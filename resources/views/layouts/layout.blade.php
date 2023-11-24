@@ -40,15 +40,15 @@
             </button>
             <nav>
                 <ul class="menu"><li id="menu-item-83" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-83"><a href="{{route('welcome')}}">Каталог</a>
-                        <ul class="sub-menu">
+                        <ul class="sub-menu" style = "display: block;">
                             <li id="menu-item-324" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-324"><a href="{{route('welcome')}}">Внутренние работы</a></li>
                             <li id="menu-item-325" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-325"><a href="">Наружные работы</a></li>
                         </ul>
                     </li>
                     <li id="menu-item-15" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15"><a href="">Новости</a></li>
                     <li id="menu-item-218" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-218"><a href="">Калькулятор</a></li>
-                    <li id="menu-item-137" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137"><a href="https://benjaminmoore.by/colors/">Цвет</a></li>
-                    <li id="menu-item-101" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-101"><a href="https://benjaminmoore.by/contacts/">Где купить</a></li>
+                    <li id="menu-item-137" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137"><a href="{{route('colors')}}">Цвет</a></li>
+                    <li id="menu-item-101" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-101"><a href="{{route('contacts')}}">Где купить</a></li>
                 </ul>            </nav>
         </div>
     </div>
@@ -62,7 +62,7 @@
             </svg>
         </a>
         <nav>
-            <a class="" href="https://benjaminmoore.by/%d1%81%d0%b5%d1%80%d0%b8%d1%8f-regal-select/">Внутренние работы</a><a class="" href="https://benjaminmoore.by/%d0%bf%d1%80%d0%be%d0%bf%d0%b8%d1%82%d0%ba%d0%b0-arborcoat/">Наружные работы</a><a class="" href="https://benjaminmoore.by/news/">Новости</a><a class="" href="https://benjaminmoore.by/calculator/">Калькулятор</a><a class="" href="https://benjaminmoore.by/colors/">Цвет</a><a class="" href="https://benjaminmoore.by/contacts/">Где купить</a>        </nav>
+            <a class="" href="https://benjaminmoore.by/%d1%81%d0%b5%d1%80%d0%b8%d1%8f-regal-select/">Внутренние работы</a><a class="" href="https://benjaminmoore.by/%d0%bf%d1%80%d0%be%d0%bf%d0%b8%d1%82%d0%ba%d0%b0-arborcoat/">Наружные работы</a><a class="" href="https://benjaminmoore.by/news">Новости</a><a class="" href="https://benjaminmoore.by/calculator/">Калькулятор</a><a class="" href="{{route('colors')}}">Цвет</a><a class="" href="{{route('contacts')}}">Где купить</a>        </nav>
     </div>
     <div class="container footer__info">
         <div class="left-side">
@@ -95,5 +95,8 @@
         </div>
     </div>
 </footer>
+<script async src = "{{asset('public/resources/js/tag.js')}}"></script>
+<script src = "{{asset('public/resources/js/vendor.js')}} defer"></script>
+<script src = "{{asset('public/resources/js/index.js')}} defer"></script>
 </body>
 </html>
