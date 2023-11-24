@@ -49,8 +49,8 @@
                     </li>
                     <li id="menu-item-15" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15"><a href="{{route('news')}}">Новости</a></li>
                     <li id="menu-item-218" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-218"><a href="{{route('calc')}}">Калькулятор</a></li>
-                    <li id="menu-item-137" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137"><a href="https://benjaminmoore.by/colors/">Цвет</a></li>
-                    <li id="menu-item-101" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-101"><a href="https://benjaminmoore.by/contacts/">Где купить</a></li>
+                    <li id="menu-item-137" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137"><a href="{{route('colors')}}">Цвет</a></li>
+                    <li id="menu-item-101" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-101"><a href="{{route('contacts')}}">Где купить</a></li>
                 </ul>
             </nav>
         </div>
