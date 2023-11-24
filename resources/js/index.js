@@ -124,7 +124,7 @@ $(function () {
         $('.images-list .image-' + $(this).data('image-id')).fadeIn();
 		$('.images-selector .texts').hide();
         $('.images-selector .text-' + $(this).data('image-id')).fadeIn();
-		let color =$(this).data('color'); 
+		let color =$(this).data('color');
 		$('.select-color').css('color', color);
     })
 	if($('.select-color').length){

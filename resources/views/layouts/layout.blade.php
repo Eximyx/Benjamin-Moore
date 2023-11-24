@@ -16,15 +16,15 @@
     @vite([
                 'resources/css/1main.css',
                 'resources/css/sbi-styles.min.css',
+                'resources/js/alerting.js',
                 'resources/js/index.js',
                 'resources/js/tag.js',
                 'resources/js/vendor.js',
-//                'resources/images/'
           ])
 </head>
 <body>
 <header class="main">
-    <div style="background-color:rgba(0,0,0,.2)" class="container">
+    <div style="background-color:rgba(0,0,0,.2);margin-bottom: 100px" class="container">
         <div class="left-side">
             <a href="/" class="logo">
                 <svg width="180" height="27" viewBox="0 0 180 27">
@@ -32,28 +32,35 @@
                 </svg>
             </a>
             <a href="tel:+375 (29) 608-40-00" class="phone">+375 (29) 608-40-00</a>
-
         </div>
         <div class="right-side">
             <button type="button" class="menu-toggle">
                 открыть меню
             </button>
             <nav>
-                <ul class="menu"><li id="menu-item-83" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-83"><a href="{{route('welcome')}}">Каталог</a>
-                        <ul class="sub-menu">
-                            <li id="menu-item-324" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-324"><a href="{{route('welcome')}}">Внутренние работы</a></li>
+                <ul class="menu"><li id="menu-item-83" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-83">
+                        <a style="user-select: none" onclick=openSubMenu()>
+                            Каталог
+                        </a>
+                        <ul class="sub-menu" >
+                            <li id="menu-item-324" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-324"><a href="">Внутренние работы</a></li>
                             <li id="menu-item-325" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-325"><a href="">Наружные работы</a></li>
                         </ul>
                     </li>
-                    <li id="menu-item-15" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15"><a href="">Новости</a></li>
-                    <li id="menu-item-218" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-218"><a href="">Калькулятор</a></li>
+                    <li id="menu-item-15" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15"><a href="{{route('news')}}">Новости</a></li>
+                    <li id="menu-item-218" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-218"><a href="{{route('calc')}}">Калькулятор</a></li>
                     <li id="menu-item-137" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137"><a href="https://benjaminmoore.by/colors/">Цвет</a></li>
                     <li id="menu-item-101" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-101"><a href="https://benjaminmoore.by/contacts/">Где купить</a></li>
-                </ul>            </nav>
+                </ul>
+            </nav>
         </div>
     </div>
 </header>
-@yield('content')
+<main class="main">
+    <div>
+        @yield('content')
+    </div>
+</main>
 <footer class="footer  main">
     <div class="container footer__nav">
         <a href="" class="logo">
@@ -95,5 +102,10 @@
         </div>
     </div>
 </footer>
+<script src={{Vite::asset('resources/js/index.js')}}></script>
+<script src={{Vite::asset('resources/js/alerting.js')}}></script>
+<script src={{Vite::asset('resources/js/tag.js')}}></script>
+<script src={{Vite::asset('resources/js/vendor.js')}}></script>
+
 </body>
 </html>
