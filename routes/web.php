@@ -41,3 +41,10 @@ Route::prefix('catalog')
             return view('catalog/internal_work');
         });
 });
+
+Route::get('/colors', function () {
+    return view('main/colors');
+})->name('colors');
+Route::get('/contacts', function () {
+    return view('main/contacts');
+})->name('contacts');
