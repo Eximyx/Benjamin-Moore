@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\StaticPageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,10 +12,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('/main/main');
-});
 
 Route::get('/home', function () {
     return view('/welcome');
@@ -37,18 +33,34 @@ Route::prefix('catalog')
         Route::get('/external_work',function () {
             return view('catalog/external_work');
         });
-        Route::get('/internal_work/',function () {
+        Route::get('/internal_work',function () {
             return view('catalog/internal_work');
         });
 });
 
-Route::get('/colors', function () {
-    return view('main/colors');
-})->name('colors');
 Route::get('/contacts', function () {
     return view('main/contacts');
 })->name('contacts');
+//Route::prefix('admin')
+//    ->group(function () {
+//        Route::get('/login',function () {
+//            return view('welcome');
+//        });
+//        Route::get('/index',function () {
+//            return view('catalog/external_work');
+//        });
+//        Route::get('/{}',function () {
+//            return view('catalog/internal_work');
+//        });
+//    });
 
-Route::get('welcome',function () {
-    return view('welcome');
+Route::prefix('info')->group(function () {
+    Route::get('/',[StaticPageController::class,'index'])->name('info.index');
+    Route::get('/create',[StaticPageController::class,'create']);
+    Route::get('{staticPage}',[StaticPageController::class,'show']);
 });
+
+
+
+
+
