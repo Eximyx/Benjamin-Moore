@@ -37,7 +37,7 @@ Route::prefix('catalog')
             return view('catalog/internal_work');
         });
 });
-
+// flrnlfgmr
 Route::get('/contacts', function () {
     return view('main/contacts');
 })->name('contacts');
