@@ -58,6 +58,7 @@ Route::prefix('info')->group(function () {
     Route::get('/',[StaticPageController::class,'index'])->name('info.index');
     Route::get('/create',[StaticPageController::class,'create']);
     Route::get('{staticPage}',[StaticPageController::class,'show']);
+    Route::get('{staticPage}');
 });
 
 
