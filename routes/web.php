@@ -48,3 +48,7 @@ Route::get('/colors', function () {
 Route::get('/contacts', function () {
     return view('main/contacts');
 })->name('contacts');
+
+Route::get('welcome',function () {
+    return view('welcome');
+});
