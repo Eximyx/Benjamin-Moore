@@ -55,13 +55,29 @@ Route::get('/contacts', function () {
 //    });
 
 Route::prefix('info')->group(function () {
-    Route::get('/',[StaticPageController::class,'index'])->name('info.index');
-    Route::get('/create',[StaticPageController::class,'create']);
-    Route::get('{staticPage}',[StaticPageController::class,'show']);
-    Route::get('{staticPage}');
+    Route::get('',[StaticPageController::class,'index'])->name('info.index');
+
+    Route::get('/create',[StaticPageController::class,'create'])->name('info.create');
+    Route::post('',[StaticPageController::class,'store'])->name('info.store');
+
+    Route::get('{staticPage}',[StaticPageController::class,'show'])->name('info.show');
+
+    Route::get('{staticPage}/edit', [StaticPageController::class ,'edit'])->name('info.edit');
+
+    Route::put('{staticPage}', [StaticPageController::class,'update'])->name('info.update');
+
+    Route::delete('{post}', [StaticPageController::class,'destroy'])->name('info.destroy');
+
+
 });
 
 
 
+Route::prefix('news')->group(function () {
+    Route::get('',[NewsPostController::class,'index'])->name('news.index');
+    Route::get('/create',[NewsPostController::class,'create'])->name('news.create');
+    Route::get('{news_post}',[NewsPostController::class,'show'])->name('news.show');
+    Route::post('',[NewsPostController::class,'store'])->name('news.store');
+});
 
 
