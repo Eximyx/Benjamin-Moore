@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('static_pages', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
-            $table->longText('content');
+            $table->longText('content')->nullable();
             $table->timestamps();
         });
     }
