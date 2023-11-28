@@ -12,4 +12,5 @@ class StaticPage extends Model
     protected $guarded = false;
 
     use HasFactory;
+
 }

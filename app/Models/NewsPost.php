@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class NewsPost extends Model
 {
     use HasFactory;
+    use sluggable;
+
+
     protected $table = 'news_posts';
     protected $guarded = false;
+
+
 }
