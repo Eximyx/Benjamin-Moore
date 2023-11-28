@@ -13,7 +13,8 @@ class StaticPageController extends Controller
     public function index()
     {
         $staticPages = StaticPage::all();
-        dd($staticPages);
+//        dd($staticPages);
+        return view('info.index',compact('staticPages'));
     }
 
     /**
@@ -29,7 +30,17 @@ class StaticPageController extends Controller
      */
     public function store(Request $request)
     {
-
+//        $request['hello'] = 'asdasd';
+//        $request.array_push('sada'=>'sdasd') ;
+//
+//        dd($request);
+    $request->validate([
+      'title' => 'required|max:255',
+      'content'=> ''
+//      'body' => 'required',
+    ]);
+    StaticPage::create($request->all());
+    return redirect()->route('info.index');
     }
 
     /**
@@ -38,7 +49,7 @@ class StaticPageController extends Controller
     public function show($id)
     {
 
-        $staticPage = StaticPage::where('name',$id)->first();
+        $staticPage = StaticPage::where('title',$id)->first();
 
         return view('info.show',compact('staticPage'));
 

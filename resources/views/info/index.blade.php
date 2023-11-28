@@ -1,1 +1,3 @@
-<p>Hello world</p>
+@foreach($staticPages as $value)
+    <li>{{$value->title}}</li>
+@endforeach
