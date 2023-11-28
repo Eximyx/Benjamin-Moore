@@ -9,8 +9,8 @@ class NewsPostController extends Controller
 {
     public function index()
     {
-        $newsPost = NewsPost::all();
-        return view('news.index',compact('newsPost'));
+        $newsPosts = NewsPost::all();
+        return view('news.index',compact('newsPosts'));
     }
 
     public function create()

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NewsPostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaticPageController;
 /*
@@ -17,9 +18,7 @@ Route::get('/home', function () {
     return view('/welcome');
 })->name('welcome');
 
-Route::get('/news',function () {
-    return view('main/news');
-})->name('news');
+
 
 Route::get('/calc',function () {
     return view('main/calc');
