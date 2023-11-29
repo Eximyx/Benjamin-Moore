@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\NewsPostController;
+use App\Http\Controllers\news\NewsPostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaticPageController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,22 +37,15 @@ Route::prefix('catalog')
             return view('catalog/internal_work');
         });
 });
-// flrnlfgmr
+
 Route::get('/contacts', function () {
     return view('main/contacts');
 })->name('contacts');
-//Route::prefix('admin')
-//    ->group(function () {
-//        Route::get('/login',function () {
-//            return view('welcome');
-//        });
-//        Route::get('/index',function () {
-//            return view('catalog/external_work');
-//        });
-//        Route::get('/{}',function () {
-//            return view('catalog/internal_work');
-//        });
-//    });
+Route::prefix('admin')
+    ->group(function () {
+
+        Route::get('/',[AdminController::class,'index'])->name('admin.index');
+    });
 
 Route::prefix('info')->group(function () {
     Route::get('',[StaticPageController::class,'index'])->name('info.index');
@@ -77,6 +71,7 @@ Route::prefix('news')->group(function () {
     Route::get('/create',[NewsPostController::class,'create'])->name('news.create');
     Route::get('{news_post}',[NewsPostController::class,'show'])->name('news.show');
     Route::post('',[NewsPostController::class,'store'])->name('news.store');
+    Route::get('{news_post}/edit',[NewsPostController::class,'edit'])->name('news.edit');
+    Route::patch('news/{news_post}',[NewsPostController::class,'update'])->name('news.update');
+    Route::delete('news/{news_post}',[NewsPostController::class,'destroy'])->name('news.delete');
 });
-
-
