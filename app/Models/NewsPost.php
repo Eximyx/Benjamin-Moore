@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Cviebrock\Eloquent\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 
 class NewsPost extends Model
 {
     use HasFactory;
-    use sluggable;
+    use Sluggable;
 
 
     protected $table = 'news_posts';
