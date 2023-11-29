@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Cviebrock\Eloquent\Sluggable;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 
 class NewsPost extends Model
 {
@@ -17,5 +16,13 @@ class NewsPost extends Model
     protected $guarded = false;
     public function category(){
         return $this->belongsTo(NewsCategory::class,'category_id','id');
+    }
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 }
