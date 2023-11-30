@@ -66,7 +66,7 @@ Route::prefix('info')->group(function () {
 
     Route::put('{staticPage}', [StaticPageController::class,'update'])->name('info.update');
 
-    Route::delete('{post}', [StaticPageController::class,'destroy'])->name('info.destroy');
+    Route::delete('{staticPage}', [StaticPageController::class,'destroy'])->name('info.destroy');
 
 
 });
