@@ -21,39 +21,46 @@ class NewsPostController extends BaseController
     public function create()
     {
         $categories=NewsCategory::all();
-        // dd($);
         return view('news.create', compact('categories'));
     }
 
     public function store(NewsStoreRequest $requests){
+//        dd($requests);
         $data = $requests -> validated();
         $this->service->store($data);
         return redirect()->route('news.index');
     }
-    
+
     public function show($slug)
     {
+//        $slug = $newsPost['slug'];
+
         $newsPost = NewsPost::where('slug',$slug)->first();
-        return view('news.show',compact('newsPost'));
+        if ($newsPost != null) {
+            return view('news.show',compact('newsPost'));
+        }
+            abort(404);
     }
 
-    public function edit(NewsPost $newsPost)
+    public function edit($slug)
     {
         $categories = NewsCategory::all();
+        $newsPost = NewsPost::where('slug',$slug)->first();
         return view('news.edit',compact('newsPost','categories'));
     }
 
     public function update(NewsUpdateRequest $request,NewsPost $newsPost)
     {
+    dd($request);
         $data = $request->validated();
-    
+
         $this -> service -> update($newsPost,$data);
-    
-        return redirect()->route('news.show', $newsPost->id);
+        return redirect()->route('news.show',$newsPost->slug);
     }
 
     public function destroy(NewsPost $newsPost)
     {
+        $this->service->delete_image($newsPost);
         $newsPost->delete();
 
         return redirect()->route('news.index');

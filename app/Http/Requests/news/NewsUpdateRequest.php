@@ -24,7 +24,7 @@ class NewsUpdateRequest extends FormRequest
         return [
             'title'=>'required|string',
             'content'=> 'string',
-            'main_image'=>'string',
+            'main_image'=>'nullable|file',
             'category_id'=>'',
             'slug'=>''
         ];

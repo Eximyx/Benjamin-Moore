@@ -18,13 +18,9 @@ use App\Http\Controllers\AdminController;
 Route::get('/home', function () {
     return view('/welcome');
 })->name('welcome');
-
-
-
 Route::get('/calc',function () {
     return view('main/calc');
 })->name('calc');
-
 Route::prefix('catalog')
     ->group(function () {
         Route::get('/',function () {
@@ -38,14 +34,25 @@ Route::prefix('catalog')
         });
 });
 
-Route::get('/contacts', function () {
-    return view('main/contacts');
-})->name('contacts');
+
+
 Route::prefix('admin')
     ->group(function () {
-
         Route::get('/',[AdminController::class,'index'])->name('admin.index');
+
+        Route::prefix('news')->group(function () {
+            Route::get('',[NewsPostController::class,'index'])->name('news.index');
+            Route::get('/create',[NewsPostController::class,'create'])->name('news.create');
+            Route::get('{news_post}',[NewsPostController::class,'show'])->name('news.show');
+            Route::post('',[NewsPostController::class,'store'])->name('news.store');
+            Route::get('{news_post}/edit',[NewsPostController::class,'edit'])->name('news.edit');
+            Route::patch('{news_post}',[NewsPostController::class,'update'])->name('news.update');
+            Route::delete('{news_post}',[NewsPostController::class,'destroy'])->name('news.delete');
+        });
+
     });
+
+
 
 Route::prefix('info')->group(function () {
     Route::get('',[StaticPageController::class,'index'])->name('info.index');
@@ -66,12 +73,3 @@ Route::prefix('info')->group(function () {
 
 
 
-Route::prefix('news')->group(function () {
-    Route::get('',[NewsPostController::class,'index'])->name('news.index');
-    Route::get('/create',[NewsPostController::class,'create'])->name('news.create');
-    Route::get('{news_post}',[NewsPostController::class,'show'])->name('news.show');
-    Route::post('',[NewsPostController::class,'store'])->name('news.store');
-    Route::get('{news_post}/edit',[NewsPostController::class,'edit'])->name('news.edit');
-    Route::patch('news/{news_post}',[NewsPostController::class,'update'])->name('news.update');
-    Route::delete('news/{news_post}',[NewsPostController::class,'destroy'])->name('news.delete');
-});

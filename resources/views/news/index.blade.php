@@ -1,11 +1,20 @@
-@extends('layouts.news')
+@extends('layouts.admin')
 @section('content')
     <div>
         <div class="mb-3">
             <a href="{{route('news.create')}} " class="btn btn-primary mb-3">Create new post</a>
         </div>
-        @foreach ($newsPosts as $newsPost)
-        <div><a href="{{route('news.show',$newsPost->slug)}}">{{$newsPost->id}}.{{$newsPost->title}}</a></div>
-        @endforeach
-    </div>
+        <div class="row">
+        @foreach ($newsPosts->reverse() as $newsPost)
+                <div class="card" style="width: 18rem;">
+                    <a class="btn stretched-link" href="{{route('news.show',$newsPost->slug)}}" >
+                    <img class="card-img-top" src="{{url('storage/image/'.$newsPost->main_image)}}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{$newsPost->title}}</h5>
+                    </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+
 @endsection

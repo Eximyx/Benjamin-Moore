@@ -1,7 +1,7 @@
-@extends('layouts.news')
+@extends('layouts.admin')
 @section('content')
     <div>
-        <form action="{{route('news.store')}}" method="post">
+        <form action="{{route('news.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="title">Title</label>
@@ -19,7 +19,7 @@
             </div>
             <div class="mb-3">
                 <label for="main_image">Main_Image</label>
-                <input type="text" value = " {{old('main_image')}}"name = "main_image" class="form-control" id="main_image" placeholder="main_image">
+                <input type="file" value = " {{old('main_image')}}" name = "main_image" class="form-control" id="main_image" placeholder="main_image">
                 @error('main_image')
                 <p class='text-danger'>{{$message}}</p>
                 @enderror
@@ -28,7 +28,7 @@
                 <label for="category">Category</label>
                 <select class="form-select form-select-sm" id="category" name='category_id'>
                     @foreach ($categories as $category)
-                    <option 
+                    <option
                     value="{{$category->id}}">{{$category->title}}</option>
                     @endforeach
                 </select>
@@ -44,7 +44,7 @@
         </form>
     </div>
     <script>
-        
+
         $(document).ready(function(){
             $('#content').summernote();
         });
