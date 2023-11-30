@@ -51,9 +51,7 @@ class NewsPostController extends BaseController
 
     public function update(NewsUpdateRequest $request,NewsPost $newsPost)
     {
-    dd($request);
         $data = $request->validated();
-
         $this -> service -> update($newsPost,$data);
         return redirect()->route('news.show',$newsPost->slug);
     }

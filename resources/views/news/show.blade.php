@@ -21,7 +21,7 @@
                 Edit
             </a>
 
-            <a class="btn btn-primary row-lg-6 mb-4">
+            <a href="{{route('news.index')}}" class="btn btn-primary row-lg-6 mb-4">
                 Back
             </a>
            <div>
@@ -34,9 +34,4 @@
         </div>
     </div>
 
-
-    <script>
-        const div = document.createElement('div');
-        $('#content').appendChild(div);
-    </script>
 @endsection
