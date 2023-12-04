@@ -1,1 +1,0 @@
-{{$staticPage->title}}

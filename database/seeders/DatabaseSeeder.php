@@ -12,20 +12,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-<<<<<<< Updated upstream
+// <<<<<<< trying-to-add-auth
+//          \App\Models\User::factory(10)->create();
+.
+// =======
+// <<<<<<< Updated upstream
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-=======
+// =======
 //         \App\Models\User::factory(10)->create();
          \App\Models\NewsPost::factory(40)->create();
+// >>>>>>> main
 //         \App\Models\User::factory()->create([
 //             'name' => 'Test User',
 //             'email' => 'test@example.com',
 //         ]);
->>>>>>> Stashed changes
+// <<<<<<< trying-to-add-auth
+// =======
+// >>>>>>> Stashed changes
+// >>>>>>> main
     }
 }
