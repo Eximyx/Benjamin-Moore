@@ -5,11 +5,11 @@
     <div class="col">
         <div class="row-lg-6 mb-4">
 
-            <div class="p-md-5 text-white rounded"
+            <div class=" m-0 text-white text-truncate rounded"
                  style="background-repeat: no-repeat;background-image: url({{url('storage/image/'.$newsPost->main_image)}})">
-                <h1 class="h-50 d-inline-block text-black font-weight-bold">
+                <p style="white-space: normal" class="m-0 text-black font-weight-bold">
                     {{$newsPost->title}}
-                </h1>
+                </p>
             </div>
         </div>
 

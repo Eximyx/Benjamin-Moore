@@ -5,7 +5,7 @@
             @csrf
             <div class="mb-3">
                 <label for="title">Title</label>
-                <input value="{{old('title')}}" type="text" name = "title" class="form-control" id="title" placeholder="title">
+                <input value="{{old('title')}}" type="text" name = "title" maxlength="255" class="form-control" id="title" placeholder="title">
                 @error('title')
                 <p class='text-danger'>{{$message}}</p>
                 @enderror
@@ -32,13 +32,6 @@
                     value="{{$category->id}}">{{$category->title}}</option>
                     @endforeach
                 </select>
-            </div>
-            <div class="mb-3">
-                <label for="content">slug</label>
-                <textarea name = "slug" class="form-control" id="slug" placeholder="slug">{{old('slug')}}</textarea>
-                @error('slug')
-                <p class='text-danger'>{{$message}}</p>
-                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>

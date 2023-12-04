@@ -15,6 +15,53 @@ use App\Http\Controllers\AdminController;
 |
 */
 
+<<<<<<< Updated upstream
+=======
+Route::controller(AuthController::class)->middleware('user')->group(function () {
+    Route::get('register', 'register')->name('register');
+    Route::post('register', 'registerSave')->name('register.save');
+
+    Route::get('login', 'login')->name('login');
+    Route::post('login', 'loginAction')->name('login.action');
+
+    Route::get('logout', 'logout')->middleware('auth')->name('logout');
+});
+
+
+Route::middleware('admin')->group(function () {
+    Route::get('admin/dashboard', function () {
+        return view('admin/dashboard');
+    })->name('dashboard');
+    Route::prefix('admin')
+        ->group(function () {
+            Route::get('/',[AdminController::class,'index'])->name('admin.index');
+
+            Route::prefix('news')->group(function () {
+                Route::get('',[NewsPostController::class,'index'])->name('news.index');
+                Route::get('/create',[NewsPostController::class,'create'])->name('news.create');
+                Route::get('{news_post}',[NewsPostController::class,'show'])->name('news.show');
+                Route::post('',[NewsPostController::class,'store'])->name('news.store');
+                Route::get('{news_post}/edit',[NewsPostController::class,'edit'])->name('news.edit');
+                Route::patch('{news_post}',[NewsPostController::class,'update'])->name('news.update');
+                Route::delete('{news_post}',[NewsPostController::class,'destroy'])->name('news.delete');
+            });
+
+        });
+
+//    Route::controller(ProductController::class)->prefix('products')->group(function () {
+//        Route::get('', 'index')->name('products');
+//        Route::get('create', 'create')->name('products.create');
+//        Route::post('store', 'store')->name('products.store');
+//        Route::get('show/{id}', 'show')->name('products.show');
+//        Route::get('edit/{id}', 'edit')->name('products.edit');
+//        Route::put('edit/{id}', 'update')->name('products.update');
+//        Route::delete('destroy/{id}', 'destroy')->name('products.destroy');
+//    });
+
+    Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
+});
+
+>>>>>>> Stashed changes
 Route::get('/home', function () {
     return view('/welcome');
 })->name('welcome');
@@ -36,21 +83,7 @@ Route::prefix('catalog')
 
 
 
-Route::prefix('admin')
-    ->group(function () {
-        Route::get('/',[AdminController::class,'index'])->name('admin.index');
 
-        Route::prefix('news')->group(function () {
-            Route::get('',[NewsPostController::class,'index'])->name('news.index');
-            Route::get('/create',[NewsPostController::class,'create'])->name('news.create');
-            Route::get('{news_post}',[NewsPostController::class,'show'])->name('news.show');
-            Route::post('',[NewsPostController::class,'store'])->name('news.store');
-            Route::get('{news_post}/edit',[NewsPostController::class,'edit'])->name('news.edit');
-            Route::patch('{news_post}',[NewsPostController::class,'update'])->name('news.update');
-            Route::delete('{news_post}',[NewsPostController::class,'destroy'])->name('news.delete');
-        });
-
-    });
 
 
 

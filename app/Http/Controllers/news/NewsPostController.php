@@ -14,7 +14,7 @@ class NewsPostController extends BaseController
 {
     public function index()
     {
-        $newsPosts = NewsPost::all();
+        $newsPosts = NewsPost::paginate(15);
         return view('news.index',compact('newsPosts'));
     }
 
@@ -25,16 +25,15 @@ class NewsPostController extends BaseController
     }
 
     public function store(NewsStoreRequest $requests){
-//        dd($requests);
+
         $data = $requests -> validated();
         $this->service->store($data);
+
         return redirect()->route('news.index');
     }
 
     public function show($slug)
     {
-//        $slug = $newsPost['slug'];
-
         $newsPost = NewsPost::where('slug',$slug)->first();
         if ($newsPost != null) {
             return view('news.show',compact('newsPost'));

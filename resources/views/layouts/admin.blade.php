@@ -161,7 +161,21 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
+<<<<<<< Updated upstream
                     @yield('content')
+=======
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-2">
+                    <h1 class="h3 m-1 text-gray-800">@yield('title')</h1>
+                </div>
+                <div class="p-0 m-0 ml-5 justify-content-between align-items-center">
+                    @yield('contents')
+                </div>
+
+
+
+>>>>>>> Stashed changes
             </div>
             <!-- /.container-fluid -->
 

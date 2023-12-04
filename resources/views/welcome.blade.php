@@ -1,0 +1,1 @@
+{{dd(auth(),auth()->user())}}
