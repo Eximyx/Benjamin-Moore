@@ -15,7 +15,7 @@ class NewsPost extends Model
     protected $table = 'news_posts';
     protected $guarded = false;
     public function category(){
-        return $this->belongsTo(NewsCategory::class,'category_id','id');
+        return $this->belongsTo(Category::class,'category_id','id');
     }
     public function sluggable(): array
     {

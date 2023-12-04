@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('main_image');
-            $table->longText('content');
+            $table->string('content');
             $table->unsignedBigInteger('category_id');
             $table->index('category_id','news_category_idx');
-            $table->foreign('category_id','news_category_fk')->references('id')->on('news_categories');
-            $table->string('slug')->nullable()->index();
+            $table->foreign('category_id','news_category_fk')->references('id')->on('categories');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

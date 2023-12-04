@@ -6,7 +6,7 @@
             @method('patch')
             <div class="mb-3">
                 <label for="title">Title</label>
-                <input type="text" name="title" class="form-control" id="title" placeholder="title"
+                <input type="text" maxlength="255" name="title" class="form-control" id="title" placeholder="title"
                        value="{{$newsPost->title}}">
             </div>
             <div class="mb-3">
@@ -19,11 +19,12 @@
                 <input type="file" name="main_image" class="form-control" id="main_image" placeholder="main_image">
                 <p class='text-danger invisible' id="image-error-message">Файл должен быть изображением!</p>
             </div>
-            <div class="mb-3">
-                <label for="slug">Slug</label>
-                <input type="text" name="slug" class="form-control" id="slug" placeholder="slug"
-                       value="{{$newsPost->slug}}">
-            </div>
+
+{{--            <div class="mb-3">--}}
+{{--                <label for="slug">Slug</label>--}}
+{{--                <input type="text" name="slug" class="form-control" id="slug" placeholder="slug"--}}
+{{--                       value="{{$newsPost->slug}}">--}}
+{{--            </div>--}}
             <div class="mb-3">
                 <label for="category">Category</label>
                 <select class="form-select form-select-sm" id="category" name='category_id'>

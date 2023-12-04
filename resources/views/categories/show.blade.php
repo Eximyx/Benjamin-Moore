@@ -1,15 +1,15 @@
 @extends('layouts.admin')
-@section('contents')
+@section('content')
 
     <h1>Новости</h1>
     <div class="col">
         <div class="row-lg-6 mb-4">
 
-            <div class=" m-0 text-white text-truncate rounded"
+            <div class="p-md-5 text-white rounded"
                  style="background-repeat: no-repeat;background-image: url({{url('storage/image/'.$newsPost->main_image)}})">
-                <p style="white-space: normal" class="m-0 text-black font-weight-bold">
+                <h1 class="h-50 d-inline-block text-black font-weight-bold">
                     {{$newsPost->title}}
-                </p>
+                </h1>
             </div>
         </div>
 
@@ -21,7 +21,7 @@
                 Edit
             </a>
 
-            <a href="{{route('news.index')}}" class="btn btn-primary row-lg-6 mb-4">
+            <a class="btn btn-primary row-lg-6 mb-4">
                 Back
             </a>
            <div>
@@ -33,6 +33,10 @@
            </div>
         </div>
     </div>
-x
 
+
+    <script>
+        const div = document.createElement('div');
+        $('#content').appendChild(div);
+    </script>
 @endsection

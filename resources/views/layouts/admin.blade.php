@@ -40,14 +40,15 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
+
                 <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">@yield('title')</h1>
+                <div class="d-sm-flex align-items-center justify-content-between mb-2">
+                    <h1 class="h3 m-1 text-gray-800">@yield('title')</h1>
+                </div>
+                <div class="p-0 m-0 ml-5 justify-content-between align-items-center">
+                    @yield('contents')
                 </div>
 
-                @yield('contents')
-
-                <!-- Content Row -->
 
 
             </div>

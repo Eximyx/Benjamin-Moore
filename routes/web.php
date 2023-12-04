@@ -16,7 +16,9 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::controller(AuthController::class)->group(function () {
+
+
+Route::controller(AuthController::class)->middleware('user')->group(function () {
     Route::get('register', 'register')->name('register');
     Route::post('register', 'registerSave')->name('register.save');
 
@@ -26,80 +28,81 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
-
-Route::middleware('auth')->group(function () {
-    Route::get('dashboard', function () {
+Route::middleware('admin')->group(function () {
+    Route::get('admin/dashboard', function () {
         return view('admin/dashboard');
     })->name('dashboard');
+    Route::prefix('admin')
+        ->group(function () {
+            Route::get('/',[AdminController::class,'index'])->name('admin.index');
 
-    Route::controller(ProductController::class)->prefix('products')->group(function () {
-        Route::get('', 'index')->name('products');
-        Route::get('create', 'create')->name('products.create');
-        Route::post('store', 'store')->name('products.store');
-        Route::get('show/{id}', 'show')->name('products.show');
-        Route::get('edit/{id}', 'edit')->name('products.edit');
-        Route::put('edit/{id}', 'update')->name('products.update');
-        Route::delete('destroy/{id}', 'destroy')->name('products.destroy');
-    });
+            Route::prefix('news')->group(function () {
+                Route::get('',[NewsPostController::class,'index'])->name('news.index');
+                Route::get('/create',[NewsPostController::class,'create'])->name('news.create');
+                Route::get('{news_post}',[NewsPostController::class,'show'])->name('news.show');
+                Route::post('',[NewsPostController::class,'store'])->name('news.store');
+                Route::get('{news_post}/edit',[NewsPostController::class,'edit'])->name('news.edit');
+                Route::patch('{news_post}',[NewsPostController::class,'update'])->name('news.update');
+                Route::delete('{news_post}',[NewsPostController::class,'destroy'])->name('news.delete');
+            });
 
+        });
     Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
+
+//    Route::controller(ProductController::class)->prefix('products')->group(function () {
+//        Route::get('', 'index')->name('products');
+//        Route::get('create', 'create')->name('products.create');
+//        Route::post('store', 'store')->name('products.store');
+//        Route::get('show/{id}', 'show')->name('products.show');
+//        Route::get('edit/{id}', 'edit')->name('products.edit');
+//        Route::put('edit/{id}', 'update')->name('products.update');
+//        Route::delete('destroy/{id}', 'destroy')->name('products.destroy');
+//    });
+
 });
+
 
 Route::get('/home', function () {
     return view('/welcome');
 })->name('welcome');
-Route::get('/calc',function () {
-    return view('main/calc');
-})->name('calc');
-Route::prefix('catalog')
-    ->group(function () {
-        Route::get('/',function () {
-            return view('welcome');
-        });
-        Route::get('/external_work',function () {
-            return view('catalog/external_work');
-        });
-        Route::get('/internal_work',function () {
-            return view('catalog/internal_work');
-        });
-});
+// Route::get('/calc',function () {
+//     return view('main/calc');
+// })->name('calc');
+// Route::prefix('catalog')
+//     ->group(function () {
+//         Route::get('/',function () {
+//             return view('welcome');
+//         });
+//         Route::get('/external_work',function () {
+//             return view('catalog/external_work');
+//         });
+//         Route::get('/internal_work',function () {
+//             return view('catalog/internal_work');
+//         });
+// });
 
 
 
-Route::prefix('admin')
-    ->group(function () {
-        Route::get('/',[AdminController::class,'index'])->name('admin.index');
-
-        Route::prefix('news')->group(function () {
-            Route::get('',[NewsPostController::class,'index'])->name('news.index');
-            Route::get('/create',[NewsPostController::class,'create'])->name('news.create');
-            Route::get('{news_post}',[NewsPostController::class,'show'])->name('news.show');
-            Route::post('',[NewsPostController::class,'store'])->name('news.store');
-            Route::get('{news_post}/edit',[NewsPostController::class,'edit'])->name('news.edit');
-            Route::patch('{news_post}',[NewsPostController::class,'update'])->name('news.update');
-            Route::delete('{news_post}',[NewsPostController::class,'destroy'])->name('news.delete');
-        });
-
-    });
 
 
 
-Route::prefix('info')->group(function () {
-    Route::get('',[StaticPageController::class,'index'])->name('info.index');
 
-    Route::get('/create',[StaticPageController::class,'create'])->name('info.create');
-    Route::post('',[StaticPageController::class,'store'])->name('info.store');
+// Route::prefix('info')->group(function () {
+//     Route::get('',[StaticPageController::class,'index'])->name('info.index');
 
-    Route::get('{staticPage}',[StaticPageController::class,'show'])->name('info.show');
+//     Route::get('/create',[StaticPageController::class,'create'])->name('info.create');
+//     Route::post('',[StaticPageController::class,'store'])->name('info.store');
 
-    Route::get('{staticPage}/edit', [StaticPageController::class ,'edit'])->name('info.edit');
+//     Route::get('{staticPage}',[StaticPageController::class,'show'])->name('info.show');
 
-    Route::put('{staticPage}', [StaticPageController::class,'update'])->name('info.update');
+//     Route::get('{staticPage}/edit', [StaticPageController::class ,'edit'])->name('info.edit');
 
-    Route::delete('{staticPage}', [StaticPageController::class,'destroy'])->name('info.destroy');
+//     Route::put('{staticPage}', [StaticPageController::class,'update'])->name('info.update');
+
+//     Route::delete('{staticPage}', [StaticPageController::class,'destroy'])->name('info.destroy');
 
 
-});
+// });
 
 
 
