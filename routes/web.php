@@ -15,8 +15,6 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-<<<<<<< Updated upstream
-=======
 Route::controller(AuthController::class)->middleware('user')->group(function () {
     Route::get('register', 'register')->name('register');
     Route::post('register', 'registerSave')->name('register.save');
@@ -61,7 +59,6 @@ Route::middleware('admin')->group(function () {
     Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
 });
 
->>>>>>> Stashed changes
 Route::get('/home', function () {
     return view('/welcome');
 })->name('welcome');
@@ -79,7 +76,7 @@ Route::prefix('catalog')
         Route::get('/internal_work',function () {
             return view('catalog/internal_work');
         });
-});
+    });
 
 
 
