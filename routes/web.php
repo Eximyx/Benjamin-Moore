@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\news\NewsPostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaticPageController;
@@ -15,6 +16,8 @@ use App\Http\Controllers\AdminController;
 |
 */
 
+
+
 Route::controller(AuthController::class)->middleware('user')->group(function () {
     Route::get('register', 'register')->name('register');
     Route::post('register', 'registerSave')->name('register.save');
@@ -24,7 +27,6 @@ Route::controller(AuthController::class)->middleware('user')->group(function () 
 
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
-
 
 Route::middleware('admin')->group(function () {
     Route::get('admin/dashboard', function () {
@@ -45,6 +47,7 @@ Route::middleware('admin')->group(function () {
             });
 
         });
+    Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
 
 //    Route::controller(ProductController::class)->prefix('products')->group(function () {
 //        Route::get('', 'index')->name('products');
@@ -56,27 +59,27 @@ Route::middleware('admin')->group(function () {
 //        Route::delete('destroy/{id}', 'destroy')->name('products.destroy');
 //    });
 
-    Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
 });
+
 
 Route::get('/home', function () {
     return view('/welcome');
 })->name('welcome');
-Route::get('/calc',function () {
-    return view('main/calc');
-})->name('calc');
-Route::prefix('catalog')
-    ->group(function () {
-        Route::get('/',function () {
-            return view('welcome');
-        });
-        Route::get('/external_work',function () {
-            return view('catalog/external_work');
-        });
-        Route::get('/internal_work',function () {
-            return view('catalog/internal_work');
-        });
-    });
+// Route::get('/calc',function () {
+//     return view('main/calc');
+// })->name('calc');
+// Route::prefix('catalog')
+//     ->group(function () {
+//         Route::get('/',function () {
+//             return view('welcome');
+//         });
+//         Route::get('/external_work',function () {
+//             return view('catalog/external_work');
+//         });
+//         Route::get('/internal_work',function () {
+//             return view('catalog/internal_work');
+//         });
+// });
 
 
 
@@ -84,22 +87,22 @@ Route::prefix('catalog')
 
 
 
-Route::prefix('info')->group(function () {
-    Route::get('',[StaticPageController::class,'index'])->name('info.index');
+// Route::prefix('info')->group(function () {
+//     Route::get('',[StaticPageController::class,'index'])->name('info.index');
 
-    Route::get('/create',[StaticPageController::class,'create'])->name('info.create');
-    Route::post('',[StaticPageController::class,'store'])->name('info.store');
+//     Route::get('/create',[StaticPageController::class,'create'])->name('info.create');
+//     Route::post('',[StaticPageController::class,'store'])->name('info.store');
 
-    Route::get('{staticPage}',[StaticPageController::class,'show'])->name('info.show');
+//     Route::get('{staticPage}',[StaticPageController::class,'show'])->name('info.show');
 
-    Route::get('{staticPage}/edit', [StaticPageController::class ,'edit'])->name('info.edit');
+//     Route::get('{staticPage}/edit', [StaticPageController::class ,'edit'])->name('info.edit');
 
-    Route::put('{staticPage}', [StaticPageController::class,'update'])->name('info.update');
+//     Route::put('{staticPage}', [StaticPageController::class,'update'])->name('info.update');
 
-    Route::delete('{staticPage}', [StaticPageController::class,'destroy'])->name('info.destroy');
+//     Route::delete('{staticPage}', [StaticPageController::class,'destroy'])->name('info.destroy');
 
 
-});
+// });
 
 
 

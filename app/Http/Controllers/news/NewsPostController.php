@@ -49,7 +49,7 @@ class NewsPostController extends BaseController
         return view('news.edit',compact('newsPost','categories'));
     }
 
-    public function update(NewsUpdateRequest $request,NewsPost $newsPost)
+    public function update(Request $request,NewsPost $newsPost)
     {
         $data = $request->validated();
         $this -> service -> update($newsPost,$data);
