@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\news\NewsStoreRequest;
 use App\Http\Requests\news\NewsUpdateRequest;
 use App\Models\Category;
-use App\Models\NewsCategory;
 use App\Models\NewsPost;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
@@ -15,7 +14,7 @@ class NewsPostController extends BaseController
 {
     public function index()
     {
-        $newsPosts = NewsPost::paginate(15);
+        $newsPosts = NewsPost::paginate(16);
         return view('news.index',compact('newsPosts'));
     }
 
@@ -49,7 +48,7 @@ class NewsPostController extends BaseController
         return view('news.edit',compact('newsPost','categories'));
     }
 
-    public function update(Request $request,NewsPost $newsPost)
+    public function update(NewsUpdateRequest $request,NewsPost $newsPost)
     {
         $data = $request->validated();
         $this -> service -> update($newsPost,$data);

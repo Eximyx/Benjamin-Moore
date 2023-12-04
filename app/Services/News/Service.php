@@ -26,7 +26,9 @@ class Service{
 
 
     public function delete_image(NewsPost $newsPost) {
-        Storage::delete('public/image/'.$newsPost->main_image);
+        if (!($newsPost->main_image == 'default_post.jpg')){
+            Storage::delete('public/image/'.$newsPost->main_image);
+        }
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\NewsCategory;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,7 +22,7 @@ class NewsPostFactory extends Factory
             'title'=>fake()->name(),
             'main_image'=>'default_post.jpg',
             'content'=>fake()->text(),
-            'category_id'=>NewsCategory::get()->random()->id,
+            'category_id'=>Category::get()->random()->id,
         ];
     }
 }
