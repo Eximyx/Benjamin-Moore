@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('main_image');
-            $table->string('content');
+            $table->longText('content');
             $table->unsignedBigInteger('category_id');
             $table->index('category_id','news_category_idx');
             $table->foreign('category_id','news_category_fk')->references('id')->on('categories');

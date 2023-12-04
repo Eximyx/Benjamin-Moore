@@ -3,10 +3,10 @@
 
     <h1>Новости</h1>
     <div class="col">
-        <div class="row-lg-6 mb-4">
+        <div style="height: 300px;border-width: 2px" class="row-lg-6 mb-4">
 
-            <div class=" m-0 text-white text-truncate rounded"
-                 style="background-repeat: no-repeat;background-image: url({{url('storage/image/'.$newsPost->main_image)}})">
+            <div class="m-0 text-white text-truncate rounded"
+                 style="height: 200px;background-repeat: no-repeat;background-image: url({{url('storage/image/'.$newsPost->main_image)}})">
                 <p style="white-space: normal" class="m-0 text-black font-weight-bold">
                     {{$newsPost->title}}
                 </p>

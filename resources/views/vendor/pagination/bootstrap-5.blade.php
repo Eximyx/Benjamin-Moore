@@ -38,6 +38,7 @@
                     {!! __('results') !!}
                 </p>
             </div>
+
             <div>
                 <ul class="pagination">
                     {{-- Previous Page Link --}}
