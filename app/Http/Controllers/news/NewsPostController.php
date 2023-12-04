@@ -5,6 +5,7 @@ namespace App\Http\Controllers\news;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\news\NewsStoreRequest;
 use App\Http\Requests\news\NewsUpdateRequest;
+use App\Models\Category;
 use App\Models\NewsCategory;
 use App\Models\NewsPost;
 use GuzzleHttp\Psr7\Response;
@@ -20,7 +21,7 @@ class NewsPostController extends BaseController
 
     public function create()
     {
-        $categories=NewsCategory::all();
+        $categories=Category::all();
         return view('news.create', compact('categories'));
     }
 
@@ -43,7 +44,7 @@ class NewsPostController extends BaseController
 
     public function edit($slug)
     {
-        $categories = NewsCategory::all();
+        $categories = Category::all();
         $newsPost = NewsPost::where('slug',$slug)->first();
         return view('news.edit',compact('newsPost','categories'));
     }
