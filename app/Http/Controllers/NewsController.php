@@ -64,6 +64,8 @@ class NewsController extends Controller
     }
     public function destroy(Request $request)
     {
+        // TODO removing images from storage
+
         $employee = NewsPost::where('id', $request->id)->delete();
 
         return Response()->json($employee);
