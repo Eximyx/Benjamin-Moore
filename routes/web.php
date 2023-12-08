@@ -3,7 +3,9 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\news\NewsPostController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StaticPageController;
+use App\Http\Controllers\news\CategoryController;
+//use App\Http\Controllers\StaticPageController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +38,26 @@ Route::middleware('admin')->group(function () {
         ->group(function () {
             Route::get('/',[AdminController::class,'index'])->name('admin.index');
 
+            Route::prefix('category')->group(function ()  {
+                Route::get('/',[CategoryController::class,'index'])->name('categories.index');
+                Route::get('/create',[CategoryController::class,'create'])->name('categories.create');
+                Route::post('/',[CategoryController::class,'destroy'])->name('categories.delete');
+                Route::post('/store',[CategoryController::class,'store'])->name('categories.store');
+            });
+            Route::prefix('newss')->group(function () {
+                Route::get('ajax-crud-datatable', [NewsController::class, 'index']);
+                Route::post('store', [NewsController::class, 'store']);
+                Route::post('edit', [NewsController::class, 'edit']);
+                Route::post('delete', [NewsController::class, 'destroy']);
+                Route::get('categories',[NewsController::class,'categoryfetch']);
+
+
+            });
+
+
+
             Route::prefix('news')->group(function () {
+                Route::get('/fetchall',[NewsPostController::class,'fetchall'])->name('news.fetchall');
                 Route::get('',[NewsPostController::class,'index'])->name('news.index');
                 Route::get('/create',[NewsPostController::class,'create'])->name('news.create');
                 Route::get('{news_post}',[NewsPostController::class,'show'])->name('news.show');
@@ -103,6 +124,7 @@ Route::get('/home', function () {
 
 
 // });
+
 
 
 

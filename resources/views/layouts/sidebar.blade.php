@@ -23,6 +23,11 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>News</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('categories.index') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Categories</span></a>
+    </li>
 
     <li class="nav-item">
         <a class="nav-link" href="/profile">

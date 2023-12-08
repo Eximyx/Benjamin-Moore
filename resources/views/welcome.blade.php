@@ -1,1 +1,1 @@
-{{dd(auth(),auth()->user())}}
+{{dd(auth(),auth()->user()), dd($request)}}

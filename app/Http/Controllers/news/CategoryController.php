@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\news;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\categories\CategoriesStoreRequest;
 use App\Http\Requests\categories\CategoriesUpdateRequest;
 use App\Models\Category;
+use App\Models\NewsPost;
 use App\Services\Categories\CategoryService;
 use Faker\Provider\Base;
 use Illuminate\Http\Request;
@@ -19,8 +19,8 @@ class CategoryController extends Controller
     }
     public function index()
     {
-        $categories = Category::all();
-        return view('categories.index',compact('categories'));
+        $newsPosts = NewsPost::paginate(16);
+        return view('categories.index',compact('newsPosts'));
     }
 
     /**
@@ -28,14 +28,18 @@ class CategoryController extends Controller
      */
     public function create()
     {
+
         return view('categories.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoriesStoreRequest $request)
+    public function store(Request $request)
     {
+
+        return response()->json($request->all());
+
         $data = $request->validated();
         $this->service->store($data);
         return redirect()->route('news.create');
@@ -71,6 +75,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->route('categories.index');
+        return response()->json(['status' => '200']);
     }
 }

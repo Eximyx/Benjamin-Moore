@@ -24,9 +24,10 @@ class NewsStoreRequest extends FormRequest
         return [
             'title'=>'required|string',
             'content'=> 'string',
-            'main_image'=>'required|file',
-            'category_id'=>'',
-            'slug'=>''
+            'main_image'=>'file',
+            'categoriesArr'=> '',
+            'category_id'=>'required',
+            'slug'=>'',
         ];
     }
 }

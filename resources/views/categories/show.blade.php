@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('content')
+@section('contents')
 
     <h1>Новости</h1>
     <div class="col">

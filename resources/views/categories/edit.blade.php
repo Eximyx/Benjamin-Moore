@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('content')
+@section('contents')
     <div>
         <form action="{{route('news.update',$newsPost)}}" method="post" enctype="multipart/form-data">
             @csrf
