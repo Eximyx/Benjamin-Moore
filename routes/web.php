@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\news\NewsPostController;
+use App\Http\Controllers\StaticPageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\news\CategoryController;
 //use App\Http\Controllers\StaticPageController;
@@ -42,6 +43,16 @@ Route::middleware('admin')->group(function () {
                 Route::post('delete', [NewsController::class, 'destroy']);
                 Route::get('categories',[NewsController::class,'categoryfetch']);
             });
+
+            Route::prefix('static-page')->group(function () {
+                Route::get('/ajax-crud-datatable', [StaticPageController::class, 'index'])->name('static-page.index');
+                Route::post('store', [StaticPageController::class, 'store']);
+                Route::post('edit', [StaticPageController::class, 'edit']);
+                Route::post('delete', [StaticPageController::class, 'destroy']);
+                Route::post('toggle', [StaticPageController::class, 'toggle']);
+                // Route::get('categories',[NewsController::class,'categoryfetch']);
+            });
+        
         });
     Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
 });

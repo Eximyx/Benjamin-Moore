@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\news\NewsStoreRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\NewsPost;
@@ -31,7 +32,7 @@ class NewsController extends Controller
         return view('news.index');
     }
 
-    public function store(Request $request)
+    public function store(NewsStoreRequest $request)
     {
         $data = $this->service->news_store($request->all());
 
@@ -52,9 +53,7 @@ class NewsController extends Controller
 
     public function edit(Request $request)
     {
-        $where = array('id' => $request->id);
-        $newsPost = NewsPost::where($where)->first();
-
+        $newsPost = NewsPost::where('id', $request->id)->first();
         return Response()->json($newsPost);
     }
 

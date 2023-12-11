@@ -24,9 +24,9 @@
             <span>News</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('categories.index') }}">
+        <a class="nav-link" href="{{ route('static-page.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Categories</span></a>
+            <span>StaticPages</span></a>
     </li>
 
     <li class="nav-item">
