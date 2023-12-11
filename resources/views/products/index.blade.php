@@ -342,19 +342,28 @@
         function editFunc(id) {
             $.ajax({
                 type: "POST",
-                url: "{{ url('admin/product/edit') }}",
+                url: "{{ url('admin/products/edit') }}",
                 data: {
                     id: id
                 },
                 dataType: 'json',
                 success: function(res) {
                     $('#EmployeeForm')[0].reset();
-                    $("#category").find(`option[value='${res.category_id}']`).attr("selected", true);
+                    $("#category").find(`option[value='${res.product_category_id}']`).attr("selected", true);
                     $('#EmployeeModal').html("Edit Employee");
                     $('#employee-modal').modal('show');
                     $('#summernote-content').summernote('code', res.content);
                     $('#id').val(res.id);
                     $('#title').val(res.title);
+                    $('#code').val(res.code);
+                    $('#type').val(res.type);
+                    $('#colors').val(res.colors);
+                    $('#base').val(res.base);
+                    $('#v_of_dry_remain').val(res.v_of_dry_remain);
+                    $('#time_to_repeat').val(res.time_to_repeat);
+                    $('#consumption').val(res.consumption);
+                    $('#thickness').val(res.thickness);
+                    $('#description').val(res.description);
                     result.src = `{{ url('storage/image/') }}/${res.main_image}`;
                 }
             });
