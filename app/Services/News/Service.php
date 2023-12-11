@@ -2,6 +2,11 @@
 
 namespace App\Services\News;
 
+
+// TODO ADD PRODUCT_CATEGORY ADD
+// TODO ADD USER_TABLE
+// 
+
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\NestedRules;

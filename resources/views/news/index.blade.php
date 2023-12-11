@@ -105,17 +105,10 @@
                 }
             });
 
-
-            // DataTable setups
-            // TODO CHANGE COLOR OF SELECTED ROWS https://datatables.net/forums/discussion/37959/background-color-of-selected-row
-            // $('#ajax-crud-datatable tbody tr.selected').css('background-color','yellow');
-
-            $('#ajax-crud-datatable').DataTable({
+                 $('#ajax-crud-datatable').DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                scrollX: true,
-                select: true,
                 ajax: "{{ url('admin/news/ajax-crud-datatable') }}",
                 columns: [{
                         data: 'id',

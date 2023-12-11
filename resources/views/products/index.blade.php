@@ -155,8 +155,6 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                scrollX: true,
-                select: true,
                 ajax: "{{ url('admin/products/crud') }}",
                 columns: [{
                         data: 'id',

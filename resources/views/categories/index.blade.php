@@ -204,6 +204,7 @@
             // $('#add_employee_form').on('shown.bs.modal', function () {
             //     $('#summernote-content').summernote();
             // })
+            //TODO Добавить нормальные возможности для редактирования текста
 
             $('#summernote-content').summernote({
                 toolbar: [
@@ -223,7 +224,6 @@
 
 
 
-            //TODO Добавить нормальные возможности для редактирования текста
 
 
 
@@ -259,8 +259,6 @@
                 reader.readAsDataURL(file);
                 return true;
             }
-
-            //TODO CHANGE TO ONE POST
 
             function categoryIdToTitle(posts, categories) {
                 const categories_id = [];
