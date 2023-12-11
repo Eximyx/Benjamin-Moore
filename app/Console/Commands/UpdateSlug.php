@@ -4,6 +4,9 @@ namespace App\Console\Commands;
 
 use App\Models\NewsPost;
 use App\Models\StaticPage;
+use App\Models\Product;
+use App\Models\ProductCategory;
+
 use Illuminate\Console\Command;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -26,6 +29,18 @@ class UpdateSlug extends Command
             $staticPage->slug = SlugService::createSlug(StaticPage::class, 'slug', $staticPage->title);
             $this->info($staticPage->slug);
             $staticPage->save();
+        });
+        $products = Product::all();
+        $products->each(function(Product $product){
+            $product->slug = SlugService::createSlug(Product::class, 'slug', $product->title);
+            $this->info($product->slug);
+            $product->save();
+        });
+        $product_categories = ProductCategory::all();
+        $product_categories->each(function(ProductCategory $product_category){
+            $product_category->slug = SlugService::createSlug(ProductCategory::class, 'slug', $product_category->title);
+            $this->info($product_category->slug);
+            $product_category->save();
         });
     }
 }

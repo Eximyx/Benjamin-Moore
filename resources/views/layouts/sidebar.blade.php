@@ -17,7 +17,11 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
-
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('products.index')}}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Products</span></a>
+    </li>
     <li class="nav-item">
         <a class="nav-link" href="{{route('news.index')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>

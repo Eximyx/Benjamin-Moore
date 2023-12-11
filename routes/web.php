@@ -1,11 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\news\NewsPostController;
 use App\Http\Controllers\StaticPageController;
+use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\news\CategoryController;
-//use App\Http\Controllers\StaticPageController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AdminController;
 /*
@@ -36,6 +34,13 @@ Route::middleware('admin')->group(function () {
     Route::prefix('admin')
         ->group(function () {
             Route::get('/',[AdminController::class,'index'])->name('admin.index');
+            Route::prefix('products')->group(function () {
+                Route::get('/crud', [ProductsController::class, 'index'])->name('products.index');
+                Route::post('store', [ProductsController::class, 'store']);
+                Route::post('edit', [ProductsController::class, 'edit']);
+                Route::post('delete', [ProductsController::class, 'destroy']);
+                Route::get('categories',[ProductsController::class,'categoryfetch']);
+        });
             Route::prefix('news')->group(function () {
                 Route::get('/ajax-crud-datatable', [NewsController::class, 'index'])->name('news.index');
                 Route::post('store', [NewsController::class, 'store']);

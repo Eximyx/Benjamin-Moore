@@ -4,7 +4,6 @@ namespace App\Services\News;
 
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
-use App\Models\NewsPost;
 use Illuminate\Validation\NestedRules;
 
 class Service
@@ -42,7 +41,7 @@ class Service
         $newsPost->update($data);
     }
 
-    public function delete_image(NewsPost $newsPost)
+    public function delete_image($newsPost)
     {
         if (!($newsPost->main_image == 'default_post.jpg')) {
             Storage::delete('public/image/' . $newsPost->main_image);
