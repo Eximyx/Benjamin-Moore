@@ -23,21 +23,20 @@ class NewsController extends Controller
                 $newsPost['category_id'] = Category::find($newsPost['category_id'])->title;
             }
             return datatables()->of($NewsPosts)
-                ->addColumn('action', 'new_s.news-action')
+                ->addColumn('action', 'news.news-action')
                 ->rawColumns(['action'])
                 ->addIndexColumn()
                 ->make(true);
         }
-        return view('new_s.index');
+        return view('news.index');
     }
 
     public function store(Request $request)
     {
         $data = $this->service->news_store($request->all());
 
-        //  TODO WE NEED TO UPDATE SLUG AFTER TITLE CHANGING
 
-        $employee = NewsPost::updateOrCreate(
+        $newsPost = NewsPost::updateOrCreate(
             [
                 'id' => $data['id']],
             [
@@ -48,15 +47,15 @@ class NewsController extends Controller
             ]
         );
 
-        return Response()->json($employee);
+        return Response()->json($newsPost);
     }
 
     public function edit(Request $request)
     {
         $where = array('id' => $request->id);
-        $employee = NewsPost::where($where)->first();
+        $newsPost = NewsPost::where($where)->first();
 
-        return Response()->json($employee);
+        return Response()->json($newsPost);
     }
 
     public function categoryfetch() {
@@ -64,10 +63,11 @@ class NewsController extends Controller
     }
     public function destroy(Request $request)
     {
-        // TODO removing images from storage
-
-        $employee = NewsPost::where('id', $request->id)->delete();
-
-        return Response()->json($employee);
+      
+        $newsPost = NewsPost::where('id', $request->id)->first(); 
+        $this->service->delete_image($newsPost);
+        $newsPost->delete();
+        
+        return Response()->json($newsPost);
     }
 }

@@ -285,20 +285,6 @@
                 }
             }
 
-
-            //TODO DELETE
-            $.extend(true, DataTable.defaults, {
-                searching: true,
-                ordering: true,
-                select: true,
-                columns: [
-                    {data: 'id'},
-                    {data: 'title'},
-                    {data: 'category_id'}
-                ]
-            });
-
-
             $('#example tbody').on('click', 'tr', function () {
                 if ($(this).hasClass('selected')) {
                     $(this).removeClass('selected');
@@ -318,8 +304,6 @@
                     data: categoryIdToTitle(data['posts'], data['categories']),
                 })
             };
-            //TODO DELETE
-            //TODO ONLY CATEGORIES
 
             function fetchAllPosts() {
 

@@ -19,7 +19,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('news.index') }}">
+        <a class="nav-link" href="{{route('news.index')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>News</span></a>
     </li>

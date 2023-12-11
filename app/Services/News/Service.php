@@ -70,6 +70,7 @@ class Service
         if (!($newsPost->main_image == 'default_post.jpg')) {
             Storage::delete('public/image/' . $newsPost->main_image);
         }
+        return $newsPost;
     }
 
 }
