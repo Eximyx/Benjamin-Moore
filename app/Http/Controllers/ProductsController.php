@@ -4,30 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
-use App\Services\Service;
 use Illuminate\Http\Request;
+// TODO REQUEST Product ERICHECK
 
-class ProductsController extends Controller
+class ProductsController extends BaseController
 {
-    public function __construct(Service $service)
-    {
-        $this->service = $service;
-    }
-
     public function index()
     {
+        $categories = ProductCategory::all();
         if (request()->ajax()) {
             $products = Product::all();
             foreach ($products as $product) {
                 $product['product_category_id'] = ProductCategory::find($product['product_category_id'])->title;
             }
-            return datatables()->of($products)
-                ->addColumn('action', 'products.products-action')
-                ->rawColumns(['action'])
-                ->addIndexColumn()
-                ->make(true);
+            return $this->service->create_datatable($products)->make(true);
         }
-        return view('products.index');
+        return view('products.index',compact('categories'));
     }
 
     public function store(Request $request)

@@ -31,6 +31,7 @@
             </table>
         </div>
     </div>
+    <!--//TODO CATEGORY & NAMING EXIMYX--> 
 
     <!-- boostrap News model -->
     <div class="modal fade" id="News-modal" aria-hidden="true" style="z-index: 1045" tabindex="-1">
@@ -95,6 +96,7 @@
         </div>
     </div>
     <!-- end bootstrap model -->
+
     <script>
         $(document).ready(function() {
             fetchAllcategories()
@@ -257,7 +259,7 @@
         });
 
 
-        //TODO NORMAL IMAGE UPLOADER
+        //TODO IMAGE FIX BOTH
 
         const upload = document.querySelector('#main_image');
         const result = document.querySelector('#result');

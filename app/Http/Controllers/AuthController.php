@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+// TODO REQUEST Auth EXIMYX
+
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;

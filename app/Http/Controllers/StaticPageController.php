@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\StaticPage;
+use Illuminate\Http\Request;
+// TODO REQUEST StaticPage EXIMYX
 
 class StaticPageController extends BaseController
 {
@@ -25,7 +27,7 @@ class StaticPageController extends BaseController
             [
                 'title' => $data['title'],
                 'content' => $data['content'],
-                'slug' => 'ursllll',
+                'slug' => '',
             ]
         );
 

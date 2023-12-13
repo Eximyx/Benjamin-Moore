@@ -18,7 +18,7 @@ class Service
         }
         ;
 
-        if (is_string($data['categoriesArr'])) {
+        if (array_key_exists('categoriesArr',$data) && is_string($data['categoriesArr'])) {
             $categories = explode(',', $data['categoriesArr']);
             foreach ($categories as $item) {
                 Category::create([
@@ -67,7 +67,11 @@ class Service
                 ->editColumn('updated_at', function () {
                     return Carbon::parse()->format('Y-m-d H:i:s');
                 })
-                ->addColumn('action', 'layouts/action')
+                ->addColumn('action', function ($value) {
+                    $request = request()->getPathInfo();
+
+                    return view('layouts/action',compact('request','value'));
+                })
                 ->addIndexColumn();
     }
 

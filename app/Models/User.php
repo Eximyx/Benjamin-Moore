@@ -1,7 +1,5 @@
 <?php
 
-// TODO CHECK 
-
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;

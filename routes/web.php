@@ -62,7 +62,7 @@ Route::middleware('admin')->group(function () {
                 Route::post('store', [ProductCategoryController::class, 'store']);
                 Route::post('edit', [ProductCategoryController::class, 'edit']);
                 Route::post('delete', [ProductCategoryController::class, 'destroy']);
-
+            });
 
             
             Route::prefix('users')->middleware('root')->group(function () {

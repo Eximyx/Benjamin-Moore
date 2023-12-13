@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+// TODO REQUEST Admin EXIMYX
+
 use Illuminate\Http\Request;
 use App\Models\User;
 use Validator;
@@ -20,9 +22,6 @@ class AdminController extends BaseController
             }
             ;
             return $this->service->create_datatable($Users)->make(true);
-            // ->editColumn('role', function () {
-            //     return $roles;
-            // })->make(true);
         }
         return view('user.index', compact('roles'));
     }

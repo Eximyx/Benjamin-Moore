@@ -201,10 +201,7 @@
                 input.value = '';
             })
 
-            // $('#add_employee_form').on('shown.bs.modal', function () {
-            //     $('#summernote-content').summernote();
-            // })
-            //TODO Добавить нормальные возможности для редактирования текста
+            //TODO SUMMERNOTE BOTH
 
             $('#summernote-content').summernote({
                 toolbar: [

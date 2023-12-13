@@ -32,6 +32,7 @@
             </table>
         </div>
     </div>
+    <!--//TODO User NAMING EXIMYX -->
 
     <div class="modal fade" id="User-modal" aria-hidden="true" tabindex="-1">
         <div class="modal-dialog modal-lg " style="max-width:20rem">

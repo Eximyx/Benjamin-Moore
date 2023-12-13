@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductCategory;
-use App\Services\News\Service;
 use Illuminate\Http\Request;
+// TODO REQUEST ProductCategory ERICHEK
 
-class ProductCategoryController extends Controller
+class ProductCategoryController extends BaseController
 {
-    public function __construct(Service $service)
-    {
-        $this->service = $service;
-    }
     public function index()
     {
         $kinds = ProductCategory::getWork();
@@ -20,11 +16,7 @@ class ProductCategoryController extends Controller
             foreach ($product_categories as $product_category) {
                 $product_category['kind_of_work'] = $kinds[$product_category['kind_of_work']]; 
             }
-            return datatables()->of($product_categories)
-                ->addColumn('action', 'product_category.action')
-                ->rawColumns(['action'])
-                ->addIndexColumn()
-                ->make(true);
+            return $this->service->create_datatable($product_categories)->make(true);
         }
         return view('product_category.index',compact('kinds'));
     }
@@ -52,10 +44,6 @@ class ProductCategoryController extends Controller
         $product_category = ProductCategory::where($where)->first();
         return Response()->json($product_category);
     }
-    public function categoryfetch() {
-        return response()->json(ProductCategory::all());
-    }
-
     public function destroy(Request $request)
     {
         $product_category = ProductCategory::where('id', $request->id)->first(); 

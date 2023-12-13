@@ -32,28 +32,26 @@
             </table>
         </div>
     </div>
+    <!--//TODO Product NAMING ERICHEK -->
 
-    <!-- boostrap employee model -->
-    <div class="modal fade" id="employee-modal" aria-hidden="true" style="z-index: 1045" tabindex="-1">
+    <!-- boostrap Product model -->
+    <div class="modal fade" id="Product-modal" aria-hidden="true" style="z-index: 1045" tabindex="-1">
         <div class="modal-dialog modal-lg modal-fullscreen m-0" style="max-width: none">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Employee</h5>
+                    <h5 class="modal-title">Product</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="javascript:void(0)" id="EmployeeForm" name="EmployeeForm" class="form-horizontal"
+                    <form action="javascript:void(0)" id="ProductForm" name="ProductForm" class="form-horizontal"
                         method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" id="id">
-                        <input type="hidden" name="categoriesArr" id="categoryArr">
-                        <div class="row">
-                            <div class="col-lg">
-                                <label for="title">Title</label>
-                                <input type="text" name="title" id="title" class="form-control" placeholder="title"
-                                    required>
-                            </div>
+                        <div class="col-lg">
+                            <label for="title">Title</label>
+                            <input type="text" name="title" id="title" class="form-control" placeholder="title"
+                                required>
                         </div>
-                        <div class="my-2">
+                        <div class="col-lg">
                             <label for="content">Content</label>
                             <textarea type="text" name="content" class="form-control" id="summernote-content" placeholder="content" required></textarea>
                         </div>
@@ -64,8 +62,8 @@
                         </div>
                         <div class="col-lg">
                             <label for="gloss_level">Gloss level</label>
-                            <input type="text" name="gloss_level" id="gloss_level" class="form-control" placeholder="code"
-                                required>
+                            <input type="text" name="gloss_level" id="gloss_level" class="form-control"
+                                placeholder="gloss_level" required>
                         </div>
                         <div class="col-lg">
                             <label for="type">Type</label>
@@ -84,50 +82,44 @@
                         </div>
                         <div class="col-lg">
                             <label for="v_of_dry_remain">V of dry remain</label>
-                            <input type="text" name="v_of_dry_remain" id="v_of_dry_remain" class="form-control" placeholder="v_of_dry_remain"
-                                required>
+                            <input type="text" name="v_of_dry_remain" id="v_of_dry_remain" class="form-control"
+                                placeholder="v_of_dry_remain" required>
                         </div>
                         <div class="col-lg">
                             <label for="time_to_repeat">Time to repeat</label>
-                            <input type="text" name="time_to_repeat" id="time_to_repeat" class="form-control" placeholder="time_to_repeat"
-                                required>
+                            <input type="text" name="time_to_repeat" id="time_to_repeat" class="form-control"
+                                placeholder="time_to_repeat" required>
                         </div>
                         <div class="col-lg">
                             <label for="consumption">Consumption</label>
-                            <input type="text" name="consumption" id="consumption" class="form-control" placeholder="consumption"
-                                required>
+                            <input type="text" name="consumption" id="consumption" class="form-control"
+                                placeholder="consumption" required>
                         </div>
                         <div class="col-lg">
                             <label for="thickness">Thickness</label>
-                            <input type="text" name="thickness" id="thickness" class="form-control" placeholder="thickness"
-                                required>
+                            <input type="text" name="thickness" id="thickness" class="form-control"
+                                placeholder="thickness" required>
                         </div>
                         <div class="col-lg">
-                            <label for="description">description</label>
-                            <input type="text" name="description" id="description" class="form-control" placeholder="description"
-                                required>
+                            <label for="description">Description</label>
+                            <input type="text" name="description" id="description" class="form-control"
+                                placeholder="description" required>
                         </div>
-
-                        <div class="my-2">
+                        <div class="col-lg">
                             <label for="category">Category</label>
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Категории
-                                </button>
-                                <ul class="dropdown-menu p-0">
-                                    <select class="form-select" size="5" aria-label="size 5 select example"
-                                        id="category" name="category_id" required>
-                                    </select>
-                                </ul>
-                            </div>
+                            <select class="form-select" aria-label="select example" id="category" name="category_id"
+                                required style="max-width: 20rem">
+                                @foreach ($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->title}}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <div class="my-2">
+                        <div class="col-lg">
                             <label for="main_image">Select Avatar</label>
                             <input type="file" name="main_image" class="form-control" id="main_image">
-                            <img class="h-25 w-25 img-thumbnail m-0" id="result">
+                            <img class="img-thumbnail m-0 mt-2" id="result" style="max-height: 20rem;max-width:20rem">
                         </div>
-                        <div class="my-2">
+                        <div class="col-lg">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Add new product</button>
                         </div>
@@ -137,12 +129,10 @@
             </div>
         </div>
     </div>
-    <!-- end bootstrap employee model -->
+    <!-- end bootstrap Product model -->
 
     <script>
         $(document).ready(function() {
-            fetchAllcategories()
-            // Ajax setups
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -201,61 +191,7 @@
                 }
             }
         });
-        let newCategories = [];
 
-        const options = $('#category')[0];
-
-        // Adjusting category options
-        function add_categories(categories) {
-            document.querySelector('#category').innerHTML = '';
-            for (let i = 0; i < categories.length; i++) {
-                $('#category').append(`<option value="${categories[i]['id']}">${categories[i]['title']}</option>`)
-            }
-        }
-
-        const categories = () => {
-            let data = {
-                'categories': []
-            };
-            for (let i = 0; i < options.length; i++) {
-                data['categories'].push(options[i].text)
-            }
-            data['last_value'] = parseInt(options[options.length - 1].value);
-            return data;
-        }
-
-
-
-        function fetchAllcategories() {
-            $.ajax({
-                url: '{{ url('admin/products/categories') }}',
-                method: 'get',
-                error: function() {
-                    console.log('Something went wrong');
-                },
-                success: function(response) {
-                    console.log(response);
-                    add_categories(response);
-                }
-            });
-        }
-
-
-        // Adding new category
-        $('#addCategory').on('click', () => {
-            const input = document.querySelector('#category_add');
-            const data = categories();
-            console.log(data);
-            if (input.value != '' && !(data['categories'].includes(input.value))) {
-                $('#category').append($('<option>', {
-                    value: data["last_value"] + 1,
-                    text: input.value
-                }));
-                data['categories'].push(input.value);
-                newCategories.push(input.value);
-            }
-            input.value = '';
-        })
 
         // Fullscreen Button for summernote (BUG FIXED)
         const OpenFullScreen = function(context) {
@@ -299,7 +235,8 @@
         });
 
 
-        //TODO NORMAL IMAGE UPLOADER
+                //TODO IMAGE FIX BOTH
+
 
         const upload = document.querySelector('#main_image');
         const result = document.querySelector('#result');
@@ -326,23 +263,15 @@
         }
 
         function add() {
-            $('#EmployeeForm')[0].reset();
+            $('#ProductForm')[0].reset();
             document.querySelector('#result').src = default_image;
-            $("#mySelect").prop("selectedIndex", -1);
+            $("#mySelect").prop("selectedIndex", 0);
             $('#summernote-content').summernote('reset');
-            $('#EmployeeModal').html("Add Employee");
-            $('#employee-modal').modal('show');
+            $('#ProductModal').html("Add Product");
+            $('#Product-modal').modal('show');
             $('#id').val('');
         }
 
-        // function addCategory() {
-        //     $('#CategoryForm')[0].reset();
-        //     document.querySelector('#result').src = default_image;
-        //      $("#mySelect").prop("selectedIndex", -1);
-        //      $('#Category-modal').html("Add Employee");
-        //     $('#Category-modal').modal('show');
-        //     $('#id').val('');
-        // }
 
         function editFunc(id) {
             $.ajax({
@@ -353,10 +282,10 @@
                 },
                 dataType: 'json',
                 success: function(res) {
-                    $('#EmployeeForm')[0].reset();
+                    $('#ProductForm')[0].reset();
                     $("#category").find(`option[value='${res.product_category_id}']`).attr("selected", true);
-                    $('#EmployeeModal').html("Edit Employee");
-                    $('#employee-modal').modal('show');
+                    $('#ProductModal').html("Edit Product");
+                    $('#Product-modal').modal('show');
                     $('#summernote-content').summernote('code', res.content);
                     $('#id').val(res.id);
                     $('#title').val(res.title);
@@ -403,11 +332,8 @@
             })
         }
 
-        $('#EmployeeForm').submit(function(e) {
+        $('#ProductForm').submit(function(e) {
             e.preventDefault();
-            if (newCategories.length != 0) {
-                $('#categoryArr').val(newCategories);
-            }
             var formData = new FormData(this);
             $.ajax({
                 type: 'POST',
@@ -417,9 +343,8 @@
                 contentType: false,
                 processData: false,
                 success: (data) => {
-                    newCategories = []
                     console.log(data);
-                    $("#employee-modal").modal('hide');
+                    $("#Product-modal").modal('hide');
                     var oTable = $('#ajax-crud-datatable').dataTable();
                     oTable.fnDraw(false);
                     $("#btn-save").html('Submit');

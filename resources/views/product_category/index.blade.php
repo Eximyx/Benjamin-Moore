@@ -31,9 +31,10 @@
             </table>
         </div>
     </div>
+    <!--//TODO ProductCategory NAMING ERICHEK --> 
 
-    <!-- boostrap employee model -->
-    <div class="modal fade" id="employee-modal" tabindex="-1" aria-hidden="true">
+    <!-- boostrap ProductCategory model -->
+    <div class="modal fade" id="ProductCategory-modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-fullscreen m-0" style="max-width: none">
             <div class="modal-content">
                 <div class="modal-header">
@@ -41,7 +42,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="javascript:void(0)" id="EmployeeForm" name="EmployeeForm" class="form-horizontal"
+                    <form action="javascript:void(0)" id="ProductCategoryForm" name="ProductCategoryForm" class="form-horizontal"
                         method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" id="id">
                         <div class="row">
@@ -53,14 +54,17 @@
                         </div>
                         <div class="my-2">
                             <label for="description">Description</label>
-                            <textarea type="text" name="description" class="form-control" id="summernote-content" placeholder="description" required></textarea>
+                            <textarea type="text" name="description" class="form-control" id="summernote-content" placeholder="description"
+                                required></textarea>
                         </div>
                         <div class="my-2">
                             <label for="kind_of_work">Kind of work</label>
                             <div class="dropdown">
-                                <select class="form-select" aria-label="Default select example" id="kind_of_work" name="kind_of_work" required>
-                                    <option value="0">Внутренние работы</option>
-                                    <option value="1">Наружние работы</option>
+                                <select class="form-select" aria-label="Default select example" id="kind_of_work"
+                                    name="kind_of_work" required>
+                                    @foreach ($kinds as $id => $kind)
+                                        <option value="{{$id}}">{{$kind}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -74,11 +78,10 @@
             </div>
         </div>
     </div>
-    <!-- end bootstrap employee model -->
+    <!-- end bootstrap ProductCategory model -->
 
     <script>
         $(document).ready(function() {
-            // fetchAllcategories()
             // Ajax setups
             $.ajaxSetup({
                 headers: {
@@ -134,60 +137,6 @@
                 }
             }
         });
-        let newCategories = [];
-
-        const options = $('#kind_of_work')[0];
-
-        // Adjusting category options
-        function add_categories(categories) {
-            document.querySelector('#kind_of_work').innerHTML = '';
-            for (let i = 0; i < categories.length; i++) {
-                $('#kind_of_work').append(`<option value="${categories[i]['id']}">${categories[i]['title']}</option>`)
-            }
-        }
-
-        const categories = () => {
-            let data = {
-                'categories': []
-            };
-            for (let i = 0; i < options.length; i++) {
-                data['categories'].push(options[i].text)
-            }
-            data['last_value'] = parseInt(options[options.length - 1].value);
-            console.log($data);
-            return data;
-        }
-
-
-        function fetchAllcategories() {
-            $.ajax({
-                url: '{{ url('admin/product_category/kind_of_work') }}',
-                method: 'get',
-                error: function() {
-                    console.log('Something went wrong');
-                },
-                success: function(response) {
-                    console.log(response);
-                    add_categories(response);
-                }
-            });
-        }
-
-        // Adding new category
-        // $('#addCategory').on('click', () => {
-        //     const input = document.querySelector('#category_add');
-        //     const data = categories();
-        //     console.log(data);
-        //     if (input.value != '' && !(data['categories'].includes(input.value))) {
-        //         $('#category').append($('<option>', {
-        //             value: data["last_value"] + 1,
-        //             text: input.value
-        //         }));
-        //         data['categories'].push(input.value);
-        //         newCategories.push(input.value);
-        //     }
-        //     input.value = '';
-        // })
 
         // Fullscreen Button for summernote (BUG FIXED)
         const OpenFullScreen = function(context) {
@@ -230,40 +179,12 @@
             }
         });
 
-
-        //TODO NORMAL IMAGE UPLOADER
-
-        // const upload = document.querySelector('#main_image');
-        // const result = document.querySelector('#result');
-        // const default_image = "{{ url('storage/image/default_post.jpg') }}";
-
-        // upload.addEventListener("change", (e) => {
-        //     console.log(e.target.files[0]);
-        //     if (!previewFunc(e.target.files[0])) {
-        //         upload.value = '';
-        //         result.src = default_image;
-        //     }
-        // });
-
-        // function previewFunc(file) {
-        //     if (file === undefined || !file.type.match(/image.*/)) {
-        //         return false
-        //     }
-        //     const reader = new FileReader();
-        //     reader.addEventListener("load", (e) => {
-        //         result.src = e.target.result;
-        //     });
-        //     reader.readAsDataURL(file);
-        //     return true;
-        // }
-
         function add() {
-            $('#EmployeeForm')[0].reset();
-            // document.querySelector('#result').src = default_image;
+            $('#ProductCategoryForm')[0].reset();
             $("#mySelect").prop("selectedIndex", -1);
             $('#summernote-content').summernote('reset');
-            $('#EmployeeModal').html("Add Employee");
-            $('#employee-modal').modal('show');
+            $('#ProductCategoryModal').html("Add ProductCategory");
+            $('#ProductCategory-modal').modal('show');
             $('#id').val('');
         }
 
@@ -276,10 +197,10 @@
                 },
                 dataType: 'json',
                 success: function(res) {
-                    $('#EmployeeForm')[0].reset();
+                    $('#ProductCategoryForm')[0].reset();
                     $("#kind_of_work").find(`option[value='${res.kind_of_work}']`).attr("selected", true);
-                    $('#EmployeeModal').html("Edit Employee");
-                    $('#employee-modal').modal('show');
+                    $('#ProductCategoryModal').html("Edit ProductCategory");
+                    $('#ProductCategory-modal').modal('show');
                     $('#summernote-content').summernote('code', res.description);
                     $('#id').val(res.id);
                     $('#title').val(res.title);
@@ -315,11 +236,8 @@
             })
         }
 
-        $('#EmployeeForm').submit(function(e) {
+        $('#ProductCategoryForm').submit(function(e) {
             e.preventDefault();
-            // if (newCategories.length != 0) {
-            //     $('#categoryArr').val(newCategories);
-            // }
             var formData = new FormData(this);
             $.ajax({
                 type: 'POST',
@@ -329,9 +247,8 @@
                 contentType: false,
                 processData: false,
                 success: (data) => {
-                    // newCategories = []
                     console.log(data);
-                    $("#employee-modal").modal('hide');
+                    $("#ProductCategory-modal").modal('hide');
                     var oTable = $('#ajax-crud-datatable').dataTable();
                     oTable.fnDraw(false);
                     $("#btn-save").html('Submit');

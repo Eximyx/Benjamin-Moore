@@ -19,7 +19,7 @@ class ProductCategory extends Model
         return $this->hasMany(Product::class,'product_category_id','id');
     }
     public static function getWork() {
-        return [0 => 'Internal Work',1=>'External Work'];
+        return [0 => 'Внутренние работы',1=>'Наружные работы'];
     }
 
     public function sluggable(): array
