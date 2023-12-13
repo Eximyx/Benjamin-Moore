@@ -32,6 +32,7 @@
             </table>
         </div>
     </div>
+    
     <!--//TODO User NAMING EXIMYX -->
 
     <div class="modal fade" id="User-modal" aria-hidden="true" tabindex="-1">
@@ -51,30 +52,33 @@
                         <div class="form-group">
                             <input name="name" type="text"
                                 class="form-control form-control-user @error('name')is-invalid @enderror" id="name"
-                                placeholder="Name">
+                                placeholder="Имя" required>
                             @error('name')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group">
                             <input name="email" type="email"
-                                class="form-control form-control-user @error('email')is-invalid @enderror" id="email"
-                                placeholder="Email Address">
-                            @error('email')
-                                <span class="invalid-feedback">{{ $message }}</span>
+                                class="form-control form-control-user @error('email') is-invalid" @enderror id="email"
+                                placeholder="Email Address" required>
+
+                                {{-- @if() {{$errors}} @endif --}}
+                                @if($errors->has('email'))
+                                {{dd()}}
+                                @endif 
+                            @if($errors->has('email'))
+                                <span class="invalid-feedback">{{ $errors->get('email') }}</span>
                             @enderror
                         </div>
                         <div class="form-group">
                             <input name="password" type="password"
                                 class="form-control form-control-user @error('password')is-invalid @enderror" id="password"
-                                placeholder="Password">
+                                placeholder="Password" >
                             @error('password')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                         <div>
-                            {{-- @if (au) --}}
-                            {{-- {{$id}} --}}
                             <select class="form-select" name="role" id="role" aria-label="Default select example">
                                 @foreach ($roles as $id => $role)
                                     <option {{ $id == 0 ? 'selected' : '' }} value="{{ $id }}">{{ $role }}
@@ -220,7 +224,10 @@
                     $("#btn-save").attr("disabled", false);
                 },
                 error: function(data) {
-                    console.log(data);
+                    $('span[id="error"]').remove(); 
+                    $.each(data.responseJSON.errors,function(field_name,error){
+                        $(document).find('[name='+field_name+']').after('<span id="error" class="text-strong text-danger">' +error+ '</span>')
+                    })
                 }
             });
         });

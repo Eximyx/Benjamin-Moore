@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 // TODO REQUEST Admin EXIMYX
 
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Validator;
@@ -27,25 +28,26 @@ class AdminController extends BaseController
     }
 
     // UserRequest
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $data = $request->all();
-
-
-
+        // $data = ; 
+        // Validator::make($request->all(), [
+        //     'id' => 'nullable',
+        //     'name' => 'required',
+        //     'email' => 'required|email',
+        //     'password' => 'required',
+        //     'role' => ''
+        // ])->validate();
+        $request->validated();
+        // response()->json($data);
+        return response()->json($request->all());
         if ($request->id !== null){ 
             if(!($data['password'] !== null)) {
                 $data['password'] = User::where('id',$data['id'])->first()['password'];
             }     
         }
+        // $data->validate();
 
-        Validator::make($data, [
-            'id' => 'nullable',
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'role' => ''
-        ])->validate();
 
         if($data['id'] == Auth()->user()->id) {
             $data['role'] = 2;
