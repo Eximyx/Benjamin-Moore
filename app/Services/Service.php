@@ -1,15 +1,10 @@
 <?php
 
-namespace App\Services\News;
+namespace App\Services;
 
-
-// TODO ADD PRODUCT_CATEGORY ADD
-// TODO ADD USER_TABLE
-// 
-
+use Illuminate\Support\Carbon;
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\NestedRules;
 
 class Service
 {
@@ -52,6 +47,28 @@ class Service
             Storage::delete('public/image/' . $newsPost->main_image);
         }
         return $newsPost;
+    }
+
+    public function toggle($data) {
+        if ($data['is_toggled']) {
+            $data['is_toggled'] = 0; 
+        } else {
+            $data['is_toggled'] = 1;
+        }
+        return $data;
+    }
+
+    public function create_datatable($data) {
+       return datatables()->of($data)
+                ->rawColumns(['action'])
+                ->editColumn('created_at', function () {
+                    return Carbon::parse()->format('Y-m-d H:i:s');
+                })
+                ->editColumn('updated_at', function () {
+                    return Carbon::parse()->format('Y-m-d H:i:s');
+                })
+                ->addColumn('action', 'layouts/action')
+                ->addIndexColumn();
     }
 
 }

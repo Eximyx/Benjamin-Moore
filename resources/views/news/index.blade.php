@@ -66,7 +66,7 @@
                                 </button>
                                 <ul class="dropdown-menu pb-0">
                                     <select class="form-select" size="5" aria-label="size 5 select example"
-                                        id="category" name="category_id" required>
+                                        id="category" name="category_id" required>  
                                     </select>
                                     <li>
                                         <div class="input-group mb-0">
@@ -334,6 +334,32 @@
                         dataType: 'json',
                         success: function(res) {
                             console.log(res)
+                            var oTable = $('#ajax-crud-datatable').dataTable();
+                            oTable.fnDraw(false);
+                        }
+                    });
+                }
+            })
+        }
+
+        function toggle(id) {
+            var id = id;
+            Swal.fire({
+                title: 'Do you really want to toggle this static-page?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#DC3545',
+                confirmButtonText: 'Submit'
+            }).then((result) => {
+                if (result['isConfirmed']) {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ url('admin/news/toggle') }}",
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(res) {
                             var oTable = $('#ajax-crud-datatable').dataTable();
                             oTable.fnDraw(false);
                         }

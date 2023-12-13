@@ -1,5 +1,7 @@
 <?php
 
+// TODO CHECK 
+
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -11,17 +13,30 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    
+    const ROLE_USER = 0;
+    const ROLE_ADMIN = 1;
+    const ROLE_ROOT = 2;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+
+    public static function getRoles()
+    {    return [
+        self::ROLE_USER => "user",
+        self::ROLE_ADMIN => "admin",
+        self::ROLE_ROOT => "root"
+        ];
+    }
+
     protected $fillable = [
         'name',
         'email',
         'password',
-        'IsAdmin'
+        'role'
     ];
 
     /**
@@ -32,7 +47,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'IsAdmin'
+        // 'role'
     ];
 
     /**

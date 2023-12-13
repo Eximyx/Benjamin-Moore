@@ -1,29 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
-// use App\Models\Category;
-use Illuminate\Http\Request;
 use App\Models\StaticPage;
-use App\Services\News\Service;
 
-class StaticPageController extends Controller
+class StaticPageController extends BaseController
 {
-
-    public function __construct(Service $service,)
-    {
-        $this->service = $service;
-    }
-
     public function index()
     {
         if (request()->ajax()) {
             $StaticPages = StaticPage::all();
-            return datatables()->of($StaticPages)
-                ->rawColumns(['action'])
-                ->addColumn('action', 'static-page/static-page-action')
-                ->addIndexColumn()
-                ->make(true);
+            return $this->service->create_datatable($StaticPages)->make(true);
             }
         return view('static-page.index');
     }
@@ -58,13 +44,9 @@ class StaticPageController extends Controller
     } 
        public function toggle(Request $request)
     {
-        $staticPage = StaticPage::where('id', $request->id)->first();
-        if ($staticPage['is_toggled']) {
-            $staticPage['is_toggled'] = 0; 
-        } else {
-            $staticPage['is_toggled'] = 1;
-        }
-        $staticPage->save();    
-        return Response()->json($staticPage);
+        $data = StaticPage::where('id', $request->id)->first();
+        $this->service->toggle($data);
+        $data->save();    
+        return Response()->json($data);
     }
 }

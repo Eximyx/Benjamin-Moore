@@ -1,21 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\BaseController;
 
-use App\Http\Requests\news\NewsStoreRequest;
+use App\Http\Requests\news\NewsRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use App\Models\NewsPost;
-use App\Services\News\Service;
 
-class NewsController extends Controller
+class NewsController extends BaseController
 {
-
-    public function __construct(Service $service,)
-    {
-        $this->service = $service;
-    }
-
     public function index()
     {
         if (request()->ajax()) {
@@ -23,23 +16,20 @@ class NewsController extends Controller
             foreach ($NewsPosts as $newsPost) {
                 $newsPost['category_id'] = Category::find($newsPost['category_id'])->title;
             }
-            return datatables()->of($NewsPosts)
-                ->addColumn('action', 'news.news-action')
-                ->rawColumns(['action'])
-                ->addIndexColumn()
-                ->make(true);
+            return $this->service->create_datatable($NewsPosts)->make(true);
         }
         return view('news.index');
     }
 
-    public function store(NewsStoreRequest $request)
+    public function store(NewsRequest $request)
     {
         $data = $this->service->news_store($request->all());
 
 
         $newsPost = NewsPost::updateOrCreate(
             [
-                'id' => $data['id']],
+                'id' => $data['id']
+            ],
             [
                 'title' => $data['title'],
                 'main_image' => $data['main_image'],
@@ -62,11 +52,17 @@ class NewsController extends Controller
     }
     public function destroy(Request $request)
     {
-      
         $newsPost = NewsPost::where('id', $request->id)->first(); 
         $this->service->delete_image($newsPost);
         $newsPost->delete();
         
         return Response()->json($newsPost);
+    }
+
+    public function toggle(Request $request) {
+        $data = NewsPost::where('id', $request->id)->first();
+        $data = $this->service->toggle($data)->save();
+        return response()->json($data);
+
     }
 }

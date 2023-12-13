@@ -22,10 +22,9 @@ class StaticPageRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' =>'nullable|numeric',
             'title'=>'required|string',
-            'content'=> 'string',
-            'url'=>'nullable|string',
-            'is_toggled'=>'nullable',
+            'content'=> 'reqired|string',
         ];
     }
 }

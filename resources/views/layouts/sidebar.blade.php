@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard')}}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -18,12 +18,17 @@
             <span>Dashboard</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{route('products.index')}}">
+        <a class="nav-link" href="{{ route('products.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Products</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{route('news.index')}}">
+        <a class="nav-link" href="{{ route('product_category.index') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Products categories</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('news.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>News</span></a>
     </li>
@@ -33,12 +38,14 @@
             <span>StaticPages</span></a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="/profile">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Profile</span></a>
-    </li>
 
+    @if (Auth::user()->role === 2)
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('user.index') }}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>User</span></a>
+        </li>
+    @endif
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

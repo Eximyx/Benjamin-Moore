@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use Illuminate\Support\Facades\Hash;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Category;
@@ -19,8 +20,8 @@ class DatabaseSeeder extends Seeder
          \App\Models\User::factory()->create([
              'name' => 'admin',
              'email' => 'admin@admin',
-             'password' => 'admin',
-             'IsAdmin' => 1
+             'password' => Hash::make('admin'),
+             'role' => 1
          ]);
     }
 }

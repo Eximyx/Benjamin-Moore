@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
-use App\Services\News\Service;
+use App\Services\Service;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -42,6 +42,7 @@ class ProductsController extends Controller
                 'main_image' => $data['main_image'],
                 'content' => $data['content'],
                 'code' => $data['code'],
+                'gloss_level' => $data['gloss_level'],
                 'description' => $data['description'],
                 'type' => $data['type'],
                 'colors' => $data['colors'],

@@ -28,7 +28,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'IsAdmin' => 0
+            'isdmin' => 0
         ]);
 
 
@@ -40,7 +40,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('welcome',);
+        return redirect()->route('welcome', );
     }
 
     public function login()
@@ -61,7 +61,7 @@ class AuthController extends Controller
         }
         $request->session()->regenerate();
 
-        return redirect('admin/dashboard');
+        return redirect('admin/');
 
     }
 
@@ -74,8 +74,38 @@ class AuthController extends Controller
         return redirect('login');
     }
 
-    public function profile()
+    public function profile(Request $request)
     {
-        return view('admin/profile');
+        $roles = User::getRoles();
+        return view('admin/profile',compact('roles'));
+
     }
+
+    public function profile_set()
+    {
+
+        $data = request()->all();
+        $data['id'] = Auth::user()->id;
+        if (!($data['password'] !== null)) {
+            $data['password'] = Auth()->user()->password;
+        }
+
+        $user = Validator::make($data, [
+            'id' => 'required',
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+        ])->validate();
+
+        $user = User::updateOrCreate([
+            'id' => $data['id']
+
+        ], 
+        [
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password']]);
+        return response()->json($user);
+    }
+
 }
