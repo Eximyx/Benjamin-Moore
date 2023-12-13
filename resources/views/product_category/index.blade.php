@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
-                    <h2>Laravel 10 Ajax DataTables CRUD (Create Read Update and Delete) </h2>
+                    <h2>Product categories</h2>
                 </div>
                 <div class="pull-right mb-2">
                     <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Add new product</a>
@@ -38,7 +38,7 @@
         <div class="modal-dialog modal-lg modal-fullscreen m-0" style="max-width: none">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Category</h5>
+                    <h5 class="modal-title">Product category</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

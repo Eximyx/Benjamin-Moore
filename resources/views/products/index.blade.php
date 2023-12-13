@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
-                    <h2>Laravel 10 Ajax DataTables CRUD (Create Read Update and Delete) </h2>
+                    <h2>Products</h2>
                 </div>
                 <div class="pull-right mb-2">
                     <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Add new product</a>
@@ -46,66 +46,66 @@
                     <form action="javascript:void(0)" id="ProductForm" name="ProductForm" class="form-horizontal"
                         method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" id="id">
-                        <div class="col-lg">
+                        <div class="col-lg mb-3">
                             <label for="title">Title</label>
                             <input type="text" name="title" id="title" class="form-control" placeholder="title"
                                 required>
                         </div>
-                        <div class="col-lg">
+                        <div class="col-lg mb-3">
                             <label for="content">Content</label>
                             <textarea type="text" name="content" class="form-control" id="summernote-content" placeholder="content" required></textarea>
                         </div>
-                        <div class="col-lg">
+                        <div class="col-lg mb-3">
                             <label for="code">Code</label>
                             <input type="number" name="code" id="code" class="form-control" placeholder="code"
                                 required>
                         </div>
-                        <div class="col-lg">
+                        <div class="col-lg mb-3">
                             <label for="gloss_level">Gloss level</label>
                             <input type="text" name="gloss_level" id="gloss_level" class="form-control"
-                                placeholder="gloss_level" required>
+                                placeholder="gloss level" required>
                         </div>
-                        <div class="col-lg">
+                        <div class="col-lg mb-3">
                             <label for="type">Type</label>
                             <input type="text" name="type" id="type" class="form-control" placeholder="type"
                                 required>
                         </div>
-                        <div class="col-lg">
+                        <div class="col-lg mb-3">
                             <label for="colors">Colors</label>
                             <input type="text" name="colors" id="colors" class="form-control" placeholder="colors"
                                 required>
                         </div>
-                        <div class="col-lg">
+                        <div class="col-lg mb-3">
                             <label for="base">Base</label>
                             <input type="text" name="base" id="base" class="form-control" placeholder="base"
                                 required>
                         </div>
-                        <div class="col-lg">
+                        <div class="col-lg mb-3">
                             <label for="v_of_dry_remain">V of dry remain</label>
                             <input type="text" name="v_of_dry_remain" id="v_of_dry_remain" class="form-control"
-                                placeholder="v_of_dry_remain" required>
+                                placeholder="v of dry remain" required>
                         </div>
-                        <div class="col-lg">
+                        <div class="col-lg mb-3">
                             <label for="time_to_repeat">Time to repeat</label>
                             <input type="text" name="time_to_repeat" id="time_to_repeat" class="form-control"
-                                placeholder="time_to_repeat" required>
+                                placeholder="time to repeat" required>
                         </div>
-                        <div class="col-lg">
+                        <div class="col-lg mb-3">
                             <label for="consumption">Consumption</label>
                             <input type="text" name="consumption" id="consumption" class="form-control"
                                 placeholder="consumption" required>
                         </div>
-                        <div class="col-lg">
+                        <div class="col-lg mb-3">
                             <label for="thickness">Thickness</label>
                             <input type="text" name="thickness" id="thickness" class="form-control"
                                 placeholder="thickness" required>
                         </div>
-                        <div class="col-lg">
+                        <div class="col-lg mb-3">
                             <label for="description">Description</label>
                             <input type="text" name="description" id="description" class="form-control"
                                 placeholder="description" required>
                         </div>
-                        <div class="col-lg">
+                        <div class="col-lg mb-3">
                             <label for="category">Category</label>
                             <select class="form-select" aria-label="select example" id="category" name="category_id"
                                 required style="max-width: 20rem">
@@ -114,14 +114,14 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-lg">
+                        <div class="col-lg mb-3">
                             <label for="main_image">Select Avatar</label>
                             <input type="file" name="main_image" class="form-control" id="main_image">
                             <img class="img-thumbnail m-0 mt-2" id="result" style="max-height: 20rem;max-width:20rem">
                         </div>
                         <div class="col-lg">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Add new product</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>
