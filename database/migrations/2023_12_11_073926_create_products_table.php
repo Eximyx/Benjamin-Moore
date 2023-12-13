@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('main_image');
             $table->longText('content');
             $table->integer('code');
+            $table->string('gloss_level');
             $table->string('description');
             $table->string('type');
             $table->string('colors');

@@ -22,8 +22,7 @@
                     <tr>
                         <th>id</th>
                         <th>title</th>
-                        <th>code</th>
-                        <th>category</th>
+                        <th>kind_of_work</th>
                         <th>created_at</th>
                         <th>updated_at</th>
                         <th>Action</th>
@@ -34,18 +33,17 @@
     </div>
 
     <!-- boostrap employee model -->
-    <div class="modal fade" id="employee-modal" aria-hidden="true" style="z-index: 1045" tabindex="-1">
+    <div class="modal fade" id="employee-modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-fullscreen m-0" style="max-width: none">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Employee</h5>
+                    <h5 class="modal-title">Category</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="javascript:void(0)" id="EmployeeForm" name="EmployeeForm" class="form-horizontal"
                         method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" id="id">
-                        <input type="hidden" name="categoriesArr" id="categoryArr">
                         <div class="row">
                             <div class="col-lg">
                                 <label for="title">Title</label>
@@ -54,82 +52,21 @@
                             </div>
                         </div>
                         <div class="my-2">
-                            <label for="content">Content</label>
-                            <textarea type="text" name="content" class="form-control" id="summernote-content" placeholder="content" required></textarea>
+                            <label for="description">Description</label>
+                            <textarea type="text" name="description" class="form-control" id="summernote-content" placeholder="description" required></textarea>
                         </div>
-                        <div class="col-lg">
-                            <label for="code">Code</label>
-                            <input type="number" name="code" id="code" class="form-control" placeholder="code"
-                                required>
-                        </div>
-                        <div class="col-lg">
-                            <label for="gloss_level">Gloss level</label>
-                            <input type="text" name="gloss_level" id="gloss_level" class="form-control" placeholder="code"
-                                required>
-                        </div>
-                        <div class="col-lg">
-                            <label for="type">Type</label>
-                            <input type="text" name="type" id="type" class="form-control" placeholder="type"
-                                required>
-                        </div>
-                        <div class="col-lg">
-                            <label for="colors">Colors</label>
-                            <input type="text" name="colors" id="colors" class="form-control" placeholder="colors"
-                                required>
-                        </div>
-                        <div class="col-lg">
-                            <label for="base">Base</label>
-                            <input type="text" name="base" id="base" class="form-control" placeholder="base"
-                                required>
-                        </div>
-                        <div class="col-lg">
-                            <label for="v_of_dry_remain">V of dry remain</label>
-                            <input type="text" name="v_of_dry_remain" id="v_of_dry_remain" class="form-control" placeholder="v_of_dry_remain"
-                                required>
-                        </div>
-                        <div class="col-lg">
-                            <label for="time_to_repeat">Time to repeat</label>
-                            <input type="text" name="time_to_repeat" id="time_to_repeat" class="form-control" placeholder="time_to_repeat"
-                                required>
-                        </div>
-                        <div class="col-lg">
-                            <label for="consumption">Consumption</label>
-                            <input type="text" name="consumption" id="consumption" class="form-control" placeholder="consumption"
-                                required>
-                        </div>
-                        <div class="col-lg">
-                            <label for="thickness">Thickness</label>
-                            <input type="text" name="thickness" id="thickness" class="form-control" placeholder="thickness"
-                                required>
-                        </div>
-                        <div class="col-lg">
-                            <label for="description">description</label>
-                            <input type="text" name="description" id="description" class="form-control" placeholder="description"
-                                required>
-                        </div>
-
                         <div class="my-2">
-                            <label for="category">Category</label>
+                            <label for="kind_of_work">Kind of work</label>
                             <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Категории
-                                </button>
-                                <ul class="dropdown-menu p-0">
-                                    <select class="form-select" size="5" aria-label="size 5 select example"
-                                        id="category" name="category_id" required>
-                                    </select>
-                                </ul>
+                                <select class="form-select" aria-label="Default select example" id="kind_of_work" name="kind_of_work" required>
+                                    <option value="0">Внутренние работы</option>
+                                    <option value="1">Наружние работы</option>
+                                </select>
                             </div>
                         </div>
                         <div class="my-2">
-                            <label for="main_image">Select Avatar</label>
-                            <input type="file" name="main_image" class="form-control" id="main_image">
-                            <img class="h-25 w-25 img-thumbnail m-0" id="result">
-                        </div>
-                        <div class="my-2">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Add new product</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -141,7 +78,7 @@
 
     <script>
         $(document).ready(function() {
-            fetchAllcategories()
+            // fetchAllcategories()
             // Ajax setups
             $.ajaxSetup({
                 headers: {
@@ -153,7 +90,7 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: "{{ url('admin/products/crud') }}",
+                ajax: "{{ url('admin/product_category/crud') }}",
                 columns: [{
                         data: 'id',
                         name: 'id'
@@ -163,12 +100,8 @@
                         name: 'title'
                     },
                     {
-                        data: 'code',
-                        name: 'code'
-                    },
-                    {
-                        data: 'product_category_id',
-                        name: 'product_category_id'
+                        data: 'kind_of_work',
+                        name: 'kind_of_work'
                     },
                     {
                         data: 'created_at',
@@ -203,13 +136,13 @@
         });
         let newCategories = [];
 
-        const options = $('#category')[0];
+        const options = $('#kind_of_work')[0];
 
         // Adjusting category options
         function add_categories(categories) {
-            document.querySelector('#category').innerHTML = '';
+            document.querySelector('#kind_of_work').innerHTML = '';
             for (let i = 0; i < categories.length; i++) {
-                $('#category').append(`<option value="${categories[i]['id']}">${categories[i]['title']}</option>`)
+                $('#kind_of_work').append(`<option value="${categories[i]['id']}">${categories[i]['title']}</option>`)
             }
         }
 
@@ -221,14 +154,14 @@
                 data['categories'].push(options[i].text)
             }
             data['last_value'] = parseInt(options[options.length - 1].value);
+            console.log($data);
             return data;
         }
 
 
-
         function fetchAllcategories() {
             $.ajax({
-                url: '{{ url('admin/products/categories') }}',
+                url: '{{ url('admin/product_category/kind_of_work') }}',
                 method: 'get',
                 error: function() {
                     console.log('Something went wrong');
@@ -240,22 +173,21 @@
             });
         }
 
-
         // Adding new category
-        $('#addCategory').on('click', () => {
-            const input = document.querySelector('#category_add');
-            const data = categories();
-            console.log(data);
-            if (input.value != '' && !(data['categories'].includes(input.value))) {
-                $('#category').append($('<option>', {
-                    value: data["last_value"] + 1,
-                    text: input.value
-                }));
-                data['categories'].push(input.value);
-                newCategories.push(input.value);
-            }
-            input.value = '';
-        })
+        // $('#addCategory').on('click', () => {
+        //     const input = document.querySelector('#category_add');
+        //     const data = categories();
+        //     console.log(data);
+        //     if (input.value != '' && !(data['categories'].includes(input.value))) {
+        //         $('#category').append($('<option>', {
+        //             value: data["last_value"] + 1,
+        //             text: input.value
+        //         }));
+        //         data['categories'].push(input.value);
+        //         newCategories.push(input.value);
+        //     }
+        //     input.value = '';
+        // })
 
         // Fullscreen Button for summernote (BUG FIXED)
         const OpenFullScreen = function(context) {
@@ -301,33 +233,33 @@
 
         //TODO NORMAL IMAGE UPLOADER
 
-        const upload = document.querySelector('#main_image');
-        const result = document.querySelector('#result');
-        const default_image = "{{ url('storage/image/default_post.jpg') }}";
+        // const upload = document.querySelector('#main_image');
+        // const result = document.querySelector('#result');
+        // const default_image = "{{ url('storage/image/default_post.jpg') }}";
 
-        upload.addEventListener("change", (e) => {
-            console.log(e.target.files[0]);
-            if (!previewFunc(e.target.files[0])) {
-                upload.value = '';
-                result.src = default_image;
-            }
-        });
+        // upload.addEventListener("change", (e) => {
+        //     console.log(e.target.files[0]);
+        //     if (!previewFunc(e.target.files[0])) {
+        //         upload.value = '';
+        //         result.src = default_image;
+        //     }
+        // });
 
-        function previewFunc(file) {
-            if (file === undefined || !file.type.match(/image.*/)) {
-                return false
-            }
-            const reader = new FileReader();
-            reader.addEventListener("load", (e) => {
-                result.src = e.target.result;
-            });
-            reader.readAsDataURL(file);
-            return true;
-        }
+        // function previewFunc(file) {
+        //     if (file === undefined || !file.type.match(/image.*/)) {
+        //         return false
+        //     }
+        //     const reader = new FileReader();
+        //     reader.addEventListener("load", (e) => {
+        //         result.src = e.target.result;
+        //     });
+        //     reader.readAsDataURL(file);
+        //     return true;
+        // }
 
         function add() {
             $('#EmployeeForm')[0].reset();
-            document.querySelector('#result').src = default_image;
+            // document.querySelector('#result').src = default_image;
             $("#mySelect").prop("selectedIndex", -1);
             $('#summernote-content').summernote('reset');
             $('#EmployeeModal').html("Add Employee");
@@ -335,42 +267,22 @@
             $('#id').val('');
         }
 
-        // function addCategory() {
-        //     $('#CategoryForm')[0].reset();
-        //     document.querySelector('#result').src = default_image;
-        //      $("#mySelect").prop("selectedIndex", -1);
-        //      $('#Category-modal').html("Add Employee");
-        //     $('#Category-modal').modal('show');
-        //     $('#id').val('');
-        // }
-
         function editFunc(id) {
             $.ajax({
                 type: "POST",
-                url: "{{ url('admin/products/edit') }}",
+                url: "{{ url('admin/product_category/edit') }}",
                 data: {
                     id: id
                 },
                 dataType: 'json',
                 success: function(res) {
                     $('#EmployeeForm')[0].reset();
-                    $("#category").find(`option[value='${res.product_category_id}']`).attr("selected", true);
+                    $("#kind_of_work").find(`option[value='${res.kind_of_work}']`).attr("selected", true);
                     $('#EmployeeModal').html("Edit Employee");
                     $('#employee-modal').modal('show');
-                    $('#summernote-content').summernote('code', res.content);
+                    $('#summernote-content').summernote('code', res.description);
                     $('#id').val(res.id);
                     $('#title').val(res.title);
-                    $('#code').val(res.code);
-                    $('#gloss_level').val(res.gloss_level);
-                    $('#type').val(res.type);
-                    $('#colors').val(res.colors);
-                    $('#base').val(res.base);
-                    $('#v_of_dry_remain').val(res.v_of_dry_remain);
-                    $('#time_to_repeat').val(res.time_to_repeat);
-                    $('#consumption').val(res.consumption);
-                    $('#thickness').val(res.thickness);
-                    $('#description').val(res.description);
-                    result.src = `{{ url('storage/image/') }}/${res.main_image}`;
                 }
             });
         }
@@ -388,7 +300,7 @@
                     // ajax
                     $.ajax({
                         type: "POST",
-                        url: "{{ url('admin/products/delete') }}",
+                        url: "{{ url('admin/product_category/delete') }}",
                         data: {
                             id: id
                         },
@@ -405,19 +317,19 @@
 
         $('#EmployeeForm').submit(function(e) {
             e.preventDefault();
-            if (newCategories.length != 0) {
-                $('#categoryArr').val(newCategories);
-            }
+            // if (newCategories.length != 0) {
+            //     $('#categoryArr').val(newCategories);
+            // }
             var formData = new FormData(this);
             $.ajax({
                 type: 'POST',
-                url: "{{ url('admin/products/store') }}",
+                url: "{{ url('admin/product_category/store') }}",
                 data: formData,
                 cache: false,
                 contentType: false,
                 processData: false,
                 success: (data) => {
-                    newCategories = []
+                    // newCategories = []
                     console.log(data);
                     $("#employee-modal").modal('hide');
                     var oTable = $('#ajax-crud-datatable').dataTable();
