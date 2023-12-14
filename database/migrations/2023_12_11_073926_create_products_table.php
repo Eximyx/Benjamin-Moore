@@ -30,6 +30,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_category_id');
             $table->index('product_category_id','product_product_category_idx');
             $table->foreign('product_category_id','product_product_category_fk')->references('id')->on('product_categories');
+            $table->boolean('is_toggled')->default(false);
             $table->timestamps();
         });
     }

@@ -11,21 +11,44 @@ class ProductsController extends BaseController
 {
     public function index()
     {
-        $categories = ProductCategory::all();
+        $data = Product::getModel();
+        $selectable = ProductCategory::All();
+        $datatable_columns = [];
+        foreach ($data['datatable_data'] as $key => $item){ 
+            $datatable_columns[] = ['data' => $key, 'name' => $key]; 
+        };
         if (request()->ajax()) {
-            $products = Product::all();
-            foreach ($products as $product) {
-                $product['product_category_id'] = ProductCategory::find($product['product_category_id'])->title;
+            $Entities = Product::all();
+            foreach ($Entities as $Enity) {
+                $Enity['product_category_id'] = ProductCategory::find($Enity['product_category_id'])->title;
             }
-            return $this->service->create_datatable($products)->make(true);
+            return $this->service->create_datatable($Entities)->make(true);
         }
-        return view('products.index',compact('categories'));
+        return view('layouts.datatable',compact('data','selectable', 'datatable_columns'));
     }
 
     public function store(Request $request)
     {
-        $data = $this->service->news_store($request->all());
-        $product = Product::updateOrCreate(
+        $data = $this->service->image_store($request->validate([
+            'id' => 'numeric|nullable',
+            'title' => 'string|required',
+            'main_image' => 'nullable',
+            'content' => 'string|required',
+            'code' => 'numeric|required',
+            'gloss_level' => 'string|required',
+            'description' => 'string|required',
+            'type' => 'string|required',
+            'colors' => 'string|required',
+            'base' => 'string|required',
+            'v_of_dry_remain' => 'string|required',
+            'time_to_repeat' => 'string|required',
+            'consumption' => 'string|required',
+            'thickness' => 'string|required',
+            'product_category_id' => 'numeric|required',
+        ]));
+        
+
+        $Entity = Product::updateOrCreate(
             [
                 'id' => $data['id']
             ],
@@ -43,31 +66,31 @@ class ProductsController extends BaseController
                 'time_to_repeat' => $data['time_to_repeat'],
                 'consumption' => $data['consumption'],
                 'thickness' => $data['thickness'],
-                'product_category_id' => $data['category_id'],
+                'product_category_id' => $data['product_category_id'],
             ]
         );
 
-        return Response()->json($product);
+        return Response()->json($Entity);
     }
 
     public function edit(Request $request)
     {
-        $where = array('id' => $request->id);
-        $product = Product::where($where)->first();
+        $Entity = Product::where('id', $request->id)->first();
 
-        return Response()->json($product);
-    }
-
-    public function categoryfetch() {
-        return response()->json(ProductCategory::all());
+        return Response()->json($Entity);
     }
 
     public function destroy(Request $request)
     {
-        $product = Product::where('id', $request->id)->first(); 
-        $this->service->delete_image($product);
-        $product->delete();
+        $Entity = Product::where('id', $request->id)->first(); 
+        $this->service->delete_image($Entity);
+        $Entity->delete();
         
-        return Response()->json($product);
+        return Response()->json($Entity);
+    }
+    public function toggle(Request $request) {
+        $data = Product::where('id', $request->id)->first();
+        $data = $this->service->toggle($data)->save();
+        return response()->json($data);
     }
 }
