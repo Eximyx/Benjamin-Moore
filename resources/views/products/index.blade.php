@@ -4,10 +4,10 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
-                    <h2>Products</h2>
+                    <h2>Товар</h2>
                 </div>
                 <div class="pull-right mb-2">
-                    <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Add new product</a>
+                    <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Добавить товар</a>
                 </div>
             </div>
         </div>
@@ -21,12 +21,12 @@
                 <thead>
                     <tr>
                         <th>id</th>
-                        <th>title</th>
-                        <th>code</th>
-                        <th>category</th>
-                        <th>created_at</th>
-                        <th>updated_at</th>
-                        <th>Action</th>
+                        <th>Заголовок</th>
+                        <th>Код</th>
+                        <th>Категория</th>
+                        <th>Дата создания</th>
+                        <th>Дата изменения</th>
+                        <th></th>
                     </tr>
                 </thead>
             </table>
@@ -38,75 +38,74 @@
     <div class="modal fade" id="Product-modal" aria-hidden="true" style="z-index: 1045" tabindex="-1">
         <div class="modal-dialog modal-lg modal-fullscreen m-0" style="max-width: none">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Product</h5>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Товар</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="javascript:void(0)" id="ProductForm" name="ProductForm" class="form-horizontal"
+                    <form action="javascript:void(0)" id="Form" name="Form" class="form-horizontal"
                         method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" id="id">
                         <div class="col-lg mb-3">
-                            <label for="title">Title</label>
-                            <input type="text" name="title" id="title" class="form-control" placeholder="title"
+                            <label for="title">Заголовок</label>
+                            <input type="text" name="title" id="title" class="form-control" placeholder="Заголовок"
                                 required>
                         </div>
                         <div class="col-lg mb-3">
-                            <label for="content">Content</label>
-                            <textarea type="text" name="content" class="form-control" id="summernote-content" placeholder="content" required></textarea>
+                            <label for="content">Характеристики</label>
+                            <textarea type="text" name="content" class="form-control" id="summernote-content" placeholder="Характеристики" required></textarea>
                         </div>
                         <div class="col-lg mb-3">
-                            <label for="code">Code</label>
-                            <input type="number" name="code" id="code" class="form-control" placeholder="code"
+                            <label for="code">Код</label>
+                            <input type="number" name="code" id="code" class="form-control" placeholder="Код"
                                 required>
                         </div>
                         <div class="col-lg mb-3">
-                            <label for="gloss_level">Gloss level</label>
-                            <input type="text" name="gloss_level" id="gloss_level" class="form-control"
-                                placeholder="gloss level" required>
+                            <label for="gloss_level">Степень блеска</label>
+                            <input type="text" name="gloss_level" id="gloss_level" class="form-control" placeholder="Степень блеска" required>
                         </div>
                         <div class="col-lg mb-3">
-                            <label for="type">Type</label>
-                            <input type="text" name="type" id="type" class="form-control" placeholder="type"
+                            <label for="type">Тип</label>
+                            <input type="text" name="type" id="type" class="form-control" placeholder="Тип"
                                 required>
                         </div>
                         <div class="col-lg mb-3">
-                            <label for="colors">Colors</label>
-                            <input type="text" name="colors" id="colors" class="form-control" placeholder="colors"
+                            <label for="colors">Цвета</label>
+                            <input type="text" name="colors" id="colors" class="form-control" placeholder="Цвета"
                                 required>
                         </div>
                         <div class="col-lg mb-3">
-                            <label for="base">Base</label>
-                            <input type="text" name="base" id="base" class="form-control" placeholder="base"
+                            <label for="base">Базы</label>
+                            <input type="text" name="base" id="base" class="form-control" placeholder="Базы"
                                 required>
                         </div>
                         <div class="col-lg mb-3">
-                            <label for="v_of_dry_remain">V of dry remain</label>
+                            <label for="v_of_dry_remain">V сухого остатка</label>
                             <input type="text" name="v_of_dry_remain" id="v_of_dry_remain" class="form-control"
-                                placeholder="v of dry remain" required>
+                                placeholder="V сухого остатка" required>
                         </div>
                         <div class="col-lg mb-3">
-                            <label for="time_to_repeat">Time to repeat</label>
+                            <label for="time_to_repeat">Повторное нанесение</label>
                             <input type="text" name="time_to_repeat" id="time_to_repeat" class="form-control"
-                                placeholder="time to repeat" required>
+                                placeholder="Повторное нанесение" required>
                         </div>
                         <div class="col-lg mb-3">
-                            <label for="consumption">Consumption</label>
+                            <label for="consumption">Расход кв.м/гал</label>
                             <input type="text" name="consumption" id="consumption" class="form-control"
-                                placeholder="consumption" required>
+                                placeholder="Расход кв.м/гал" required>
                         </div>
                         <div class="col-lg mb-3">
-                            <label for="thickness">Thickness</label>
+                            <label for="thickness">Толщина сухой пленки (милы)</label>
                             <input type="text" name="thickness" id="thickness" class="form-control"
-                                placeholder="thickness" required>
+                                placeholder="Толщина сухой пленки (милы)" required>
                         </div>
                         <div class="col-lg mb-3">
-                            <label for="description">Description</label>
+                            <label for="description">Описание</label>
                             <input type="text" name="description" id="description" class="form-control"
-                                placeholder="description" required>
+                                placeholder="Описание" required>
                         </div>
                         <div class="col-lg mb-3">
-                            <label for="category">Category</label>
+                            <label for="category">Серия</label>
                             <select class="form-select" aria-label="select example" id="category" name="category_id"
                                 required style="max-width: 20rem">
                                 @foreach ($categories as $category)
@@ -115,13 +114,13 @@
                             </select>
                         </div>
                         <div class="col-lg mb-3">
-                            <label for="main_image">Select Avatar</label>
+                            <label for="main_image">Выберите изображение</label>
                             <input type="file" name="main_image" class="form-control" id="main_image">
                             <img class="img-thumbnail m-0 mt-2" id="result" style="max-height: 20rem;max-width:20rem">
                         </div>
                         <div class="col-lg">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                            <button type="submit" class="btn btn-primary">Подтвердить</button>
                         </div>
                     </form>
                 </div>
@@ -263,7 +262,7 @@
         }
 
         function add() {
-            $('#ProductForm')[0].reset();
+            $('#Form')[0].reset();
             document.querySelector('#result').src = default_image;
             $("#mySelect").prop("selectedIndex", 0);
             $('#summernote-content').summernote('reset');
@@ -282,24 +281,20 @@
                 },
                 dataType: 'json',
                 success: function(res) {
-                    $('#ProductForm')[0].reset();
+                    $('#Form')[0].reset();
                     $("#category").find(`option[value='${res.product_category_id}']`).attr("selected", true);
                     $('#ProductModal').html("Edit Product");
                     $('#Product-modal').modal('show');
                     $('#summernote-content').summernote('code', res.content);
-                    $('#id').val(res.id);
-                    $('#title').val(res.title);
-                    $('#code').val(res.code);
-                    $('#gloss_level').val(res.gloss_level);
-                    $('#type').val(res.type);
-                    $('#colors').val(res.colors);
-                    $('#base').val(res.base);
-                    $('#v_of_dry_remain').val(res.v_of_dry_remain);
-                    $('#time_to_repeat').val(res.time_to_repeat);
-                    $('#consumption').val(res.consumption);
-                    $('#thickness').val(res.thickness);
-                    $('#description').val(res.description);
                     result.src = `{{ url('storage/image/') }}/${res.main_image}`;
+                    $.each(res, function(key,value) {
+                        if (!(key == 'main_image'))
+                        {
+                            $('#'+key).val(value);
+                        }
+                        
+                    });
+                    
                 }
             });
         }
@@ -332,7 +327,7 @@
             })
         }
 
-        $('#ProductForm').submit(function(e) {
+        $('#Form').submit(function(e) {
             e.preventDefault();
             var formData = new FormData(this);
             $.ajax({

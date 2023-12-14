@@ -4,10 +4,10 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
-                    <h2>Product categories</h2>
+                    <h2>Серии товара</h2>
                 </div>
                 <div class="pull-right mb-2">
-                    <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Add new product</a>
+                    <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Добавить серию</a>
                 </div>
             </div>
         </div>
@@ -21,11 +21,11 @@
                 <thead>
                     <tr>
                         <th>id</th>
-                        <th>title</th>
-                        <th>kind_of_work</th>
-                        <th>created_at</th>
-                        <th>updated_at</th>
-                        <th>Action</th>
+                        <th>Заголовок</th>
+                        <th>Тип работы</th>
+                        <th>Дата создания</th>
+                        <th>Дата изменения</th>
+                        <th></th>
                     </tr>
                 </thead>
             </table>
@@ -38,7 +38,7 @@
         <div class="modal-dialog modal-lg modal-fullscreen m-0" style="max-width: none">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Product category</h5>
+                    <h5 class="modal-title">Категория товара</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -47,18 +47,18 @@
                         <input type="hidden" name="id" id="id">
                         <div class="row">
                             <div class="col-lg">
-                                <label for="title">Title</label>
-                                <input type="text" name="title" id="title" class="form-control" placeholder="title"
+                                <label for="title">Заголовок</label>
+                                <input type="text" name="title" id="title" class="form-control" placeholder="Заголовок"
                                     required>
                             </div>
                         </div>
                         <div class="my-2">
-                            <label for="description">Description</label>
-                            <textarea type="text" name="description" class="form-control" id="summernote-content" placeholder="description"
+                            <label for="description">Описание</label>
+                            <textarea type="text" name="description" class="form-control" id="summernote-content" placeholder="Описание"
                                 required></textarea>
                         </div>
                         <div class="my-2">
-                            <label for="kind_of_work">Kind of work</label>
+                            <label for="kind_of_work">Тип работы</label>
                             <div class="dropdown">
                                 <select class="form-select" aria-label="Default select example" id="kind_of_work"
                                     name="kind_of_work" required>
@@ -69,8 +69,8 @@
                             </div>
                         </div>
                         <div class="my-2">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                            <button type="submit" class="btn btn-primary">Подтвердить</button>
                         </div>
                     </form>
                 </div>
@@ -202,8 +202,9 @@
                     $('#ProductCategoryModal').html("Edit ProductCategory");
                     $('#ProductCategory-modal').modal('show');
                     $('#summernote-content').summernote('code', res.description);
-                    $('#id').val(res.id);
-                    $('#title').val(res.title);
+                    $.each(res, function(key,value) {
+                        $('#'+key).val(value);
+                    });
                 }
             });
         }
