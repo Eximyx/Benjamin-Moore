@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
-// TODO ERICHEK PRODUCT_CATEGORY kind_of_work +_id Controller, Validator, Layout, Model (function)
 
 
 class CategoryController extends BaseController

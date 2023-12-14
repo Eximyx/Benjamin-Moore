@@ -219,13 +219,6 @@
                 }
             });
 
-
-
-
-
-
-
-
             const upload = document.querySelector('#main_image');
             const result = document.querySelector('#result');
             const error_message = $('#image-error-message');

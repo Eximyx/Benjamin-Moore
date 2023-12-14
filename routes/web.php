@@ -34,7 +34,7 @@ Route::middleware('admin')->group(function () {
                 return view('admin.dashboard');
             })->name('dashboard');
             Route::prefix('products')->group(function () {
-                Route::get('/crud', [ProductsController::class, 'index'])->name('products.index');
+                Route::get('/', [ProductsController::class, 'index'])->name('products.index');
                 Route::post('store', [ProductsController::class, 'store']);
                 Route::post('edit', [ProductsController::class, 'edit']);
                 Route::post('delete', [ProductsController::class, 'destroy']);

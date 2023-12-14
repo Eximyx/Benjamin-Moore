@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
-// TODO ERICHEK PRODUCT Controller, Validator, Layout, Model (function)
 
 class ProductsController extends BaseController
 {
@@ -13,10 +12,7 @@ class ProductsController extends BaseController
     {
         $data = Product::getModel();
         $selectable = ProductCategory::All();
-        $datatable_columns = [];
-        foreach ($data['datatable_data'] as $key => $item){ 
-            $datatable_columns[] = ['data' => $key, 'name' => $key]; 
-        };
+        $datatable_columns = $this->service->get_datatable_columns($data);
         if (request()->ajax()) {
             $Entities = Product::all();
             foreach ($Entities as $Enity) {
