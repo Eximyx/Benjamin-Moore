@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\StaticPage;
 use Illuminate\Http\Request;
-// TODO REQUEST StaticPage EXIMYX
+// TODO EXIMYX STATICPAGE Controller, VALIDATOR, Layout, Model (function)
+
 
 class StaticPageController extends BaseController
 {

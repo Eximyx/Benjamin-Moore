@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
-// TODO REQUEST Product ERICHECK
+// TODO ERICHEK PRODUCT Controller, Validator, Layout, Model (function)
 
 class ProductsController extends BaseController
 {

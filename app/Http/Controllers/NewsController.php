@@ -1,8 +1,5 @@
 <?php
 
-
-// TODO NEWSPOST CATEGORY laravel EXIMYX
-
 namespace App\Http\Controllers;
 use App\Http\Controllers\BaseController;
 
@@ -21,11 +18,11 @@ class NewsController extends BaseController
             $datatable_columns[] = ['data' => $key, 'name' => $key]; 
         };
         if (request()->ajax()) {
-            $NewsPosts = NewsPost::all();
-            foreach ($NewsPosts as $newsPost) {
-                $newsPost['category_id'] = Category::find($newsPost['category_id'])->title;
+            $Entities = NewsPost::all();
+            foreach ($Entities as $Entity) {
+                $Entity['category_id'] = Category::find($Entity['category_id'])->title;
             }
-            $table = $this->service->create_datatable($NewsPosts);
+            $table = $this->service->create_datatable($Entities);
             return $table->make(true);
         }
         return view('layouts.datatable',compact('data','selectable','datatable_columns'));
@@ -33,11 +30,11 @@ class NewsController extends BaseController
 
     public function store(Request $request)
     {
-        
+
         $data = $this->service->image_store($request->all());
 
 
-        $newsPost = NewsPost::updateOrCreate(
+        $Entity = NewsPost::updateOrCreate(
             [
                 'id' => $data['id']
             ],
@@ -49,25 +46,21 @@ class NewsController extends BaseController
             ]
         );
 
-        return Response()->json($newsPost);
+        return Response()->json($Entity);
     }
 
     public function edit(Request $request)
     {
-        $newsPost = NewsPost::where('id', $request->id)->first();
-        return Response()->json($newsPost);
-    }
-
-    public function categoryfetch() {
-        return response()->json(Category::all());
+        $Entity = NewsPost::where('id', $request->id)->first();
+        return Response()->json($Entity);
     }
     public function destroy(Request $request)
     {
-        $newsPost = NewsPost::where('id', $request->id)->first(); 
-        $this->service->delete_image($newsPost);
-        $newsPost->delete();
+        $Entity = NewsPost::where('id', $request->id)->first(); 
+        $this->service->delete_image($Entity);
+        $Entity->delete();
         
-        return Response()->json($newsPost);
+        return Response()->json($Entity);
     }
 
     public function toggle(Request $request) {

@@ -31,7 +31,6 @@
             </table>
         </div>
     </div>
-    <!--//TODO StaticPage NAMING EXIMYX -->
 
     <div class="modal fade" id="StaticPage-modal" aria-hidden="true" style="z-index: 1045" tabindex="-1">
         <div class="modal-dialog modal-lg modal-fullscreen m-0" style="max-width: none">

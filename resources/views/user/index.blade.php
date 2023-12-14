@@ -152,7 +152,6 @@
                         }
                     });
                     $('span[id="error"]').remove();
-                    // TODO IMPLEMENT CATEGORY_SELECT
                     $('#password').val(res.password);
                 }
             });
