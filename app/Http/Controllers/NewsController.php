@@ -6,27 +6,35 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\BaseController;
 
-use App\Http\Requests\news\NewsRequest;
 use App\Models\Category;
 use App\Models\NewsPost;
+use Illuminate\Http\Request;
 
 class NewsController extends BaseController
 {
     public function index()
     {
+        $data = NewsPost::getModel();
+        $selectable = Category::All();
+        $datatable_columns = [];
+        foreach ($data['datatable_data'] as $key => $item){ 
+            $datatable_columns[] = ['data' => $key, 'name' => $key]; 
+        };
         if (request()->ajax()) {
             $NewsPosts = NewsPost::all();
             foreach ($NewsPosts as $newsPost) {
                 $newsPost['category_id'] = Category::find($newsPost['category_id'])->title;
             }
-            return $this->service->create_datatable($NewsPosts)->make(true);
+            $table = $this->service->create_datatable($NewsPosts);
+            return $table->make(true);
         }
-        return view('news.index');
+        return view('layouts.datatable',compact('data','selectable','datatable_columns'));
     }
 
-    public function store(NewsRequest $request)
+    public function store(Request $request)
     {
-        $data = $this->service->news_store($request->all());
+        
+        $data = $this->service->image_store($request->all());
 
 
         $newsPost = NewsPost::updateOrCreate(

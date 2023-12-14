@@ -40,7 +40,7 @@ Route::middleware('admin')->group(function () {
                 Route::get('categories', [ProductsController::class, 'categoryfetch']);
             });
             Route::prefix('news')->group(function () {
-                Route::get('/ajax-crud-datatable', [NewsController::class, 'index'])->name('news.index');
+                Route::get('/', [NewsController::class, 'index'])->name('news.index');
                 Route::post('store', [NewsController::class, 'store']);
                 Route::post('edit', [NewsController::class, 'edit']);
                 Route::post('delete', [NewsController::class, 'destroy']);

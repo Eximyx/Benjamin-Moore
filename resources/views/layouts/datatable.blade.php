@@ -3,89 +3,70 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 margin-tb">
-                <div class="pull-left">
-                    <h2>Laravel 10 Ajax DataTables CRUD (Create Read Update and Delete) </h2>
+                <div class="float-left">
+                    <h2>{{$data['ModelName']}}</h2>
                 </div>
-                <div class="pull-right mb-2">
-                    <a class="btn btn-success" onClick="add()" href="javascript:void(0)"> Create News</a>
+                <div class="float-right mb-2">
+                    <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Добавить</a>
                 </div>
             </div>
         </div>
-        @if ($message = Session::get('success'))
-            <div class="alert alert-success">
-                <p>{{ $message }}</p>
-            </div>
-        @endif
         <div class="">
-            <table class="m-0 w-100 table table-striped" id="ajax-crud-datatable">
+            <table class="m-0 w-100 table table-striped" id="table">
                 <thead>
                     <tr>
                         <th>id</th>
-                        <th>title</th>
-                        <th>category_id</th>
-                        <th>created_at</th>
-                        <th>updated_at</th>
-                        <th>Action</th>
+                        @foreach ($data['datatable_data'] as $key)
+                            <th>{{ $key }}</th>
+                        @endforeach
+                        <th>Дата создания</th>
+                        <th>Дата изменения</th>
+                        <th></th>
                     </tr>
                 </thead>
             </table>
         </div>
     </div>
-    <!--//TODO CATEGORY & NAMING EXIMYX--> 
-
     <!-- boostrap News model -->
-    <div class="modal fade" id="News-modal" aria-hidden="true" style="z-index: 1045" tabindex="-1">
+    <div class="modal fade" id="Form-modal" aria-hidden="true" style="z-index: 1045" tabindex="-1">
         <div class="modal-dialog modal-lg modal-fullscreen m-0" style="max-width: none">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="window_title" class="modal-title">News</h5>
+                    <h5 id="window_title" class="modal-title ml-2 p-1">{{ $data['ModelName'] }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="javascript:void(0)" id="NewsForm" name="NewsForm" class="form-horizontal"
-                        method="POST" enctype="multipart/form-data">
+                    <form action="javascript:void(0)" id="Form" name="Form" class="form-horizontal" method="POST"
+                        enctype="multipart/form-data">
                         <input type="hidden" name="id" id="id">
-                        <div class="row">
-                            <div class="col-lg">
-                                <label for="title">Title</label>
-                                <input type="text" name="title" id="title" class="form-control" placeholder="title"
-                                    required>
+                        @foreach ($data['form_data'] as $key => $value)
+                            <div class="col-lg mt-2">
+                                @if ($key == 'content')
+                                    <label for="content">{{ $value }}</label>
+                                    <textarea type="text" name="content" class="form-control" id="summernote-content" placeholder="content" required></textarea>
+                                @elseif(str_contains($key, '_id'))
+                                    <div>
+                                        <select class="form-select" name="{{$key}}" id="select"
+                                            aria-label="Default select example" required>
+                                            @foreach ($selectable as $item)
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->title }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @elseif(str_contains($key, 'image'))
+                                    <label for="{{ $key }}">{{ $value }}</label>
+                                    <input type="file" name="{{ $key }}" class="form-control" id="image">
+                                    <img class="my-2 img-thumbnail m-0" id="result" style="max-width: 20rem;max-height:20rem">
+                                @else
+                                    <label for="{{ $key }}">{{ $value }}</label>
+                                    <input type="text" name="{{ $key }}" id="{{ $key }}"
+                                        class="form-control" placeholder="{{ $value }}" required>
+                                @endif
                             </div>
-                            <input type="hidden" name="categoriesArr" id="categoryArr">
-                        </div>
-
-                        <div class="my-2">
-                            <label for="content">Content</label>
-                            <textarea type="text" name="content" class="form-control" id="summernote-content" placeholder="content" required></textarea>
-                        </div>
-                        <div class="my-2">
-                            <label for="category">Category</label>
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Категории
-                                </button>
-                                <ul class="dropdown-menu pb-0">
-                                    <select class="form-select" size="5" aria-label="size 5 select example"
-                                        id="category" name="category_id" required>  
-                                    </select>
-                                    <li>
-                                        <div class="input-group mb-0">
-                                            <input type="text" id="category_add" class="m-0 form-control"
-                                                placeholder="Add a new category">
-                                            <button class="m-0 btn btn-primary" type="button" id="addCategory">Button
-                                            </button>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="my-2">
-                            <label for="main_image">Select Avatar</label>
-                            <input type="file" name="main_image" class="form-control" id="main_image">
-                            <img class="h-25 w-25 img-thumbnail m-0" id="result">
-                        </div>
-                        <div class="my-2">
+                        @endforeach
+                        <div class="col-lg mt-2">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
@@ -95,35 +76,24 @@
             </div>
         </div>
     </div>
-    <!-- end bootstrap model -->
-
     <script>
         $(document).ready(function() {
-            fetchAllcategories()
-            // Ajax setups
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
-                 $('#ajax-crud-datatable').DataTable({
+            $('#table').DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: "{{ url('admin/news/ajax-crud-datatable') }}",
+                ajax: "{{ url(request()->getPathInfo())}}",
                 columns: [{
                         data: 'id',
                         name: 'id'
                     },
-                    {
-                        data: 'title',
-                        name: 'title'
-                    },
-                    {
-                        data: 'category_id',
-                        name: 'category_id'
-                    },
+                    ...@json($datatable_columns),
                     {
                         data: 'created_at',
                         name: 'created_at'
@@ -140,21 +110,10 @@
                 ],
                 order: [
                     [0, 'desc']
-                ]
+                ],
             });
         });
-        $('#ajax-crud-datatable tbody').on('click', 'tr', function() {
-            if ($(this).hasClass('selected')) {
-                $(this).removeClass('selected');
-            } else {
-                $('#ajax-crud-datatable tbody tr.selected').removeClass('selected');
-                $(this).addClass('selected');
-            }
-        });
 
-        $('#ajax-crud-datatable tbody').on('dblclick', 'tr', function() {});
-
-        // Checking an escape button after summernote (BUG FIXED)
         document.addEventListener('keydown', function(event) {
             if (event.code == 'Escape') {
                 // document.getElementsByClassName("note-editor note-frame panel panel-default")[0].style.position = 'fixed';
@@ -165,59 +124,7 @@
                 }
             }
         });
-        let newCategories = [];
 
-        const options = $('#category')[0];
-
-        // Adjusting category options
-        function add_categories(categories) {
-            document.querySelector('#category').innerHTML = '';
-            for (let i = 0; i < categories.length; i++) {
-                $('#category').append(`<option value="${categories[i]['id']}">${categories[i]['title']}</option>`)
-            }
-        }
-
-        const categories = () => {
-            let data = {
-                'categories': []
-            };
-            for (let i = 0; i < options.length; i++) {
-                data['categories'].push(options[i].text)
-            }
-            data['last_value'] = parseInt(options[options.length - 1].value);
-            return data;
-        }
-
-
-
-        function fetchAllcategories() {
-            $.ajax({
-                url: '{{ url('admin/news/categories') }}',
-                method: 'get',
-                success: function(response) {
-                    add_categories(response);
-                }
-            });
-        }
-
-
-        // Adding new category
-        $('#addCategory').on('click', () => {
-            const input = document.querySelector('#category_add');
-            const data = categories();
-            console.log(data);
-            if (input.value != '' && !(data['categories'].includes(input.value))) {
-                $('#category').append($('<option>', {
-                    value: data["last_value"] + 1,
-                    text: input.value
-                }));
-                data['categories'].push(input.value);
-                newCategories.push(input.value);
-            }
-            input.value = '';
-        })
-
-        // Fullscreen Button for summernote (BUG FIXED)
         const OpenFullScreen = function(context) {
             const ui = $.summernote.ui;
 
@@ -258,10 +165,7 @@
             }
         });
 
-
-        //TODO IMAGE FIX BOTH
-
-        const upload = document.querySelector('#main_image');
+        const upload = document.querySelector('#image');
         const result = document.querySelector('#result');
         const default_image = "{{ url('storage/image/default_post.jpg') }}";
 
@@ -286,32 +190,40 @@
         }
 
         function add() {
-            $('#NewsForm')[0].reset();
+            $('#Form')[0].reset();
             document.querySelector('#result').src = default_image;
-            $("#mySelect").prop("selectedIndex", -1);
+            $("#mySelect").prop("selectedIndex", 0);
             $('#summernote-content').summernote('reset');
-            $('#window_title').text("Add News Post");
-            $('#News-modal').modal('show');
+            // $('#window_title').text("Add News Post");
+            $('#Form-modal').modal('show');
             $('#id').val('');
         }
 
         function editFunc(id) {
             $.ajax({
                 type: "POST",
-                url: "{{ url('admin/news/edit') }}",
+                url: "{{ url(request()->getPathInfo().'edit') }}",
                 data: {
                     id: id
                 },
                 dataType: 'json',
                 success: function(res) {
-                    $('#NewsForm')[0].reset();
-                    $("#category").find(`option[value='${res.category_id}']`).attr("selected", true);
+                    $('#Form')[0].reset();
                     $('#window_title').text("Edit News Post");
-                    $('#News-modal').modal('show');
+                    $('#Form-modal').modal('show');
+                    $.each(res, function(key, value) {
+                        if(key.includes('_id')) {
+                            $("#select").find(`option[value='${value}']`).attr("selected", true);
+                        }
+                        else {
+                            $('#' + key).val(value);
+                        }
+                    });
                     $('#summernote-content').summernote('code', res.content);
-                    $('#id').val(res.id);
-                    $('#title').val(res.title);
                     result.src = `{{ url('storage/image/') }}/${res.main_image}`;
+                },
+                error: function(data) {
+                    console.log(data);
                 }
             });
         }
@@ -326,17 +238,16 @@
                 confirmButtonText: 'Delete'
             }).then((result) => {
                 if (result['isConfirmed']) {
-                    // ajax
                     $.ajax({
                         type: "POST",
-                        url: "{{ url('admin/news/delete') }}",
+                        url: "{{ url(request()->getPathInfo().'delete') }}",
                         data: {
                             id: id
                         },
                         dataType: 'json',
                         success: function(res) {
                             console.log(res)
-                            var oTable = $('#ajax-crud-datatable').dataTable();
+                            var oTable = $('#table').dataTable();
                             oTable.fnDraw(false);
                         }
                     });
@@ -356,13 +267,13 @@
                 if (result['isConfirmed']) {
                     $.ajax({
                         type: "POST",
-                        url: "{{ url('admin/news/toggle') }}",
+                        url: "{{ url(request()->getPathInfo().'toggle') }}",
                         data: {
                             id: id
                         },
                         dataType: 'json',
                         success: function(res) {
-                            var oTable = $('#ajax-crud-datatable').dataTable();
+                            var oTable = $('#table').dataTable();
                             oTable.fnDraw(false);
                         }
                     });
@@ -370,22 +281,20 @@
             })
         }
 
-        $('#NewsForm').submit(function(e) {
+        $('#Form').submit(function(e) {
             e.preventDefault();
-            $('#categoryArr').val(newCategories);
-
             var formData = new FormData(this);
             $.ajax({
                 type: 'POST',
-                url: "{{ url('admin/news/store') }}",
+                url: "{{ url(request()->getPathInfo().'store') }}",
                 data: formData,
                 cache: false,
                 contentType: false,
                 processData: false,
                 success: (data) => {
                     newCategories = []
-                    $("#News-modal").modal('hide');
-                    var oTable = $('#ajax-crud-datatable').dataTable();
+                    $("#Form-modal").modal('hide');
+                    var oTable = $('#table').dataTable();
                     oTable.fnDraw(false);
                     $("#btn-save").html('Submit');
                     $("#btn-save").attr("disabled", false);

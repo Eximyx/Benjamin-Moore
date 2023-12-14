@@ -15,7 +15,7 @@ class RootMiddleWare
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth()->user()->role !== 2) {
+        if (Auth()->user()->role_id !== 2) {
             return redirect('admin/'); 
         }
 

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Service
 {
-    public function news_store($data)
+    public function image_store($data)
     {
         if (array_key_exists('main_image', $data)) {
             Storage::put('public\image', $data['main_image']);
@@ -16,29 +16,8 @@ class Service
         } else {
             $data['main_image'] = 'default_post.jpg';
         }
-        ;
 
-        if (array_key_exists('categoriesArr',$data) && is_string($data['categoriesArr'])) {
-            $categories = explode(',', $data['categoriesArr']);
-            foreach ($categories as $item) {
-                Category::create([
-                    'title' => $item
-                ]);
-            }
-        }
-        unset($data['categoriesArr']);
         return $data;
-    }
-
-    public function update($newsPost, $data)
-    {
-        if (array_key_exists('main_image', $data)) {
-            $this->delete_image($newsPost);
-            Storage::put('public\image', $data['main_image']);
-            $data['main_image'] = $data['main_image']->hashName();
-        }
-        ;
-        $newsPost->update($data);
     }
 
     public function delete_image($newsPost)
@@ -69,7 +48,6 @@ class Service
                 })
                 ->addColumn('action', function ($value) {
                     $request = request()->getPathInfo();
-
                     return view('layouts/action',compact('request','value'));
                 })
                 ->addIndexColumn();

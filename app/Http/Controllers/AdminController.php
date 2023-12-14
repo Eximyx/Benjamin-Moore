@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-// TODO REQUEST Admin EXIMYX
-
-use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Validator;
 
 class AdminController extends BaseController
 {
@@ -19,7 +15,7 @@ class AdminController extends BaseController
             $Users = User::all();
 
             foreach ($Users as $User) {
-                $User['role'] = $roles[$User['role']];
+                $User['role_id'] = $roles[$User['role_id']];
             }
             ;
             return $this->service->create_datatable($Users)->make(true);
@@ -28,29 +24,28 @@ class AdminController extends BaseController
     }
 
     // UserRequest
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
-        // $data = ; 
-        // Validator::make($request->all(), [
-        //     'id' => 'nullable',
-        //     'name' => 'required',
-        //     'email' => 'required|email',
-        //     'password' => 'required',
-        //     'role' => ''
-        // ])->validate();
-        $request->validated();
-        // response()->json($data);
-        return response()->json($request->all());
-        if ($request->id !== null){ 
-            if(!($data['password'] !== null)) {
-                $data['password'] = User::where('id',$data['id'])->first()['password'];
-            }     
+        if (Auth()->user()->id == $request['id']) {
+            return response()->json('У тебя нет доступа!');
         }
-        // $data->validate();
 
+        if ($request['id'] !== null) {
+            if (!($request['password'] !== null)) {
+                $request['password'] = User::where('id', $request['id'])->first()['password'];
+            }
+        }
 
-        if($data['id'] == Auth()->user()->id) {
-            $data['role'] = 2;
+        $data = $request->validate([
+            'id' => 'nullable',
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'role_id' => ''
+        ]);
+
+        if ($data['id'] == Auth()->user()->id) {
+            $data['role_id'] = 2;
         }
 
         $user = User::updateOrCreate(
@@ -60,7 +55,7 @@ class AdminController extends BaseController
             [
                 'name' => $data['name'],
                 'email' => $data['email'],
-                'role' => $data['role'],
+                'role_id' => $data['role_id'],
                 'password' => $data['password'],
             ]
         );
@@ -70,24 +65,18 @@ class AdminController extends BaseController
 
     public function edit(Request $request)
     {
-        if (Auth()->user()->id == $request->id);
-        {
-            return response()->json(['ERROR'=>'U R FUCKING IDIOT!']);
-        }
         $user = User::where('id', $request->id)->first();
-        
+
         return Response()->json($user);
     }
 
     public function destroy(Request $request)
     {
-        if (Auth()->user()->id == $request->id);
-        {
-            return response()->json(['ERROR'=>'U R FUCKING IDIOT!']);
+
+        if (Auth()->user()->id == $request['id']) {
+            return response()->json('У тебя нет доступа!');
         }
-
         $user = User::where('id', $request->id)->first();
-
         $user->delete();
 
         return Response()->json($user);

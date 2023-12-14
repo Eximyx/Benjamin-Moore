@@ -12,9 +12,9 @@
             <i class="fa fa-edit"></i>
         </a>
         
-        @if (isset($is_toggled))
+        @if (isset($value->is_toggled))
         <a href="javascript:void(0);" onClick="toggle({{$value->id}})" class="m-1 btn btn-primary">
-            <i class="fa {{ $is_toggled ? 'fa-check-square' : 'fa-square' }}" style="transform: scale(1.5)"></i>
+            <i class="fa {{ $value->is_toggled ? 'fa-check-square' : 'fa-square' }}" style="transform: scale(1.5)"></i>
         </a>
         @endif
 

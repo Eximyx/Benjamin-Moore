@@ -4,38 +4,30 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
-                    <h2>Laravel 10 Ajax DataTables CRUD (Create Read Update and Delete) </h2>
+                    <h2>Пользователи</h2>
                 </div>
                 <div class="pull-right mb-2">
-                    <a class="btn btn-success" onClick="add()" href="javascript:void(0)"> Create User</a>
+                    <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Добавить</a>
                 </div>
             </div>
         </div>
-        @if ($message = Session::get('success'))
-            <div class="alert alert-success">
-                <p>{{ $message }}</p>
-            </div>
-        @endif
         <div class="">
             <table class="m-0 w-100 table table-striped" id="datatable">
                 <thead>
                     <tr>
                         <th>id</th>
-                        <th>name</th>
-                        <th>email</th>
-                        <th>role</th>
-                        <th>created_at</th>
-                        <th>updated_at</th>
-                        <th>Action</th>
+                        <th>Имя</th>
+                        <th>Email</th>
+                        <th>Права</th>
+                        <th>Дата создания</th>
+                        <th>Дата изменения</th>
+                        <th></th>
                     </tr>
                 </thead>
             </table>
         </div>
     </div>
-    
-    <!--//TODO User NAMING EXIMYX -->
-
-    <div class="modal fade" id="User-modal" aria-hidden="true" tabindex="-1">
+    <div class="modal fade" id="Form-Modal" aria-hidden="true" tabindex="-1">
         <div class="modal-dialog modal-lg " style="max-width:20rem">
             <div class="modal-content">
                 <div class="modal-header">
@@ -43,43 +35,24 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="javascript:void(0)" id="UserForm" name="UserForm" class="form" method="POST"
+                    <form action="javascript:void(0)" id="Form" name="Form" class="form" method="POST"
                         enctype="multipart/form-data">
-                        <input type="hidden" name="id" id="id" @error('id')is-invalid @enderror>
-                        @error('id')
-                            <span class="invalid-feedback">{{ $message }}</span>
-                        @enderror
+                        <input type="hidden" name="id" id="id">
                         <div class="form-group">
-                            <input name="name" type="text"
-                                class="form-control form-control-user @error('name')is-invalid @enderror" id="name"
+                            <input name="name" type="text" class="form-control form-control-user" id="name"
                                 placeholder="Имя" required>
-                            @error('name')
-                                <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror
                         </div>
                         <div class="form-group">
-                            <input name="email" type="email"
-                                class="form-control form-control-user @error('email') is-invalid" @enderror id="email"
-                                placeholder="Email Address" required>
-
-                                {{-- @if() {{$errors}} @endif --}}
-                                @if($errors->has('email'))
-                                {{dd()}}
-                                @endif 
-                            @if($errors->has('email'))
-                                <span class="invalid-feedback">{{ $errors->get('email') }}</span>
-                            @enderror
+                            <input name="email" type="email" class="form-control form-control-user" id="email"
+                                placeholder="Email" required>
                         </div>
                         <div class="form-group">
-                            <input name="password" type="password"
-                                class="form-control form-control-user @error('password')is-invalid @enderror" id="password"
-                                placeholder="Password" >
-                            @error('password')
-                                <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror
+                            <input name="password" type="password" class="form-control form-control-user" id="password"
+                                placeholder="Пароль">
                         </div>
                         <div>
-                            <select class="form-select" name="role" id="role" aria-label="Default select example">
+                            <select class="form-select" name="role_id" id="select" aria-label="Default select example"
+                                required>
                                 @foreach ($roles as $id => $role)
                                     <option {{ $id == 0 ? 'selected' : '' }} value="{{ $id }}">{{ $role }}
                                     </option>
@@ -87,8 +60,8 @@
                             </select>
                         </div>
                         <div class="my-2">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                            <button type="submit" class="btn btn-primary">Подтвердить</button>
                         </div>
                     </form>
                 </div>
@@ -103,7 +76,6 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-
             $('#datatable').DataTable({
                 processing: true,
                 serverSide: true,
@@ -122,8 +94,8 @@
                         name: 'email'
                     },
                     {
-                        data: 'role',
-                        name: 'role'
+                        data: 'role_id',
+                        name: 'role_id'
                     },
                     {
                         data: 'created_at',
@@ -147,11 +119,13 @@
 
 
         function add() {
-            $('#UserForm')[0].reset();
+            $('span[id="error"]').remove();
+            $('#Form')[0].reset();
+            $("#select").prop("selectedIndex", 0);
             $('#summernote-content').summernote('reset');
-            $('#UserModal').html("Add User");
+            $('#FormModal').html("Add User");
             $('#modal_title').html("Add User");
-            $('#User-modal').modal('show');
+            $('#Form-Modal').modal('show');
             $('#id').val('');
         }
 
@@ -165,14 +139,21 @@
                 dataType: 'json',
                 success: function(res) {
                     console.log(res);
-                    $('#UserForm')[0].reset();
+                    $('#Form')[0].reset();
                     $('#modal_title').html("Edit User");
-                    $('#User-modal').modal('show');
-                    $('#id').val(res.id);
-                    $('#name').val(res.name);
-                    $('#email').val(res.email);
+                    $('#Form-Modal').modal('show');
+                    $.each(res, function(key,value) {
+                        if (key.includes('_id') ) {
+                            $("#select").find(`option[value='${value}']`).attr("selected", true);
+
+                        }else {
+                            $('#'+key).val(value);
+
+                        }
+                    });
+                    $('span[id="error"]').remove();
+                    // TODO IMPLEMENT CATEGORY_SELECT
                     $('#password').val(res.password);
-                    // $('#role')
                 }
             });
         }
@@ -204,7 +185,7 @@
             })
         }
 
-        $('#UserForm').submit(function(e) {
+        $('#Form').submit(function(e) {
             e.preventDefault();
             var formData = new FormData(this);
             $.ajax({
@@ -217,16 +198,19 @@
                 success: (data) => {
                     console.log(data);
                     newCategories = []
-                    $("#User-modal").modal('hide');
+                    $("#Form-Modal").modal('hide');
                     var oTable = $('#datatable').dataTable();
                     oTable.fnDraw(false);
                     $("#btn-save").html('Submit');
                     $("#btn-save").attr("disabled", false);
                 },
                 error: function(data) {
-                    $('span[id="error"]').remove(); 
-                    $.each(data.responseJSON.errors,function(field_name,error){
-                        $(document).find('[name='+field_name+']').after('<span id="error" class="text-strong text-danger">' +error+ '</span>')
+                    console.log(data);
+                    $('span[id="error"]').remove();
+                    $.each(data.responseJSON.errors, function(field_name, error) {
+                        $(document).find('[name=' + field_name + ']').after(
+                            '<span id="error" class="text-strong text-danger">' + error +
+                            '</span>')
                     })
                 }
             });
