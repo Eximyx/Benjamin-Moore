@@ -34,6 +34,7 @@ class NewsController extends BaseController
         $data = $this->service->image_store($request->validate([
             'id' => 'numeric|nullable',
             'title' => 'string|required',
+            'category_id' => 'numeric|required',
             'content'=> 'string|required',
             'main_image'=> 'nullable',
     ]));

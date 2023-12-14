@@ -67,8 +67,8 @@
                             </div>
                         @endforeach
                         <div class="col-lg mt-2">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                            <button type="submit" class="btn btn-primary">Подтвердить</button>
                         </div>
                     </form>
                 </div>
@@ -129,7 +129,6 @@
 
         const OpenFullScreen = function(context) {
             const ui = $.summernote.ui;
-
             const button = ui.button({
                 contents: '<i class="align-items-center fa fa-expand"/>',
                 tooltip: 'FullScreen',
@@ -194,9 +193,8 @@
         function add() {
             $('#Form')[0].reset();
             document.querySelector('#result').src = default_image;
-            $("#mySelect").prop("selectedIndex", 0);
+            $("#select").prop("selectedIndex", 0);
             $('#summernote-content').summernote('reset');
-            // $('#window_title').text("Add News Post");
             $('#Form-modal').modal('show');
             $('#id').val('');
         }
@@ -294,7 +292,6 @@
                 contentType: false,
                 processData: false,
                 success: (data) => {
-                    newCategories = []
                     $("#Form-modal").modal('hide');
                     var oTable = $('#table').dataTable();
                     oTable.fnDraw(false);
