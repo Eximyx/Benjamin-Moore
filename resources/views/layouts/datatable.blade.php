@@ -27,6 +27,32 @@
             </table>
         </div>
     </div>
+    <table class="table-bordered">
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>URI</th>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Route::getRoutes() as $route)
+                @if (
+                    str_contains($route->getName(),'.index')
+                )
+                <tr>
+                    <td>{{ $route->methods()[0] }}</td>
+                    <td>{{ $route->uri() }}</td>
+                    <td>{{ $route->getName()}}</td>
+                    <td>{{ $route->getActionName() }}</td>
+                </tr>
+                @endif
+            @endforeach
+        </tbody>
+    </table>
+
+
     <!-- boostrap News model -->
     <div class="modal fade" id="Form-modal" aria-hidden="true" style="z-index: 1045" tabindex="-1">
         <div class="modal-dialog modal-lg modal-fullscreen m-0" style="max-width: none">

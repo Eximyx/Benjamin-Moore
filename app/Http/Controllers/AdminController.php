@@ -13,11 +13,11 @@ class AdminController extends BaseController
         $datatable_columns = $this->service->get_datatable_columns($data);
         $selectable = User::getRoles();
         if (request()->ajax()) {
-            $Users = User::all();
-            foreach ($Users as $User) {
-                $User['role_id'] = $selectable[$User['role_id']]['title'];
+            $entities = User::all();
+            foreach ($entities as $entity) {
+                $entity['role_id'] = $selectable[$entity['role_id']]['title'];
             };
-            return $this->service->create_datatable($Users)->make(true);
+            return $this->service->create_datatable($entities)->make(true);
         }
         return view('layouts.datatable', compact('data','selectable','datatable_columns'));
     }
@@ -47,7 +47,7 @@ class AdminController extends BaseController
             $data['role_id'] = 2;
         }
 
-        $user = User::updateOrCreate(
+        $entity = User::updateOrCreate(
             [
                 'id' => $data['id']
             ],
@@ -59,14 +59,14 @@ class AdminController extends BaseController
             ]
         );
 
-        return Response()->json($user);
+        return Response()->json($entity);
     }
 
     public function edit(Request $request)
     {
-        $user = User::where('id', $request->id)->first();
+        $entity = User::where('id', $request->id)->first();
 
-        return Response()->json($user);
+        return Response()->json($entity);
     }
 
     public function destroy(Request $request)
@@ -75,10 +75,9 @@ class AdminController extends BaseController
         if (Auth()->user()->id == $request['id']) {
             return response()->json('У тебя нет доступа!');
         }
-        $user = User::where('id', $request->id)->first();
-        $user->delete();
+        $entity = User::where('id', $request->id)->first()->delete;
 
-        return Response()->json($user);
+        return Response()->json($entity);
     }
 
 }

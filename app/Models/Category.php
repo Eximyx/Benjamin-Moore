@@ -7,12 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    public static function getModel()
+    {
+        return [
+            'ModelName' => 'Категории',
+            'datatable_data' => [
+                'title' => 'Заголовок',
+            ],
+            'form_data' => [
+                'title' => 'Заголовок',
+            ]
+        ];
+    }
+
     protected $table = 'categories';
 
     protected $guarded = false;
 
     use HasFactory;
-    public function posts() {
-        return $this->hasMany(NewsPost::class,'category_id','id');
+    public function posts()
+    {
+        return $this->hasMany(NewsPost::class, 'category_id', 'id');
     }
 }

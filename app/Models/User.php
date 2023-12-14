@@ -32,9 +32,9 @@ class User extends Authenticatable
                 'role_id' => 'Права',
             ],
             'form_data' => [
-                'name' => 'Заголовок',
-                'email' => 'Содержимое',
-                'password' => 'Категория',
+                'name' => 'Имя',
+                'email' => 'Email',
+                'password' => 'Пароль',
                 'role_id' => 'Права',
             ]
         ];

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StaticPageController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
@@ -45,8 +46,6 @@ Route::middleware('admin')->group(function () {
                 Route::post('edit', [NewsController::class, 'edit']);
                 Route::post('delete', [NewsController::class, 'destroy']);
                 Route::post('toggle', [NewsController::class, 'toggle']);
-                Route::get('categories', [NewsController::class, 'categoryfetch']);
-
             });
 
             Route::prefix('static-page')->group(function () {
@@ -55,10 +54,15 @@ Route::middleware('admin')->group(function () {
                 Route::post('edit', [StaticPageController::class, 'edit']);
                 Route::post('delete', [StaticPageController::class, 'destroy']);
                 Route::post('toggle', [StaticPageController::class, 'toggle']);
-
+            });
+            Route::prefix('category')->group(function () {
+                Route::get('/', [CategoryController::class, 'index'])->name('category.index');
+                Route::post('store', [CategoryController::class, 'store']);
+                Route::post('edit', [CategoryController::class, 'edit']);
+                Route::post('delete', [CategoryController::class, 'destroy']);
             });
             Route::prefix('product_category')->group(function () {
-                Route::get('/crud', [ProductCategoryController::class, 'index'])->name('product_category.index');
+                Route::get('/', [ProductCategoryController::class, 'index'])->name('product_category.index');
                 Route::post('store', [ProductCategoryController::class, 'store']);
                 Route::post('edit', [ProductCategoryController::class, 'edit']);
                 Route::post('delete', [ProductCategoryController::class, 'destroy']);

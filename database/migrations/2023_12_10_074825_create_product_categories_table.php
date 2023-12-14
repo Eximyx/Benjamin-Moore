@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('product_categories', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->boolean('kind_of_work');
-            $table->text('description');
+            $table->boolean('kind_of_work_id');
+            $table->text('content');
             $table->string('slug')->unique();
             $table->timestamps();
         });

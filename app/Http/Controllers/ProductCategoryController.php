@@ -11,45 +11,50 @@ class ProductCategoryController extends BaseController
 {
     public function index()
     {
-        $kinds = ProductCategory::getWork();
+        $data = ProductCategory::getModel();
+        $selectable = ProductCategory::getWork();
+        $datatable_columns = $this->service->get_datatable_columns($data);
         if (request()->ajax()) {
-            $product_categories = ProductCategory::all();
-            foreach ($product_categories as $product_category) {
-                $product_category['kind_of_work'] = $kinds[$product_category['kind_of_work']]; 
+            $entities = ProductCategory::all();
+            foreach ($entities as $entity) {
+                $entity['kind_of_work_id'] = $selectable[$entity['kind_of_work_id']]['title']; 
             }
-            return $this->service->create_datatable($product_categories)->make(true);
+            return $this->service->create_datatable($entities)->make(true);
         }
-        return view('product_category.index',compact('kinds'));
+        return view('layouts.datatable',compact('data','selectable','datatable_columns'));
     }
 
     public function store(Request $request)
     {
-        $data = $request->all();
-        $product_category = ProductCategory::updateOrCreate(
+        $data = $request->validate([
+            'id' => 'numeric|nullable',
+            'title'=> 'string|required',
+            'content'=> 'string|required',
+            'kind_of_work_id'=> 'required',
+        ]);
+        $entity = ProductCategory::updateOrCreate(
             [
                 'id' => $data['id']
             ],
             [
                 'title' => $data['title'],
-                'description' => $data['description'],
-                'kind_of_work' => $data['kind_of_work'],
+                'content' => $data['content'],
+                'kind_of_work_id' => $data['kind_of_work_id'],
             ]
         );
 
-        return Response()->json($product_category);
+        return Response()->json($entity);
     }
 
     public function edit(Request $request)
     {
-        $where = array('id' => $request->id);
-        $product_category = ProductCategory::where($where)->first();
-        return Response()->json($product_category);
+        $entity = ProductCategory::where('id', $request->id)->first();
+        return Response()->json($entity);
     }
     public function destroy(Request $request)
     {
-        $product_category = ProductCategory::where('id', $request->id)->first(); 
-        $product_category->delete();
+        $entity = ProductCategory::where('id', $request->id)->first()->delete(); 
         
-        return Response()->json($product_category);
+        return Response()->json($entity);
     }
 }

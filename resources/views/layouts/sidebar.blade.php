@@ -9,33 +9,40 @@
     </a>
 
     <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+    <hr class="sidebar-divider m-0 p-0">
 
     <!-- Nav Item - Dashboard -->
+
     <li class="nav-item">
         <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('products.index') }}">
+        <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Products</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('product_category.index') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Products categories</span></a>
+            <span>Категории новостей</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('news.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>News</span></a>
+            <span>Категории</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('products.index') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Продукты</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('product_category.index') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Категории продуктов</span></a>
+    </li>
+
     <li class="nav-item">
         <a class="nav-link" href="{{ route('static-page.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>StaticPages</span></a>
+            <span>Страницы</span></a>
     </li>
 
 
@@ -43,7 +50,7 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('user.index') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>User</span></a>
+                <span>Пользователь</span></a>
         </li>
     @endif
     <!-- Divider -->
