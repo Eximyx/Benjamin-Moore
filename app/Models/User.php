@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    
+
     const ROLE_USER = 0;
     const ROLE_ADMIN = 1;
     const ROLE_ROOT = 2;
@@ -22,30 +22,34 @@ class User extends Authenticatable
      * @var array<int, string>
      */
 
-     public static function getModel()
-     {
-         return [
-             'ModelName' => 'Пользователи',
-             'datatable_data' => [
-                 'name' => 'Имя',
-                 'email' => 'Email',
-                 'role_id' => 'Права',
-             ],
-             'form_data' => [
-                 'name' => 'Заголовок',
-                 'email' => 'Содержимое',
-                 'password' => 'Категория',
-                 'role_id' => 'Права',
-             ]
-         ];
-     }
+    public static function getModel()
+    {
+        return [
+            'ModelName' => 'Пользователи',
+            'datatable_data' => [
+                'name' => 'Имя',
+                'email' => 'Email',
+                'role_id' => 'Права',
+            ],
+            'form_data' => [
+                'name' => 'Заголовок',
+                'email' => 'Содержимое',
+                'password' => 'Категория',
+                'role_id' => 'Права',
+            ]
+        ];
+    }
 
 
     public static function getRoles()
-    {    return [
-        self::ROLE_USER => "user",
-        self::ROLE_ADMIN => "admin",
-        self::ROLE_ROOT => "root"
+    {
+        return [
+            0 => ["id" => 0,
+                "title" => 'user'],
+            1 => ["id" => 1,
+                "title" => "admin"],
+            2 => ["id" => 2,
+            "title" => "root"]
         ];
     }
 

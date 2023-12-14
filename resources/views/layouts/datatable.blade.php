@@ -49,8 +49,8 @@
                                         <select class="form-select" name="{{$key}}" id="select"
                                             aria-label="Default select example" required>
                                             @foreach ($selectable as $item)
-                                                <option value="{{ $item->id }}">
-                                                    {{ $item->title }}
+                                                <option value="{{ $item['id'] }}">
+                                                    {{ $item['title'] }}
                                                 </option>
                                             @endforeach
                                         </select>
