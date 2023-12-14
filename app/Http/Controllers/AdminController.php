@@ -9,18 +9,16 @@ class AdminController extends BaseController
 {
     public function index()
     {
-        $roles = User::getRoles();
-
+        $data = User::getModel();
+        $selectable = User::getRoles();
         if (request()->ajax()) {
             $Users = User::all();
-
             foreach ($Users as $User) {
-                $User['role_id'] = $roles[$User['role_id']];
-            }
-            ;
+                $User['role_id'] = $selectable[$User['role_id']];
+            };
             return $this->service->create_datatable($Users)->make(true);
         }
-        return view('user.index', compact('roles'));
+        return view('layouts.datatable', compact('data','selectable'));
     }
 
     // UserRequest

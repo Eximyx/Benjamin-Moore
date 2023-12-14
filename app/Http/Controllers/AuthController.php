@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-// TODO EXIMYX  Controller, VALIDATOR, Layout, Model (function)
-
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;

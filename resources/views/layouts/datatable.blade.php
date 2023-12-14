@@ -41,8 +41,8 @@
                         <input type="hidden" name="id" id="id">
                         @foreach ($data['form_data'] as $key => $value)
                             <div class="col-lg mt-2">
+                                <label for="{{$key}}">{{ $value }}</label>
                                 @if ($key == 'content')
-                                    <label for="content">{{ $value }}</label>
                                     <textarea type="text" name="content" class="form-control" id="summernote-content" placeholder="content" required></textarea>
                                 @elseif(str_contains($key, '_id'))
                                     <div>
@@ -56,11 +56,9 @@
                                         </select>
                                     </div>
                                 @elseif(str_contains($key, 'image'))
-                                    <label for="{{ $key }}">{{ $value }}</label>
                                     <input type="file" name="{{ $key }}" class="form-control" id="image">
                                     <img class="my-2 img-thumbnail m-0" id="result" style="max-width: 20rem;max-height:20rem">
                                 @else
-                                    <label for="{{ $key }}">{{ $value }}</label>
                                     <input type="text" name="{{ $key }}" id="{{ $key }}"
                                         class="form-control" placeholder="{{ $value }}" required>
                                 @endif
@@ -166,15 +164,15 @@
             }
         });
 
-        const upload = document.querySelector('#image');
-        const result = document.querySelector('#result');
+        // const upload = $('#image');
+        const result = $('#result');
         const default_image = "{{ url('storage/image/default_post.jpg') }}";
 
-        upload.addEventListener("change", (e) => {
+        $('#image').on("change", (e) => {
             console.log(e.target.files[0]);
             if (!previewFunc(e.target.files[0])) {
-                upload.value = '';
-                result.src = default_image;
+                $('#image').val('');
+                $('#result').attr("src", default_image);
             }
         });
 
@@ -184,7 +182,7 @@
             }
             const reader = new FileReader();
             reader.addEventListener("load", (e) => {
-                result.src = e.target.result;
+                $('#result').attr("src", e.target.result);                
             });
             reader.readAsDataURL(file);
             return true;
@@ -192,7 +190,8 @@
 
         function add() {
             $('#Form')[0].reset();
-            document.querySelector('#result').src = default_image;
+            $('#result').attr("src", default_image);
+            // document.querySelector('#result').src = default_image;
             $("#select").prop("selectedIndex", 0);
             $('#summernote-content').summernote('reset');
             $('#Form-modal').modal('show');
@@ -220,7 +219,9 @@
                         }
                     });
                     $('#summernote-content').summernote('code', res.content);
-                    result.src = `{{ url('storage/image/') }}/${res.main_image}`;
+                    // result.src = ;
+                    result.attr("src", `{{ url('storage/image/') }}/${res.main_image}`);
+
                 },
                 error: function(data) {
                     console.log(data);

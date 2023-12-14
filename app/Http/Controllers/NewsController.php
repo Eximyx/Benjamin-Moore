@@ -13,10 +13,9 @@ class NewsController extends BaseController
     {
         $data = NewsPost::getModel();
         $selectable = Category::All();
-        $datatable_columns = [];
-        foreach ($data['datatable_data'] as $key => $item){ 
-            $datatable_columns[] = ['data' => $key, 'name' => $key]; 
-        };
+        
+        $datatable_columns = $this->service->get_datatable_columns($data);
+        
         if (request()->ajax()) {
             $Entities = NewsPost::all();
             foreach ($Entities as $Entity) {
@@ -25,6 +24,7 @@ class NewsController extends BaseController
             $table = $this->service->create_datatable($Entities);
             return $table->make(true);
         }
+        
         return view('layouts.datatable',compact('data','selectable','datatable_columns'));
     }
 
@@ -38,8 +38,9 @@ class NewsController extends BaseController
             'content'=> 'string|required',
             'main_image'=> 'nullable',
     ]));
-
-
+        if ($data['main_image'] === 'old') {
+            $data['main_image'] = NewsPost::find($data['id'])['main_image'];
+        }
         $Entity = NewsPost::updateOrCreate(
             [
                 'id' => $data['id']

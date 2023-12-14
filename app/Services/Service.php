@@ -14,7 +14,10 @@ class Service
             Storage::put('public\image', $data['main_image']);
             $data['main_image'] = $data['main_image']->hashName();
         } else {
-            $data['main_image'] = 'default_post.jpg';
+            if ($data['id'] === null) {
+                $data['main_image'] = 'default_post.jpg';
+            }
+            else {$data['main_image'] = 'old';}
         }
 
         return $data;
@@ -51,6 +54,14 @@ class Service
                     return view('layouts/action',compact('request','value'));
                 })
                 ->addIndexColumn();
+    }
+
+    public function get_datatable_columns($data) {
+        $columns = [];
+        foreach ($data['datatable_data'] as $key => $item) {
+            $columns[] = ['data' => $key, 'name' => $key];
+        }
+        return $columns;
     }
 
 }

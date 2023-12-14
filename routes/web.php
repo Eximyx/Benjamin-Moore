@@ -50,7 +50,7 @@ Route::middleware('admin')->group(function () {
             });
 
             Route::prefix('static-page')->group(function () {
-                Route::get('/ajax-crud-datatable', [StaticPageController::class, 'index'])->name('static-page.index');
+                Route::get('/', [StaticPageController::class, 'index'])->name('static-page.index');
                 Route::post('store', [StaticPageController::class, 'store']);
                 Route::post('edit', [StaticPageController::class, 'edit']);
                 Route::post('delete', [StaticPageController::class, 'destroy']);

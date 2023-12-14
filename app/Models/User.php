@@ -22,6 +22,25 @@ class User extends Authenticatable
      * @var array<int, string>
      */
 
+     public static function getModel()
+     {
+         return [
+             'ModelName' => 'Пользователи',
+             'datatable_data' => [
+                 'name' => 'Имя',
+                 'email' => 'Email',
+                 'role_id' => 'Права',
+             ],
+             'form_data' => [
+                 'name' => 'Заголовок',
+                 'email' => 'Содержимое',
+                 'password' => 'Категория',
+                 'role_id' => 'Права',
+             ]
+         ];
+     }
+
+
     public static function getRoles()
     {    return [
         self::ROLE_USER => "user",

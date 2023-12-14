@@ -1,28 +1,35 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\StaticPage;
 use Illuminate\Http\Request;
-// TODO EXIMYX STATICPAGE Controller, VALIDATOR, Layout, Model (function)
-
 
 class StaticPageController extends BaseController
 {
     public function index()
     {
+        $data = StaticPage::getModel();
+        $datatable_columns = $this->service->get_datatable_columns($data);
         if (request()->ajax()) {
-            $StaticPages = StaticPage::all();
-            return $this->service->create_datatable($StaticPages)->make(true);
-            }
-        return view('static-page.index');
+            $Entities = StaticPage::all();
+            $table = $this->service->create_datatable($Entities);
+            return $table->make(true);
+        }
+        return view('layouts.datatable', compact('data', 'datatable_columns'));
     }
 
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->validate(
+            [
+                'id' => 'nullable',
+                'title' => 'string|required',
+                'content' => 'string|required'
+            ]);
 
 
-        $staticPages = StaticPage::updateOrCreate(
+        $Entities = StaticPage::updateOrCreate(
             [
                 'id' => $data['id']],
             [
@@ -32,24 +39,23 @@ class StaticPageController extends BaseController
             ]
         );
 
-        return Response()->json($staticPages);
+        return Response()->json($Entities);
     }
 
     public function edit(Request $request)
     {
-        $staticPage = StaticPage::where('id', $request->id)->first();
-        return Response()->json($staticPage);
+        $Entity = StaticPage::where('id', $request->id)->first();
+        return Response()->json($Entity);
     }
     public function destroy(Request $request)
     {
-        $staticPage = StaticPage::where('id', $request->id)->delete();    
-        return Response()->json($staticPage);
-    } 
-       public function toggle(Request $request)
+        $Entity = StaticPage::where('id', $request->id)->delete();
+        return Response()->json($Entity);
+    }
+    public function toggle(Request $request)
     {
         $data = StaticPage::where('id', $request->id)->first();
-        $this->service->toggle($data);
-        $data->save();    
+        $data = $this->service->toggle($data)->save();
         return Response()->json($data);
     }
 }
