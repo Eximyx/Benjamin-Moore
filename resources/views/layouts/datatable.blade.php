@@ -77,18 +77,20 @@
         </div>
     </div>
     <script>
+            const urls = "{{url(request()->getPathInfo())}}"
+
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-
+            console.log(urls);
             $('#table').DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: "{{ url(request()->getPathInfo())}}",
+                ajax: urls,
                 columns: [{
                         data: 'id',
                         name: 'id'
@@ -202,7 +204,7 @@
         function editFunc(id) {
             $.ajax({
                 type: "POST",
-                url: "{{ url(request()->getPathInfo().'edit') }}",
+                url: urls+'/edit',
                 data: {
                     id: id
                 },
@@ -240,7 +242,7 @@
                 if (result['isConfirmed']) {
                     $.ajax({
                         type: "POST",
-                        url: "{{ url(request()->getPathInfo().'delete') }}",
+                        url: urls+'/delete',
                         data: {
                             id: id
                         },
@@ -267,7 +269,7 @@
                 if (result['isConfirmed']) {
                     $.ajax({
                         type: "POST",
-                        url: "{{ url(request()->getPathInfo().'toggle') }}",
+                        url: urls+'/toggle',
                         data: {
                             id: id
                         },
@@ -286,7 +288,7 @@
             var formData = new FormData(this);
             $.ajax({
                 type: 'POST',
-                url: "{{ url(request()->getPathInfo().'store') }}",
+                url: urls+'/store',
                 data: formData,
                 cache: false,
                 contentType: false,

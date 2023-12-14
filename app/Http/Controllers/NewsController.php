@@ -31,7 +31,12 @@ class NewsController extends BaseController
     public function store(Request $request)
     {
 
-        $data = $this->service->image_store($request->all());
+        $data = $this->service->image_store($request->validate([
+            'id' => 'numeric|nullable',
+            'title' => 'string|required',
+            'content'=> 'string|required',
+            'main_image'=> 'nullable',
+    ]));
 
 
         $Entity = NewsPost::updateOrCreate(
