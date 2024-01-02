@@ -16,6 +16,6 @@ class UserRolesFactory extends Factory
      */
     public function definition(): array
     {
-        // return ['title']
+        return ['title' => fake()->name()];
     }
 }

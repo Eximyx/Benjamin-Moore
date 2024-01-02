@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
              'name' => 'admin',
              'email' => 'admin@admin',
              'password' => Hash::make('admin'),
-             'user_role_id' => 2
+             'user_role_id' => \App\Models\UserRoles::where('id', '2')->first()->id,
          ]);
     }
 }

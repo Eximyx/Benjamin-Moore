@@ -39,8 +39,11 @@ abstract class BaseController extends Controller
             $table = $this->service->create_datatable($Entities);
             return $table->make(true);
         }
-
-        return view('layouts.datatable', compact(['data', 'selectable', 'datatable_columns']));
+        $variables = ['data','datatable_columns'];
+        if (isset($data['selectable'])) {
+            $variables[''] = 'selectable';
+        }   
+        return view('layouts.datatable', compact([...$variables]));
     }
 
     public function store(Request $request)

@@ -20,8 +20,8 @@ return new class extends Migration
             
             
             $table->unsignedBigInteger('user_role_id');
-            $table->index('user_role_id','users_user_role_idx');
-            $table->foreign('user_role_id','users_user_role_fk')->references('id')->on('user_roles');
+            $table->index('user_role_id','user_user_role_idx');
+            $table->foreign('user_role_id','user_user_role_fk')->references('id')->on('user_roles');
             
             $table->rememberToken();
             $table->timestamps();
