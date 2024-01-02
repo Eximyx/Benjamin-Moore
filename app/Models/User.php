@@ -12,10 +12,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    const ROLE_USER = 0;
-    const ROLE_ADMIN = 1;
-    const ROLE_ROOT = 2;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -36,21 +32,17 @@ class User extends Authenticatable
                 'email' => 'Email',
                 'password' => 'Пароль',
                 'role_id' => 'Права',
+            ],
+            'selectable' => UserRoles::class,
+            'validator_data' => [
+                
             ]
         ];
     }
 
-
-    public static function getRoles()
+    function UserRoles()
     {
-        return [
-            0 => ["id" => 0,
-                "title" => 'user'],
-            1 => ["id" => 1,
-                "title" => "admin"],
-            2 => ["id" => 2,
-            "title" => "root"]
-        ];
+        return $this->belongsTo(UserRoles::class, 'user_role_id', 'id');
     }
 
     protected $fillable = [
@@ -68,7 +60,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        // 'role'
     ];
 
     /**
