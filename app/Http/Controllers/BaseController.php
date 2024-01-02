@@ -32,9 +32,7 @@ abstract class BaseController extends Controller
         if (request()->ajax()) {
             $Entities = $this->model::all();
             if (isset($selectable_id)) {
-                // dd("a");
                 foreach ($Entities as $Entity) {
-                    // dd()
                     $Entity[$selectable_id] = $selectableModel::find($Entity[$selectable_id])->title;
                 }
             }
@@ -52,7 +50,7 @@ abstract class BaseController extends Controller
         $data = $this->service->store($request->validate([
             'id' => 'numeric|nullable',
             ...$validator_data
-        ]),array_key_exists('main_image',$validator_data));
+        ]), array_key_exists('main_image', $validator_data));
 
         $id = $data['id'];
 

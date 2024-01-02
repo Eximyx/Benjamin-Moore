@@ -4,7 +4,6 @@ namespace Database\Seeders;
 use Illuminate\Support\Facades\Hash;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,11 +15,12 @@ class DatabaseSeeder extends Seeder
     {
        \App\Models\Category::factory()->create(['title' => 'first']);
         \App\Models\NewsPost::factory(40)->create();
+        \App\Models\UserRoles::factory()->createMany([['title' =>'User'],['title' =>'Admin'],['title'=>'root']]);
          \App\Models\User::factory()->create([
              'name' => 'admin',
              'email' => 'admin@admin',
              'password' => Hash::make('admin'),
-             'role_id' => 2
+             'user_role_id' => 2
          ]);
     }
 }
