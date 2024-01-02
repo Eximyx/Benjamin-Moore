@@ -19,7 +19,7 @@
             <span>Dashboard</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('dashboard') }}">
+        <a class="nav-link" href="{{ route('news_category.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Категории новостей</span></a>
     </li>

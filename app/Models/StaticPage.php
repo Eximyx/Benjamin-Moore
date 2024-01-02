@@ -15,7 +15,6 @@ class StaticPage extends Model
             'ModelName' => 'Информация',
             'datatable_data' => [
                 'title' => 'Заголовок',
-                'content' => 'Содержимое',
             ],
             'form_data' => [
                 'title' => 'Заголовок',

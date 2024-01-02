@@ -1,13 +1,16 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BController;
 use App\Http\Controllers\StaticPageController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SubController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductCategoryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,8 +58,8 @@ Route::middleware('admin')->group(function () {
                 Route::post('delete', [StaticPageController::class, 'destroy']);
                 Route::post('toggle', [StaticPageController::class, 'toggle']);
             });
-            Route::prefix('category')->group(function () {
-                Route::get('/', [CategoryController::class, 'index'])->name('category.index');
+            Route::prefix('news_category')->group(function () {
+                Route::get('/', [CategoryController::class, 'index'])->name('news_category.index');
                 Route::post('store', [CategoryController::class, 'store']);
                 Route::post('edit', [CategoryController::class, 'edit']);
                 Route::post('delete', [CategoryController::class, 'destroy']);
@@ -68,13 +71,21 @@ Route::middleware('admin')->group(function () {
                 Route::post('delete', [ProductCategoryController::class, 'destroy']);
             });
 
-            
+
             Route::prefix('users')->middleware('root')->group(function () {
                 Route::get('/', [AdminController::class, 'index'])->name('user.index');
                 Route::post('store', [AdminController::class, 'store']);
                 Route::post('edit', [AdminController::class, 'edit']);
                 Route::post('delete', [AdminController::class, 'destroy']);
                 Route::post('toggle', [AdminController::class, 'toggle']);
+
+            });
+            Route::prefix('B')->middleware('root')->group(function () {
+                Route::get('/', [SubController::class, 'index'])->name('B.index');
+                Route::post('store', [SubController::class, 'store']);
+                Route::post('edit', [SubController::class, 'edit']);
+                Route::post('delete', [SubController::class, 'destroy']);
+                Route::post('toggle', [SubController::class, 'toggle']);
 
             });
             Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');

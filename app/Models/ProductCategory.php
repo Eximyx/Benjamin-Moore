@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductCategory extends Model
 {
+    // TODO IMPLEMENT INTERFACE, чтобы программисты в дальнейшем понимали, что нужно перезаписывать getmodel 
     use HasFactory;
     use Sluggable;
     protected $table = 'product_categories';
@@ -26,6 +27,12 @@ class ProductCategory extends Model
                 'title' => 'Название',
                 'content' => 'Содержимое',
                 'kind_of_work_id' => 'Категория',
+            ],
+            'selectable' => KindOfWork::class,
+            'validator_data' => [
+                'title' => 'string|required',
+                'content' => 'string|required',
+                'kind_of_work_id' => 'required',
             ]
         ];
     }
@@ -42,9 +49,14 @@ class ProductCategory extends Model
     }
 
 
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'product_category_id', 'id');
     
-    public function products() {
-        return $this->hasMany(Product::class,'product_category_id','id');
+    }
+    public function kind_of_work(){
+        return $this->belongsTo(KindOfWork::class,'kind_of_work_id','id');
     }
     public function sluggable(): array
     {

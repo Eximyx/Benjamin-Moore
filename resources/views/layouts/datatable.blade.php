@@ -27,7 +27,9 @@
             </table>
         </div>
     </div>
-    <table class="table-bordered">
+    {{-- 
+        // TODO DELETE
+        <table class="table-bordered">
         <thead>
             <tr>
                 <th>Method</th>
@@ -50,7 +52,7 @@
                 @endif
             @endforeach
         </tbody>
-    </table>
+    </table> --}}
 
 
     <!-- boostrap News model -->
@@ -300,6 +302,7 @@
                         },
                         dataType: 'json',
                         success: function(res) {
+                            console.log(res);
                             var oTable = $('#table').dataTable();
                             oTable.fnDraw(false);
                         }
@@ -319,6 +322,7 @@
                 contentType: false,
                 processData: false,
                 success: (data) => {
+                    console.log(data);
                     $("#Form-modal").modal('hide');
                     var oTable = $('#table').dataTable();
                     oTable.fnDraw(false);
