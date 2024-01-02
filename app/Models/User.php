@@ -25,17 +25,20 @@ class User extends Authenticatable
             'datatable_data' => [
                 'name' => 'Имя',
                 'email' => 'Email',
-                'role_id' => 'Права',
+                'user_role_id' => 'Права',
             ],
             'form_data' => [
                 'name' => 'Имя',
                 'email' => 'Email',
                 'password' => 'Пароль',
-                'role_id' => 'Права',
+                'user_role_id' => 'Права',
             ],
             'selectable' => UserRoles::class,
             'validator_data' => [
-                
+                'name' => 'string|required',
+                'email' => 'email|required',
+                'password' => 'required',
+                'user_role_id' => 'string|required'
             ]
         ];
     }
@@ -49,7 +52,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role_id'
+        'user_role_id'
     ];
 
     /**

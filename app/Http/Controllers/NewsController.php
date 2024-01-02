@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\BaseController;
-
 use App\Models\NewsPost;
 
 class NewsController extends BaseController

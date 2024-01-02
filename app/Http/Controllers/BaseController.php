@@ -39,24 +39,23 @@ abstract class BaseController extends Controller
             $table = $this->service->create_datatable($Entities);
             return $table->make(true);
         }
-        $variables = ['data','datatable_columns'];
+        $variables = ['data', 'datatable_columns'];
         if (isset($data['selectable'])) {
             $variables[''] = 'selectable';
-        }   
+        }
         return view('layouts.datatable', compact([...$variables]));
     }
 
     public function store(Request $request)
     {
+
         $validator_data = $this->model::getModel()["validator_data"];
 
         $data = $this->service->store($request->validate([
             'id' => 'numeric|nullable',
             ...$validator_data
         ]), array_key_exists('main_image', $validator_data));
-
         $id = $data['id'];
-
         unset($data['id']);
 
         $Entity = $this->model::updateOrCreate(
