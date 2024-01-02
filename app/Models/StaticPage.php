@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class StaticPage extends Model
 {
 
+    use HasFactory;
+    use Sluggable;
+
     public static function getModel()
     {
         return [
@@ -19,16 +22,15 @@ class StaticPage extends Model
             'form_data' => [
                 'title' => 'Заголовок',
                 'content' => 'Содержимое',
+            ],
+            'validator_data' => [
+                'title' =>'string|required',
+                'content' => 'string|required',
             ]
         ];
     }
-
     protected $table = 'static_pages';
     protected $guarded = false;
-
-    use HasFactory;
-    use Sluggable;
-
     public function sluggable(): array
     {
         return [
