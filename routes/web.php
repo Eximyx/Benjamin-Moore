@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route
 ;
 use App\Http\Controllers\AuthController;
@@ -83,15 +84,17 @@ Route::middleware('admin')->group(function () {
 
             });
        
-            Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
-            Route::post('/profile_set', [App\Http\Controllers\AuthController::class, 'profile_set']);
+            Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+            Route::post('/profile_set', [AuthController::class, 'profile_set']);
 
         });
 });
 
 
-Route::get('/home', [ProductsController::class,'shop'])->name('welcome');
+// Route::get('/home', [ProductsController::class,'shop'])->name('welcome');
 
+
+Route::get('/home',[MainController::class,'index'])->name('main');
 
 
 
