@@ -48,7 +48,7 @@
     <div class="col-sm-12 py-1 row justify-content-between align-items-center ">
         <div class="col-sm-2 col-1 row justify-content-start   align-items-end ">
             <p class="align-items-center fw-bold text-secondary text-nowrap fs-6 m-0">
-                <img srcset="assets/benjaminmoore-icon.png 1150w">
+                <img srcset="{{url('storage/assets/benjaminmoore-icon.png')}} 1350w">
                 Benjamin Moore
             </p>
         </div>
