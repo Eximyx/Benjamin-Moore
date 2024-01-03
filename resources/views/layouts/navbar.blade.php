@@ -165,9 +165,9 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                     {{-- <b id='profile'></b> --}}
-                    <b id='profile' class="m-0 p-0">{{ auth()->user()->name }}</b>
+                    <b id='profile' class="m-0 p-0">{{ auth()->user()->name}}</b>
                     <br>
-                    <small>{{ Auth()->user()->role == 2 ? 'root' : 'admin' }}</small>
+                    <small>{{ Auth()->user()->user_role_id == 3 ? 'root' : 'admin' }}</small>
                 </span>
                 <img class="img-profile rounded-circle" src="{{ url('storage/image/profile.svg') }}" alt="...">
             </a>

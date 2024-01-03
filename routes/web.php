@@ -1,15 +1,17 @@
 <?php
-
+use Illuminate\Support\Facades\Route
+;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BController;
-use App\Http\Controllers\StaticPageController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\SubController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AdminController;
+
+use App\Http\Controllers\StaticPageController;
+
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\NewsController;
+
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\ProductsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -80,14 +82,7 @@ Route::middleware('admin')->group(function () {
                 Route::post('toggle', [AdminController::class, 'toggle']);
 
             });
-            Route::prefix('B')->middleware('root')->group(function () {
-                Route::get('/', [SubController::class, 'index'])->name('B.index');
-                Route::post('store', [SubController::class, 'store']);
-                Route::post('edit', [SubController::class, 'edit']);
-                Route::post('delete', [SubController::class, 'destroy']);
-                Route::post('toggle', [SubController::class, 'toggle']);
-
-            });
+       
             Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
             Route::post('/profile_set', [App\Http\Controllers\AuthController::class, 'profile_set']);
 
@@ -95,9 +90,8 @@ Route::middleware('admin')->group(function () {
 });
 
 
-Route::get('/home', function () {
-    return view('/welcome');
-})->name('welcome');
+Route::get('/home', [ProductsController::class,'shop'])->name('welcome');
+
 
 
 

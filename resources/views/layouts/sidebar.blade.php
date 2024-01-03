@@ -46,7 +46,7 @@
     </li>
 
 
-    @if (Auth::user()->role_id > 1)
+    @if (Auth::user()->user_role_id > 1)
         <li class="nav-item">
             <a class="nav-link" href="{{ route('user.index') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>

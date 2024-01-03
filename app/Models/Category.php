@@ -16,6 +16,9 @@ class Category extends Model
             ],
             'form_data' => [
                 'title' => 'Заголовок',
+            ],
+            'validator_data' => [
+                'title' => 'string|required'
             ]
         ];
     }

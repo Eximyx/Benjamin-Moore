@@ -9,4 +9,10 @@ class ProductsController extends BaseController
     public function __construct(Product $model) {
         parent::__construct($model);    
     }
+
+    public function shop() {
+        $products = $this->model::All();
+        return view("welcome",compact("products"));
+    }
+    
 }
