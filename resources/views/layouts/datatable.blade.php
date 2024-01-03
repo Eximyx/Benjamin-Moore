@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="float-left">
-                    <h2>{{$data['ModelName']}}</h2>
+                    <h2>{{ $data['ModelName'] }}</h2>
                 </div>
                 <div class="float-right mb-2">
                     <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Добавить</a>
@@ -27,35 +27,7 @@
             </table>
         </div>
     </div>
-    {{-- 
-        // TODO DELETE
-        <table class="table-bordered">
-        <thead>
-            <tr>
-                <th>Method</th>
-                <th>URI</th>
-                <th>Name</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(Route::getRoutes() as $route)
-                @if (
-                    str_contains($route->getName(),'.index')
-                )
-                <tr>
-                    <td>{{ $route->methods()[0] }}</td>
-                    <td>{{ $route->uri() }}</td>
-                    <td>{{ $route->getName()}}</td>
-                    <td>{{ $route->getActionName() }}</td>
-                </tr>
-                @endif
-            @endforeach
-        </tbody>
-    </table> --}}
 
-
-    <!-- boostrap News model -->
     <div class="modal fade" id="Form-modal" aria-hidden="true" style="z-index: 1045" tabindex="-1">
         <div class="modal-dialog modal-lg modal-fullscreen m-0" style="max-width: none">
             <div class="modal-content">
@@ -69,12 +41,15 @@
                         <input type="hidden" name="id" id="id">
                         @foreach ($data['form_data'] as $key => $value)
                             <div class="col-lg mt-2">
-                                <label for="{{$key}}">{{ $value }}</label>
+                                <label for="{{ $key }}">{{ $value }}</label>
                                 @if ($key == 'content')
                                     <textarea type="text" name="content" class="form-control" id="summernote-content" placeholder="content" required></textarea>
+                                @elseif($key == 'description')
+                                    <textarea type="text" name="description" class="form-control" id="description" rows="3" placeholder="content"
+                                        required></textarea>
                                 @elseif(str_contains($key, '_id'))
                                     <div>
-                                        <select class="form-select" name="{{$key}}" id="select"
+                                        <select class="form-select" name="{{ $key }}" id="select"
                                             aria-label="Default select example" required>
                                             @foreach ($selectable as $item)
                                                 <option value="{{ $item['id'] }}">
@@ -85,7 +60,8 @@
                                     </div>
                                 @elseif(str_contains($key, 'image'))
                                     <input type="file" name="{{ $key }}" class="form-control" id="image">
-                                    <img class="my-2 img-thumbnail m-0" id="result" style="max-width: 20rem;max-height:20rem">
+                                    <img class="my-2 img-thumbnail m-0" id="result"
+                                        style="max-width: 20rem;max-height:20rem">
                                 @else
                                     <input type="text" name="{{ $key }}" id="{{ $key }}"
                                         class="form-control" placeholder="{{ $value }}" required>
@@ -103,7 +79,7 @@
         </div>
     </div>
     <script>
-            const urls = "{{url(request()->getPathInfo())}}"
+        const urls = "{{ url(request()->getPathInfo()) }}"
 
         $(document).ready(function() {
             $.ajaxSetup({
@@ -185,7 +161,7 @@
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['table', ['table']],
                 ['insert', ['link', 'picture', 'video']],
-                ['view', ['summernote_fullscreen']],
+                ['view', ['summernote_fullscreen', 'codeview']],
             ],
             buttons: {
                 summernote_fullscreen: OpenFullScreen
@@ -210,7 +186,7 @@
             }
             const reader = new FileReader();
             reader.addEventListener("load", (e) => {
-                $('#result').attr("src", e.target.result);                
+                $('#result').attr("src", e.target.result);
             });
             reader.readAsDataURL(file);
             return true;
@@ -229,7 +205,7 @@
         function editFunc(id) {
             $.ajax({
                 type: "POST",
-                url: urls+'/edit',
+                url: urls + '/edit',
                 data: {
                     id: id
                 },
@@ -239,10 +215,9 @@
                     $('#window_title').text("Edit News Post");
                     $('#Form-modal').modal('show');
                     $.each(res, function(key, value) {
-                        if(key.includes('_id')) {
+                        if (key.includes('_id')) {
                             $("#select").find(`option[value='${value}']`).attr("selected", true);
-                        }
-                        else {
+                        } else {
                             $('#' + key).val(value);
                         }
                     });
@@ -269,7 +244,7 @@
                 if (result['isConfirmed']) {
                     $.ajax({
                         type: "POST",
-                        url: urls+'/delete',
+                        url: urls + '/delete',
                         data: {
                             id: id
                         },
@@ -296,7 +271,7 @@
                 if (result['isConfirmed']) {
                     $.ajax({
                         type: "POST",
-                        url: urls+'/toggle',
+                        url: urls + '/toggle',
                         data: {
                             id: id
                         },
@@ -316,7 +291,7 @@
             var formData = new FormData(this);
             $.ajax({
                 type: 'POST',
-                url: urls+'/store',
+                url: urls + '/store',
                 data: formData,
                 cache: false,
                 contentType: false,

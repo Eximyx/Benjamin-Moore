@@ -3,7 +3,8 @@
         class="row py-1 justify-content-between align-items-center border-bottom border-2 border-opacity-25 border-black">
         <div class="col-md-2 col-xxl-2 row justify-content-between align-items-end ">
             <p class="align-items-center fw-bold text-secondary text-nowrap col-12 fs-6 m-0">
-                <img srcset="assets/benjaminmoore-icon.png 2300w">
+                <img srcset="{{url('storage/assets/benjaminmoore-icon.png')}} 2300w">
+                
                 Benjamin Moore
             </p>
         </div>

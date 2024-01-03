@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Service
 {
-    public function store($data, $hasImage)
+    public function store($data, $hasImage, $model)
     {
         // return $data;
         if ($hasImage) {
@@ -24,19 +24,19 @@ class Service
             }
             if ($data['main_image'] === 'old') {
                 if (isset($data['main_image'])) {
-                    $data['main_image'] = $this->model::find($data['id'])['main_image'];
+                    $data['main_image'] = $model::find($data['id'])['main_image'];
                 }
             }
         }
         return $data;
     }
 
-    public function delete_image($newsPost)
+    public function delete_image($Entity)
     {
-        if (!($newsPost->main_image == 'default_post.jpg')) {
-            Storage::delete('public/image/' . $newsPost->main_image);
+        if (!($Entity->main_image == 'default_post.jpg')) {
+            Storage::delete('public/image/' . $Entity->main_image);
         }
-        return $newsPost;
+        return $Entity;
     }
 
     public function toggle($data)

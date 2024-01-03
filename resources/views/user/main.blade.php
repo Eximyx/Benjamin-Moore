@@ -1,9 +1,9 @@
 @extends('user.layout', ['title' => 'Главная'])
 @section('contents')
-    <div id="image-wrapper" class="row rounded-4 border border-1 bg-light my-1 position-relative" alt="">
+    <div id="image-wrapper" class="row rounded-4 border border-1 my-1 position-relative" alt="">
         <div class="col-sm-4 clearfix"></div>
         <div class="container-fluid position-absolute h-100 rounded-4 "
-            style="background-image: url('assets/creative.jpg') ;background-position: center;background-size: cover; background-repeat: no-repeat; filter:brightness(75%)">
+            style="background-image:url({{url('storage/assets/creative.jpg')}});background-position: center;background-size: cover; background-repeat: no-repeat; filter:brightness(75%)">
             <img src="" class="img-fluid" alt="">
         </div>
         <div class="position-relative py-5 my-3">
@@ -41,73 +41,7 @@
                         <div id="product-id"
                             class="product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2">
                             <div class="row border-2 border rounded-4 align-items-center align-self-center m-0 p-0">
-                                <img src="assets/краска.png" class="img-fluid rounded-4 align-self-center" alt="">
-                                <div class="text-center fs-5 p-0 m-0">
-                                    <p class="m-0 py-0">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</p>
-                                </div>
-                                <div class="text-center fw-light fs-6 p-0 m-0">
-                                    <p class="m-0 py-2">Степень блеска «полуглянцевая»</p>
-                                </div>
-                                <div class="row justify-content-between align-items-center m-0 py-1">
-                                    <div
-                                        class="col-5 col-sm-5 col-md-5 col-lg-3 justify-content-center align-items-end p-0 m-0">
-                                        <p class="text-center text-nowrap p-0 m-0 fs-5">$ 5199</p>
-                                    </div>
-                                    <div class="col-5 col-sm-5 col-md-6 col-lg-6 align-items-center m-0 p-0">
-                                        <button
-                                            class="btn btn-danger text-center p-0 m-0 w-100 h-25 py-1 rounded-4 fs-5">Заказать</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="product-id"
-                            class="product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2">
-                            <div class="row border-2 border rounded-4 align-items-center align-self-center m-0 p-0">
-                                <img src="assets/краска.png" class="img-fluid rounded-4 align-self-center" alt="">
-                                <div class="text-center fs-5 p-0 m-0">
-                                    <p class="m-0 py-0">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</p>
-                                </div>
-                                <div class="text-center fw-light fs-6 p-0 m-0">
-                                    <p class="m-0 py-2">Степень блеска «полуглянцевая»</p>
-                                </div>
-                                <div class="row justify-content-between align-items-center m-0 py-1">
-                                    <div
-                                        class="col-5 col-sm-6 col-md-5 col-lg-3 justify-content-center align-items-end p-0 m-0">
-                                        <p class="text-center text-nowrap p-0 m-0 fs-5">$ 5199</p>
-                                    </div>
-                                    <div class="col-5 col-sm-5 col-md-6 col-lg-6 align-items-center m-0 p-0">
-                                        <button
-                                            class="btn btn-danger text-center p-0 m-0 w-100 h-25 py-1 rounded-4 fs-5">Заказать</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="product-id"
-                            class="product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2">
-                            <div class="row border-2 border rounded-4 align-items-center align-self-center m-0 p-0">
-                                <img src="assets/краска.png" class="img-fluid rounded-4 align-self-center" alt="">
-                                <div class="text-center fs-5 p-0 m-0">
-                                    <p class="m-0 py-0">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</p>
-                                </div>
-                                <div class="text-center fw-light fs-6 p-0 m-0">
-                                    <p class="m-0 py-2">Степень блеска «полуглянцевая»</p>
-                                </div>
-                                <div class="row justify-content-between align-items-center m-0 py-1">
-                                    <div
-                                        class="col-5 col-sm-5 col-md-5 col-lg-3 justify-content-center align-items-end p-0 m-0">
-                                        <p class="text-center text-nowrap p-0 m-0 fs-5">$ 5199</p>
-                                    </div>
-                                    <div class="col-5 col-sm-5 col-md-6 col-lg-6 align-items-center m-0 p-0">
-                                        <button
-                                            class="btn btn-danger text-center p-0 m-0 w-100 h-25 py-1 rounded-4 fs-5">Заказать</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="product-id"
-                            class="d-md-none d-lg-block product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2">
-                            <div class="row border-2 border rounded-4 align-items-center align-self-center m-0 p-0">
-                                <img src="assets/краска.png" class="img-fluid rounded-4 align-self-center" alt="">
+                                <img src="{{url('storage/assets/краска.png')}}" class="img-fluid rounded-4 align-self-center" alt="">
                                 <div class="text-center fs-5 p-0 m-0">
                                     <p class="m-0 py-0">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</p>
                                 </div>
@@ -169,10 +103,10 @@
         </div>
         <div class=" row col-12 col-lg-5 rounded-4">
             <div class="d-none d-lg-block col rounded-4">
-                <img src="assets/erikus.jpg" class="img-fluid" alt="">
+                <img src="{{url('storage/assets/erikus.jpg')}}" class="img-fluid" alt="">
             </div>
             <div class="d-none d-lg-block col rounded-4">
-                <img src="assets/eximyx.jpg" class="img-fluid" alt="">
+                <img src="{{url('storage/assets/eximyx.jpg')}}" class="img-fluid" alt="">
             </div>
         </div>
         <div class="row m-0 m-0 justify-content-between mt-5">
@@ -201,48 +135,28 @@
             </div>
         </div>
     </div>
-    <div id="news" class="row justify-content-between m-0 p-0">
+    <div id="news" class="row justify-content-between m-0 p-0 border-bottom border-2 border-opacity-25 mt-5">
         <div class="col-sm-12 m-0 p-0 row">
             <h4 class="fw-normal">Новости</h4>
             <h2 class="text-danger text-nowrap fw-medium mb-2">ПОСЛЕДНИЕ НОВОСТИ</h2>
         </div>
         @foreach ($NewsPost as $item)
             <div id="news-{{ $item->id }}" class="col-sm-12 col-md-4 justify-content-between align-items-end">
-                <img class="img-fluid" srcset="{{ url('storage/image') }}/{{ $item->main_image }}">
+                <img class="img-fluid w-100" srcset="{{ url('storage/image') }}/{{ $item->main_image }}">
                 <p class="opacity-75 m-0 my-2 ">
                     <i class="fa fa-clock opacity-75 "></i>
                     {{ $item->created_at }}
                 </p>
-                <h4 class="col text-wrap">{{ $item->title }}</h4>
-                <p class="text-wrap d-block truncate" >Предварительные выводы неутешительны:
-                    существующая теория требует анализа новых предложений.</p>
+                <h4 class="col text-wrap truncate">{{ $item->title }}</h4>
+                <p class="text-wrap truncate" >{{$item->content}}</p>
             </div>
         @endforeach
-
-        <div id="news id" class="col-sm-12 col-md-4 justify-content-between align-items-end">
-            <img class="img-fluid" srcset="assets/news_img.png">
-            <p class="opacity-75">
-                Udemy
-                <i class="fa fa-clock opacity-75 "></i>
-                27 января 2021
-            </p>
-            <h4 class="text-wrap">Какие IT - професси будут востребованы в 2022 году</h4>
-            <p class="text-wrap">Предварительные выводы неутешительны:
-                существующая теория требует анализа новых предложений.</p>
-        </div>
-        <div id="news id" class="col-sm-12 col-md-4 justify-content-between align-items-end">
-            <img class="img-fluid" srcset="assets/news_img.png">
-            <p class="opacity-75">
-                Udemy
-                <i class="fa fa-clock opacity-75 "></i>
-                27 января 2021
-            </p>
-            <h4 class="text-wrap">Какие IT - професси будут востребованы в 2022 году</h4>
-            <p class="text-wrap">Предварительные выводы неутешительны:
-                существующая теория требует анализа новых предложений.</p>
-        </div>
     </div>
-    <div class="row m-0 p-0">
+    <div id="location" class="row m-0 p-0 mt-5">
+        <div class="col-sm-12 m-0 p-0 row">
+            <h4 class="fw-normal">Наш адрес</h4>
+            <h2 class="text-danger text-nowrap fw-medium mb-2">ГДЕ МЫ НАХОДИМСЯ</h2>
+        </div>
         <div class="col-sm-12 col-md-12 col-lg-8">
             <iframe class="rounded-4 mb-3"
                 src="https://yandex.ru/map-widget/v1/?um=constructor%3Ab4b0cc562e37a8f254c72d9ee28e7f7d677f827665373280c0df05bc6f3a013a&amp;source=constructor"

@@ -22,6 +22,7 @@ class NewsPostFactory extends Factory
             'title'=>fake()->name(),
             'main_image'=>'default_post.jpg',
             'content'=>fake()->text(),
+            'description' =>fake()->text(),
             'category_id'=>Category::get()->random()->id,
         ];
     }

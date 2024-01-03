@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('main_image');
             $table->boolean('is_toggled')->default(false);
             $table->longText('content');
+            $table->string('description');
             $table->unsignedBigInteger('category_id');
             $table->index('category_id','news_category_idx');
             $table->foreign('category_id','news_category_fk')->references('id')->on('categories');

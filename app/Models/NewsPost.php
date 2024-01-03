@@ -18,19 +18,21 @@ class NewsPost extends Model
         return [
             'ModelName' => 'Новости',
             'datatable_data' => [
-                'title' => 'Заголовок', 
+                'title' => 'Заголовок',
                 'category_id' => 'Категория',
             ],
             'form_data' => [
                 'title' => 'Заголовок',
+                'description' => 'Описание',
                 'content' => 'Содержимое',
                 'category_id' => 'Категория',
                 'main_image' => 'Фото',
             ],
             'selectable' => Category::Class,
             'validator_data' => [
-                'title'=> 'string|required',
-                'category_id'=> 'string|required',
+                'title' => 'string|required',
+                'description' => 'string|required',
+                'category_id' => 'string|required',
                 'content' => 'string|required',
                 'main_image' => 'nullable'
             ]
