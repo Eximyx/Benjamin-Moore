@@ -32,8 +32,8 @@
                     ПН — ПТ, 10:00 — 19:00
                 </p>
             </div>
-            <i class="fs-5 col-md-2 col-lg-2 fa fa-shop m-0 p-0">
-                <sub class="m-0 p-0 text-danger" style="font-size:10px">99<span class="m-0 p-0"
+            <i class="text-black-50 fs-5 col-md-2 col-lg-2 fa fa-shop m-0 p-0">
+                <sub class="m-0 p-0 text-danger opacity-100 " style="font-size:10px">99<span class="m-0 p-0"
                         style="font-size:7px">+</span></sub></i>
             <div
                 class="py-lg-1 py-1 btn btn-danger px-0 p-0 m-0 col-md-3 col-lg-3 justify-content-center align-items-center ">
