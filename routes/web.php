@@ -95,10 +95,9 @@ Route::middleware('admin')->group(function () {
 
 
 Route::get('/home',[MainController::class,'index'])->name('main');
-
-Route::get('/catalog',[CatalogController::class,'index'])->name('catalog');
-Route::get('/news',[CatalogController::class,'index'])->name('catalog');
-Route::get('/news/{id}',[CatalogController::class,'index'])->name('catalog');
+Route::get('/catalog',[CatalogController::class,'index'])->name('user.catalog');
+Route::get('/news',[NewsController::class,'news_index'])->name('user.news');
+Route::get('/news/{slug}',[NewsController::class,'show'])->name('user.news.show');
 Route::get('/book/{id}',[CatalogController::class,'addProductToCart'])->name('addproduct.to.cart');
 
 

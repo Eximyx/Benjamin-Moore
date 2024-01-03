@@ -3,7 +3,7 @@
     <div id="image-wrapper" class="row rounded-4 border border-1 my-1 position-relative" alt="">
         <div class="col-sm-4 clearfix"></div>
         <div class="container-fluid position-absolute h-100 rounded-4 "
-            style="background-image:url({{url('storage/assets/creative.jpg')}});background-position: center;background-size: cover; background-repeat: no-repeat; filter:brightness(75%)">
+            style="background-image:url({{ url('storage/assets/creative.jpg') }});background-position: center;background-size: cover; background-repeat: no-repeat; filter:brightness(75%)">
             <img src="" class="img-fluid" alt="">
         </div>
         <div class="position-relative py-5 my-3">
@@ -41,7 +41,8 @@
                         <div id="product-id"
                             class="product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2">
                             <div class="row border-2 border rounded-4 align-items-center align-self-center m-0 p-0">
-                                <img src="{{url('storage/assets/краска.png')}}" class="img-fluid rounded-4 align-self-center" alt="">
+                                <img src="{{ url('storage/assets/краска.png') }}"
+                                    class="img-fluid rounded-4 align-self-center" alt="">
                                 <div class="text-center fs-5 p-0 m-0">
                                     <p class="m-0 py-0">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</p>
                                 </div>
@@ -103,10 +104,10 @@
         </div>
         <div class=" row col-12 col-lg-5 rounded-4">
             <div class="d-none d-lg-block col rounded-4">
-                <img src="{{url('storage/assets/erikus.jpg')}}" class="img-fluid" alt="">
+                <img src="{{ url('storage/assets/erikus.jpg') }}" class="img-fluid" alt="">
             </div>
             <div class="d-none d-lg-block col rounded-4">
-                <img src="{{url('storage/assets/eximyx.jpg')}}" class="img-fluid" alt="">
+                <img src="{{ url('storage/assets/eximyx.jpg') }}" class="img-fluid" alt="">
             </div>
         </div>
         <div class="row m-0 m-0 justify-content-between mt-5">
@@ -143,12 +144,17 @@
         @foreach ($NewsPost as $item)
             <div id="news-{{ $item->id }}" class="col-sm-12 col-md-4 justify-content-between align-items-end">
                 <img class="img-fluid w-100" srcset="{{ url('storage/image') }}/{{ $item->main_image }}">
-                <p class="opacity-75 m-0 my-2 ">
-                    <i class="fa fa-clock opacity-75 "></i>
-                    {{ $item->created_at }}
-                </p>
+                <div class="row justify-content-between">
+                    <p class="text-truncate col-6 opacity-75 m-0 my-2 ">
+                        <i class="fa fa-clock opacity-75 "></i>
+                        {{ $item->created_at }}
+                    </p>
+                    <p class="text-truncate col-6 opacity-75 m-0 my-2 text-center">
+                        <a class="link-secondary" href="{{route('user.news.show',$item->slug)}}">Подробнее</a>
+                    </p>
+                </div>
                 <h4 class="col text-wrap truncate">{{ $item->title }}</h4>
-                <p class="text-wrap truncate" >{{$item->content}}</p>
+                <p class="text-wrap truncate">{{ $item->content }}</p>
             </div>
         @endforeach
     </div>

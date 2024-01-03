@@ -10,8 +10,15 @@ class NewsController extends BaseController
         parent::__construct($model);    
     }
 
-    // public function shop() {
-    //     $products = $this->model::All();
-    //     return view("welcome",compact("products"));
-    // }
+
+    public function news_index() {
+        $newsposts = NewsPost::orderBy("created_at","desc")->paginate(9);
+        return view("user.news",compact('newsposts'));
+    }
+
+    public function show($slug) {
+        $NewsPost = NewsPost::whereSlug($slug)->firstOrFail();
+        $NewsPosts = NewsPost::orderBy("created_at","desc")->paginate(4);
+        return view("user.news_show", compact(["NewsPosts","NewsPost"]));
+    } 
 }
