@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route
 ;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\StaticPageController;
 
 use App\Http\Controllers\CategoryController;
@@ -95,6 +95,9 @@ Route::middleware('admin')->group(function () {
 
 
 Route::get('/home',[MainController::class,'index'])->name('main');
+
+Route::get('/catalog',[CatalogController::class,'index'])->name('catalog');
+Route::get('/book/{id}',[CatalogController::class,'addProductToCart'])->name('addproduct.to.cart');
 
 
 
