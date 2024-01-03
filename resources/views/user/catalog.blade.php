@@ -31,50 +31,6 @@
         </div>
     </div>
         @endforeach
-        {{-- <div id="product-id"
-            class="product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2">
-            <div class="row border-2 border rounded-4 align-items-center align-self-center m-0 p-0">
-                <img src="assets/краска.png" class="img-fluid rounded-4 align-self-center" alt="">
-                <div class="text-center fs-5 p-0 m-0">
-                    <p class="m-0 py-0">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</p>
-                </div>
-                <div class="text-center fw-light fs-6 p-0 m-0">
-                    <p class="m-0 py-2">Степень блеска «полуглянцевая»</p>
-                </div>
-                <div class="row justify-content-between align-items-center m-0 py-1">
-                    <div
-                        class="col-5 col-sm-5 col-md-5 col-lg-3 justify-content-center align-items-end p-0 m-0">
-                        <p class="text-center text-nowrap p-0 m-0 fs-5">$ 5199</p>
-                    </div>
-                    <div class="col-5 col-sm-5 col-md-6 col-lg-6 align-items-center m-0 p-0">
-                        <button
-                            class="btn btn-danger text-center p-0 m-0 w-100 h-25 py-1 rounded-4 fs-5">Заказать</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="product-id"
-            class="d-md-none d-lg-block product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2">
-            <div class="row border-2 border rounded-4 align-items-center align-self-center m-0 p-0">
-                <img src="assets/краска.png" class="img-fluid rounded-4 align-self-center" alt="">
-                <div class="text-center fs-5 p-0 m-0">
-                    <p class="m-0 py-0">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</p>
-                </div>
-                <div class="text-center fw-light fs-6 p-0 m-0">
-                    <p class="m-0 py-2">Степень блеска «полуглянцевая»</p>
-                </div>
-                <div class="row justify-content-between align-items-center m-0 py-1">
-                    <div
-                        class="col-5 col-sm-5 col-md-5 col-lg-3 justify-content-center align-items-end p-0 m-0">
-                        <p class="text-center text-nowrap p-0 m-0 fs-5">$ 5199</p>
-                    </div>
-                    <div class="col-5 col-sm-5 col-md-6 col-lg-6 align-items-center m-0 p-0">
-                        <button
-                            class="btn btn-danger text-center p-0 m-0 w-100 h-25 py-1 rounded-4 fs-5">Заказать</button>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
     </div>
         <div class="row">
             <button class="btn btn-outline-danger mx-auto w-auto text-nowrap">Показать больше</button>

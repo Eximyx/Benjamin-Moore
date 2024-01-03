@@ -20,14 +20,18 @@ class CatalogController extends Controller
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
-                "title" => $product->name,
+                "title" => $product->title,
                 "quantity" => 1,
-                "price" => '$22',
-                "image" => $product->image,
+                "price" => '22',
+                "main_image" => $product->main_image,
                 "gloss_level" => $product->gloss_level,
             ];
         }
         session()->put('cart', $cart);
         return redirect()->back()->with('success', 'Book has been added to cart!');
+    }
+
+    public function productCart(){
+        return view('user.cart');
     }
 }

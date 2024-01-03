@@ -32,9 +32,11 @@
                     ПН — ПТ, 10:00 — 19:00
                 </p>
             </div>
-            <i class="text-black-50 fs-5 col-md-2 col-lg-2 fa fa-shop m-0 p-0">
-                <sub class="m-0 p-0 text-danger opacity-100 " style="font-size:10px">99<span class="m-0 p-0"
-                        style="font-size:7px">+</span></sub></i>
+            <a class="text-black-50 fs-5 col-md-2 col-lg-2 fa fa-shop m-0 p-0" href="{{route('cart')}}">
+                    <sub class="m-0 p-0 text-danger opacity-100 " style="font-size:10px">
+                        {{count((array) session('cart'))}} <span class="m-0 p-0" style="font-size:7px">+</span>
+                    </sub>
+            </a>
             <div
                 class="py-lg-1 py-1 btn btn-danger px-0 p-0 m-0 col-md-3 col-lg-3 justify-content-center align-items-center ">
                 <p class="text-center text-nowrap text-white fs-6 m-0 py-1">
