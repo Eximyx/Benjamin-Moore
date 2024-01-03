@@ -97,6 +97,8 @@ Route::middleware('admin')->group(function () {
 Route::get('/home',[MainController::class,'index'])->name('main');
 
 Route::get('/catalog',[CatalogController::class,'index'])->name('catalog');
+Route::get('/news',[CatalogController::class,'index'])->name('catalog');
+Route::get('/news/{id}',[CatalogController::class,'index'])->name('catalog');
 Route::get('/book/{id}',[CatalogController::class,'addProductToCart'])->name('addproduct.to.cart');
 
 
