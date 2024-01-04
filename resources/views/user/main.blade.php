@@ -55,8 +55,8 @@
                                         <p class="text-center text-nowrap p-0 m-0 fs-5">$ 5199</p>
                                     </div>
                                     <div class="col-5 col-sm-5 col-md-6 col-lg-6 align-items-center m-0 p-0">
-                                        <button
-                                            class="btn btn-danger text-center p-0 m-0 w-100 h-25 py-1 rounded-4 fs-5">Заказать</button>
+                                        <a
+                                            class="btn btn-danger text-center p-0 m-0 w-100 h-25 py-1 rounded-4 fs-5" href="{{route('user.catalog')}}">Заказать</a>
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
             <!-- <div class="swiper-scrollbar"></div> -->
         </div>
         <div class="row">
-            <button class="btn btn-outline-danger mx-auto w-auto text-nowrap">Показать больше</button>
+            <a class="btn btn-outline-danger mx-auto w-auto text-nowrap" href="{{route('user.catalog')}}">Показать больше</a>
         </div>
     </div>
     <div id="about us" class="row justify-content-between m-0 p-0 mt-5 py-2">
@@ -98,7 +98,7 @@
                     функционально разнесены на независимые элементы.
                 </p>
                 <div class="col-6 mb-2">
-                    <button class=" btn btn-outline-danger text-center rounded-4 p-1 fs-4">Подробнее</button>
+                    <a class="btn btn-outline-danger text-center rounded-4 p-1 fs-4" href={{route('user.news')}}>Подробнее</a>
                 </div>
             </div>
         </div>
@@ -169,26 +169,67 @@
                 width="100%" height="600" frameborder="0"></iframe>
         </div>
         <div class="row col m-0 p-0">
-            <h3 class="fw-normal fs-4">Оставьте заявку</h4>
-                <h2 class="text-wrap fw-normal fs-5 mb-2">Мы свяжемся с вами в течении нескольких минут</h2>
-                <div class="col-12 justify-content-between align-items-center">
-                    <label class="form-label p-0">Имя</label>
-                    <input type="email" class="form-control rounded-5 border-danger border-2"
-                        id="exampleFormControlInput1" placeholder="Имя">
-                </div>
-                <div class="col-12 justify-content-between align-items-center">
-                    <label class="form-label p-0">Email</label>
-                    <input type="email" class="form-control rounded-5 border-danger border-2"
-                        id="exampleFormControlInput1" placeholder="Email">
-                </div>
-                <div class="col-12 justify-content-between align-items-center">
-                    <label for="exampleFormControlTextarea1" class="form-label p-0">Сообщение</label>
-                    <textarea class="form-control rounded-4 border-danger border-2" id="exampleFormControlTextarea1" rows="6"
-                        placeholder="Текст сообщения"></textarea>
-                </div>
-                <div class="col-12 mt-3">
-                    <button class="w-auto px-5 btn btn-danger text-center rounded-4 fs-4">Заказать</button>
-                </div>
+            <form action="javascript:void(0)" id="Form" name="Form" method="POST">
+                <h3 class="fw-normal fs-4">Оставьте заявку</h4>
+                    <h2 class="text-wrap fw-normal fs-5 mb-2">Мы свяжемся с вами в течении нескольких минут</h2>
+                    <div class="col-12 justify-content-between align-items-center">
+                        <label class="form-label p-0">Имя</label>
+                        <input type="text" class="form-control rounded-5 border-danger border-2"
+                            id="name" placeholder="Имя">
+                    </div>
+                    <div class="col-12 justify-content-between align-items-center">
+                        <label class="form-label p-0">Email</label>
+                        <input type="email" class="form-control rounded-5 border-danger border-2"
+                            id="exampleFormControlInput1" placeholder="Email">
+                    </div>
+                    <div class="col-12 justify-content-between align-items-center">
+                        <label for="exampleFormControlTextarea1" class="form-label p-0">Сообщение</label>
+                        <textarea class="form-control rounded-4 border-danger border-2" id="exampleFormControlTextarea1" rows="6"
+                            placeholder="Текст сообщения"></textarea>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <button type="submit" class="w-auto px-5 btn btn-danger text-center rounded-4 fs-4">Заказать</button>
+                    </div>
+            </form>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        });
+    $('#Form').submit(function(e) {
+            
+            e.preventDefault();
+
+            var formData = new FormData(this);
+            console.log(formData);
+            $.ajax({
+                method: "post",
+                url: '{{ route('leads') }}',
+                data: {
+                    name:  
+                },
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: (data) => {
+                    console.log(data);
+                    var oTable = $('#table').dataTable();
+                    oTable.fnDraw(false);
+                    $("#btn-save").html('Submit');
+                    $("#btn-save").attr("disabled", false);
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+        });
+</script>
 @endsection
