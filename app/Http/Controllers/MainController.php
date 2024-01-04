@@ -2,19 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Leads;
 use App\Models\NewsPost;
 use App\Models\Product;
+use App\Services\Service;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
+    public function __construct(Leads $leads){
+        $this->service = new Service;
+        $this->model = $leads;
+    }
     public function index()
     {
         return view("user.main",["NewsPost"=> NewsPost::orderBy("created_at","desc")->paginate(3),"Products"=>Product::all()]);
     }
 
     public function leads(Request $request){
-        $validator_data = $this->model::getModel()["validator_data"];
+        $validator_data = Leads::getModel()["validator_data"];
 
         $data = $this->service->store($request->validate([
             'id' => 'numeric|nullable',
@@ -23,7 +29,7 @@ class MainController extends Controller
         $id = $data['id'];
         unset($data['id']);
 
-        $Entity = $this->model::updateOrCreate(
+        $Entity = Leads::updateOrCreate(
             [
                 'id' => $id
             ],

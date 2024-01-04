@@ -169,22 +169,22 @@
                 width="100%" height="600" frameborder="0"></iframe>
         </div>
         <div class="row col m-0 p-0">
-            <form action="javascript:void(0)" id="Form" name="Form" method="POST">
+            <form action="javascript:void(0)" id="Form" name="Form" method="POST" class="form-horizontal"  enctype="multipart/form-data">
                 <h3 class="fw-normal fs-4">Оставьте заявку</h4>
                     <h2 class="text-wrap fw-normal fs-5 mb-2">Мы свяжемся с вами в течении нескольких минут</h2>
                     <div class="col-12 justify-content-between align-items-center">
                         <label class="form-label p-0">Имя</label>
                         <input type="text" class="form-control rounded-5 border-danger border-2"
-                            id="name" placeholder="Имя">
+                            id="name" name="name" placeholder="Имя">
                     </div>
                     <div class="col-12 justify-content-between align-items-center">
                         <label class="form-label p-0">Email</label>
                         <input type="email" class="form-control rounded-5 border-danger border-2"
-                            id="exampleFormControlInput1" placeholder="Email">
+                            id="contactInfo" name="contactInfo" placeholder="Email">
                     </div>
                     <div class="col-12 justify-content-between align-items-center">
                         <label for="exampleFormControlTextarea1" class="form-label p-0">Сообщение</label>
-                        <textarea class="form-control rounded-4 border-danger border-2" id="exampleFormControlTextarea1" rows="6"
+                        <textarea class="form-control rounded-4 border-danger border-2" id="message" name="message" rows="6"
                             placeholder="Текст сообщения"></textarea>
                     </div>
                     <div class="col-12 mt-3">
@@ -213,9 +213,7 @@
             $.ajax({
                 method: "post",
                 url: '{{ route('leads') }}',
-                data: {
-                    name:  
-                },
+                data: formData, 
                 cache: false,
                 contentType: false,
                 processData: false,
