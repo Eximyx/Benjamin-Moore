@@ -108,7 +108,7 @@ Route::patch('/qq', [CatalogController::class, 'changeCount'])->name('quantity')
 Route::delete('/delete-cart-product', [CatalogController::class, 'deleteProduct'])->name('delete.cart.product');
 
 
-
+Route::post('/leads',[MainController::class,'leads'])->name('leads');
 
 
 
