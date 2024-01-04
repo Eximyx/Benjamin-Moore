@@ -22,20 +22,20 @@
                 Страницы
             </a>
         </div>
-        <div class=" col-md-3 col-lg-3 col-xxl-2 justify-content-between row align-items-center ">
+        <div class="col-md-3 col-lg-3 col-xxl-2 justify-content-between row align-items-center ">
             <div class=" col-lg-3 col-xl-8 row" style="font-size:12px">
-                <p class="text-nowrap text-secondary m-0">
+                <a class="m-0 nav-link text-nowrap text-secondary m-0" href="tel:+375 (29) 608-40-00">
                     <i class="fa fa-phone text-danger"></i>
                     +375 (29) 608-40-00
-                </p>
-                <p class="text-secondary text-nowrap m-0">
+                </a>
+                <a class="nav-link text-secondary text-nowrap m-0">
                     <i class="fa fa-clock text-danger"></i>
                     ПН — ПТ, 10:00 — 19:00
-                </p>
-                <p class="text-secondary text-nowrap m-0">
+                </a>
+                <a class=" p-0 nav-link text-secondary text-nowrap m-0" href="mailto:benjaminmoore@test.com">
                     <i class="fa fa-envelope text-danger"></i>
                     benjaminmoore@test.com
-                </p>
+                </a>
             </div>
         </div>
     </div>
