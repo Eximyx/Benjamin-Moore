@@ -100,7 +100,8 @@ Route::get('/calculator',function () {
 Route::get('/catalog',[CatalogController::class,'index'])->name('user.catalog');
 Route::get('/news',[NewsController::class,'news_index'])->name('user.news');
 Route::get('/news/{slug}',[NewsController::class,'show'])->name('user.news.show');
-Route::get('/product/{id}',[CatalogController::class,'addProductToCart'])->name('addproduct.to.cart');
+Route::post('/product/{id}',[CatalogController::class,'addProductToCart'])->name('addproduct.to.cart');
+Route::post('/product/{id?}',[CatalogController::class,'changeCount'])->name('change.count');
 Route::get('/cart',[CatalogController::class,'productCart'])->name('cart');
 Route::patch('/update-shopping-cart', [CatalogController::class, 'updateCart'])->name('update.cart');
 Route::patch('/qq', [CatalogController::class, 'changeCount'])->name('quantity');

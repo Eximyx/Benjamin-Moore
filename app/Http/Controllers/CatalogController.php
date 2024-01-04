@@ -9,14 +9,14 @@ class CatalogController extends Controller
 {
     public function index()
     {
-        return view("user.catalog",["Products"=>Product::all()]);
+        return view("user.catalog", ["Products" => Product::all()]);
     }
 
-    public function addProductToCart($id)
+    public function addProductToCart($id = null, $quantity = 0)
     {
         $product = Product::findOrFail($id);
         $cart = session()->get('cart', []);
-        if(isset($cart[$id])) {
+        if (isset($cart[$id])) {
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
@@ -32,18 +32,22 @@ class CatalogController extends Controller
     }
     public function changeCount(Request $request)
     {
-        $cart = session()->get('cart');
-        $cart[$request->id]["quantity"] = $request->quantity;
+        $cart = session()->get('cart',[]);
+        if (isset($cart[$request->id])) {
+            $cart[$request->id]['quantity'] = (int) $request['quantity'];
+        }
         session()->put('cart', $cart);
-        session()->flash('success', 'Book added to cart.');
+        return response()->json(['success'=> true, 's'=>$cart]);
     }
-    public function productCart(){
+    public function productCart()
+    {
         return view('user.cart');
     }
 
     public function updateCart(Request $request)
     {
-        if($request->id && $request->quantity){
+        return response()->json($request);
+        if ($request->id && $request->quantity) {
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
@@ -51,10 +55,11 @@ class CatalogController extends Controller
         }
     }
 
-    public function deleteProduct(Request $request){
-        if($request->id) {
+    public function deleteProduct(Request $request)
+    {
+        if ($request->id) {
             $cart = session()->get('cart');
-            if(isset($cart[$request->id])) {
+            if (isset($cart[$request->id])) {
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
@@ -62,12 +67,6 @@ class CatalogController extends Controller
         }
     }
 
-    // public function cartClear(Request $request){
-    //     if($request->id) {
-    //         $cart = session()->remove('cart');
-    //         session()->put('cart', $cart);
-    //         }
-    //         session()->flash('success', 'Book successfully deleted.');
-    //     }
-    
+
+
 }
