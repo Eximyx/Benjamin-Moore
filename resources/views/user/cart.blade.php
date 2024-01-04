@@ -6,7 +6,7 @@
             <th>Product</th>
             <th>Price</th>
             <th>Total</th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -25,9 +25,9 @@
                     </td>
                     <td data-th="Price">${{ $details['price'] }}</td>
                     
-                    <td data-th="Subtotal" class="text-center"></td>
+                    <td rowID="{{$details['quantity']}}" data-th="Total" class="text-center"><input id="quantity" type="number" min="1" value="{{$details['quantity'] }}"></td>
                     <td class="actions">
-                        <a class="btn btn-outline-danger btn-sm delete-product"><i class="fa fa-trash-o"></i></a>
+                            <a id="delete-product" class="mx-3 btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
             @endforeach
@@ -36,8 +36,8 @@
     <tfoot>
         <tr>
             <td colspan="5" class="text-right">
-                <a href="{{ url('/home') }}" class="btn btn-primary"><i class="fa fa-angle-left"></i> Continue Shopping</a>
-                <button class="btn btn-danger">Checkout</button>
+                <a href="{{ route('user.catalog') }}" class="btn btn-primary"><i class="fa fa-angle-left"></i>  Вернуться к каталогу</a>
+                {{-- <button id="deleteCart" class="btn btn-danger">Очистить корзину</button> --}}
             </td>
         </tr>
     </tfoot>
@@ -45,42 +45,79 @@
 @endsection
 
 @section('scripts')
-{{-- <script type="text/javascript">
-    // $(".edit-cart-info").change(function (e) {
+<script type="text/javascript">
+    
+    $("#delete-product").click(function (e) {
+        e.preventDefault();
+        var ele = $(this);
+        if(confirm("Do you really want to delete?")) {
+            $.ajax({
+                url: '{{ route('delete.cart.product') }}',
+                method: "DELETE",
+                data: {
+                    _token: '{{ csrf_token() }}', 
+                    id: ele.parents("tr").attr("rowId")
+                },
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+        }
+    });
+
+    $("#quantity").click(function (e) {
+        e.preventDefault();
+        var ele = $(this);
+            {
+            $.ajax({
+                url: '{{ route('quantity') }}',
+                method: "patch",
+                data: {
+                    _token: '{{ csrf_token() }}', 
+                    id: ele.parents("tr").attr("rowId")
+                    quantity: ele.parents("td").attr("rowId")
+                },
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+            }
+    });
+    {{--
+    // $("#deleteCart").click(function (e) {
     //     e.preventDefault();
     //     var ele = $(this);
-    //     $.ajax({
-    //         url: '{{ route('update.sopping.cart') }}',
-    //         method: "patch",
-    //         data: {
-    //             _token: '{{ csrf_token() }}', 
-    //             id: ele.parents("tr").attr("rowId"), 
-    //         },
-    //         success: function (response) {
-    //             window.location.reload();
-    //         }
-    //     });
-    // });
-
-    // $(".delete-product").click(function (e) {
-    //     e.preventDefault();
-
-    //     var ele = $(this);
-
-    //     if(confirm("Do you really want to delete?")) {
+    //     if(confirm("Do you really want to clear the cart?")) {
     //         $.ajax({
-    //             url: '{{ route('delete.cart.product') }}',
+    //             url: '{{ route('clear') }}',
     //             method: "DELETE",
     //             data: {
     //                 _token: '{{ csrf_token() }}', 
-    //                 id: ele.parents("tr").attr("rowId")
+    //                 id: {{session()->get('cart')->id}}
     //             },
     //             success: function (response) {
     //                 window.location.reload();
     //             }
     //         });
     //     }
+    // });--}}
+
+    $("#edit-cart-info").change(function (e) {  
+        e.preventDefault();
+        var ele = $(this);
+        $.ajax({
+            url: '{{ route('update.cart') }}',
+            method: "patch",
+            data: {
+                _token: '{{ csrf_token() }}', 
+                id: ele.parents("tr").attr("rowId"), 
+            },
+            success: function (response) {
+                window.location.reload();
+            }
+        });
     });
 
-</script> --}}
+
+</script>
 @endsection

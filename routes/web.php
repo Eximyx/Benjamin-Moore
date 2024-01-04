@@ -97,8 +97,12 @@ Route::get('/home',[MainController::class,'index'])->name('main');
 Route::get('/catalog',[CatalogController::class,'index'])->name('user.catalog');
 Route::get('/news',[NewsController::class,'news_index'])->name('user.news');
 Route::get('/news/{slug}',[NewsController::class,'show'])->name('user.news.show');
-Route::get('/book/{id}',[CatalogController::class,'addProductToCart'])->name('addproduct.to.cart');
+Route::get('/product/{id}',[CatalogController::class,'addProductToCart'])->name('addproduct.to.cart');
 Route::get('/cart',[CatalogController::class,'productCart'])->name('cart');
+Route::patch('/update-shopping-cart', [CatalogController::class, 'updateCart'])->name('update.cart');
+Route::patch('/qq', [CatalogController::class, 'changeCount'])->name('quantity');
+Route::delete('/delete-cart-product', [CatalogController::class, 'deleteProduct'])->name('delete.cart.product');
+
 
 
 
