@@ -35,7 +35,7 @@ class CatalogController extends Controller
         $cart = session()->get('cart');
         $cart[$request->id]["quantity"] = $request->quantity;
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', '');
+        session()->flash('success', 'Book added to cart.');
     }
     public function productCart(){
         return view('user.cart');

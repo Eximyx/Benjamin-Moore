@@ -25,7 +25,7 @@
                     </td>
                     <td data-th="Price">${{ $details['price'] }}</td>
                     
-                    <td rowID="{{$details['quantity']}}" data-th="Total" class="text-center"><input id="quantity" type="number" min="1" value="{{$details['quantity'] }}"></td>
+                    <td data-th="Total" class="text-center number"><input id="quantity" type="number" min="1" value="{{$details['quantity'] }}"></td>
                     <td class="actions">
                             <a id="delete-product" class="mx-3 btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></a>
                     </td>
@@ -48,6 +48,7 @@
 <script type="text/javascript">
     
     $("#delete-product").click(function (e) {
+        console.log("dsdsdsd");
         e.preventDefault();
         var ele = $(this);
         if(confirm("Do you really want to delete?")) {
@@ -66,6 +67,7 @@
     });
 
     $("#quantity").click(function (e) {
+        console.log("dsdsdsd");
         e.preventDefault();
         var ele = $(this);
             {
@@ -74,8 +76,8 @@
                 method: "patch",
                 data: {
                     _token: '{{ csrf_token() }}', 
-                    id: ele.parents("tr").attr("rowId")
-                    quantity: ele.parents("td").attr("rowId")
+                    id: ele.parents("tr").attr("rowId"),
+                    quantity: ele.parents("input").attr("value")
                 },
                 success: function (response) {
                     window.location.reload();
@@ -83,24 +85,6 @@
             });
             }
     });
-    {{--
-    // $("#deleteCart").click(function (e) {
-    //     e.preventDefault();
-    //     var ele = $(this);
-    //     if(confirm("Do you really want to clear the cart?")) {
-    //         $.ajax({
-    //             url: '{{ route('clear') }}',
-    //             method: "DELETE",
-    //             data: {
-    //                 _token: '{{ csrf_token() }}', 
-    //                 id: {{session()->get('cart')->id}}
-    //             },
-    //             success: function (response) {
-    //                 window.location.reload();
-    //             }
-    //         });
-    //     }
-    // });--}}
 
     $("#edit-cart-info").change(function (e) {  
         e.preventDefault();
@@ -118,6 +102,8 @@
         });
     });
 
-
+    $('.number').on('input', function() {
+            $(this).val($(this).val().replace(/[A-Za-zА-Яа-яЁё.,]/, ''))
+        });
 </script>
 @endsection
