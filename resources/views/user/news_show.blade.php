@@ -35,6 +35,9 @@
                     <p class="text-wrap truncate">{{ $item->content }}</p>
                 </div>
             @endforeach
+            <div class="row justify-content-center">
+                <a class="w-auto btn btn-outline-danger" href="{{route('user.news')}}">Все новости</a>
+            </div>
         </div>
     </div>
 @endsection

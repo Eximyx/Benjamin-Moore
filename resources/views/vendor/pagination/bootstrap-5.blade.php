@@ -34,7 +34,7 @@
                     <span class="fw-semibold">{{ $paginator->lastItem() }}</span>
                     {!! __('из') !!}
                     <span class="fw-semibold">{{ $paginator->total() }}</span>
-                    {!! __('results') !!}
+                    {!! __('') !!}
                 </p>
             </div>
 

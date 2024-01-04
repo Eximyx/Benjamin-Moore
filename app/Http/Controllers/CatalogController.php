@@ -9,7 +9,9 @@ class CatalogController extends Controller
 {
     public function index()
     {
-        return view("user.catalog", ["Products" => Product::all()]);
+        $products = Product::orderBy("created_at","desc")->paginate(12);
+
+        return view("user.catalog", ["Products" => $products]);
     }
 
     public function addProductToCart($id = null, $quantity = 0)

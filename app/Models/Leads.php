@@ -24,9 +24,9 @@ class Leads extends Model
                 'message' => 'Сообщение',
             ],
             'validator_data' => [
-                'name' => 'string|reuired', 
-                'contactInfo' => 'string|reuired',
-                'message' => 'string|reuired',
+                'name' => 'string|required', 
+                'contactInfo' => 'string|required',
+                'message' => 'string|required',
             ]
         ];
     }

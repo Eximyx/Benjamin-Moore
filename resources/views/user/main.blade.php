@@ -19,51 +19,62 @@
                 </p>
             </div>
             <div class="row col-sm-12 justify-content-between align-items-center m-2 p-0">
-                <div class="col-5 col-sm-3 col-md-2 btn btn-danger rounded-4 my-1">Купить</div>
-                <div class="col-5 col-sm-3 col-md-2 btn btn-secondary text-nowrap rounded-4 m-0">
+                <a class="col-5 col-sm-3 col-md-2 btn btn-danger rounded-4 my-1"
+                    href="{{ route('user.catalog') }}">Купить</a>
+                {{-- <div class="col-5 col-sm-3 col-md-2 btn btn-secondary text-nowrap rounded-4 m-0">
                     Все цвета</div>
-                <div class="col-5 col-sm-4 col-md-6 clearfix m-0 p-0"> </div>
+                <div class="col-5 col-sm-4 col-md-6 clearfix m-0 p-0"> </div> --}}
             </div>
         </div>
     </div>
     <div class="row justify-content-between m-0 p-0 my-4 py-2">
-        <div class="row">
-            <h4 class="fw-normal">Предлагаем</h1>
-                <h2 class="text-danger text-nowrap fw-medium">НАШУ ПРОДУКЦИЮ</h1>
+        <div class="row justify-content-between ">
+            <div class="col">
+                <h4 class="fw-normal">Предлагаем</h4>
+                <h2 class="text-danger text-nowrap fw-medium">НАШУ ПРОДУКЦИЮ</h2>
+            </div>
+            <div class="col-1 float-end justify-content-end align-items-end my-auto">
+                <a class="btn btn-outline-danger mx-auto w-auto text-nowrap" href="{{ route('user.catalog') }}">Все
+                    продукты</a>
+            </div>
         </div>
-        <div class="swiper">
+        <div class="swiper" style="max-height:fit-content">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 <!-- Slides -->
-                <div class=" swiper-slide">
-                    <!-- <div id="products" class="row justify-content-between m-0 p-0 my-4 py-2"> -->
-                    <div id="products" class="products row justify-content-between m-0 p-0 mt-4 px-0 px-md-5">
-                        <div id="product-id"
-                            class="product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2">
-                            <div class="row border-2 border rounded-4 align-items-center align-self-center m-0 p-0">
-                                <img src="{{ url('storage/assets/краска.png') }}"
-                                    class="img-fluid rounded-4 align-self-center" alt="">
-                                <div class="text-center fs-5 p-0 m-0">
-                                    <p class="m-0 py-0">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</p>
-                                </div>
-                                <div class="text-center fw-light fs-6 p-0 m-0">
-                                    <p class="m-0 py-2">Степень блеска «полуглянцевая»</p>
-                                </div>
-                                <div class="row justify-content-between align-items-center m-0 py-1">
-                                    <div
-                                        class="col-5 col-sm-5 col-md-5 col-lg-3 justify-content-center align-items-end p-0 m-0">
-                                        <p class="text-center text-nowrap p-0 m-0 fs-5">$ 5199</p>
+                {{-- $foreac --}}
+                @foreach ($Products as $arrProduct)
+                    <div class=" swiper-slide">
+                        <div id="products" class="products row justify-content-between m-0 p-0 mt-4 px-0 px-md-5">
+                            @foreach ($arrProduct as $product)
+                                <div id="{{ $product }}"
+                                    class="{{ $product->id % 4 == 0 ? 'd-none d-lg-block' : '' }} product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2">
+                                    <div class="row border-2 border rounded-4 align-items-center align-self-center m-0 p-0">
+                                        <img src="{{ url('storage/image/' . $product->main_image) }}"
+                                            class="img-fluid rounded-4 align-self-center m-0 p-0" alt="">
+                                        <div class="text-center fs-5 p-0 m-0">
+                                            <p class="m-0 py-0">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</p>
+                                        </div>
+                                        <div class="text-center fw-light fs-6 p-0 m-0">
+                                            <p class="m-0 py-2">Степень блеска «полуглянцевая»</p>
+                                        </div>
+                                        <div class="row justify-content-between align-items-center m-0 py-1">
+                                            <div
+                                                class="col-5 col-sm-5 col-md-5 col-lg-3 justify-content-center align-items-end p-0 m-0">
+                                                <p class="text-center text-nowrap p-0 m-0 fs-5">$ 5199</p>
+                                            </div>
+                                            <div class="col-5 col-sm-5 col-md-6 col-lg-6 align-items-center m-0 p-0">
+                                                <a class="btn btn-danger text-center p-0 m-0 w-100 h-25 py-1 rounded-4 fs-5"
+                                                    href="{{ route('user.catalog') }}">Заказать</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-5 col-sm-5 col-md-6 col-lg-6 align-items-center m-0 p-0">
-                                        <a
-                                            class="btn btn-danger text-center p-0 m-0 w-100 h-25 py-1 rounded-4 fs-5" href="{{route('user.catalog')}}">Заказать</a>
-                                    </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
-                </div>
-                <div class="swiper-slide">Slide 2</div>
+                @endforeach
+
                 <!-- <div class="swiper-slide">Slide 3</div> -->
             </div>
             <!-- If we need pagination -->
@@ -76,9 +87,7 @@
             <!-- If we need scrollbar -->
             <!-- <div class="swiper-scrollbar"></div> -->
         </div>
-        <div class="row">
-            <a class="btn btn-outline-danger mx-auto w-auto text-nowrap" href="{{route('user.catalog')}}">Показать больше</a>
-        </div>
+
     </div>
     <div id="about us" class="row justify-content-between m-0 p-0 mt-5 py-2">
         <div class="row col-12 col-lg-7 m-0 p-0">
@@ -98,7 +107,8 @@
                     функционально разнесены на независимые элементы.
                 </p>
                 <div class="col-6 mb-2">
-                    <a class="btn btn-outline-danger text-center rounded-4 p-1 fs-4" href={{route('user.news')}}>Подробнее</a>
+                    <a class="btn btn-outline-danger text-center rounded-4 p-1 fs-4"
+                        href={{ route('user.news') }}>Подробнее</a>
                 </div>
             </div>
         </div>
@@ -137,10 +147,17 @@
         </div>
     </div>
     <div id="news" class="row justify-content-between m-0 p-0 border-bottom border-2 border-opacity-25 mt-5">
-        <div class="col-sm-12 m-0 p-0 row">
-            <h4 class="fw-normal">Новости</h4>
-            <h2 class="text-danger text-nowrap fw-medium mb-2">ПОСЛЕДНИЕ НОВОСТИ</h2>
+        <div class="row justify-content-between ">
+            <div class="col">
+                <h4 class="fw-normal">Новости</h4>
+                <h2 class="text-danger text-nowrap fw-medium">ПОСЛЕДНИЕ НОВОСТИ</h2>
+            </div>
+            <div class="col-1 float-end justify-content-end align-items-end my-auto">
+                <a class="btn btn-outline-danger mx-auto w-auto text-nowrap" href="{{ route('user.news') }}">Все
+                    новости</a>
+            </div>
         </div>
+
         @foreach ($NewsPost as $item)
             <div id="news-{{ $item->id }}" class="col-sm-12 col-md-4 justify-content-between align-items-end">
                 <img class="img-fluid w-100" srcset="{{ url('storage/image') }}/{{ $item->main_image }}">
@@ -150,7 +167,7 @@
                         {{ $item->created_at }}
                     </p>
                     <p class="text-truncate col-6 opacity-75 m-0 my-2 text-center">
-                        <a class="link-secondary" href="{{route('user.news.show',$item->slug)}}">Подробнее</a>
+                        <a class="link-secondary" href="{{ route('user.news.show', $item->slug) }}">Подробнее</a>
                     </p>
                 </div>
                 <h4 class="col text-wrap truncate">{{ $item->title }}</h4>
@@ -169,43 +186,46 @@
                 width="100%" height="600" frameborder="0"></iframe>
         </div>
         <div class="row col m-0 p-0">
-            <form action="javascript:void(0)" id="Form" name="Form" method="POST" class="form-horizontal"  enctype="multipart/form-data">
-                <h3 class="fw-normal fs-4">Оставьте заявку</h4>
-                    <h2 class="text-wrap fw-normal fs-5 mb-2">Мы свяжемся с вами в течении нескольких минут</h2>
-                    <div class="col-12 justify-content-between align-items-center">
-                        <label class="form-label p-0">Имя</label>
-                        <input type="text" class="form-control rounded-5 border-danger border-2"
-                            id="name" name="name" placeholder="Имя">
-                    </div>
-                    <div class="col-12 justify-content-between align-items-center">
-                        <label class="form-label p-0">Email</label>
-                        <input type="email" class="form-control rounded-5 border-danger border-2"
-                            id="contactInfo" name="contactInfo" placeholder="Email">
-                    </div>
-                    <div class="col-12 justify-content-between align-items-center">
-                        <label for="exampleFormControlTextarea1" class="form-label p-0">Сообщение</label>
-                        <textarea class="form-control rounded-4 border-danger border-2" id="message" name="message" rows="6"
-                            placeholder="Текст сообщения"></textarea>
-                    </div>
-                    <div class="col-12 mt-3">
-                        <button type="submit" class="w-auto px-5 btn btn-danger text-center rounded-4 fs-4">Заказать</button>
-                    </div>
+            <form action="javascript:void(0)" id="Form" name="Form" method="POST" class="form-horizontal"
+                enctype="multipart/form-data">
+                <h3 class="fw-normal fs-4">Оставьте заявку</h3>
+                <h2 class="text-wrap fw-normal fs-5 mb-2">Мы свяжемся с вами в течении нескольких минут</h2>
+                <input type="hidden" name="id" id="id">
+
+                <div class="col-12 justify-content-between align-items-center">
+                    <label class="form-label p-0">Имя</label>
+                    <input type="text" class="form-control rounded-5 border-danger border-2" id="name"
+                        name="name" placeholder="Имя">
+                </div>
+                <div class="col-12 justify-content-between align-items-center">
+                    <label class="form-label p-0">Email</label>
+                    <input type="email" class="form-control rounded-5 border-danger border-2" id="contactInfo"
+                        name="contactInfo" placeholder="Email">
+                </div>
+                <div class="col-12 justify-content-between align-items-center">
+                    <label for="exampleFormControlTextarea1" class="form-label p-0">Сообщение</label>
+                    <textarea class="form-control rounded-4 border-danger border-2" id="message" name="message" rows="6"
+                        placeholder="Текст сообщения"></textarea>
+                </div>
+                <div class="col-12 mt-3">
+                    <button type="submit" class="w-auto px-5 btn btn-danger text-center rounded-4 fs-4">Заказать</button>
+                </div>
             </form>
         </div>
     </div>
 @endsection
 
 @section('scripts')
-<script>
-    $(document).ready(function() {
+    <script>
+        $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
         });
-    $('#Form').submit(function(e) {
-            
+        $('#Form').submit(function(e) {
+
             e.preventDefault();
 
             var formData = new FormData(this);
@@ -213,7 +233,7 @@
             $.ajax({
                 method: "post",
                 url: '{{ route('leads') }}',
-                data: formData, 
+                data: formData,
                 cache: false,
                 contentType: false,
                 processData: false,
@@ -225,9 +245,31 @@
                     $("#btn-save").attr("disabled", false);
                 },
                 error: function(data) {
+                    // #('')
                     console.log(data);
                 }
             });
         });
-</script>
+        const swiper = new Swiper('.swiper', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+
+            // If we need pagination
+            // pagination: {
+            //     el: '.swiper-pagination',
+            // },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // // And if we need scrollbar
+            // scrollbar: {
+            //     el: '.swiper-scrollbar',
+            // },
+        });
+    </script>
 @endsection
