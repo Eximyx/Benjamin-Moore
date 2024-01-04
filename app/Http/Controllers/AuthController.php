@@ -76,8 +76,14 @@ class AuthController extends Controller
 
     public function profile(Request $request)
     {
-        $roles = User::getRoles();
-        return view('admin/profile',compact('roles'));
+        // $roles = User::getRoles();
+        return view('admin/profile');
+
+    }
+    public function profileUSer(Request $request)
+    {
+        // $roles = User::getRoles();
+        return view('user/profile');
 
     }
 

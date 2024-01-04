@@ -110,6 +110,8 @@ Route::delete('/delete-cart-product', [CatalogController::class, 'deleteProduct'
 
 Route::post('/leads',[MainController::class,'leads'])->name('leads');
 
+Route::get('/profile',[AuthController::class,'profileUser'])->name('prof');
+
 
 
 
