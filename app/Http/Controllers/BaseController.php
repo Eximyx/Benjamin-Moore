@@ -41,7 +41,7 @@ abstract class BaseController extends Controller
         }
         $variables = ['data', 'datatable_columns'];
         if (isset($data['selectable'])) {
-            $variables[''] = 'selectable';
+            $variables[''] = 'selectable';  
         }
         return view('layouts.datatable', compact([...$variables]));
     }

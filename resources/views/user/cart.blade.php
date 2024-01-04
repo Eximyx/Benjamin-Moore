@@ -80,12 +80,12 @@
             var quantity = ele.parents().children('input#quantity');
             var value = parseInt(quantity.val()) + 1;
             quantity.val(value)
-        }) 
+        })
         $('#product-minus').click(function(e) {
             e.preventDefault();
             var ele = $(this);
             var quantity = ele.parents().children('input#quantity');
-            var value = parseInt(quantity.val())- 1;
+            var value = parseInt(quantity.val()) - 1;
             quantity.val(value)
         })
 
