@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\LeadsController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route
 ;
@@ -67,6 +68,12 @@ Route::middleware('admin')->group(function () {
                 Route::post('edit', [CategoryController::class, 'edit']);
                 Route::post('delete', [CategoryController::class, 'destroy']);
             });
+            Route::prefix('leads')->group(function () {
+                Route::get('/', [LeadsController::class, 'index'])->name('leads.index');
+                Route::post('store', [LeadsController::class, 'store']);
+                Route::post('edit', [LeadsController::class, 'edit']);
+                Route::post('delete', [LeadsController::class, 'destroy']);
+            });
             Route::prefix('product_category')->group(function () {
                 Route::get('/', [ProductCategoryController::class, 'index'])->name('product_category.index');
                 Route::post('store', [ProductCategoryController::class, 'store']);
@@ -83,7 +90,7 @@ Route::middleware('admin')->group(function () {
                 Route::post('toggle', [AdminController::class, 'toggle']);
 
             });
-       
+
             Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
             Route::post('/profile_set', [AuthController::class, 'profile_set']);
 
@@ -93,24 +100,24 @@ Route::middleware('admin')->group(function () {
 
 // Route::get('/home', [ProductsController::class,'shop'])->name('welcome');
 ///sa
-Route::get('/home',[MainController::class,'index'])->name('main');
-Route::get('/calculator',function () {
+Route::get('/home', [MainController::class, 'index'])->name('main.index');
+Route::get('/calculator', function () {
     return view('user.calculator');
 })->name('calc');
-Route::get('/catalog',[CatalogController::class,'index'])->name('user.catalog');
-Route::get('/news',[NewsController::class,'news_index'])->name('user.news');
-Route::get('/news/{slug}',[NewsController::class,'show'])->name('user.news.show');
-Route::post('/product/{id}',[CatalogController::class,'addProductToCart'])->name('addproduct.to.cart');
-Route::post('/product/{id?}',[CatalogController::class,'changeCount'])->name('change.count');
-Route::get('/cart',[CatalogController::class,'productCart'])->name('cart');
+Route::get('/catalog', [CatalogController::class, 'index'])->name('user.catalog');
+Route::get('/news', [NewsController::class, 'news_index'])->name('user.news');
+Route::get('/news/{slug}', [NewsController::class, 'show'])->name('user.news.show');
+Route::get('/product/{id}', [CatalogController::class, 'addProductToCart'])->name('addproduct.to.cart');
+Route::post('/product/{id?}', [CatalogController::class, 'changeCount'])->name('change.count');
+Route::get('/cart', [CatalogController::class, 'productCart'])->name('cart');
 Route::patch('/update-shopping-cart', [CatalogController::class, 'updateCart'])->name('update.cart');
 Route::patch('/qq', [CatalogController::class, 'changeCount'])->name('quantity');
 Route::delete('/delete-cart-product', [CatalogController::class, 'deleteProduct'])->name('delete.cart.product');
 
 
-Route::post('/leads',[MainController::class,'leads'])->name('leads');
+Route::post('/leads', [MainController::class, 'leads'])->name('leads');
 
-Route::get('/profile',[AuthController::class,'profileUser'])->name('prof');
+Route::get('/profile', [AuthController::class, 'profileUser'])->name('prof');
 
 
 

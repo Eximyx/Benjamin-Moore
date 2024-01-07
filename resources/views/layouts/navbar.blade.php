@@ -6,16 +6,14 @@
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
-
         <div class="topbar-divider d-none d-sm-block"></div>
-
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                     {{-- <b id='profile'></b> --}}
-                    <b id='profile' class="m-0 p-0">{{ auth()->user()->name}}</b>
+                    <b id='profile' class="m-0 p-0">{{ auth()->user()->name }}</b>
                     <br>
                     <small>{{ Auth()->user()->user_role_id == 3 ? 'root' : 'admin' }}</small>
                 </span>

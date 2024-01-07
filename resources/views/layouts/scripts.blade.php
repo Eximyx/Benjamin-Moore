@@ -18,12 +18,9 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
 crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
-<script src="{{ asset('admin_assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-<link href="{{ asset('admin_assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
-<script src="{{ asset('admin_assets/js/sb-admin-2.min.js') }}"></script>
+
+
 <link href="https://cdn.datatables.net/v/bs5/dt-1.13.8/r-2.5.0/sl-1.7.0/datatables.min.css" rel="stylesheet">
-<script src="{{ asset('admin_assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="https://cdn.datatables.net/v/bs5/dt-1.13.8/r-2.5.0/sl-1.7.0/datatables.min.js"></script>
 <link
 href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -32,3 +29,8 @@ rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{{ asset('admin_assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- Core plugin JavaScript-->
+<script src="{{ asset('admin_assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+<!-- Custom scripts for all pages-->
+<script src="{{ asset('admin_assets/js/sb-admin-2.min.js') }}"></script>

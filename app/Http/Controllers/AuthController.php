@@ -40,7 +40,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('welcome', );
+        return redirect()->route('main.index');
     }
 
     public function login()

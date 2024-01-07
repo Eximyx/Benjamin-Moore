@@ -26,7 +26,7 @@
                         <td data-th="Price">${{ $details['price'] }}</td>
 
                         <td data-th="Total" class="text-center">
-                            <div class="border rounded-4 boder-2 border-black-50 m-0 p-0">
+                            <div class="border rounded-4 boder-2 border-black-50 m-0 p-0" style="min-width: 100px">
                                 <input type="button" id="product-minus" value="-" class="p-0 m-0 border-0"><input
                                     id="quantity" type="text" min="1"
                                     class="p-0 m-0 number w-auto border-0 text-center quantity" size="1"
@@ -34,7 +34,7 @@
                                     value="+" class="border-0 p-0 m-0">
                             </div>
                         </td>
-                        <td class="actions">
+                        <td class="actions" style="min-width:100px">
                             <a id="delete-product" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></a>
                             <a id="save-product" class="mx-2 btn btn-outline-success btn-sm"> <i
                                     class="fa fa-check"></i></a>

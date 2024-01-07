@@ -1,9 +1,9 @@
 @extends('user.layout')
 @section('contents')
     {{-- //TODO back вы знаете площадь окрашивания --}}
-    <div class="" style="padding-bottom:100px">
+    <div class="" style="padding-bottom:7vh">
 
-        <div class="row justify-content-between h-100 pb-5">
+        <div class="row justify-content-between h-100 pb-1">
             <div class="pb-5">
                 <h2 class="col-sm-12">Калькулятор расхода краски</h2>
                 <h4 class="col-sm-12">Не переплачивайте за краску, расчитайте её точно</h4>
@@ -55,14 +55,14 @@
                 </div>
 
             </div>
-            <div class="col col-md-4 col-lg-8 align-items-center justify-content-between p-0 row py-4">
+            <div class="col col-md-4 col-lg-8 align-items-center justify-content-between row ">
                 <div class="col-sm-12 border border-2 rounded-4 border-black-75 w-auto mx-auto py-4">
                     <h4 class="text-center p-4">Окрашиваемая площадь</h4>
                     <p id="area" class="text-center"><span
                             class="square text-nowrap text-danger fs-3 fw-bold py-4 ">0</span><br> квадратных
                         метров</p>
                 </div>
-                <div class="col-sm-12 border border-2 rounded-4 border-black-75 w-auto my-2 py-4 mx-auto ">
+                <div class="col-sm-12 border border-2 rounded-4 border-black-75 w-auto my-2 py-2 mx-auto ">
                     <h4 class="text text-center py-4">Рекомендуемый объём краски</h4>
                     <div class="row justify-content-center">
                         <p class="col-6 text-center"><span class="gallon text-nowrap text-danger fs-3 fw-bold">0</span><br>
