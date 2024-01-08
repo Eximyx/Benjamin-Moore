@@ -18,11 +18,16 @@ class MainController extends Controller
     public function index()
     {
         $Products = Product::all();
+        $count = count($Products);
+        $j = 0;
         $List = [];
-        for ( $i = 0; $i < 5; $i++ ) {
-            $List[$i] = [];
-            for ($j = 0; $j < 4; $j++ ) {  
-                $List[$i][] = $Products[$i*4+$j];
+        for ( $i = 0; $i < $count; $i++ ) {
+            if ($i % 4 == 0 & $i !== 0) {
+                $j++;
+                $List[$j][] = $Products[$i];
+            }
+            else {
+                $List[$j][] = $Products[$i];
             }
         }
         return view("user.main", ["NewsPost" => NewsPost::orderBy("created_at", "desc")->paginate(3), "Products" => $List]);

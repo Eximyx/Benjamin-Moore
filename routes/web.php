@@ -104,6 +104,9 @@ Route::get('/home', [MainController::class, 'index'])->name('main.index');
 Route::get('/calculator', function () {
     return view('user.calculator');
 })->name('calc');
+Route::get('/contacts', function () {
+    return view('user.contacts');
+})->name('contacts');
 Route::get('/catalog', [CatalogController::class, 'index'])->name('user.catalog');
 Route::get('/news', [NewsController::class, 'news_index'])->name('user.news');
 Route::get('/news/{slug}', [NewsController::class, 'show'])->name('user.news.show');

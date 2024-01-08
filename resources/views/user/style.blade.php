@@ -48,4 +48,25 @@
         opacity: 1;
         color: red;
     }
+
+    /* Sidebar styles */
+    .offcanvas-body > a {
+        font-size: 20px;
+        margin-top: 20px;
+        border-bottom:solid 1px rgba(0,0,0,.2);
+
+    }
+    .fs-7 { 
+        font-size:12px;
+    }
+    .fs-8 { 
+        font-size:10px;
+    }
+    .active-square { 
+        color:red;
+    }
+
+    .form-control {
+        background-color:rgba(0,0,0,0);
+    }
 </style>

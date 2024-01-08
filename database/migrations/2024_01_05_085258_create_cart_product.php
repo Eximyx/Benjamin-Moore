@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create("cart_product", function (Blueprint $table) {
             $table->id();
-                
-
-        };
+        });
     }
 
     /**

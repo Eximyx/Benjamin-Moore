@@ -45,18 +45,19 @@
                 {{-- $foreac --}}
                 @foreach ($Products as $arrProduct)
                     <div class=" swiper-slide">
-                        <div id="products" class="products row justify-content-between m-0 p-0 mt-4 px-0 px-md-5">
+                        <div id="products" class="products row justify-content-start m-0 p-0 mt-4 px-0 px-md-5">
                             @foreach ($arrProduct as $product)
-                                <div id="{{ $product }}"
-                                    class="{{ $product->id % 4 == 0 ? 'd-none d-lg-block' : '' }} product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2">
-                                    <div class="row border-2 border rounded-4 align-items-center align-self-center m-0 p-0">
-                                        <img src="{{ url('storage/image/' . $product->main_image) }}"
-                                            class="img-fluid rounded-4 align-self-center m-0 p-0" alt="">
+                                <div id="{{ $product->id }}"
+                                    class="{{ $product->id % 4 == 0 ? 'd-none d-lg-block' : '' }} h-auto product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2">
+                                    <div class="row border-2 border rounded-4 align-items-center m-0 p-0 h-100">
+                                        <img src="{{ url('storage/image/' . 'краска.webp') }}"
+                                            class=" rounded-4 align-self-center m-0 p-0" alt=""
+                                            style="size:cover;positon:center">
                                         <div class="text-center fs-5 p-0 m-0">
-                                            <p class="m-0 py-0">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</p>
+                                            <p class="m-0 p-0">{{ $product->title }}</p>
                                         </div>
                                         <div class="text-center fw-light fs-6 p-0 m-0">
-                                            <p class="m-0 py-2">Степень блеска «полуглянцевая»</p>
+                                            <p class="m-0 p-0">{{ $product->gloss_level }}</p>
                                         </div>
                                         <div class="row justify-content-between align-items-center m-0 py-1">
                                             <div
@@ -175,27 +176,22 @@
             </div>
         @endforeach
     </div>
-    <div id="location" class="row m-0 p-0 mt-5">
-        <div class="col-sm-12 m-0 p-0 row">
-            <h4 class="fw-normal">Наш адрес</h4>
-            <h2 class="text-danger text-nowrap fw-medium mb-2">ГДЕ МЫ НАХОДИМСЯ</h2>
+    <div id="leads" class="row m-0 p-0 mt-5">
+        <div class="col-sm-12 col-md-12 col-lg-8 m-0 p-0">
+            <iframe class="rounded-left-4 mb-3 m-0 p-0 w-100 h-100"
+                src="https://yandex.ru/map-widget/v1/?um=constructor%3Ab4b0cc562e37a8f254c72d9ee28e7f7d677f827665373280c0df05bc6f3a013a&amp;source=constructor" frameborder="0"></iframe>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-8">
-            <iframe class="rounded-4 mb-3"
-                src="https://yandex.ru/map-widget/v1/?um=constructor%3Ab4b0cc562e37a8f254c72d9ee28e7f7d677f827665373280c0df05bc6f3a013a&amp;source=constructor"
-                width="100%" height="600" frameborder="0"></iframe>
-        </div>
-        <div class="row col m-0 p-0">
+        <div class="row col m-0 p-4" style="background-color:#F5E9DD">
             <form action="javascript:void(0)" id="Form" name="Form" method="POST" class="form-horizontal"
                 enctype="multipart/form-data">
-                <h3 class="fw-normal fs-4">Оставьте заявку</h3>
-                <h2 class="text-wrap fw-normal fs-5 mb-2">Мы свяжемся с вами в течении нескольких минут</h2>
+                <h3 class="fw-normal fs-3">Оставьте заявку</h3>
+                <h2 class="text-wrap fw-normal fs-5 mb-2">Мы свяжемся с вами в течении 5 минут</h2>
                 <input type="hidden" name="id" id="id">
 
                 <div class="col-12 justify-content-between align-items-center">
                     <label class="form-label p-0">Имя</label>
                     <input type="text" class="form-control rounded-5 border-danger border-2" id="name"
-                        name="name" placeholder="Имя">
+                        name="name" placeholder="Имя" >
                 </div>
                 <div class="col-12 justify-content-between align-items-center">
                     <label class="form-label p-0">Email</label>

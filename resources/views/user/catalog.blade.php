@@ -5,9 +5,51 @@
             <h4 class="fw-normal">Предлагаем</h1>
                 <h2 class="text-danger text-nowrap fw-medium">НАШУ ПРОДУКЦИЮ</h1>
         </div>
+        <form action="" enctype="">
+
+        </form>
+        <div id="form" class="col-3">
+            <form action="javascript:void(0)" id="Form" name="Form" class="form-horizontal" method="POST"
+                enctype="multipart/form-data">
+                <label for="category_id" class="form-label p-0 fw-normal">Серия</label>
+                <select id="category_id" name="category_id" class="form-select rounded-5 border-danger border-2"
+                    aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <label for="category_id" class="form-label p-0">Работы</label>
+                <select id="category_id" name="category_id" class="form-select rounded-5 border-danger border-2"
+                    aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <label for="category_id" class="form-label p-0">Тип</label>
+                <select id="category_id" name="category_id" class="form-select rounded-5 border-danger border-2"
+                    aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <label for="category_id" class="form-label p-0">Цвета</label>
+                <select id="category_id" name="category_id" class="form-select rounded-5 border-danger border-2"
+                    aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </form>
+        </div>
+        <div class="clearfix col-12"></div>
         @foreach ($Products as $product)
-            <div id="product-id" class="product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2">
-                <div class="row border-2 border rounded-4 align-items-center align-self-center m-0 p-0">
+            <div id="product-id"
+                class="product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2 h-auto ">
+                <div class="row border-2 border rounded-4 align-items-center align-self-center m-0 p-0 h-100">
                     <img src="storage/image/{{ $product->main_image }}"
                         class="m-0 p-0 w-100 img-fluid rounded-4 align-self-center" alt="">
                     <div class="text-center fs-5 p-0 m-0">
@@ -33,8 +75,4 @@
         @endforeach
     </div>
     {{ $Products->links() }}
-    <div class="row">
-        <button class="btn btn-outline-danger mx-auto w-auto text-nowrap">Показать больше</button>
-    </div>
-    </div>
 @endsection
