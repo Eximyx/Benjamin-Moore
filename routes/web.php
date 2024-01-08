@@ -122,6 +122,10 @@ Route::post('/leads', [MainController::class, 'leads'])->name('leads');
 
 Route::get('/profile', [AuthController::class, 'profileUser'])->name('prof');
 
+Route::get('/product',function () {
+    return view('user.product');
+})->name('product');
+
 
 
 
