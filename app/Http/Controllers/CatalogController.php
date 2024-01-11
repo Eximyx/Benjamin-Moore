@@ -3,15 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller
 {
     public function index()
     {
-        $products = Product::orderBy("created_at","desc")->paginate(12);
+        $categories = ProductCategory::all();
+        $products = Product::orderBy("created_at", "desc")->paginate(12);
 
-        return view("user.catalog", ["Products" => $products]);
+        return view("user.catalog", ["Products" => $products, "category" => $categories]);
+    }
+    public function fetch(Request $request)
+    {
+        // return response()->json($request->category_id);
+        $query = Product::query();
+        if (isset($request['category_id']) && $request['category_id'] !== "0") {
+            // return response()->json($request->category_id);
+            $query->where("product_category_id", "=", $request["category_id"]);
+        }
+        // return response($query->get()->paginate(5));
+        $products = $query->paginate(12);
+        return view("user.search_result", ["Products" => $products])->render();
     }
 
     public function addProductToCart($id = null, $quantity = 0)
@@ -34,12 +48,12 @@ class CatalogController extends Controller
     }
     public function changeCount(Request $request)
     {
-        $cart = session()->get('cart',[]);
+        $cart = session()->get('cart', []);
         if (isset($cart[$request->id])) {
             $cart[$request->id]['quantity'] = (int) $request['quantity'];
         }
         session()->put('cart', $cart);
-        return response()->json(['success'=> true, 's'=>$cart]);
+        return response()->json(['success' => true, 's' => $cart]);
     }
     public function productCart()
     {

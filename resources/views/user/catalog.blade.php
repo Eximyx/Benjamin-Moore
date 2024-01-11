@@ -8,71 +8,64 @@
         <form action="" enctype="">
 
         </form>
-        <div id="form" class="col-3">
+        <div class="col-3">
             <form action="javascript:void(0)" id="Form" name="Form" class="form-horizontal" method="POST"
                 enctype="multipart/form-data">
                 <label for="category_id" class="form-label p-0 fw-normal">Серия</label>
                 <select id="category_id" name="category_id" class="form-select rounded-5 border-danger border-2"
                     aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option selected value="0">Все</option>
+                    @foreach ($category as $value)
+                        <option value="{{ $value->id }}">{{ $value->title }}</option>
+                    @endforeach
                 </select>
-                <label for="category_id" class="form-label p-0">Работы</label>
-                <select id="category_id" name="category_id" class="form-select rounded-5 border-danger border-2"
+                <label for="kind_of_work_id" class="form-label p-0">Работы</label>
+                <select id="kind_of_work_id" name="kind_of_work_id" class="form-select rounded-5 border-danger border-2"
                     aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option selected value="0">Все</option>
+                    <option value="1">Внутренние работы</option>
+                    <option value="2">Внешние работы</option>
                 </select>
-                <label for="category_id" class="form-label p-0">Тип</label>
-                <select id="category_id" name="category_id" class="form-select rounded-5 border-danger border-2"
-                    aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-                <label for="category_id" class="form-label p-0">Цвета</label>
-                <select id="category_id" name="category_id" class="form-select rounded-5 border-danger border-2"
-                    aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
+                <div class="row w-100 m-0 my-2">
+                    <button type="submit" class="btn btn-outline-danger">Применить фильтр</button>
+                    <button type="button" class="btn btn-danger my-2" id="reset">Сбросить всё</button>
+                </div>
             </form>
         </div>
         <div class="clearfix col-12"></div>
-        @foreach ($Products as $product)
-            <div id="product-id"
-                class="product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2 h-auto ">
-                <div class="row border-2 border rounded-4 align-items-center align-self-center m-0 p-0 h-100">
-                    <img src="storage/image/{{ $product->main_image }}"
-                        class="m-0 p-0 w-100 img-fluid rounded-4 align-self-center" alt="">
-                    <div class="text-center fs-5 p-0 m-0">
-                        <p class="m-0 py-0">{{ $product->title }}</p>
-                    </div>
-                    <div class="text-center fw-light fs-6 p-0 m-0">
-                        <p class="m-0 py-2">{{ $product->gloss_level }}</p>
-                    </div>
-                    <div class="row justify-content-between align-items-center m-0 py-1">
-                        <div class="col-5 col-sm-6 col-md-5 col-lg-3 justify-content-center align-items-end p-0 m-0">
-                            <p class="text-center text-nowrap p-0 m-0 fs-5">$ 5199</p>
-                        </div>
-                        <div class="col-5 col-sm-5 col-md-6 col-lg-6 align-items-center m-0 p-0">
-                            <a class="btn btn-outline-danger text-center p-0 m-0 w-100 h-25 py-1 rounded-4 fs-5"
-                                href="{{ route('addproduct.to.cart', $product->id) }}">
-                                Заказать
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
+        <div id="searchResult col-12 w-100">
+        </div>
     </div>
-    {{ $Products->links() }}
+    
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        });
+        $('#Form').submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                method: "get",
+                url: '{{ route('user.catalog.fetch') }}',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: (data) => {
+                    $("#searchResult").html(data);
+                    var oTable = $('#table').dataTable();
+                    oTable.fnDraw(false);
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+        });
+    </script>
 @endsection

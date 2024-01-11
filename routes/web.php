@@ -107,22 +107,24 @@ Route::get('/calculator', function () {
 Route::get('/contacts', function () {
     return view('user.contacts');
 })->name('contacts');
-Route::get('/catalog', [CatalogController::class, 'index'])->name('user.catalog');
 Route::get('/news', [NewsController::class, 'news_index'])->name('user.news');
 Route::get('/news/{slug}', [NewsController::class, 'show'])->name('user.news.show');
-Route::get('/product/{id}', [CatalogController::class, 'addProductToCart'])->name('addproduct.to.cart');
-Route::post('/product/{id?}', [CatalogController::class, 'changeCount'])->name('change.count');
-Route::get('/cart', [CatalogController::class, 'productCart'])->name('cart');
-Route::patch('/update-shopping-cart', [CatalogController::class, 'updateCart'])->name('update.cart');
-Route::patch('/qq', [CatalogController::class, 'changeCount'])->name('quantity');
-Route::delete('/delete-cart-product', [CatalogController::class, 'deleteProduct'])->name('delete.cart.product');
+Route::get('/catalog/fetch', [CatalogController::class, 'fetch'])->name('user.catalog.fetch');
+Route::get('/catalog/{id}', [CatalogController::class, 'addProductToCart'])->name('addproduct.to.cart');
+Route::post('/catalog', [CatalogController::class, 'index'])->name('user.catalog');
+Route::get('/catalog', [CatalogController::class, 'index'])->name('user.catalog');
 
+// Route::post('/product/{id?}', [CatalogController::class, 'changeCount'])->name('change.count');
+// Route::get('/cart', [CatalogController::class, 'productCart'])->name('cart');
+// Route::patch('/update-shopping-cart', [CatalogController::class, 'updateCart'])->name('update.cart');
+// Route::patch('/qq', [CatalogController::class, 'changeCount'])->name('quantity');
+// Route::delete('/delete-cart-product', [CatalogController::class, 'deleteProduct'])->name('delete.cart.product');
 
 Route::post('/leads', [MainController::class, 'leads'])->name('leads');
 
 Route::get('/profile', [AuthController::class, 'profileUser'])->name('prof');
 
-Route::get('/product',function () {
+Route::get('/product', function () {
     return view('user.product');
 })->name('product');
 

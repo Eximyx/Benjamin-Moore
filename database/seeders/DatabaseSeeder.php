@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-       \App\Models\Category::factory()->create(['title' => 'first']);
+       \App\Models\Category::factory(10)->create();
        \App\Models\KindOfWork::factory()->createMany([['title' =>'Внутренние работы'],['title' =>'Внешние работы']]);
 // \App\Models\Category::factory()->createMany([[
         \App\Models\ProductCategory::factory(10)->create();

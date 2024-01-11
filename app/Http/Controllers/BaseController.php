@@ -41,7 +41,7 @@ abstract class BaseController extends Controller
         }
         $variables = ['data', 'datatable_columns'];
         if (isset($data['selectable'])) {
-            $variables[''] = 'selectable';  
+            $variables[''] = 'selectable';
         }
         return view('layouts.datatable', compact([...$variables]));
     }
@@ -54,7 +54,7 @@ abstract class BaseController extends Controller
         $data = $this->service->store($request->validate([
             'id' => 'numeric|nullable',
             ...$validator_data
-        ]), array_key_exists('main_image', $validator_data),$this->model);
+        ]), array_key_exists('main_image', $validator_data), $this->model);
         $id = $data['id'];
         unset($data['id']);
 

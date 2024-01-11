@@ -14,7 +14,6 @@
 <body>
     <div class="container p-2">
         @include('user.navbar')
-
         @yield('contents')
         <div class="p-2">
             @include('user.footer')
@@ -23,5 +22,4 @@
     </div>
 </body>
 @yield('scripts')
-
 </html>
