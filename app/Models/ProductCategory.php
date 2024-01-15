@@ -10,7 +10,7 @@ class ProductCategory extends Model
 {
     // TODO IMPLEMENT INTERFACE, чтобы программисты в дальнейшем понимали, что нужно перезаписывать getmodel 
     use HasFactory;
-    use Sluggable;
+    // use Sluggable;
     protected $table = 'product_categories';
 
     protected $guarded = false;
@@ -58,12 +58,12 @@ class ProductCategory extends Model
     public function kind_of_work(){
         return $this->belongsTo(KindOfWork::class,'kind_of_work_id','id');
     }
-    public function sluggable(): array
-    {
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ];
-    }
+    // public function sluggable(): array
+    // {
+    //     return [
+    //         'slug' => [
+    //             'source' => 'title'
+    //         ]
+    //     ];
+    // }
 }

@@ -20,7 +20,7 @@ class ProductFactory extends Factory
         return [
 
             'title' => fake()->name(),
-            'main_image' => '1.jpg',
+            'main_image' => '6da12a028269c2f29852d5928aa7b983-1.webp',
             'content' => fake()->text(),
             'code' => fake()->numberBetween(0,500),
             'gloss_level' => fake()->word(),

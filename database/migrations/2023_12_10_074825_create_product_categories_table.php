@@ -18,7 +18,7 @@ return new class extends Migration
             $table->index('kind_of_work_id','product_category_kind_of_work_idx');
             $table->foreign('kind_of_work_id','product_category_kind_of_work_fk')->references('id')->on('kind_of_work');
             $table->text('content');
-            $table->string('slug')->unique();
+            // $table->string('slug')->unique();
             $table->timestamps();
         });
     }

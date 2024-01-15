@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
 // \App\Models\Category::factory()->createMany([[
         \App\Models\ProductCategory::factory(10)->create();
         \App\Models\NewsPost::factory(40)->create();
-        \App\Models\Product::factory(50)->create();
+        \App\Models\Product::factory(500)->create();
         \App\Models\UserRoles::factory()->createMany([['title' =>'User'],['title' =>'Admin'],['title'=>'root']]);
          \App\Models\User::factory()->create([
              'name' => 'admin',

@@ -1,6 +1,6 @@
 @extends('user.layout', ['title' => 'Главная'])
 @section('contents')
-    <div id="image-wrapper" class="row rounded-4 border border-1 my-1 position-relative" alt="">
+    <div id="image-wrapper" class="row rounded-4 border border-1 position-relative" alt="">
         <div class="col-sm-4 clearfix"></div>
         <div class="container-fluid position-absolute h-100 rounded-4 "
             style="background-image:url({{ url('storage/assets/creative.jpg') }});background-position: center;background-size: cover; background-repeat: no-repeat; filter:brightness(75%)">
@@ -27,13 +27,13 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-between m-0 p-0 my-4 py-2">
+    <div class="row justify-content-between">
         <div class="row justify-content-between ">
             <div class="col">
-                <h4 class="fw-normal">Предлагаем</h4>
-                <h2 class="text-danger text-nowrap fw-medium">НАШУ ПРОДУКЦИЮ</h2>
+                <h4 class="fw-normal">Новости</h4>
+                <h2 class="text-danger text-nowrap fw-medium">ПОСЛЕДНИЕ НОВОСТИ</h2>
             </div>
-            <div class="col-1 float-end justify-content-end align-items-end my-auto">
+            <div class="col-1 justify-content-end align-items-end my-auto">
                 <a class="btn btn-outline-danger mx-auto w-auto text-nowrap" href="{{ route('user.catalog') }}">Все
                     продукты</a>
             </div>
@@ -221,30 +221,7 @@
                 }
             });
         });
-        $('#Form').submit(function(e) {
 
-            e.preventDefault();
-
-            var formData = new FormData(this);
-            console.log(formData);
-            $.ajax({
-                method: "post",
-                url: '{{ route('leads') }}',
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: (data) => {
-                    console.log(data);
-                    var oTable = $('#table').dataTable();
-                    oTable.fnDraw(false);
-                },
-                error: function(data) {
-                    // #('')
-                    console.log(data);
-                }
-            });
-        });
         const swiper = new Swiper('.swiper', {
             // Optional parameters
             direction: 'horizontal',
