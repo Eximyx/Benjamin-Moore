@@ -11,6 +11,9 @@ class Product extends Model
     use HasFactory;
     use Sluggable;
 
+    protected $table = 'products';
+    protected $guarded = false;
+
     public static function getModel()
     {
         return [
@@ -55,8 +58,7 @@ class Product extends Model
             ]
         ];
     }
-    protected $table = 'products';
-    protected $guarded = false;
+    
     public function category()
     {
         return $this->belongsTo(ProductCategory::class,'product_category_id','id');
