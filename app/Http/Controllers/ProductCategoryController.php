@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductCategory;
-use Illuminate\Http\Request;
+use App\Repositories\ProductCategoryRepository;
+use App\Services\ProductCategoryService;
+use App\Http\Requests\ProductCategoryRequest;
 
-class ProductCategoryController extends BaseController
-{
-    public function __construct(ProductCategory $model) {
-        parent::__construct($model);    
+
+
+class ProductCategoryController extends FakeController{
+    public function __construct(ProductCategoryService $service, ProductCategoryRepository $repository, ProductCategoryRequest $request) {
+        $this->service = $service;
+        $this->repository = $repository;
+        $this->request = $request;
     }
+
 
 }
