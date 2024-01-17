@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseController extends Controller
 {
+
+    protected $service;
+    protected $model;
     public function __construct(Model $model)
     {
         $this->service = new Service;
@@ -41,7 +44,7 @@ abstract class BaseController extends Controller
         }
         $variables = ['data', 'datatable_columns'];
         if (isset($data['selectable'])) {
-            $variables[''] = 'selectable';
+            $variables[] = 'selectable';
         }
         return view('layouts.datatable', compact([...$variables]));
     }
@@ -49,6 +52,7 @@ abstract class BaseController extends Controller
     public function store(Request $request)
     {
 
+        // return response()->json($request->allFiles());
         $validator_data = $this->model::getModel()["validator_data"];
 
         $data = $this->service->store($request->validate([

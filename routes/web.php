@@ -1,6 +1,8 @@
 <?php
+use App\Http\Controllers\FakeController;
 use App\Http\Controllers\LeadsController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\NewController;
 use Illuminate\Support\Facades\Route
 ;
 use App\Http\Controllers\AuthController;
@@ -110,7 +112,7 @@ Route::get('/contacts', function () {
 Route::get('/news', [NewsController::class, 'news_index'])->name('user.news');
 Route::get('/news/{slug}', [NewsController::class, 'show'])->name('user.news.show');
 
-Route::post('categoryProduct/fetch',[ProductCategoryController::class,'fetch'])->name('fetch');
+Route::post('categoryProduct/fetch', [ProductCategoryController::class, 'fetch'])->name('fetch');
 
 Route::get('catalog', [CatalogController::class, 'index'])->name('user.catalog');
 
@@ -118,12 +120,25 @@ Route::post('/leads', [MainController::class, 'leads'])->name('leads');
 
 Route::get('/profile', [AuthController::class, 'profileUser'])->name('prof');
 
-Route::get('/product/{slug}',[CatalogController::class, 'show'])->name('product.show'); 
+Route::get('/product/{slug}', [CatalogController::class, 'show'])->name('product.show');
+
+
+// Route::get('/test',[FakeController::class,'index'])->name('test');
 
 
 
 
-
-
-
-
+Route::prefix('test')->group(function () {
+    Route::get('/', [ProductsController::class, 'index'])->name('leads.index');
+    Route::post('store', [ProductsController::class, 'store']);
+    Route::post('edit', [ProductsController::class, 'edit']);
+    Route::post('delete', [ProductsController::class, 'delete']);
+    Route::post('toggle', [ProductsController::class, 'toggle']);
+});
+Route::prefix('test1')->group(function () {
+    Route::get('/', [NewController::class, 'index'])->name('leads.index');
+    Route::post('store', [NewController::class, 'store']);
+    Route::post('edit', [NewController::class, 'edit']);
+    Route::post('delete', [NewController::class, 'delete']);
+    Route::post('toggle', [NewController::class, 'toggle']);
+});

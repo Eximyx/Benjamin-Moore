@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Repositories\ProductRepository;
+use App\Services\ProductService;
 
-class ProductsController extends BaseController
+class ProductsController extends FakeController
 {
-    public function __construct(Product $model) {
-        parent::__construct($model);    
+    public function __construct(ProductService $service, ProductRepository $repository)
+    {
+        $this->service = $service;
+        $this->repository = $repository; 
     }
 }

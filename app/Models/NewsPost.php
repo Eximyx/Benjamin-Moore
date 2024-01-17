@@ -13,12 +13,16 @@ class NewsPost extends Model
     use Sluggable;
     use SoftDeletes;
 
+    protected $table = 'news_posts';
+    protected $guarded = false;
+
     public static function getModel()
     {
         return [
             'ModelName' => 'Новости',
             'datatable_data' => [
                 'title' => 'Заголовок',
+                'is_toggled' => 'Отображение',
                 'category_id' => 'Категория',
             ],
             'form_data' => [
@@ -28,7 +32,8 @@ class NewsPost extends Model
                 'category_id' => 'Категория',
                 'main_image' => 'Фото',
             ],
-            'selectable' => Category::Class,
+            'selectable' => Category::class,
+            'selectableModel' => new Category(),
             'validator_data' => [
                 'title' => 'string|required',
                 'description' => 'string|required',
@@ -38,8 +43,7 @@ class NewsPost extends Model
             ]
         ];
     }
-    protected $table = 'news_posts';
-    protected $guarded = false;
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');

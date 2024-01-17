@@ -7,11 +7,12 @@ use Illuminate\Support\Carbon;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Storage;
 
+
+//TODO THIS MUST BE A SINGLETONE (этот сервис должен создаваться один раз, потому что в последствии все контроллеры и модели обращаются к нему)
 class Service
 {
     public function store($data, $hasImage, $model)
     {
-        // return $data;
         if ($hasImage) {
             if (array_key_exists('main_image', $data)) {
                 Storage::put('public\image', $data['main_image']);
@@ -30,6 +31,7 @@ class Service
             }
         }
         return $data;
+
     }
 
     public function delete_image($Entity)
@@ -50,7 +52,7 @@ class Service
         return $data;
     }
 
-    public function create_datatable($data)
+    public function create_datatable($data = null)
     {
         return datatables()->of($data)
             ->rawColumns(['action'])
@@ -93,4 +95,18 @@ class Service
         }
         return $List;
     }
+
+    public function getDataKeyForCombobox($data)
+    {
+        foreach ($data["form_data"] as $key => $value) {
+            if (strPos($key, "_id")) {
+                $selectable_key = $key;
+                unset($data["form_data"][$key]);
+                return $selectable_key;
+            }
+        }
+    }
+
+
+
 }

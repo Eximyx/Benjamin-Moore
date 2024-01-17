@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="float-left">
-                    <h2>{{ $data['ModelName'] }}</h2>
+                    {{-- <h2>{{ $data['ModelName'] }}</h2> --}}
                 </div>
                 <div class="float-right mb-2">
                     <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Добавить</a>
@@ -16,9 +16,9 @@
                 <thead>
                     <tr>
                         <th>id</th>
-                        @foreach ($data['datatable_data'] as $key)
+                        {{-- @foreach ($data['datatable_data'] as $key)
                             <th>{{ $key }}</th>
-                        @endforeach
+                        @endforeach --}}
                         <th>Дата создания</th>
                         <th>Дата изменения</th>
                         <th></th>
@@ -27,19 +27,19 @@
             </table>
         </div>
     </div>
-    {{ $selectable }}
+
     <div class="modal fade" id="Form-modal" aria-hidden="true" style="z-index: 1045" tabindex="-1">
         <div class="modal-dialog modal-lg modal-fullscreen m-0" style="max-width: none">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="window_title" class="modal-title ml-2 p-1">{{ $data['ModelName'] }}</h5>
+                    {{-- <h5 id="window_title" class="modal-title ml-2 p-1">{{ $data['ModelName'] }}</h5> --}}
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="javascript:void(0)" id="Form" name="Form" class="form-horizontal" method="POST"
                         enctype="multipart/form-data">
                         <input type="hidden" name="id" id="id">
-                        @foreach ($data['form_data'] as $key => $value)
+                        {{-- @foreach ($data['form_data'] as $key => $value)
                             <div class="col-lg mt-2">
                                 <label for="{{ $key }}">{{ $value }}</label>
                                 @if ($key == 'content')
@@ -72,7 +72,7 @@
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                             <button type="submit" class="btn btn-primary">Подтвердить</button>
                         </div>
-                    </form>
+                    </form> --}}
                 </div>
                 <div class="modal-footer"></div>
             </div>
@@ -97,7 +97,7 @@
                         data: 'id',
                         name: 'id'
                     },
-                    ...@json($datatable_columns),
+                    @json($datatable_columns),
                     {
                         data: 'created_at',
                         name: 'created_at'
@@ -115,6 +115,7 @@
                 order: [
                     [0, 'desc']
                 ],
+
             });
         });
 
@@ -211,7 +212,6 @@
                 },
                 dataType: 'json',
                 success: function(res) {
-                    console.log(res);
                     $('#Form')[0].reset();
                     $('#window_title').text("Edit News Post");
                     $('#Form-modal').modal('show');
@@ -262,7 +262,6 @@
 
         function toggle(id) {
             var id = id;
-            console.log(id);
             Swal.fire({
                 title: 'Do you really want to toggle this static-page?',
                 icon: 'warning',
@@ -290,7 +289,6 @@
 
         $('#Form').submit(function(e) {
             e.preventDefault();
-
             var formData = new FormData(this);
             $.ajax({
                 type: 'POST',
@@ -300,17 +298,12 @@
                 contentType: false,
                 processData: false,
                 success: (data) => {
-                    if (!data['errorInfo']) {
-                        $("#Form-modal").modal('hide');
-                        var oTable = $('#table').dataTable();
-                        oTable.fnDraw(false);
-                        $("#btn-save").html('Submit');
-                        $("#btn-save").attr("disabled", false);
-                    }
-                    else {
-                        console.log(data);
-                    }
-
+                    console.log(data);
+                    $("#Form-modal").modal('hide');
+                    var oTable = $('#table').dataTable();
+                    oTable.fnDraw(false);
+                    $("#btn-save").html('Submit');
+                    $("#btn-save").attr("disabled", false);
                 },
                 error: function(data) {
                     console.log(data);

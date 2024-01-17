@@ -40,6 +40,7 @@ class Product extends Model
                 'product_category_id' => 'Серия',
             ],
             'selectable' => ProductCategory::Class,
+            'selectableModel' => new ProductCategory(),
             'validator_data' => [
                 'title' => 'string|required',
                 'main_image' => 'nullable',
