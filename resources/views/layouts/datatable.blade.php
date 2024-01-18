@@ -307,9 +307,7 @@
                         $("#btn-save").html('Submit');
                         $("#btn-save").attr("disabled", false);
                     }
-                    else {
-                        console.log(data);
-                    }
+                    console.log(data);
 
                 },
                 error: function(data) {

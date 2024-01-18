@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateNewsPostRequest;
+use App\Repositories\CoreRepository;
+use App\Services\BaseService;
 use Illuminate\Http\Request;
 use App\Services\Service;
 
@@ -10,9 +11,14 @@ use App\Services\Service;
 abstract class FakeController extends Controller
 {
 
-    protected $service;
-    protected $repository;
+    protected BaseService $service;
+    protected CoreRepository $repository;
+    protected Request $request;
 
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+    }
 
     public function index(Service $service)
     {
@@ -34,10 +40,11 @@ abstract class FakeController extends Controller
         return view('layouts.datatable', compact(['selectable', 'data', 'datatable_columns']));
     }
 
-    public function store(Service $service, CreateNewsPostRequest $request)
+    public function store(Request $request)
     {
-        $data = $this->service->store($request->validated());
+        $request = $request->validate($this->request->rules());
 
+        $data = $this->service->store($request);
         return response()->json($data);
     }
 

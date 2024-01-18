@@ -2,24 +2,21 @@
 
 namespace App\Services;
 
-use App\Repositories\CoreRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Exception;
 
 class BaseService
 {
-
     protected $repository;
-
-
+    
     public function getAllDataForDatatable()
     {
         $Entities = $this->repository->getAllForDatatable();
         return $Entities;
     }
 
-    public function findById(Request $request)
+    public function findById($request)
     {
         $id = $request->validate(['id' => 'required'])['id'];
         $entity = $this->repository->findById($id);
@@ -50,7 +47,7 @@ class BaseService
         return $data;
     }
 
-    public function destroy(Request $request)
+    public function destroy($request)
     {
         $entity = $this->findById($request);
         if (isset($entity->main_image)) {
@@ -60,7 +57,7 @@ class BaseService
         return $entity;
     }
 
-    public function toggle(Request $request)
+    public function toggle($request)
     {
         $entity = $this->findById($request);
 

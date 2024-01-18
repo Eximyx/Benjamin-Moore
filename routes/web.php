@@ -142,3 +142,11 @@ Route::prefix('test1')->group(function () {
     Route::post('delete', [NewController::class, 'delete']);
     Route::post('toggle', [NewController::class, 'toggle']);
 });
+
+Route::prefix('test2')->group(function () {
+    Route::get('/', [NewController::class, 'index'])->name('leads.index');
+    Route::post('store', [NewController::class, 'store']);
+    Route::post('edit', [NewController::class, 'edit']);
+    Route::post('delete', [NewController::class, 'delete']);
+    Route::post('toggle', [NewController::class, 'toggle']);
+});
