@@ -23,11 +23,20 @@ class CreateProductRequest extends FormRequest
     {
         return [
             'id' => 'numeric|nullable',
-            'title' => 'string|required|max:2',
-            'description' => 'string|required',
-            'category_id' => 'string|required',
+            'title' => 'string|required',
+            'main_image' => 'nullable',
             'content' => 'string|required',
-            'main_image' => 'image|mimes:jpeg,png,jpg|nullable'
+            'code' => 'numeric|required',
+            'gloss_level' => 'string|required',
+            'description' => 'string|required',
+            'type' => 'string|required',
+            'colors' => 'string|required',
+            'base' => 'string|required',
+            'v_of_dry_remain' => 'string|required',
+            'time_to_repeat' => 'string|required',
+            'consumption' => 'string|required',
+            'thickness' => 'string|required',
+            'product_category_id' => 'required',
         ];
     }
 }

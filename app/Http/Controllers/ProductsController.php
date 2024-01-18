@@ -9,8 +9,9 @@ use App\Services\ProductService;
 class ProductsController extends FakeController
 {
     
-    public function __construct(ProductService $service, ProductRepository $repository, CreateProductRequest $createProductRequest)
+    public function __construct(ProductService $service, ProductRepository $repository)
     {
+        parent::__construct(new CreateProductRequest());
         $this->service = $service;
         $this->repository = $repository; 
     }

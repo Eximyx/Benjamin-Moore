@@ -129,24 +129,18 @@ Route::get('/product/{slug}', [CatalogController::class, 'show'])->name('product
 
 
 Route::prefix('test')->group(function () {
-    Route::get('/', [ProductsController::class, 'index'])->name('leads.index');
+    Route::get('/', [ProductsController::class, 'index']);
     Route::post('store', [ProductsController::class, 'store']);
     Route::post('edit', [ProductsController::class, 'edit']);
     Route::post('delete', [ProductsController::class, 'delete']);
     Route::post('toggle', [ProductsController::class, 'toggle']);
 });
+
 Route::prefix('test1')->group(function () {
-    Route::get('/', [NewController::class, 'index'])->name('leads.index');
+    Route::get('/', [NewController::class, 'index']);
     Route::post('store', [NewController::class, 'store']);
     Route::post('edit', [NewController::class, 'edit']);
     Route::post('delete', [NewController::class, 'delete']);
     Route::post('toggle', [NewController::class, 'toggle']);
 });
 
-Route::prefix('test2')->group(function () {
-    Route::get('/', [NewController::class, 'index'])->name('leads.index');
-    Route::post('store', [NewController::class, 'store']);
-    Route::post('edit', [NewController::class, 'edit']);
-    Route::post('delete', [NewController::class, 'delete']);
-    Route::post('toggle', [NewController::class, 'toggle']);
-});
