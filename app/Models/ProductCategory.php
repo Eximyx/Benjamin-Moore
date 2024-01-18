@@ -29,7 +29,6 @@ class ProductCategory extends Model
                 'kind_of_work_id' => 'Категория',
             ],
             'selectable' => KindOfWork::class,
-            'selectableModel' => new KindOfWork(),
             'validator_data' => [
                 'title' => 'string|required',
                 'content' => 'string|required',

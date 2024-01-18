@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\CreateNewsPostRequest;
 use Illuminate\Http\Request;
 use App\Services\Service;
 
@@ -12,11 +12,11 @@ abstract class FakeController extends Controller
 
     protected $service;
     protected $repository;
-    protected $request;
 
 
     public function index(Service $service)
     {
+
         $data = $this->repository->startConditions()->getModel();
 
         if (request()->ajax()) {
@@ -34,9 +34,9 @@ abstract class FakeController extends Controller
         return view('layouts.datatable', compact(['selectable', 'data', 'datatable_columns']));
     }
 
-    public function store(Service $service, Request $request)
+    public function store(Service $service, CreateNewsPostRequest $request)
     {
-        $data = $this->service->store($this->request->validated());
+        $data = $this->service->store($request->validated());
 
         return response()->json($data);
     }
