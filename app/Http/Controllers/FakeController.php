@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\CoreRepository;
 use App\Services\BaseService;
 use Illuminate\Http\Request;
-use App\Services\Service;
 
 
 abstract class FakeController extends Controller
 {
 
     protected BaseService $service;
-    protected CoreRepository $repository;
     protected Request $request;
 
     public function __construct(Request $request)
@@ -20,24 +17,17 @@ abstract class FakeController extends Controller
         $this->request = $request;
     }
 
-    public function index(Service $service)
+    public function index()
     {
 
-        $data = $this->repository->startConditions()->getModel();
-
         if (request()->ajax()) {
-            $Entities = $this->service->getAllDataForDatatable();
-
-            $table = $service->create_datatable($Entities);
-
-            return $table->make(true);
+            $table = $this->service->ajaxDataTable();
+            return $table;
         }
 
-        $datatable_columns = $service->get_datatable_columns($data);
+        $datatable_columns = $this->service->getVariablesForDataTable();
 
-        $selectable = $data['selectableModel']->all();
-
-        return view('layouts.datatable', compact(['selectable', 'data', 'datatable_columns']));
+        return view('layouts.datatable', [...$datatable_columns]);
     }
 
     public function store(Request $request)

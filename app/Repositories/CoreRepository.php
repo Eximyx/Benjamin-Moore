@@ -37,7 +37,7 @@ abstract class CoreRepository
 
     public function getAllForDatatable()
     {
-        $data = $this->model->getModel();
+        $data = $this->getModelData();
         $selectable_key = null;
 
         if (isset($data['selectableModel'])) {
@@ -103,7 +103,9 @@ abstract class CoreRepository
 
     }
 
-
+    public function getModelData() {
+        return $this->model->getModel();
+    }
 
 }
 

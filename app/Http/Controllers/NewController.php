@@ -9,11 +9,10 @@ use App\Services\NewsService;
 class NewController extends FakeController
 {
 
-    public function __construct(NewsService $service, NewsRepository $repository)
+    public function __construct(NewsService $service)
     {
         parent::__construct(new CreateNewsPostRequest());
         $this->service = $service;
-        $this->repository = $repository;
     }
 
 }

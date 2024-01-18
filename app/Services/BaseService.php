@@ -2,18 +2,43 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Request;
+use App\Repositories\CoreRepository;
 use Illuminate\Support\Facades\Storage;
+use App\Services\DatatableService;
+
 use Exception;
 
-class BaseService
+abstract class BaseService
 {
-    protected $repository;
-    
-    public function getAllDataForDatatable()
+    protected DatatableService $datatableService;
+    protected CoreRepository $repository;
+    public function __construct()
     {
-        $Entities = $this->repository->getAllForDatatable();
-        return $Entities;
+        $this->datatableService = app(DatatableService::class);
+    }
+
+    public function ajaxDataTable()
+    {
+        $entities = $this->repository->getAllForDatatable();
+        $table = $this->datatableService->createDatatable($entities);
+
+        return $table->make(true);
+    }
+
+    public function getVariablesForDataTable()
+    {
+
+        $modelData = $this->repository->getModelData();
+
+        $variables = [];
+
+        if (isset($modelData['selectableModel'])) {
+            $variables['selectable'] = $modelData['selectableModel']->all();
+        }
+        $variables['datatable_columns'] = $this->datatableService->getDatatableColumns($modelData);
+        $variables['data'] = $modelData;
+
+        return $variables;
     }
 
     public function findById($request)
