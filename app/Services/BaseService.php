@@ -11,7 +11,7 @@ use Exception;
 abstract class BaseService
 {
     protected DatatableService $datatableService;
-    protected CoreRepository $repository;
+    protected $repository;
     public function __construct()
     {
         $this->datatableService = app(DatatableService::class);

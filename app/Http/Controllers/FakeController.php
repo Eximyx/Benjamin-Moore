@@ -25,9 +25,9 @@ abstract class FakeController extends Controller
             return $table;
         }
 
-        $datatable_columns = $this->service->getVariablesForDataTable();
+        $datatable_variables = $this->service->getVariablesForDataTable();
 
-        return view('layouts.datatable', [...$datatable_columns]);
+        return view('layouts.datatable', [...$datatable_variables]);
     }
 
     public function store(Request $request)

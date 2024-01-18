@@ -9,6 +9,7 @@ class ProductService extends BaseService
     protected $repository;
     public function __construct(ProductRepository $productRepository)
     {
+        parent::__construct();
         $this->repository = $productRepository;
     }
 }
