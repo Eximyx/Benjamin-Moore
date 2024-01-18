@@ -13,4 +13,8 @@ class ProductsController extends FakeController
         parent::__construct(new CreateProductRequest());
         $this->service = $service;
     }
+
+    public function wrapper() {
+        
+    }
 }

@@ -39,6 +39,7 @@ class Product extends Model
                 'thickness' => 'Толщина сухой пленки (милы)',
                 'product_category_id' => 'Серия',
             ],
+            'selectable_key' => 'product_category_id',
             'selectable' => ProductCategory::Class,
             'selectableModel' => new ProductCategory(),
             'validator_data' => [

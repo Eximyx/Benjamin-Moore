@@ -9,7 +9,6 @@ class NewsRepository extends CoreRepository
 {
 
     protected $model;
-    protected $service;
 
     public function __construct()
     {
@@ -20,5 +19,5 @@ class NewsRepository extends CoreRepository
         return Model::class;
     }
 
-  
+
 }

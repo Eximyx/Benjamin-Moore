@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
+    protected $service;
+    protected $model;
     public function __construct(Leads $leads)
     {
         $this->service = new Service;

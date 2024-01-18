@@ -12,7 +12,7 @@ abstract class CoreRepository
      */
 
     protected $model;
-    protected $service;
+    // protected $service;
 
     /**
      * CoreRepository Contstructor
@@ -20,7 +20,7 @@ abstract class CoreRepository
 
     public function __construct()
     {
-        $this->service = app('App\Services\Service');
+        // $this->service = app('App\Services\Service');
         $this->model = app($this->getModelClass());
     }
 
@@ -29,11 +29,29 @@ abstract class CoreRepository
      */
     abstract protected function getModelClass();
 
+    public function getModelData() {
+        return $this->model->getModel();
+    }
+
     public function startConditions()
     {
         return clone $this->model;
     }
 
+    public function getAll(){
+        $entities = $this->model->all(); 
+        return $entities;
+    }
+
+    public function getLatest($amount = null){
+        $entities = $this->model->latest();
+
+        if ($amount) {
+            $entities = $entities->take($amount);
+        } 
+        return $entities->get();
+
+    }
 
     public function getAllForDatatable()
     {
@@ -41,7 +59,8 @@ abstract class CoreRepository
         $selectable_key = null;
 
         if (isset($data['selectableModel'])) {
-            $selectable_key = $this->service->getDataKeyForCombobox($data);
+            // $selectable_key = $this->service->getDataKeyForCombobox($data);
+            $selectable_key = $data['selectable_key'];
         }
 
         $query = $this->queryForDatatable($data, $selectable_key);
@@ -101,10 +120,6 @@ abstract class CoreRepository
         }
         return $query;
 
-    }
-
-    public function getModelData() {
-        return $this->model->getModel();
     }
 
 }

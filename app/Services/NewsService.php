@@ -11,4 +11,6 @@ class NewsService extends BaseService
         parent::__construct();
         $this->repository = $newsRepository;
     }
+
+
 }

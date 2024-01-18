@@ -17,6 +17,11 @@ abstract class BaseService
         $this->datatableService = app(DatatableService::class);
     }
 
+    public function showLatest($amount = null)
+    {
+        $entities = $this->repository->getLatest($amount);
+        return $entities;
+    }
     public function ajaxDataTable()
     {
         $entities = $this->repository->getAllForDatatable();
@@ -109,5 +114,24 @@ abstract class BaseService
         $image = $image->hashName();
         return $image;
     }
+
+
+    public function wrapper($items, $product_slide)
+    {
+        // $Entities = $items;
+        $count = count($items);
+        $j = 0;
+        $List = [];
+        for ($i = 0; $i < $count; $i++) {
+            if ($i % $product_slide == 0 & $i !== 0) {
+                $j++;
+                $List[$j][] = $items[$i];
+            } else {
+                $List[$j][] = $items[$i];
+            }
+        }
+        return $List;
+    }
+
 
 }

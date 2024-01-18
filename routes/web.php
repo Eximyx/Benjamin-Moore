@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\FakeController;
+use App\Http\Controllers\FakeMainController;
 use App\Http\Controllers\LeadsController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\NewController;
@@ -144,3 +145,8 @@ Route::prefix('test1')->group(function () {
     Route::post('toggle', [NewController::class, 'toggle']);
 });
 
+
+
+Route::prefix('fake')->group(function(){
+    Route::get('/',[FakeMainController::class,'index']);
+});

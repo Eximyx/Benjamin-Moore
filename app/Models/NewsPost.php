@@ -32,6 +32,7 @@ class NewsPost extends Model
                 'category_id' => 'Категория',
                 'main_image' => 'Фото',
             ],
+            'selectable_key' => 'category_id',
             'selectable' => Category::class,
             'selectableModel' => new Category(),
             'validator_data' => [
