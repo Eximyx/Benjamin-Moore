@@ -3,41 +3,50 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateAdminRequest;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Services\AuthService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
+
 
 class AuthController extends Controller
 {
+    protected Request $request;
+
+    public function __construct(){
+        $this->request = new CreateAdminRequest();
+    }
     public function register()
     {
         return view('auth/register');
     }
 
-    public function registerSave(CreateAdminRequest $request)
+    public function registerSave(AuthService $service ,Request $request)
     {
-        $data = $this->service->store(($request->validate($request->rules())));
+        $request = $request->validate($this->request->rules());
+        $data = $service->store($request);
+        return response()->json($data);
 
-        User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'User_role_id' => 0
-        ]);
+        // User::create([
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'password' => Hash::make($data['password']),
+        //     'User_role_id' => 0
+        // ]);
 
 
-        if (!Auth::attempt($request->only('email', 'password'), true)) {
-            throw ValidationException::withMessages([
-                'email' => trans('auth.failed')
-            ]);
-        }
+        // if (!Auth::attempt($request->only('email', 'password'), true)) {
+        //     throw ValidationException::withMessages([
+        //         'email' => trans('auth.failed')
+        //     ]);
+        // }
 
-        $request->session()->regenerate();
+        // $request->session()->regenerate();
 
-        return redirect()->route('main.index');
+        // return redirect()->route('main.index');
     }
 
     public function login()
@@ -45,17 +54,10 @@ class AuthController extends Controller
         return view('auth/login');
     }
 
-    public function loginAction(Request $request)
+    public function loginAction(LoginRequest $request)
     {
-        Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required'
-        ])->validate();
-        if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
-            throw ValidationException::withMessages([
-                'email' => trans('auth.failed')
-            ]);
-        }
+        $request->validated();
+        
         $request->session()->regenerate();
 
         return redirect('admin/');
@@ -73,13 +75,11 @@ class AuthController extends Controller
 
     public function profile(Request $request)
     {
-        // $roles = User::getRoles();
         return view('admin/profile');
 
     }
     public function profileUSer(Request $request)
     {
-        // $roles = User::getRoles();
         return view('user/profile');
 
     }

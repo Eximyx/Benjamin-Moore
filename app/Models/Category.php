@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    use HasFactory;
+
+    protected $table = 'categories';
+    protected $guarded = false;
+
     public static function getModel()
     {
         return [
@@ -16,20 +21,23 @@ class Category extends Model
             ],
             'form_data' => [
                 'title' => 'Заголовок',
-            ],
-            'validator_data' => [
-                'title' => 'string|required'
             ]
         ];
     }
 
-    protected $table = 'categories';
-
-    protected $guarded = false;
-
-    use HasFactory;
     public function posts()
     {
         return $this->hasMany(NewsPost::class, 'category_id', 'id');
     }
+
+    protected $fillable = [
+        'title',
+    ];
+
+    protected $hidden = [];
+
+    protected $casts = [
+        'create_at' => 'datetime',
+        'update_at' => 'datetime'
+    ];
 }

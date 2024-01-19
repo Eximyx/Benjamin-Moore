@@ -9,9 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class NewsPost extends Model
 {
-    use HasFactory;
-    use Sluggable;
-    use SoftDeletes;
+    use HasFactory, Sluggable, SoftDeletes;
 
     protected $table = 'news_posts';
     protected $guarded = false;
@@ -33,15 +31,7 @@ class NewsPost extends Model
                 'main_image' => 'Фото',
             ],
             'selectable_key' => 'category_id',
-            'selectable' => Category::class,
-            'selectableModel' => new Category(),
-            'validator_data' => [
-                'title' => 'string|required',
-                'description' => 'string|required',
-                'category_id' => 'string|required',
-                'content' => 'string|required',
-                'main_image' => 'nullable'
-            ]
+            'selectableModel' => new Category()
         ];
     }
 
@@ -49,6 +39,7 @@ class NewsPost extends Model
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
+
     public function sluggable(): array
     {
         return [
@@ -57,4 +48,20 @@ class NewsPost extends Model
             ]
         ];
     }
+
+    protected $fillable = [
+        'title',
+        'content',
+        'is_toggled',
+        'main_image',
+        'description',
+        'category_id'
+    ];
+
+    protected $hidden = [];
+
+    protected $casts = [
+        'create_at' => 'datetime',
+        'update_at' => 'datetime'
+    ];
 }

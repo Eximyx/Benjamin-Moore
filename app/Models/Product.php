@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use HasFactory;
-    use Sluggable;
+    use HasFactory, Sluggable;
 
     protected $table = 'products';
     protected $guarded = false;
@@ -22,6 +21,7 @@ class Product extends Model
                 'title' => 'Заголовок',
                 'code' => 'Код',
                 'product_category_id' => 'Категория',
+                'is_toggled' => 'Отображение'
             ],
             'form_data' => [
                 'title' => 'Заголовок',
@@ -40,31 +40,15 @@ class Product extends Model
                 'product_category_id' => 'Серия',
             ],
             'selectable_key' => 'product_category_id',
-            'selectable' => ProductCategory::Class,
-            'selectableModel' => new ProductCategory(),
-            'validator_data' => [
-                'title' => 'string|required',
-                'main_image' => 'nullable',
-                'content' => 'string|required',
-                'code' => 'numeric|required',
-                'gloss_level' => 'string|required',
-                'description' => 'string|required',
-                'type' => 'string|required',
-                'colors' => 'string|required',
-                'base' => 'string|required',
-                'v_of_dry_remain' => 'string|required',
-                'time_to_repeat' => 'string|required',
-                'consumption' => 'string|required',
-                'thickness' => 'string|required',
-                'product_category_id' => 'required',
-            ]
+            'selectableModel' => new ProductCategory()
         ];
     }
-    
+
     public function category()
     {
-        return $this->belongsTo(ProductCategory::class,'product_category_id','id');
+        return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
     }
+
     public function sluggable(): array
     {
         return [
@@ -73,5 +57,29 @@ class Product extends Model
             ]
         ];
     }
-}
 
+    protected $fillable = [
+        'title',
+        'content',
+        'is_toggled',
+        'main_image',
+        'code',
+        'gloss_level',
+        'description',
+        'type',
+        'colors',
+        'base',
+        'v_of_dry_remain',
+        'time_to_repeat',
+        'consumption',
+        'thickness',
+        'product_category_id'
+    ];
+
+    protected $hidden = [];
+
+    protected $casts = [
+        'create_at' => 'datetime',
+        'update_at' => 'datetime'
+    ];
+}

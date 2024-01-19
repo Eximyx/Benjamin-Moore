@@ -11,27 +11,34 @@ class Leads extends Model
 
     protected $table = 'leads';
     protected $guarded = false;
-    
+
     public static function getModel()
     {
         return [
             'ModelName' => 'Обратная связь',
             'datatable_data' => [
-                'name' => 'Имя', 
+                'name' => 'Имя',
                 'contactInfo' => 'контактная информация',
                 'message' => 'Сообщение',
             ],
             'form_data' => [
-                'name' => 'Имя', 
+                'name' => 'Имя',
                 'contactInfo' => 'контактная информация',
                 'message' => 'Сообщение',
-            ],
-            'validator_data' => [
-                'name' => 'string|required', 
-                'contactInfo' => 'string|required',
-                'message' => 'string|required',
             ]
         ];
     }
 
+    protected $fillable = [
+        'name',
+        'contactInfo',
+        'message'
+    ];
+
+    protected $hidden = [];
+
+    protected $casts = [
+        'create_at' => 'datetime',
+        'update_at' => 'datetime'
+    ];
 }

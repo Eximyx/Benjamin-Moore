@@ -9,11 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class StaticPage extends Model
 {
 
-    use HasFactory;
-    use Sluggable;
+    use HasFactory, Sluggable;
 
     protected $table = 'static_pages';
     protected $guarded = false;
+
     public static function getModel()
     {
         return [
@@ -25,14 +25,10 @@ class StaticPage extends Model
             'form_data' => [
                 'title' => 'Заголовок',
                 'content' => 'Содержимое',
-            ],
-            'validator_data' => [
-                'title' =>'string|required',
-                'content' => 'string|required',
             ]
         ];
     }
-    
+
     public function sluggable(): array
     {
         return [
@@ -41,4 +37,17 @@ class StaticPage extends Model
             ]
         ];
     }
+
+    protected $fillable = [
+        'title',
+        'content',
+        'is_toggled',
+    ];
+
+    protected $hidden = [];
+
+    protected $casts = [
+        'create_at' => 'datetime',
+        'update_at' => 'datetime'
+    ];
 }
