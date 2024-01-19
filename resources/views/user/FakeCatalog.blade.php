@@ -91,10 +91,13 @@
         let kind_of_work = 0;
         const fetch_data = (array = []) => {
             setTimeout(() => {
+                console.log(array);
+
                 $.ajax({
                     type: "get",
                     url: '?' + array.join('&'),
                     success: (data) => {
+                        console.log(data);
                         if (change) {
                             var categories = '<option selected value="0">Все</option>';
                             for (let item of Object.entries(data[0])) {

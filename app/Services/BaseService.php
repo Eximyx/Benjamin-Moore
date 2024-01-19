@@ -22,7 +22,14 @@ abstract class BaseService
         return $entities;
     }
 
-    public function showWithPaginate($amount = 1){
+    public function findBySlug($slug)
+    {
+        $entity = $this->repository->findBySlug($slug);
+        return $entity;
+    }
+
+    public function showWithPaginate($amount = 1)
+    {
         $entities = $this->repository->startConditions()->paginate($amount);
         return $entities;
     }
@@ -39,6 +46,7 @@ abstract class BaseService
         $selectables = $this->repository->getAllSelectables();
         return $selectables;
     }
+
 
     public function getVariablesForDataTable()
     {

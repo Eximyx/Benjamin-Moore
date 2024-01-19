@@ -111,7 +111,7 @@ Route::get('/contacts', function () {
     return view('user.contacts');
 })->name('contacts');
 Route::get('/news', [NewsController::class, 'news_index'])->name('user.news');
-Route::get('/news/{slug}', [NewsController::class, 'show'])->name('user.news.show');
+Route::get('/news/{slug}', [NewsController::class, 'show']);
 
 Route::post('categoryProduct/fetch', [ProductCategoryController::class, 'fetch'])->name('fetch');
 
@@ -185,8 +185,12 @@ Route::prefix('test6')->group(function () {
 });
 
 
-Route::prefix('fake')->group(function(){
-    Route::get('/',[FakeMainController::class,'index']);
-    Route::get('/catalog',[FakeMainController::class, 'catalog']);
-    Route::get('/catalog/{id}',[FakeMainController::class, 'showProduct']);
+Route::prefix('fake')->group(function () {
+    Route::get('/', [FakeMainController::class, 'index']);
+    Route::get('/catalog', [FakeMainController::class, 'catalog']);
+    Route::get('/catalog/{slug}', [FakeMainController::class, 'showProduct'])->name('product.show');
+    Route::get('/news', [FakeMainController::class, 'news']);
+    Route::get('/news/{slug}', [FakeMainController::class, 'newsShow'])->name('user.news.show');
+    Route::get('/calculator', [FakeMainController::class, 'calc']);
+    Route::get('/contacts', [FakeMainController::class, 'contacts']);
 });

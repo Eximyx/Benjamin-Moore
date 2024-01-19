@@ -52,7 +52,7 @@ abstract class CoreRepository
         if ($amount) {
             $entities = $entities->take($amount);
         }
-        return $entities->get();
+        return $entities;
 
     }
 
@@ -84,6 +84,11 @@ abstract class CoreRepository
         return $Entities;
     }
 
+    public function findBySlug($slug)
+    {
+        $entity = $this->model->where("slug", $slug)->first();
+        return $entity;
+    }
     public function findById($id)
     {
         $entity = $this->model->find($id);

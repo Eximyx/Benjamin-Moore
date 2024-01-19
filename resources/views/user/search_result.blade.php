@@ -31,4 +31,4 @@
             </div>
         </div>
     @endforeach
-    {{ $Products->links() }}
+    {{ $Products->withQueryString()->links() }}

@@ -9,6 +9,7 @@ use App\Services\Service;
 
 class CatalogController extends Controller
 {
+    protected $service;
     public function __construct()
     {
         $this->service = new Service;

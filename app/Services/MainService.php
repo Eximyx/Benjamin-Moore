@@ -14,22 +14,50 @@ class MainService
         $this->productSer = $productService;
     }
 
-    public function showNewsAndProducts($amountOfNews = null, $amountOfProducts = null)
+    public function showNews($amountOfNews = null)
     {
-        $items['news'] = $this->newsSer->showLatest($amountOfNews);
-
-        $items['products'] = $this->productSer->showWrapper($amountOfProducts);
-
-        return $items;
+        $news = $this->newsSer->showLatest($amountOfNews);
+        return $news;
     }
 
-    public function fetchProducts()
+    public function productsWrapper($amountOfProducts = 4)
     {
-        $list = [];
-        
-        $list['categories'] = $this->productSer->getAllSelectable();
+        $products = $this->productSer->showWrapper($amountOfProducts);
+        return $products;
+    }
 
-        $list['products'] = $this->productSer->showWithPaginate(12);
+    public function findProductBySlug($slug)
+    {
+        $product = $this->productSer->findBySlug($slug);
+        return $product;
+    }
+
+    public function findNewsBySlug($slug)
+    {
+        $news = $this->newsSer->findBySlug($slug);
+        return $news;
+    }
+
+    public function fetchProducts($data = null)
+    {
+        $list['category_title'] = null;
+        $kind_of_work_id = null;
+        $category_id = null;
+
+        if ($data) {
+            $kind_of_work_id = $data['kind_of_work_id'];
+            $category_id = $data['category_id'];
+        }
+
+        $list['categories'] = $this->productSer->getAllSelectable($kind_of_work_id);
+        if (!$category_id) {
+            $category_id = $list['categories']->pluck('id')->toArray();
+        } else {
+            $list['category_title'] = $list['categories']->find($category_id)->title;
+        }
+
+        $list['categories'] = $list['categories']->get();
+        $list['products'] = $this->productSer->getAllWithFilters($category_id);
 
         return $list;
     }
