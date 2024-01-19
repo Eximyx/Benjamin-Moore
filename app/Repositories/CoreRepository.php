@@ -29,7 +29,8 @@ abstract class CoreRepository
      */
     abstract protected function getModelClass();
 
-    public function getModelData() {
+    public function getModelData()
+    {
         return $this->model->getModel();
     }
 
@@ -38,19 +39,27 @@ abstract class CoreRepository
         return clone $this->model;
     }
 
-    public function getAll(){
-        $entities = $this->model->all(); 
+    public function getAll()
+    {
+        $entities = $this->model->all();
         return $entities;
     }
 
-    public function getLatest($amount = null){
+    public function getLatest($amount = null)
+    {
         $entities = $this->model->latest();
 
         if ($amount) {
             $entities = $entities->take($amount);
-        } 
+        }
         return $entities->get();
 
+    }
+
+    public function getAllSelectables()
+    {
+        $selectable = $this->model->getModel()['selectableModel']->all();
+        return $selectable;
     }
 
     public function getAllForDatatable()
@@ -65,8 +74,13 @@ abstract class CoreRepository
 
         $query = $this->queryForDatatable($data, $selectable_key);
 
-        $Entities = $this->startConditions()->join(...$query['join'])->select(...$query['select'])->get();
+        $Entities = $this->startConditions();
 
+        if (isset($query['join'])) {
+            $Entities = $Entities->join(...$query['join']);
+        }
+
+        $Entities = $Entities->select(...$query['select'])->get();
         return $Entities;
     }
 
@@ -118,8 +132,11 @@ abstract class CoreRepository
 
             $query['select'][] = $selectableModelName . '.title as ' . $selectable_key;
         }
-        return $query;
 
+        $query['select'][] = $modelName . '.created_at';
+        $query['select'][] = $modelName . '.updated_at';
+
+        return $query;
     }
 
 }
