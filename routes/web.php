@@ -145,6 +145,14 @@ Route::prefix('test1')->group(function () {
     Route::post('toggle', [NewController::class, 'toggle']);
 });
 
+Route::prefix('test2')->group(function () {
+    Route::get('/', [ProductCategoryController::class, 'index']);
+    Route::post('store', [ProductCategoryController::class, 'store']);
+    Route::post('edit', [ProductCategoryController::class, 'edit']);
+    Route::post('delete', [ProductCategoryController::class, 'delete']);
+    Route::post('toggle', [ProductCategoryController::class, 'toggle']);
+});
+
 
 
 Route::prefix('fake')->group(function(){

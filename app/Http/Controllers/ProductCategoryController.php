@@ -2,9 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\CreateProductCategoryRequest;
+use App\Services\ProductCategoryService;
 
-class ProductCategoryController extends Controller
+
+
+
+class ProductCategoryController extends FakeController
 {
-    //
+    public function __construct(ProductCategoryService $service)
+    {
+        parent::__construct(new CreateProductCategoryRequest());
+        $this->service = $service;
+    }
 }
