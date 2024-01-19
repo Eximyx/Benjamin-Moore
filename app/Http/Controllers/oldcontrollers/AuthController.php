@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateAdminRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -17,15 +16,19 @@ class AuthController extends Controller
         return view('auth/register');
     }
 
-    public function registerSave(CreateAdminRequest $request)
+    public function registerSave(Request $request)
     {
-        $data = $this->service->store(($request->validate($request->rules())));
+        Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed',
+        ])->validate();
 
         User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'User_role_id' => 0
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'isdmin' => 0
         ]);
 
 

@@ -9,6 +9,9 @@ class Leads extends Model
 {
     use HasFactory;
 
+    protected $table = 'leads';
+    protected $guarded = false;
+    
     public static function getModel()
     {
         return [
@@ -30,7 +33,5 @@ class Leads extends Model
             ]
         ];
     }
-    protected $table = 'leads';
-    protected $guarded = false;
 
 }

@@ -161,6 +161,29 @@ Route::prefix('test3')->group(function () {
     Route::post('toggle', [StaticPageController::class, 'toggle']);
 });
 
+Route::prefix('test4')->group(function () {
+    Route::get('/', [CategoryController::class, 'index']);
+    Route::post('store', [CategoryController::class, 'store']);
+    Route::post('edit', [CategoryController::class, 'edit']);
+    Route::post('delete', [CategoryController::class, 'delete']);
+    Route::post('toggle', [CategoryController::class, 'toggle']);
+});
+
+Route::prefix('test5')->group(function () {
+    Route::get('/', [LeadsController::class, 'index']);
+    Route::post('store', [LeadsController::class, 'store']);
+    Route::post('edit', [LeadsController::class, 'edit']);
+    Route::post('delete', [LeadsController::class, 'delete']);
+    Route::post('toggle', [LeadsController::class, 'toggle']);
+});
+
+Route::prefix('test6')->group(function () {
+    Route::get('/', [AdminController::class, 'index']);
+    Route::post('store', [AdminController::class, 'store']);
+    Route::post('edit', [AdminController::class, 'edit']);
+    Route::post('delete', [AdminController::class, 'delete']);
+});
+
 
 Route::prefix('fake')->group(function(){
     Route::get('/',[FakeMainController::class,'index']);

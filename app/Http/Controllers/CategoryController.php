@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Http\Requests\CreateCategoryRequest;
+use App\Services\CategoryService;
 
 
-class CategoryController extends BaseController
+class CategoryController extends FakeController
 {
-    public function __construct(Category $model) {
-        parent::__construct($model);
+    public function __construct(CategoryService $service)
+    {
+        parent::__construct(new CreateCategoryRequest());
+        $this->service = $service;
     }
 }

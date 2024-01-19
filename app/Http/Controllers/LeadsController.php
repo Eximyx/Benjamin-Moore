@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Leads;
-use App\Models\LeadsMigration;
-use Illuminate\Http\Request;
+use App\Http\Requests\CreateLeadsRequest;
+use App\Services\LeadsService;
 
-class LeadsController extends BaseController
+class LeadsController extends FakeController
 {
-    public function __construct(Leads $model) {
-        parent::__construct($model);    
+    public function __construct(LeadsService $service)
+    {
+        parent::__construct(new CreateLeadsRequest());
+        $this->service = $service;
     }
 }

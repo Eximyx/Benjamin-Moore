@@ -33,7 +33,9 @@ class User extends Authenticatable
                 'password' => 'Пароль',
                 'user_role_id' => 'Права',
             ],
+            'selectable_key' => 'user_role_id',
             'selectable' => UserRoles::class,
+            'selectableModel' => new UserRoles(),
             'validator_data' => [
                 'name' => 'string|required',
                 'email' => 'email|required',
