@@ -28,7 +28,9 @@ class ProductCategory extends Model
                 'content' => 'Содержимое',
                 'kind_of_work_id' => 'Категория',
             ],
+            'selectable_key' => 'kind_of_work_id',
             'selectable' => KindOfWork::class,
+            'selectableModel' => new KindOfWork(),
             'validator_data' => [
                 'title' => 'string|required',
                 'content' => 'string|required',
@@ -58,12 +60,5 @@ class ProductCategory extends Model
     public function kind_of_work(){
         return $this->belongsTo(KindOfWork::class,'kind_of_work_id','id');
     }
-    // public function sluggable(): array
-    // {
-    //     return [
-    //         'slug' => [
-    //             'source' => 'title'
-    //         ]
-    //     ];
-    // }
+
 }

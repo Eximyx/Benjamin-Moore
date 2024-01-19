@@ -27,7 +27,6 @@
             </table>
         </div>
     </div>
-    {{ $selectable }}
     <div class="modal fade" id="Form-modal" aria-hidden="true" style="z-index: 1045" tabindex="-1">
         <div class="modal-dialog modal-lg modal-fullscreen m-0" style="max-width: none">
             <div class="modal-content">

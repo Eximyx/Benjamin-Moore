@@ -153,6 +153,13 @@ Route::prefix('test2')->group(function () {
     Route::post('toggle', [ProductCategoryController::class, 'toggle']);
 });
 
+Route::prefix('test3')->group(function () {
+    Route::get('/', [StaticPageController::class, 'index']);
+    Route::post('store', [StaticPageController::class, 'store']);
+    Route::post('edit', [StaticPageController::class, 'edit']);
+    Route::post('delete', [StaticPageController::class, 'delete']);
+    Route::post('toggle', [StaticPageController::class, 'toggle']);
+});
 
 
 Route::prefix('fake')->group(function(){
