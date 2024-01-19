@@ -25,7 +25,8 @@ class LoginRequest extends FormRequest
             'id'=>'',
             'email' => 'email|required',
             'password' => 'required',
-            '_token' => ''
+            '_token' => '',
+            'user_role_id' => ''
         ];
     }
 }

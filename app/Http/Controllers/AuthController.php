@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateAdminRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -17,7 +18,7 @@ class AuthController extends Controller
     protected Request $request;
 
     public function __construct(){
-        $this->request = new CreateAdminRequest();
+        $this->request = new RegisterRequest();
     }
     public function register()
     {
@@ -27,8 +28,8 @@ class AuthController extends Controller
     public function registerSave(AuthService $service ,Request $request)
     {
         $request = $request->validate($this->request->rules());
-        $data = $service->store($request);
-        return response()->json($data);
+        $service->store($request);
+
 
         // User::create([
         //     'name' => $data['name'],
@@ -44,9 +45,9 @@ class AuthController extends Controller
         //     ]);
         // }
 
-        // $request->session()->regenerate();
+        $this->request->session()->regenerate();
 
-        // return redirect()->route('main.index');
+        return redirect()->route('main.index');
     }
 
     public function login()
@@ -56,6 +57,7 @@ class AuthController extends Controller
 
     public function loginAction(LoginRequest $request)
     {
+        return response()->json($request->validated());
         $request->validated();
         
         $request->session()->regenerate();
