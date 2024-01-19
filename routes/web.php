@@ -164,4 +164,6 @@ Route::prefix('test3')->group(function () {
 
 Route::prefix('fake')->group(function(){
     Route::get('/',[FakeMainController::class,'index']);
+    Route::get('/catalog',[FakeMainController::class, 'catalog']);
+    Route::get('/catalog/{id}',[FakeMainController::class, 'showProduct']);
 });

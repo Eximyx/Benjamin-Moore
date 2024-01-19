@@ -16,9 +16,16 @@ class FakeMainController extends Controller
 
     public function index()
     {
-        $items = $this->service->showNewsAndProducts(3,4);
+        $items = $this->service->showNewsAndProducts(3, 4);
         return view("user.main", ["NewsPost" => $items['news'], "Products" => $items['products']]);
-
-        // return reponse()->json($);
     }
+
+    public function catalog(){
+        return view('user.FakeCatalog');
+    }
+
+    public function showProduct(){
+        return view('user');
+    }
+
 }
