@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('main_image');
+            $table->string('main_image')->default('1.jpg');
             $table->longText('content');
             $table->integer('code');
             $table->string('gloss_level');

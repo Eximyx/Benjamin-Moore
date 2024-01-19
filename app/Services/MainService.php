@@ -23,4 +23,15 @@ class MainService
         return $items;
     }
 
+    public function fetchProducts()
+    {
+        $list = [];
+        
+        $list['categories'] = $this->productSer->getAllSelectable();
+
+        $list['products'] = $this->productSer->showWithPaginate(12);
+
+        return $list;
+    }
+
 }

@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Repositories\CoreRepository;
 use Illuminate\Support\Facades\Storage;
 use App\Services\DatatableService;
 
@@ -22,12 +21,23 @@ abstract class BaseService
         $entities = $this->repository->getLatest($amount);
         return $entities;
     }
+
+    public function showWithPaginate($amount = 1){
+        $entities = $this->repository->startConditions()->paginate($amount);
+        return $entities;
+    }
     public function ajaxDataTable()
     {
         $entities = $this->repository->getAllForDatatable();
         $table = $this->datatableService->createDatatable($entities);
 
         return $table->make(true);
+    }
+
+    public function getAllSelectable()
+    {
+        $selectables = $this->repository->getAllSelectables();
+        return $selectables;
     }
 
     public function getVariablesForDataTable()

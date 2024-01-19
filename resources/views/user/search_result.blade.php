@@ -9,7 +9,7 @@
         <div id="product"
             class="col-12 col-md-4 col-lg-4 justify-content-center align-items-center py-2 m-0 p-2 h-auto ">
             <div class="row border-2 border rounded-4 align-items-center align-self-center m-0 p-0 h-100">
-                <img src="storage/image/{{ $product->main_image }}"
+                <img src="{{asset('storage').'/image/'. $product->main_image }}"
                     class="m-0 p-0 w-100 img-fluid rounded-4 align-self-center" alt="">
                 <div class="text-center fs-5 p-0 m-0">
                     <p class="m-0 py-0">{{ $product->title }}</p>

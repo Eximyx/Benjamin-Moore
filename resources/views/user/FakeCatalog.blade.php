@@ -19,9 +19,9 @@
                 <select id="category_id" name="category_id" class="categories form-select rounded-5 border-danger border-2"
                     aria-label="Default select example">
                     <option selected value="0">Все</option>
-                    {{-- @foreach ($category as $value)
+                    @foreach ($category as $value)
                         <option value="{{ $value->id }}">{{ $value->title }}</option>
-                    @endforeach  --}}
+                    @endforeach
                 </select>
                 <div class="row w-100 m-0 my-2">
                     {{-- <button type="submit" class="btn btn-outline-danger">Применить фильтр</button> --}}
@@ -58,9 +58,9 @@
                                 class="categories form-select rounded-5 border-danger border-2"
                                 aria-label="Default select example">
                                 <option selected value="0">Все</option>
-                                {{-- @foreach ($category as $value)
+                                @foreach ($category as $value)
                                     <option value="{{ $value->id }}">{{ $value->title }}</option>
-                                @endforeach --}}
+                                @endforeach
                             </select>
                             <div class="row w-100 m-0 my-2">
                                 {{-- <button type="submit" class="btn btn-outline-danger">Применить фильтр</button> --}}
@@ -74,8 +74,7 @@
         </div>
         <div class="col-12 col-lg-9 m-0">
             <div id="searchResult" class="row">
-                {{-- @include('user.search_result') --}}
-
+                @include('user.search_result')
             </div>
         </div>
     </div>
