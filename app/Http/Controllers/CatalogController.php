@@ -28,7 +28,7 @@ class CatalogController extends Controller
                 $query->whereIn('product_category_id', $categories->pluck('id')->toArray());
                 $categories = $categories->get();
             }
-            
+
             if (isset($request['category_id']) && $request['category_id'] !== "0") {
                 $query->where("product_category_id", "=", $request["category_id"]);
             }
@@ -37,11 +37,12 @@ class CatalogController extends Controller
         }
         return view("user.catalog", ["Products" => $products, "category" => $categories]);
     }
-    public function show($slug) {
+    public function show($slug)
+    {
         $Products = Product::all();
-        $item = $Products->where('slug',$slug)->first();
-        $Products = $this->service->wrapper($Products,4);
-        return view('user.product',compact('Products','item'));
-    
+        $item = $Products->where('slug', $slug)->first();
+        $Products = $this->service->wrapper($Products, 4);
+        return view('user.product', compact('Products', 'item'));
+
     }
 }
