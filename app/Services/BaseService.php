@@ -75,8 +75,7 @@ abstract class BaseService
     public function store($request)
     {
         $id = null;
-
-        if ($request['id'] !== null) {
+        if (isset($request['id']) && $request['id'] !== null) {
             $id = $request['id'];
             unset($request['id']);
         }

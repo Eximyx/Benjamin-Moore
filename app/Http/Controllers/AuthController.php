@@ -2,50 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateAdminRequest;
-use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\LoginRequest;
+use App\Http\Requests\AuthRequest;
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Services\AuthService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 
 class AuthController extends Controller
 {
     protected Request $request;
+    protected AuthService $service;
 
-    public function __construct(){
-        $this->request = new RegisterRequest();
+    public function __construct(AuthService $authService)
+    {
+        $this->request = new AuthRequest();
+        $this->service = $authService;
     }
     public function register()
     {
         return view('auth/register');
     }
 
-    public function registerSave(AuthService $service ,Request $request)
+    public function registerSave(Request $request)
     {
-        $request = $request->validate($this->request->rules());
-        $service->store($request);
 
+        $data = $request->validate($this->request->rules());
 
-        // User::create([
-        //     'name' => $data['name'],
-        //     'email' => $data['email'],
-        //     'password' => Hash::make($data['password']),
-        //     'User_role_id' => 0
-        // ]);
+        $user = $this->service->store($data);
 
-
-        // if (!Auth::attempt($request->only('email', 'password'), true)) {
-        //     throw ValidationException::withMessages([
-        //         'email' => trans('auth.failed')
-        //     ]);
-        // }
-
-        $this->request->session()->regenerate();
+        $this->loginAction($request);
 
         return redirect()->route('main.index');
     }
@@ -55,15 +40,10 @@ class AuthController extends Controller
         return view('auth/login');
     }
 
-    public function loginAction(LoginRequest $request)
+    public function loginAction(Request $request)
     {
-        return response()->json($request->validated());
-        $request->validated();
-        
-        $request->session()->regenerate();
-
+        $this->service->authAttempt($request);
         return redirect('admin/');
-
     }
 
     public function logout(Request $request)
@@ -86,30 +66,12 @@ class AuthController extends Controller
 
     }
 
-    public function profile_set()
+    public function profile_set(Request $request)
     {
-
-        $data = request()->all();
-        $data['id'] = Auth::user()->id;
-        if (!($data['password'] !== null)) {
-            $data['password'] = Auth()->user()->password;
-        }
-
-        $user = Validator::make($data, [
-            'id' => 'required',
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-        ])->validate();
-
-        $user = User::updateOrCreate([
-            'id' => $data['id']
-
-        ], 
-        [
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => $data['password']]);
+        $validation = $this->service->profileSet($request);
+        // We can do it in an another request, but we wont to do that. So be patient :3
+        $validation = $validation->validate(['id' => 'required', ...$this->request->rules()]);
+        $user = $this->service->store($validation);
         return response()->json($user);
     }
 

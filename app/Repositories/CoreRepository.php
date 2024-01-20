@@ -58,7 +58,7 @@ abstract class CoreRepository
 
     public function getAllSelectables()
     {
-        $selectable = $this->model->getModel()['selectableModel']->all();
+        $selectable = clone $this->model->getModel()['selectableModel']->all();
         return $selectable;
     }
 
