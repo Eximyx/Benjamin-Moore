@@ -6,6 +6,7 @@ use App\Http\Requests\AuthRequest;
 use Illuminate\Http\Request;
 use App\Services\AuthService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\Controller;
 
 
 class AuthController extends Controller
@@ -58,12 +59,10 @@ class AuthController extends Controller
     public function profile(Request $request)
     {
         return view('admin/profile');
-
     }
     public function profileUSer(Request $request)
     {
         return view('user/profile');
-
     }
 
     public function profile_set(Request $request)
@@ -74,5 +73,4 @@ class AuthController extends Controller
         $user = $this->service->store($validation);
         return response()->json($user);
     }
-
 }

@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UserSessionMidlleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check()) {
@@ -21,8 +16,7 @@ class UserSessionMidlleware
         }
         if ($request->getPathInfo() == '/logout') {
             return $next($request);
-        }
-        else {
+        } else {
             return redirect('home');
         }
     }
