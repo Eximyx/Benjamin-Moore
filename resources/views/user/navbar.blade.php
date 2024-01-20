@@ -63,7 +63,7 @@
             </div>
             <div class="col-6 d-none d-lg-flex px-lg-2 p-0 m-0 justify-content-center align-items-center "
                 style="height:fit-content;width:fit-content">
-                <a class="btn btn-danger text-center text-nowrap text-white fs-6 m-0 py-1" href="{{ route('login') }}">
+                <a class="btn btn-danger text-center text-nowrap text-white fs-6 m-0 py-1" href="{{ route('main.index') }}">
                     Заказать звонок
                 </a>
             </div>
