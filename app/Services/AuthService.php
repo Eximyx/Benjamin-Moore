@@ -18,10 +18,12 @@ class AuthService extends BaseService
     {
         $data = $request->all();
         $data['id'] = Auth::user()->id;
+
         if (!($data['password'] !== null)) {
             $data['password'] =  Auth::user()->password;
         }
         $request->replace($data);
+
         return $request;
     }
 
@@ -34,7 +36,4 @@ class AuthService extends BaseService
         }
         $request->session()->regenerate();
     }
-
-
-
 }

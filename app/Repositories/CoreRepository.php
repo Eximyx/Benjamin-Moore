@@ -1,32 +1,16 @@
 <?php
+
 namespace App\Repositories;
-
-use Illuminate\Database\Eloquent\Model;
-
 
 abstract class CoreRepository
 {
-    /**
-     * 
-     * @var Model
-     */
-
     protected $model;
-    // protected $service;
-
-    /**
-     * CoreRepository Contstructor
-     */
 
     public function __construct()
     {
-        // $this->service = app('App\Services\Service');
         $this->model = app($this->getModelClass());
     }
 
-    /**
-     * @return mixed
-     */
     abstract protected function getModelClass();
 
     public function getModelData()
@@ -42,6 +26,7 @@ abstract class CoreRepository
     public function getAll()
     {
         $entities = $this->model->all();
+
         return $entities;
     }
 
@@ -53,12 +38,12 @@ abstract class CoreRepository
             $entities = $entities->take($amount);
         }
         return $entities;
-
     }
 
     public function getAllSelectables()
     {
         $selectable = clone $this->model->getModel()['selectableModel']->all();
+
         return $selectable;
     }
 
@@ -68,7 +53,6 @@ abstract class CoreRepository
         $selectable_key = null;
 
         if (isset($data['selectableModel'])) {
-            // $selectable_key = $this->service->getDataKeyForCombobox($data);
             $selectable_key = $data['selectable_key'];
         }
 
@@ -87,18 +71,19 @@ abstract class CoreRepository
     public function findBySlug($slug)
     {
         $entity = $this->model->where("slug", $slug)->first();
+
         return $entity;
     }
+
     public function findById($id)
     {
         $entity = $this->model->find($id);
+
         return $entity;
     }
 
     public function updateOrCreate($request, $id = null)
     {
-
-
         $entity = $this->model->updateOrCreate([
             'id' => $id
         ], [
@@ -111,6 +96,7 @@ abstract class CoreRepository
     public function destroy($entity)
     {
         $entity = $entity->delete();
+
         return $entity;
     }
 
@@ -143,6 +129,4 @@ abstract class CoreRepository
 
         return $query;
     }
-
 }
-

@@ -48,6 +48,7 @@ class ProductCategory extends Model
     {
         return $this->hasMany(Product::class, 'product_category_id', 'id');
     }
+
     public function kind_of_work()
     {
         return $this->belongsTo(KindOfWork::class, 'kind_of_work_id', 'id');

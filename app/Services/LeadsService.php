@@ -11,6 +11,4 @@ class LeadsService extends BaseService
         parent::__construct();
         $this->repository = $repository;
     }
-
-
 }

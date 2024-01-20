@@ -2,13 +2,11 @@
 
 namespace App\Services;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
-use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Storage;
 
-
 //TODO THIS MUST BE A SINGLETONE (этот сервис должен создаваться один раз, потому что в последствии все контроллеры и модели обращаются к нему)
+
 class Service
 {
     public function store($data, $hasImage, $model)
@@ -31,7 +29,6 @@ class Service
             }
         }
         return $data;
-
     }
 
     public function delete_image($Entity)
@@ -78,10 +75,8 @@ class Service
         return $columns;
     }
 
-
     public function wrapper($items, $product_slide)
     {
-        // $Entities = $items;
         $count = count($items);
         $j = 0;
         $List = [];
@@ -106,7 +101,4 @@ class Service
             }
         }
     }
-
-
-
 }

@@ -4,7 +4,6 @@ namespace App\Services;
 
 class MainService
 {
-
     protected $newsSer;
     protected $productSer;
     protected $leadsSer;
@@ -19,29 +18,35 @@ class MainService
     public function showNews($amountOfNews = null)
     {
         $news = $this->newsSer->showLatest($amountOfNews);
+
         return $news;
     }
 
     public function productsWrapper($amountOfProducts = 4)
     {
         $products = $this->productSer->showWrapper($amountOfProducts);
+
         return $products;
     }
 
     public function findProductBySlug($slug)
     {
         $product = $this->productSer->findBySlug($slug);
+
         return $product;
     }
 
     public function findNewsBySlug($slug)
     {
         $news = $this->newsSer->findBySlug($slug);
+
         return $news;
     }
 
-    public function leadsCreate($request){
+    public function leadsCreate($request)
+    {
         $leads = $this->leadsSer->store($request);
+
         return $leads;
     }
 
@@ -68,5 +73,4 @@ class MainService
 
         return $list;
     }
-
 }

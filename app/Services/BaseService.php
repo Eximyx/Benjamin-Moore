@@ -4,13 +4,13 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
 use App\Services\DatatableService;
-
 use Exception;
 
 abstract class BaseService
 {
     protected DatatableService $datatableService;
     protected $repository;
+
     public function __construct()
     {
         $this->datatableService = app(DatatableService::class);
@@ -19,20 +19,24 @@ abstract class BaseService
     public function showLatest($amount = null)
     {
         $entities = $this->repository->getLatest($amount);
+
         return $entities;
     }
 
     public function findBySlug($slug)
     {
         $entity = $this->repository->findBySlug($slug);
+
         return $entity;
     }
 
     public function showWithPaginate($amount = 1)
     {
         $entities = $this->repository->startConditions()->paginate($amount);
+
         return $entities;
     }
+
     public function ajaxDataTable()
     {
         $entities = $this->repository->getAllForDatatable();
@@ -44,9 +48,9 @@ abstract class BaseService
     public function getAllSelectable()
     {
         $selectables = $this->repository->getAllSelectables();
+
         return $selectables;
     }
-
 
     public function getVariablesForDataTable()
     {
@@ -101,6 +105,7 @@ abstract class BaseService
             $this->deleteImage($entity->main_iamge);
         }
         $entity->delete();
+
         return $entity;
     }
 
@@ -129,13 +134,12 @@ abstract class BaseService
     {
         Storage::put('public\image', $image);
         $image = $image->hashName();
+
         return $image;
     }
 
-
     public function wrapper($items, $product_slide)
     {
-        // $Entities = $items;
         $count = count($items);
         $j = 0;
         $List = [];
@@ -149,6 +153,4 @@ abstract class BaseService
         }
         return $List;
     }
-
-
 }

@@ -1,11 +1,11 @@
 <?php
+
 namespace App\Services;
 
 use Illuminate\Support\Carbon;
 
 class DatatableService
 {
-
     public function createDatatable($data = null)
     {
         return datatables()->of($data)
@@ -31,5 +31,4 @@ class DatatableService
         }
         return $columns;
     }
-
 }

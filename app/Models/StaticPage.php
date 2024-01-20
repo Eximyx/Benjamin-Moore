@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class StaticPage extends Model
 {
-
     use HasFactory, Sluggable;
 
     protected $table = 'static_pages';

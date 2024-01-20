@@ -11,6 +11,4 @@ class CategoryService extends BaseService
         parent::__construct();
         $this->repository = $repository;
     }
-
-
 }

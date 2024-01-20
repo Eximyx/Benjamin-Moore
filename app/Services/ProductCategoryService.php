@@ -11,6 +11,4 @@ class ProductCategoryService extends BaseService
         parent::__construct();
         $this->repository = $productCategoryRepository;
     }
-
-
 }
