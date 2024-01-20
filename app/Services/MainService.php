@@ -7,11 +7,13 @@ class MainService
 
     protected $newsSer;
     protected $productSer;
+    protected $leadsSer;
 
-    public function __construct(NewsService $newsService, ProductService $productService)
+    public function __construct(NewsService $newsService, ProductService $productService, LeadsService $leadsService)
     {
         $this->newsSer = $newsService;
         $this->productSer = $productService;
+        $this->leadsSer = $leadsService;
     }
 
     public function showNews($amountOfNews = null)
@@ -36,6 +38,11 @@ class MainService
     {
         $news = $this->newsSer->findBySlug($slug);
         return $news;
+    }
+
+    public function leadsCreate($request){
+        $leads = $this->leadsSer->store($request);
+        return $leads;
     }
 
     public function fetchProducts($data = null)

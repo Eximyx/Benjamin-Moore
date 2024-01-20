@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateLeadsRequest;
 use App\Http\Requests\SlugRequest;
 use Illuminate\Http\Request;
 use App\Services\MainService;
@@ -52,12 +53,21 @@ class FakeMainController extends Controller
         return view('user.product', compact('item', 'Products'));
     }
 
-    public function calc(){
+    public function calc()
+    {
         return view('user.calculator');
     }
 
-    public function contacts(){
+    public function contacts()
+    {
         return view('user.contacts');
+    }
+
+    public function leads(CreateLeadsRequest $request)
+    {
+        $request = $request->validated();
+        $leads = $this->service->leadsCreate($request);
+        return response()->json($leads);
     }
 
 }

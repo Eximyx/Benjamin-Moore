@@ -99,29 +99,36 @@ Route::middleware('admin')->group(function () {
 
         });
 });
+Route::prefix('')->group(function () {
+    Route::get('/', [FakeMainController::class, 'index'])->name('main.index');
+    Route::get('/catalog', [FakeMainController::class, 'catalog'])->name('user.catalog');
+    Route::get('/catalog/{slug}', [FakeMainController::class, 'showProduct'])->name('product.show');
+    Route::get('/news', [FakeMainController::class, 'news'])->name('user.news');
+    Route::get('/news/{slug}', [FakeMainController::class, 'newsShow'])->name('user.news.show');
+    Route::get('/calculator', [FakeMainController::class, 'calc'])->name('calc');
+    Route::get('/contacts', [FakeMainController::class, 'contacts'])->name('contacts');
+    Route::post('/leads', [FakeMainController::class, 'leads'])->name('leads');
+});
 
+// Route::get('/home', [MainController::class, 'index'])->name('main.index');
+// Route::get('/calculator', function () {
+//     return view('user.calculator');
+// })->name('calc');
+// Route::get('/contacts', function () {
+//     return view('user.contacts');
+// })->name('contacts');
+// Route::get('/news', [NewsController::class, 'news_index'])->name('user.news');
+// Route::get('/news/{slug}', [NewsController::class, 'show']);
 
-// Route::get('/home', [ProductsController::class,'shop'])->name('welcome');
-///sa
-Route::get('/home', [MainController::class, 'index'])->name('main.index');
-Route::get('/calculator', function () {
-    return view('user.calculator');
-})->name('calc');
-Route::get('/contacts', function () {
-    return view('user.contacts');
-})->name('contacts');
-Route::get('/news', [NewsController::class, 'news_index'])->name('user.news');
-Route::get('/news/{slug}', [NewsController::class, 'show']);
+// Route::post('categoryProduct/fetch', [ProductCategoryController::class, 'fetch'])->name('fetch');
 
-Route::post('categoryProduct/fetch', [ProductCategoryController::class, 'fetch'])->name('fetch');
+// Route::get('catalog', [CatalogController::class, 'index'])->name('user.catalog');
 
-Route::get('catalog', [CatalogController::class, 'index'])->name('user.catalog');
+// Route::post('/leads', [MainController::class, 'leads'])->name('leads');
 
-Route::post('/leads', [MainController::class, 'leads'])->name('leads');
+// Route::get('/profile', [AuthController::class, 'profileUser'])->name('prof');
 
-Route::get('/profile', [AuthController::class, 'profileUser'])->name('prof');
-
-Route::get('/product/{slug}', [CatalogController::class, 'show'])->name('product.show');
+// Route::get('/product/{slug}', [CatalogController::class, 'show'])->name('product.show');
 
 
 // Route::get('/test',[FakeController::class,'index'])->name('test');
@@ -130,11 +137,7 @@ Route::get('/product/{slug}', [CatalogController::class, 'show'])->name('product
 
 
 Route::prefix('test')->group(function () {
-    Route::get('/', [ProductsController::class, 'index']);
-    Route::post('store', [ProductsController::class, 'store']);
-    Route::post('edit', [ProductsController::class, 'edit']);
-    Route::post('delete', [ProductsController::class, 'delete']);
-    Route::post('toggle', [ProductsController::class, 'toggle']);
+
 });
 
 Route::prefix('test1')->group(function () {
@@ -185,12 +188,3 @@ Route::prefix('test6')->group(function () {
 });
 
 
-Route::prefix('fake')->group(function () {
-    Route::get('/', [FakeMainController::class, 'index']);
-    Route::get('/catalog', [FakeMainController::class, 'catalog']);
-    Route::get('/catalog/{slug}', [FakeMainController::class, 'showProduct'])->name('product.show');
-    Route::get('/news', [FakeMainController::class, 'news']);
-    Route::get('/news/{slug}', [FakeMainController::class, 'newsShow'])->name('user.news.show');
-    Route::get('/calculator', [FakeMainController::class, 'calc']);
-    Route::get('/contacts', [FakeMainController::class, 'contacts']);
-});
