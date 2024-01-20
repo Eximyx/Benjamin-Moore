@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateLeadsRequest;
-use App\Http\Requests\SlugRequest;
-use Illuminate\Http\Request;
 use App\Services\MainService;
 use App\Http\Requests\ProductFilterRequest;
-
+use Illuminate\Routing\Controller;
 
 class FakeMainController extends Controller
 {
     protected $service;
+
     public function __construct(MainService $mainService)
     {
         $this->service = $mainService;
@@ -23,11 +22,13 @@ class FakeMainController extends Controller
         $items['products'] = $this->service->productsWrapper();
         return view("user.main", ["NewsPost" => $items['news'], "Products" => $items['products']]);
     }
+
     public function news()
     {
         $newsposts = $this->service->showNews()->paginate(12);
         return view('user.news', compact('newsposts'));
     }
+
     public function catalog(ProductFilterRequest $request)
     {
         $entities = $this->service->fetchProducts();
@@ -46,6 +47,7 @@ class FakeMainController extends Controller
         $NewsPosts = $this->service->showNews(3)->get();
         return view('user.news_show', compact('NewsPost', 'NewsPosts'));
     }
+
     public function productShow($slug)
     {
         $item = $this->service->findProductBySlug($slug);
@@ -69,5 +71,4 @@ class FakeMainController extends Controller
         $leads = $this->service->leadsCreate($request);
         return response()->json($leads);
     }
-
 }
