@@ -8,12 +8,11 @@ use Illuminate\Routing\Controller;
 
 abstract class FakeController extends Controller
 {
-    protected BaseService $service;
-    protected Request $request;
 
-    public function __construct(Request $request)
-    {
-        $this->request = $request;
+    public function __construct(
+        protected BaseService $service,
+        protected Request $request
+    ) {
     }
 
     public function index()

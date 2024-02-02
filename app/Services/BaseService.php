@@ -8,15 +8,15 @@ use Exception;
 
 abstract class BaseService
 {
-    protected DatatableService $datatableService;
-    protected $repository;
 
-    public function __construct()
-    {
+    protected $datatableService;
+    public function __construct(
+        protected $repository
+    ) {
         $this->datatableService = app(DatatableService::class);
     }
 
-    public function showLatest($amount = null)
+    public function showLatest(int $amount = null)
     {
         $entities = $this->repository->getLatest($amount);
 
@@ -30,7 +30,7 @@ abstract class BaseService
         return $entity;
     }
 
-    public function showWithPaginate($amount = 1)
+    public function showWithPaginate(int $amount = 1)
     {
         $entities = $this->repository->startConditions()->paginate($amount);
 
@@ -138,7 +138,7 @@ abstract class BaseService
         return $image;
     }
 
-    public function wrapper($items, $product_slide)
+    public function wrapper($items, int $product_slide)
     {
         $count = count($items);
         $j = 0;

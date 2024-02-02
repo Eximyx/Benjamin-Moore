@@ -8,7 +8,6 @@ class NewsService extends BaseService
 {
     public function __construct(NewsRepository $newsRepository)
     {
-        parent::__construct();
-        $this->repository = $newsRepository;
+        parent::__construct($newsRepository);
     }
 }

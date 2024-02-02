@@ -8,7 +8,6 @@ class ProductCategoryService extends BaseService
 {
     public function __construct(ProductCategoryRepository $productCategoryRepository)
     {
-        parent::__construct();
-        $this->repository = $productCategoryRepository;
+        parent::__construct($productCategoryRepository);
     }
 }
