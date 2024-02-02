@@ -95,7 +95,7 @@ Route::middleware('admin')->group(function () {
 
 Route::get('/', [FakeMainController::class, 'index'])->name('main.index');
 Route::get('/catalog', [FakeMainController::class, 'catalog'])->name('user.catalog');
-Route::get('/catalog/{slug}', [FakeMainController::class, 'showProduct'])->name('product.show');
+Route::get('/catalog/{slug}', [FakeMainController::class, 'productShow'])->name('product.show');
 Route::get('/news', [FakeMainController::class, 'news'])->name('user.news');
 Route::get('/news/{slug}', [FakeMainController::class, 'newsShow'])->name('user.news.show');
 Route::get('/calculator', [FakeMainController::class, 'calc'])->name('calc');
