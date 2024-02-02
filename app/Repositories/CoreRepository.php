@@ -2,16 +2,22 @@
 
 namespace App\Repositories;
 
+use Illuminate\Database\Eloquent\Model;
+
 abstract class CoreRepository
 {
-    protected $model;
 
-    public function __construct()
+    public function __construct(
+    protected $model
+    )
     {
-        $this->model = app($this->getModelClass());
+        $this->model = app($model);
     }
 
-    abstract protected function getModelClass();
+    public function getModelClass(Model $model)
+    {
+        return $this->$model::class;
+    }
 
     public function getModelData()
     {

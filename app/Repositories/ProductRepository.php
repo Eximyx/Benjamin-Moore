@@ -8,20 +8,15 @@ class ProductRepository extends CoreRepository
 {
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct(Model::class);
     }
 
-    protected function getModelClass()
-    {
-        return Model::class;
-    }
-
-    public function getAllSelectables($kind_of_work_id = null)
+    public function getAllSelectables($kindOfWorkId = null)
     {
         $selectable = clone $this->model->getModel()['selectableModel'];
 
-        if ($kind_of_work_id) {
-            $selectable = $selectable->where('kind_of_work_id', $kind_of_work_id);
+        if ($kindOfWorkId) {
+            $selectable = $selectable->where('kind_of_work_id', $kindOfWorkId);
         }
 
         return $selectable;

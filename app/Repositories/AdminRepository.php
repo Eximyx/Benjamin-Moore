@@ -6,15 +6,8 @@ use App\Models\User as Model;
 
 class AdminRepository extends CoreRepository
 {
-    protected $model;
-
     public function __construct()
     {
-        parent::__construct();
-    }
-
-    protected function getModelClass()
-    {
-        return Model::class;
+        parent::__construct(Model::class);
     }
 }

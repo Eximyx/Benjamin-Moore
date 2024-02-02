@@ -15,7 +15,7 @@ class CreateNewsPostRequest extends FormRequest
     {
         return [
             'id' => 'numeric|nullable',
-            'title' => 'string|required|max:2',
+            'title' => 'string|requiredf',
             'description' => 'string|required',
             'category_id' => 'string|required',
             'content' => 'string|required',
