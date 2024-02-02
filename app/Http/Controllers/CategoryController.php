@@ -7,9 +7,8 @@ use App\Services\CategoryService;
 
 class CategoryController extends FakeController
 {
-    public function __construct(CategoryService $service)
+    public function __construct(CategoryService $categoryService)
     {
-        parent::__construct(new CreateCategoryRequest());
-        $this->service = $service;
+        parent::__construct($categoryService, new CreateCategoryRequest());
     }
 }

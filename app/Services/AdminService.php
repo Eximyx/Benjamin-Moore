@@ -6,9 +6,8 @@ use App\Repositories\AdminRepository;
 
 class AdminService extends BaseService
 {
-    public function __construct(AdminRepository $repository)
+    public function __construct(AdminRepository $adminRepository)
     {
-        parent::__construct();
-        $this->repository = $repository;
+        parent::__construct($adminRepository);
     }
 }

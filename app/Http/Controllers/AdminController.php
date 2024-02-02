@@ -7,10 +7,8 @@ use App\Services\AdminService;
 
 class AdminController extends FakeController
 {
-    //TODO сделать сто-то с возможностью редактировать себя
-    public function __construct(AdminService $service)
+    public function __construct(AdminService $adminService)
     {
-        parent::__construct(new CreateAdminRequest());
-        $this->service = $service;
+        parent::__construct($adminService, new CreateAdminRequest());
     }
 }

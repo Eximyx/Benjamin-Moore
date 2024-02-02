@@ -8,10 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthService extends BaseService
 {
-    public function __construct(AuthRepository $repository)
+    public function __construct(AuthRepository $authRepository)
     {
-        parent::__construct();
-        $this->repository = $repository;
+        parent::__construct($authRepository);
     }
 
     public function profileSet($request)
@@ -20,7 +19,7 @@ class AuthService extends BaseService
         $data['id'] = Auth::user()->id;
 
         if (!($data['password'] !== null)) {
-            $data['password'] =  Auth::user()->password;
+            $data['password'] = Auth::user()->password;
         }
         $request->replace($data);
 

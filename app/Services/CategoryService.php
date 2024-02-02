@@ -8,7 +8,6 @@ class CategoryService extends BaseService
 {
     public function __construct(CategoryRepository $repository)
     {
-        parent::__construct();
-        $this->repository = $repository;
+        parent::__construct($repository);
     }
 }

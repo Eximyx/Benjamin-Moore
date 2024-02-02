@@ -11,13 +11,11 @@ use Illuminate\Routing\Controller;
 
 class AuthController extends Controller
 {
-    protected Request $request;
-    protected AuthService $service;
-
-    public function __construct(AuthService $authService)
-    {
+    protected $request;
+    public function __construct(
+        protected AuthService $service
+    ) {
         $this->request = new AuthRequest();
-        $this->service = $authService;
     }
     public function register()
     {
@@ -29,7 +27,7 @@ class AuthController extends Controller
 
         $data = $request->validate($this->request->rules());
 
-        $user = $this->service->store($data);
+        $this->service->store($data);
 
         $this->loginAction($request);
 
@@ -65,10 +63,10 @@ class AuthController extends Controller
         return view('user/profile');
     }
 
-    public function profile_set(Request $request)
+    public function profileSet(Request $request)
     {
         $validation = $this->service->profileSet($request);
-        // We can do it in an another request, but we wont to do that. So be patient :3
+        // TODO We can do it in an another request, but we wont to do that. So be patient :3
         $validation = $validation->validate(['id' => 'required', ...$this->request->rules()]);
         $user = $this->service->store($validation);
         return response()->json($user);

@@ -11,8 +11,9 @@ class FakeMainController extends Controller
 {
     protected $service;
 
-    public function __construct(MainService $mainService)
-    {
+    public function __construct(
+        MainService $mainService
+    ) {
         $this->service = $mainService;
     }
 
