@@ -11,7 +11,7 @@ abstract class FakeController extends Controller
 
     public function __construct(
         protected BaseService $service,
-        protected Request $request
+        protected $request
     ) {
     }
 

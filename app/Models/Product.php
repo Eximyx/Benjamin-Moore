@@ -13,37 +13,6 @@ class Product extends Model
     protected $table = 'products';
     protected $guarded = false;
 
-    public static function getModel()
-    {
-        return [
-            'ModelName' => 'Товары',
-            'datatable_data' => [
-                'title' => 'Заголовок',
-                'code' => 'Код',
-                'product_category_id' => 'Категория',
-                'is_toggled' => 'Отображение'
-            ],
-            'form_data' => [
-                'title' => 'Заголовок',
-                'main_image' => 'Фото',
-                'content' => 'Характеристика',
-                'code' => 'Код',
-                'gloss_level' => 'Степень блеска',
-                'description' => 'Описание',
-                'type' => 'Тип',
-                'colors' => 'Цвета',
-                'base' => 'Базы',
-                'v_of_dry_remain' => 'V сухого остатка',
-                'time_to_repeat' => 'Повторное нанесение',
-                'consumption' => 'Расход кв.м/гал',
-                'thickness' => 'Толщина сухой пленки (милы)',
-                'product_category_id' => 'Серия',
-            ],
-            'selectable_key' => 'product_category_id',
-            'selectableModel' => new ProductCategory()
-        ];
-    }
-
     public function category()
     {
         return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');

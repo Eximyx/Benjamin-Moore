@@ -2,26 +2,23 @@
 
 namespace App\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
-
 abstract class CoreRepository
 {
 
     public function __construct(
-    protected $model
-    )
-    {
+        protected $model
+    ) {
         $this->model = app($model);
     }
 
-    public function getModelClass(Model $model)
+    public function getModelClass()
     {
-        return $this->$model::class;
+        return $this->model::class;
     }
 
     public function getModelData()
     {
-        return $this->model->getModel();
+        return config('getmodelconfig')[$this->getModelClass()];
     }
 
     public function startConditions()
@@ -48,13 +45,14 @@ abstract class CoreRepository
 
     public function getAllSelectables()
     {
-        $selectable = clone $this->model->getModel()['selectableModel']->all();
+        $selectable = clone $this->getModelData()['selectableModel']->all();
 
         return $selectable;
     }
 
     public function getAllForDatatable()
     {
+        // TODO RESOURCE 
         $data = $this->getModelData();
         $selectable_key = null;
 
@@ -93,7 +91,7 @@ abstract class CoreRepository
         $entity = $this->model->updateOrCreate([
             'id' => $id
         ], [
-            ...$request
+            ...$request 
         ]);
 
         return $entity;

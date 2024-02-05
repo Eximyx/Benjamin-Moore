@@ -7,9 +7,9 @@ use App\Services\StaticPageService;
 
 class StaticPageController extends FakeController
 {
-    public function __construct(StaticPageService $service)
-    {
-        parent::__construct(new CreateStaticPageRequest());
-        $this->service = $service;
+    public function __construct(
+        StaticPageService $staticPageService
+    ) {
+        parent::__construct($staticPageService, new CreateStaticPageRequest());
     }
 }

@@ -1,4 +1,6 @@
 <?php
+use App\Services\BaseService;
+use App\Services\LeadsService;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
@@ -13,7 +15,7 @@ use App\Http\Controllers\ProductsController;
 
 use App\Http\Controllers\FakeMainController;
 
-
+use App\Models\NewsPost;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,3 +103,8 @@ Route::get('/news/{slug}', [FakeMainController::class, 'newsShow'])->name('user.
 Route::get('/calculator', [FakeMainController::class, 'calc'])->name('calc');
 Route::get('/contacts', [FakeMainController::class, 'contacts'])->name('contacts');
 Route::post('/leads', [FakeMainController::class, 'leads'])->name('leads');
+
+
+Route::get('/testd/{post}', function (NewsPost $newsPost) {
+    return response($newsPost);
+});

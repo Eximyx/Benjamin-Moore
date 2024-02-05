@@ -9,33 +9,31 @@ use Illuminate\Routing\Controller;
 
 class FakeMainController extends Controller
 {
-    protected $service;
 
     public function __construct(
-        MainService $mainService
+        protected MainService $mainService
     ) {
-        $this->service = $mainService;
     }
 
     public function index()
     {
-        $items['news'] = $this->service->showNews(3)->get();
-        $items['products'] = $this->service->productsWrapper();
+        $items['news'] = $this->mainService->showNews(3)->get();
+        $items['products'] = $this->mainService->productsWrapper();
         return view("user.main", ["NewsPost" => $items['news'], "Products" => $items['products']]);
     }
 
     public function news()
     {
-        $newsposts = $this->service->showNews()->paginate(12);
+        $newsposts = $this->mainService->showNews()->paginate(12);
         return view('user.news', compact('newsposts'));
     }
 
     public function catalog(ProductFilterRequest $request)
     {
-        $entities = $this->service->fetchProducts();
+        $entities = $this->mainService->fetchProducts();
 
         if (request()->ajax()) {
-            $entities = $this->service->fetchProducts($request->validated());
+            $entities = $this->mainService->fetchProducts($request->validated());
 
             return response()->json([$entities['categories'], view("user.search_result", ["category" => $entities['categories'], "Products" => $entities['products'], "category_title" => $entities['category_title']])->render()]);
         }
@@ -44,15 +42,15 @@ class FakeMainController extends Controller
 
     public function newsShow($slug)
     {
-        $NewsPost = $this->service->findNewsBySlug($slug);
-        $NewsPosts = $this->service->showNews(3)->get();
+        $NewsPost = $this->mainService->findNewsBySlug($slug);
+        $NewsPosts = $this->mainService->showNews(3)->get();
         return view('user.news_show', compact('NewsPost', 'NewsPosts'));
     }
 
     public function productShow($slug)
     {
-        $item = $this->service->findProductBySlug($slug);
-        $Products = $this->service->productsWrapper();
+        $item = $this->mainService->findProductBySlug($slug);
+        $Products = $this->mainService->productsWrapper();
         return view('user.product', compact('item', 'Products'));
     }
 
@@ -69,7 +67,7 @@ class FakeMainController extends Controller
     public function leads(CreateLeadsRequest $request)
     {
         $request = $request->validated();
-        $leads = $this->service->leadsCreate($request);
+        $leads = $this->mainService->leadsCreate($request);
         return response()->json($leads);
     }
 }

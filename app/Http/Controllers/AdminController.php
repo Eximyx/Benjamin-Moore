@@ -7,8 +7,9 @@ use App\Services\AdminService;
 
 class AdminController extends FakeController
 {
-    public function __construct(AdminService $adminService)
-    {
+    public function __construct(
+        AdminService $adminService
+    ) {
         parent::__construct($adminService, new CreateAdminRequest());
     }
 }

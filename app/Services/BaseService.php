@@ -9,11 +9,11 @@ use Exception;
 abstract class BaseService
 {
 
-    protected $datatableService;
     public function __construct(
-        protected $repository
+        // TODO CORE_REPOSITORY
+        protected $repository,
+        protected DatatableService $datatableService = new DatatableService()
     ) {
-        $this->datatableService = app(DatatableService::class);
     }
 
     public function showLatest(int $amount = null)
@@ -54,6 +54,7 @@ abstract class BaseService
 
     public function getVariablesForDataTable()
     {
+        //TODO resource
 
         $modelData = $this->repository->getModelData();
 
@@ -102,7 +103,7 @@ abstract class BaseService
     {
         $entity = $this->findById($request);
         if (isset($entity->main_image)) {
-            $this->deleteImage($entity->main_iamge);
+            $this->deleteImage($entity->main_image);
         }
         $entity->delete();
 
@@ -138,13 +139,13 @@ abstract class BaseService
         return $image;
     }
 
-    public function wrapper($items, int $product_slide)
+    public function wrapper($items, int $slide)
     {
         $count = count($items);
         $j = 0;
         $List = [];
         for ($i = 0; $i < $count; $i++) {
-            if ($i % $product_slide == 0 & $i !== 0) {
+            if ($i % $slide == 0 & $i !== 0) {
                 $j++;
                 $List[$j][] = $items[$i];
             } else {
@@ -153,4 +154,12 @@ abstract class BaseService
         }
         return $List;
     }
+    public function showWrapper(int $slideCount)
+    {
+        $items = $this->repository->getLatest()->get();
+        $wrappedItems = $this->wrapper($items, $slideCount);
+
+        return $wrappedItems;
+    }
+
 }

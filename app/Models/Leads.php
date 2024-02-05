@@ -12,23 +12,6 @@ class Leads extends Model
     protected $table = 'leads';
     protected $guarded = false;
 
-    public static function getModel()
-    {
-        return [
-            'ModelName' => 'Обратная связь',
-            'datatable_data' => [
-                'name' => 'Имя',
-                'contactInfo' => 'контактная информация',
-                'message' => 'Сообщение',
-            ],
-            'form_data' => [
-                'name' => 'Имя',
-                'contactInfo' => 'контактная информация',
-                'message' => 'Сообщение',
-            ]
-        ];
-    }
-
     protected $fillable = [
         'name',
         'contactInfo',

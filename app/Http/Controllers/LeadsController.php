@@ -7,9 +7,9 @@ use App\Services\LeadsService;
 
 class LeadsController extends FakeController
 {
-    public function __construct(LeadsService $service)
-    {
-        parent::__construct(new CreateLeadsRequest());
-        $this->service = $service;
+    public function __construct(
+        LeadsService $leadsService
+    ) {
+        parent::__construct($leadsService, new CreateLeadsRequest());
     }
 }

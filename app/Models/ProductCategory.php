@@ -12,24 +12,6 @@ class ProductCategory extends Model
     protected $table = 'product_categories';
     protected $guarded = false;
 
-    public static function getModel()
-    {
-        return [
-            'ModelName' => 'Категории продуктов',
-            'datatable_data' => [
-                'title' => 'Название',
-                'kind_of_work_id' => 'Категория',
-            ],
-            'form_data' => [
-                'title' => 'Название',
-                'content' => 'Содержимое',
-                'kind_of_work_id' => 'Категория',
-            ],
-            'selectable_key' => 'kind_of_work_id',
-            'selectableModel' => new KindOfWork()
-        ];
-    }
-
     public static function getWork()
     {
         return [

@@ -13,6 +13,9 @@ class AuthService extends BaseService
         parent::__construct($authRepository);
     }
 
+
+    // TODO Непонятно, как тут использовать репозиторий, если мы вызываем фасад AUTH и реквест валидировать тут тоже не нужно, потому 
+    // что по логике он дальше в контроллере уходит в store, предварительно провалидировав полученные данные
     public function profileSet($request)
     {
         $data = $request->all();

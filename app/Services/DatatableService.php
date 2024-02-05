@@ -6,7 +6,7 @@ use Illuminate\Support\Carbon;
 
 class DatatableService
 {
-    public function createDatatable($data = null)
+    public function createDatatable(  $data = null)
     {
         return datatables()->of($data)
             ->rawColumns(['action'])

@@ -7,9 +7,9 @@ use App\Services\NewsService;
 
 class NewsController extends FakeController
 {
-    public function __construct(NewsService $service)
-    {
-        parent::__construct(new CreateNewsPostRequest());
-        $this->service = $service;
+    public function __construct(
+        NewsService $newsService
+    ) {
+        parent::__construct($newsService, new CreateNewsPostRequest());
     }
 }

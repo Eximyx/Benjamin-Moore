@@ -11,26 +11,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public static function getModel()
-    {
-        return [
-            'ModelName' => 'Пользователи',
-            'datatable_data' => [
-                'name' => 'Имя',
-                'email' => 'Email',
-                'user_role_id' => 'Права',
-            ],
-            'form_data' => [
-                'name' => 'Имя',
-                'email' => 'Email',
-                'password' => 'Пароль',
-                'user_role_id' => 'Права',
-            ],
-            'selectable_key' => 'user_role_id',
-            'selectableModel' => new UserRoles()
-        ];
-    }
-
     function userRoles()
     {
         return $this->belongsTo(UserRoles::class, 'user_role_id', 'id');

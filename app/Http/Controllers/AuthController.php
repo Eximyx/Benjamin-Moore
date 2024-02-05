@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
     protected $request;
     public function __construct(
-        protected AuthService $service
+        protected AuthService $service,
     ) {
         $this->request = new AuthRequest();
     }
@@ -69,6 +69,7 @@ class AuthController extends Controller
         // TODO We can do it in an another request, but we wont to do that. So be patient :3
         $validation = $validation->validate(['id' => 'required', ...$this->request->rules()]);
         $user = $this->service->store($validation);
+
         return response()->json($user);
     }
 }

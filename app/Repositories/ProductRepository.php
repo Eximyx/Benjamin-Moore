@@ -22,7 +22,7 @@ class ProductRepository extends CoreRepository
         return $selectable;
     }
 
-    public function getProductsWithFilters($categories = null)
+    public function getAllWithFilters($categories = null)
     {
         $products = $this->startConditions();
         if (gettype($categories) == "array") {
