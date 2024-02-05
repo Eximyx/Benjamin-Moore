@@ -10,4 +10,4 @@ class NewsService extends BaseService
     {
         parent::__construct($newsRepository);
     }
-}
+}   

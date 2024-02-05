@@ -1,6 +1,5 @@
 <?php
-use App\Services\BaseService;
-use App\Services\LeadsService;
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
@@ -15,7 +14,8 @@ use App\Http\Controllers\ProductsController;
 
 use App\Http\Controllers\FakeMainController;
 
-use App\Models\NewsPost;
+use App\Http\Controllers\TestController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +57,7 @@ Route::middleware('admin')->group(function () {
                 Route::post('delete', [NewsController::class, 'destroy']);
                 Route::post('toggle', [NewsController::class, 'toggle']);
             });
+
 
             Route::prefix('static-page')->group(function () {
                 Route::get('/', [StaticPageController::class, 'index'])->name('static-page.index');
@@ -104,7 +105,11 @@ Route::get('/calculator', [FakeMainController::class, 'calc'])->name('calc');
 Route::get('/contacts', [FakeMainController::class, 'contacts'])->name('contacts');
 Route::post('/leads', [FakeMainController::class, 'leads'])->name('leads');
 
-
-Route::get('/testd/{post}', function (NewsPost $newsPost) {
-    return response($newsPost);
+Route::prefix('test')->group(function () {
+    // Route::get('/', [TestController::class, 'index'])->name('news.index');
+    Route::post('store', [TestController::class, 'store']);
+    Route::post('edit', [TestController::class, 'edit']);
+    Route::post('delete', [TestController::class, 'destroy']);
+    Route::post('toggle', [TestController::class, 'toggle']);
+    Route::get('create', [TestController::class, 'create']);
 });

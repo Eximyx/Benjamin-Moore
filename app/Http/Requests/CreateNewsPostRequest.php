@@ -4,21 +4,16 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateNewsPostRequest extends FormRequest
-{
-    public function authorize(): bool
-    {
-        return true;
-    }
 
+final class CreateNewsPostRequest extends FormRequest
+{
     public function rules(): array
     {
         return [
-            'id' => 'numeric|nullable',
-            'title' => 'string|required',
-            'description' => 'string|required',
-            'category_id' => 'string|required',
-            'content' => 'string|required',
+            'title' => 'string|nullable',
+            'description' => 'string|nullable',
+            'category_id' => 'string|nullable',
+            'content' => 'string|nullable',
             'main_image' => 'image|mimes:jpeg,png,jpg|nullable'
         ];
     }
