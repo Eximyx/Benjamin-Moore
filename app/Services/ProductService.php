@@ -6,9 +6,10 @@ use App\Repositories\ProductRepository;
 
 class ProductService extends BaseService
 {
-    public function __construct(ProductRepository $productRepository)
-    {
-        parent::__construct($productRepository);
+    public function __construct(
+        ProductRepository $repository
+    ) {
+        parent::__construct($repository);
     }
 
     public function getAllSelectable($kind_of_work_id = null)

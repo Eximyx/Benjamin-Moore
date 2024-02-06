@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\DataTransferObjects\BaseDTO;
+use App\Http\Resources\ResourceInterface;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class CoreRepository
@@ -82,7 +83,7 @@ abstract class CoreRepository
         return $entity;
     }
 
-    public function findById(string $id): Model
+    public function findById(string $id): mixed
     {
         $entity = $this->model->find($id);
 
@@ -100,7 +101,7 @@ abstract class CoreRepository
         return $entity;
     }
 
-    public function update(object $entity, array $dto)
+    public function update(ResourceInterface $entity, array $dto)
     {
         return tap($entity)->update($dto);
     }

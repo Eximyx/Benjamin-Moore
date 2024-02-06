@@ -16,7 +16,7 @@ class NewsPostDTO extends BaseDTO
 
     }
 
-    public static function appRequest(CreateNewsPostRequest $request)
+    public static function appRequest(CreateNewsPostRequest $request): NewsPostDTO
     {
         return new NewsPostDTO(
             $request->title,

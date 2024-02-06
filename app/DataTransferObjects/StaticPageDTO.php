@@ -2,9 +2,9 @@
 
 namespace App\DataTransferObjects;
 
-use App\Http\Requests\CreateNewsPostRequest;
+use App\Http\Requests\CreateStaticPageRequest;
 
-class NewsPostDTO extends BaseDTO
+class StaticPageDTO extends BaseDTO
 {
     public function __construct(
         public readonly string $title,
@@ -13,14 +13,11 @@ class NewsPostDTO extends BaseDTO
 
     }
 
-    public static function appRequest(CreateNewsPostRequest $request)
+    public static function appRequest(CreateStaticPageRequest $request) : StaticPageDTO
     {
-        return new NewsPostDTO(
+        return new StaticPageDTO(
             $request->title,
-            $request->description,
-            $request->category_id,
             $request->content,
-            $request->main_image
         );
 
     }

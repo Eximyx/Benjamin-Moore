@@ -14,7 +14,7 @@ class CreateNewsPostRequest extends FormRequest
             'description' => 'string|required',
             'category_id' => 'string|required',
             'content' => 'string|required',
-            'main_image' => 'image|mimes:jpeg,png,jpg|required'
+            'main_image' => 'image|mimes:jpeg,png,jpg|nullable'
         ];
     }
 }

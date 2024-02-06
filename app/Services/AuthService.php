@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthService extends BaseService
 {
-    public function __construct(AuthRepository $authRepository)
-    {
-        parent::__construct($authRepository);
+    public function __construct(
+        AuthRepository $repository
+    ) {
+        parent::__construct($repository);
     }
 
 
