@@ -6,8 +6,9 @@ use App\Repositories\LeadsRepository;
 
 class LeadsService extends BaseService
 {
-    public function __construct(LeadsRepository $leadsRepository)
+    public function __construct(
+        LeadsRepository $repository)
     {
-        parent::__construct($leadsRepository);
+        parent::__construct($repository);
     }
 }
