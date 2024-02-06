@@ -100,7 +100,7 @@ abstract class CoreRepository
         return $entity;
     }
 
-    public function update(Model $entity, array $dto)
+    public function update(object $entity, array $dto)
     {
         return tap($entity)->update($dto);
     }

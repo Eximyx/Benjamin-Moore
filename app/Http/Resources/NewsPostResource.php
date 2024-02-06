@@ -8,14 +8,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class NewsPostResource extends JsonResource
 {
 
-    protected $id;
-    protected $title;
-    protected $description;
-    protected $category_id;
-    protected $content;
-    protected $main_image;
-
-
     /**
      * Transform the resource into an array.
      *

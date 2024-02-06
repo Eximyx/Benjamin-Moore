@@ -61,7 +61,6 @@ abstract class FakeController extends Controller
     public function edit(Request $request)
     {
         $entity = $this->service->findById($request->id);
-
         return $this->resource::make($entity);
     }
 

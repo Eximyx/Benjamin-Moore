@@ -10,6 +10,6 @@ class StaticPageController extends FakeController
     public function __construct(
         StaticPageService $staticPageService
     ) {
-        parent::__construct($staticPageService, new CreateStaticPageRequest());
+        parent::__construct($staticPageService,  );
     }
 }
