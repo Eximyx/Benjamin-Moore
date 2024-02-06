@@ -46,7 +46,7 @@ Route::middleware('admin')->group(function () {
                 Route::get('/', [ProductsController::class, 'index'])->name('products.index');
                 Route::post('store', [ProductsController::class, 'store']);
                 Route::post('create', [ProductsController::class, 'create']);
-                Route::post('update/{entity}', [NewsController::class, 'update']);
+                Route::post('update/{entity}', [ProductsController::class, 'update']);
                 Route::post('edit', [ProductsController::class, 'edit']);
                 Route::post('delete', [ProductsController::class, 'delete']);
                 Route::post('toggle', [ProductsController::class, 'toggle']);
