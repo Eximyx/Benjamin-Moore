@@ -11,7 +11,7 @@ abstract class BaseService
 {
     use DataTableTrait;
     public function __construct(
-        protected $repository,
+        protected object $repository,
     ) {
     }
 

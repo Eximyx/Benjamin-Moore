@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateStaticPageRequest;
+use App\DataTransferObjects\StaticPageDTO;
+use App\Http\Resources\StaticPageResource;
 use App\Services\StaticPageService;
 
 class StaticPageController extends FakeController
 {
     public function __construct(
-        StaticPageService $staticPageService
+        StaticPageService $service
     ) {
-        parent::__construct($staticPageService,  );
+        parent::__construct(
+            $service,
+            StaticPageDTO::class,
+            StaticPageResource::class,
+            CreateStaticPageRequest::class
+        );
     }
 }

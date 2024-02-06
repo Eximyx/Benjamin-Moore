@@ -16,7 +16,7 @@ class CreateProductRequest extends FormRequest
         return [
             'id' => 'numeric|nullable',
             'title' => 'string|required',
-            'main_image' => 'nullable',
+            'main_image' => 'image|mimes:jpeg,png,jpg|nullable',
             'content' => 'string|required',
             'code' => 'numeric|required',
             'gloss_level' => 'string|required',
@@ -28,7 +28,7 @@ class CreateProductRequest extends FormRequest
             'time_to_repeat' => 'string|required',
             'consumption' => 'string|required',
             'thickness' => 'string|required',
-            'product_category_id' => 'required',
+            'product_category_id' => 'numeric|required',
         ];
     }
 }

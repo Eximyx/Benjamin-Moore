@@ -5,17 +5,16 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class NewsPostResource extends JsonResource
+class ProductCategoryResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
         return [
+
             'id' => $this->id,
             'title' => $this->title,
-            'description' => $this->description,
-            'category_id' => $this->category_id,
             'content' => $this->content,
-            'main_image' => $this->main_image
+            'kind_of_work_id' => $this->kind_of_work_id,
         ];
     }
 }
