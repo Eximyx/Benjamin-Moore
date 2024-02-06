@@ -1,4 +1,4 @@
-@extends('user.layout', ['title' => 'Главная'])
+@extends('user.layout')
 @section('contents')
     <table id="cart" class="table table-bordered">
         <thead>

@@ -53,8 +53,10 @@ Route::middleware('admin')->group(function () {
             Route::prefix('news')->group(function () {
                 Route::get('/', [NewsController::class, 'index'])->name('news.index');
                 Route::post('store', [NewsController::class, 'store']);
+                Route::post('create', [NewsController::class, 'create']);
+                Route::post('update/{entity}', [NewsController::class, 'update']);
                 Route::post('edit', [NewsController::class, 'edit']);
-                Route::post('delete', [NewsController::class, 'destroy']);
+                Route::post('delete', [NewsController::class, 'delete']);
                 Route::post('toggle', [NewsController::class, 'toggle']);
             });
 

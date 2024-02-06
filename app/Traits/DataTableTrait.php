@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services;
+namespace App\Traits;
 
 use Illuminate\Support\Carbon;
 
-class DatatableService
+trait DataTableTrait
 {
-    public function createDatatable(  $data = null)
+    public function createDatatable($data = null)
     {
         return datatables()->of($data)
             ->rawColumns(['action'])

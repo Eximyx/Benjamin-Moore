@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 
-final class CreateNewsPostRequest extends FormRequest
+class CreateNewsPostRequest extends FormRequest
 {
     public function rules(): array
     {

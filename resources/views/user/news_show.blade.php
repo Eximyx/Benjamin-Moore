@@ -1,4 +1,4 @@
-@extends('user.layout', ['title' => 'Каталог'])
+@extends('user.layout')
 @section('contents')
     <div id="news" class="row justify-content-between m-0 p-0 border-bottom border-2 border-opacity-25 mt-5">
         <div class="col-sm-12 col-lg-8">

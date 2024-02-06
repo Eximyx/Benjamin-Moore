@@ -8,7 +8,7 @@
             <i class="fa fa-trash"></i>
         </a>
     @else
-        <a href="javascript:void(0)" onClick="editFunc({{ $value->id }})" class="m-1 btn btn-success edit">
+        <a href="javascript:void(0)" onClick="editFunc({{ $value->id}})" class="m-1 btn btn-success edit">
             <i class="fa fa-edit"></i>
         </a>
 

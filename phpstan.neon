@@ -13,6 +13,6 @@ parameters:
 #        - '#PHPDoc tag @var#'
 #
 #    excludePaths:
-#        - ./*/*/FileToBeExcluded.php
+#        - ./app/Http/Resources/
 #
 #    checkMissingIterableValueType: false

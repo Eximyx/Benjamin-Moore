@@ -2,11 +2,14 @@
 
 namespace App\Repositories;
 
+use App\DataTransferObjects\BaseDTO;
+use Illuminate\Database\Eloquent\Model;
+
 abstract class CoreRepository
 {
 
     public function __construct(
-        protected $model
+        protected mixed $model
     ) {
         $this->model = app($model);
     }
@@ -79,23 +82,29 @@ abstract class CoreRepository
         return $entity;
     }
 
-    public function findById($id)
+    public function findById(string $id): Model
     {
         $entity = $this->model->find($id);
 
         return $entity;
     }
 
-    public function updateOrCreate($request, $id = null)
+    public function save(object $entity)
     {
-        $entity = $this->model->updateOrCreate([
-            'id' => $id
-        ], [
-            ...$request 
-        ]);
-
+        $entity->save();
         return $entity;
     }
+    public function create(mixed $data)
+    {
+        $entity = $this->model->create($data);
+        return $entity;
+    }
+
+    public function update(Model $entity, array $dto)
+    {
+        return tap($entity)->update($dto);
+    }
+
 
     public function destroy($entity)
     {

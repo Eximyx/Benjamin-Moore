@@ -2,17 +2,16 @@
 
 namespace App\Services;
 
+use App\Repositories\CoreRepository;
 use Illuminate\Support\Facades\Storage;
-use App\Services\DatatableService;
-use Exception;
+use App\Traits\DataTableTrait;
+use App\DataTransferObjects\BaseDTO;
 
 abstract class BaseService
 {
-
+    use DataTableTrait;
     public function __construct(
-        // TODO CORE_REPOSITORY
-        protected $repository,
-        protected DatatableService $datatableService = new DatatableService()
+        protected CoreRepository $repository,
     ) {
     }
 
@@ -40,7 +39,7 @@ abstract class BaseService
     public function ajaxDataTable()
     {
         $entities = $this->repository->getAllForDatatable();
-        $table = $this->datatableService->createDatatable($entities);
+        $table = $this->createDatatable($entities);
 
         return $table->make(true);
     }
@@ -54,7 +53,6 @@ abstract class BaseService
 
     public function getVariablesForDataTable()
     {
-        //TODO resource
 
         $modelData = $this->repository->getModelData();
 
@@ -63,63 +61,73 @@ abstract class BaseService
         if (isset($modelData['selectableModel'])) {
             $variables['selectable'] = $modelData['selectableModel']->all();
         }
-        $variables['datatable_columns'] = $this->datatableService->getDatatableColumns($modelData);
+        $variables['datatable_columns'] = $this->getDatatableColumns($modelData);
         $variables['data'] = $modelData;
 
         return $variables;
     }
 
-    public function findById($request)
+    public function findById(string $id)
     {
-        $id = $request->validate(['id' => 'required'])['id'];
         $entity = $this->repository->findById($id);
 
         return $entity;
     }
 
-    public function store($request)
+    public function create(BaseDTO $dto)
     {
-        $id = null;
-        if (isset($request['id']) && $request['id'] !== null) {
-            $id = $request['id'];
-            unset($request['id']);
-        }
-        if (isset($request['main_image'])) {
-            $request['main_image'] = $this->uploadImage($request['main_image']);
-        }
-        try {
-            $data = $this->repository->updateOrCreate($request, $id);
-        } catch (Exception $e) {
-            if (isset($request['main_image']) && $request['main_image'] !== 'default_post.jpg') {
-                $this->deleteImage($request['main_image']);
-            }
-            return $e;
+        $data = (array) $dto;
+
+        if (array_key_exists('main_image', $data)) {
+            $data['main_image'] = $this->uploadImage($data['main_image']);
         }
 
-        return $data;
+        $entity = $this->repository->create($data);
+
+        return $entity;
+    }
+    public function update(object $entity, BaseDTO $dto)
+    {
+        $dto = (array) $dto;
+        if (isset($entity->main_image)) {
+            if ($dto['main_image'] !== null) {
+                $deleted = $this->deleteImage($entity->main_image);
+                if ($deleted) {
+                    $dto['main_image'] = $this->uploadImage($dto['main_image']);
+                }
+            } else {
+                $dto['main_image'] = $entity->main_image;
+            }
+        }
+
+        $entity = $this->repository->update(
+            $entity,
+            $dto
+        );
+        return $entity;
     }
 
     public function destroy($request)
     {
-        $entity = $this->findById($request);
+        $entity = $this->findById($request->id);
+
         if (isset($entity->main_image)) {
             $this->deleteImage($entity->main_image);
         }
-        $entity->delete();
+
+        $this->repository->destroy($entity);
 
         return $entity;
     }
 
     public function toggle($request)
     {
-        $entity = $this->findById($request);
+        $entity = $this->findById($request->id);
 
         if (isset($entity->is_toggled)) {
             $entity['is_toggled'] = !$entity['is_toggled'];
-            $entity->save();
+            $entity = $this->repository->save($entity);
             return $entity;
-        } else {
-            return 'This functiion is not allowed for this model!';
         }
     }
 
@@ -131,10 +139,14 @@ abstract class BaseService
         return true;
     }
 
-    protected function uploadImage($image)
+    protected function uploadImage(mixed $image)
     {
-        Storage::put('public\image', $image);
-        $image = $image->hashName();
+        if ($image !== null) {
+            Storage::put('public\image', $image);
+            $image = $image->hashName();
+        } else {
+            $image = 'default_post.jpg';
+        }
 
         return $image;
     }

@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="float-left">
-                    <h2>{{ $data['ModelName'] }}</h2>
+                    <h2>{{ $data['data']['ModelName'] }}</h2>
                 </div>
                 <div class="float-right mb-2">
                     <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Добавить</a>
@@ -16,7 +16,7 @@
                 <thead>
                     <tr>
                         <th>id</th>
-                        @foreach ($data['datatable_data'] as $key)
+                        @foreach ($data['data']['datatable_data'] as $key)
                             <th>{{ $key }}</th>
                         @endforeach
                         <th>Дата создания</th>
@@ -31,14 +31,14 @@
         <div class="modal-dialog modal-lg modal-fullscreen m-0" style="max-width: none">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="window_title" class="modal-title ml-2 p-1">{{ $data['ModelName'] }}</h5>
+                    <h5 id="window_title" class="modal-title ml-2 p-1">{{ $data['data']['ModelName'] }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="javascript:void(0)" id="Form" name="Form" class="form-horizontal" method="POST"
                         enctype="multipart/form-data">
                         <input type="hidden" name="id" id="id">
-                        @foreach ($data['form_data'] as $key => $value)
+                        @foreach ($data['data']['form_data'] as $key => $value)
                             <div class="col-lg mt-2">
                                 <label for="{{ $key }}">{{ $value }}</label>
                                 @if ($key == 'content')
@@ -50,7 +50,7 @@
                                     <div>
                                         <select class="form-select" name="{{ $key }}" id="select"
                                             aria-label="Default select example" required>
-                                            @foreach ($selectable as $item)
+                                            @foreach ($data['selectable'] as $item)
                                                 <option value="{{ $item['id'] }}">
                                                     {{ $item['title'] }}
                                                 </option>
@@ -96,15 +96,15 @@
                         data: 'id',
                         name: 'id'
                     },
-                    ...@json($datatable_columns),
-                        {
-                            data: 'created_at',
-                            name: 'created_at'
-                        },
-                        {
-                            data: 'updated_at',
-                            name: 'updated_at'
-                        },
+                    ...@json($data['datatable_columns']),
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'updated_at',
+                        name: 'updated_at'
+                    },
                     {
                         data: 'action',
                         name: 'action',
@@ -210,6 +210,7 @@
                 },
                 dataType: 'json',
                 success: function(res) {
+                    res = res['data'];
                     console.log(res);
                     $('#Form')[0].reset();
                     $('#window_title').text("Edit News Post");
@@ -291,9 +292,12 @@
             e.preventDefault();
 
             var formData = new FormData(this);
+            var id = $('#id').val();
+            var url = id == '' ? '/create' : '/update/' + id;
+            console.log(url);
             $.ajax({
                 type: 'POST',
-                url: urls + '/store',
+                url: urls + url,
                 data: formData,
                 cache: false,
                 contentType: false,
@@ -311,8 +315,8 @@
                 },
                 error: function(data) {
                     console.log(data);
-                }
+                },
             });
-        });
+        })
     </script>
 @endsection

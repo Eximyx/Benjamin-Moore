@@ -1,4 +1,4 @@
-@extends('user.layout', ['title' => 'Главная'])
+@extends('user.layout')
 @section('contents')
     <div id="image-wrapper" class="row rounded-4 border border-1 position-relative" alt="">
         <div class="col-sm-4 clearfix"></div>

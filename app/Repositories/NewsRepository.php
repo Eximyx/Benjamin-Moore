@@ -3,6 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\NewsPost as Model;
+use App\DataTransferObjects\BaseDTO;
+
+
 
 class NewsRepository extends CoreRepository
 {
@@ -10,4 +13,6 @@ class NewsRepository extends CoreRepository
     {
         parent::__construct(Model::class);
     }
+
+
 }
