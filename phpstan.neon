@@ -4,12 +4,12 @@ includes:
 parameters:
     excludePaths:
         - app/Http/Resources/
-   
+
     paths:
         - app/
 
     # Level 9 is the highest level
-    level: 5
+    level: 9
 
 #    ignoreErrors:
 #        - '#PHPDoc tag @var#'

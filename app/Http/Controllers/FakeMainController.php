@@ -25,8 +25,8 @@ class FakeMainController extends Controller
 
     public function news()
     {
-        $newsposts = $this->mainService->showNews()->paginate(12);
-        return view('user.news', compact('newsposts'));
+        $newsPosts = $this->mainService->showNews()->paginate(12);
+        return view('user.news', compact('newsPosts'));
     }
 
     public function catalog(ProductFilterRequest $request)
