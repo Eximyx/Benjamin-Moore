@@ -10,16 +10,16 @@ class LeadDTO extends BaseDTO
         public readonly string $name,
         public readonly string $contactInfo,
         public readonly string $message,
-    ) 
+    )
     {
     }
 
-    public static function appRequest(CreateLeadsRequest $request):LeadDTO
+    public static function appRequest(CreateLeadsRequest $request): LeadDTO
     {
         return new LeadDTO(
-            $request->name,
-            $request->contactInfo,
-            $request->message
+            $request['name'],
+            $request['contactInfo'],
+            $request['message']
         );
     }
 }

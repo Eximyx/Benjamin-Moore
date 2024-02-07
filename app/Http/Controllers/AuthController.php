@@ -3,20 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthRequest;
-use Illuminate\Http\Request;
 use App\Services\AuthService;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 
 class AuthController extends Controller
 {
-    protected $request;
+    protected Request $request;
+
     public function __construct(
         protected AuthService $service,
-    ) {
+    )
+    {
         $this->request = new AuthRequest();
     }
+
     public function register()
     {
         return view('auth/register');
@@ -58,6 +61,7 @@ class AuthController extends Controller
     {
         return view('admin/profile');
     }
+
     public function profileUSer(Request $request)
     {
         return view('user/profile');

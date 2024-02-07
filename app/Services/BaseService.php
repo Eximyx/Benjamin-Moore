@@ -2,31 +2,28 @@
 
 namespace App\Services;
 
-use App\Repositories\CoreRepository;
-use Illuminate\Support\Facades\Storage;
-use App\Traits\DataTableTrait;
 use App\DataTransferObjects\BaseDTO;
+use App\Traits\DataTableTrait;
+use Illuminate\Support\Facades\Storage;
 
 abstract class BaseService
 {
     use DataTableTrait;
+
     public function __construct(
         protected object $repository,
-    ) {
+    )
+    {
     }
 
     public function showLatest(int $amount = null)
     {
-        $entities = $this->repository->getLatest($amount);
-
-        return $entities;
+        return $this->repository->getLatest($amount);
     }
 
     public function findBySlug($slug)
     {
-        $entity = $this->repository->findBySlug($slug);
-
-        return $entity;
+        return $this->repository->findBySlug($slug);
     }
 
     public function showWithPaginate(int $amount = 1)
@@ -41,7 +38,7 @@ abstract class BaseService
         $entities = $this->repository->getAllForDatatable();
         $table = $this->createDatatable($entities);
 
-        return $table->make(true);
+        return $table->make();
     }
 
     public function getAllSelectable()
@@ -76,7 +73,7 @@ abstract class BaseService
 
     public function create(BaseDTO $dto)
     {
-        $data = (array) $dto;
+        $data = (array)$dto;
 
         if (array_key_exists('main_image', $data)) {
             $data['main_image'] = $this->uploadImage($data['main_image']);
@@ -86,9 +83,10 @@ abstract class BaseService
 
         return $entity;
     }
+
     public function update(object $entity, BaseDTO $dto)
     {
-        $dto = (array) $dto;
+        $dto = (array)$dto;
         if (isset($entity->main_image)) {
             if ($dto['main_image'] !== null) {
                 $deleted = $this->deleteImage($entity->main_image);
@@ -131,7 +129,7 @@ abstract class BaseService
         }
     }
 
-    protected function deleteImage($image)
+    protected function deleteImage($image): bool
     {
         if (!($image == 'default_post.jpg')) {
             Storage::delete('public/image/' . $image);
@@ -159,13 +157,12 @@ abstract class BaseService
         for ($i = 0; $i < $count; $i++) {
             if ($i % $slide == 0 & $i !== 0) {
                 $j++;
-                $List[$j][] = $items[$i];
-            } else {
-                $List[$j][] = $items[$i];
             }
+            $List[$j][] = $items[$i];
         }
         return $List;
     }
+
     public function showWrapper(int $slideCount)
     {
         $items = $this->repository->getLatest()->get();

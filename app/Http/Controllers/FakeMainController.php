@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateLeadsRequest;
-use App\Services\MainService;
 use App\Http\Requests\ProductFilterRequest;
+use App\Services\MainService;
 use Illuminate\Routing\Controller;
 
 class FakeMainController extends Controller
@@ -12,7 +12,8 @@ class FakeMainController extends Controller
 
     public function __construct(
         protected MainService $mainService
-    ) {
+    )
+    {
     }
 
     public function index()

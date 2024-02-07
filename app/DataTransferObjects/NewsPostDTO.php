@@ -11,19 +11,20 @@ class NewsPostDTO extends BaseDTO
         public readonly string $description,
         public readonly string $category_id,
         public readonly string $content,
-        public mixed $main_image,
-    ) {
+        public mixed           $main_image,
+    )
+    {
 
     }
 
     public static function appRequest(CreateNewsPostRequest $request): NewsPostDTO
     {
         return new NewsPostDTO(
-            $request->title,
-            $request->description,
-            $request->category_id,
-            $request->content,
-            $request->main_image
+            $request['title'],
+            $request['description'],
+            $request['category_id'],
+            $request['content'],
+            $request['main_image']
         );
 
     }

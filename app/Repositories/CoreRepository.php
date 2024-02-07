@@ -2,16 +2,15 @@
 
 namespace App\Repositories;
 
-use App\DataTransferObjects\BaseDTO;
 use App\Http\Resources\ResourceInterface;
-use Illuminate\Database\Eloquent\Model;
 
 abstract class CoreRepository
 {
 
     public function __construct(
         protected mixed $model
-    ) {
+    )
+    {
         $this->model = app($model);
     }
 
@@ -56,7 +55,7 @@ abstract class CoreRepository
 
     public function getAllForDatatable()
     {
-        // TODO RESOURCE 
+        // TODO RESOURCE
         $data = $this->getModelData();
         $selectable_key = null;
 
@@ -95,13 +94,14 @@ abstract class CoreRepository
         $entity->save();
         return $entity;
     }
+
     public function create(mixed $data)
     {
         $entity = $this->model->create($data);
         return $entity;
     }
 
-    public function update(ResourceInterface $entity, array $dto)
+    public function update(object $entity, array $dto)
     {
         return tap($entity)->update($dto);
     }

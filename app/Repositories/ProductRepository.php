@@ -25,7 +25,7 @@ class ProductRepository extends CoreRepository
     public function getAllWithFilters($categories = null)
     {
         $products = $this->startConditions();
-        if (gettype($categories) == "array") {
+        if (is_array($categories)) {
             $products = $products->whereIn('product_category_id', $categories);
         } else {
             $products = $products->where('product_category_id', $categories);

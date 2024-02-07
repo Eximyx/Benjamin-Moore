@@ -8,14 +8,14 @@ class CategoryDTO extends BaseDTO
 {
     public function __construct(
         public readonly string $title,
-    ) 
+    )
     {
     }
 
-    public static function appRequest(CreateCategoryRequest $request):CategoryDTO
+    public static function appRequest(CreateCategoryRequest $request): CategoryDTO
     {
         return new CategoryDTO(
-            $request->title,
+            $request['title'],
         );
     }
 }

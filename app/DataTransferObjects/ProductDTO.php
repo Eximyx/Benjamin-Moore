@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection Annotator */
 
 namespace App\DataTransferObjects;
 
@@ -18,29 +18,31 @@ class ProductDTO extends BaseDTO
         public readonly string $time_to_repeat,
         public readonly string $consumption,
         public readonly string $thickness,
-        public readonly int $base,
-        public readonly int $product_category_id,
-        public mixed $main_image,
-    ) {
+        public readonly int    $base,
+        public readonly int    $product_category_id,
+        public mixed           $main_image,
+    )
+    {
 
     }
+
     public static function appRequest(CreateProductRequest $request): ProductDTO
     {
         return new ProductDTO(
-            $request->title,
-            $request->content,
-            $request->code,
-            $request->gloss_level,
-            $request->description,
-            $request->type,
-            $request->colors,
-            $request->v_of_dry_remain,
-            $request->time_to_repeat,
-            $request->consumption,
-            $request->thickness,
-            $request->base,
-            $request->product_category_id,
-            $request->main_image,
+            $request['title'],
+            $request['content'],
+            $request['code'],
+            $request['gloss_level'],
+            $request['description'],
+            $request['type'],
+            $request['colors'],
+            $request['v_of_dry_remain'],
+            $request['time_to_repeat'],
+            $request['consumption'],
+            $request['thickness'],
+            $request['base'],
+            $request['product_category_id'],
+            $request['main_image'],
         );
 
     }

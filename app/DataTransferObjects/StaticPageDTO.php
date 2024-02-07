@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection Annotator */
 
 namespace App\DataTransferObjects;
 
@@ -9,15 +9,16 @@ class StaticPageDTO extends BaseDTO
     public function __construct(
         public readonly string $title,
         public readonly string $content,
-    ) {
+    )
+    {
 
     }
 
-    public static function appRequest(CreateStaticPageRequest $request) : StaticPageDTO
+    public static function appRequest(CreateStaticPageRequest $request): StaticPageDTO
     {
         return new StaticPageDTO(
-            $request->title,
-            $request->content,
+            $request['title'],
+            $request['content'],
         );
 
     }
