@@ -7,11 +7,12 @@ use App\Http\Requests\CreateLeadsRequest;
 use App\Http\Resources\LeadResource;
 use App\Services\LeadsService;
 
-class LeadsController extends FakeController
+class LeadsController extends BaseAdminController
 {
     public function __construct(
         LeadsService $service,
-    ) {
+    )
+    {
         parent::__construct($service, LeadDTO::class, LeadResource::class, CreateLeadsRequest::class);
     }
 }

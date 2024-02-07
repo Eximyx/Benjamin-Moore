@@ -7,7 +7,7 @@ use App\Http\Requests\ProductFilterRequest;
 use App\Services\MainService;
 use Illuminate\Routing\Controller;
 
-class FakeMainController extends Controller
+class MainController extends Controller
 {
 
     public function __construct(

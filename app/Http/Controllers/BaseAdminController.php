@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DataTableResource;
 use App\Services\BaseService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Http\Resources\DataTableResource;
 
 
-abstract class FakeController extends Controller
+abstract class BaseAdminController extends Controller
 {
 
     public function __construct(
         protected BaseService $service,
-        protected string $dto,
-        protected string $resource,
-        protected string $request,
-    ) {
+        protected string      $dto,
+        protected string      $resource,
+        protected string      $request,
+    )
+    {
     }
 
     public function index()
@@ -45,6 +46,7 @@ abstract class FakeController extends Controller
         $entity = $this->service->create($dto);
         return $this->resource::make($entity);
     }
+
     public function update(Request $request)
     {
         $entity = $this->edit($request);
@@ -58,6 +60,7 @@ abstract class FakeController extends Controller
 
         return $this->resource::make($entity);
     }
+
     public function edit(Request $request)
     {
         $entity = $this->service->findById($request->id);

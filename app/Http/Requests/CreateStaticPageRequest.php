@@ -14,6 +14,7 @@ class CreateStaticPageRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => 'numeric|nullable',
             'title' => 'string|required',
             'content' => 'string|required',
         ];

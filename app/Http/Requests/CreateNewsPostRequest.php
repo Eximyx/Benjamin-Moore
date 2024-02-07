@@ -10,6 +10,7 @@ class CreateNewsPostRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => 'numeric|nullable',
             'title' => 'string|required',
             'description' => 'string|required',
             'category_id' => 'string|required',
