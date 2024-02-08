@@ -415,7 +415,7 @@
 
 		/**
 		 * Redraw the table
-		 *  @param {bool} [complete=true] Re-filter and resort (if enabled) the table before the draw.
+		 *  @param {boolean} [complete=true] Re-filter and resort (if enabled) the table before the draw.
 		 *  @dtopt API
 		 *  @deprecated Since v1.10
 		 *

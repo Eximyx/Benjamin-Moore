@@ -5,7 +5,7 @@
             <h4 class="fw-normal">Новости</h4>
             <h2 class="text-danger text-nowrap fw-medium mb-2">ПОСЛЕДНИЕ НОВОСТИ</h2>
         </div>
-        @foreach ($newsposts as $item)
+        @foreach ($newsPosts as $item)
             <div id="news-{{ $item->id }}" class="col-sm-12 col-md-4 justify-content-between align-items-end">
                 <img class="img-fluid w-100" srcset="{{ url('storage/image') }}/{{ $item->main_image }}">
                 <div class="row justify-content-between">
@@ -21,6 +21,6 @@
                 <p class="text-wrap truncate">{{ $item->content }}</p>
             </div>
         @endforeach
-        {{ $newsposts->links() }}
+        {{ $newsPosts->links() }}
     </div>
 @endsection

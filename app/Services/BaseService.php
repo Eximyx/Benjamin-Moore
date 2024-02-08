@@ -3,7 +3,11 @@
 namespace App\Services;
 
 use App\DataTransferObjects\BaseDTO;
+use App\Repositories\CoreRepository;
 use App\Traits\DataTableTrait;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 
 abstract class BaseService
@@ -11,7 +15,7 @@ abstract class BaseService
     use DataTableTrait;
 
     public function __construct(
-        protected object $repository,
+        protected CoreRepository $repository,
     )
     {
     }
@@ -33,25 +37,21 @@ abstract class BaseService
         return $entities;
     }
 
-    public function ajaxDataTable()
+    public function ajaxDataTable(): JsonResponse
     {
         $entities = $this->repository->getAllForDatatable();
-        $table = $this->createDatatable($entities);
-
-        return $table->make();
+        return $this->createDatatable($entities)->make();
     }
 
-    public function getAllSelectable()
+    public function getAllSelectable(): Collection
     {
-        $selectables = $this->repository->getAllSelectables();
-
-        return $selectables;
+        return $this->repository->getAllSelectables();
     }
 
     public function getVariablesForDataTable()
     {
 
-        $modelData = $this->repository->getModelData();
+        $modelData = $this->repository->modelData;
 
         $variables = [];
 
@@ -64,14 +64,12 @@ abstract class BaseService
         return $variables;
     }
 
-    public function findById(string $id)
+    public function findById(string $id): Model
     {
-        $entity = $this->repository->findById($id);
-
-        return $entity;
+        return $this->repository->findById($id);
     }
 
-    public function create(BaseDTO $dto)
+    public function create(BaseDTO $dto): Model
     {
         $data = (array)$dto;
 
@@ -79,14 +77,13 @@ abstract class BaseService
             $data['main_image'] = $this->uploadImage($data['main_image']);
         }
 
-        $entity = $this->repository->create($data);
-
-        return $entity;
+        return $this->repository->create($data);
     }
 
-    public function update(object $entity, BaseDTO $dto)
+    public function update(object $entity, BaseDTO $dto): Model
     {
         $dto = (array)$dto;
+
         if (isset($entity->main_image)) {
             if ($dto['main_image'] !== null) {
                 $deleted = $this->deleteImage($entity->main_image);
@@ -105,7 +102,7 @@ abstract class BaseService
         return $entity;
     }
 
-    public function destroy($request)
+    public function destroy($request): Model
     {
         $entity = $this->findById($request->id);
 
@@ -118,26 +115,26 @@ abstract class BaseService
         return $entity;
     }
 
-    public function toggle($request)
+    public function toggle($request): Model
     {
         $entity = $this->findById($request->id);
 
         if (isset($entity->is_toggled)) {
             $entity['is_toggled'] = !$entity['is_toggled'];
             $entity = $this->repository->save($entity);
-            return $entity;
         }
+        return $entity;
     }
 
     protected function deleteImage($image): bool
     {
-        if (!($image == 'default_post.jpg')) {
+        if (!($image === 'default_post.jpg')) {
             Storage::delete('public/image/' . $image);
         }
         return true;
     }
 
-    protected function uploadImage(mixed $image)
+    protected function uploadImage(mixed $image): string
     {
         if ($image !== null) {
             Storage::put('public\image', $image);
@@ -147,28 +144,6 @@ abstract class BaseService
         }
 
         return $image;
-    }
-
-    public function wrapper($items, int $slide)
-    {
-        $count = count($items);
-        $j = 0;
-        $List = [];
-        for ($i = 0; $i < $count; $i++) {
-            if ($i % $slide == 0 & $i !== 0) {
-                $j++;
-            }
-            $List[$j][] = $items[$i];
-        }
-        return $List;
-    }
-
-    public function showWrapper(int $slideCount)
-    {
-        $items = $this->repository->getLatest()->get();
-        $wrappedItems = $this->wrapper($items, $slideCount);
-
-        return $wrappedItems;
     }
 
 }

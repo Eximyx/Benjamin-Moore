@@ -2,14 +2,14 @@
 
 namespace App\Repositories;
 
-use App\Models\NewsPost as Model;
 
+use App\Models\NewsPost;
 
 class NewsRepository extends CoreRepository
 {
     public function __construct()
     {
-        parent::__construct(Model::class);
+        parent::__construct(NewsPost::class);
     }
 
 }

@@ -2,55 +2,68 @@
 
 namespace App\Services;
 
+use App\Actions\WrapItems;
+use App\Repositories\LeadsRepository;
+use App\Repositories\NewsRepository;
+use App\Repositories\ProductRepository;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+
+
 class MainService
 {
-    protected $newsSer;
-    protected $productSer;
-    protected $leadsSer;
 
-    public function __construct(NewsService $newsService, ProductService $productService, LeadsService $leadsService)
+    public function __construct(
+        protected NewsRepository    $newsRepository,
+        protected ProductRepository $productRepository,
+        protected LeadsRepository   $leadsRepository,
+        protected WrapItems         $wrapItems
+    )
     {
-        $this->newsSer = $newsService;
-        $this->productSer = $productService;
-        $this->leadsSer = $leadsService;
+
     }
 
-    public function showNews($amountOfNews = null)
+    /**
+     * @param int|null $amountOfNews
+     * @return LengthAwarePaginator<Model>
+     */
+    public function showNews(int $amountOfNews = null): LengthAwarePaginator
     {
-        $news = $this->newsSer->showLatest($amountOfNews);
-
-        return $news;
+        return $this->newsRepository->getLatest($amountOfNews)->paginate($amountOfNews);
     }
 
-    public function productsWrapper($amountOfProducts = 4)
+    /**
+     * @param int $amountOfProducts
+     * @return array<array<Model>>
+     */
+    public function productsWrapper(int $amountOfProducts = 4): array
     {
-        $products = $this->productSer->showWrapper($amountOfProducts);
+        $items = $this->productRepository->getLatest()->get();
 
-        return $products;
+        return $this->wrapItems->__invoke($items, $amountOfProducts);
     }
 
-    public function findProductBySlug($slug)
+    public function findProductBySlug(string $slug): Model
     {
-        $product = $this->productSer->findBySlug($slug);
-
-        return $product;
+        return $this->productRepository->findBySlug($slug);
     }
 
-    public function findNewsBySlug($slug)
+    public function findNewsBySlug(string $slug): Model
     {
-        $news = $this->newsSer->findBySlug($slug);
-
-        return $news;
+        return $this->newsRepository->findBySlug($slug);
     }
 
-    public function leadsCreate($request)
+    public function leadsCreate(Request $request): Model
     {
-        $leads = $this->leadsSer->store($request);
-
-        return $leads;
+        return $this->leadsRepository->create($request);
     }
 
-    public function fetchProducts($data = null)
+    /**
+     * @param array<mixed|array>|null $data
+     * @return array<mixed|array>
+     */
+    public function fetchProducts(array $data = null): array
     {
         $list['category_title'] = null;
         $kind_of_work_id = null;
@@ -61,7 +74,8 @@ class MainService
             $category_id = $data['category_id'];
         }
 
-        $list['categories'] = $this->productSer->getAllSelectable($kind_of_work_id);
+        $list['categories'] = $this->productRepository->getAllSelectables($kind_of_work_id);
+        
         if (!$category_id) {
             $category_id = $list['categories']->pluck('id')->toArray();
         } else {
@@ -69,7 +83,7 @@ class MainService
         }
 
         $list['categories'] = $list['categories']->get();
-        $list['products'] = $this->productSer->getAllWithFilters($category_id);
+        $list['products'] = $this->productRepository->getAllWithFilters($category_id);
 
         return $list;
     }

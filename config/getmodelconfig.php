@@ -1,16 +1,12 @@
 <?php
 
-use App\Models\NewsPost;
 use App\Models\Category;
-
+use App\Models\KindOfWork;
+use App\Models\Leads;
+use App\Models\NewsPost;
 use App\Models\Product;
 use App\Models\ProductCategory;
-use App\Models\KindOfWork;
-
-use App\Models\Leads;
-
 use App\Models\StaticPage;
-
 use App\Models\User;
 use App\Models\UserRoles;
 

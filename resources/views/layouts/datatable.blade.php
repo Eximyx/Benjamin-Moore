@@ -14,15 +14,15 @@
         <div class="">
             <table class="m-0 w-100 table table-striped" id="table">
                 <thead>
-                    <tr>
-                        <th>id</th>
-                        @foreach ($data['data']['datatable_data'] as $key)
-                            <th>{{ $key }}</th>
-                        @endforeach
-                        <th>Дата создания</th>
-                        <th>Дата изменения</th>
-                        <th></th>
-                    </tr>
+                <tr>
+                    <th>id</th>
+                    @foreach ($data['data']['datatable_data'] as $key)
+                        <th>{{ $key }}</th>
+                    @endforeach
+                    <th>Дата создания</th>
+                    <th>Дата изменения</th>
+                    <th></th>
+                </tr>
                 </thead>
             </table>
         </div>
@@ -36,20 +36,22 @@
                 </div>
                 <div class="modal-body">
                     <form action="javascript:void(0)" id="Form" name="Form" class="form-horizontal" method="POST"
-                        enctype="multipart/form-data">
+                          enctype="multipart/form-data">
                         <input type="hidden" name="id" id="id">
                         @foreach ($data['data']['form_data'] as $key => $value)
                             <div class="col-lg mt-2">
                                 <label for="{{ $key }}">{{ $value }}</label>
-                                @if ($key == 'content')
-                                    <textarea type="text" name="content" class="form-control" id="summernote-content" placeholder="content" required></textarea>
+                                @if ($key === 'content')
+                                    <textarea type="text" name="content" class="form-control" id="summernote-content"
+                                              placeholder="content" required></textarea>
                                 @elseif($key == 'description')
-                                    <textarea type="text" name="description" class="form-control" id="description" rows="3" placeholder="content"
-                                        required></textarea>
+                                    <textarea type="text" name="description" class="form-control" id="description"
+                                              rows="3" placeholder="content"
+                                              required></textarea>
                                 @elseif(str_contains($key, '_id'))
                                     <div>
                                         <select class="form-select" name="{{ $key }}" id="select"
-                                            aria-label="Default select example" required>
+                                                aria-label="Default select example" required>
                                             @foreach ($data['selectable'] as $item)
                                                 <option value="{{ $item['id'] }}">
                                                     {{ $item['title'] }}
@@ -60,10 +62,10 @@
                                 @elseif(str_contains($key, 'image'))
                                     <input type="file" name="{{ $key }}" class="form-control" id="image">
                                     <img class="my-2 img-thumbnail m-0" id="result"
-                                        style="max-width: 20rem;max-height:20rem">
+                                         style="max-width: 20rem;max-height:20rem">
                                 @else
                                     <input type="text" name="{{ $key }}" id="{{ $key }}"
-                                        class="form-control" placeholder="{{ $value }}" required>
+                                           class="form-control" placeholder="{{ $value }}" required>
                                 @endif
                             </div>
                         @endforeach
@@ -77,10 +79,11 @@
             </div>
         </div>
     </div>
+    {{$data['result']}}
     <script>
         const urls = "{{ url(request()->getPathInfo()) }}"
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -92,32 +95,42 @@
                 serverSide: true,
                 responsive: true,
                 ajax: urls,
-                columns: [{
-                        data: 'id',
-                        name: 'id'
-                    },
-                    ...@json($data['datatable_columns']),
+                columns: [
                     {
-                        data: 'created_at',
-                        name: 'created_at'
+                        "data": 'id',
+                        "name": 'id'
                     },
+                    @foreach ($data['datatable_columns'] as $item) @json($item), @endforeach
+
                     {
-                        data: 'updated_at',
-                        name: 'updated_at'
-                    },
+                        "data": 'created_at',
+                        "name":
+                            'created_at'
+                    }
+                    ,
                     {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false
-                    },
+                        "data": 'updated_at',
+                        "name":
+                            'updated_at'
+                    }
+                    ,
+                    {
+                        "data": 'action',
+                        "name":
+                            'action',
+                        "orderable":
+                            false
+                    }
+                    ,
                 ],
-                order: [
+                "order": [
                     [0, 'desc']
                 ],
-            });
+            })
+            ;
         });
 
-        document.addEventListener('keydown', function(event) {
+        document.addEventListener('keydown', function (event) {
             if (event.code == 'Escape') {
                 // document.getElementsByClassName("note-editor note-frame panel panel-default")[0].style.position = 'fixed';
                 if ($('#summernote-content').summernote('fullscreen.isFullscreen')) {
@@ -128,19 +141,19 @@
             }
         });
 
-        const OpenFullScreen = function(context) {
+        const OpenFullScreen = function (context) {
             const ui = $.summernote.ui;
             const button = ui.button({
                 contents: '<i class="align-items-center fa fa-expand"/>',
                 tooltip: 'FullScreen',
-                click: function() {
+                click: function () {
                     $('#summernote-content').summernote('fullscreen.toggle');
                     if ($('#summernote-content').summernote('fullscreen.isFullscreen')) {
                         document.getElementsByClassName(
-                                "note-editor note-frame panel panel-default fullscreen")[0].style
+                            "note-editor note-frame panel panel-default fullscreen")[0].style
                             .backgroundColor = '#fff';
                         document.getElementsByClassName(
-                                "note-editor note-frame panel panel-default fullscreen")[0].style.position =
+                            "note-editor note-frame panel panel-default fullscreen")[0].style.position =
                             'fixed';
                     } else {
                         document.getElementsByClassName("note-editor note-frame panel panel-default")[0]
@@ -209,13 +222,13 @@
                     id: id
                 },
                 dataType: 'json',
-                success: function(res) {
+                success: function (res) {
                     res = res['data'];
                     console.log(res);
                     $('#Form')[0].reset();
                     $('#window_title').text("Edit News Post");
                     $('#Form-modal').modal('show');
-                    $.each(res, function(key, value) {
+                    $.each(res, function (key, value) {
                         if (key.includes('_id')) {
                             $("#select").find(`option[value='${value}']`).attr("selected", true);
                         } else {
@@ -227,7 +240,7 @@
                     result.attr("src", `{{ url('storage/image/') }}/${res.main_image}`);
 
                 },
-                error: function(data) {
+                error: function (data) {
                     console.log(data);
                 }
             });
@@ -250,7 +263,7 @@
                             id: id
                         },
                         dataType: 'json',
-                        success: function(res) {
+                        success: function (res) {
                             console.log(res)
                             var oTable = $('#table').dataTable();
                             oTable.fnDraw(false);
@@ -278,7 +291,7 @@
                             id: id
                         },
                         dataType: 'json',
-                        success: function(res) {
+                        success: function (res) {
                             console.log(res);
                             var oTable = $('#table').dataTable();
                             oTable.fnDraw(false);
@@ -288,7 +301,7 @@
             })
         }
 
-        $('#Form').submit(function(e) {
+        $('#Form').submit(function (e) {
             e.preventDefault();
 
             var formData = new FormData(this);
@@ -313,7 +326,7 @@
                     console.log(data);
 
                 },
-                error: function(data) {
+                error: function (data) {
                     console.log(data);
                 },
             });

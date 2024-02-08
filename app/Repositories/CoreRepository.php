@@ -1,44 +1,58 @@
-<?php
+<?php /** @noinspection StaticInvocationViaThisInspection */
 
 namespace App\Repositories;
 
-use App\Http\Resources\ResourceInterface;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+
 
 abstract class CoreRepository
 {
 
+    protected Model $model;
+    /**
+     * @var array<string,mixed>
+     */
+    public array $modelData;
+
     public function __construct(
-        protected mixed $model
+        string|null $modelClass
     )
     {
-        $this->model = app($model);
+        $this->model = app($modelClass);
+        $this->modelData = ((array)config('getmodelconfig'))[$modelClass];
     }
 
-    public function getModelClass()
+    public function getModelClass(): string
     {
         return $this->model::class;
     }
 
-    public function getModelData()
-    {
-        return config('getmodelconfig')[$this->getModelClass()];
-    }
-
-    public function startConditions()
+    /**
+     * @return Model
+     */
+    public function startConditions(): Model
     {
         return clone $this->model;
     }
 
-    public function getAll()
-    {
-        $entities = $this->model->all();
 
-        return $entities;
+    /**
+     * @return Collection<int,Model>
+     */
+    public function getAll(): Collection
+    {
+        return $this->model->all();
     }
 
-    public function getLatest($amount = null)
+    /**
+     * @param int|null $amount
+     * @return Builder<Model>
+     */
+    public function getLatest(int $amount = null): Builder
     {
-        $entities = $this->model->latest();
+        $entities = $this->model::latest();
 
         if ($amount) {
             $entities = $entities->take($amount);
@@ -46,17 +60,22 @@ abstract class CoreRepository
         return $entities;
     }
 
-    public function getAllSelectables()
+    /**
+     * @return Collection<int,Model>
+     */
+    public function getAllSelectables(): Collection
     {
-        $selectable = clone $this->getModelData()['selectableModel']->all();
-
-        return $selectable;
+        return $this->modelData['selectableModel']->all();
     }
 
-    public function getAllForDatatable()
+
+    /**
+     * @return Collection<int,Model>
+     */
+    public function getAllForDatatable(): Collection
     {
         // TODO RESOURCE
-        $data = $this->getModelData();
+        $data = $this->modelData;
         $selectable_key = null;
 
         if (isset($data['selectableModel'])) {
@@ -71,50 +90,55 @@ abstract class CoreRepository
             $Entities = $Entities->join(...$query['join']);
         }
 
-        $Entities = $Entities->select(...$query['select'])->get();
-        return $Entities;
+        return $Entities->select(...$query['select'])->get();
     }
 
-    public function findBySlug($slug)
+    public function findBySlug(string $slug): Model|null
     {
-        $entity = $this->model->where("slug", $slug)->first();
-
-        return $entity;
+        return $this->model::where("slug", $slug)->first();
     }
 
-    public function findById(string $id): mixed
+    public function findById(string $id): Model|null
     {
-        $entity = $this->model->find($id);
-
-        return $entity;
+        return $this->model::find($id);
     }
 
-    public function save(object $entity)
+    public function save(Model $entity): Model
     {
-        $entity->save();
-        return $entity;
+        return tap($entity)->save();
     }
 
-    public function create(mixed $data)
+    /**
+     * @param array<string,mixed> $data
+     * @return Model|null
+     */
+    public function create(array $data): Model|null
     {
-        $entity = $this->model->create($data);
-        return $entity;
+        return $this->model->create($data);
     }
 
-    public function update(object $entity, array $dto)
+    /**
+     * @param Model $entity
+     * @param array<string, mixed> $dto
+     * @return Model
+     */
+    public function update(Model $entity, array $dto): Model
     {
         return tap($entity)->update($dto);
     }
 
 
-    public function destroy($entity)
+    public function destroy(Model $entity): Model
     {
-        $entity = $entity->delete();
-
-        return $entity;
+        return tap($entity)->delete();
     }
 
-    public function queryForDatatable($data, $selectable_key)
+    /**
+     * @param array<string,mixed> $data
+     * @param mixed $selectable_key
+     * @return array<string,array<int,mixed>>
+     */
+    public function queryForDatatable(array $data, mixed $selectable_key): array
     {
         $query = [];
         $modelName = $this->model->getTable();
@@ -143,4 +167,5 @@ abstract class CoreRepository
 
         return $query;
     }
+
 }
