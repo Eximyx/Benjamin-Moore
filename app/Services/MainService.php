@@ -7,7 +7,6 @@ use App\Repositories\LeadsRepository;
 use App\Repositories\NewsRepository;
 use App\Repositories\ProductRepository;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 
@@ -44,19 +43,23 @@ class MainService
         return $this->wrapItems->__invoke($items, $amountOfProducts);
     }
 
-    public function findProductBySlug(string $slug): Model
+    public function findProductBySlug(string $slug): Model|null
     {
         return $this->productRepository->findBySlug($slug);
     }
 
-    public function findNewsBySlug(string $slug): Model
+    public function findNewsBySlug(string $slug): Model|null
     {
         return $this->newsRepository->findBySlug($slug);
     }
 
-    public function leadsCreate(Request $request): Model
+    /**
+     * @param array<string,mixed> $request
+     * @return Model|null
+     */
+
+    public function leadsCreate(array $request): Model|null
     {
-        /** @var Request $request */
         return $this->leadsRepository->create($request);
     }
 
@@ -64,6 +67,7 @@ class MainService
      * @param array<mixed|array>|null $data
      * @return array<mixed|array>
      */
+
     public function fetchProducts(array $data = null): array
     {
         $list['category_title'] = null;
@@ -80,10 +84,10 @@ class MainService
         if (!$category_id) {
             $category_id = $list['categories']->pluck('id')->toArray();
         } else {
-            $list['category_title'] = $list['categories']->find($category_id)->title;
+            $list['category_title'] = $list['categories']->find($category_id)['title'];
         }
 
-        $list['categories'] = $list['categories']->get();
+        $list['categories'] = $list['categories']->get('categories');
         $list['products'] = $this->productRepository->getAllWithFilters($category_id);
 
         return $list;
