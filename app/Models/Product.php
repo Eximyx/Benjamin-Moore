@@ -5,6 +5,7 @@ namespace App\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
@@ -13,11 +14,18 @@ class Product extends Model
     protected $table = 'products';
     protected $guarded = false;
 
-    public function category()
+
+    /**
+     * @return BelongsTo<ProductCategory, Product>
+     */
+    public function category(): BelongsTo
     {
         return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function sluggable(): array
     {
         return [
@@ -44,8 +52,6 @@ class Product extends Model
         'thickness',
         'product_category_id'
     ];
-
-    protected $hidden = [];
 
     protected $casts = [
         'create_at' => 'datetime',

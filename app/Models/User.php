@@ -15,7 +15,7 @@ class User extends Authenticatable
     /**
      * @return BelongsTo<UserRoles, User>,
      */
-    function userRoles(): BelongsTo
+    public function userRoles(): BelongsTo
     {
         return $this->belongsTo(UserRoles::class, 'user_role_id', 'id');
     }

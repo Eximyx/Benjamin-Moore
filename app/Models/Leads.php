@@ -18,8 +18,6 @@ class Leads extends Model
         'message'
     ];
 
-    protected $hidden = [];
-
     protected $casts = [
         'create_at' => 'datetime',
         'update_at' => 'datetime'

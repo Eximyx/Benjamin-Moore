@@ -3,11 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Models\NewsPost;
-use App\Models\StaticPage;
 use App\Models\Product;
-
-use Illuminate\Console\Command;
+use App\Models\StaticPage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Model;
 
 class UpdateSlug extends Command
 {
@@ -15,7 +15,11 @@ class UpdateSlug extends Command
 
     protected $description = 'Updating the slug of all existing entities that contain it';
 
-    protected $arrayOfSluggableModels;
+    /**
+     * @var array<Model>
+     */
+    protected array $arrayOfSluggableModels;
+
     public function __construct()
     {
         parent::__construct();
@@ -26,13 +30,13 @@ class UpdateSlug extends Command
         ];
     }
 
-    public function handle()
+    public function handle(): void
     {
         foreach ($this->arrayOfSluggableModels as $model) {
             $entities = $model->all();
             foreach ($entities as $entity) {
-                $entity->slug = SlugService::createSlug($model::class, 'slug', $entity->title);
-                $this->info($entity->slug);
+                $entity['slug'] = SlugService::createSlug($model::class, 'slug', $entity['title']);
+                $this->info($entity['slug']);
                 $entity->save();
             }
         }

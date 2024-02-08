@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
@@ -12,7 +13,10 @@ class Category extends Model
     protected $table = 'categories';
     protected $guarded = false;
 
-    public function posts()
+    /**
+     * @return HasMany<NewsPost>
+     */
+    public function posts(): HasMany
     {
         return $this->hasMany(NewsPost::class, 'category_id', 'id');
     }
@@ -20,8 +24,6 @@ class Category extends Model
     protected $fillable = [
         'title',
     ];
-
-    protected $hidden = [];
 
     protected $casts = [
         'create_at' => 'datetime',
