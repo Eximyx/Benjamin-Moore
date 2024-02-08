@@ -4,12 +4,12 @@ namespace App\DataTransferObjects;
 
 use App\Http\Requests\CreateProductRequest;
 
-class ProductDTO extends BaseDTO
+class ProductDTO implements BaseDTO
 {
     public function __construct(
         public readonly string $title,
         public readonly string $content,
-        public readonly int $code,
+        public readonly int    $code,
         public readonly string $gloss_level,
         public readonly string $description,
         public readonly string $type,

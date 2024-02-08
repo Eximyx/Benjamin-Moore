@@ -4,7 +4,7 @@ namespace App\DataTransferObjects;
 
 use App\Http\Requests\CreateCategoryRequest;
 
-class CategoryDTO extends BaseDTO
+class CategoryDTO implements BaseDTO
 {
     public function __construct(
         public readonly string $title,

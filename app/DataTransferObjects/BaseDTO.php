@@ -2,11 +2,7 @@
 
 namespace App\DataTransferObjects;
 
-abstract class BaseDTO
+interface BaseDTO
 {
-    public function __construct()
-    {
-
-    }
 
 }

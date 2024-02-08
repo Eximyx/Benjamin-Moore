@@ -4,7 +4,7 @@ namespace App\DataTransferObjects;
 
 use App\Http\Requests\CreateNewsPostRequest;
 
-class NewsPostDTO extends BaseDTO
+class NewsPostDTO implements BaseDTO
 {
     public function __construct(
         public readonly string $title,

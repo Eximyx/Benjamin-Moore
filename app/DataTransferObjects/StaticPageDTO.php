@@ -4,7 +4,7 @@ namespace App\DataTransferObjects;
 
 use App\Http\Requests\CreateStaticPageRequest;
 
-class StaticPageDTO extends BaseDTO
+class StaticPageDTO implements BaseDTO
 {
     public function __construct(
         public readonly string $title,

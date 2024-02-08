@@ -4,7 +4,7 @@ namespace App\DataTransferObjects;
 
 use App\Http\Requests\CreateLeadsRequest;
 
-class LeadDTO extends BaseDTO
+class LeadDTO implements BaseDTO
 {
     public function __construct(
         public readonly string $name,

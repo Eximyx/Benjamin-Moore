@@ -4,7 +4,7 @@ namespace App\DataTransferObjects;
 
 use App\Http\Requests\CreateProductCategoryRequest;
 
-class ProductCategoryDTO extends BaseDTO
+class ProductCategoryDTO implements BaseDTO
 {
     /**
      * @param string $title

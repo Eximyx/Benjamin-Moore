@@ -4,7 +4,7 @@ namespace App\DataTransferObjects;
 
 use App\Http\Requests\CreateAdminRequest;
 
-class AdminDTO extends BaseDTO
+class AdminDTO implements BaseDTO
 {
     public function __construct(
         public readonly string $name,

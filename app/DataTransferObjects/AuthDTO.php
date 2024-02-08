@@ -4,7 +4,7 @@ namespace App\DataTransferObjects;
 
 use App\Http\Requests\AuthRequest;
 
-class AuthDTO extends BaseDTO
+class AuthDTO implements BaseDTO
 {
     public function __construct(
         public readonly string $name,
