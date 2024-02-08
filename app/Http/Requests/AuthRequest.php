@@ -17,7 +17,7 @@ class AuthRequest extends FormRequest
             'id' => 'numeric|nullable',
             'name' => 'string|required',
             'email' => 'email|required',
-            'password' => 'required',
+            'password' => 'string|required|nullable',
         ];
     }
 }

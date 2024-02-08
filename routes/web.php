@@ -9,7 +9,6 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\StaticPageController;
-use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -35,7 +34,7 @@ Route::controller(AuthController::class)->middleware('user')->group(function () 
 Route::middleware('admin')->group(function () {
     Route::prefix('admin')
         ->group(function () {
-            Route::get('/', function () {
+            Route::get('/', static function () {
                 return view('admin.dashboard');
             })->name('dashboard');
             Route::prefix('products')->group(function () {
@@ -95,8 +94,11 @@ Route::middleware('admin')->group(function () {
                 Route::post('delete', [AdminController::class, 'delete']);
                 Route::post('toggle', [AdminController::class, 'toggle']);
             });
+
             Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
-            Route::post('/profile_set', [AuthController::class, 'profile_set']);
+            Route::post('/profileSet', [AuthController::class, 'profileSet'])->name('profileSet');
+
+
         });
 });
 
@@ -109,11 +111,3 @@ Route::get('/calculator', [MainController::class, 'calc'])->name('calc');
 Route::get('/contacts', [MainController::class, 'contacts'])->name('contacts');
 Route::post('/leads', [MainController::class, 'leads'])->name('leads');
 
-Route::prefix('test')->group(function () {
-    // Route::get('/', [TestController::class, 'index'])->name('news.index');
-    Route::post('store', [TestController::class, 'store']);
-    Route::post('edit', [TestController::class, 'edit']);
-    Route::post('delete', [TestController::class, 'delete']);
-    Route::post('toggle', [TestController::class, 'toggle']);
-    Route::get('create', [TestController::class, 'create']);
-});

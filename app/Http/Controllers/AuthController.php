@@ -4,51 +4,70 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthRequest;
 use App\Services\AuthService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-
+use App\DataTransferObjects\AuthDTO;
+use App\Http\Resources\AuthResource;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    protected Request $request;
+    public string $dto;
+    public string $resource;
+    public string $request;
 
     public function __construct(
         protected AuthService $service,
     )
     {
-        $this->request = new AuthRequest();
+        $this->dto = AuthDTO::class;
+        $this->resource = AuthResource::class;
+        $this->request = AuthRequest::class;
     }
 
-    public function register()
+    public function register():View
     {
         return view('auth/register');
     }
 
-    public function registerSave(Request $request)
+    /**
+     * @throws ValidationException
+     */
+    public function registerSave(Request $request):RedirectResponse
     {
+        $request = new $this->request($request->all());
 
-        $data = $request->validate($this->request->rules());
+        $dto = $this->dto::appRequest(
+            $request
+        );
 
-        $this->service->store($data);
+        $this->service->create($dto);
 
         $this->loginAction($request);
 
         return redirect()->route('main.index');
     }
 
-    public function login()
+    public function login():View
     {
         return view('auth/login');
     }
 
-    public function loginAction(Request $request)
+    /**
+     * @throws ValidationException
+     */
+    public function loginAction(Request $request):RedirectResponse
     {
         $this->service->authAttempt($request);
+
         return redirect('admin/');
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request):RedirectResponse
     {
         Auth::guard('web')->logout();
 
@@ -57,23 +76,24 @@ class AuthController extends Controller
         return redirect('login');
     }
 
-    public function profile(Request $request)
+    public function profile():View
     {
         return view('admin/profile');
     }
 
-    public function profileUSer(Request $request)
+    public function profileSet(Request $request):JsonResource
     {
-        return view('user/profile');
-    }
+        $entity = $this->service->findById((string)Auth::user()->id);
 
-    public function profileSet(Request $request)
-    {
-        $validation = $this->service->profileSet($request);
+        $request = $this->service->profileSet(new $this->request($request->all()));
+
         // TODO We can do it in an another request, but we wont to do that. So be patient :3
-        $validation = $validation->validate(['id' => 'required', ...$this->request->rules()]);
-        $user = $this->service->store($validation);
 
-        return response()->json($user);
+        $entity = $this->service->update(
+            $entity,
+            $this->dto::appRequest($request)
+        );
+
+        return $this->resource::make($entity);
     }
 }

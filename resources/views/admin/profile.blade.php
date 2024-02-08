@@ -44,17 +44,17 @@
         });
             $('#profile_setup_frm').submit(function(e) {
                 e.preventDefault();
-                var formData = new FormData(this);
+                const formData = new FormData(this);
                 $.ajax({
-                    type: 'post',
-                    url: "{{ url('admin/profile_set') }}",
+                    type: 'POST',
+                    url: "{{url('/admin/profile')}}",
                     data: formData,
                     cache: false,
                     contentType: false,
                     processData: false,
                     success: (data) => {
                         console.log(data);
-                        $('#profile').html(data['name']);
+                        $('#profile').html(data['data']['name']);
                     },
                     error: function(data) {
                         console.log(data);
