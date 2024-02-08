@@ -6,16 +6,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\DataTableResource;
 use App\Services\BaseService;
+use Exception;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Routing\Controller;
 
-
 abstract class BaseAdminController extends Controller
 {
-
     public function __construct(
         protected BaseService $service,
         protected string      $dto,
@@ -27,6 +27,7 @@ abstract class BaseAdminController extends Controller
 
     /**
      * @return JsonResponse|View
+     * @throws Exception
      */
     public function index(): JsonResponse|View
     {
@@ -55,9 +56,9 @@ abstract class BaseAdminController extends Controller
         return $this->resource::make($entity);
     }
 
-    public function update(Request $request): JsonResource
+    public function update(Request $request): JsonResource|Model
     {
-        $entity = $this->edit($request);
+        $entity = $this->service->findById($request['id']);
 
         $request = new $this->request($request->all());
 
@@ -72,6 +73,7 @@ abstract class BaseAdminController extends Controller
     public function edit(Request $request): JsonResource
     {
         $entity = $this->service->findById($request['id']);
+
         return $this->resource::make($entity);
     }
 

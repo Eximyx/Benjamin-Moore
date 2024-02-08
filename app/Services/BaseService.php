@@ -2,12 +2,16 @@
 
 namespace App\Services;
 
-use App\DataTransferObjects\BaseDTO;
+use App\Contracts\BaseDTO;
 use App\Repositories\CoreRepository;
 use App\Traits\DataTableTrait;
+use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
 
 abstract class BaseService
@@ -20,33 +24,50 @@ abstract class BaseService
     {
     }
 
-    public function showLatest(int $amount = null)
+    /**
+     * @param int|null $amount
+     * @return Builder<Model>
+     */
+    public function showLatest(int $amount = null): Builder
     {
         return $this->repository->getLatest($amount);
     }
 
-    public function findBySlug($slug)
+    public function findBySlug(string $slug): Model|null
     {
         return $this->repository->findBySlug($slug);
     }
 
-    public function showWithPaginate(int $amount = 1)
+    /**
+     * @param int $amount
+     * @return LengthAwarePaginator<Model>
+     */
+    public function showWithPaginate(int $amount = 1): LengthAwarePaginator
     {
-        return $this->repository->startConditions()->paginate($amount);
+        return $this->repository->getModelClass()::paginate($amount);
     }
 
+    /**
+     * @throws Exception
+     */
     public function ajaxDataTable(): JsonResponse
     {
         $entities = $this->repository->getAllForDatatable();
         return $this->createDatatable($entities)->make();
     }
 
+    /**
+     * @return Collection<int,Model>
+     */
     public function getAllSelectable(): Collection
     {
         return $this->repository->getAllSelectables();
     }
 
-    public function getVariablesForDataTable()
+    /**
+     * @return array<string,mixed>
+     */
+    public function getVariablesForDataTable(): array
     {
 
         $modelData = $this->repository->modelData;
@@ -62,12 +83,12 @@ abstract class BaseService
         return $variables;
     }
 
-    public function findById(string $id): Model
+    public function findById(string $id): Model|null
     {
         return $this->repository->findById($id);
     }
 
-    public function create(BaseDTO $dto): Model
+    public function create(BaseDTO $dto): Model|null
     {
         $data = (array)$dto;
 
@@ -78,18 +99,23 @@ abstract class BaseService
         return $this->repository->create($data);
     }
 
-    public function update(object $entity, BaseDTO $dto): Model
+    /**
+     * @param Model $entity
+     * @param BaseDTO $dto
+     * @return Model
+     */
+    public function update(Model|null $entity, BaseDTO $dto): Model
     {
         $dto = (array)$dto;
 
-        if (isset($entity->main_image)) {
+        if (isset($entity['main_image'])) {
             if ($dto['main_image'] !== null) {
-                $deleted = $this->deleteImage($entity->main_image);
+                $deleted = $this->deleteImage($entity['main_image']);
                 if ($deleted) {
                     $dto['main_image'] = $this->uploadImage($dto['main_image']);
                 }
             } else {
-                $dto['main_image'] = $entity->main_image;
+                $dto['main_image'] = $entity['main_image'];
             }
         }
 
@@ -99,22 +125,24 @@ abstract class BaseService
         );
     }
 
-    public function destroy($request): Model
+    public function destroy(Request $request): Model|null
     {
-        $entity = $this->findById($request->id);
+        $entity = $this->findById($request['id']);
 
         if (isset($entity->main_image)) {
             $this->deleteImage($entity->main_image);
         }
 
-        $this->repository->destroy($entity);
+        if ($entity !== null) {
+            $this->repository->destroy($entity);
+        }
 
         return $entity;
     }
 
-    public function toggle($request): Model
+    public function toggle(Request $request): Model|null
     {
-        $entity = $this->findById($request->id);
+        $entity = $this->findById($request['id']);
 
         if (isset($entity->is_toggled)) {
             $entity['is_toggled'] = !$entity['is_toggled'];
@@ -123,7 +151,7 @@ abstract class BaseService
         return $entity;
     }
 
-    protected function deleteImage($image): bool
+    protected function deleteImage(string $image): bool
     {
         if (!($image === 'default_post.jpg')) {
             Storage::delete('public/image/' . $image);
