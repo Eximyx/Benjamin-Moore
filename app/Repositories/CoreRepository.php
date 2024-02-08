@@ -74,8 +74,8 @@ abstract class CoreRepository
      */
     public function getAllForDatatable(): Collection
     {
-        // TODO RESOURCE
         $data = $this->modelData;
+
         $selectable_key = null;
 
         if (isset($data['selectableModel'])) {
@@ -84,13 +84,13 @@ abstract class CoreRepository
 
         $query = $this->queryForDatatable($data, $selectable_key);
 
-        $Entities = $this->startConditions();
+        $entities = $this->startConditions();
 
         if (isset($query['join'])) {
-            $Entities = $Entities->join(...$query['join']);
+            $entities = $entities->join(...$query['join']);
         }
 
-        return $Entities->select(...$query['select'])->get();
+        return $entities->select(...$query['select'])->get();
     }
 
     public function findBySlug(string $slug): Model|null

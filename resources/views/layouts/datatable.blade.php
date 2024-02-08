@@ -79,7 +79,6 @@
             </div>
         </div>
     </div>
-    {{$data['result']}}
     <script>
         const urls = "{{ url(request()->getPathInfo()) }}"
 
@@ -246,6 +245,8 @@
             });
         }
 
+        // TODO If u want to delete a category, u will see the error  "SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row:
+
         function deleteFunc(id) {
             var id = id;
             Swal.fire({
@@ -267,6 +268,9 @@
                             console.log(res)
                             var oTable = $('#table').dataTable();
                             oTable.fnDraw(false);
+                        },
+                        error: function (res) {
+                            console.log(res);
                         }
                     });
                 }

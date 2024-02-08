@@ -1,4 +1,6 @@
-<?php
+<?php /** @noinspection PhpUndefinedMethodInspection */
+
+/** @noinspection NullPointerExceptionInspection */
 
 namespace App\Http\Controllers;
 
@@ -23,6 +25,9 @@ abstract class BaseAdminController extends Controller
     {
     }
 
+    /**
+     * @return JsonResponse|View
+     */
     public function index(): JsonResponse|View
     {
         if (request()->ajax()) {
@@ -31,7 +36,7 @@ abstract class BaseAdminController extends Controller
         $data = DataTableResource::make(
             $this->service->getVariablesForDataTable()
         );
-        $data['result'] = $this->service->ajaxDataTable();
+
         return view(
             'layouts.datatable',
             compact('data')
