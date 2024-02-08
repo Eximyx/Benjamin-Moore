@@ -71,15 +71,15 @@ class MainService
     public function fetchProducts(array $data = null): array
     {
         $list['category_title'] = null;
-        $kind_of_work_id = null;
+        $kindOfWorkId = null;
         $category_id = null;
 
         if ($data) {
-            $kind_of_work_id = $data['kind_of_work_id'];
+            $kindOfWorkId = $data['kind_of_work_id'];
             $category_id = $data['category_id'];
         }
 
-        $list['categories'] = $this->productRepository->getAllSelectables($kind_of_work_id);
+        $list['categories'] = $this->productRepository->getAllSelectables($kindOfWorkId);
 
         if (!$category_id) {
             $category_id = $list['categories']->pluck('id')->toArray();
@@ -87,7 +87,7 @@ class MainService
             $list['category_title'] = $list['categories']->find($category_id)['title'];
         }
 
-        $list['categories'] = $list['categories']->get('categories');
+        $list['categories'] = $list['categories']->all();
         $list['products'] = $this->productRepository->getAllWithFilters($category_id);
 
         return $list;

@@ -47,6 +47,8 @@ class AuthController extends Controller
 
         $this->service->create($dto);
 
+        /** @var Request $request */
+
         $this->loginAction($request);
 
         return redirect()->route('main.index');
@@ -83,11 +85,13 @@ class AuthController extends Controller
 
     public function profileSet(Request $request): JsonResource
     {
-        $entity = $this->service->findById((string)Auth::user()->id);
+        $entity = $this->service->findById((string)Auth::user()['id']);
 
-        $request = $this->service->profileSet(
-            new $this->request($request->all())
-        );
+        /** @var Request $validatedRequest */
+
+        $validatedRequest = new $this->request($request->all());
+
+        $request = $this->service->profileSet($validatedRequest);
 
 
         $entity = $this->service->update(

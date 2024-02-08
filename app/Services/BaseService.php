@@ -100,7 +100,7 @@ abstract class BaseService
     }
 
     /**
-     * @param Model $entity
+     * @param Model|null $entity
      * @param BaseDTO $dto
      * @return Model
      */

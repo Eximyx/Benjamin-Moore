@@ -118,11 +118,11 @@ abstract class CoreRepository
     }
 
     /**
-     * @param Model $entity
+     * @param Model|null $entity
      * @param array<string, mixed> $dto
      * @return Model
      */
-    public function update(Model $entity, array $dto): Model
+    public function update(Model|null $entity, array $dto): Model
     {
         return tap($entity)->update($dto);
     }

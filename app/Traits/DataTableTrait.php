@@ -2,16 +2,21 @@
 
 namespace App\Traits;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
+use Illuminate\View\View;
 use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\Exceptions\Exception;
 
 trait DataTableTrait
 {
     /**
+     * @param Collection|null $data
+     * @return DataTableAbstract|Exception|View
+     * @throws Exception
      * @throws \Exception
      */
-    public function createDatatable($data = null): DataTableAbstract|Exception
+    public function createDatatable(Collection $data = null): DataTableAbstract|Exception|View
     {
         return datatables()->of($data)
             ->rawColumns(['action'])
