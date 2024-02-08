@@ -14,10 +14,10 @@ class UserSessionMidlleware
         if (!Auth::check()) {
             return $next($request);
         }
-        if ($request->getPathInfo() == '/logout') {
+        if ($request->getPathInfo() === '/logout') {
             return $next($request);
-        } else {
-            return redirect('home');
         }
+
+        return redirect('home');
     }
 }

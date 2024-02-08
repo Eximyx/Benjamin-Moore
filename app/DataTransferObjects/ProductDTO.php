@@ -1,4 +1,4 @@
-<?php /** @noinspection Annotator */
+<?php
 
 namespace App\DataTransferObjects;
 

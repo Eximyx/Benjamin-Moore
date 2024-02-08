@@ -32,9 +32,7 @@ abstract class BaseService
 
     public function showWithPaginate(int $amount = 1)
     {
-        $entities = $this->repository->startConditions()->paginate($amount);
-
-        return $entities;
+        return $this->repository->startConditions()->paginate($amount);
     }
 
     public function ajaxDataTable(): JsonResponse
@@ -95,11 +93,10 @@ abstract class BaseService
             }
         }
 
-        $entity = $this->repository->update(
-            $entity,
-            $dto
+        return $this->repository->update(
+            entity: $entity,
+            dto: $dto
         );
-        return $entity;
     }
 
     public function destroy($request): Model

@@ -56,6 +56,7 @@ class MainService
 
     public function leadsCreate(Request $request): Model
     {
+        /** @var Request $request */
         return $this->leadsRepository->create($request);
     }
 
@@ -75,7 +76,7 @@ class MainService
         }
 
         $list['categories'] = $this->productRepository->getAllSelectables($kind_of_work_id);
-        
+
         if (!$category_id) {
             $category_id = $list['categories']->pluck('id')->toArray();
         } else {

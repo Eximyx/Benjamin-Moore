@@ -11,7 +11,7 @@ class WrapItems
         $j = 0;
         $List = [];
         foreach ($items as $i => $iValue) {
-            if ($i % $slideAmount == 0 & $i !== 0) {
+            if (($i % $slideAmount === 0) & ($i !== 0)) {
                 $j++;
             }
             $List[$j][] = $iValue;
