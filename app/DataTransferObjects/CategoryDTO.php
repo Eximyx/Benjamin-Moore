@@ -2,6 +2,7 @@
 
 namespace App\DataTransferObjects;
 
+use App\Contracts\BaseDTO;
 use App\Http\Requests\CreateCategoryRequest;
 
 class CategoryDTO implements BaseDTO

@@ -2,6 +2,7 @@
 
 namespace App\DataTransferObjects;
 
+use App\Contracts\BaseDTO;
 use App\Http\Requests\CreateLeadsRequest;
 
 class LeadDTO implements BaseDTO

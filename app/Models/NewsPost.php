@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
@@ -16,11 +16,17 @@ class NewsPost extends Model
     protected $table = 'news_posts';
     protected $guarded = false;
 
-    public function category()
+    /**
+     * @return BelongsTo<Category, NewsPost>
+     */
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function sluggable(): array
     {
         return [
@@ -38,8 +44,6 @@ class NewsPost extends Model
         'description',
         'category_id'
     ];
-
-    protected $hidden = [];
 
     protected $casts = [
         'create_at' => 'datetime',

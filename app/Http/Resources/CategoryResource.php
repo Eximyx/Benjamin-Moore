@@ -7,11 +7,15 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryResource extends JsonResource
 {
+    /**
+     * @param Request $request
+     * @return array<string,mixed>
+     */
     public function toArray(Request $request): array
     {
         return [
-            'title' => $this->title,
-            'id' => $this->id,
+            'id' => $this['id'],
+            'title' => $this['title'],
         ];
     }
 }

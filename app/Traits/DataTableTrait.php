@@ -3,10 +3,15 @@
 namespace App\Traits;
 
 use Illuminate\Support\Carbon;
+use Yajra\DataTables\DataTableAbstract;
+use Yajra\DataTables\Exceptions\Exception;
 
 trait DataTableTrait
 {
-    public function createDatatable($data = null)
+    /**
+     * @throws \Exception
+     */
+    public function createDatatable($data = null): DataTableAbstract|Exception
     {
         return datatables()->of($data)
             ->rawColumns(['action'])
@@ -23,7 +28,11 @@ trait DataTableTrait
             ->addIndexColumn();
     }
 
-    public function getDatatableColumns($data)
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function getDatatableColumns(array $data): array
     {
         $columns = [];
         foreach ($data['datatable_data'] as $key => $item) {

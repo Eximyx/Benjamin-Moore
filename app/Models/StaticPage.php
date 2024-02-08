@@ -13,6 +13,9 @@ class StaticPage extends Model
     protected $table = 'static_pages';
     protected $guarded = false;
 
+    /**
+     * @return array<string,mixed>
+     */
     public function sluggable(): array
     {
         return [
@@ -27,8 +30,6 @@ class StaticPage extends Model
         'content',
         'is_toggled',
     ];
-
-    protected $hidden = [];
 
     protected $casts = [
         'create_at' => 'datetime',

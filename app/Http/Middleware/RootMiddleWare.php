@@ -10,7 +10,7 @@ class RootMiddleWare
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth()->user()->user_role_id !== 3) {
+        if (Auth()->user()['user_role_id'] !== 3) {
             return redirect('admin/');
         }
 

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProductCategory extends Model
 {
@@ -12,26 +14,18 @@ class ProductCategory extends Model
     protected $table = 'product_categories';
     protected $guarded = false;
 
-    public static function getWork()
-    {
-        return [
-            0 => [
-                "id" => 0,
-                "title" => 'Внутренние работы'
-            ],
-            1 => [
-                "id" => 1,
-                "title" => "Наружные работы"
-            ],
-        ];
-    }
-
-    public function products()
+    /**
+     * @return HasMany<Product>
+     */
+    public function products(): HasMany
     {
         return $this->hasMany(Product::class, 'product_category_id', 'id');
     }
 
-    public function kind_of_work()
+    /**
+     * @return belongsTo<KindOfWork,ProductCategory>
+     */
+    public function kind_of_work(): BelongsTo
     {
         return $this->belongsTo(KindOfWork::class, 'kind_of_work_id', 'id');
     }
@@ -42,7 +36,6 @@ class ProductCategory extends Model
         'kind_of_work_id',
     ];
 
-    protected $hidden = [];
 
     protected $casts = [
         'create_at' => 'datetime',
