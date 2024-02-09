@@ -1,36 +1,24 @@
 @extends('layouts.admin')
+@section('title', trans($data['data']['ModelName']))
 @section('contents')
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 margin-tb">
-                <div class="float-left">
-                    <h2>@lang($data['data']['ModelName'])</h2>
-                    @lang('pagination.next')
-                </div>
-                <div class="float-right mb-2">
-                    <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Добавить</a>
-                </div>
-            </div>
-        </div>
-        <div class="">
-            <table class="m-0 w-100 table table-striped" id="table">
-                <thead>
-                <tr>
-                    <th>id</th>
-                    @foreach ($data['data']['datatable_data'] as $key => $value)
-                        @if(str_contains($key, '_id'))
-                            <th>@lang('admin.keys.category')</th>
-                        @else
-                            <th>@lang('admin.keys.'.$key)</th>
-                        @endif
-                    @endforeach
-                    <th>Дата создания</th>
-                    <th>Дата изменения</th>
-                    <th></th>
-                </tr>
-                </thead>
-            </table>
-        </div>
+        <table class="m-0 w-100 table table-striped" id="table">
+            <thead>
+            <tr>
+                <th>id</th>
+                @foreach ($data['data']['datatable_data'] as $key => $value)
+                    @if(str_contains($key, '_id'))
+                        <th>@lang('admin.keys.category')</th>
+                    @else
+                        <th>@lang('admin.keys.'.$key)</th>
+                    @endif
+                @endforeach
+                <th>Дата создания</th>
+                <th>Дата изменения</th>
+                <th></th>
+            </tr>
+            </thead>
+        </table>
     </div>
     <div class="modal fade" id="Form-modal" aria-hidden="true" style="z-index: 1045" tabindex="-1">
         <div class="modal-dialog modal-lg modal-fullscreen m-0" style="max-width: none">
