@@ -18,50 +18,22 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li> --}}
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('news_category.index') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Категории новостей</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('news.index') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Категории</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('products.index') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Продукты</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('product_category.index') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Категории продуктов</span></a>
-    </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('static-page.index') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Страницы</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('news.index') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Новости</span></a>
-    </li>   
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('leads.index') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Заказы</span></a>
-    </li>
+    @foreach(Route::getRoutes() as $key => $value)
+        @if(str_contains($value->uri, 'admin') && str_contains($value->getName(), 'index'))
+            @if (str_contains($value->getName(),'user') && Auth()->user()->user_role_id < 3)
+                @continue
+            @endif
+            <li class="nav-item">
+                <a class="nav-link" href={{route($value->getName())}}>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>{{$value->getName()}}</span></a>
+            </li>
+        @endif
+    @endforeach
 
-    @if (Auth::user()->user_role_id > 1)
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('user.index') }}">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Пользователь</span></a>
-        </li>
-    @endif
+
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

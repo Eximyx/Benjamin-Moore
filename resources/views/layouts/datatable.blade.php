@@ -4,7 +4,8 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="float-left">
-                    <h2>{{ $data['data']['ModelName'] }}</h2>
+                    <h2>@lang($data['data']['ModelName'])</h2>
+                    @lang('pagination.next')
                 </div>
                 <div class="float-right mb-2">
                     <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Добавить</a>
@@ -16,8 +17,8 @@
                 <thead>
                 <tr>
                     <th>id</th>
-                    @foreach ($data['data']['datatable_data'] as $key)
-                        <th>{{ $key }}</th>
+                    @foreach ($data['data']['datatable_data'] as $key => $value)
+                        <th>@lang('admin.keys.'.$key)</th>
                     @endforeach
                     <th>Дата создания</th>
                     <th>Дата изменения</th>
@@ -31,7 +32,7 @@
         <div class="modal-dialog modal-lg modal-fullscreen m-0" style="max-width: none">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="window_title" class="modal-title ml-2 p-1">{{ $data['data']['ModelName'] }}</h5>
+                    <h5 id="window_title" class="modal-title ml-2 p-1">@lang($data['data']['ModelName'])</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -40,13 +41,13 @@
                         <input type="hidden" name="id" id="id">
                         @foreach ($data['data']['form_data'] as $key => $value)
                             <div class="col-lg mt-2">
-                                <label for="{{ $key }}">{{ $value }}</label>
+                                <label for="{{ $key }}">@lang('admin.keys.'.$key)</label>
                                 @if ($key === 'content')
                                     <textarea type="text" name="content" class="form-control" id="summernote-content"
                                               placeholder="content" required></textarea>
                                 @elseif($key == 'description')
                                     <textarea type="text" name="description" class="form-control" id="description"
-                                              rows="3" placeholder="content"
+                                              rows="3" placeholder="@lang('admin.keys.'.$key)"
                                               required></textarea>
                                 @elseif(str_contains($key, '_id'))
                                     <div>
@@ -79,6 +80,8 @@
             </div>
         </div>
     </div>
+
+    f
     <script>
         const urls = "{{ url(request()->getPathInfo()) }}"
 
@@ -90,44 +93,51 @@
             });
             console.log(urls);
             $('#table').DataTable({
+                @if (App::currentLocale() !== "en")
+                language: @json(config('datatable_'.App::currentLocale())),
+                @endif
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: urls,
-                columns: [
-                    {
-                        "data": 'id',
-                        "name": 'id'
-                    },
-                    @foreach ($data['datatable_columns'] as $item) @json($item), @endforeach
+                ajax:
+                urls,
+                columns:
+                    [
+                        {
+                            "data": 'id',
+                            "name": 'id'
+                        },
+                        @foreach ($data['datatable_columns'] as $item) @json($item), @endforeach
 
                     {
                         "data": 'created_at',
                         "name":
                             'created_at'
                     }
-                    ,
-                    {
-                        "data": 'updated_at',
-                        "name":
-                            'updated_at'
-                    }
-                    ,
-                    {
-                        "data": 'action',
-                        "name":
-                            'action',
-                        "orderable":
-                            false
-                    }
-                    ,
-                ],
-                "order": [
-                    [0, 'desc']
-                ],
+                        ,
+                        {
+                            "data": 'updated_at',
+                            "name":
+                                'updated_at'
+                        }
+                        ,
+                        {
+                            "data": 'action',
+                            "name":
+                                'action',
+                            "orderable":
+                                false
+                        }
+                        ,
+                    ],
+                "order":
+                    [
+                        [0, 'desc']
+                    ],
             })
             ;
-        });
+        })
+        ;
 
         document.addEventListener('keydown', function (event) {
             if (event.code == 'Escape') {
@@ -206,7 +216,7 @@
         function add() {
             $('#Form')[0].reset();
             $('#result').attr("src", default_image);
-            // document.querySelector('#result').src = default_image;
+            $('#window_title').text('@lang('admin.modal.create')');
             $("#select").prop("selectedIndex", 0);
             $('#summernote-content').summernote('reset');
             $('#Form-modal').modal('show');
@@ -225,7 +235,7 @@
                     res = res['data'];
                     console.log(res);
                     $('#Form')[0].reset();
-                    $('#window_title').text("Edit News Post");
+                    $('#window_title').text('@lang('admin.modal.edit')');
                     $('#Form-modal').modal('show');
                     $.each(res, function (key, value) {
                         if (key.includes('_id')) {

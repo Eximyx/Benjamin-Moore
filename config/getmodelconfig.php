@@ -12,7 +12,7 @@ use App\Models\UserRoles;
 
 return [
     NewsPost::class => [
-        'ModelName' => 'Новости',
+        'ModelName' => 'admin.news.title',
         'datatable_data' => [
             'title' => 'Заголовок',
             'is_toggled' => 'Отображение',
@@ -29,7 +29,7 @@ return [
         'selectableModel' => app(Category::class),
     ],
     Category::class => [
-        'ModelName' => 'Категории',
+        'ModelName' => 'admin.category.title',
         'datatable_data' => [
             'title' => 'Заголовок',
         ],
