@@ -17,13 +17,14 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
     public string $dto;
+
     public string $resource;
+
     public string $request;
 
     public function __construct(
         protected AuthService $service,
-    )
-    {
+    ) {
         $this->dto = AuthDTO::class;
         $this->resource = AuthResource::class;
         $this->request = AuthRequest::class;
@@ -48,7 +49,6 @@ class AuthController extends Controller
         $this->service->create($dto);
 
         /** @var Request $request */
-
         $this->loginAction($request);
 
         return redirect()->route('main.index');
@@ -85,14 +85,12 @@ class AuthController extends Controller
 
     public function profileSet(Request $request): JsonResource
     {
-        $entity = $this->service->findById((string)Auth::user()['id']);
+        $entity = $this->service->findById((string) Auth::user()['id']);
 
         /** @var Request $validatedRequest */
-
         $validatedRequest = new $this->request($request->all());
 
         $request = $this->service->profileSet($validatedRequest);
-
 
         $entity = $this->service->update(
             $entity,

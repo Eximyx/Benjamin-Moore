@@ -12,6 +12,7 @@ class ProductCategory extends Model
     use HasFactory;
 
     protected $table = 'product_categories';
+
     protected $guarded = false;
 
     /**
@@ -36,9 +37,8 @@ class ProductCategory extends Model
         'kind_of_work_id',
     ];
 
-
     protected $casts = [
         'create_at' => 'datetime',
-        'update_at' => 'datetime'
+        'update_at' => 'datetime',
     ];
 }

@@ -10,8 +10,7 @@ class StaticPageDTO implements BaseDTO
     public function __construct(
         public readonly string $title,
         public readonly string $content,
-    )
-    {
+    ) {
 
     }
 
@@ -23,5 +22,4 @@ class StaticPageDTO implements BaseDTO
         );
 
     }
-
 }

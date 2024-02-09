@@ -10,16 +10,17 @@ class Leads extends Model
     use HasFactory;
 
     protected $table = 'leads';
+
     protected $guarded = false;
 
     protected $fillable = [
         'name',
         'contactInfo',
-        'message'
+        'message',
     ];
 
     protected $casts = [
         'create_at' => 'datetime',
-        'update_at' => 'datetime'
+        'update_at' => 'datetime',
     ];
 }

@@ -12,8 +12,8 @@ class Product extends Model
     use HasFactory, Sluggable;
 
     protected $table = 'products';
-    protected $guarded = false;
 
+    protected $guarded = false;
 
     /**
      * @return BelongsTo<ProductCategory, Product>
@@ -30,8 +30,8 @@ class Product extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
-            ]
+                'source' => 'title',
+            ],
         ];
     }
 
@@ -50,11 +50,11 @@ class Product extends Model
         'time_to_repeat',
         'consumption',
         'thickness',
-        'product_category_id'
+        'product_category_id',
     ];
 
     protected $casts = [
         'create_at' => 'datetime',
-        'update_at' => 'datetime'
+        'update_at' => 'datetime',
     ];
 }

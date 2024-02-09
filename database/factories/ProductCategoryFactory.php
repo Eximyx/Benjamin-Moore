@@ -18,9 +18,9 @@ class ProductCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' =>fake()->name(),
+            'title' => fake()->name(),
             'content' => fake()->word(),
-            'kind_of_work_id' => KindOfWork::get()->random()->id
+            'kind_of_work_id' => KindOfWork::get()->random()->id,
         ];
     }
 }

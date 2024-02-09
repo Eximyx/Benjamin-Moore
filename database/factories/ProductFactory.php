@@ -22,7 +22,7 @@ class ProductFactory extends Factory
             'title' => fake()->name(),
             'main_image' => 'краска.webp',
             'content' => fake()->text(),
-            'code' => fake()->numberBetween(0,500),
+            'code' => fake()->numberBetween(0, 500),
             'gloss_level' => fake()->word(),
             'description' => fake()->word(),
             'type' => fake()->word(),

@@ -10,7 +10,6 @@ use App\Models\StaticPage;
 use App\Models\User;
 use App\Models\UserRoles;
 
-
 return [
     NewsPost::class => [
         'ModelName' => 'Новости',
@@ -27,7 +26,7 @@ return [
             'main_image' => 'Фото',
         ],
         'selectable_key' => 'category_id',
-        'selectableModel' => app(Category::class)
+        'selectableModel' => app(Category::class),
     ],
     Category::class => [
         'ModelName' => 'Категории',
@@ -36,7 +35,7 @@ return [
         ],
         'form_data' => [
             'title' => 'Заголовок',
-        ]
+        ],
     ],
     Product::class => [
         'ModelName' => 'Товары',
@@ -44,7 +43,7 @@ return [
             'title' => 'Заголовок',
             'code' => 'Код',
             'product_category_id' => 'Категория',
-            'is_toggled' => 'Отображение'
+            'is_toggled' => 'Отображение',
         ],
         'form_data' => [
             'title' => 'Заголовок',
@@ -63,7 +62,7 @@ return [
             'product_category_id' => 'Серия',
         ],
         'selectable_key' => 'product_category_id',
-        'selectableModel' => app(ProductCategory::class)
+        'selectableModel' => app(ProductCategory::class),
     ],
     ProductCategory::class => [
         'ModelName' => 'Категории продуктов',
@@ -77,7 +76,7 @@ return [
             'kind_of_work_id' => 'Категория',
         ],
         'selectable_key' => 'kind_of_work_id',
-        'selectableModel' => app(KindOfWork::class)
+        'selectableModel' => app(KindOfWork::class),
     ],
     Leads::class => [
         'ModelName' => 'Обратная связь',
@@ -90,7 +89,7 @@ return [
             'name' => 'Имя',
             'contactInfo' => 'контактная информация',
             'message' => 'Сообщение',
-        ]
+        ],
     ],
     StaticPage::class => [
         'ModelName' => 'Информация',
@@ -101,7 +100,7 @@ return [
         'form_data' => [
             'title' => 'Заголовок',
             'content' => 'Содержимое',
-        ]
+        ],
     ],
     User::class => [
         'ModelName' => 'Пользователи',
@@ -117,6 +116,6 @@ return [
             'user_role_id' => 'Права',
         ],
         'selectable_key' => 'user_role_id',
-        'selectableModel' => app(UserRoles::class)
+        'selectableModel' => app(UserRoles::class),
     ],
 ];

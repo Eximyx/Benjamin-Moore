@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 class NewsPost extends Model
 {
     use HasFactory, Sluggable, SoftDeletes;
 
     protected $table = 'news_posts';
+
     protected $guarded = false;
 
     /**
@@ -31,8 +31,8 @@ class NewsPost extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
-            ]
+                'source' => 'title',
+            ],
         ];
     }
 
@@ -42,11 +42,11 @@ class NewsPost extends Model
         'is_toggled',
         'main_image',
         'description',
-        'category_id'
+        'category_id',
     ];
 
     protected $casts = [
         'create_at' => 'datetime',
-        'update_at' => 'datetime'
+        'update_at' => 'datetime',
     ];
 }

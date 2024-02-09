@@ -11,6 +11,7 @@ class Category extends Model
     use HasFactory;
 
     protected $table = 'categories';
+
     protected $guarded = false;
 
     /**
@@ -27,6 +28,6 @@ class Category extends Model
 
     protected $casts = [
         'create_at' => 'datetime',
-        'update_at' => 'datetime'
+        'update_at' => 'datetime',
     ];
 }

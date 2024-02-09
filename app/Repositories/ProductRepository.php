@@ -1,9 +1,10 @@
-<?php /** @noinspection PhpMultipleClassDeclarationsInspection */
+<?php
+
+/** @noinspection PhpMultipleClassDeclarationsInspection */
 
 /** @noinspection StaticInvocationViaThisInspection */
 
 namespace App\Repositories;
-
 
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
@@ -18,7 +19,6 @@ class ProductRepository extends CoreRepository
     }
 
     /**
-     * @param mixed|null $kindOfWorkId
      * @return Collection<int,Model>
      */
     public function getAllSelectables(mixed $kindOfWorkId = null): Collection
@@ -32,7 +32,6 @@ class ProductRepository extends CoreRepository
     }
 
     /**
-     * @param mixed|null $categories
      * @return LengthAwarePaginator<Model>
      */
     public function getAllWithFilters(mixed $categories = null): LengthAwarePaginator

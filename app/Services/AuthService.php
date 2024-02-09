@@ -5,12 +5,13 @@ namespace App\Services;
 use App\Http\Resources\AuthResource;
 use App\Repositories\AuthRepository;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class AuthService extends BaseService
 {
     public string $resource;
+
     public function __construct(
         AuthRepository $repository
     ) {
@@ -21,12 +22,12 @@ class AuthService extends BaseService
     // TODO Непонятно, как тут использовать репозиторий, если мы вызываем фасад AUTH и реквест валидировать тут тоже не нужно, потому
     // что по логике он дальше в контроллере уходит в store, предварительно провалидировав полученные данные
 
-    public function profileSet(Request $request):Request
+    public function profileSet(Request $request): Request
     {
         $data = $request->all();
         $data['id'] = Auth::user()->id;
 
-        if (!($data['password'] !== null)) {
+        if (! ($data['password'] !== null)) {
             $data['password'] = Auth::user()->password;
         }
         $request->replace($data);
@@ -37,11 +38,11 @@ class AuthService extends BaseService
     /**
      * @throws ValidationException
      */
-    public function authAttempt(Request $request):void
+    public function authAttempt(Request $request): void
     {
-        if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+        if (! Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed')
+                'email' => trans('auth.failed'),
             ]);
         }
         request()->session()->regenerate();

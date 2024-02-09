@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class WrapItems
 {
     /**
-     * @param Collection<int,Model> $items
-     * @param int $slideAmount
+     * @param  Collection<int,Model>  $items
      * @return array<int,array<Model>>
      */
     public function __invoke(Collection $items, int $slideAmount): array
@@ -22,6 +21,7 @@ class WrapItems
             }
             $List[$j][] = $iValue;
         }
+
         return $List;
     }
 }

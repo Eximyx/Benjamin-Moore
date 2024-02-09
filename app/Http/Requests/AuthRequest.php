@@ -14,7 +14,6 @@ class AuthRequest extends FormRequest
     /**
      * @return string[]
      */
-
     public function rules(): array
     {
         return [

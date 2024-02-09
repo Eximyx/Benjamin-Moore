@@ -14,7 +14,6 @@ class CreateProductRequest extends FormRequest
     /**
      * @return string[]
      */
-    
     public function rules(): array
     {
         return [

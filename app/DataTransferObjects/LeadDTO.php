@@ -11,8 +11,7 @@ class LeadDTO implements BaseDTO
         public readonly string $name,
         public readonly string $contactInfo,
         public readonly string $message,
-    )
-    {
+    ) {
     }
 
     public static function appRequest(CreateLeadsRequest $request): LeadDTO

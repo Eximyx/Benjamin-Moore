@@ -14,7 +14,6 @@ class CreateAdminRequest extends FormRequest
     /**
      * @return string[]
      */
-
     public function rules(): array
     {
         return [
@@ -22,7 +21,7 @@ class CreateAdminRequest extends FormRequest
             'name' => 'string|required',
             'email' => 'email|required',
             'password' => 'required',
-            'user_role_id' => 'string|required'
+            'user_role_id' => 'string|required',
         ];
     }
 }

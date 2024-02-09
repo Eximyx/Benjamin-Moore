@@ -11,8 +11,7 @@ class LeadsController extends BaseAdminController
 {
     public function __construct(
         LeadsService $service,
-    )
-    {
+    ) {
         parent::__construct($service, LeadDTO::class, LeadResource::class, CreateLeadsRequest::class);
     }
 }

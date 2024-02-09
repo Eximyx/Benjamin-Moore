@@ -11,8 +11,7 @@ class StaticPageController extends BaseAdminController
 {
     public function __construct(
         StaticPageService $service
-    )
-    {
+    ) {
         parent::__construct(
             $service,
             StaticPageDTO::class,

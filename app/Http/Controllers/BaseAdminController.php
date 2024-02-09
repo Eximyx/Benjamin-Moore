@@ -1,4 +1,6 @@
-<?php /** @noinspection PhpUndefinedMethodInspection */
+<?php
+
+/** @noinspection PhpUndefinedMethodInspection */
 
 /** @noinspection NullPointerExceptionInspection */
 
@@ -18,15 +20,13 @@ abstract class BaseAdminController extends Controller
 {
     public function __construct(
         protected BaseService $service,
-        protected string      $dto,
-        protected string      $resource,
-        protected string      $request,
-    )
-    {
+        protected string $dto,
+        protected string $resource,
+        protected string $request,
+    ) {
     }
 
     /**
-     * @return JsonResponse|View
      * @throws Exception
      */
     public function index(): JsonResponse|View
@@ -53,6 +53,7 @@ abstract class BaseAdminController extends Controller
         );
 
         $entity = $this->service->create($dto);
+
         return $this->resource::make($entity);
     }
 

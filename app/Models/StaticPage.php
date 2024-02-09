@@ -11,6 +11,7 @@ class StaticPage extends Model
     use HasFactory, Sluggable;
 
     protected $table = 'static_pages';
+
     protected $guarded = false;
 
     /**
@@ -20,8 +21,8 @@ class StaticPage extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
-            ]
+                'source' => 'title',
+            ],
         ];
     }
 
@@ -33,6 +34,6 @@ class StaticPage extends Model
 
     protected $casts = [
         'create_at' => 'datetime',
-        'update_at' => 'datetime'
+        'update_at' => 'datetime',
     ];
 }

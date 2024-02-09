@@ -12,8 +12,7 @@ class AdminDTO implements BaseDTO
         public readonly string $email,
         public readonly string $password,
         public readonly string $user_role_id,
-    )
-    {
+    ) {
     }
 
     public static function appRequest(CreateAdminRequest $request): AdminDTO

@@ -11,8 +11,7 @@ class CategoryController extends BaseAdminController
 {
     public function __construct(
         CategoryService $service
-    )
-    {
+    ) {
         parent::__construct($service, CategoryDTO::class, CategoryResource::class, CreateCategoryRequest::class);
     }
 }

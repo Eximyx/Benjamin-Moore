@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\NewsPost>
@@ -19,11 +18,11 @@ class NewsPostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'=>fake()->name(),
-            'main_image'=>'default_post.jpg',
-            'content'=>fake()->text(),
-            'description' =>fake()->text(),
-            'category_id'=>Category::get()->random()->id,
+            'title' => fake()->name(),
+            'main_image' => 'default_post.jpg',
+            'content' => fake()->text(),
+            'description' => fake()->text(),
+            'category_id' => Category::get()->random()->id,
         ];
     }
 }

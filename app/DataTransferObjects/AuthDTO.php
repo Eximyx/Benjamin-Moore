@@ -11,8 +11,7 @@ class AuthDTO implements BaseDTO
         public readonly string $name,
         public readonly string $email,
         public readonly string $password,
-    )
-    {
+    ) {
 
     }
 
@@ -25,5 +24,4 @@ class AuthDTO implements BaseDTO
         );
 
     }
-
 }

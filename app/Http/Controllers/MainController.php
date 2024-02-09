@@ -11,11 +11,9 @@ use Illuminate\Routing\Controller;
 
 class MainController extends Controller
 {
-
     public function __construct(
         protected MainService $mainService
-    )
-    {
+    ) {
     }
 
     public function index(): View
@@ -23,12 +21,14 @@ class MainController extends Controller
         // TODO News/Products resource
         $items['news'] = $this->mainService->showNews(3);
         $items['products'] = $this->mainService->productsWrapper();
-        return view("user.main", ["NewsPost" => $items['news'], "Products" => $items['products']]);
+
+        return view('user.main', ['NewsPost' => $items['news'], 'Products' => $items['products']]);
     }
 
     public function news(): View
     {
         $newsPosts = $this->mainService->showNews();
+
         return view('user.news', compact('newsPosts'));
     }
 
@@ -40,15 +40,17 @@ class MainController extends Controller
         if (request()->ajax()) {
             $entities = $this->mainService->fetchProducts($request->validated());
 
-            return response()->json([$entities['categories'], view("user.search_result", ["category" => $entities['categories'], "Products" => $entities['products'], "category_title" => $entities['category_title']])->render()]);
+            return response()->json([$entities['categories'], view('user.search_result', ['category' => $entities['categories'], 'Products' => $entities['products'], 'category_title' => $entities['category_title']])->render()]);
         }
-        return view('user.FakeCatalog', ["entities" => $entities, "Products" => $entities['products'], "category" => $entities['categories']]);
+
+        return view('user.FakeCatalog', ['entities' => $entities, 'Products' => $entities['products'], 'category' => $entities['categories']]);
     }
 
     public function newsShow(string $slug): JsonResponse|View
     {
         $NewsPost = $this->mainService->findNewsBySlug($slug);
         $NewsPosts = $this->mainService->showNews(3);
+
         return view('user.news_show', compact('NewsPost', 'NewsPosts'));
     }
 
@@ -56,6 +58,7 @@ class MainController extends Controller
     {
         $item = $this->mainService->findProductBySlug($slug);
         $Products = $this->mainService->productsWrapper();
+
         return view('user.product', compact('item', 'Products'));
     }
 
@@ -73,6 +76,7 @@ class MainController extends Controller
     {
         $request = $request->validated();
         $leads = $this->mainService->leadsCreate($request);
+
         return response()->json($leads);
     }
 }

@@ -8,7 +8,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class NewsPostResource extends JsonResource
 {
     /**
-     * @param Request $request
      * @return array<string,mixed>
      */
     public function toArray(Request $request): array
@@ -19,7 +18,7 @@ class NewsPostResource extends JsonResource
             'description' => $this['description'],
             'category_id' => $this['category_id'],
             'content' => $this['content'],
-            'main_image' => $this['main_image']
+            'main_image' => $this['main_image'],
         ];
     }
 }

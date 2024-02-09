@@ -11,7 +11,6 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\StaticPageController;
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -98,7 +97,6 @@ Route::middleware('admin')->group(function () {
             Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
             Route::post('/profileSet', [AuthController::class, 'profileSet'])->name('profileSet');
 
-
         });
 });
 
@@ -110,4 +108,3 @@ Route::get('/news/{slug}', [MainController::class, 'newsShow'])->name('user.news
 Route::get('/calculator', [MainController::class, 'calc'])->name('calc');
 Route::get('/contacts', [MainController::class, 'contacts'])->name('contacts');
 Route::post('/leads', [MainController::class, 'leads'])->name('leads');
-

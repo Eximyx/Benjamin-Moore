@@ -14,7 +14,6 @@ class CreateStaticPageRequest extends FormRequest
     /**
      * @return string[]
      */
-    
     public function rules(): array
     {
         return [

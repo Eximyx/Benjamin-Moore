@@ -14,7 +14,6 @@ class CreateProductCategoryRequest extends FormRequest
     /**
      * @return string[]
      */
-    
     public function rules(): array
     {
         return [

@@ -14,12 +14,11 @@ class ProductFilterRequest extends FormRequest
     /**
      * @return string[]
      */
-    
     public function rules(): array
     {
         return [
             'category_id' => 'nullable|numeric',
-            'kind_of_work_id' => 'nullable|numeric'
+            'kind_of_work_id' => 'nullable|numeric',
         ];
     }
 }

@@ -20,26 +20,23 @@ abstract class BaseService
 
     public function __construct(
         protected CoreRepository $repository,
-    )
-    {
+    ) {
     }
 
     /**
-     * @param int|null $amount
      * @return Builder<Model>
      */
-    public function showLatest(int $amount = null): Builder
+    public function showLatest(?int $amount = null): Builder
     {
         return $this->repository->getLatest($amount);
     }
 
-    public function findBySlug(string $slug): Model|null
+    public function findBySlug(string $slug): ?Model
     {
         return $this->repository->findBySlug($slug);
     }
 
     /**
-     * @param int $amount
      * @return LengthAwarePaginator<Model>
      */
     public function showWithPaginate(int $amount = 1): LengthAwarePaginator
@@ -53,6 +50,7 @@ abstract class BaseService
     public function ajaxDataTable(): JsonResponse
     {
         $entities = $this->repository->getAllForDatatable();
+
         return $this->createDatatable($entities)->make();
     }
 
@@ -83,14 +81,14 @@ abstract class BaseService
         return $variables;
     }
 
-    public function findById(string $id): Model|null
+    public function findById(string $id): ?Model
     {
         return $this->repository->findById($id);
     }
 
-    public function create(BaseDTO $dto): Model|null
+    public function create(BaseDTO $dto): ?Model
     {
-        $data = (array)$dto;
+        $data = (array) $dto;
 
         if (array_key_exists('main_image', $data)) {
             $data['main_image'] = $this->uploadImage($data['main_image']);
@@ -99,14 +97,9 @@ abstract class BaseService
         return $this->repository->create($data);
     }
 
-    /**
-     * @param Model|null $entity
-     * @param BaseDTO $dto
-     * @return Model
-     */
-    public function update(Model|null $entity, BaseDTO $dto): Model
+    public function update(?Model $entity, BaseDTO $dto): Model
     {
-        $dto = (array)$dto;
+        $dto = (array) $dto;
 
         if (isset($entity['main_image'])) {
             if ($dto['main_image'] !== null) {
@@ -125,7 +118,7 @@ abstract class BaseService
         );
     }
 
-    public function destroy(Request $request): Model|null
+    public function destroy(Request $request): ?Model
     {
         $entity = $this->findById($request['id']);
 
@@ -140,22 +133,24 @@ abstract class BaseService
         return $entity;
     }
 
-    public function toggle(Request $request): Model|null
+    public function toggle(Request $request): ?Model
     {
         $entity = $this->findById($request['id']);
 
         if (isset($entity->is_toggled)) {
-            $entity['is_toggled'] = !$entity['is_toggled'];
+            $entity['is_toggled'] = ! $entity['is_toggled'];
             $entity = $this->repository->save($entity);
         }
+
         return $entity;
     }
 
     protected function deleteImage(string $image): bool
     {
-        if (!($image === 'default_post.jpg')) {
-            Storage::delete('public/image/' . $image);
+        if (! ($image === 'default_post.jpg')) {
+            Storage::delete('public/image/'.$image);
         }
+
         return true;
     }
 
@@ -170,5 +165,4 @@ abstract class BaseService
 
         return $image;
     }
-
 }

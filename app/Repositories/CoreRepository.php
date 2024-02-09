@@ -1,4 +1,6 @@
-<?php /** @noinspection StaticInvocationViaThisInspection */
+<?php
+
+/** @noinspection StaticInvocationViaThisInspection */
 
 namespace App\Repositories;
 
@@ -6,22 +8,20 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-
 abstract class CoreRepository
 {
-
     protected Model $model;
+
     /**
      * @var array<string,mixed>
      */
     public array $modelData;
 
     public function __construct(
-        string|null $modelClass
-    )
-    {
+        ?string $modelClass
+    ) {
         $this->model = app($modelClass);
-        $this->modelData = ((array)config('getmodelconfig'))[$modelClass];
+        $this->modelData = ((array) config('getmodelconfig'))[$modelClass];
     }
 
     public function getModelClass(): string
@@ -29,14 +29,10 @@ abstract class CoreRepository
         return $this->model::class;
     }
 
-    /**
-     * @return Model
-     */
     public function startConditions(): Model
     {
         return clone $this->model;
     }
-
 
     /**
      * @return Collection<int,Model>
@@ -47,16 +43,16 @@ abstract class CoreRepository
     }
 
     /**
-     * @param int|null $amount
      * @return Builder<Model>
      */
-    public function getLatest(int $amount = null): Builder
+    public function getLatest(?int $amount = null): Builder
     {
         $entities = $this->model::latest();
 
         if ($amount) {
             $entities = $entities->take($amount);
         }
+
         return $entities;
     }
 
@@ -67,7 +63,6 @@ abstract class CoreRepository
     {
         return $this->modelData['selectableModel']->all();
     }
-
 
     /**
      * @return Collection<int,Model>
@@ -93,12 +88,12 @@ abstract class CoreRepository
         return $entities->select(...$query['select'])->get();
     }
 
-    public function findBySlug(string $slug): Model|null
+    public function findBySlug(string $slug): ?Model
     {
-        return $this->model::where("slug", $slug)->first();
+        return $this->model::where('slug', $slug)->first();
     }
 
-    public function findById(string $id): Model|null
+    public function findById(string $id): ?Model
     {
         return $this->model::find($id);
     }
@@ -109,24 +104,20 @@ abstract class CoreRepository
     }
 
     /**
-     * @param array<string,mixed> $data
-     * @return Model|null
+     * @param  array<string,mixed>  $data
      */
-    public function create(array $data): Model|null
+    public function create(array $data): ?Model
     {
         return $this->model->create($data);
     }
 
     /**
-     * @param Model|null $entity
-     * @param array<string, mixed> $dto
-     * @return Model
+     * @param  array<string, mixed>  $dto
      */
-    public function update(Model|null $entity, array $dto): Model
+    public function update(?Model $entity, array $dto): Model
     {
         return tap($entity)->update($dto);
     }
-
 
     public function destroy(Model $entity): Model
     {
@@ -134,8 +125,7 @@ abstract class CoreRepository
     }
 
     /**
-     * @param array<string,mixed> $data
-     * @param mixed $selectable_key
+     * @param  array<string,mixed>  $data
      * @return array<string,array<int,mixed>>
      */
     public function queryForDatatable(array $data, mixed $selectable_key): array
@@ -143,10 +133,10 @@ abstract class CoreRepository
         $query = [];
         $modelName = $this->model->getTable();
 
-        $query['select'] = [$modelName . '.id'];
+        $query['select'] = [$modelName.'.id'];
 
         foreach (array_keys($data['datatable_data']) as $item) {
-            $query['select'][] = $modelName . '.' . $item;
+            $query['select'][] = $modelName.'.'.$item;
         }
 
         if (isset($data['selectableModel'])) {
@@ -154,18 +144,17 @@ abstract class CoreRepository
 
             $query['join'] = [
                 $selectableModelName,
-                $modelName . '.' . $selectable_key,
+                $modelName.'.'.$selectable_key,
                 '=',
-                $selectableModelName . '.id'
+                $selectableModelName.'.id',
             ];
 
-            $query['select'][] = $selectableModelName . '.title as ' . $selectable_key;
+            $query['select'][] = $selectableModelName.'.title as '.$selectable_key;
         }
 
-        $query['select'][] = $modelName . '.created_at';
-        $query['select'][] = $modelName . '.updated_at';
+        $query['select'][] = $modelName.'.created_at';
+        $query['select'][] = $modelName.'.updated_at';
 
         return $query;
     }
-
 }

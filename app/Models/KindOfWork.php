@@ -11,6 +11,7 @@ class KindOfWork extends Model
     use HasFactory;
 
     protected $table = 'kind_of_work';
+
     protected $guarded = false;
 
     /**

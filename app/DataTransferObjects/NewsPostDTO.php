@@ -12,9 +12,8 @@ class NewsPostDTO implements BaseDTO
         public readonly string $description,
         public readonly string $category_id,
         public readonly string $content,
-        public mixed           $main_image,
-    )
-    {
+        public mixed $main_image,
+    ) {
 
     }
 
@@ -29,5 +28,4 @@ class NewsPostDTO implements BaseDTO
         );
 
     }
-
 }
