@@ -18,7 +18,11 @@
                 <tr>
                     <th>id</th>
                     @foreach ($data['data']['datatable_data'] as $key => $value)
-                        <th>@lang('admin.keys.'.$key)</th>
+                        @if(str_contains($key, '_id'))
+                            <th>@lang('admin.keys.category')</th>
+                        @else
+                            <th>@lang('admin.keys.'.$key)</th>
+                        @endif
                     @endforeach
                     <th>Дата создания</th>
                     <th>Дата изменения</th>
@@ -41,7 +45,11 @@
                         <input type="hidden" name="id" id="id">
                         @foreach ($data['data']['form_data'] as $key => $value)
                             <div class="col-lg mt-2">
-                                <label for="{{ $key }}">@lang('admin.keys.'.$key)</label>
+                                @if(str_contains($key, '_id'))
+                                    <label for="{{ $key }}">@lang('admin.keys.category')</label>
+                                @else
+                                    <label for="{{ $key }}">@lang('admin.keys.'.$key)</label>
+                                @endif
                                 @if ($key === 'content')
                                     <textarea type="text" name="content" class="form-control" id="summernote-content"
                                               placeholder="content" required></textarea>
