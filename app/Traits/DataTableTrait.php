@@ -36,7 +36,7 @@ trait DataTableTrait
     {
         $columns = [];
         foreach ($data['datatable_data'] as $key => $item) {
-            $columns[] = ['data' => $key, 'name' => $key];
+            $columns[] = ['data' => $item, 'name' => $item];
         }
 
         return $columns;

@@ -19,9 +19,10 @@ abstract class CoreRepository
 
     public function __construct(
         ?string $modelClass
-    ) {
+    )
+    {
         $this->model = app($modelClass);
-        $this->modelData = ((array) config('getmodelconfig'))[$modelClass];
+        $this->modelData = ((array)config('getmodelconfig'))[$modelClass];
     }
 
     public function getModelClass(): string
@@ -104,7 +105,7 @@ abstract class CoreRepository
     }
 
     /**
-     * @param  array<string,mixed>  $data
+     * @param array<string,mixed> $data
      */
     public function create(array $data): ?Model
     {
@@ -112,7 +113,7 @@ abstract class CoreRepository
     }
 
     /**
-     * @param  array<string, mixed>  $dto
+     * @param array<string, mixed> $dto
      */
     public function update(?Model $entity, array $dto): Model
     {
@@ -125,7 +126,7 @@ abstract class CoreRepository
     }
 
     /**
-     * @param  array<string,mixed>  $data
+     * @param array<string,mixed> $data
      * @return array<string,array<int,mixed>>
      */
     public function queryForDatatable(array $data, mixed $selectable_key): array
@@ -133,10 +134,10 @@ abstract class CoreRepository
         $query = [];
         $modelName = $this->model->getTable();
 
-        $query['select'] = [$modelName.'.id'];
+        $query['select'] = [$modelName . '.id'];
 
-        foreach (array_keys($data['datatable_data']) as $item) {
-            $query['select'][] = $modelName.'.'.$item;
+        foreach ($data['datatable_data'] as $item) {
+            $query['select'][] = $modelName . '.' . $item;
         }
 
         if (isset($data['selectableModel'])) {
@@ -144,16 +145,16 @@ abstract class CoreRepository
 
             $query['join'] = [
                 $selectableModelName,
-                $modelName.'.'.$selectable_key,
+                $modelName . '.' . $selectable_key,
                 '=',
-                $selectableModelName.'.id',
+                $selectableModelName . '.id',
             ];
 
-            $query['select'][] = $selectableModelName.'.title as '.$selectable_key;
+            $query['select'][] = $selectableModelName . '.title as ' . $selectable_key;
         }
 
-        $query['select'][] = $modelName.'.created_at';
-        $query['select'][] = $modelName.'.updated_at';
+        $query['select'][] = $modelName . '.created_at';
+        $query['select'][] = $modelName . '.updated_at';
 
         return $query;
     }

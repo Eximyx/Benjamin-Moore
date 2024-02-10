@@ -2,19 +2,23 @@
 @section('title', trans($data['data']['ModelName']))
 @section('contents')
     <div class="container-fluid">
+        <div class='float-right'>
+            <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Добавить</a>
+        </div>
+
         <table class="m-0 w-100 table table-striped" id="table">
             <thead>
             <tr>
                 <th>id</th>
                 @foreach ($data['data']['datatable_data'] as $key => $value)
-                    @if(str_contains($key, '_id'))
+                    @if(str_contains($value, '_id'))
                         <th>@lang('admin.keys.category')</th>
                     @else
-                        <th>@lang('admin.keys.'.$key)</th>
+                        <th>@lang('admin.keys.'.$value)</th>
                     @endif
                 @endforeach
-                <th>Дата создания</th>
-                <th>Дата изменения</th>
+                <th>@lang('admin.keys.created_at')</th>
+                <th>@lang('admin.keys.updated_at')</th>
                 <th></th>
             </tr>
             </thead>
@@ -33,21 +37,21 @@
                         <input type="hidden" name="id" id="id">
                         @foreach ($data['data']['form_data'] as $key => $value)
                             <div class="col-lg mt-2">
-                                @if(str_contains($key, '_id'))
-                                    <label for="{{ $key }}">@lang('admin.keys.category')</label>
+                                @if(str_contains($value, '_id'))
+                                    <label for="{{ $value }}">@lang('admin.keys.category')</label>
                                 @else
-                                    <label for="{{ $key }}">@lang('admin.keys.'.$key)</label>
+                                    <label for="{{ $value }}">@lang('admin.keys.'.$value)</label>
                                 @endif
-                                @if ($key === 'content')
+                                @if ($value === 'content')
                                     <textarea type="text" name="content" class="form-control" id="summernote-content"
                                               placeholder="content" required></textarea>
-                                @elseif($key == 'description')
+                                @elseif($value == 'description')
                                     <textarea type="text" name="description" class="form-control" id="description"
-                                              rows="3" placeholder="@lang('admin.keys.'.$key)"
+                                              rows="3" placeholder="@lang('admin.keys.'.$value)"
                                               required></textarea>
-                                @elseif(str_contains($key, '_id'))
+                                @elseif(str_contains($value, '_id'))
                                     <div>
-                                        <select class="form-select" name="{{ $key }}" id="select"
+                                        <select class="form-select" name="{{ $value }}" id="select"
                                                 aria-label="Default select example" required>
                                             @foreach ($data['selectable'] as $item)
                                                 <option value="{{ $item['id'] }}">
@@ -61,7 +65,7 @@
                                     <img class="my-2 img-thumbnail m-0" id="result"
                                          style="max-width: 20rem;max-height:20rem">
                                 @else
-                                    <input type="text" name="{{ $key }}" id="{{ $key }}"
+                                    <input type="text" name="{{ $value }}" id="{{ $value }}"
                                            class="form-control" placeholder="{{ $value }}" required>
                                 @endif
                             </div>
@@ -77,7 +81,6 @@
         </div>
     </div>
 
-    f
     <script>
         const urls = "{{ url(request()->getPathInfo()) }}"
 
@@ -88,7 +91,9 @@
                 }
             });
             console.log(urls);
+            console.log();
             $('#table').DataTable({
+
                 @if (App::currentLocale() !== "en")
                 language: @json(config('datatable_'.App::currentLocale())),
                 @endif
@@ -103,22 +108,27 @@
                             "data": 'id',
                             "name": 'id'
                         },
-                        @foreach ($data['datatable_columns'] as $item) @json($item), @endforeach
 
-                    {
-                        "data": 'created_at',
-                        "name":
-                            'created_at'
-                    }
+                        @foreach ($data['datatable_columns'] as $item) @json($item),
+                            @endforeach
+
+                        {
+                            "data":
+                                'created_at',
+                            "name":
+                                'created_at'
+                        }
                         ,
                         {
-                            "data": 'updated_at',
+                            "data":
+                                'updated_at',
                             "name":
                                 'updated_at'
                         }
                         ,
                         {
-                            "data": 'action',
+                            "data":
+                                'action',
                             "name":
                                 'action',
                             "orderable":
@@ -132,8 +142,7 @@
                     ],
             })
             ;
-        })
-        ;
+        });
 
         document.addEventListener('keydown', function (event) {
             if (event.code == 'Escape') {

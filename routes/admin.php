@@ -46,16 +46,16 @@ Route::middleware('admin')->group(function () {
                 Route::post('toggle', [NewsController::class, 'toggle']);
             });
 
-            Route::prefix('static-page')->group(function () {
-                Route::get('/', [StaticPageController::class, 'index'])->name('static-page.index');
+            Route::prefix('static_pages')->group(function () {
+                Route::get('/', [StaticPageController::class, 'index'])->name('static_pages.index');
                 Route::post('create', [StaticPageController::class, 'create']);
                 Route::post('update/{entity}', [StaticPageController::class, 'update']);
                 Route::post('edit', [StaticPageController::class, 'edit']);
                 Route::post('delete', [StaticPageController::class, 'delete']);
                 Route::post('toggle', [StaticPageController::class, 'toggle']);
             });
-            Route::prefix('news_category')->group(function () {
-                Route::get('/', [CategoryController::class, 'index'])->name('news_category.index');
+            Route::prefix('news_categories')->group(function () {
+                Route::get('/', [CategoryController::class, 'index'])->name('news_categories.index');
                 Route::post('create', [CategoryController::class, 'create']);
                 Route::post('update/{entity}', [CategoryController::class, 'update']);
                 Route::post('edit', [CategoryController::class, 'edit']);
@@ -68,8 +68,8 @@ Route::middleware('admin')->group(function () {
                 Route::post('edit', [LeadsController::class, 'edit']);
                 Route::post('delete', [LeadsController::class, 'delete']);
             });
-            Route::prefix('product_category')->group(function () {
-                Route::get('/', [ProductCategoryController::class, 'index'])->name('product_category.index');
+            Route::prefix('product_categories')->group(function () {
+                Route::get('/', [ProductCategoryController::class, 'index'])->name('product_categories.index');
                 Route::post('create', [ProductCategoryController::class, 'create']);
                 Route::post('update/{entity}', [ProductCategoryController::class, 'update']);
                 Route::post('edit', [ProductCategoryController::class, 'edit']);

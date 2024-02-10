@@ -27,7 +27,7 @@
             <li class="nav-item">
                 <a class="nav-link" href={{route($value->getName())}}>
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>{{$value->getName()}}</span></a>
+                    <span>@lang('sidebar.'.$value->getName())</span></a>
             </li>
         @endif
     @endforeach
