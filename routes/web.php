@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminMainController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,23 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('routes', function () {
-    $routeCollection = Route::getRoutes();
-
-    foreach ($routeCollection as $value) {
-        if (str_contains($value->uri, 'admin') && str_contains($value->getName(), 'index')) {
-            echo
-                '<li class="nav-item">' .
-                '<a class="nav-link" href="' . $value->uri . '">' .
-                '<i class="fas fa-fw fa-tachometer-alt"></i>' .
-                '<span>Заказы</span></a>' .
-                '</li>';
-
-        }
-
-    }
-    echo "</table>";
-});
 Route::get('/', [MainController::class, 'index'])->name('main.index');
 Route::get('/catalog', [MainController::class, 'catalog'])->name('user.catalog');
 Route::get('/catalog/{slug}', [MainController::class, 'productShow'])->name('product.show');
@@ -39,5 +23,6 @@ Route::get('/news/{slug}', [MainController::class, 'newsShow'])->name('user.news
 Route::get('/calculator', [MainController::class, 'calc'])->name('calc');
 Route::get('/contacts', [MainController::class, 'contacts'])->name('contacts');
 Route::post('/leads', [MainController::class, 'leads'])->name('leads');
-
+Route::get('/admin/settings', [AdminMainController::class, 'index'])->name('dashboard');
+Route::post('/admin/settings', [AdminMainController::class, 'set'])->name('settings.up');
 require __DIR__ . '/admin.php';
