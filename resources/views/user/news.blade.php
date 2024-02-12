@@ -2,8 +2,8 @@
 @section('contents')
     <div id="news" class="row justify-content-between m-0 p-0 border-bottom border-2 border-opacity-25 mt-5">
         <div class="col-sm-12 m-0 p-0 row">
-            <h4 class="fw-normal">Новости</h4>
-            <h2 class="text-danger text-nowrap fw-medium mb-2">ПОСЛЕДНИЕ НОВОСТИ</h2>
+            <h4 class="fw-normal">@lang('news.title')</h4>
+            <h2 class="text-danger text-nowrap fw-medium mb-2">@lang('news.subTitle')</h2>
         </div>
         @foreach ($newsPosts as $item)
             <div id="news-{{ $item->id }}" class="col-sm-12 col-md-4 justify-content-between align-items-end">
@@ -14,7 +14,8 @@
                         {{ $item->created_at }}
                     </p>
                     <p class="text-truncate col-6 opacity-75 m-0 my-2 text-center">
-                        <a class="link-secondary" href="{{ route('user.news.show', $item->slug) }}">Подробнее</a>
+                        <a class="link-secondary"
+                           href="{{ route('user.news.show', $item->slug) }}">@lang('news.more')</a>
                     </p>
                 </div>
                 <h4 class="col text-wrap truncate">{{ $item->title }}</h4>

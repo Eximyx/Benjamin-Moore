@@ -13,7 +13,8 @@ class MainController extends Controller
 {
     public function __construct(
         protected MainService $mainService
-    ) {
+    )
+    {
     }
 
     public function index(): View
@@ -43,7 +44,7 @@ class MainController extends Controller
             return response()->json([$entities['categories'], view('user.search_result', ['category' => $entities['categories'], 'Products' => $entities['products'], 'category_title' => $entities['category_title']])->render()]);
         }
 
-        return view('user.FakeCatalog', ['entities' => $entities, 'Products' => $entities['products'], 'category' => $entities['categories']]);
+        return view('user.catalog', ['entities' => $entities, 'Products' => $entities['products'], 'category' => $entities['categories']]);
     }
 
     public function newsShow(string $slug): JsonResponse|View

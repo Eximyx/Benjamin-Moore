@@ -3,7 +3,7 @@
     <div id="image-wrapper" class="row rounded-4 border border-1 position-relative" alt="">
         <div class="col-sm-4 clearfix"></div>
         <div class="container-fluid position-absolute h-100 rounded-4 "
-            style="background-image:url({{ url('storage/assets/creative.jpg') }});background-position: center;background-size: cover; background-repeat: no-repeat; filter:brightness(75%)">
+             style="background-image:url({{ url('storage/assets/creative.jpg') }});background-position: center;background-size: cover; background-repeat: no-repeat; filter:brightness(75%)">
             <img src="" class="img-fluid" alt="">
         </div>
         <div class="position-relative py-5 my-3">
@@ -20,7 +20,7 @@
             </div>
             <div class="row col-sm-12 justify-content-between align-items-center m-2 p-0">
                 <a class="col-5 col-sm-3 col-md-2 btn btn-danger rounded-4 my-1"
-                    href="{{ route('user.catalog') }}">Купить</a>
+                   href="{{ route('user.catalog') }}">@lang('main.buttons.buy')</a>
                 {{-- <div class="col-5 col-sm-3 col-md-2 btn btn-secondary text-nowrap rounded-4 m-0">
                     Все цвета</div>
                 <div class="col-5 col-sm-4 col-md-6 clearfix m-0 p-0"> </div> --}}
@@ -30,12 +30,12 @@
     <div class="row justify-content-between">
         <div class="row justify-content-between ">
             <div class="col">
-                <h4 class="fw-normal">Новости</h4>
-                <h2 class="text-danger text-nowrap fw-medium">ПОСЛЕДНИЕ НОВОСТИ</h2>
+                <h4 class="fw-normal">@lang('main.titles.products')</h4>
+                <h2 class="text-danger text-nowrap fw-medium">@lang('main.titles.lastProducts')</h2>
             </div>
             <div class="col-1 justify-content-end align-items-end my-auto">
-                <a class="btn btn-outline-danger mx-auto w-auto text-nowrap" href="{{ route('user.catalog') }}">Все
-                    продукты</a>
+                <a class="btn btn-outline-danger mx-auto w-auto text-nowrap"
+                   href="{{ route('user.catalog') }}">@lang('main.buttons.allProducts')</a>
             </div>
         </div>
         <div class="swiper" style="max-height:fit-content">
@@ -48,11 +48,11 @@
                         <div id="products" class="products row justify-content-start m-0 p-0 mt-4 px-0 px-md-5">
                             @foreach ($arrProduct as $product)
                                 <div id="{{ $product->id }}"
-                                    class="{{ $product->id % 4 == 0 ? 'd-none d-lg-block' : '' }} h-auto product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2">
+                                     class="{{ $product->id % 4 == 0 ? 'd-none d-lg-block' : '' }} h-auto product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2">
                                     <div class="row border-2 border rounded-4 align-items-center m-0 p-0 h-100">
                                         <img src="{{ url('storage/image/' . 'краска.webp') }}"
-                                            class=" rounded-4 align-self-center m-0 p-0" alt=""
-                                            style="size:cover;positon:center">
+                                             class=" rounded-4 align-self-center m-0 p-0" alt=""
+                                             style="size:cover;positon:center">
                                         <div class="text-center fs-5 p-0 m-0">
                                             <p class="m-0 p-0">{{ $product->title }}</p>
                                         </div>
@@ -66,7 +66,7 @@
                                             </div>
                                             <div class="col-5 col-sm-5 col-md-6 col-lg-6 align-items-center m-0 p-0">
                                                 <a class="btn btn-danger text-center p-0 m-0 w-100 h-25 py-1 rounded-4 fs-5"
-                                                    href="{{ route('user.catalog') }}">Заказать</a>
+                                                   href="{{ route('user.catalog') }}">@lang('main.buttons.order')</a>
                                             </div>
                                         </div>
                                     </div>
@@ -93,8 +93,8 @@
     <div id="about us" class="row justify-content-between m-0 p-0 mt-5 py-2">
         <div class="row col-12 col-lg-7 m-0 p-0">
             <div class="col m-0 p-0 row">
-                <h4 class="fw-normal">О нашей компании</h4>
-                <h2 class="text-danger text-nowrap fw-medium mb-2">НЕМНОГО О НАС</h2>
+                <h4 class="fw-normal">@lang('main.titles.aboutCompany')</h4>
+                <h2 class="text-danger text-nowrap fw-medium mb-2">@lang('main.titles.aboutUs')</h2>
                 <p class="fs-6 fw-light text-wrap py-2">
                     Задача организации, в особенности же граница обучения кадров играет определяющее значение
                     для
@@ -109,7 +109,7 @@
                 </p>
                 <div class="col-6 mb-2">
                     <a class="btn btn-outline-danger text-center rounded-4 p-1 fs-4"
-                        href={{ route('user.news') }}>Подробнее</a>
+                       href={{ route('user.news') }}>@lang('main.buttons.more')</a>
                 </div>
             </div>
         </div>
@@ -150,12 +150,12 @@
     <div id="news" class="row justify-content-between m-0 p-0 border-bottom border-2 border-opacity-25 mt-5">
         <div class="row justify-content-between ">
             <div class="col">
-                <h4 class="fw-normal">Новости</h4>
-                <h2 class="text-danger text-nowrap fw-medium">ПОСЛЕДНИЕ НОВОСТИ</h2>
+                <h4 class="fw-normal">@lang('main.titles.news')</h4>
+                <h2 class="text-danger text-nowrap fw-medium">@lang('main.titles.lastNews')</h2>
             </div>
             <div class="col-1 float-end justify-content-end align-items-end my-auto">
-                <a class="btn btn-outline-danger mx-auto w-auto text-nowrap" href="{{ route('user.news') }}">Все
-                    новости</a>
+                <a class="btn btn-outline-danger mx-auto w-auto text-nowrap"
+                   href="{{ route('user.news') }}">@lang('main.buttons.allNews')</a>
             </div>
         </div>
 
@@ -168,7 +168,8 @@
                         {{ $item->created_at }}
                     </p>
                     <p class="text-truncate col-6 opacity-75 m-0 my-2 text-center">
-                        <a class="link-secondary" href="{{ route('user.news.show', $item->slug) }}">Подробнее</a>
+                        <a class="link-secondary"
+                           href="{{ route('user.news.show', $item->slug) }}">@lang('main.buttons.more')</a>
                     </p>
                 </div>
                 <h4 class="col text-wrap truncate">{{ $item->title }}</h4>
@@ -179,33 +180,35 @@
     <div id="leads" class="row m-0 p-0 mt-5">
         <div class="col-sm-12 col-md-12 col-lg-8 m-0 p-0">
             <iframe class="rounded-left-4 mb-3 m-0 p-0 w-100 h-100"
-                src="https://yandex.ru/map-widget/v1/?um=constructor%3Ab4b0cc562e37a8f254c72d9ee28e7f7d677f827665373280c0df05bc6f3a013a&amp;source=constructor"
-                frameborder="0"></iframe>
+                    src="https://yandex.ru/map-widget/v1/?um=constructor%3Ab4b0cc562e37a8f254c72d9ee28e7f7d677f827665373280c0df05bc6f3a013a&amp;source=constructor"
+                    frameborder="0"></iframe>
         </div>
         <div class="row col m-0 p-4" style="background-color:#F5E9DD">
             <form action="javascript:void(0)" id="Form" name="Form" method="POST" class="form-horizontal"
-                enctype="multipart/form-data">
-                <h3 class="fw-normal fs-3">Оставьте заявку</h3>
-                <h2 class="text-wrap fw-normal fs-5 mb-2">Мы свяжемся с вами в течении 5 минут</h2>
+                  enctype="multipart/form-data">
+                <h3 class="fw-normal fs-3">@lang('main.form.title')</h3>
+                <h2 class="text-wrap fw-normal fs-5 mb-2">@lang('main.form.subTitle')</h2>
                 <input type="hidden" name="id" id="id">
 
                 <div class="col-12 justify-content-between align-items-center">
-                    <label class="form-label p-0">Имя</label>
+                    <label class="form-label p-0">@lang('main.form.name')</label>
                     <input type="text" class="form-control rounded-5 border-danger border-2" id="name"
-                        name="name" placeholder="Имя">
+                           name="name" placeholder=@lang('main.form.name')>
                 </div>
                 <div class="col-12 justify-content-between align-items-center">
-                    <label class="form-label p-0">Email</label>
+                    <label class="form-label p-0">@lang('main.form.email')</label>
                     <input type="email" class="form-control rounded-5 border-danger border-2" id="contactInfo"
-                        name="contactInfo" placeholder="Email">
+                           name="contactInfo" placeholder=@lang('main.form.email')>
                 </div>
                 <div class="col-12 justify-content-between align-items-center">
-                    <label for="exampleFormControlTextarea1" class="form-label p-0">Сообщение</label>
+                    <label for="exampleFormControlTextarea1" class="form-label p-0">@lang('main.form.message')</label>
                     <textarea class="form-control rounded-4 border-danger border-2" id="message" name="message" rows="6"
-                        placeholder="Текст сообщения"></textarea>
+                              placeholder=@lang('main.form.message')></textarea>
                 </div>
                 <div class="col-12 mt-3">
-                    <button type="submit" class="w-auto px-5 btn btn-danger text-center rounded-4 fs-4">Заказать</button>
+                    <button type="submit"
+                            class="w-auto px-5 btn btn-danger text-center rounded-4 fs-4">@lang('main.form.order')
+                    </button>
                 </div>
             </form>
         </div>
@@ -214,7 +217,7 @@
 
 @section('scripts')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

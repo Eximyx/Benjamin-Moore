@@ -17,10 +17,10 @@
             </div>
         </div>
         <div class="col-sm-12 col-lg-4 text-wrap mt-sm-5 m-0 p-5">
-            <h2 class="text-center">Последние новости</h2>
+            <h2 class="text-center">@lang('news.lastNews')</h2>
             @foreach ($NewsPosts as $item)
                 <div id="news-{{ $item->id }}"
-                    class="mx-auto col-sm-12 col-lg-11 justify-content-between align-items-end">
+                     class="mx-auto col-sm-12 col-lg-11 justify-content-between align-items-end">
                     <img class="img-fluid w-100" srcset="{{ url('storage/image') }}/{{ $item->main_image }}">
                     <div class="row justify-content-between">
                         <p class="text-truncate col-6 opacity-75 m-0 my-2 ">
@@ -28,7 +28,8 @@
                             {{ $NewsPost->created_at }}
                         </p>
                         <p class="text-truncate col-6 opacity-75 m-0 my-2 text-center">
-                            <a class="link-secondary" href="{{route('user.news.show',$NewsPost->slug)}}">Подробнее</a>
+                            <a class="link-secondary"
+                               href="{{route('user.news.show',$NewsPost->slug)}}">@lang('news.more')</a>
                         </p>
                     </div>
                     <h4 class="col text-wrap truncate">{{ $item->title }}</h4>
@@ -36,7 +37,7 @@
                 </div>
             @endforeach
             <div class="row justify-content-center">
-                <a class="w-auto btn btn-outline-danger" href="{{route('user.news')}}">Все новости</a>
+                <a class="w-auto btn btn-outline-danger" href="{{route('user.news')}}">@lang('news.allNews')</a>
             </div>
         </div>
     </div>
