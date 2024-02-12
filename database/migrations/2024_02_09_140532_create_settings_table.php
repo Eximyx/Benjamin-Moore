@@ -15,8 +15,8 @@ return new class extends Migration {
             $table->string('email');
             $table->string('phone');
             $table->string('work_time');
-            $table->string('info');
-            $table->string('banner');
+            $table->string('location');
+            $table->string('instagram');
             $table->timestamps();
         });
     }
