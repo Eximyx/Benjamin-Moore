@@ -3,8 +3,6 @@
 return [
     'lang' => 'ru',
 
-    'news.index' => 'fedfd',
-
     'news.title' => 'Новости',
 
     'category.title' => 'Категории новостей',
@@ -18,6 +16,10 @@ return [
     'staticPage.title' => 'Статические страницы',
 
     'user.title' => 'Пользователи',
+
+    'profile.title' => 'Профиль',
+
+    'profileSettings.title' => 'Настройки профиля',
 
     'keys' => [
         'title' => 'Заголовок',
@@ -42,9 +44,17 @@ return [
         'updated_at' => 'Дата обновления',
         'contactInfo' => 'Контактная информация',
         'message' => 'Сообщение',
-
-
     ],
+
+    'buttons' => [
+        'profileSave' => 'Сохранить профиль',
+        'logout' => 'Выйти',
+        'profile' => 'Профиль',
+        'add' => 'Добавить',
+        'submit' => 'Подтвердить',
+        'close' => 'Закрыть',
+    ],
+
     'modal' => [
         'edit' => 'Редактирование',
         'create' => 'Создание',

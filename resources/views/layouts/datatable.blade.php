@@ -3,7 +3,7 @@
 @section('contents')
     <div class="container-fluid">
         <div class='float-right'>
-            <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Добавить</a>
+            <a class="btn btn-success" onClick="add()" href="javascript:void(0)">@lang('admin.buttons.add')</a>
         </div>
 
         <table class="m-0 w-100 table table-striped" id="table">
@@ -71,8 +71,9 @@
                             </div>
                         @endforeach
                         <div class="col-lg mt-2">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                            <button type="submit" class="btn btn-primary">Подтвердить</button>
+                            <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">@lang('admin.buttons.close')</button>
+                            <button type="submit" class="btn btn-primary">@lang('admin.buttons.submit')</button>
                         </div>
                     </form>
                 </div>

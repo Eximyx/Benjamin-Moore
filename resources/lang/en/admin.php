@@ -17,6 +17,10 @@ return [
 
     'user.title' => 'Users',
 
+    'profile.title' => 'Profile',
+
+    'profileSettings.title' => 'Profile settings',
+
     'keys' => [
         'title' => 'Title',
         'is_toggled' => 'Toggled',
@@ -40,6 +44,15 @@ return [
         'updated_at' => 'Updated at',
         'contactInfo' => 'Contact info',
         'message' => 'Message',
+    ],
+
+    'buttons' => [
+        'profileSave' => 'Save profile',
+        'logout' => 'Logout',
+        'profile' => 'Profile',
+        'add' => 'Add',
+        'submit' => 'Submit',
+        'close' => 'Close',
     ],
 
     'modal' => [
