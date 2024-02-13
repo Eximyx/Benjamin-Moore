@@ -10,12 +10,14 @@ return [
     ],
 
     'titles' => [
-        'products' => 'Продукты',
-        'lastProducts' => 'НАШИ ПРОДУКТЫ',
+        'products' => 'Предлагаем',
+        'lastProducts' => 'НАШУ ПРОДУКЦИЮ',
         'news' => 'Новости',
         'lastNews' => 'ПОСЛЕДНИЕ НОВОСТИ',
         'aboutUs' => 'НЕМНОГО О НАС',
         'aboutCompany' => 'О нашей компании',
+        'reviews' => 'Отзывы о нас',
+        'subReviews' => 'ЧТО О НАС ГОВОРЯТ',
     ],
 
     'buttons' => [

@@ -25,4 +25,7 @@ Route::get('/contacts', [MainController::class, 'contacts'])->name('contacts');
 Route::post('/leads', [MainController::class, 'leads'])->name('leads');
 Route::get('/admin/settings', [AdminMainController::class, 'index'])->name('dashboard');
 Route::post('/admin/settings', [AdminMainController::class, 'set'])->name('settings.up');
+Route::get('/eee', function () {
+    return view('user.test');
+});
 require __DIR__ . '/admin.php';

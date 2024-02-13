@@ -3,24 +3,19 @@
 return [
     'lang' => 'ru',
 
-    'news.title' => 'Новости',
-
-    'category.title' => 'Категории новостей',
-
-    'product.title' => 'Товары',
-
-    'productCategory.title' => 'Категории продуктов',
-
-    'leads.title' => 'Запросы обратной связи',
-
-    'staticPage.title' => 'Статические страницы',
-
-    'user.title' => 'Пользователи',
-
-    'profile.title' => 'Профиль',
-
-    'profileSettings.title' => 'Настройки профиля',
-
+    'titles' => [
+        'news' => 'Новости',
+        'category' => 'Категории новостей',
+        'product' => 'Товары',
+        'productCategory' => 'Категории продуктов',
+        'leads' => 'Запросы обратной связи',
+        'staticPage' => 'Статические страницы',
+        'user' => 'Пользователи',
+        'profile' => 'Профиль',
+        'profileSettings' => 'Настройки профиля',
+        'review' => 'Отзывы'
+    ],
+    
     'keys' => [
         'title' => 'Заголовок',
         'is_toggled' => 'Отображение',
