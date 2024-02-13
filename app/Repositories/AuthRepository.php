@@ -2,12 +2,22 @@
 
 namespace App\Repositories;
 
-use App\Models\User as Model;
+use App\Models\User;
 
-class AuthRepository extends CoreRepository
+class AuthRepository
 {
-    public function __construct()
+    /**
+     * @param User $entity
+     * @param array<string,mixed> $dto
+     * @return User
+     */
+    public function update(User $entity, array $dto): User
     {
-        parent::__construct(Model::class);
+        return tap($entity)->update($dto);
+    }
+
+    public function getUserById(string $id): ?User
+    {
+        return User::find($id);
     }
 }

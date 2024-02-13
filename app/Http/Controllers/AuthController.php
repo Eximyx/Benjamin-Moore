@@ -9,49 +9,16 @@ use App\Services\AuthService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public string $dto;
-
-    public string $resource;
-
-    public string $request;
-
     public function __construct(
         protected AuthService $service,
-    ) {
-        $this->dto = AuthDTO::class;
-        $this->resource = AuthResource::class;
-        $this->request = AuthRequest::class;
-    }
-
-    public function register(): View
+    )
     {
-        return view('auth/register');
-    }
-
-    /**
-     * @throws ValidationException
-     */
-    public function registerSave(Request $request): RedirectResponse
-    {
-        $request = new $this->request($request->all());
-
-        $dto = $this->dto::appRequest(
-            $request
-        );
-
-        $this->service->create($dto);
-
-        /** @var Request $request */
-        $this->loginAction($request);
-
-        return redirect()->route('main.index');
     }
 
     public function login(): View
@@ -78,25 +45,21 @@ class AuthController extends Controller
         return redirect('login');
     }
 
-    public function profile(): View
+    public function profile(): View|AuthResource
     {
+        if (request()->ajax()) {
+            $entity = $this->service->getUserById((string)Auth::user()['id']);
+            $request = new AuthRequest(request()->all());
+            $request = $this->service->profileSet($request);
+
+            $entity = $this->service->update(
+                $entity,
+                AuthDTO::appRequest($request)
+            );
+
+            return AuthResource::make($entity);
+        }
+
         return view('admin/profile');
-    }
-
-    public function profileSet(Request $request): JsonResource
-    {
-        $entity = $this->service->findById((string) Auth::user()['id']);
-
-        /** @var Request $validatedRequest */
-        $validatedRequest = new $this->request($request->all());
-
-        $request = $this->service->profileSet($validatedRequest);
-
-        $entity = $this->service->update(
-            $entity,
-            $this->dto::appRequest($request)
-        );
-
-        return $this->resource::make($entity);
     }
 }

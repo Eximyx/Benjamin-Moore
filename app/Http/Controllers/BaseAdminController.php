@@ -48,7 +48,9 @@ abstract class BaseAdminController extends Controller
 
     public function create(Request $request): JsonResource
     {
-        $request = new $this->request($request->all());
+
+        $request = app($this->request, $request->all());
+
         $dto = $this->dto::AppRequest(
             $request
         );
@@ -62,7 +64,7 @@ abstract class BaseAdminController extends Controller
     {
         $entity = $this->service->findById($request['id']);
 
-        $request = new $this->request($request->all());
+        $request = app($this->request, $request->all());
 
         $entity = $this->service->update(
             $entity,

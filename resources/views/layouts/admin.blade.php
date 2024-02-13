@@ -21,7 +21,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css">
-    <link href="https://cdn.datatables.net/v/bs5/dt-1.13.8/r-2.5.0/sl-1.7.0/datatables.min.css" rel="stylesheet">
+    {{--    <link href="https://cdn.datatables.net/v/bs5/dt-1.13.8/r-2.5.0/sl-1.7.0/datatables.min.css" rel="stylesheet">--}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 
     <link href="https://fonts.cdnfonts.com/css/commissioner-2" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
@@ -93,6 +95,7 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-2">
                     <h1 class="h3 m-1 text-gray-800">@yield('title')</h1>
+                    
                 </div>
                 <div class="p-0 m-0 ml-1 justify-content-between align-items-center">
                     @yield('contents')

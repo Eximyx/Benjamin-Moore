@@ -1,155 +1,194 @@
 @extends('layouts.admin')
-
-
-@section('title', 'Настройки')
-
 @section('contents')
-    <form action="javascript:void(0)" id="Form" name="Form" class="form form-horizontal" method="POST"
-          enctype="multipart/form-data">
-        <div class="col-12 m-0 p-0" id="contact-info">
-            <div class="row">
-                <h5 class="text-gray-800">Контактная информация</h5>
-                <div class="col-12 col-sm">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" value="" id="email" class="form-control"
-                           placeholder="email"
-                    >
-                </div>
-                <div class="col-12 col-sm">
-                    <label for="phone">Номер телефона</label>
-                    <input type="text" name="phone" id="phone" class="form-control" placeholder="phone-number">
-                </div>
-                <div class="col-12 col-sm">
-                    <label for="work_time">Время работы</label>
-                    <input type="text" name="work_time" id="work_time" class="form-control" placeholder="work time">
-                </div>
+    <div class="container-fluid">
+        <div class="row my-2">
+            <div class="col m-0 p-0">
+                <ul class="nav nav-tabs">
+                    <li><a data-toggle="tab" href="#contact-info" class="btn">Контакты</a></li>
+                    <li><a data-toggle="tab" href="#about-us" class="btn">Немного о нас</a></li>
+                    <li><a data-toggle="tab" href="#banners" class="btn">Баннеры</a></li>
+                </ul>
             </div>
-            <div class="row">
-                <div class="col-12 col-sm">
-                    <label for="location">Местоположение</label>
-                    <input type="text" name="location" id="location" class="form-control" placeholder="location">
-                </div>
-                <div class="col-12 col-sm">
-                    <label for="instagram">Instagram</label>
-                    <input type="text" name="instagram" id="instagram" class="form-control" placeholder="">
-                </div>
+            <div class="col-auto m-0 p-0 d-none d-md-block">
+                <button type="submit" class="btn btn-primary">Подтвердить</button>
             </div>
         </div>
-        <div class="my-2 d-flex justify-content-end align-items-end">
-            <button type="submit" class="btn btn-primary ml-2">Подтвердить</button>
-        </div>
-    </form>
-    <form action="javascript:void(0)" id="Form" name="Form" class="form form-horizontal" method="POST"
-          enctype="multipart/form-data">
-        <div class="row" id="about-us">
-            <h5 class="text-gray-800">Немного о нас</h5>
-            <div class="row m-0 p-0">
-                <div class="row m-0 p-0">
-                    <div class="col-md">
-                        <label for="">Доступные</label>
-                        <select class="form-select overflow-hidden" size="6" aria-label="size 6 select example">
-                            <option selected>Open this select menu</option>
-                            <option draggable="true" value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="2">Two</option>
-                            <option value="2">Two</option>
-                            <option value="2">Two</option>
-                            <option value="2">Two</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                    </div>
-                    <div class="col-md">
-                        <label for="">Активные</label>
-                        <select class="form-select overflow-hidden" size="6" aria-label="size 3 select example">
-                        </select>
-                    </div>
-
-                </div>
-                <div class="col-12">
-                    <label for="">Секция</label>
-                    <input type="text" id="section_title" class="form-control" placeholder="">
-                    <textarea type="text" id="section_description" class="form-control" rows="4"></textarea>
-                </div>
-            </div>
-
-            <div class="col-12 col-md">
-
-
-                <div class="row m-0 p-0">
-                    <div class="col">
-                        <div class="col-12 col-sm-12 col-lg">
-                            <label for="">Файл 1</label>
-                            <div class="row m-0 p-0">
-                                <label class="form-control col" style="cursor: pointer">Выберите файл №1
-                                    <input type="file" name="fileImage" class="image form-control"
-                                           style="visibility: hidden">
-                                </label>
-                                <button type="button" class="w-auto text-wrap form-control">
-                                    Показать
-                                </button>
-                            </div>
+        <div class="tab-content text-gray-800 mt-2 p-0">
+            <div id="contact-info" class="tab-pane fade">
+                <form action="javascript:void(0)" id="Form" name="Form" class="form form-horizontal" method="POST"
+                      enctype="multipart/form-data">
+                    <div class="row justify-content-between">
+                        <div class="col-md-6">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" value="" id="email" class="form-control"
+                                   placeholder="email">
                         </div>
-                        <div class="col-12 col-sm-12 col-lg">
-                            <label for="">Файл 1</label>
-                            <div class="row m-0 p-0">
-                                <label class="form-control col" style="cursor: pointer">Выберите файл №1
-                                    <input type="file" name="fileImage" class="image form-control"
-                                           style="visibility: hidden">
-                                </label>
-                                <button type="button" class="w-auto text-wrap form-control">
-                                    Показать
-                                </button>
-                            </div>
+                        <div class="col-md-6">
+                            <label for="phone">Номер телефона</label>
+                            <input type="text" name="phone" id="phone" class="form-control"
+                                   placeholder="phone-number">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="work_time">Время работы</label>
+                            <input type="text" name="work_time" id="work_time" class="form-control"
+                                   placeholder="work time">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="location">Местоположение</label>
+                            <input type="text" name="location" id="location" class="form-control"
+                                   placeholder="location">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="instagram">Instagram</label>
+                            <input type="text" name="instagram" id="instagram" class="form-control"
+                                   placeholder="instagram">
                         </div>
                     </div>
-
-
-                </div>
-
-                <div class="my-2 d-flex justify-content-end align-items-end">
-                    <button type="button" class="mx-2 btn btn-outline-danger">Удалить
-                    </button>
-                    <button type="submit" class="btn btn-primary">Добавить</button>
-                </div>
+                </form>
             </div>
-        </div>
+            <div id="about-us" class="tab-pane fade">
+                <form action="javascript:void(0)" id="Form" name="Form" class="form form-horizontal row"
+                      method="POST"
+                      enctype="multipart/form-data">
+                    <div class="col-md-8">
+                        <div class="row justify-content-between">
+                            <div class="col-md-6">
+                                <label for="">Доступные</label>
+                                <select class="form-select overflow-auto " size="6"
+                                        aria-label="size 6 select example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="2">Two</option>
+                                    <option value="2">Two</option>
+                                    <option value="2">Two</option>
+                                    <option value="2">Two</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <ul class="row col-12 col-md nav m-0">
+                                <li class="d-none  d-md-flex "><a class="d-none  d-md-flex btn"><i
+                                            class="fa fa-arrow-right"></i></a>
+                                </li>
+                                <li class="d-none d-md-flex "><a class="btn"><i class="fa fa-arrow-left"></i></a></li>
+                                <li class="d-none d-md-flex "><a class="d-flex d-md-none btn"><i
+                                            class="fa fa-arrow-down"></i></a></li>
+                                <li class="d-none d-md-flex "><a class="d-flex d-md-none btn"><i
+                                            class="fa fa-arrow-up"></i></a></li>
+                                <li><a class="btn"><i class="fa fa-trash"></i></a></li>
+                            </ul>
 
-        <div class="my-2 d-flex justify-content-end align-items-end">
-            <button type="submit" class="btn btn-primary ml-2">Подтвердить</button>
-        </div>
-    </form>
-    <form action="javascript:void(0)" id="Form" name="Form" class="form form-horizontal" method="POST"
-          enctype="multipart/form-data">
-        <div class="row m-0 p-0">
-            <div class="col-12 col-sm mt-0 mt-sm-2">
-                <label for="">Баннер-1</label>
-                <input type="text" name="" id="" class="form-control" placeholder="">
-                <textarea type="text" name="" class="form-control mt-1" id="" rows="3"></textarea>
-                <div class="row m-0 p-0">
-                    <input type="file" name="fileImage" class="col image form-control">
-                    <button type="button" class="col-3 col-lg-4 text-wrap form-control">
-                        Показать
-                    </button>
-                </div>
+                            <div class="col-md">
+                                <label for="">Активные</label>
+                                <select class="form-select overflow-auto" size="6"
+                                        aria-label="select example">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row m-0 justify-content-end">
+                            <label for="">Секция</label>
+                            <input type="text" id="section_title" class="form-control" placeholder="">
+                            <textarea type="text" id="section_description" class="form-control"
+                                      rows="4" placeholder="Описание"></textarea>
+                            <button type="button" class=" mt-2 w-auto btn btn-primary">
+                                Добавить
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg">
+                        <label for="">Файл 1</label>
+                        <div class="row  m-0 p-0">
+                            <label class="form-control col" style="cursor: pointer">Обзор
+                                <input type="file" name="fileImage" class="image form-control"
+                                       style="visibility: hidden">
+                            </label>
+                            <button class="form-control col-auto w-auto text-wrap ">
+                                <i class="fa fa-expand"></i>
+                            </button>
+                        </div>
+                        <label for="">Файл 2</label>
+                        <div class="row col m-0 p-0">
+                            <label class="form-control col" style="cursor: pointer">Обзор
+                                <input type="file" name="fileImage" class="image form-control"
+                                       style="visibility: hidden">
+                            </label>
+                            <button class="form-control col-auto w-auto text-wrap ">
+                                <i class="fa fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="col-12 col-sm mt-1 mt-sm-2">
-                <label for="">Баннер-2</label>
-                <input type="text" name="" id="" class="form-control" placeholder="">
-                <textarea type="text" name="" class="form-control mt-1" id="" rows="3"></textarea>
-                <div class="row m-0 p-0">
-                    <input type="file" name="fileImage" class="col image form-control">
-                    <button type="button" class="col-3 col-lg-4 btn text-wrap form-control">
-                        Показать
-                    </button>
-                </div>
+            <div id="banners" class="tab-pane fade">
+                <form action="javascript:void(0)" id="Form" name="Form" class="form form-horizontal row"
+                      method="POST"
+                      enctype="multipart/form-data">
+                    <div class="col-lg-8">
+                        <div class="row justify-content-between">
+                            <div class="col-md-5">
+                                <label for="">Доступные</label>
+                                <select class="form-select overflow-auto " size="6"
+                                        aria-label="size 6 select example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="2">Two</option>
+                                    <option value="2">Two</option>
+                                    <option value="2">Two</option>
+                                    <option value="2">Two</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div
+                                class="col-md-1 row m-0 p-0 align-items-center justify-content-center align-self-center">
+                                <a class="w-auto d-none d-md-block btn"><i class="fa fa-arrow-right"></i></a>
+                                <a class="w-auto d-none d-md-block btn"><i class="fa fa-arrow-left"></i></a>
+                                <a class="w-auto d-block d-md-none btn"><i class="fa fa-arrow-down"></i></a>
+                                <a class="w-auto d-block d-md-none btn"><i class="fa fa-arrow-up"></i></a>
+                                <a class="w-auto btn"><i class="fa fa-trash"></i></a>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Активные</label>
+                                <select class="form-select overflow-auto" size="6"
+                                        aria-label="select example">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row m-0 justify-content-end">
+                            <div class="row m-0 p-0">
+                                <label for="">Секция</label>
+                                <input type="text" id="section_title" class="form-control" placeholder="">
+                                <textarea type="text" id="section_description" class="form-control"
+                                          rows="4" placeholder="Описание"></textarea>
+                            </div>
+                            <div class="row justify-content-between m-0 p-0 mt-2">
+                                <div class="row col m-0 p-0">
+                                    <label class="form-control col" style="cursor: pointer">Обзор
+                                        <input type="file" name="fileImage" class="image form-control"
+                                               style="visibility: hidden">
+                                    </label>
+                                    <button class="form-control col-auto w-auto text-wrap ">
+                                        <i class="fa fa-expand"></i>
+                                    </button>
+                                </div>
+                                <div class="col-auto justify-content-between m-0 ml-1 p-0">
+                                    <button type="button" class="w-auto btn btn-primary align-self-end">
+                                        Добавить
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
+
         </div>
-        <div class="mt-my-2 d-flex justify-content-end align-items-end">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Показать</button>
-            <button type="submit" class="btn btn-primary">Подтвердить</button>
+        <div class="row m-0 p-0 justify-content-end mt-2">
+            <button type="submit" class="d-block d-md-none btn btn-primary align-self-end w-auto">Подтвердить</button>
         </div>
-    </form>
+    </div>
     <script>
 
         $(document).ready(function () {
