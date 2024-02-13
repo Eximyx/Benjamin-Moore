@@ -1,5 +1,6 @@
 @extends('user.layout')
 @section('contents')
+
     <div id="image-wrapper" class="row rounded-4 border border-1 position-relative" alt="">
         <div class="col-sm-4 clearfix"></div>
         <div class="container-fluid position-absolute h-100 rounded-4 "
@@ -177,6 +178,60 @@
             </div>
         @endforeach
     </div>
+
+    <div class="row justify-content-between">
+        <div class="row justify-content-between ">
+            <div class="col">
+                <h4 class="fw-normal">@lang('main.titles.reviews')</h4>
+                <h2 class="text-danger text-nowrap fw-medium">@lang('main.titles.subReviews')</h2>
+            </div>
+            <div class="col-1 justify-content-end align-items-end my-auto">
+                <a class="btn btn-outline-danger mx-auto w-auto text-nowrap"
+                   href="{{ route('user.catalog') }}">@lang('main.buttons.allProducts')</a>
+            </div>
+        </div>
+        <div class="swiper" style="max-height:fit-content">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                @foreach ($reviews as $arrReview)
+                    <div class=" swiper-slide">
+                        <div id="reviews" class="reviews row justify-content-start ">
+                            @foreach ($arrReview as $review)
+                                <div id="{{ $review->id }}"
+                                     class="{{ $review->id % 3 == 0 ? 'd-none d-lg-flex' : '' }} review row
+                                         justify-content-center align-items-center col-md-4 col-lg-4 py-2 m-0 p-2">
+                                    <div class="review-card h-100">
+                                        <div class="review-card__header">
+                                            <img src="{{ url('storage/image/user-avatar.png') }}" alt="user avatar">
+                                            <h4>{{ $review->title }}</h4>
+                                        </div>
+                                        <p class="review-card__text">
+                                            {{ $review->description }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+
+                <!-- <div class="swiper-slide">Slide 3</div> -->
+            </div>
+            <!-- If we need pagination -->
+            <!-- <div class="swiper-pagination"></div> -->
+
+            <!-- If we need navigation buttons -->
+            <div class="d-none d-md-block swiper-button swiper-button-prev"></div>
+            <div class="d-none d-md-block swiper-button swiper-button-next"></div>
+
+            <!-- If we need scrollbar -->
+            <!-- <div class="swiper-scrollbar"></div> -->
+
+        </div>
+    </div>
+
     <div id="leads" class="row m-0 p-0 mt-5">
         <div class="col-sm-12 col-md-12 col-lg-8 m-0 p-0">
             <iframe class="rounded-left-4 mb-3 m-0 p-0 w-100 h-100"

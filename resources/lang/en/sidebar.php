@@ -16,5 +16,7 @@ return [
     'static_pages.index' => 'Static pages',
 
     'user.index' => 'Users',
+
+    'review.index' => 'Reviews',
 ];
 

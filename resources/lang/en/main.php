@@ -12,12 +12,14 @@ return [
     ],
 
     'titles' => [
-        'products' => 'Products',
+        'products' => 'We offer',
         'lastProducts' => 'OUR PRODUCTS',
         'news' => 'News',
         'lastNews' => 'LAST NEWS',
         'aboutUs' => 'ABOUT US',
         'aboutCompany' => 'About our company',
+        'reviews' => 'Reviews about us',
+        'subReviews' => 'WHAT THEY SAY ABOUT US',
     ],
 
     'buttons' => [

@@ -9,7 +9,7 @@
         <table class="m-0 w-100 table table-striped" id="table">
             <thead>
             <tr>
-                <th>id</th>
+                <th>Id</th>
                 @foreach ($data['data']['datatable_data'] as $key => $value)
                     @if(str_contains($value, '_id'))
                         <th>@lang('admin.keys.category')</th>
@@ -60,8 +60,8 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                @elseif(str_contains($key, 'image'))
-                                    <input type="file" name="{{ $key }}" class="form-control" id="image">
+                                @elseif(str_contains($value, 'image'))
+                                    <input type="file" name="{{ $value }}" class="form-control" id="image">
                                     <img class="my-2 img-thumbnail m-0" id="result"
                                          style="max-width: 20rem;max-height:20rem">
                                 @else

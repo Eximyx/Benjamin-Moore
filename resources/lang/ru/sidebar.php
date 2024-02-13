@@ -16,5 +16,7 @@ return [
     'static_pages.index' => 'Статические страницы',
 
     'user.index' => 'Пользователи',
+
+    'review.index' => 'Отзывы',
 ];
 

@@ -22,8 +22,9 @@ class MainController extends Controller
         // TODO News/Products resource
         $items['news'] = $this->mainService->showNews(3);
         $items['products'] = $this->mainService->productsWrapper();
+        $items['reviews'] = $this->mainService->reviewsWrapper();
 
-        return view('user.main', ['NewsPost' => $items['news'], 'Products' => $items['products']]);
+        return view('user.main', ['NewsPost' => $items['news'], 'Products' => $items['products'], 'reviews' => $items['reviews']]);
     }
 
     public function news(): View

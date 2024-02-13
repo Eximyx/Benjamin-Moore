@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 @section('contents')
-    <h1 class="mb-0">@lang('admin.profile.title')</h1>
+    <h1 class="mb-0">@lang('admin.titles.profile')</h1>
     <hr/>
     <form method="post" enctype="multipart/form-data" id="profile_setup_frm" action="javascript:void(0)">
         <div class="row">
             <div class="col-md-12 border-right">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">@lang('admin.profileSettings.title')</h4>
+                        <h4 class="text-right">@lang('admin.titles.profileSettings')</h4>
                     </div>
                     <div class="row" id="res"></div>
                     <div class="row mt-2">
@@ -52,7 +52,7 @@
                 const formData = new FormData(this);
                 $.ajax({
                     type: 'POST',
-                    url: "{{url('/admin/profile')}}",
+                    url: "{{route('profile')}}",
                     data: formData,
                     cache: false,
                     contentType: false,

@@ -3,23 +3,18 @@
 return [
     'lang' => 'en',
 
-    'news.title' => 'News',
-
-    'category.title' => 'Categories of news',
-
-    'product.title' => 'Products',
-
-    'productCategory.title' => 'Product categories',
-
-    'leads.title' => 'Leads',
-
-    'staticPage.title' => 'Static pages',
-
-    'user.title' => 'Users',
-
-    'profile.title' => 'Profile',
-
-    'profileSettings.title' => 'Profile settings',
+    'titles' => [
+        'news' => 'News',
+        'category' => 'Categories of news',
+        'product' => 'Products',
+        'productCategory' => 'Product categories',
+        'leads' => 'Leads',
+        'staticPage' => 'Static pages',
+        'user' => 'Users',
+        'profile' => 'Profile',
+        'profileSettings' => 'Profile settings',
+        'review' => 'Reviews'
+    ],
 
     'keys' => [
         'title' => 'Title',

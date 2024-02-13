@@ -6,13 +6,14 @@ use App\Models\Leads;
 use App\Models\NewsPost;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Review;
 use App\Models\StaticPage;
 use App\Models\User;
 use App\Models\UserRoles;
 
 return [
     NewsPost::class => [
-        'ModelName' => 'admin.news.title',
+        'ModelName' => 'admin.titles.news',
         'datatable_data' => [
             'title',
             'is_toggled',
@@ -28,8 +29,9 @@ return [
         'selectable_key' => 'category_id',
         'selectableModel' => app(Category::class),
     ],
+
     Category::class => [
-        'ModelName' => 'admin.category.title',
+        'ModelName' => 'admin.titles.category',
         'datatable_data' => [
             'title',
         ],
@@ -37,8 +39,9 @@ return [
             'title',
         ],
     ],
+
     Product::class => [
-        'ModelName' => 'admin.product.title',
+        'ModelName' => 'admin.titles.product',
         'datatable_data' => [
             'title',
             'code',
@@ -64,8 +67,9 @@ return [
         'selectable_key' => 'product_category_id',
         'selectableModel' => app(ProductCategory::class),
     ],
+
     ProductCategory::class => [
-        'ModelName' => 'admin.productCategory.title',
+        'ModelName' => 'admin.titles.productCategory',
         'datatable_data' => [
             'title',
             'kind_of_work_id',
@@ -78,8 +82,9 @@ return [
         'selectable_key' => 'kind_of_work_id',
         'selectableModel' => app(KindOfWork::class),
     ],
+
     Leads::class => [
-        'ModelName' => 'admin.leads.title',
+        'ModelName' => 'admin.titles.leads',
         'datatable_data' => [
             'name',
             'contactInfo',
@@ -91,8 +96,9 @@ return [
             'message',
         ],
     ],
+
     StaticPage::class => [
-        'ModelName' => 'admin.staticPage.title',
+        'ModelName' => 'admin.titles.staticPage',
         'datatable_data' => [
             'title',
             'is_toggled',
@@ -102,8 +108,9 @@ return [
             'content',
         ],
     ],
+
     User::class => [
-        'ModelName' => 'admin.user.title',
+        'ModelName' => 'admin.titles.user',
         'datatable_data' => [
             'name',
             'email',
@@ -117,6 +124,19 @@ return [
         ],
         'selectable_key' => 'user_role_id',
         'selectableModel' => app(UserRoles::class),
+    ],
+
+    Review::class => [
+        'ModelName' => 'admin.titles.review',
+        'datatable_data' => [
+            'title',
+            'description',
+        ],
+        'form_data' => [
+            'title',
+            'description',
+            'main_image',
+        ],
     ],
 ];
 
