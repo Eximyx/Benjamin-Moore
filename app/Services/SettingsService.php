@@ -11,8 +11,11 @@ use App\Repositories\SettingRepositories\BannersRepository;
 use App\Repositories\SettingRepositories\ContactsRepository;
 use App\Repositories\SettingRepositories\SectionRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class SettingsService
 {
@@ -23,10 +26,11 @@ class SettingsService
 
     public function __construct(
         protected ContactsRepository $contactsRepository,
-        protected SectionRepository $sectionRepository,
-        protected BannersRepository $bannersRepository,
+        protected SectionRepository  $sectionRepository,
+        protected BannersRepository  $bannersRepository,
 
-    ) {
+    )
+    {
         $this->repositories = [
             'about-us' => $this->sectionRepository,
             'banners' => $this->bannersRepository,
@@ -34,23 +38,26 @@ class SettingsService
     }
 
     /**
-     * @return Collection<int,Section>
+     * @return Collection<int,Model>
      */
     public function getSections(): Collection
     {
-        return $this->sectionRepository->getSections();
+        return $this->sectionRepository->getAll();
     }
 
     /**
-     * @return Collection<int,Banner>
+     * @return Collection<int,Model>
      */
     public function getBanners(): Collection
     {
-        return $this->bannersRepository->getBanners();
+        return $this->bannersRepository->getAll();
     }
 
     /**
-     * @return Collection<int,Section>
+     * @return Collection<int,Model>
+     *
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function getActiveSections(): Collection
     {
@@ -58,7 +65,10 @@ class SettingsService
     }
 
     /**
-     * @return Collection<int,Banner>
+     * @return Collection<int,Model>
+     *
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function getActiveBanners(): Collection
     {
@@ -82,7 +92,7 @@ class SettingsService
     }
 
     /**
-     * @param  array<string,mixed>  $data
+     * @param array<string,mixed> $data
      */
     public function update(string $tab_id, array $data): mixed
     {
@@ -90,7 +100,7 @@ class SettingsService
     }
 
     /**
-     * @param  array<string,mixed>  $data
+     * @param array<string,mixed> $data
      */
     public function delete(array $data): Section|Banner|null
     {
@@ -99,14 +109,14 @@ class SettingsService
         $entity = $repository->findById($data['id']);
 
         if ($entity !== null) {
-            $entity = $repository->delete($entity);
+            $entity = $repository->destroy($entity);
         }
 
         return $entity;
     }
 
     /**
-     * @param  array<string,mixed>  $data
+     * @param array<string,mixed> $data
      */
     public function settingsSet(array $data): Contacts
     {
@@ -114,14 +124,16 @@ class SettingsService
     }
 
     /**
-     * @param  array<int, UploadedFile>  $data
+     * @param array<int, UploadedFile|string> $data
      */
     public function uploadFilesForSections(array $data): void
     {
         foreach ($data as $value) {
-            Storage::putFileAs(
-                'public/image/sections', $value,
-                'section_image_'.$value->getClientOriginalName().'.'.'jpg');
+            if (!is_string($value)) {
+                Storage::putFileAs(
+                    'public/image/sections', $value,
+                    'section_image_' . $value->getClientOriginalName() . '.' . 'jpg');
+            }
         }
     }
 }

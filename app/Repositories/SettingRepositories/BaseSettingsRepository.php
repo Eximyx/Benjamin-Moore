@@ -2,9 +2,11 @@
 
 namespace App\Repositories\SettingRepositories;
 
-use App\Models\Banner;
 use App\Repositories\CoreRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class BaseSettingsRepository extends CoreRepository
 {
@@ -19,24 +21,27 @@ class BaseSettingsRepository extends CoreRepository
     }
 
     /**
-     * @return Collection<int,Banner>
+     * @return Collection<int,Model>
+     *
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function getActive(): Collection
     {
-        return $this->getModelClass()::where('position', '>', '0')->get();
+        return $this->model::where('position', '>', '0')->orderBy('position')->get();
     }
 
     /**
-     * @param  array<int,int|string>  $array
-     * @return array<int,Banner|null>
+     * @param array<int,int|string> $array
+     * @return array<int,Model|null>
      */
     public function toggle(array $array): array
     {
         $collection = [];
         foreach ($array as $key => $value) {
-            $entity = Banner::find($value);
-            if (! empty($entity)) {
-                $entity->position = $key + 1;
+            $entity = $this->model::find($value);
+            if (!empty($entity)) {
+                $entity['position'] = $key + 1;
                 $entity->save();
             }
             $collection[] = $entity;

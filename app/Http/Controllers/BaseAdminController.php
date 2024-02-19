@@ -20,11 +20,10 @@ abstract class BaseAdminController extends Controller
 {
     public function __construct(
         protected CoreService $service,
-        protected string      $dto,
-        protected string      $resource,
-        protected string      $request,
-    )
-    {
+        protected string $dto,
+        protected string $resource,
+        protected string $request,
+    ) {
     }
 
     /**

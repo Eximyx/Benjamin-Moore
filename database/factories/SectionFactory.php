@@ -18,7 +18,7 @@ class SectionFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->name(),
+            'title' => fake()->word(),
             'content' => fake()->text(),
         ];
     }

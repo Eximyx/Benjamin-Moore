@@ -2,12 +2,13 @@
 
 namespace App\Repositories\ModelRepositories;
 
-use App\Models\User as Model;
+
+use App\Models\User;
 
 class AdminRepository extends BaseModelRepository
 {
     public function __construct()
     {
-        parent::__construct(Model::class);
+        parent::__construct(User::class);
     }
 }

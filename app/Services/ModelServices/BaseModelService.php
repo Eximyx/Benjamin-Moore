@@ -4,11 +4,11 @@ namespace App\Services\ModelServices;
 
 use App\Repositories\ModelRepositories\BaseModelRepository;
 use App\Services\CoreService;
-use http\Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Yajra\DataTables\Exceptions\Exception;
 
 abstract class BaseModelService extends CoreService
 {
@@ -16,7 +16,6 @@ abstract class BaseModelService extends CoreService
     {
         parent::__construct($repository);
     }
-
 
     /**
      * @return LengthAwarePaginator<Model>
@@ -27,7 +26,7 @@ abstract class BaseModelService extends CoreService
     }
 
     /**
-     * @throws Exception|\Yajra\DataTables\Exceptions\Exception
+     * @throws Exception
      */
     public function ajaxDataTable(): JsonResponse
     {
