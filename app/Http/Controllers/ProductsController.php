@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\DataTransferObjects\ProductDTO;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Resources\ProductResource;
-use App\Services\ModelServices\ProductServiceBase;
+use App\Services\ModelServices\ProductService;
 
 class ProductsController extends BaseAdminController
 {
     public function __construct(
-        ProductServiceBase $service,
+        ProductService $service,
 
     )
     {

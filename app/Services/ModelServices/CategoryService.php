@@ -4,7 +4,7 @@ namespace App\Services\ModelServices;
 
 use App\Repositories\ModelRepositories\CategoryRepository;
 
-class CategoryServiceBase extends BaseModelService
+class CategoryService extends BaseModelService
 {
     public function __construct(CategoryRepository $repository)
     {

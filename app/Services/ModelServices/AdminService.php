@@ -4,7 +4,7 @@ namespace App\Services\ModelServices;
 
 use App\Repositories\ModelRepositories\AdminRepository;
 
-class AdminServiceBase extends BaseModelService
+class AdminService extends BaseModelService
 {
     public function __construct(AdminRepository $adminRepository)
     {

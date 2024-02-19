@@ -4,10 +4,9 @@ namespace App\Services\ModelServices;
 
 use App\Repositories\ModelRepositories\ReviewRepository;
 
-class ReviewServiceBase extends BaseModelService
+class ReviewService extends BaseModelService
 {
-    public function __construct(
-        ReviewRepository $repository)
+    public function __construct(ReviewRepository $repository)
     {
         parent::__construct($repository);
     }

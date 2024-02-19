@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\DataTransferObjects\StaticPageDTO;
 use App\Http\Requests\CreateStaticPageRequest;
 use App\Http\Resources\StaticPageResource;
-use App\Services\ModelServices\StaticPageServiceBase;
+use App\Services\ModelServices\StaticPageService;
 
 class StaticPageController extends BaseAdminController
 {
     public function __construct(
-        StaticPageServiceBase $service
+        StaticPageService $service
     )
     {
         parent::__construct(

@@ -4,11 +4,9 @@ namespace App\Services\ModelServices;
 
 use App\Repositories\ModelRepositories\NewsRepository;
 
-class NewsServiceBase extends BaseModelService
+class NewsService extends BaseModelService
 {
-    public function __construct(
-        NewsRepository $repository
-    )
+    public function __construct(NewsRepository $repository)
     {
         parent::__construct($repository);
     }

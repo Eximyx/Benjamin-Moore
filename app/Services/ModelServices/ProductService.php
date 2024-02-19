@@ -4,11 +4,9 @@ namespace App\Services\ModelServices;
 
 use App\Repositories\ModelRepositories\ProductRepository;
 
-class ProductServiceBase extends BaseModelService
+class ProductService extends BaseModelService
 {
-    public function __construct(
-        ProductRepository $repository
-    )
+    public function __construct(ProductRepository $repository)
     {
         parent::__construct($repository);
     }
