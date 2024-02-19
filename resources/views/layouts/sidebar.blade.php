@@ -2,10 +2,11 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        {{--        <img class="mb-1 mr-1" srcset="{{ url('storage/assets/benjaminmoore-icon.png') }}"--}}
+        {{--             style="height:24px;width:24px">--}}
+        <p class="m-0">
+            Benjamin Moore
+        </p>
     </a>
 
     <!-- Divider -->
@@ -26,14 +27,12 @@
             @endif
             <li class="nav-item">
                 <a class="nav-link" href={{route($value->getName())}}>
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class=" fas fa-circle p-0 m-0"></i>
                     <span>@lang('sidebar.'.$value->getName())</span></a>
             </li>
         @endif
     @endforeach
-
-
-
+    
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
