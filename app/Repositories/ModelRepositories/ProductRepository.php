@@ -4,14 +4,14 @@
 
 /** @noinspection StaticInvocationViaThisInspection */
 
-namespace App\Repositories;
+namespace App\Repositories\ModelRepositories;
 
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class ProductRepository extends CoreRepository
+class ProductRepository extends BaseModelRepository
 {
     public function __construct()
     {

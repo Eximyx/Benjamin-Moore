@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\ModelRepositories;
 
 use App\Models\Review as Model;
 
-class ReviewRepository extends CoreRepository
+class ReviewRepository extends BaseModelRepository
 {
     public function __construct()
     {

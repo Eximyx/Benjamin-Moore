@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\ModelRepositories;
 
 use App\Models\Leads as Model;
 
-class LeadsRepository extends CoreRepository
+class LeadsRepository extends BaseModelRepository
 {
     public function __construct()
     {

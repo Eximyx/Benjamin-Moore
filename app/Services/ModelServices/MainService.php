@@ -1,25 +1,24 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\ModelServices;
 
 use App\Actions\WrapItems;
-use App\Repositories\LeadsRepository;
-use App\Repositories\NewsRepository;
-use App\Repositories\ProductRepository;
-use App\Repositories\ReviewRepository;
+use App\Repositories\ModelRepositories\LeadsRepository;
+use App\Repositories\ModelRepositories\NewsRepository;
+use App\Repositories\ModelRepositories\ProductRepository;
+use App\Repositories\ModelRepositories\ReviewRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class MainService
 {
     public function __construct(
-        protected NewsRepository    $newsRepository,
+        protected NewsRepository $newsRepository,
         protected ProductRepository $productRepository,
-        protected ReviewRepository  $reviewRepository,
-        protected LeadsRepository   $leadsRepository,
-        protected WrapItems         $wrapItems
-    )
-    {
+        protected ReviewRepository $reviewRepository,
+        protected LeadsRepository $leadsRepository,
+        protected WrapItems $wrapItems
+    ) {
 
     }
 
@@ -62,7 +61,7 @@ class MainService
     }
 
     /**
-     * @param array<string,mixed> $request
+     * @param  array<string,mixed>  $request
      */
     public function leadsCreate(array $request): ?Model
     {
@@ -70,7 +69,7 @@ class MainService
     }
 
     /**
-     * @param array<mixed|array>|null $data
+     * @param  array<mixed|array>|null  $data
      * @return array<mixed|array>
      */
     public function fetchProducts(?array $data = null): array
@@ -86,7 +85,7 @@ class MainService
 
         $list['categories'] = $this->productRepository->getAllSelectables($kindOfWorkId);
 
-        if (!$category_id) {
+        if (! $category_id) {
             $category_id = $list['categories']->pluck('id')->toArray();
         } else {
             $list['category_title'] = $list['categories']->find($category_id)['title'];

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\ModelRepositories;
 
 use App\Models\ProductCategory as Model;
 
-class ProductCategoryRepository extends CoreRepository
+class ProductCategoryRepository extends BaseModelRepository
 {
     public function __construct()
     {

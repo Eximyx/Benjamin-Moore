@@ -46,11 +46,9 @@
 
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.8/r-2.5.0/sl-1.7.0/datatables.min.js"></script>
 
-
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     {{-- @include('layouts.scripts') --}}
-
     <title>SB Admin 2 - Dashboard</title>
     <!-- Custom fonts for this template-->
     {{--    <link href="{{asset("css/all.min.css")}}" rel="stylesheet" type="text/css"> --}}
@@ -95,7 +93,7 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-2">
                     <h1 class="h3 m-1 text-gray-800">@yield('title')</h1>
-                    
+
                 </div>
                 <div class="p-0 m-0 ml-1 justify-content-between align-items-center">
                     @yield('contents')

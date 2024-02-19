@@ -116,10 +116,10 @@
         </div>
         <div class=" row col-12 col-lg-5 rounded-4">
             <div class="d-none d-lg-block col rounded-4">
-                <img src="{{ url('storage/assets/erikus.jpg') }}" class="img-fluid" alt="">
+                <img src="{{ url('storage/image/sections/section_image_1.jpg') }}" class="img-fluid" alt="">
             </div>
             <div class="d-none d-lg-block col rounded-4">
-                <img src="{{ url('storage/assets/eximyx.jpg') }}" class="img-fluid" alt="">
+                <img src="{{ url('storage/image/sections/section_image_2.jpg') }}" class="img-fluid" alt="">
             </div>
         </div>
         <div class="row m-0 m-0 justify-content-between mt-5">

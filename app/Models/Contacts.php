@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Section extends Model
+class Contacts extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'toggled',
-        'content',
-    ];
+        'email', 'phone',
+        'work_time', 'place', 'location',
+        'instagram'];
 }

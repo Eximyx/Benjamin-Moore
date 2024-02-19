@@ -23,8 +23,10 @@ Route::get('/news/{slug}', [MainController::class, 'newsShow'])->name('user.news
 Route::get('/calculator', [MainController::class, 'calc'])->name('calc');
 Route::get('/contacts', [MainController::class, 'contacts'])->name('contacts');
 Route::post('/leads', [MainController::class, 'leads'])->name('leads');
-Route::get('/admin/settings', [AdminMainController::class, 'index'])->name('dashboard');
-Route::post('/admin/settings', [AdminMainController::class, 'set'])->name('settings.up');
+Route::get('/admin/settings', [AdminMainController::class, 'index'])->name('settings');
+Route::post('/admin/settings', [AdminMainController::class, 'contacts'])->name('settings.contacts');
+Route::post('/admin/settings/delete', [AdminMainController::class, 'delete'])->name('settings.delete');
+Route::post('/admin/settings/toggle', [AdminMainController::class, 'toggle'])->name('settings.toggle');
 Route::get('/eee', function () {
     return view('user.test');
 });

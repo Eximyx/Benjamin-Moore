@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateLeadsRequest;
 use App\Http\Requests\ProductFilterRequest;
-use App\Services\MainService;
+use App\Services\ModelServices\MainService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;

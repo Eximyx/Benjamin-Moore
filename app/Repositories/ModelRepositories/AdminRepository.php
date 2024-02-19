@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\ModelRepositories;
 
 use App\Models\User as Model;
 
-class AdminRepository extends CoreRepository
+class AdminRepository extends BaseModelRepository
 {
     public function __construct()
     {

@@ -323,7 +323,6 @@
 
         $('#Form').submit(function (e) {
             e.preventDefault();
-
             var formData = new FormData(this);
             var id = $('#id').val();
             var url = id == '' ? '/create' : '/update/' + id;

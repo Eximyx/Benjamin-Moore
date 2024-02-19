@@ -7,7 +7,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\DataTableResource;
-use App\Services\BaseService;
+use App\Services\CoreService;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
@@ -19,7 +19,7 @@ use Illuminate\Routing\Controller;
 abstract class BaseAdminController extends Controller
 {
     public function __construct(
-        protected BaseService $service,
+        protected CoreService $service,
         protected string      $dto,
         protected string      $resource,
         protected string      $request,
