@@ -46,11 +46,11 @@
                 {{-- $foreac --}}
                 @foreach ($Products as $arrProduct)
                     <div class=" swiper-slide">
-                        <div id="products" class="products row justify-content-start m-0 p-0 mt-4 px-0 px-md-5">
+                        <div id="products" class="products row justify-content-center m-0 p-0 mt-4 px-0 px-md-5">
                             @foreach ($arrProduct as $product)
                                 <div id="{{ $product->id }}"
                                      class="{{ $product->id % 4 == 0 ? 'd-none d-lg-block' : '' }} h-auto product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2">
-                                    <div class="row border-2 border rounded-4 align-items-center m-0 p-0 h-100">
+                                    <div class="row product-card border-2 border rounded-4 align-items-center m-0 p-0 h-100">
                                         <img src="{{ url('storage/image/' . 'краска.webp') }}"
                                              class=" rounded-4 align-self-center m-0 p-0" alt=""
                                              style="size:cover;positon:center">
@@ -196,12 +196,12 @@
                 <!-- Slides -->
                 @foreach ($reviews as $arrReview)
                     <div class=" swiper-slide">
-                        <div id="reviews" class="reviews row justify-content-start ">
+                        <div id="reviews" class="reviews row justify-content-center ">
                             @foreach ($arrReview as $review)
                                 <div id="{{ $review->id }}"
                                      class="{{ $review->id % 3 == 0 ? 'd-none d-lg-flex' : '' }} review row
                                          justify-content-center align-items-center col-md-4 col-lg-4 py-2 m-0 p-2">
-                                    <div class="review-card h-100">
+                                    <div class="review-card h-100 ">
                                         <div class="review-card__header">
                                             <img src="{{ url('storage/image/user-avatar.png') }}" alt="user avatar">
                                             <h4>{{ $review->title }}</h4>
