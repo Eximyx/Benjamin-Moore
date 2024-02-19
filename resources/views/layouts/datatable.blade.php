@@ -44,7 +44,7 @@
                                 @endif
                                 @if ($value === 'content')
                                     <textarea type="text" name="content" class="form-control" id="summernote-content"
-                                              placeholder="content" required></textarea>
+                                              placeholder=@lang('admin.keys.content') required></textarea>
                                 @elseif($value == 'description')
                                     <textarea type="text" name="description" class="form-control" id="description"
                                               rows="3" placeholder="@lang('admin.keys.'.$value)"
@@ -66,7 +66,7 @@
                                          style="max-width: 20rem;max-height:20rem">
                                 @else
                                     <input type="text" name="{{ $value }}" id="{{ $value }}"
-                                           class="form-control" placeholder="{{ $value }}" required>
+                                           class="form-control" placeholder="@lang('admin.keys.'.$value)" required>
                                 @endif
                             </div>
                         @endforeach
