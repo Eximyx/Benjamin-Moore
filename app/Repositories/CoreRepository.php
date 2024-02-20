@@ -57,6 +57,7 @@ abstract class CoreRepository
 
     public function findById(string $id): ?Model
     {
+
         return $this->model::find($id);
     }
 
@@ -66,11 +67,11 @@ abstract class CoreRepository
     }
 
     /**
-     * @param  array<string,mixed>  $data
+     * @param  array<string,mixed>  $dto
      */
-    public function create(array $data): ?Model
+    public function create(array $dto): ?Model
     {
-        return $this->model->create($data);
+        return $this->model->create($dto);
     }
 
     /**

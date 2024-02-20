@@ -19,9 +19,7 @@ class NewsService extends BaseModelService
     {
         $data = (array) $dto;
 
-        if (array_key_exists('main_image', $data)) {
-            $data['main_image'] = $this->uploadImage($data['main_image']);
-        }
+        $data['main_image'] = $this->uploadImage($data['main_image']);
 
         return $this->repository->create($data);
     }
@@ -30,15 +28,13 @@ class NewsService extends BaseModelService
     {
         $dto = (array) $dto;
 
-        if (isset($entity['main_image'])) {
-            if ($dto['main_image'] !== null) {
-                $deleted = $this->deleteImage($entity['main_image']);
-                if ($deleted) {
-                    $dto['main_image'] = $this->uploadImage($dto['main_image']);
-                }
-            } else {
-                $dto['main_image'] = $entity['main_image'];
+        if ($dto['main_image'] !== null) {
+            $deleted = $this->deleteImage($entity['main_image']);
+            if ($deleted) {
+                $dto['main_image'] = $this->uploadImage($dto['main_image']);
             }
+        } else {
+            $dto['main_image'] = $entity['main_image'];
         }
 
         return $this->repository->update(
@@ -51,9 +47,7 @@ class NewsService extends BaseModelService
     {
         $entity = $this->findById($request['id']);
 
-        if (isset($entity->main_image)) {
-            $this->deleteImage($entity->main_image);
-        }
+        $this->deleteImage($entity->main_image);
 
         if ($entity !== null) {
             $this->repository->destroy($entity);
@@ -66,10 +60,9 @@ class NewsService extends BaseModelService
     {
         $entity = $this->findById($request['id']);
 
-        if (isset($entity->is_toggled)) {
-            $entity['is_toggled'] = ! $entity['is_toggled'];
-            $entity = $this->repository->save($entity);
-        }
+        $entity['is_toggled'] = ! $entity['is_toggled'];
+
+        $entity = $this->repository->save($entity);
 
         return $entity;
     }
