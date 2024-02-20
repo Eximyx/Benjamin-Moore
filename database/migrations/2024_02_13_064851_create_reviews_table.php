@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->text('description');
+            $table->boolean('is_toggled')->default(false);
             $table->longText('main_image')->default('profile.svg');
             $table->timestamps();
         });

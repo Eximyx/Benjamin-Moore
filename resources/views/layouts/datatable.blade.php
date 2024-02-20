@@ -266,11 +266,12 @@
         function deleteFunc(id) {
             var id = id;
             Swal.fire({
-                title: 'Do you really want to delete this post?',
+                title: '@lang('messages.messages.delete')',
                 icon: 'warning',
                 showCancelButton: true,
+                cancelButtonText: '@lang('messages.buttons.cancel')',
                 confirmButtonColor: '#DC3545',
-                confirmButtonText: 'Delete'
+                confirmButtonText: '@lang('messages.buttons.delete')',
             }).then((result) => {
                 if (result['isConfirmed']) {
                     $.ajax({
@@ -295,13 +296,13 @@
 
         function toggle(id) {
             var id = id;
-            console.log(id);
             Swal.fire({
-                title: 'Do you really want to toggle this static-page?',
+                title: '@lang('messages.messages.toggle')',
                 icon: 'warning',
                 showCancelButton: true,
+                cancelButtonText: '@lang('messages.buttons.cancel')',
                 confirmButtonColor: '#DC3545',
-                confirmButtonText: 'Submit'
+                confirmButtonText: '@lang('messages.buttons.toggle')',
             }).then((result) => {
                 if (result['isConfirmed']) {
                     $.ajax({

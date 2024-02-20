@@ -131,6 +131,7 @@ return [
         'datatable_data' => [
             'title',
             'description',
+            'is_toggled',
         ],
         'form_data' => [
             'title',

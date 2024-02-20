@@ -12,7 +12,7 @@ class AdminPanelMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::user() === null || Auth::user()['user_role_id'] < 2) {
-            return redirect('/');
+            return redirect('/login');
         }
 
         return $next($request);

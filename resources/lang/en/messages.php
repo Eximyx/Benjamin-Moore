@@ -4,7 +4,8 @@ return [
     'lang' => 'en',
 
     'messages' => [
-        'delete' => 'Are you sure?',
+        'delete' => 'Want to delete?',
+        'toggle' => 'Want to display?',
 
     ],
 

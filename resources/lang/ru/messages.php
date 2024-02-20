@@ -4,11 +4,13 @@ return [
     'lang' => 'ru',
 
     'messages' => [
-        'delete' => 'Вы уверены?',
+        'delete' => 'Хотите удалить?',
+        'toggle' => 'Хотите отобразить?'
 
     ],
 
     'buttons' => [
+        'toggle' => 'Отобразить',
         'delete' => 'Удалить',
         'cancel' => 'Отмена'
     ]
