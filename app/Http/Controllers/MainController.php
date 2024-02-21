@@ -13,8 +13,7 @@ class MainController extends Controller
 {
     public function __construct(
         protected MainService $mainService
-    )
-    {
+    ) {
     }
 
     public function index(): View

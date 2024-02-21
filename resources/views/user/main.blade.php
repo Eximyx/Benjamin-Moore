@@ -50,7 +50,8 @@
                             @foreach ($arrProduct as $product)
                                 <div id="{{ $product->id }}"
                                      class="{{ $product->id % 4 == 0 ? 'd-none d-lg-block' : '' }} h-auto product row justify-content-center align-items-center col-md-4 col-lg-3 py-2 m-0 p-2">
-                                    <div class="row product-card border-2 border rounded-4 align-items-center m-0 p-0 h-100">
+                                    <div
+                                        class="row product-card border-2 border rounded-4 align-items-center m-0 p-0 h-100">
                                         <img src="{{ url('storage/image/' . 'краска.webp') }}"
                                              class=" rounded-4 align-self-center m-0 p-0" alt=""
                                              style="size:cover;positon:center">

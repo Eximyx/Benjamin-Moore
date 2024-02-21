@@ -451,7 +451,6 @@
 
             function update(e, url, formData) {
                 let option = available_select.find('option:selected');
-                console.log(option);
                 ajaxRequest(url, formData,
                     // Success Function
                     (data) => {
@@ -459,16 +458,20 @@
                             data = data['data'];
                         }
                         option.html(data['title']);
+                        console.log(data);
                     },
                     // Error Function
                     (data) => {
+                        if (data['data']) {
+                            data = data['data'];
+                        }
                         console.log(data);
                     },
                 );
             }
 
             function create(e, url, formData) {
-                ajaxRequest(url, formData,
+                return ajaxRequest(url, formData,
                     // Success Function
                     (data) => {
                         console.log(data);
@@ -476,11 +479,14 @@
                             data = data['data'];
                         }
                         available_select.prepend(`<option value="${data['id']}">${data['title']}</option>`);
-                        return data;
+                        console.log(data);
                     },
                     // Error Function
                     (data) => {
-                        return data;
+                        if (data['data']) {
+                            data = data['data'];
+                        }
+                        console.log(data);
                     },
                 );
             }
@@ -490,7 +496,8 @@
                 let form = $(e.target).closest('form')[0];
                 let formData = new FormData(form);
 
-                $(e.target).attr('class').includes('addButton') ? create(e, urls + '/create', formData) : update(e, urls + '/update', formData);
+                let value = $(e.target).attr('class').includes('addButton') ? create(e, urls + '/create', formData) : update(e, urls + '/update', formData);
+
                 formModal.modal('hide');
                 form.reset();
             });

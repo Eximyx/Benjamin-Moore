@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\SettingsControllers;
 
 use App\DataTransferObjects\ModelDTO\SectionDTO;
-use App\DataTransferObjects\ToggleSectionDTO;
+use App\DataTransferObjects\ToggleSectionsDTO;
 use App\Http\Controllers\CoreController;
 use App\Http\Requests\CreateSectionRequest;
 use App\Http\Requests\ToggleSectionRequest;
@@ -12,7 +12,7 @@ use App\Http\Resources\ToggleResource;
 use App\Services\SettingsServices\SectionService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SectionController extends CoreController
+class SectionsController extends CoreController
 {
     public function __construct(SectionService $service)
     {
@@ -21,7 +21,7 @@ class SectionController extends CoreController
 
     public function toggle(ToggleSectionRequest $request): JsonResource
     {
-        $dto = ToggleSectionDTO::appRequest($request);
+        $dto = ToggleSectionsDTO::appRequest($request);
 
         return ToggleResource::make($this->service->toggle($dto));
     }

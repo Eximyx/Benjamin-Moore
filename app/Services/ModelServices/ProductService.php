@@ -47,9 +47,11 @@ class ProductService extends BaseModelService
     {
         $entity = $this->findById($request['id']);
 
-        $this->deleteImage($entity->main_image);
-
         if ($entity !== null) {
+            if (isset($entity['main_image'])) {
+                $this->deleteImage($entity['main_image']);
+            }
+
             $this->repository->destroy($entity);
         }
 
@@ -61,9 +63,8 @@ class ProductService extends BaseModelService
         $entity = $this->findById($request['id']);
 
         $entity['is_toggled'] = !$entity['is_toggled'];
-        $entity = $this->repository->save($entity);
 
-        return $entity;
+        return $this->repository->save($entity);
     }
 
     protected function deleteImage(string $image): bool
@@ -87,4 +88,3 @@ class ProductService extends BaseModelService
         return $image;
     }
 }
-

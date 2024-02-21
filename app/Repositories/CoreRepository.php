@@ -57,8 +57,7 @@ abstract class CoreRepository
 
     public function findById(string $id): ?Model
     {
-
-        return $this->model::find($id);
+        return $this->model::findOrFail($id);
     }
 
     public function save(Model $entity): Model

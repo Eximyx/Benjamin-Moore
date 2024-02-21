@@ -4,7 +4,7 @@ namespace App\Repositories\SettingRepositories;
 
 use App\Models\Section;
 
-class SectionRepository extends BaseSettingsRepository
+class SectionRepository extends SettingRepository
 {
     public function __construct()
     {
