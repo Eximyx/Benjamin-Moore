@@ -14,7 +14,7 @@ class Review extends Model
     protected $guarded = false;
 
     protected $fillable = [
-        'title',
+        'name',
         'description',
         'main_image',
     ];

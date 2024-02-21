@@ -17,7 +17,7 @@ class ReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->name(),
+            'name' => fake()->name(),
             'main_image' => 'default_post.jpg',
             'description' => fake()->text(),
         ];

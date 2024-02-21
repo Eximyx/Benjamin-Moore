@@ -18,7 +18,7 @@ class CreateStaticPageRequest extends FormRequest
     {
         return [
             'id' => 'numeric|nullable',
-            'title' => 'string|required',
+            'title' => 'string|required|min:5|max:100',
             'content' => 'string|required',
         ];
     }

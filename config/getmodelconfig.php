@@ -129,12 +129,12 @@ return [
     Review::class => [
         'ModelName' => 'admin.titles.review',
         'datatable_data' => [
-            'title',
+            'name',
             'description',
             'is_toggled',
         ],
         'form_data' => [
-            'title',
+            'name',
             'description',
             'main_image',
         ],

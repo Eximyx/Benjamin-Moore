@@ -18,9 +18,9 @@ class CreateLeadsRequest extends FormRequest
     {
         return [
             'id' => 'numeric|nullable',
-            'name' => 'string|required',
-            'contactInfo' => 'string|required',
-            'message' => 'string|required',
+            'name' => 'string|required|min:2|max:25',
+            'contactInfo' => 'string|required|min:5|max:50',
+            'message' => 'string|required|max:200',
         ];
     }
 }
