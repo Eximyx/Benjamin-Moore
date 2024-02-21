@@ -15,38 +15,35 @@ class BaseSettingsRepository extends CoreRepository
         parent::__construct($modelClass);
     }
 
-    public function nullPosition(): int
-    {
-        return $this->model::query()->update(['position' => null]);
-    }
-
     /**
      * @return Collection<int,Model>
      *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public function getActive(): Collection
-    {
-        return $this->model::where('position', '>', '0')->orderBy('position')->get();
-    }
 
-    /**
-     * @param array<int,int|string> $array
-     * @return array<int,Model|null>
-     */
     public function toggle(array $array): array
     {
-        $collection = [];
+        $collection[] = ['active_items' => []];
         foreach ($array as $key => $value) {
             $entity = $this->model::find($value);
             if (!empty($entity)) {
                 $entity['position'] = $key + 1;
                 $entity->save();
             }
-            $collection[] = $entity;
+            $collection['active_items'][] = $entity;
         }
 
         return $collection;
+    }
+
+    public function nullPosition(): int
+    {
+        return $this->model::query()->update(['position' => null]);
+    }
+
+    public function getActive(): Collection
+    {
+        return $this->model::where('position', '>', '0')->orderBy('position')->get();
     }
 }

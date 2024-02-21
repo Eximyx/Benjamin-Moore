@@ -11,7 +11,7 @@ class Section extends Model
 
     protected $fillable = [
         'title',
-        'toggled',
+        'position',
         'content',
     ];
 }

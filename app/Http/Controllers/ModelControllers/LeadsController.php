@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\ModelControllers;
 
-use App\DataTransferObjects\LeadDTO;
+use App\DataTransferObjects\ModelDTO\LeadDTO;
 use App\Http\Requests\CreateLeadsRequest;
 use App\Http\Resources\LeadResource;
 use App\Services\ModelServices\LeadsService;

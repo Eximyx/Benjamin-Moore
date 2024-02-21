@@ -8,7 +8,7 @@ namespace App\Http\Controllers\ModelControllers;
 
 use App\Http\Controllers\CoreController;
 use App\Http\Resources\DataTableResource;
-use App\Services\CoreService;
+use App\Services\ModelServices\BaseModelService;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -16,10 +16,10 @@ use Illuminate\Http\JsonResponse;
 abstract class BaseAdminController extends CoreController
 {
     public function __construct(
-        protected CoreService $service,
-        protected string      $dto,
-        protected string      $resource,
-        protected string      $request,
+        BaseModelService $service,
+        string           $dto,
+        string           $resource,
+        string           $request,
     )
     {
         parent::__construct(
@@ -38,11 +38,10 @@ abstract class BaseAdminController extends CoreController
         $data = DataTableResource::make(
             $this->service->getVariablesForDataTable()
         );
+
         return view(
             'layouts.datatable',
             compact('data')
         );
     }
-
-
 }

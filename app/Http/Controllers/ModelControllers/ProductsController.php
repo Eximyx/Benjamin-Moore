@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\ModelControllers;
 
-use App\DataTransferObjects\ProductDTO;
+use App\DataTransferObjects\ModelDTO\ProductDTO;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Services\ModelServices\ProductService;

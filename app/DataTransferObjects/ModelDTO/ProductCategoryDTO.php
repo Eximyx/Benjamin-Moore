@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTransferObjects;
+namespace App\DataTransferObjects\ModelDTO;
 
 use App\Contracts\ModelDTO;
 use App\Http\Requests\CreateProductCategoryRequest;

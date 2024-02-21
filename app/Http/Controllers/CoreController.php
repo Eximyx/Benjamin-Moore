@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\CoreService;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -11,10 +10,11 @@ abstract class CoreController
 {
     public function __construct(
         protected CoreService $service,
-        protected string $dto,
-        protected string $resource,
-        protected string $request,
-    ) {
+        protected string      $dto,
+        protected string      $resource,
+        protected string      $request,
+    )
+    {
 
     }
 
@@ -38,7 +38,7 @@ abstract class CoreController
         return $this->resource::make($entity);
     }
 
-    public function update(Request $request): JsonResource|Model
+    public function update(Request $request): JsonResource
     {
         $entity = $this->service->findById($request['id']);
 

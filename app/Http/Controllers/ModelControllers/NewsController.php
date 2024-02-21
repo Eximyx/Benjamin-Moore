@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\ModelControllers;
 
-use App\DataTransferObjects\NewsPostDTO;
+use App\DataTransferObjects\ModelDTO\NewsPostDTO;
 use App\Http\Requests\CreateNewsPostRequest;
 use App\Http\Resources\NewsPostResource;
 use App\Services\ModelServices\NewsService;

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\ModelControllers;
 
-use App\DataTransferObjects\StaticPageDTO;
+use App\DataTransferObjects\ModelDTO\StaticPageDTO;
 use App\Http\Requests\CreateStaticPageRequest;
 use App\Http\Resources\StaticPageResource;
 use App\Services\ModelServices\StaticPageService;

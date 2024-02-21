@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTransferObjects;
+namespace App\DataTransferObjects\ModelDTO;
 
 use App\Contracts\BaseDTO;
 use App\Contracts\ModelDTO;

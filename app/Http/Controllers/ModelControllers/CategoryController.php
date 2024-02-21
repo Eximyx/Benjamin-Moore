@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\ModelControllers;
 
-use App\DataTransferObjects\CategoryDTO;
+use App\DataTransferObjects\ModelDTO\CategoryDTO;
 use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Services\ModelServices\CategoryService;

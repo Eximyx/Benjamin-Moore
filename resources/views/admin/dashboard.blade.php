@@ -92,13 +92,14 @@
                                 </li>
                                 <li class="delete col-auto p-0 d-md-none"><a class="btn"><i class="fa fa-trash"></i></a>
                                 </li>
-                                <li class="col-auto p-0 d-md-none"><a class="btn"><i class="fa fa-edit"></i></a>
+                                <li class="edit-button col-auto p-0 d-md-none"><a class="btn"><i class="fa fa-edit"></i></a>
                                 </li>
                                 <li class="plus-button col-auto p-0 d-md-none"><a class="btn"><i class="fa fa-plus"></i></a>
                                 </li>
                                 <li class="delete justify-content-center d-none d-md-flex"><a class="btn"><i
                                             class="fa fa-trash"></i></a></li>
-                                <li class="d-none d-md-flex"><a class="btn"><i class="fa fa-edit"></i></a></li>
+                                <li class="edit-button d-none d-md-flex"><a class="btn"><i class="fa fa-edit"></i></a>
+                                </li>
                                 <li class="plus-button d-none d-md-flex"><a class="btn"><i class="fa fa-plus"></i></a>
                                 </li>
                             </ul>
@@ -222,14 +223,14 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="bannerModalForm" tabindex="-1" style="z-index: 1045">
+    <div class="modal fade" id="bannerModalForm" class="modalForm" tabindex="-1" style="z-index: 1045">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 id="window_title" class="modal-title">@lang('admin.titles.banners')</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="javascript:void(0)" class="modalForm"
+                <form action="javascript:void(0)"
                       method="POST"
                       enctype="multipart/form-data">
                     <div class="modal-body py-0">
@@ -254,7 +255,8 @@
                     </div>
                     <div class="modal-footer">
                         <div class="row m-0 p-0 align-items-center justify-content-between">
-                            <button type="button" class="addButton my-auto mx-2 col-auto btn btn-success">
+                            <button type="submit" id="ModalButton"
+                                    class="ModalButton my-auto mx-2 col-auto btn btn-success">
                                 @lang('admin.buttons.submit')
                             </button>
                             <button type="button" class="my-auto col-auto btn btn-outline-secondary">
@@ -266,7 +268,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="sectionModalForm" tabindex="-1" style="z-index: 1045">
+    <div class="modal fade formModal" id="sectionModalForm" tabindex="-1" style="z-index: 1045">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -278,6 +280,7 @@
                       enctype="multipart/form-data">
                     <div class="modal-body py-0">
                         <div class="row m-0 p-0">
+                            <input type="number" name="id" hidden="true"/>
                             <label class="m-0 p-0 my-auto py-2">@lang('admin.keys.title')</label>
                             <input type="text" name="title" class="form-control"
                                    placeholder="@lang('admin.keys.title')">
@@ -288,9 +291,9 @@
                     </div>
                     <div class="modal-footer">
                         <div class="row m-0 p-0 align-items-center justify-content-between">
-                            <button type="button" id="modalButton"
-                                    class="addButton my-auto mx-2 col-auto btn btn-success">
-                                @lang('admin.buttons.add')
+                            <button type="button" id="ModalButton"
+                                    class="ModalButton my-auto mx-2 col-auto btn btn-success">
+                                @lang('admin.buttons.submit')
                             </button>
                             <button type="button" class="my-auto col-auto btn btn-outline-secondary">
                                 @lang('admin.buttons.cancel')
@@ -325,13 +328,11 @@
             });
             $('#contact-info-click').click();
 
-
             let available_select = $('#available');
             let active_select = $('#active');
             let formModal = $('#sectionModalForm');
             let imageModal = $('#imageModal');
-            let buttonModal = $('#sectionModalButton');
-
+            let buttonModal = $('#ModalButton');
             let tab_id = '#contact-info';
             let urls = '{{route('settings.contacts')}}';
 
@@ -343,22 +344,20 @@
                 urls = "{{route('settings')}}/contacts"
                 if (tab_id === '#about-us') {
                     urls = "{{route('settings')}}/about-us"
-                    formModal = $('#sectionModalForm')
-                    buttonModal = $('#sectionModalButton');
+                    formModal = $('#sectionModalForm');
 
                 } else if (tab_id === '#banners') {
                     urls = "{{route('settings')}}/banners"
                     formModal = $('#bannerModalForm');
-                    buttonModal = $('#bannerModalButton');
                 }
-
+                buttonModal = formModal.find('#ModalButton');
                 available_select = tab.find('#available');
                 active_select = tab.find('#active');
             });
 
             $('.forward-arrow').on('click', (e) => {
                 if (active_select.find('option').length < 3) {
-                    active_select.prepend(available_select.find('option:selected'));
+                    active_select.append(available_select.find('option:selected'));
                 }
             })
 
@@ -367,7 +366,6 @@
             })
 
             $('.plus-button').on('click', (e) => {
-                console.log(formModal);
                 buttonModal.removeClass('editButton');
                 buttonModal.addClass('addButton');
                 formModal.modal('show');
@@ -375,10 +373,9 @@
 
             $('.edit-button').on('click', (e) => {
                 let selected = available_select.val();
-                buttonModal.addClass('editButton');
-                buttonModal.removeClass('.addButton');
                 if (selected !== null) {
-
+                    buttonModal.addClass('editButton');
+                    buttonModal.removeClass('addButton');
                     $.ajax({
                         type: "POST",
                         url: urls + '/edit',
@@ -388,13 +385,16 @@
                         },
                         success: function (res) {
                             console.log(formModal)
-                            formModal.modal('show');
+                            if (res['data']) {
+                                res = res['data'];
+                            }
                             formModal.find('form')[0].reset();
+                            formModal.modal('show');
                             $.each(res, function (key, value) {
                                 if (!key.includes('image')) {
                                     $(`[name=${key}]`).val(value);
-                                } else {
-                                    $('[type=file]').attr('data', '/default_post.jpg')
+                                } else if (!key.includes('image')) {
+                                    $('[type=file]').attr('data', data['main_image'])
                                 }
                             });
                             console.log(res);
@@ -449,57 +449,52 @@
                 }
             })
 
-            $('.editButton').on('click', (e) => {
-                e.preventDefault();
-                let form = $(e.target).closest('form')[0];
-                let formData = new FormData(form);
-                let url = '{{route('settings.update.section')}}'
-                if (tab_id === '#banners') {
-                    url = '{{route('settings.update.banner')}}'
-                }
+            function update(e, url, formData) {
+                let option = available_select.find('option:selected');
+                console.log(option);
                 ajaxRequest(url, formData,
                     // Success Function
                     (data) => {
-                        console.log(data);
-                        formModal.modal('hide');
-                        available_select.html(data['title']);
+                        if (data['data']) {
+                            data = data['data'];
+                        }
+                        option.html(data['title']);
                     },
                     // Error Function
                     (data) => {
                         console.log(data);
                     },
                 );
-            })
+            }
 
-            $('.addButton').on('click', (e) => {
-                e.preventDefault();
-                let form = $(e.target).closest('form')[0];
-                let formData = new FormData(form);
-                let url = '{{route('settings.create.section')}}'
-                if (tab_id === '#banners') {
-                    url = '{{route('settings.create.banner')}}'
-                }
+            function create(e, url, formData) {
                 ajaxRequest(url, formData,
                     // Success Function
                     (data) => {
+                        console.log(data);
+                        if (data['data']) {
+                            data = data['data'];
+                        }
                         available_select.prepend(`<option value="${data['id']}">${data['title']}</option>`);
-                        formModal.modal('hide');
-                        console.log(data);
+                        return data;
                     },
                     // Error Function
                     (data) => {
-                        console.log(data);
+                        return data;
                     },
                 );
-            })
+            }
 
-            {{--$('.cancelButton').on('click', (e) => {--}}
-            {{--    e.preventDefault();--}}
-            {{--    let form = $(e.target).closest('form')[0];--}}
-            {{--    let formData = new FormData(form);--}}
-            {{--    ajaxRequest('{{route('settings.contacts')}}', formData);--}}
-            {{--    console.log(formData);--}}
-            {{--})--}}
+            $('.ModalButton').on('click', (e) => {
+                e.preventDefault();
+                let form = $(e.target).closest('form')[0];
+                let formData = new FormData(form);
+
+                $(e.target).attr('class').includes('addButton') ? create(e, urls + '/create', formData) : update(e, urls + '/update', formData);
+                formModal.modal('hide');
+                form.reset();
+            });
+
 
             function defaultErrorResponse(data) {
                 console.log('Error:', data)
@@ -525,7 +520,6 @@
             $('.form').submit((e) => {
                 e.preventDefault();
                 let formData = new FormData(e.target);
-
                 if (tab_id !== '#contact-info') {
                     let selected_options = [];
                     formData.append(`files[]`, {});

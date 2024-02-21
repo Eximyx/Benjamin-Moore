@@ -1,9 +1,9 @@
 <?php
 
-namespace App\DataTransferObjects;
+namespace App\DataTransferObjects\ModelDTO;
 
 use App\Contracts\ModelDTO;
-use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\CreateSectionRequest;
 
 class SectionDTO implements ModelDTO
 {
@@ -15,7 +15,7 @@ class SectionDTO implements ModelDTO
 
     }
 
-    public static function appRequest(CreateProductRequest $request): SectionDTO
+    public static function appRequest(CreateSectionRequest $request): SectionDTO
     {
         return new SectionDTO(
             $request['title'],
