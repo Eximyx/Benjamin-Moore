@@ -3,12 +3,10 @@
 namespace App\Repositories\SettingRepositories;
 
 use App\Repositories\CoreRepository;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Psr\Container\ContainerExceptionInterface;
-use Psr\Container\NotFoundExceptionInterface;
 
-class BaseSettingsRepository extends CoreRepository
+class SettingRepository extends CoreRepository
 {
     public function __construct(?string $modelClass)
     {
@@ -16,19 +14,18 @@ class BaseSettingsRepository extends CoreRepository
     }
 
     /**
-     * @return Collection<int,Model>
-     *
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
+     * @param  array<int>  $array
+     * @return array<int|string,array<int|string, mixed>>
      */
-
     public function toggle(array $array): array
     {
         $collection[] = ['active_items' => []];
         foreach ($array as $key => $value) {
             $entity = $this->model::find($value);
-            if (!empty($entity)) {
-                $entity['position'] = $key + 1;
+            if (! empty($entity)) {
+                if (isset($entity->position)) {
+                    $entity->position = $key + 1;
+                }
                 $entity->save();
             }
             $collection['active_items'][] = $entity;
@@ -42,8 +39,11 @@ class BaseSettingsRepository extends CoreRepository
         return $this->model::query()->update(['position' => null]);
     }
 
-    public function getActive(): Collection
+    /**
+     * @return Builder<Model>
+     */
+    public function getActive(): Builder
     {
-        return $this->model::where('position', '>', '0')->orderBy('position')->get();
+        return $this->model::where('position', '>', '0')->orderBy('position');
     }
 }

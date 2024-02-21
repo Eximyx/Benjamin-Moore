@@ -7,7 +7,7 @@ use App\Models\Contacts;
 class ContactsRepository
 {
     /**
-     * @param array<string,mixed> $data
+     * @param  array<string,mixed>  $data
      */
     public function updateOrCreate(array $data): Contacts
     {

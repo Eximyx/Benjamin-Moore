@@ -32,4 +32,11 @@ class SettingsController extends Controller
         return response()->json($request->all());
     }
 
+    // TODO: contacts IMPLEMENT
+    public function contactsSet(Request $request): JsonResponse
+    {
+        return response()->json($request->all());
+    }
+
+
 }

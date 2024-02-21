@@ -10,6 +10,9 @@ class Banner extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'content', 'toggled', 'image',
+        'title',
+        'content',
+        'position',
+        'image',
     ];
 }

@@ -2,20 +2,12 @@
 
 namespace App\Services;
 
-use App\DataTransferObjects\ToggleableSettingsDTO;
-use App\Http\Requests\ToggleableRequest;
-use App\Models\Banner;
 use App\Models\Contacts;
-use App\Models\Section;
 use App\Repositories\SettingRepositories\BannersRepository;
 use App\Repositories\SettingRepositories\ContactsRepository;
 use App\Repositories\SettingRepositories\SectionRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
-use Psr\Container\ContainerExceptionInterface;
-use Psr\Container\NotFoundExceptionInterface;
 
 class SettingsService
 {
@@ -26,15 +18,9 @@ class SettingsService
 
     public function __construct(
         protected ContactsRepository $contactsRepository,
-        protected SectionRepository  $sectionRepository,
-        protected BannersRepository  $bannersRepository,
-
-    )
-    {
-        $this->repositories = [
-            'about-us' => $this->sectionRepository,
-            'banners' => $this->bannersRepository,
-        ];
+        protected SectionRepository $sectionRepository,
+        protected BannersRepository $bannersRepository,
+    ) {
     }
 
     /**
@@ -42,98 +28,38 @@ class SettingsService
      */
     public function getSections(): Collection
     {
-        return $this->sectionRepository->getAll();
+        return $this->sectionRepository->getLatest()->get();
     }
 
     /**
-     * @return Collection<int,Model>
+     * @return Collection<int, Model>
      */
     public function getBanners(): Collection
     {
-        return $this->bannersRepository->getAll();
+        return $this->bannersRepository->getLatest()->get();
     }
 
     /**
-     * @return Collection<int,Model>
-     *
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
+     * @return Collection<int, Model>
      */
     public function getActiveSections(): Collection
     {
-        return $this->sectionRepository->getActive();
+        return $this->sectionRepository->getActive()->get();
     }
 
     /**
-     * @return Collection<int,Model>
-     *
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
+     * @return Collection<int, Model>
      */
     public function getActiveBanners(): Collection
     {
-        return $this->bannersRepository->getActive();
-    }
-
-    public function toggle(ToggleableRequest $request): mixed
-    {
-        $dto = ToggleableSettingsDTO::appRequest($request);
-
-        if ($dto->tab_id === 'about-us') {
-            $this->uploadFilesForSections($dto->files);
-        }
-        $result = $this->repositories[$dto->tab_id]->nullPosition();
-
-        if ($result) {
-            $result = $this->repositories[$dto->tab_id]->toggle($dto->active_items);
-        }
-
-        return $result;
+        return $this->bannersRepository->getActive()->get();
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param  array<string, mixed>  $data
      */
-    public function update(string $tab_id, array $data): mixed
-    {
-        return $this->repositories[$tab_id]->update($data);
-    }
-
-    /**
-     * @param array<string,mixed> $data
-     */
-    public function delete(array $data): Section|Banner|null
-    {
-        $repository = $this->repositories[$data['tab_id']];
-
-        $entity = $repository->findById($data['id']);
-
-        if ($entity !== null) {
-            $entity = $repository->destroy($entity);
-        }
-
-        return $entity;
-    }
-
-    /**
-     * @param array<string,mixed> $data
-     */
-    public function settingsSet(array $data): Contacts
+    public function contactsSet(array $data): Contacts
     {
         return $this->contactsRepository->updateOrCreate($data);
-    }
-
-    /**
-     * @param array<int, UploadedFile|string> $data
-     */
-    public function uploadFilesForSections(array $data): void
-    {
-        foreach ($data as $value) {
-            if (!is_string($value)) {
-                Storage::putFileAs(
-                    'public/image/sections', $value,
-                    'section_image_' . $value->getClientOriginalName() . '.' . 'jpg');
-            }
-        }
     }
 }

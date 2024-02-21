@@ -14,12 +14,13 @@ class AuthService
 {
     public function __construct(
         protected AuthRepository $repository
-    ) {
+    )
+    {
     }
 
     public function update(User $entity, AuthDTO $dto): User
     {
-        $dto = (array) $dto;
+        $dto = (array)$dto;
 
         return $this->repository->update(
             entity: $entity,
@@ -27,7 +28,11 @@ class AuthService
         );
     }
 
-    public function getUserById(string $id)
+    /**
+     * @param string $id
+     * @return User|null
+     */
+    public function getUserById(string $id): ?User
     {
         return $this->repository->getUserById($id);
     }
@@ -37,7 +42,7 @@ class AuthService
         $data = $request->all();
         $data['id'] = Auth::user()->id;
 
-        if (! ($data['password'] !== null)) {
+        if (!($data['password'] !== null)) {
             $data['password'] = Auth::user()->password;
         }
         $request->replace($data);
@@ -50,7 +55,7 @@ class AuthService
      */
     public function authAttempt(Request $request): void
     {
-        if (! Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+        if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
             ]);
