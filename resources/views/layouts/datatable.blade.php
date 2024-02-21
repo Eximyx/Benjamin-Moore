@@ -1,11 +1,7 @@
 @extends('layouts.admin')
 @section('title', trans($data['data']['ModelName']))
 @section('contents')
-    <div class="container-fluid">
-        <div class='float-right'>
-            <a class="btn btn-success" onClick="add()" href="javascript:void(0)">@lang('admin.buttons.add')</a>
-        </div>
-
+    <div class="container-fluid p-0">
         <table class="m-0 w-100 table table-striped" id="table">
             <thead>
             <tr>

@@ -49,7 +49,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     {{-- @include('layouts.scripts') --}}
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Benjamin moore Admin</title>
     <!-- Custom fonts for this template-->
     {{--    <link href="{{asset("css/all.min.css")}}" rel="stylesheet" type="text/css"> --}}
 
@@ -91,8 +91,11 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center justify-content-between mb-2">
                     <h1 class="h3 m-1 text-gray-800">@yield('title')</h1>
+                    @if(!str_contains(Route::currentRouteName(), 'profile'))
+                        <a class="btn btn-success text-center float-left mt-2" onClick="add()" href="javascript:void(0)">@lang('admin.buttons.add')</a>
+                    @endif
 
                 </div>
                 <div class="p-0 m-0 ml-1 justify-content-between align-items-center">

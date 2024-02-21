@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('contents')
-    <h1 class="mb-0">@lang('admin.titles.profile')</h1>
+    <h1 class="m-0">@lang('admin.titles.profile')</h1>
     <hr/>
     <form method="post" enctype="multipart/form-data" id="profile_setup_frm" action="javascript:void(0)">
-        <div class="row">
-            <div class="col-md-12 border-right">
-                <div class="p-3 py-5">
+        <div class="row m-0">
+            <div class="p-0 col-md-12">
+                <div class="p-0">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="text-right">@lang('admin.titles.profileSettings')</h4>
                     </div>
