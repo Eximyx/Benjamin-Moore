@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ModelControllers;
 
 use App\DataTransferObjects\ProductCategoryDTO;
 use App\Http\Requests\CreateProductCategoryRequest;

@@ -2,10 +2,10 @@
 
 namespace App\DataTransferObjects;
 
-use App\Contracts\BaseDTO;
+use App\Contracts\ModelDTO;
 use App\Http\Requests\AuthRequest;
 
-class AuthDTO implements BaseDTO
+class AuthDTO implements ModelDTO
 {
     public function __construct(
         public readonly string $name,

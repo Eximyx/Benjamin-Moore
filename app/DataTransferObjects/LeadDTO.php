@@ -2,16 +2,17 @@
 
 namespace App\DataTransferObjects;
 
-use App\Contracts\BaseDTO;
+use App\Contracts\ModelDTO;
 use App\Http\Requests\CreateLeadsRequest;
 
-class LeadDTO implements BaseDTO
+class LeadDTO implements ModelDTO
 {
     public function __construct(
         public readonly string $name,
         public readonly string $contactInfo,
         public readonly string $message,
-    ) {
+    )
+    {
     }
 
     public static function appRequest(CreateLeadsRequest $request): LeadDTO

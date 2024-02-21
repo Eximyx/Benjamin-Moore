@@ -2,44 +2,40 @@
 
 namespace App\Services;
 
-use App\Contracts\BaseDTO;
+use App\Contracts\ModelDTO;
 use App\Repositories\CoreRepository;
-use App\Traits\DataTableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 abstract class CoreService
 {
-    use DataTableTrait;
-
     public function __construct(
         protected CoreRepository $repository,
-    )
-    {
+    ) {
     }
 
     public function findById(string $id): ?Model
     {
-       $entity = $this->repository->findById($id);
+        $entity = $this->repository->findById($id);
 
-       if($entity == null){
-           throw new ModelNotFoundException('ds',500);
+        if ($entity == null) {
+            throw new ModelNotFoundException('ds', 500);
+        }
 
-       }
-       return $entity;
+        return $entity;
     }
 
-    public function create(BaseDTO $dto): ?Model
+    public function create(ModelDTO $dto): ?Model
     {
-        $dto = (array)$dto;
+        $dto = (array) $dto;
 
         return $this->repository->create($dto);
     }
 
-    public function update(Model $entity, BaseDTO $dto): Model
+    public function update(Model $entity, ModelDTO $dto): Model
     {
-        $dto = (array)$dto;
+        $dto = (array) $dto;
 
         return $this->repository->update(
             $entity,

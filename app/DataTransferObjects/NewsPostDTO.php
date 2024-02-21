@@ -2,10 +2,10 @@
 
 namespace App\DataTransferObjects;
 
-use App\Contracts\BaseDTO;
+use App\Contracts\ModelDTO;
 use App\Http\Requests\CreateNewsPostRequest;
 
-class NewsPostDTO implements BaseDTO
+class NewsPostDTO implements ModelDTO
 {
     public function __construct(
         public readonly string $title,

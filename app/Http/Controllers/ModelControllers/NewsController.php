@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ModelControllers;
 
 use App\DataTransferObjects\NewsPostDTO;
 use App\Http\Requests\CreateNewsPostRequest;
@@ -11,7 +11,8 @@ class NewsController extends BaseAdminController
 {
     public function __construct(
         NewsService $service,
-    ) {
+    )
+    {
         parent::__construct($service, NewsPostDTO::class, NewsPostResource::class, CreateNewsPostRequest::class);
     }
 }

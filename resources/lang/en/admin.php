@@ -13,7 +13,10 @@ return [
         'user' => 'Users',
         'profile' => 'Profile',
         'profileSettings' => 'Profile settings',
-        'review' => 'Reviews'
+        'review' => 'Reviews',
+        'contacts' => 'Contacts',
+        'banners' => 'Banners',
+        'sections' => 'Sections',
     ],
 
     'keys' => [
@@ -48,6 +51,7 @@ return [
         'add' => 'Add',
         'submit' => 'Submit',
         'close' => 'Close',
+        'cancel' => 'Cancel',
     ],
 
     'modal' => [
@@ -55,4 +59,3 @@ return [
         'create' => 'Create',
     ],
 ];
-

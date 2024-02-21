@@ -1,14 +1,14 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\LeadsController;
-use App\Http\Controllers\NewsController;
-use App\Http\Controllers\ProductCategoryController;
-use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\StaticPageController;
+use App\Http\Controllers\ModelControllers\AdminController;
+use App\Http\Controllers\ModelControllers\CategoryController;
+use App\Http\Controllers\ModelControllers\LeadsController;
+use App\Http\Controllers\ModelControllers\NewsController;
+use App\Http\Controllers\ModelControllers\ProductCategoryController;
+use App\Http\Controllers\ModelControllers\ProductsController;
+use App\Http\Controllers\ModelControllers\ReviewController;
+use App\Http\Controllers\ModelControllers\StaticPageController;
 
 Route::controller(AuthController::class)->middleware('user')->group(function () {
     Route::get('login', 'login')->name('login');

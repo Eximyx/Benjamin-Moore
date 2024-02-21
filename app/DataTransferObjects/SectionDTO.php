@@ -3,9 +3,9 @@
 namespace App\DataTransferObjects;
 
 use App\Contracts\ModelDTO;
-use App\Http\Requests\CreateStaticPageRequest;
+use App\Http\Requests\CreateProductRequest;
 
-class StaticPageDTO implements ModelDTO
+class SectionDTO implements ModelDTO
 {
     public function __construct(
         public readonly string $title,
@@ -15,9 +15,9 @@ class StaticPageDTO implements ModelDTO
 
     }
 
-    public static function appRequest(CreateStaticPageRequest $request): StaticPageDTO
+    public static function appRequest(CreateProductRequest $request): SectionDTO
     {
-        return new StaticPageDTO(
+        return new SectionDTO(
             $request['title'],
             $request['content'],
         );

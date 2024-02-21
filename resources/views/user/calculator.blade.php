@@ -100,7 +100,7 @@
 
         $('.number').on('input', function () {
             var length = 5;
-            $(this).val($(this).val().replace(/[A-Za-zА-Яа-яЁё.,]/, ''))
+            $(this).val($(this).val().replace(/[A-Za-zА-Яа-яЁё.,-]/, ''))
             if (this.id == "squareS") {
                 length = 10;
             }

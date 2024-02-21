@@ -3,9 +3,10 @@
 namespace App\DataTransferObjects;
 
 use App\Contracts\BaseDTO;
+use App\Contracts\ModelDTO;
 use App\Http\Requests\CreateReviewRequest;
 
-class ReviewDTO implements BaseDTO
+class ReviewDTO implements ModelDTO
 {
     public function __construct(
         public readonly string $name,

@@ -4,6 +4,7 @@ namespace App\Services\ModelServices;
 
 use App\Repositories\ModelRepositories\BaseModelRepository;
 use App\Services\CoreService;
+use App\Traits\DataTableTrait;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
@@ -12,6 +13,8 @@ use Yajra\DataTables\Exceptions\Exception;
 
 abstract class BaseModelService extends CoreService
 {
+    use DataTableTrait;
+
     public function __construct(BaseModelRepository $repository)
     {
         parent::__construct($repository);

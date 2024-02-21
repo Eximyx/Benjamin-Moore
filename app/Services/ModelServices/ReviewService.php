@@ -2,8 +2,8 @@
 
 namespace App\Services\ModelServices;
 
+use App\Contracts\ModelDTO;
 use App\Repositories\ModelRepositories\ReviewRepository;
-use App\Contracts\BaseDTO;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,18 +15,18 @@ class ReviewService extends BaseModelService
         parent::__construct($repository);
     }
 
-    public function create(BaseDTO $dto): ?Model
+    public function create(ModelDTO $dto): ?Model
     {
-        $data = (array) $dto;
+        $data = (array)$dto;
 
         $data['main_image'] = $this->uploadImage($data['main_image']);
 
         return $this->repository->create($data);
     }
 
-    public function update(Model $entity, BaseDTO $dto): Model
+    public function update(Model $entity, ModelDTO $dto): Model
     {
-        $dto = (array) $dto;
+        $dto = (array)$dto;
 
         if ($dto['main_image'] !== null) {
             $deleted = $this->deleteImage($entity['main_image']);
@@ -60,7 +60,7 @@ class ReviewService extends BaseModelService
     {
         $entity = $this->findById($request['id']);
 
-        $entity['is_toggled'] = ! $entity['is_toggled'];
+        $entity['is_toggled'] = !$entity['is_toggled'];
         $entity = $this->repository->save($entity);
 
         return $entity;
@@ -68,8 +68,8 @@ class ReviewService extends BaseModelService
 
     protected function deleteImage(string $image): bool
     {
-        if (! ($image === 'default_post.jpg')) {
-            Storage::delete('public/image/'.$image);
+        if (!($image === 'default_post.jpg')) {
+            Storage::delete('public/image/' . $image);
         }
 
         return true;

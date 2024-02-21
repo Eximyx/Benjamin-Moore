@@ -2,15 +2,15 @@
 
 namespace App\DataTransferObjects;
 
-use App\Contracts\BaseDTO;
+use App\Contracts\ModelDTO;
 use App\Http\Requests\CreateProductRequest;
 
-class ProductDTO implements BaseDTO
+class ProductDTO implements ModelDTO
 {
     public function __construct(
         public readonly string $title,
         public readonly string $content,
-        public readonly int $code,
+        public readonly int    $code,
         public readonly string $gloss_level,
         public readonly string $description,
         public readonly string $type,
@@ -20,9 +20,10 @@ class ProductDTO implements BaseDTO
         public readonly string $consumption,
         public readonly string $thickness,
         public readonly string $base,
-        public readonly int $product_category_id,
-        public mixed $main_image,
-    ) {
+        public readonly int    $product_category_id,
+        public mixed           $main_image,
+    )
+    {
 
     }
 
