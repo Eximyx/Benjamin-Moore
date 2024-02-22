@@ -12,11 +12,11 @@ return new class extends Migration {
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
-            $table->string('phone');
-            $table->string('work_time');
-            $table->string('location');
-            $table->string('instagram');
+            $table->string('email')->default('sales@benjaminmoore.by');
+            $table->string('phone')->default('+375 (29) 608-40-00');
+            $table->string('work_time')->default('Работаем ПН — ПТ, 10:00 — 19:00');
+            $table->string('location')->default('Официальный салон красок Benjamin Moore Республика Беларусь, г. Минск,ул. Восточная, д. 41');
+            $table->string('instagram')->default('@benjaminmoore.by');
             $table->timestamps();
         });
     }

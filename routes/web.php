@@ -26,8 +26,8 @@ Route::get('/calculator', [MainController::class, 'calc'])->name('calc');
 Route::get('/contacts', [MainController::class, 'contacts'])->name('contacts');
 Route::post('/leads', [MainController::class, 'leads'])->name('leads');
 Route::prefix('admin/settings')->group(function () {
-    Route::get('/contacts', [SettingsController::class, 'index'])->name('settings');
-    Route::post('/contacts', [SettingsController::class, 'contacts'])->name('settings.contacts');
+    Route::get('/', [SettingsController::class, 'index'])->name('settings');
+    Route::post('/contacts', [SettingsController::class, 'contacts'])->name('settings.contacts.set');
     Route::prefix('/banners')->group(function () {
         Route::controller(BannersController::class)->group(function () {
             Route::delete('/delete', 'delete')->name('settings.delete.banner');

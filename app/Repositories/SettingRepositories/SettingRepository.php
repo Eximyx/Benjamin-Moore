@@ -14,7 +14,7 @@ class SettingRepository extends CoreRepository
     }
 
     /**
-     * @param array<int> $array
+     * @param  array<int>  $array
      * @return array<int|string,array<int|string, mixed>>
      */
     public function toggle(array $array): array
@@ -22,7 +22,7 @@ class SettingRepository extends CoreRepository
         $collection[] = ['active_items' => []];
         foreach ($array as $key => $value) {
             $entity = $this->model::find($value);
-            if (!empty($entity)) {
+            if (! empty($entity)) {
                 $entity['position'] = $key + 1;
                 $entity = $this->save($entity);
             }

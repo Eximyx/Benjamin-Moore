@@ -15,6 +15,7 @@ return [
         'profileSettings' => 'Profile settings',
         'review' => 'Reviews',
         'contacts' => 'Contacts',
+        'aboutUs' => 'About us',
         'banners' => 'Banners',
         'sections' => 'Sections',
     ],
@@ -42,6 +43,13 @@ return [
         'updated_at' => 'Updated at',
         'contactInfo' => 'Contact info',
         'message' => 'Message',
+        'phoneNumber' => 'Phone number',
+        'workTime' => 'Work time',
+        'location' => 'Location',
+        'instagram' => 'Instagram',
+        'available' => 'Available',
+        'active' => 'Active',
+        'file' => 'File',
     ],
 
     'buttons' => [
@@ -51,6 +59,7 @@ return [
         'add' => 'Add',
         'submit' => 'Submit',
         'close' => 'Close',
+        'settings' => 'Settings',
         'cancel' => 'Cancel',
     ],
 

@@ -19,14 +19,9 @@ class SettingsController extends Controller
 
     public function index(): View
     {
-        $sections = $this->service->getSections();
-        $activeSections = $this->service->getActiveSections();
         $contacts = $this->service->contactsFetch();
 
-        $banners = $this->service->getBanners();
-        $activeBanners = $this->service->getActiveBanners();
-
-        return view('admin.dashboard', compact(['sections', 'contacts', 'banners', 'activeSections', 'activeBanners']));
+        return view('admin.settings', compact(['contacts']));
     }
 
     public function contacts(ContactsRequest $request): JsonResource

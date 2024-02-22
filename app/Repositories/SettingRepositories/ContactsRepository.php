@@ -8,7 +8,12 @@ class ContactsRepository
 {
     public function first(): ?Contacts
     {
-        return Contacts::first();
+        $entity = Contacts::first();
+        if ($entity === null) {
+            $entity = Contacts::create(['id' => 1]);
+        }
+
+        return $entity;
     }
 
     /**

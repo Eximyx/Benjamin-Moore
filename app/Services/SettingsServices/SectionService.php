@@ -15,30 +15,36 @@ class SectionService extends CoreService
         parent::__construct($repository);
     }
 
-    /**
-     * @return array<int|string,array<int|string, mixed>>|null
-     */
-    public function toggle(ToggleSectionsDTO $dto): ?array
+    //    /**
+    //     * @return array<int|string,array<int|string, mixed>>|null
+    //     */
+    //    public function toggle(ToggleSectionsDTO $dto): ?array
+    //    {
+    //        $dto = (array)$dto;
+    //
+    //        $result = $this->repository->nullPosition();
+    //
+    //        if ($result) {
+    //            $this->uploadFilesForSections($dto['files']);
+    //            $result = $this->repository->toggle($dto['active_items']);
+    //        }
+    //
+    //        return $result;
+    //    }
+
+    public function toggle(ToggleSectionsDTO $dto): void
     {
-        $dto = (array)$dto;
-
-        $result = $this->repository->nullPosition();
-
-        if ($result) {
-            $this->uploadFilesForSections($dto['files']);
-            $result = $this->repository->toggle($dto['active_items']);
-        }
-
-        return $result;
+        $dto = (array) $dto;
+        $this->uploadFilesForSections($dto['files']);
     }
 
     /**
-     * @param array<int,UploadedFile|string> $data
+     * @param  array<int,UploadedFile|string>  $data
      */
     public function uploadFilesForSections(array $data): void
     {
         foreach ($data as $value) {
-            if (!is_string($value)) {
+            if (! is_string($value)) {
                 Storage::putFileAs(
                     'public/image/sections', $value,
                     $value->getClientOriginalName());

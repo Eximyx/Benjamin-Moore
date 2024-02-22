@@ -15,6 +15,7 @@ return [
         'profileSettings' => 'Настройки профиля',
         'review' => 'Отзывы',
         'contacts' => 'Контакты',
+        'aboutUs' => 'Немного о нас',
         'sections' => 'Секции',
         'banners' => 'Баннеры',
     ],
@@ -40,8 +41,14 @@ return [
         'password' => 'Пароль',
         'created_at' => 'Дата создания',
         'updated_at' => 'Дата обновления',
-        'contactInfo' => 'Контактная информация',
         'message' => 'Сообщение',
+        'phoneNumber' => 'Номер телефона',
+        'workTime' => 'Время работы',
+        'location' => 'Местоположение',
+        'instagram' => 'Instagram',
+        'available' => 'Доступные',
+        'active' => 'Активные',
+        'file' => 'Файл',
     ],
 
     'buttons' => [
@@ -51,7 +58,8 @@ return [
         'add' => 'Добавить',
         'submit' => 'Подтвердить',
         'close' => 'Закрыть',
-        'cancel' => 'Отменить'
+        'settings' => 'Настройки',
+        'cancel' => 'Отменить',
     ],
 
     'modal' => [

@@ -8,9 +8,8 @@ use App\Http\Controllers\CoreController;
 use App\Http\Requests\CreateSectionRequest;
 use App\Http\Requests\ToggleSectionRequest;
 use App\Http\Resources\SectionResource;
-use App\Http\Resources\ToggleResource;
 use App\Services\SettingsServices\SectionService;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 
 class SectionsController extends CoreController
 {
@@ -19,10 +18,9 @@ class SectionsController extends CoreController
         parent::__construct($service, SectionDTO::class, SectionResource::class, CreateSectionRequest::class);
     }
 
-    public function toggle(ToggleSectionRequest $request): JsonResource
+    public function toggle(ToggleSectionRequest $request): JsonResponse
     {
-        $dto = ToggleSectionsDTO::appRequest($request);
-
-        return ToggleResource::make($this->service->toggle($dto));
+        $this->service->toggle(ToggleSectionsDTO::appRequest($request));
+        return response()->json(['status' => '200']);
     }
 }
