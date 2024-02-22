@@ -18,7 +18,7 @@ class BannerService extends CoreService
      */
     public function toggle(ToggleBannersDTO $dto): ?array
     {
-        $dto = (array)$dto;
+        $dto = (array) $dto;
 
         $result = $this->repository->nullPosition();
 

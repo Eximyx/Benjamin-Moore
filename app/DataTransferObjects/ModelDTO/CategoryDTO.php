@@ -9,8 +9,7 @@ class CategoryDTO implements ModelDTO
 {
     public function __construct(
         public readonly string $title,
-    )
-    {
+    ) {
     }
 
     public static function appRequest(CreateCategoryRequest $request): CategoryDTO

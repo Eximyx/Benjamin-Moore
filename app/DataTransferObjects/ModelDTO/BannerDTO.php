@@ -22,7 +22,7 @@ class BannerDTO implements ModelDTO
         return new BannerDTO(
             $request['title'],
             $request['content'],
-            $request['image'] ? $request['image'] : new UploadedFile(storage_path('image/') + '/default_post.jpg'),
+            $request['image'] ? $request['image'] : new UploadedFile('storage/image/default_post.jpg', 'banner_1.jpg'),
         );
 
     }

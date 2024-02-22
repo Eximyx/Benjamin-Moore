@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\DataTransferObjects\ModelDTO\ContactsDTO;
 use App\Models\Contacts;
 use App\Repositories\SettingRepositories\BannersRepository;
 use App\Repositories\SettingRepositories\ContactsRepository;
@@ -55,11 +56,15 @@ class SettingsService
         return $this->bannersRepository->getActive()->get();
     }
 
-    /**
-     * @param  array<string, mixed>  $data
-     */
-    public function contactsSet(array $data): Contacts
+    public function contacts(ContactsDTO $dto): Contacts
     {
-        return $this->contactsRepository->updateOrCreate($data);
+        $dto = (array) $dto;
+
+        return $this->contactsRepository->updateOrCreate($dto);
+    }
+
+    public function contactsFetch(): ?Contacts
+    {
+        return $this->contactsRepository->first();
     }
 }
