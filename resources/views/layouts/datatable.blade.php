@@ -40,7 +40,7 @@
                                 @endif
                                 @if ($value === 'content')
                                     <textarea type="text" name="content" class="form-control" id="summernote-content"
-                                              placeholder=@lang('admin.keys.content') required></textarea>
+                                              placeholder="@lang('admin.keys.content')" required></textarea>
                                 @elseif($value == 'description')
                                     <textarea type="text" name="description" class="form-control" id="description"
                                               rows="3" placeholder="@lang('admin.keys.'.$value)"

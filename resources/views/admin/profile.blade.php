@@ -14,19 +14,19 @@
 
                         <div class="col-md-6">
                             <label class="labels">@lang('admin.keys.name')</label>
-                            <input type="text" name="name" id="name" class="form-control" placeholder=@lang('admin.keys.email')
+                            <input type="text" name="name" id="name" class="form-control" placeholder="@lang('admin.keys.email')"
                                    value="{{ auth()->user()->name }}">
                         </div>
                         <div class="col-md-6">
                             <label class="labels">@lang('admin.keys.email')</label>
                             <input type="text" name="email" id="email" class="form-control"
                                    value="{{ auth()->user()->email }}"
-                                   placeholder=@lang('admin.keys.email')>
+                                   placeholder="@lang('admin.keys.email')">
                         </div>
                         <div class="col-md-6">
                             <label class="labels">@lang('admin.keys.password')</label>
                             <input type="text" name="password" id="password" class="form-control"
-                                   placeholder=@lang('admin.keys.password')>
+                                   placeholder="@lang('admin.keys.password')">
                         </div>
                     </div>
                     <div class="mt-5 text-center">
