@@ -11,6 +11,8 @@ class Contacts extends Model
 
     protected $fillable = [
         'email', 'phone',
-        'work_time', 'place', 'location',
+        'work_time',
+        'place',
+        'location',
         'instagram'];
 }

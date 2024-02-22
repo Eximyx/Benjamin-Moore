@@ -25,27 +25,31 @@
                     <div class="row justify-content-between m-0 p-0">
                         <div class="col-md-6">
                             <label for="email">Email</label>
-                            <input type="email" name="email" value="" id="email" class="form-control"
+                            <input type="email" name="email" value="{{$contacts->email}}" id="email"
+                                   class="form-control"
                                    placeholder="email">
                         </div>
                         <div class="col-md-6">
                             <label for="phone">Номер телефона</label>
-                            <input type="text" name="phone" id="phone" class="form-control"
+                            <input type="text" name="phone" value="{{$contacts->phone}}" id="phone" class="form-control"
                                    placeholder="phone-number">
                         </div>
                         <div class="col-md-6">
                             <label for="work_time">Время работы</label>
-                            <input type="text" name="work_time" id="work_time" class="form-control"
+                            <input type="text" name="work_time" id="work_time" value="{{$contacts->work_time}}"
+                                   class="form-control"
                                    placeholder="work time">
                         </div>
                         <div class="col-md-6">
                             <label for="location">Местоположение</label>
-                            <input type="text" name="location" id="location" class="form-control"
+                            <input type="text" name="location" id="location" value="{{$contacts->location}}"
+                                   class="form-control"
                                    placeholder="location">
                         </div>
                         <div class="col-md-6">
                             <label for="instagram">Instagram</label>
-                            <input type="text" name="instagram" id="instagram" class="form-control"
+                            <input type="text" name="instagram" id="instagram" value="{{$contacts->instagram}}"
+                                   class="form-control"
                                    placeholder="instagram">
                         </div>
                     </div>
@@ -377,7 +381,7 @@
                     buttonModal.addClass('editButton');
                     buttonModal.removeClass('addButton');
                     $.ajax({
-                        type: "POST",
+                        type: "GET",
                         url: urls + '/edit',
                         dataType: 'json',
                         data: {
@@ -432,7 +436,7 @@
                 let selected = available_select.val();
                 if (selected !== null) {
                     $.ajax({
-                        type: "POST",
+                        type: "DELETE",
                         url: urls + '/delete',
                         dataType: 'json',
                         data: {
