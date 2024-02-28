@@ -13,7 +13,9 @@ return new class extends Migration {
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->smallInteger('position')->nullable();
+            $table->unsignedBigInteger('banner_position_id')->unique()->nullable();
+            $table->index('banner_position_id', 'banner_banner_positions_idx');
+            $table->foreign('banner_position_id', 'banner_banner_positions_fk')->references('id')->on('banner_positions');
             $table->string('content');
             $table->string('image');
             $table->timestamps();

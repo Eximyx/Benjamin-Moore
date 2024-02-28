@@ -19,6 +19,7 @@ class CreateBannerRequest extends FormRequest
         return [
             'title' => 'string',
             'content' => 'string',
+            'banner_position_id' => 'string|nullable',
             'image' => 'image|nullable',
         ];
     }

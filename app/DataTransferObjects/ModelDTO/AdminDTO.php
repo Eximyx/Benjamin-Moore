@@ -22,7 +22,7 @@ class AdminDTO implements ModelDTO
             $request['name'],
             $request['email'],
             $request['password'],
-            $request['user_role_id']
+            $request['user_role_id'] ? $request["user_role_id"] : "1"
         );
 
     }

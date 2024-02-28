@@ -8,11 +8,11 @@ use App\Http\Requests\CreateNewsPostRequest;
 class NewsPostDTO implements ModelDTO
 {
     public function __construct(
-        public readonly string $title,
-        public readonly string $description,
-        public readonly string $category_id,
-        public readonly string $content,
-        public mixed           $main_image,
+        public readonly string  $title,
+        public readonly string  $description,
+        public readonly ?string $category_id,
+        public readonly string  $content,
+        public mixed            $main_image,
     )
     {
 

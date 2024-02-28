@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Section extends Model
 {
@@ -11,7 +12,12 @@ class Section extends Model
 
     protected $fillable = [
         'title',
-        'position',
+        'section_position_id',
         'content',
     ];
+
+    public function section_position(): BelongsTo
+    {
+        return $this->belongsTo(SectionPosition::class, 'section_position_id', 'section_position_id');
+    }
 }

@@ -1,20 +1,27 @@
 <?php
 
+use App\Models\Banner;
+use App\Models\BannerPosition;
 use App\Models\Category;
 use App\Models\KindOfWork;
 use App\Models\Leads;
+use App\Models\MetaData;
 use App\Models\NewsPost;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Review;
+use App\Models\Section;
+use App\Models\SectionPosition;
 use App\Models\StaticPage;
 use App\Models\User;
 use App\Models\UserRoles;
 
 return [
+    // TODO: Переделать базовый сервис/репозиторий, они не должны знать о различиях между сущностями. Некоторые сущности содержат отношения.  BaseModelService->getVariablesForDataTable()
     NewsPost::class => [
         'ModelName' => 'admin.titles.news',
         'datatable_data' => [
+            "id",
             'title',
             'is_toggled',
             'category_id',
@@ -29,20 +36,45 @@ return [
         'selectable_key' => 'category_id',
         'selectableModel' => app(Category::class),
     ],
-
-    Category::class => [
-        'ModelName' => 'admin.titles.category',
+    Banner::class => [
+        'ModelName' => 'admin.titles.banners',
         'datatable_data' => [
+            "id",
             'title',
+            'content',
+            'banner_position_id',
         ],
         'form_data' => [
             'title',
+            'content',
+            'banner_position_id',
+            'main_image',
         ],
+        'selectable_key' => 'banner_position_id',
+        'selectableModel' => app(BannerPosition::class),
+    ],
+
+    Section::class => [
+        'ModelName' => 'admin.titles.sections',
+        'datatable_data' => [
+            "id",
+            'title',
+            'content',
+            'section_position_id',
+        ],
+        'form_data' => [
+            'title',
+            'section_position_id',
+            'content',
+        ],
+        'selectable_key' => 'section_position_id',
+        'selectableModel' => app(SectionPosition::class),
     ],
 
     Product::class => [
         'ModelName' => 'admin.titles.product',
         'datatable_data' => [
+            "id",
             'title',
             'code',
             'product_category_id',
@@ -66,11 +98,31 @@ return [
         ],
         'selectable_key' => 'product_category_id',
         'selectableModel' => app(ProductCategory::class),
-    ],
+    ], // DONE
 
+    MetaData::class => [
+        'ModelName' => 'admin.titles.metadata',
+        'datatable_data' => [
+            'url',
+            'title',
+            'meta_description',
+            'meta_keywords',
+            'h',
+            'additional_text',
+        ],
+        'form_data' => [
+            'url',
+            'title',
+            'meta_description',
+            'meta_keywords',
+            'h',
+            'additional_text',
+        ],
+    ],
     ProductCategory::class => [
         'ModelName' => 'admin.titles.productCategory',
         'datatable_data' => [
+            "id",
             'title',
             'kind_of_work_id',
         ],
@@ -82,36 +134,10 @@ return [
         'selectable_key' => 'kind_of_work_id',
         'selectableModel' => app(KindOfWork::class),
     ],
-
-    Leads::class => [
-        'ModelName' => 'admin.titles.leads',
-        'datatable_data' => [
-            'name',
-            'contactInfo',
-            'message',
-        ],
-        'form_data' => [
-            'name',
-            'contactInfo',
-            'message',
-        ],
-    ],
-
-    StaticPage::class => [
-        'ModelName' => 'admin.titles.staticPage',
-        'datatable_data' => [
-            'title',
-            'is_toggled',
-        ],
-        'form_data' => [
-            'title',
-            'content',
-        ],
-    ],
-
     User::class => [
         'ModelName' => 'admin.titles.user',
         'datatable_data' => [
+            "id",
             'name',
             'email',
             'user_role_id',
@@ -126,9 +152,46 @@ return [
         'selectableModel' => app(UserRoles::class),
     ],
 
+    Category::class => [
+        'ModelName' => 'admin.titles.category',
+        'datatable_data' => [
+            "id",
+            'title',
+        ],
+        'form_data' => [
+            'title',
+        ],
+    ],
+    Leads::class => [
+        'ModelName' => 'admin.titles.leads',
+        'datatable_data' => [
+            "id",
+            'name',
+            'contactInfo',
+            'message',
+        ],
+        'form_data' => [
+            'name',
+            'contactInfo',
+            'message',
+        ],
+    ],
+    StaticPage::class => [
+        'ModelName' => 'admin.titles.staticPage',
+        'datatable_data' => [
+            "id",
+            'title',
+            'is_toggled',
+        ],
+        'form_data' => [
+            'title',
+            'content',
+        ],
+    ],
     Review::class => [
         'ModelName' => 'admin.titles.review',
         'datatable_data' => [
+            "id",
             'name',
             'description',
             'is_toggled',

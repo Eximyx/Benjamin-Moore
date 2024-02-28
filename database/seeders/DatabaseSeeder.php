@@ -15,6 +15,16 @@ class DatabaseSeeder extends Seeder
         \App\Models\NewsPost::factory(40)->create();
         \App\Models\Review::factory(1)->create();
         \App\Models\Section::factory(40)->create();
+        \App\Models\BannerPosition::factory()->createMany([
+            ['id' => 1, 'title' => 'Главная'],
+            ['id' => 2, 'title' => 'Скидка'],
+            ['id' => 3, 'title' => 'Где купить']
+        ]);
+        \App\Models\SectionPosition::factory()->createMany([
+            ['id' => 1, 'title' => 'Секция 1'],
+            ['id' => 2, 'title' => 'Секция 2'],
+            ['id' => 3, 'title' => 'Секция 3']
+        ]);
         \App\Models\Banner::factory(40)->create();
         \App\Models\Product::factory(500)->create();
         \App\Models\UserRoles::factory()->createMany([['title' => 'User'], ['title' => 'Admin'], ['title' => 'root']]);
