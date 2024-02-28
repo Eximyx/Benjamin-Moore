@@ -2,21 +2,16 @@
 
 return [
     'lang' => 'ru',
-
     'news.index' => 'Новости',
-
     'news_categories.index' => 'Категории новостей',
-
     'products.index' => 'Товары',
-
     'product_categories.index' => 'Категории продуктов',
-
     'leads.index' => 'Обратная связь',
-
     'static_pages.index' => 'Статические страницы',
-
-    'user.index' => 'Пользователи',
-
-    'review.index' => 'Отзывы',
+    'users.index' => 'Пользователи',
+    'reviews.index' => 'Отзывы',
+    'banners.index' => 'Баннеры',
+    'sections.index' => 'Секции',
+    'metadata.index' => 'Метаданные',
 ];
 

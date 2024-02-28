@@ -11,10 +11,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductsController extends BaseAdminController
 {
-    public function __construct(
-        ProductService $service,
-
-    )
+    public function __construct(ProductService $service)
     {
         parent::__construct($service, ProductDTO::class, ProductResource::class, CreateProductRequest::class);
     }

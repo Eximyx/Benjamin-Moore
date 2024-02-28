@@ -18,10 +18,17 @@ return [
         'aboutUs' => 'Немного о нас',
         'sections' => 'Секции',
         'banners' => 'Баннеры',
+        'metadata' => 'Метаданные',
     ],
 
     'keys' => [
-        'title' => 'Заголовок',
+        'id' => 'ID',
+        'url' => 'url',
+        'title' => 'Название страницы',
+        'meta_description' => 'Мета описание',
+        'meta_keywords' => 'Ключевые слова',
+        'h' => 'Главный заголовок',
+        'additional_text' => 'Дополнительный текст',
         'is_toggled' => 'Отображение',
         'main_image' => 'Изображение',
         'content' => 'Содержимое',

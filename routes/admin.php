@@ -2,13 +2,17 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ModelControllers\AdminController;
+use App\Http\Controllers\ModelControllers\BannersController;
 use App\Http\Controllers\ModelControllers\CategoryController;
 use App\Http\Controllers\ModelControllers\LeadsController;
+use App\Http\Controllers\ModelControllers\MetaDataController;
 use App\Http\Controllers\ModelControllers\NewsController;
 use App\Http\Controllers\ModelControllers\ProductCategoryController;
 use App\Http\Controllers\ModelControllers\ProductsController;
 use App\Http\Controllers\ModelControllers\ReviewController;
+use App\Http\Controllers\ModelControllers\SectionsController;
 use App\Http\Controllers\ModelControllers\StaticPageController;
+use App\Http\Controllers\SettingsControllers\SettingsController;
 
 Route::controller(AuthController::class)->middleware('user')->group(function () {
     Route::get('login', 'login')->name('login');
@@ -16,94 +20,54 @@ Route::controller(AuthController::class)->middleware('user')->group(function () 
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
+
 Route::middleware('admin')->group(function () {
     Route::prefix('admin')
         ->group(function () {
-            Route::get('/', static function () {
-                return view('admin.dashboard');
-            })->name('dashboard');
+            Route::prefix('settings')->group(function () {
+                Route::get('/', [SettingsController::class, 'index'])->name('settings');
+                Route::post('/contacts', [SettingsController::class, 'contacts'])->name('settings.contacts.set');
+                Route::prefix('/about-us')->group(function () {
+                    Route::controller(SectionsController::class)->group(function () {
+                        Route::post('/toggle', 'toggle')->name('settings.toggle.sections');
+                    });
+                });
+            });
 
             Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
             Route::post('/profile', [AuthController::class, 'profile'])->name('profile');
+            Route::post('update/{entity}', [NewsController::class, 'update']);
 
-            Route::prefix('products')->group(function () {
-                Route::get('/', [ProductsController::class, 'index'])->name('products.index');
-                Route::post('store', [ProductsController::class, 'store']);
-                Route::post('create', [ProductsController::class, 'create']);
-                Route::post('update/{entity}', [ProductsController::class, 'update']);
-                Route::post('edit', [ProductsController::class, 'edit']);
-                Route::post('delete', [ProductsController::class, 'delete']);
-                Route::post('toggle', [ProductsController::class, 'toggle']);
-            });
 
-            Route::prefix('news')->group(function () {
-                Route::get('/', [NewsController::class, 'index'])->name('news.index');
-                Route::post('store', [NewsController::class, 'store']);
-                Route::post('create', [NewsController::class, 'create']);
-                Route::post('update/{entity}', [NewsController::class, 'update']);
-                Route::post('edit', [NewsController::class, 'edit']);
-                Route::post('delete', [NewsController::class, 'delete']);
-                Route::post('toggle', [NewsController::class, 'toggle']);
-            });
+            Route::post('products/toggle', [ProductsController::class, 'toggle']);
+            Route::post('news/toggle', [NewsController::class, 'toggle']);
+            Route::post('static_pages/toggle', [StaticPageController::class, 'toggle']);
+            Route::post('reviews/toggle', [ReviewController::class, 'toggle']);
 
-            Route::prefix('static_pages')->group(function () {
-                Route::get('/', [StaticPageController::class, 'index'])->name('static_pages.index');
-                Route::post('create', [StaticPageController::class, 'create']);
-                Route::post('update/{entity}', [StaticPageController::class, 'update']);
-                Route::post('edit', [StaticPageController::class, 'edit']);
-                Route::post('delete', [StaticPageController::class, 'delete']);
-                Route::post('toggle', [StaticPageController::class, 'toggle']);
-            });
+            Route::post('products/update/{entity}', [ProductsController::class, 'update']);
+            Route::post('metadata/update/{entity}', [MetaDataController::class, 'update']);
+            Route::post('news/update/{entity}', [NewsController::class, 'update']);
+            Route::post('static_pages/update/{entity}', [StaticPageController::class, 'update']);
+            Route::post('sections/update/{entity}', [SectionsController::class, 'update']);
+            Route::post('news_categories/update/{entity}', [CategoryController::class, 'update']);
+            Route::post('leads/update/{entity}', [LeadsController::class, 'update']);
+            Route::post('product_categories/update/{entity}', [ProductCategoryController::class, 'update']);
+            Route::post('users/update/{entity}', [AdminController::class, 'update']);
+            Route::post('reviews/update/{entity}', [ReviewController::class, 'update']);
+            Route::post('banners/update/{entity}', [BannersController::class, 'update']);
 
-            Route::prefix('news_categories')->group(function () {
-                Route::get('/', [CategoryController::class, 'index'])->name('news_categories.index');
-                Route::post('create', [CategoryController::class, 'create']);
-                Route::post('update/{entity}', [CategoryController::class, 'update']);
-                Route::post('edit', [CategoryController::class, 'edit']);
-                Route::post('delete', [CategoryController::class, 'delete']);
-            });
-
-            Route::prefix('leads')->group(function () {
-                Route::get('/', [LeadsController::class, 'index'])->name('leads.index');
-                Route::post('create', [LeadsController::class, 'create']);
-                Route::post('update/{entity}', [LeadsController::class, 'update']);
-                Route::post('edit', [LeadsController::class, 'edit']);
-                Route::post('delete', [LeadsController::class, 'delete']);
-            });
-
-            Route::prefix('product_categories')->group(function () {
-                Route::get('/', [ProductCategoryController::class, 'index'])->name('product_categories.index');
-                Route::post('create', [ProductCategoryController::class, 'create']);
-                Route::post('update/{entity}', [ProductCategoryController::class, 'update']);
-                Route::post('edit', [ProductCategoryController::class, 'edit']);
-                Route::post('delete', [ProductCategoryController::class, 'delete']);
-            });
-
-            Route::prefix('users')->middleware('root')->group(function () {
-                Route::get('/', [AdminController::class, 'index'])->name('user.index');
-                Route::post('create', [AdminController::class, 'create']);
-                Route::post('update/{entity}', [AdminController::class, 'update']);
-                Route::post('edit', [AdminController::class, 'edit']);
-                Route::post('delete', [AdminController::class, 'delete']);
-                Route::post('toggle', [AdminController::class, 'toggle']);
-            });
-
-            Route::prefix('users')->middleware('root')->group(function () {
-                Route::get('/', [AdminController::class, 'index'])->name('user.index');
-                Route::post('create', [AdminController::class, 'create']);
-                Route::post('update/{entity}', [AdminController::class, 'update']);
-                Route::post('edit', [AdminController::class, 'edit']);
-                Route::post('delete', [AdminController::class, 'delete']);
-                Route::post('toggle', [AdminController::class, 'toggle']);
-            });
-
-            Route::prefix('reviews')->group(function () {
-                Route::get('/', [ReviewController::class, 'index'])->name('review.index');
-                Route::post('create', [ReviewController::class, 'create']);
-                Route::post('update/{entity}', [ReviewController::class, 'update']);
-                Route::post('edit', [ReviewController::class, 'edit']);
-                Route::post('delete', [ReviewController::class, 'delete']);
-                Route::post('toggle', [ReviewController::class, 'toggle']);
-            });
+            Route::resources([
+                'products' => ProductsController::class,
+                'news' => NewsController::class,
+                'static_pages' => StaticPageController::class,
+                'metadata' => MetaDataController::class,
+                'news_categories' => CategoryController::class,
+                'leads' => LeadsController::class,
+                'product_categories' => ProductCategoryController::class,
+                'users' => AdminController::class,
+                'reviews' => ReviewController::class,
+                'banners' => BannersController::class,
+                'sections' => SectionsController::class,
+            ]);
         });
 });

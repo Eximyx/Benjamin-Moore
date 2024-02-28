@@ -11,9 +11,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ReviewController extends BaseAdminController
 {
-    public function __construct(
-        ReviewService $service
-    )
+    public function __construct(ReviewService $service)
     {
         parent::__construct($service, ReviewDTO::class, ReviewResource::class, CreateReviewRequest::class);
     }

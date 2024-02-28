@@ -18,10 +18,17 @@ return [
         'aboutUs' => 'About us',
         'banners' => 'Banners',
         'sections' => 'Sections',
+        'metadata' => 'Metadata',
     ],
 
     'keys' => [
-        'title' => 'Title',
+        'id' => 'ID',
+        'url' => 'URL',
+        'title' => 'Page title',
+        'meta_description' => 'Meta description',
+        'meta_keywords' => 'Keywords',
+        'h' => 'Header',
+        'additional_text' => 'Additional text',
         'is_toggled' => 'Toggled',
         'main_image' => 'Image',
         'content' => 'Content',

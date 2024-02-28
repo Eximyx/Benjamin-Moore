@@ -5,7 +5,6 @@
         <table class="m-0 w-100 table table-striped" id="table">
             <thead>
             <tr>
-                <th>Id</th>
                 @foreach ($data['data']['datatable_data'] as $key => $value)
                     @if(str_contains($value, '_id'))
                         <th>@lang('admin.keys.category')</th>
@@ -28,9 +27,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div id="errors"></div>
                     <form action="javascript:void(0)" id="Form" name="Form" class="form-horizontal" method="POST"
                           enctype="multipart/form-data">
                         <input type="hidden" name="id" id="id">
+
                         @foreach ($data['data']['form_data'] as $key => $value)
                             <div class="col-lg mt-2">
                                 @if(str_contains($value, '_id'))
@@ -47,8 +48,10 @@
                                               required></textarea>
                                 @elseif(str_contains($value, '_id'))
                                     <div>
-                                        <select class="form-select" name="{{ $value }}" id="select"
-                                                aria-label="Default select example" required>
+                                        <select class="form-select" name="{{ $value }}" id="select">
+                                            <option value="">
+                                                Не выбрано
+                                            </option>
                                             @foreach ($data['selectable'] as $item)
                                                 <option value="{{ $item['id'] }}">
                                                     {{ $item['title'] }}
@@ -101,11 +104,6 @@
                 urls,
                 columns:
                     [
-                        {
-                            "data": 'id',
-                            "name": 'id'
-                        },
-
                         @foreach ($data['datatable_columns'] as $item) @json($item),
                             @endforeach
 
@@ -154,25 +152,28 @@
 
         const OpenFullScreen = function (context) {
             const ui = $.summernote.ui;
-            const button = ui.button({
-                contents: '<i class="align-items-center fa fa-expand"/>',
-                tooltip: 'FullScreen',
-                click: function () {
-                    $('#summernote-content').summernote('fullscreen.toggle');
-                    if ($('#summernote-content').summernote('fullscreen.isFullscreen')) {
-                        document.getElementsByClassName(
-                            "note-editor note-frame panel panel-default fullscreen")[0].style
-                            .backgroundColor = '#fff';
-                        document.getElementsByClassName(
-                            "note-editor note-frame panel panel-default fullscreen")[0].style.position =
-                            'fixed';
-                    } else {
-                        document.getElementsByClassName("note-editor note-frame panel panel-default")[0]
-                            .style.position = 'static';
+            if (ui) {
+                const button = ui.button({
+                    contents: '<i class="align-items-center fa fa-expand"/>',
+                    tooltip: 'FullScreen',
+                    click: function () {
+                        $('#summernote-content').summernote('fullscreen.toggle');
+                        if ($('#summernote-content').summernote('fullscreen.isFullscreen')) {
+                            document.getElementsByClassName(
+                                "note-editor note-frame panel panel-default fullscreen")[0].style
+                                .backgroundColor = '#fff';
+                            document.getElementsByClassName(
+                                "note-editor note-frame panel panel-default fullscreen")[0].style.position =
+                                'fixed';
+                        } else {
+                            document.getElementsByClassName("note-editor note-frame panel panel-default")[0]
+                                .style.position = 'static';
+                        }
                     }
-                }
-            })
-            return button.render();
+                })
+                return button.render();
+            }
+
         }
         // Summernote setups
         $('#summernote-content').summernote({
@@ -227,7 +228,7 @@
 
         function editFunc(id) {
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: urls + '/edit',
                 data: {
                     id: id
@@ -240,16 +241,17 @@
                     $('#window_title').text('@lang('admin.modal.edit')');
                     $('#Form-modal').modal('show');
                     $.each(res, function (key, value) {
-                        if (key.includes('_id')) {
-                            $("#select").find(`option[value='${value}']`).attr("selected", true);
+                        if (!key.includes('image')) {
+                            if (key.includes('_id')) {
+                                $("#select").find(`option[value='${value}']`).attr("selected", true);
+                            } else {
+                                $('#' + key).val(value);
+                            }
                         } else {
-                            $('#' + key).val(value);
+                            result.attr("src", `{{ url('storage/image/') }}/${res[key]}`);
                         }
                     });
                     $('#summernote-content').summernote('code', res.content);
-                    // result.src = ;
-                    result.attr("src", `{{ url('storage/image/') }}/${res.main_image}`);
-
                 },
                 error: function (data) {
                     console.log(data);
@@ -271,7 +273,7 @@
             }).then((result) => {
                 if (result['isConfirmed']) {
                     $.ajax({
-                        type: "POST",
+                        type: "DELETE",
                         url: urls + '/delete',
                         data: {
                             id: id
@@ -320,30 +322,34 @@
 
         $('#Form').submit(function (e) {
             e.preventDefault();
-            var formData = new FormData(this);
-            var id = $('#id').val();
-            var url = id == '' ? '/create' : '/update/' + id;
-            console.log(url);
+            let formData = new FormData(this);
+            let url = '';
+            let type = 'POST';
+            let id = $('#id').val();
+            if (id !== '') {
+                url += `/update/${id}`
+            }
             $.ajax({
-                type: 'POST',
+                type: type,
                 url: urls + url,
                 data: formData,
                 cache: false,
                 contentType: false,
                 processData: false,
                 success: (data) => {
-                    if (!data['errorInfo']) {
-                        $("#Form-modal").modal('hide');
-                        var oTable = $('#table').dataTable();
-                        oTable.fnDraw(false);
-                        $("#btn-save").html('Submit');
-                        $("#btn-save").attr("disabled", false);
-                    }
                     console.log(data);
-
+                    $("#Form-modal").modal('hide');
+                    var oTable = $('#table').dataTable();
+                    oTable.fnDraw(false);
+                    $("#btn-save").html('Submit');
+                    $("#btn-save").attr("disabled", false);
                 },
                 error: function (data) {
                     console.log(data);
+                    $(document).find("li.alert").remove();
+                    $.each(data.responseJSON["errors"], (key, item) => {
+                        $("#errors").append("<li class='alert alert-danger'>" + item[0] + "</li>")
+                    });
                 },
             });
         })

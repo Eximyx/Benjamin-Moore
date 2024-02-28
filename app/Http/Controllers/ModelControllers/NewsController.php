@@ -11,9 +11,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class NewsController extends BaseAdminController
 {
-    public function __construct(
-        NewsService $service,
-    )
+    public function __construct(NewsService $service)
     {
         parent::__construct($service, NewsPostDTO::class, NewsPostResource::class, CreateNewsPostRequest::class);
     }

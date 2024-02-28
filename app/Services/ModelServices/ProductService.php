@@ -17,7 +17,7 @@ class ProductService extends BaseModelService
 
     public function create(ModelDTO $dto): ?Model
     {
-        $data = (array)$dto;
+        $data = (array) $dto;
 
         $data['main_image'] = $this->uploadImage($data['main_image']);
 
@@ -26,7 +26,7 @@ class ProductService extends BaseModelService
 
     public function update(Model $entity, ModelDTO $dto): Model
     {
-        $dto = (array)$dto;
+        $dto = (array) $dto;
 
         if ($dto['main_image'] !== null) {
             $deleted = $this->deleteImage($entity['main_image']);
@@ -62,15 +62,15 @@ class ProductService extends BaseModelService
     {
         $entity = $this->findById($request['id']);
 
-        $entity['is_toggled'] = !$entity['is_toggled'];
+        $entity['is_toggled'] = ! $entity['is_toggled'];
 
         return $this->repository->save($entity);
     }
 
     protected function deleteImage(string $image): bool
     {
-        if (!($image === 'default_post.jpg')) {
-            Storage::delete('public/image/' . $image);
+        if (! ($image === 'default_post.jpg')) {
+            Storage::delete('public/image/'.$image);
         }
 
         return true;
@@ -86,5 +86,18 @@ class ProductService extends BaseModelService
         }
 
         return $image;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function getVariablesForDataTable(): array
+    {
+        $variables = parent::getVariablesForDataTable();
+        if (isset($variables['data']['selectableModel'])) {
+            $variables['selectable'] = $variables['data']['selectableModel']->all();
+        }
+
+        return $variables;
     }
 }

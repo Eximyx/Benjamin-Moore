@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CreateSectionRequest extends FormRequest
 {
-
     public function authorize(): bool
     {
         return true;
@@ -19,7 +18,8 @@ class CreateSectionRequest extends FormRequest
     {
         return [
             'title' => 'string',
-            'content' => 'string'
+            'section_position_id' => 'string|nullable',
+            'content' => 'string',
         ];
     }
 }

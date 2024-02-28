@@ -9,10 +9,10 @@ use App\Services\ModelServices\ProductCategoryService;
 
 class ProductCategoryController extends BaseAdminController
 {
-    public function __construct(
-        ProductCategoryService $service
-    )
+    public function __construct(ProductCategoryService $service)
     {
         parent::__construct($service, ProductCategoryDTO::class, ProductCategoryResource::class, CreateProductCategoryRequest::class);
     }
+
+
 }

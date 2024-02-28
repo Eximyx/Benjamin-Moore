@@ -20,7 +20,7 @@ class CreateProductCategoryRequest extends FormRequest
             'id' => 'numeric|nullable',
             'title' => 'string|required|min:5|max:100',
             'content' => 'string|required',
-            'kind_of_work_id' => 'required',
+            'kind_of_work_id' => 'string|nullable',
         ];
     }
 }

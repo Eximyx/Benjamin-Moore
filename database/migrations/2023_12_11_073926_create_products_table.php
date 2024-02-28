@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
@@ -24,7 +23,7 @@ return new class extends Migration
             $table->string('consumption');
             $table->string('thickness');
             $table->string('slug')->unique();
-            $table->unsignedBigInteger('product_category_id');
+            $table->unsignedBigInteger('product_category_id')->nullable();
             $table->index('product_category_id', 'product_product_category_idx');
             $table->foreign('product_category_id', 'product_product_category_fk')->references('id')->on('product_categories');
             $table->boolean('is_toggled')->default(false);

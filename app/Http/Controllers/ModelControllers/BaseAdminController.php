@@ -6,14 +6,14 @@
 
 namespace App\Http\Controllers\ModelControllers;
 
-use App\Http\Controllers\CoreController;
+use App\Http\Controllers\ResourceController;
 use App\Http\Resources\DataTableResource;
 use App\Services\ModelServices\BaseModelService;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 
-abstract class BaseAdminController extends CoreController
+abstract class BaseAdminController extends ResourceController
 {
     public function __construct(
         BaseModelService $service,

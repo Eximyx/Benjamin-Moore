@@ -31,7 +31,7 @@ class CreateProductRequest extends FormRequest
             'time_to_repeat' => 'string|required|max:20',
             'consumption' => 'string|required|max:20',
             'thickness' => 'string|required|max:20',
-            'product_category_id' => 'numeric|required',
+            'product_category_id' => 'numeric|nullable',
         ];
     }
 }
