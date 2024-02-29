@@ -2,7 +2,7 @@
     <div class="offcanvas-header border border-bottom-2">
         <div class="col-md-3 col-lg-2 col-xl-2 col-xxl-2 row justify-content-center align-items-end">
             <a class="nav-link align-items-center fw-bold text-secondary text-nowrap col-12 fs-6"
-                href="{{ route('main.index') }}">
+               href="{{ route('user.main.index') }}">
                 <img srcset="{{ url('storage/assets/benjaminmoore-icon.png') }}">
                 Benjamin Moore
             </a>
@@ -16,11 +16,12 @@
         <a class="nav-link" href="{{ route('user.news') }}">
             Новости
         </a>
-        <a class="nav-link" href="{{ route('calc') }}">
+        <a class="nav-link" href="{{ route('user.calc') }}">
             Калькулятор
         </a>
-        <a class="nav-link row p-0 m-0 mt-3" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-            aria-controls="collapseExample">
+        <a class="nav-link row p-0 m-0 mt-3" data-toggle="collapse" href="#collapseExample" role="button"
+           aria-expanded="false"
+           aria-controls="collapseExample">
             <div class="col-12 justify-content-between row m-0 p-0">
                 <p class="col p-0 m-0">
                     Информация
@@ -33,7 +34,6 @@
         <div class="collapse" id="collapseExample">
             <div class="row p-0 m-0">
                 <div class="row justify-content-start">
-                    <a href="{{route('contacts')}}" class="nav-link p-0 m-0">Где купить</a>
                 </div>
                 <div class="row justify-content-start">
                     <a class="nav-link p-0 m-0">Где купить</a>

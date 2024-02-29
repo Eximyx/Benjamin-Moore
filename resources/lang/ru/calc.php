@@ -20,7 +20,7 @@ return [
         'doorsSize' => '900*2000 мм',
         'windowsSize' => '1300*1500 мм',
         'square' => 'Площадь (м)*',
-        'indicateTheArea' => 'Укажите площадь'
+        'indicateTheArea' => 'Укажите площадь',
     ],
 
     'results' => [
@@ -37,4 +37,3 @@ return [
         'dontKnow' => 'Нет, не знаю',
     ],
 ];
-

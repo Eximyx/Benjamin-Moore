@@ -119,6 +119,7 @@
                 });
             }, 1000);
         }
+
         $('body').on('click', '.pagination a', (e) => {
             e.preventDefault();
             var page = $(e.target).attr('href').split('?')[1].split('&');

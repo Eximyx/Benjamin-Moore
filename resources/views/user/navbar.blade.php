@@ -6,7 +6,7 @@
         class="d-flex d-lg-none row py-1 justify-content-between align-items-center border-bottom border-2 border-opacity-25 border-black p-0 m-0">
         <div class="col-1 row justify-content-between align-items-end p-0 m-0">
             <a class="nav-link align-items-center fw-bold text-secondary text-nowrap col-12 fs-5"
-               href="{{ route('main.index') }}">
+               href="{{ route('user.main.index') }}">
                 <img srcset="{{ url('storage/assets/benjaminmoore-icon.png') }}" style="height:24px;width:24px">
                 Benjamin Moore
             </a>
@@ -21,7 +21,7 @@
         class="d-none d-lg-flex row py-1 justify-content-between align-items-center border-bottom border-2 border-opacity-25 border-black">
         <div class="w-auto row justify-content-between align-items-end">
             <a class="nav-link align-items-center fw-bold text-secondary text-nowrap col-12 fs-6"
-               href="{{ route('main.index') }}">
+               href="{{ route('user.main.index') }}">
                 <img srcset="{{ url('storage/assets/benjaminmoore-icon.png') }}" style="height:20px;width:20px">
                 Benjamin Moore
             </a>
@@ -33,7 +33,7 @@
             <a class="nav-link text-center text-secondary fs-6 col" href="{{ route('user.news') }}">
                 @lang('main.navbar.news')
             </a>
-            <a class="nav-link text-center text-secondary fs-6 col" href="{{ route('calc') }}">
+            <a class="nav-link text-center text-secondary fs-6 col" href="{{ route('user.calc') }}">
                 @lang('main.navbar.calc')
             </a>
             <div class="dropdown text-secondary p-0 col-3">
@@ -42,7 +42,7 @@
                     @lang('main.navbar.info')
                 </button>
                 <div class="dropdown-menu " aria-labelledby="dropdownMenu2">
-                    <a href="{{ route('contacts') }}" class="dropdown-item text-secondary"
+                    <a href="{{ route('user.contacts') }}" class="dropdown-item text-secondary"
                        type="button">@lang('main.navbar.whereToBuy')</a>
                     <a class="dropdown-item text-secondary" type="button">Static-page-1</a>
                     <a class="dropdown-item text-secondary" type="button">Static-page-2</a>
@@ -65,7 +65,7 @@
             <div class="col-6 d-none d-lg-flex px-lg-2 p-0 m-0 justify-content-center align-items-center "
                  style="height:fit-content;width:fit-content">
                 <a class="btn btn-danger text-center text-nowrap text-white fs-6 m-0 py-1"
-                   href="{{ route('main.index') }}">
+                   href="{{ route('user.main.index') }}">
                     @lang('main.buttons.callOrder')
                 </a>
             </div>

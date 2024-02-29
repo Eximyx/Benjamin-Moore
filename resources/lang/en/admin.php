@@ -5,7 +5,7 @@ return [
 
     'titles' => [
         'news' => 'News',
-        'category' => 'Categories of news',
+        'category' => 'News categories',
         'product' => 'Products',
         'productCategory' => 'Product categories',
         'leads' => 'Leads',

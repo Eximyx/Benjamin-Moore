@@ -17,11 +17,12 @@
                         <span class="fs-6 text-wrap">
                             Открой для себя мир удивительных красок!
                         </span>
+                    </span>
                 </p>
             </div>
             <div class="row col-sm-12 justify-content-between align-items-center m-2 p-0">
                 <a class="col-5 col-sm-3 col-md-2 btn btn-danger rounded-4 my-1"
-                   href="{{ route('user.catalog') }}">@lang('main.buttons.buy')</a>
+                   href="{{ route('user.main.index') }}">@lang('main.buttons.buy')</a>
                 {{-- <div class="col-5 col-sm-3 col-md-2 btn btn-secondary text-nowrap rounded-4 m-0">
                     Все цвета</div>
                 <div class="col-5 col-sm-4 col-md-6 clearfix m-0 p-0"> </div> --}}

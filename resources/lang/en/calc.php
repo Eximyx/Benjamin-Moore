@@ -20,15 +20,15 @@ return [
         'doorsSize' => '900*2000 mm',
         'windowsSize' => '1300*1500 mm',
         'square' => 'Square (m)*',
-        'indicateTheArea' => 'Indicate the area'
+        'indicateTheArea' => 'Indicate the area',
     ],
 
     'results' => [
         'firstTitle' => 'Painting area',
         'secTitle' => 'Recommended amount of paint',
-        'square' => 'square meters',
-        'quart' => 'quart',
-        'gallons' => 'gallons',
+        'square' => 'Square meters',
+        'quart' => 'Quart',
+        'gallons' => 'Gallons',
     ],
 
     'buttons' => [
@@ -37,4 +37,3 @@ return [
         'dontKnow' => 'I don\'t know',
     ],
 ];
-

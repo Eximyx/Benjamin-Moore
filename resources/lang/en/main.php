@@ -3,18 +3,11 @@
 return [
     'lang' => 'en',
 
-    'navbar' => [
-        'catalog' => 'Products',
-        'news' => 'News',
-        'calc' => 'Calculator',
-        'info' => 'Information',
-        'whereToBuy' => 'Find a store',
-    ],
-
     'titles' => [
         'products' => 'We offer',
         'lastProducts' => 'OUR PRODUCTS',
         'news' => 'News',
+        'catalog' => 'Catalog',
         'lastNews' => 'LAST NEWS',
         'aboutUs' => 'ABOUT US',
         'aboutCompany' => 'About our company',
@@ -24,10 +17,11 @@ return [
 
     'buttons' => [
         'buy' => 'Buy',
+        'allColors' => 'All colors',
         'order' => 'Order',
         'callOrder' => 'Call us',
         'allProducts' => 'All products',
-        'more' => 'More',
+        'more' => 'Read more',
         'allNews' => 'All news',
     ],
 
@@ -37,7 +31,7 @@ return [
         'name' => 'Name',
         'email' => 'Email',
         'message' => 'Message',
-        'order' => 'Send',
+        'send' => 'Send',
     ],
 
 ];

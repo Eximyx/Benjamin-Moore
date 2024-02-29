@@ -3,7 +3,7 @@
         class="row py-1 justify-content-between align-items-center border-top border-2 border-opacity-25 border-black mt-3">
         <div class="col-2 row justify-content-between align-items-end">
             <a class="nav-link align-items-center fw-bold text-secondary text-nowrap col-12 fs-6"
-               href="{{ route('main.index') }}">
+               href="{{ route('user.main.index') }}">
                 <img srcset="{{ url('storage/assets/benjaminmoore-icon.png') }}" style="height:20px;width:20px">
                 Benjamin Moore
             </a>
@@ -15,7 +15,7 @@
             <a class="nav-link" href="{{ route('user.news') }}">
                 @lang('main.navbar.news')
             </a>
-            <a class="nav-link" href="{{ route('calc') }}">
+            <a class="nav-link" href="{{ route('user.calc') }}">
                 @lang('main.navbar.calc')
             </a>
             <a class="nav-link row p-0 m-0" data-toggle="collapse" href="#collapseExample" role="button"
@@ -48,7 +48,7 @@
             <a class="nav-link text-center text-secondary fs-6 col-1 m-0 p-0" href="{{ route('user.news') }}">
                 @lang('main.navbar.news')
             </a>
-            <a class="nav-link text-center text-secondary fs-6 col-2 m-0 p-0" href="{{ route('calc') }}">
+            <a class="nav-link text-center text-secondary fs-6 col-2 m-0 p-0" href="{{ route('user.calc') }}">
                 @lang('main.navbar.calc')
             </a>
             <div class="dropdown text-secondary p-0 col-3">
