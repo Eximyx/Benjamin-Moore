@@ -28,5 +28,19 @@ return [
         'reset' => 'Reset all',
         'order' => 'Order',
     ],
-];
 
+    'product-details' => [
+        'similar' => 'Similar products',
+        'recommend' => 'Recommended products',
+        'isAvailable' => [
+            'Out of stock',
+            'In stock',
+        ],
+        'amount' => 'Amount',
+        'call' => 'Request a call',
+        'specs' => 'Specifications',
+        'options' => 'Options',
+        'download' => 'Download technical specifications'
+    ],
+
+];

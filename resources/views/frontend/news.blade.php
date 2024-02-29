@@ -4,160 +4,28 @@
     <section class="news-section">
         <h2 class="section-title">@lang('news.title')</h2>
         <div class="news-section__wrapper">
-            <div class="news-card-link news-card">
-                <img src="{{Vite::asset('resources/images/news-mock-image.png')}}" alt="news preview">
-                <div class="news-card__details">
-                    <p class="news-card__details-author">Udemy •</p>
-                    <img class="news-card__details-clock-image" src="{{Vite::asset('resources/icons/clock.svg')}}"
-                         alt="clock image">
-                    <p class="news-card__details-date">27 января 2021</p>
+            @foreach($newsPosts as $key => $value)
+                <div class="news-card-link news-card">
+                    <img src="{{$value->main_image}}" alt="news preview">
+                    <div class="news-card__details">
+                        <p class="news-card__details-author">Udemy •</p>
+                        <img class="news-card__details-clock-image" src="{{Vite::asset('resources/icons/clock.svg')}}"
+                             alt="clock image">
+                        <p class="news-card__details-date">27 января 2021</p>
+                    </div>
+                    <h4 class="news-card__header">
+                        Какие IT - професси будут востребованы в 2022 году
+                    </h4>
+                    <p class="news-card__description">
+                        Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
+                    </p>
+                    <a href="{{$resource['entity']->slug}}">
+                        <button class="button-outlined">{{$resource->}}</button>
+                    </a>
                 </div>
-                <h4 class="news-card__header">
-                    Какие IT - професси будут востребованы в 2022 году
-                </h4>
-                <p class="news-card__description">
-                    Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
-                </p>
-                <a href="news-details.html">
-                    <button class="button-outlined">Подробнее</button>
-                </a>
-            </div>
-            <div class="news-card-link news-card">
-                <img src="../assets/images/news-mock-image.png" alt="news preview">
-                <div class="news-card__details">
-                    <p class="news-card__details-author">Udemy •</p>
-                    <img class="news-card__details-clock-image" src="../assets/icons/clock.svg" alt="clock image">
-                    <p class="news-card__details-date">27 января 2021</p>
-                </div>
-                <h4 class="news-card__header">
-                    Какие IT - професси будут востребованы в 2022 году
-                </h4>
-                <p class="news-card__description">
-                    Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
-                </p>
-                <a href="news-details.html">
-                    <button class="button-outlined">Подробнее</button>
-                </a>
-            </div>
-            <div class="news-card">
-                <img src="../assets/images/news-mock-image.png" alt="news preview">
-                <div class="news-card__details">
-                    <p class="news-card__details-author">Udemy •</p>
-                    <img class="news-card__details-clock-image" src="../assets/icons/clock.svg" alt="clock image">
-                    <p class="news-card__details-date">27 января 2021</p>
-                </div>
-                <h4 class="news-card__header">
-                    Какие IT - професси будут востребованы в 2022 году
-                </h4>
-                <p class="news-card__description">
-                    Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
-                </p>
-                <a href="news-details.html">
-                    <button class="button-outlined">Подробнее</button>
-                </a>
-            </div>
-            <div class="news-card">
-                <img src="../assets/images/news-mock-image.png" alt="news preview">
-                <div class="news-card__details">
-                    <p class="news-card__details-author">Udemy •</p>
-                    <img class="news-card__details-clock-image" src="../assets/icons/clock.svg" alt="clock image">
-                    <p class="news-card__details-date">27 января 2021</p>
-                </div>
-                <h4 class="news-card__header">
-                    Какие IT - професси будут востребованы в 2022 году
-                </h4>
-                <p class="news-card__description">
-                    Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
-                </p>
-                <a href="news-details.html">
-                    <button class="button-outlined">Подробнее</button>
-                </a>
-            </div>
-            <div class="news-card">
-                <img src="../assets/images/news-mock-image.png" alt="news preview">
-                <div class="news-card__details">
-                    <p class="news-card__details-author">Udemy •</p>
-                    <img class="news-card__details-clock-image" src="../assets/icons/clock.svg" alt="clock image">
-                    <p class="news-card__details-date">27 января 2021</p>
-                </div>
-                <h4 class="news-card__header">
-                    Какие IT - професси будут востребованы в 2022 году
-                </h4>
-                <p class="news-card__description">
-                    Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
-                </p>
-                <a href="news-details.html">
-                    <button class="button-outlined">Подробнее</button>
-                </a>
-            </div>
-            <div class="news-card">
-                <img src="../assets/images/news-mock-image.png" alt="news preview">
-                <div class="news-card__details">
-                    <p class="news-card__details-author">Udemy •</p>
-                    <img class="news-card__details-clock-image" src="../assets/icons/clock.svg" alt="clock image">
-                    <p class="news-card__details-date">27 января 2021</p>
-                </div>
-                <h4 class="news-card__header">
-                    Какие IT - професси будут востребованы в 2022 году
-                </h4>
-                <p class="news-card__description">
-                    Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
-                </p>
-                <a href="news-details.html">
-                    <button class="button-outlined">Подробнее</button>
-                </a>
-            </div>
-            <div class="news-card">
-                <img src="../assets/images/news-mock-image.png" alt="news preview">
-                <div class="news-card__details">
-                    <p class="news-card__details-author">Udemy •</p>
-                    <img class="news-card__details-clock-image" src="../assets/icons/clock.svg" alt="clock image">
-                    <p class="news-card__details-date">27 января 2021</p>
-                </div>
-                <h4 class="news-card__header">
-                    Какие IT - професси будут востребованы в 2022 году
-                </h4>
-                <p class="news-card__description">
-                    Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
-                </p>
-                <a href="news-details.html">
-                    <button class="button-outlined">Подробнее</button>
-                </a>
-            </div>
-            <div class="news-card">
-                <img src="../assets/images/news-mock-image.png" alt="news preview">
-                <div class="news-card__details">
-                    <p class="news-card__details-author">Udemy •</p>
-                    <img class="news-card__details-clock-image" src="../assets/icons/clock.svg" alt="clock image">
-                    <p class="news-card__details-date">27 января 2021</p>
-                </div>
-                <h4 class="news-card__header">
-                    Какие IT - професси будут востребованы в 2022 году
-                </h4>
-                <p class="news-card__description">
-                    Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
-                </p>
-                <a href="news-details.html">
-                    <button class="button-outlined">Подробнее</button>
-                </a>
-            </div>
-            <div class="news-card">
-                <img src="../assets/images/news-mock-image.png" alt="news preview">
-                <div class="news-card__details">
-                    <p class="news-card__details-author">Udemy •</p>
-                    <img class="news-card__details-clock-image" src="../assets/icons/clock.svg" alt="clock image">
-                    <p class="news-card__details-date">27 января 2021</p>
-                </div>
-                <h4 class="news-card__header">
-                    Какие IT - професси будут востребованы в 2022 году
-                </h4>
-                <p class="news-card__description">
-                    Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
-                </p>
-                <a href="news-details.html">
-                    <button class="button-outlined">Подробнее</button>
-                </a>
-            </div>
+            @endforeach
+
+
         </div>
         <div class="pagination">
             <ul class="pagination-ul">

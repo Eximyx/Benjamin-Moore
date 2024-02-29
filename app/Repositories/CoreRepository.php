@@ -36,6 +36,8 @@ abstract class CoreRepository
         return $this->model->all();
     }
 
+    // TODO Перенести getLatest FindBySlug в products/news
+
     /**
      * @return Builder<Model>
      */
@@ -48,11 +50,6 @@ abstract class CoreRepository
         }
 
         return $entities;
-    }
-
-    public function findBySlug(string $slug): ?Model
-    {
-        return $this->model::where('slug', $slug)->first();
     }
 
     public function findById(string $id): ?Model

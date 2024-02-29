@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateLeadsRequest;
 use App\Http\Requests\ProductFilterRequest;
+use App\Http\Resources\MainResource;
 use App\Services\MainService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -13,31 +14,34 @@ class MainController extends Controller
 {
     public function __construct(
         protected MainService $mainService
-    ) {
+    )
+    {
     }
 
     public function index(): View
     {
-        // TODO News/Products resource
-        $items['news'] = $this->mainService->showNews(3);
-        $items['products'] = $this->mainService->productsWrapper();
-        $items['reviews'] = $this->mainService->reviewsWrapper();
 
-        return view('user.main', ['NewsPost' => $items['news'], 'Products' => $items['products'], 'reviews' => $items['reviews']]);
+        $resource = (array)MainResource::make([
+            'news' => $this->mainService->showNews(3),
+            'products' => $this->mainService->productsWrapper(),
+            'reviews' => $this->mainService->reviewsWrapper(),
+            'banners' => $this->mainService->getBannersForMain(),
+        ]);
+
+        return view('frontend.main', $resource);
     }
 
     public function news(): View
     {
         $newsPosts = $this->mainService->showNews();
 
-        return view('user.news', compact('newsPosts'));
+        return view('frontend.news');
     }
 
     public function catalog(ProductFilterRequest $request): JsonResponse|View
     {
         $entities = $this->mainService->fetchProducts();
 
-        /** @noinspection NullPointerExceptionInspection */
         if (request()->ajax()) {
             $entities = $this->mainService->fetchProducts($request->validated());
 
@@ -65,12 +69,12 @@ class MainController extends Controller
 
     public function calc(): JsonResponse|View
     {
-        return view('user.calculator');
+        return view('frontend.calculator');
     }
 
     public function contacts(): JsonResponse|View
     {
-        return view('user.contacts');
+        return view('frontend.contacts');
     }
 
     public function leads(CreateLeadsRequest $request): JsonResponse

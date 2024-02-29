@@ -28,5 +28,21 @@ return [
         'reset' => 'Сбросить все',
         'order' => 'Заказать',
     ],
+
+    'product-details' => [
+        'similar' => 'Similar products',
+        'recommend' => 'Recommended products',
+        'isAvailable' => [
+            'Не в наличии',
+            'В наличии',
+        ],
+        'amount' => 'Количество',
+        'call' => 'Заказать звонок',
+        'specs' => 'Характеристики',
+        'options' => 'Параметры',
+        'download' => 'Скачать технические характеристики'
+    ],
+
+
 ];
 

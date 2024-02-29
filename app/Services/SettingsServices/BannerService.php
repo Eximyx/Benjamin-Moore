@@ -27,6 +27,20 @@ class BannerService extends BaseModelService
         return $this->repository->create($dto);
     }
 
+    public function update(Model $entity, ModelDTO $dto): Model
+    {
+        $dto = (array)$dto;
+
+        if (!empty($dto['banner_position_id'])) {
+            $this->repository->nullPosition($dto['banner_position_id']);
+        }
+
+        return $this->repository->update(
+            $entity,
+            $dto
+        );
+    }
+
     /**
      * @throws Exception
      */

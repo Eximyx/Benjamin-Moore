@@ -38,7 +38,7 @@
     <div class="header__rightside">
         <div class="header__contacts">
             <div class="header__contacts-telephone">
-                <img src="{{asset("assets/icons/phone-logo.svg")}}" alt="phone-svg"/>
+                <img src="{{Vite::asset("resources/icons/phone-logo.svg")}}" alt="phone-svg"/>
                 <a href="tel: +375">+375 (29) 608-40-00</a>
             </div>
             <p class="header__contacts-time">Работаем ПН — ПТ, 10:00 — 19:00</p>
@@ -82,7 +82,7 @@
 </main>
 <footer class="footer">
     <div class="footer__logo">
-        <img src="{{asset('assets/icons/benjaminmoore-icon.svg')}}" alt="icon"/>
+        <img src="{{Vite::asset('resources/icons/benjaminmoore-icon.svg')}}" alt="icon"/>
         <a class="logo-text" href="{{route('user.main.index')}}">Benjamin Moore</a>
         <p>Есть над чем задуматься: явные признаки победы ограничены исключительно образом мышления.</p>
     </div>
@@ -96,10 +96,11 @@
     </div>
     <div class="footer__contacts">
         <div class="footer__contacts__inner-div">
-                <span><img src="{{asset('assets/icons/phone.svg')}}" alt="phone"><a
+                <span><img src="{{Vite::asset('resources/icons/phone.svg')}}" alt="phone"><a
                         href="tel: +375"> +375 (29) 444-32-32</a></span>
-            <span><img src="{{asset('assets/icons/point.svg')}}" alt="address"> г. Минск, ул. Восточная 41</span>
-            <span><img src="{{asset('assets/icons/mail.svg')}}" alt="mail"><a
+            <span><img src="{{Vite::asset('resources/icons/point.svg')}}"
+                       alt="address"> г. Минск, ул. Восточная 41</span>
+            <span><img src="{{Vite::asset('resources/icons/mail.svg')}}" alt="mail"><a
                     href="mailto: me@email.com"></a>support@mot.ru</span>
         </div>
     </div>

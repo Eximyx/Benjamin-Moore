@@ -6,6 +6,8 @@ use App\Models\Banner;
 use App\Repositories\ModelRepositories\BaseModelRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class BannersRepository extends BaseModelRepository
 {
@@ -62,5 +64,15 @@ class BannersRepository extends BaseModelRepository
         $query['select'][] = $selectableModelName . '.title as ' . $data['selectable_key'];
 
         return $query;
+    }
+
+    /**
+     * @return Collection<int, Model>
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function getBannersWithPositions(): Collection
+    {
+        return $this->model->where('banner_position_id', '<>', 'null')->get();
     }
 }

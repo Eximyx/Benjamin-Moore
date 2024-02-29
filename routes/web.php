@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\ModelControllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,21 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('frontend')->group(function () {
-    Route::get('/', function () {
-        return view('frontend.main');
-    })->name('user.main.index');
-    Route::get('/catalog', function () {
-        return view('frontend.catalog');
-    })->name('user.catalog');
-    Route::get('/news', function () {
-        return view('frontend.news');
-    })->name('user.news');
-    Route::get('/contacts', function () {
-        return view('frontend.contacts');
-    })->name('user.contacts');
-    Route::get('/calc', function () {
-        return view('frontend.calculator');
-    })->name('user.calc');
+    Route::get('/', [MainController::class, 'index'])->name('user.main.index');
+    Route::get('/catalog', [MainController::class, 'catalog'])->name('user.catalog');
+    Route::get('/news', [MainController::class, 'news'])->name('user.news');
+    Route::get('/news/{slug}', [MainController::class, 'showBySlug'])->name('user.news-show');
+    Route::get('/catalog/{slug}', [ProductsController::class, 'showBySlug'])->name('user.catalog-show');
+    Route::get('/contacts', [MainController::class, 'contacts'])->name('user.contacts');
+    Route::get('/calc', [MainController::class, 'calc'])->name('user.calc');
 
 });
 

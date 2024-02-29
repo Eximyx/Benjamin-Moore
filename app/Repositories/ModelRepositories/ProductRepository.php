@@ -10,12 +10,30 @@ use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class ProductRepository extends BaseModelRepository
 {
     public function __construct()
     {
         parent::__construct(Product::class);
+    }
+
+    public function findBySlug(string $slug): ?Model
+    {
+        return $this->model->where('slug', '=', $slug)->firstOrFail();
+    }
+
+    /**
+     * @param int $categoryID
+     * @return Collection<int, Model>
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function getSimilar(int $categoryID): Collection
+    {
+        return $this->model->where('product_category_id', '=', $categoryID)->get();
     }
 
     /**

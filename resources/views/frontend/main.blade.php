@@ -14,6 +14,8 @@
                     <button class="button-outlined">@lang('main.buttons.allColors')</button>
                 </a>
             </div>
+            {{--TODO FRONT: Необходимо заполнять баннер этой картинкой --}}
+            <img src="{{$resource['banners'][0]->image}}" alt="{{$resource['banners'][0]->title}}">
         </div>
     </section>
     <section class="product">
@@ -29,17 +31,20 @@
         <div class="wrapper">
             <i class="left"><img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="arrow left"></i>
             <ul class="carousel">
-                <li class="card product-card">
-                    <img src="{{Vite::asset("resources/images/paint-can.png")}}" alt="paint can">
-                    <h4 class="product-card__header">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</h4>
-                    <p class="product-card__details">Степень блеска «полуглянцевая»</p>
-                    <div class="product-card__price-block">
-                        <p class="product-card__price-block__price">$ 5199.00</p>
-                        <a href="{{route('user.catalog')}}">
-                            <button class="button-filled">@lang('main.buttons.order')</button>
-                        </a>
-                    </div>
-                </li>
+                {{--                TODO BOTH: Обсудить, как его слайдер рабатает, что ему отдавать--}}
+                @foreach($resource['products'] as $key => $value)
+                    <li class="card product-card">
+                        <img src="{{Vite::asset("resources/images/paint-can.png")}}" alt="paint can">
+                        <h4 class="product-card__header">{{$value[0]->title}}</h4>
+                        <p class="product-card__details">{{$value[0]->gloss_level}}</p>
+                        <div class="product-card__price-block">
+                            <p class="product-card__price-block__price">$ {{$value[0]->price}}</p>
+                            <a href="{{route('user.catalog-show', $value[0]->slug)}}">
+                                <button class="button-filled">@lang('main.buttons.order')</button>
+                            </a>
+                        </div>
+                    </li>
+                @endforeach
             </ul>
             <i class="right"><img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="arrow right"></i>
         </div>
@@ -176,19 +181,20 @@
         <div class="reviewsWrapper">
             <i class="left"><img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="arrow left"></i>
             <ul class="carousel reviewsCarousel">
-                <li class="card">
-                    <div class="review-card">
-                        <div class="review-card__header">
-                            <img src="{{Vite::asset('resources/images/user-avatar.png')}}" alt="user avatar">
-                            <h4>REVIEW_NAME</h4>
+                @foreach($resource['reviews'] as $key => $value)
+                    <li class="card">
+                        <div class="review-card">
+                            <div class="review-card__header">
+                                <img src="{{Vite::asset('resources/images/user-avatar.png')}}" alt="user avatar">
+                                <h4>{{$value[0]->name}}</h4>
+                            </div>
+                            <p class="review-card__text">
+                                {{$value[0]->description}}
+                            </p>
                         </div>
-                        <p class="review-card__text">
-                            Лишь многие известные личности освещают чрезвычайно интересные особенности картины в целом,
-                            однако
-                            конкретные выводы, разумеется, объективно рассмотрены соответствующими инстанциями.
-                        </p>
-                    </div>
-                </li>
+                    </li>
+                @endforeach
+
             </ul>
             <i class="right"><img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="arrow right"></i>
         </div>
@@ -201,5 +207,5 @@
     @include('frontend.lead_form')
 @endsection
 @section('scripts')
-    @vite('resources/js/main.js')
+    @vite('resources/js/slider.js')
 @endsection
