@@ -33,7 +33,9 @@ abstract class BaseAdminController extends ResourceController
     public function index(): JsonResponse|View
     {
         if (request()->ajax()) {
+
             return $this->service->ajaxDataTable();
+
         }
         $data = DataTableResource::make(
             $this->service->getVariablesForDataTable()

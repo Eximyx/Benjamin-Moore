@@ -3,6 +3,11 @@
 namespace App\Services\ModelServices;
 
 use App\Contracts\ModelDTO;
+use App\Http\Filters\ProductCategoryFilter;
+use App\Http\Filters\ProductFilter;
+use App\Http\Requests\ProductFilterRequest;
+use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Repositories\ModelRepositories\ProductRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -122,5 +127,19 @@ class ProductService extends BaseModelService
         }
 
         return $variables;
+    }
+
+    public function fetchProducts(ProductFilterRequest $request)
+    {
+        $data = $request->validated();
+
+        if(isset($data['kind_of_work_id'])){
+            $list['categories'] = $this->repository->fetchCategories($request);
+        }
+
+        $list['products'] = $this->repository->fetchProducts($request);
+
+        return $list;
+
     }
 }

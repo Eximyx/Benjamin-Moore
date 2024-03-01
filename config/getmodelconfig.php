@@ -3,6 +3,7 @@
 use App\Models\Banner;
 use App\Models\BannerPosition;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\KindOfWork;
 use App\Models\Leads;
 use App\Models\MetaData;
@@ -85,6 +86,7 @@ return [
             'main_image',
             'content',
             'code',
+            'price',
             'gloss_level',
             'description',
             'type',
@@ -200,6 +202,18 @@ return [
             'name',
             'description',
             'main_image',
+        ],
+    ],
+    Color::class => [
+        'ModelName' => 'admin.titles.color',
+        'datatable_data' => [
+            "id",
+            'title',
+            'hex_code',
+        ],
+        'form_data' => [
+            'title',
+            'hex_code',
         ],
     ],
 ];

@@ -42,6 +42,17 @@
                                 @if ($value === 'content')
                                     <textarea type="text" name="content" class="form-control" id="summernote-content"
                                               placeholder="@lang('admin.keys.content')" required></textarea>
+                                @elseif($value == 'hex_code')
+                                    <input type="color" name="{{$value}}" class="form-control" id="{{$value}}" required>
+                                @elseif($value == 'colors')
+                                    <select class="form-select" multiple name="{{$value}}[]" id="{{$value}}" size="3">
+                                        <option selected>Не выбрано</option>
+                                        <@foreach (App\Models\Color::all() as $item)
+                                            <option value="{{ $item['id'] }}">
+                                                {{ $item['title'] }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 @elseif($value == 'description')
                                     <textarea type="text" name="description" class="form-control" id="description"
                                               rows="3" placeholder="@lang('admin.keys.'.$value)"

@@ -18,7 +18,7 @@ abstract class ResourceController
 
     }
 
-    public function store(Request $request): JsonResource
+    public function store(Request $request)
     {
         $request = app($this->request, $request->all());
 

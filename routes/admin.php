@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ModelControllers\AdminController;
 use App\Http\Controllers\ModelControllers\BannersController;
 use App\Http\Controllers\ModelControllers\CategoryController;
+use App\Http\Controllers\ModelControllers\ColorController;
 use App\Http\Controllers\ModelControllers\LeadsController;
 use App\Http\Controllers\ModelControllers\MetaDataController;
 use App\Http\Controllers\ModelControllers\NewsController;
@@ -26,12 +27,7 @@ Route::middleware('admin')->group(function () {
         ->group(function () {
             Route::prefix('settings')->group(function () {
                 Route::get('/', [SettingsController::class, 'index'])->name('settings');
-                Route::post('/contacts', [SettingsController::class, 'contacts'])->name('settings.contacts.set');
-                Route::prefix('/about-us')->group(function () {
-                    Route::controller(SectionsController::class)->group(function () {
-                        Route::post('/toggle', 'toggle')->name('settings.toggle.sections');
-                    });
-                });
+                Route::post('/contacts', [SettingsController::class, 'settings'])->name('settings.set');
             });
 
             Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
@@ -55,6 +51,7 @@ Route::middleware('admin')->group(function () {
             Route::post('users/update/{entity}', [AdminController::class, 'update']);
             Route::post('reviews/update/{entity}', [ReviewController::class, 'update']);
             Route::post('banners/update/{entity}', [BannersController::class, 'update']);
+            Route::post('colors/update/{entity}',[ColorController::class,'update']);
 
             Route::resources([
                 'products' => ProductsController::class,
@@ -68,6 +65,7 @@ Route::middleware('admin')->group(function () {
                 'reviews' => ReviewController::class,
                 'banners' => BannersController::class,
                 'sections' => SectionsController::class,
+                'colors' => ColorController::class,
             ]);
         });
 });

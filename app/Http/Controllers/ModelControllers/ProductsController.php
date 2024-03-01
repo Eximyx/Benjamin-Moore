@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\ModelControllers;
 
 use App\DataTransferObjects\ModelDTO\ProductDTO;
+use App\Http\Filters\ProductFilter;
 use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\ProductFilterRequest;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductShowResource;
+use App\Models\Product;
 use App\Services\ModelServices\ProductService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -16,6 +19,19 @@ class ProductsController extends BaseAdminController
     public function __construct(ProductService $service)
     {
         parent::__construct($service, ProductDTO::class, ProductResource::class, CreateProductRequest::class);
+    }
+
+    public function store(Request $request)
+    {
+        $request = app($this->request, $request->all());
+
+        $dto = $this->dto::AppRequest(
+            $request
+        );
+
+        $entity = $this->service->create($dto);
+
+        return $this->resource::make($entity);
     }
 
     public function toggle(Request $request): JsonResource
@@ -37,5 +53,13 @@ class ProductsController extends BaseAdminController
         );
 
         return view('frontend.products-details', $resource);
+    }
+
+    public function filter(ProductFilterRequest $request)
+    {
+        $entities = $this->service->fetchProducts($request);
+
+        return view('user.catalog',['Products' => $entities['products'], 'category' => $entities['categories']]);
+
     }
 }

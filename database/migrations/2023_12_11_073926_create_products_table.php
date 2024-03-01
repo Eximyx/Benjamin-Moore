@@ -13,10 +13,10 @@ return new class extends Migration {
             $table->string('main_image')->default('1.jpg');
             $table->longText('content');
             $table->integer('code');
+            $table->unsignedInteger('price');
             $table->string('gloss_level');
             $table->string('description');
             $table->string('type');
-            $table->string('colors');
             $table->string('base');
             $table->string('v_of_dry_remain');
             $table->string('time_to_repeat');

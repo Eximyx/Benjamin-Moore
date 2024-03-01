@@ -48,7 +48,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    {{-- @include('layouts.scripts') --}}
+     @include('layouts.scripts')
     <title>Benjamin moore Admin</title>
     <!-- Custom fonts for this template-->
     {{--    <link href="{{asset("css/all.min.css")}}" rel="stylesheet" type="text/css"> --}}
