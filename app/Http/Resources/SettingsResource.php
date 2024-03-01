@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ContactsResource extends JsonResource
+class SettingsResource extends JsonResource
 {
     /**
      * @return array<string,mixed>
@@ -19,6 +19,7 @@ class ContactsResource extends JsonResource
             'work_time' => $this['work_time'],
             'location' => $this['location'],
             'instagram' => $this['instagram'],
+            'description' => $this['description'],
         ];
     }
 }

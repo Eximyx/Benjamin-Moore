@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\SettingsControllers;
 
-use App\DataTransferObjects\ModelDTO\ContactsDTO;
-use App\Http\Requests\ContactsRequest;
-use App\Http\Resources\ContactsResource;
+use App\DataTransferObjects\ModelDTO\SettingsDTO;
+use App\Http\Requests\SettingsRequest;
+use App\Http\Resources\SettingsResource;
 use App\Services\ContactsService;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Routing\Controller;
@@ -19,18 +19,17 @@ class SettingsController extends Controller
 
     public function index(): View
     {
-        $contacts = $this->service->contactsFetch();
+        $resource = (array) SettingsResource::make($this->service->settingsFetch());
 
-        return view('admin.settings', compact(['contacts']));
+        return view('admin.settings', $resource);
     }
 
-    public function contacts(ContactsRequest $request): JsonResource
+    public function settings(SettingsRequest $request): JsonResource
     {
-        $dto = ContactsDTO::appRequest($request);
+        $dto = SettingsDTO::appRequest($request);
 
-        $entity = $this->service->contacts($dto);
+        $entity = $this->service->settingsSet($dto);
 
-        return ContactsResource::make($entity);
+        return SettingsResource::make($entity);
     }
-
 }

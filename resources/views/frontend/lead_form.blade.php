@@ -9,11 +9,13 @@
         <p>@lang('main.form.subTitle')</p>
         @csrf
         <label for="name">@lang('main.form.name')</label>
-        <input type="text" id="name" placeholder="@lang('main.form.name')">
+        <input type="text" name="name" id="name" placeholder="@lang('main.form.name')">
         <label for="email">@lang('main.form.email')</label>
-        <input type="text" id="email" placeholder="Email" required>
+        <input type="text" name="email" id="email" placeholder="Email" required>
         <label for="message">@lang('main.form.message')</label>
-        <textarea id="message" placeholder="@lang('main.form.message')"></textarea>
+        <textarea name="message" id="message" placeholder="@lang('main.form.message')"></textarea>
         <button class="button-filled" type="submit">@lang('main.form.send')</button>
     </form>
 </section>
+
+{{-- TODO FRONT: 5. Сделать AJAX запрос в эту же форму и тут лушче использовать formdata, чтобы в юрл не уходили параметры --}}

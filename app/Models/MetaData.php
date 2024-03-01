@@ -9,6 +9,8 @@ class MetaData extends Model
 {
     use HasFactory;
 
+    protected $table = 'meta_data';
+
     protected $fillable = [
         'url',
         'title',

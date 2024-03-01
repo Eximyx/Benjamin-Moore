@@ -6,6 +6,7 @@ use App\Contracts\ModelDTO;
 use App\Repositories\ModelRepositories\NewsRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
 class NewsService extends BaseModelService
@@ -13,6 +14,11 @@ class NewsService extends BaseModelService
     public function __construct(NewsRepository $repository)
     {
         parent::__construct($repository);
+    }
+
+    public function findBySlug(string $slug): ?Model
+    {
+        return $this->repository->findBySlug($slug);
     }
 
     public function create(ModelDTO $dto): ?Model
@@ -67,6 +73,14 @@ class NewsService extends BaseModelService
         return $entity;
     }
 
+    /**
+     * @return Collection<int, Model>
+     */
+    public function getLatest(): Collection
+    {
+        return $this->repository->getLatest()->get();
+    }
+
     protected function deleteImage(string $image): bool
     {
         if (!($image === 'default_post.jpg')) {
@@ -99,5 +113,16 @@ class NewsService extends BaseModelService
         }
 
         return $variables;
+    }
+
+
+    // TODO: Resource for pagination News & Products
+
+    /**
+     * @return mixed
+     */
+    public function paginate()
+    {
+        return $this->repository->paginate();
     }
 }

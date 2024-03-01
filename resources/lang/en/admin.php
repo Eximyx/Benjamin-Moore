@@ -14,7 +14,7 @@ return [
         'profile' => 'Profile',
         'profileSettings' => 'Profile settings',
         'review' => 'Reviews',
-        'contacts' => 'Contacts',
+        'contacts' => 'Settings',
         'aboutUs' => 'About us',
         'banners' => 'Banners',
         'sections' => 'Sections',

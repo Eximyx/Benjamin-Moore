@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\ModelControllers\LeadsController;
+use App\Http\Controllers\ModelControllers\NewsController;
 use App\Http\Controllers\ModelControllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,14 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('frontend')->group(function () {
     Route::get('/', [MainController::class, 'index'])->name('user.main.index');
     Route::get('/catalog', [MainController::class, 'catalog'])->name('user.catalog');
-    Route::get('/news', [MainController::class, 'news'])->name('user.news');
-    Route::get('/news/{slug}', [MainController::class, 'showBySlug'])->name('user.news-show');
+    Route::get('/news', [NewsController::class, 'news'])->name('user.news');
+    Route::get('/news/{slug}', [NewsController::class, 'showBySlug'])->name('user.news-show');
     Route::get('/catalog/{slug}', [ProductsController::class, 'showBySlug'])->name('user.catalog-show');
     Route::get('/contacts', [MainController::class, 'contacts'])->name('user.contacts');
     Route::get('/calc', [MainController::class, 'calc'])->name('user.calc');
-
+    Route::post('/', [LeadsController::class, 'create'])->name('user.leads');
 });
-
 
 /*Route::get('/', [MainController::class, 'index'])->name('user.main.index');
 Route::get('/catalog', [MainController::class, 'catalog'])->name('user.catalog');

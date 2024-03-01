@@ -12,9 +12,12 @@ abstract class CoreRepository
 {
     protected Model $model;
 
+    // TODO: getLatest from CoreRepository to Product & News repositories
+
     public function __construct(
         ?string $modelClass
-    ) {
+    )
+    {
         $this->model = app($modelClass);
     }
 
@@ -41,7 +44,7 @@ abstract class CoreRepository
     /**
      * @return Builder<Model>
      */
-    public function getLatest(?int $amount = null): Builder
+    public function getLatest(int $amount = null): Builder
     {
         $entities = $this->model::latest();
 
@@ -63,7 +66,7 @@ abstract class CoreRepository
     }
 
     /**
-     * @param  array<string,mixed>  $dto
+     * @param array<string,mixed> $dto
      */
     public function create(array $dto): ?Model
     {
@@ -71,7 +74,7 @@ abstract class CoreRepository
     }
 
     /**
-     * @param  array<string, mixed>  $dto
+     * @param array<string, mixed> $dto
      */
     public function update(Model $entity, array $dto): Model
     {

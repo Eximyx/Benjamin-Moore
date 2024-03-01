@@ -6,6 +6,8 @@ use App\Models\Section;
 use App\Repositories\ModelRepositories\BaseModelRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class SectionRepository extends BaseModelRepository
 {
@@ -28,6 +30,16 @@ class SectionRepository extends BaseModelRepository
         $entities = $entities->join(...$query['join']);
 
         return $entities->select(...$query['select'])->get();
+    }
+
+    /**
+     * @return Collection<int, Model>
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function getSectionsWithPositions(): Collection
+    {
+        return $this->model->where('section_position_id', '<>', 'null')->get();
     }
 
     /**

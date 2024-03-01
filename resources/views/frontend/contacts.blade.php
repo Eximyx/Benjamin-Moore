@@ -1,4 +1,9 @@
 @extends('frontend.layout')
+
+@php
+    $settings = App\Models\Settings::first()
+@endphp
+
 @section('content')
     @include('frontend.breadcrumbs')
     <section class="contact-section">
@@ -6,19 +11,19 @@
             <h3 class="section-header">@lang('contacts.contacts')</h3>
             <div class="contacts-inner-block">
                 <img src="{{Vite::asset('resources/icons/phone.svg')}}" alt="">
-                <p>+375 (29) 444-32-32</p>
+                <p>{{$settings->phone}}</p>
             </div>
             <div class="contacts-inner-block">
                 <img src="{{Vite::asset('resources/icons/point.svg')}}" alt="">
-                <p>г. Минск, ул. Восточная 41</p>
+                <p>{{$settings->location}}</p>
             </div>
             <div class="contacts-inner-block">
                 <img src="{{Vite::asset('resources/icons/mail.svg')}}" alt="">
-                <p>support@mot.ru</p>
+                <p>{{$settings->email}}</p>
             </div>
             <div class="contacts-inner-block">
                 <img src="{{Vite::asset('resources/icons/inst.svg')}}" alt="">
-                <p>@benjaminmoore.by</p>
+                <p>{{$settings->instagram}}</p>
             </div>
             <div class="contacts-block">
                 <h4>@lang('contacts.partners')</h4>

@@ -6,7 +6,7 @@
         <div class="news-section__wrapper">
             @foreach($newsPosts as $key => $value)
                 <div class="news-card-link news-card">
-                    <img src="{{$value->main_image}}" alt="news preview">
+                    <img src="{{url('storage/image').'/'.$value->main_image}}" alt="news preview">
                     <div class="news-card__details">
                         <p class="news-card__details-author">Udemy •</p>
                         <img class="news-card__details-clock-image" src="{{Vite::asset('resources/icons/clock.svg')}}"
@@ -19,38 +19,13 @@
                     <p class="news-card__description">
                         Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
                     </p>
-                    <a href="{{$resource['entity']->slug}}">
-                        <button class="button-outlined">{{$resource->}}</button>
+                    <a href="{{route('user.news-show', $value->slug ?? 1)}}">
+                        <button class="button-outlined">@lang('news.more')</button>
                     </a>
                 </div>
             @endforeach
-
-
         </div>
-        <div class="pagination">
-            <ul class="pagination-ul">
-                <li class="pagination-item disabled">
-                    <a href="#">
-                        <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 1L1 6L5 11" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                    </a>
-                </li>
-                <li class="pagination-item disabled"><a href="#">1</a></li>
-                <li class="pagination-item-active"><a href="#">2</a></li>
-                <li class="pagination-item"><a href="#">4</a></li>
-                <li class="pagination-item"><a href="#">5</a></li>
-                <li class="pagination-item"><a href="#">6</a></li>
-                <li>...</li>
-                <li class="pagination-item"><a href="#" id="pagination-last-page">14</a></li>
-                <li class="pagination-item">
-                    <a href="#">
-                        <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 11L5 6L1 1" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        {{-- PAGINATION --}}
+        {{$newsPosts->links('frontend.pagination')}}
     </section>
 @endsection

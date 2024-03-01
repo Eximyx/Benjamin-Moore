@@ -1,4 +1,7 @@
 @extends('frontend.layout')
+@php
+    $settings = \App\Models\Settings::first();
+@endphp
 @section('content')
     <section class="main__banner">
         <div class="main__banner-block">
@@ -14,8 +17,9 @@
                     <button class="button-outlined">@lang('main.buttons.allColors')</button>
                 </a>
             </div>
-            {{--TODO FRONT: Необходимо заполнять баннер этой картинкой --}}
-            <img src="{{$resource['banners'][0]->image}}" alt="{{$resource['banners'][0]->title}}">
+            {{--TODO FRONT: 2. Необходимо заполнять баннер этой картинкой --}}
+            <img src="{{$resource['banners'][0]->image ?? url('storage/image/default_post.jpg')}}"
+                 alt="{{$resource['banners'][0]->title ?? "Картинка"}}">
         </div>
     </section>
     <section class="product">
@@ -31,7 +35,7 @@
         <div class="wrapper">
             <i class="left"><img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="arrow left"></i>
             <ul class="carousel">
-                {{--                TODO BOTH: Обсудить, как его слайдер рабатает, что ему отдавать--}}
+                {{--                TODO BOTH: Обсудить, как это слайдер рабатает, что ему отдавать--}}
                 @foreach($resource['products'] as $key => $value)
                     <li class="card product-card">
                         <img src="{{Vite::asset("resources/images/paint-can.png")}}" alt="paint can">
@@ -57,54 +61,39 @@
                     <h2>@lang('main.titles.aboutCompany')</h2>
                 </div>
                 <div class="flex-block">
-                    <div class="about-us__image-placeholder-mobile"></div>
+                    <div class="about-us__image-placeholder-mobile">
+                        <img src="" alt="">
+                    </div>
                     <div class="about-us__image-placeholder-mobile"></div>
                 </div>
                 <div class="about-us__inner-div">
-                    <p>
-                        Задача организации, в особенности же граница обучения кадров играет определяющее значение для
-                        существующих финансовых и административных условий. Внезапно, предприниматели в сети интернет
-                        функционально разнесены на независимые элементы.
-                    </p>
-                    <p>
-                        Вот вам яркий пример современных тенденций — социально-экономическое развитие обеспечивает
-                        актуальность
-                        направлений прогрессивного развития. Внезапно, предприниматели в сети интернет функционально
-                        разнесены
-                        на независимые элементы.
-                    </p>
+                    {!! str_replace('
+','<br/>',$settings->description) !!}
                 </div>
                 <a href="">
                     <button class="button-outlined">@lang('main.buttons.more')</button>
                 </a>
             </div>
             <div class="flex-block">
-                <div class="about-us__image-placeholder"></div>
-                <div class="about-us__image-placeholder"></div>
+                {{--TODO FRONT: 4. Картинки расположить, юрл есть --}}
+                <div class="about-us__image-placeholder"><img
+                        src="{{url('storage/image/sections/section_image_1.jpg')}}"
+                        alt=""></div>
+                <div class="about-us__image-placeholder"><img
+                        src="{{url('storage/image/sections/section_image_2.jpg')}}"
+                        alt=""></div>
             </div>
         </div>
         <div class="about-us__quality-cards-wrapper">
-            <div class="quality-card">
-                <h4 class="quality-card__card-header">SECTION_NAME</h4>
-                <p class="quality-card__card-details">
-                    SECTION_NAME
-                    SECTION_NAME SECTION_NAME SECTION_NAME SECTION_NAME
-                </p>
-            </div>
-            <div class="quality-card">
-                <h4 class="quality-card__card-header">Профессиональный подход</h4>
-                <p class="quality-card__card-details">
-                    Не следует, однако, забывать, что сплочённость команды профессионалов играет важную роль в
-                    формировании глубокомысленных рассуждений.
-                </p>
-            </div>
-            <div class="quality-card">
-                <h4 class="quality-card__card-header">Профессиональный подход</h4>
-                <p class="quality-card__card-details">
-                    Не следует, однако, забывать, что сплочённость команды профессионалов играет важную роль в
-                    формировании глубокомысленных рассуждений.
-                </p>
-            </div>
+            {{-- TODO FRONT: 3. Почему-то дублируются сущности в slider`е--}}
+            @foreach($resource['sections'] as $key => $value)
+                <div class="quality-card">
+                    <h4 class="quality-card__card-header">{{$value->name}}</h4>
+                    <p class="quality-card__card-details">
+                        {{$value->content}}
+                    </p>
+                </div>
+            @endforeach
         </div>
     </section>
     <section>
@@ -116,62 +105,32 @@
             <button class="button-outlined"><a href="{{route('user.news')}}">@lang('main.buttons.allNews')</a></button>
         </div>
         <div class="news-wrapper">
-            <div class="news-card">
-                <img src="{{Vite::asset('resources/images/news-mock-image.png')}}" alt="news preview">
-                <div class="news-card__details">
-                    <p class="news-card__details-author">ADMIN_NAME •</p>
-                    <img class="news-card__details-clock-image" src="{{Vite::asset('resources/icons/clock.svg')}}"
-                         alt="clock image">
-                    <p class="news-card__details-date">DATA</p>
+            {{-- TODO: ADD an USER_NAME for post --}}
+            @foreach($resource['news'] as $key => $value)
+                <div class="news-card">
+                    <img
+                        src="{{url('storage/image').'/'.$value->main_image ?? Vite::asset('resources/image/news-mock-image.png')}}"
+                        alt="news preview">
+                    <div class="news-card__details">
+                        <p class="news-card__details-author">USER_NAME •</p>
+                        <img class="news-card__details-clock-image" src="{{Vite::asset('resources/icons/clock.svg')}}"
+                             alt="clock image">
+                        <p class="news-card__details-date">{{$value->created_at}}</p>
+                    </div>
+                    <h4 class="news-card__header">
+                        Какие IT - професси будут востребованы в 2022 году
+                    </h4>
+                    <p class="news-card__description">
+                        Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
+                    </p>
+                    <a href="{{route('user.news')}}">
+                        <button class="button-outlined">@lang('main.buttons.more')</button>
+                    </a>
                 </div>
-                <h4 class="news-card__header">
-                    Какие IT - професси будут востребованы в 2022 году
-                </h4>
-                <p class="news-card__description">
-                    Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
-                </p>
-                <a href="{{route('user.news')}}">
-                    <button class="button-outlined">@lang('main.buttons.more')</button>
-                </a>
-            </div>
-            <div class="news-card">
-                <img src="{{Vite::asset('resources/images/news-mock-image.png')}}" alt="news preview">
-                <div class="news-card__details">
-                    <p class="news-card__details-author">ADMIN_NAME •</p>
-                    <img class="news-card__details-clock-image" src="{{Vite::asset('resources/icons/clock.svg')}}"
-                         alt="clock image">
-                    <p class="news-card__details-date">DATA</p>
-                </div>
-                <h4 class="news-card__header">
-                    Какие IT - професси будут востребованы в 2022 году
-                </h4>
-                <p class="news-card__description">
-                    Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
-                </p>
-                <a href="{{route('user.news')}}">
-                    <button class="button-outlined">@lang('main.buttons.more')</button>
-                </a>
-            </div>
-            <div class="news-card">
-                <img src="{{Vite::asset('resources/images/news-mock-image.png')}}" alt="news preview">
-                <div class="news-card__details">
-                    <p class="news-card__details-author">ADMIN_NAME •</p>
-                    <img class="news-card__details-clock-image" src="{{Vite::asset('resources/icons/clock.svg')}}"
-                         alt="clock image">
-                    <p class="news-card__details-date">DATA</p>
-                </div>
-                <h4 class="news-card__header">
-                    Какие IT - професси будут востребованы в 2022 году
-                </h4>
-                <p class="news-card__description">
-                    Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
-                </p>
-                <a href="{{route('user.news')}}">
-                    <button class="button-outlined">@lang('main.buttons.more')</button>
-                </a>
-            </div>
+            @endforeach
         </div>
-        <button class="button-filled mobile-news-button"><a href="{{route('user.news')}}">Все новости</a></button>
+        <button class="button-filled mobile-news-button"><a
+                href="{{route('user.news')}}">@lang('main.buttons.allNews')</a></button>
     </section>
     <section class="reviews">
         <div class="section-header">
@@ -194,12 +153,14 @@
                         </div>
                     </li>
                 @endforeach
-
             </ul>
             <i class="right"><img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="arrow right"></i>
         </div>
     </section>
     <section class="banner">
+        {{--TODO FRONT: 2. Необходимо заполнять баннер этой картинкой --}}
+        <img src="{{$resource['banners'][1]->image ?? url('storage/image/default_post.jpg')}}"
+             alt="{{$resource['banners'][1]->title ?? "Картинка"}}">
         <a href="{{route('user.catalog')}}">
             <button class="button-outlined">@lang('main.titles.catalog')</button>
         </a>

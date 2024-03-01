@@ -5,14 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contacts extends Model
+class Settings extends Model
 {
     use HasFactory;
+
+    protected $table = 'settings';
 
     protected $fillable = [
         'email', 'phone',
         'work_time',
         'place',
         'location',
-        'instagram'];
+        'instagram',
+        'description',
+    ];
 }

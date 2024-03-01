@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateLeadsRequest;
-use App\Http\Requests\ProductFilterRequest;
 use App\Http\Resources\MainResource;
 use App\Services\MainService;
 use Illuminate\Contracts\View\View;
@@ -13,7 +11,7 @@ use Illuminate\Routing\Controller;
 class MainController extends Controller
 {
     public function __construct(
-        protected MainService $mainService
+        protected MainService $service
     )
     {
     }
@@ -21,50 +19,22 @@ class MainController extends Controller
     public function index(): View
     {
 
-        $resource = (array)MainResource::make([
-            'news' => $this->mainService->showNews(3),
-            'products' => $this->mainService->productsWrapper(),
-            'reviews' => $this->mainService->reviewsWrapper(),
-            'banners' => $this->mainService->getBannersForMain(),
+        $resource = MainResource::make([
+            'news' => $this->service->showNews(3),
+            'products' => $this->service->productsWrapper(),
+            'reviews' => $this->service->reviewsWrapper(),
+            'banners' => $this->service->getBannersForMain(),
+            'sections' => $this->service->getSectionsForMain(),
         ]);
 
-        return view('frontend.main', $resource);
+        return view('frontend.main', compact('resource'));
     }
 
     public function news(): View
     {
-        $newsPosts = $this->mainService->showNews();
+        $newsPosts = $this->service->showNews();
 
-        return view('frontend.news');
-    }
-
-    public function catalog(ProductFilterRequest $request): JsonResponse|View
-    {
-        $entities = $this->mainService->fetchProducts();
-
-        if (request()->ajax()) {
-            $entities = $this->mainService->fetchProducts($request->validated());
-
-            return response()->json([$entities['categories'], view('user.search_result', ['category' => $entities['categories'], 'Products' => $entities['products'], 'category_title' => $entities['category_title']])->render()]);
-        }
-
-        return view('user.catalog', ['entities' => $entities, 'Products' => $entities['products'], 'category' => $entities['categories']]);
-    }
-
-    public function newsShow(string $slug): JsonResponse|View
-    {
-        $NewsPost = $this->mainService->findNewsBySlug($slug);
-        $NewsPosts = $this->mainService->showNews(3);
-
-        return view('user.news_show', compact('NewsPost', 'NewsPosts'));
-    }
-
-    public function productShow(string $slug): JsonResponse|View
-    {
-        $item = $this->mainService->findProductBySlug($slug);
-        $Products = $this->mainService->productsWrapper();
-
-        return view('user.product', compact('item', 'Products'));
+        return view('frontend.news', compact('newsPosts'));
     }
 
     public function calc(): JsonResponse|View
@@ -75,13 +45,5 @@ class MainController extends Controller
     public function contacts(): JsonResponse|View
     {
         return view('frontend.contacts');
-    }
-
-    public function leads(CreateLeadsRequest $request): JsonResponse
-    {
-        $request = $request->validated();
-        $leads = $this->mainService->leadsCreate($request);
-
-        return response()->json($leads);
     }
 }

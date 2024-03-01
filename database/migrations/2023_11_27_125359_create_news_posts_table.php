@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('news_posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('main_image')->default('1.jpg');
+            $table->string('main_image')->default('news-post-image.png');
             $table->boolean('is_toggled')->default(false);
             $table->longText('content');
             $table->longText('description');

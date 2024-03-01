@@ -3,6 +3,7 @@
 namespace App\Repositories\ModelRepositories;
 
 use App\Models\NewsPost;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -50,5 +51,18 @@ class NewsRepository extends BaseModelRepository
         $query['select'][] = $selectableModelName . '.title as ' . $data['selectable_key'];
 
         return $query;
+    }
+
+    /**
+     * @return LengthAwarePaginator
+     */
+    public function paginate(): LengthAwarePaginator
+    {
+        return $this->model->paginate();
+    }
+
+    public function findBySlug(string $slug): ?Model
+    {
+        return $this->model->where('slug', '=', $slug)->firstOrFail();
     }
 }

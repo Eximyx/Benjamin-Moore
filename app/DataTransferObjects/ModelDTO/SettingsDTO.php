@@ -2,9 +2,9 @@
 
 namespace App\DataTransferObjects\ModelDTO;
 
-use App\Http\Requests\ContactsRequest;
+use App\Http\Requests\SettingsRequest;
 
-class ContactsDTO
+class SettingsDTO
 {
     public function __construct(
         public readonly string $email,
@@ -12,18 +12,27 @@ class ContactsDTO
         public readonly string $work_time,
         public readonly string $location,
         public readonly string $instagram,
-    ) {
+        public readonly array  $files,
+        public readonly string $description,
+    )
+    {
 
     }
 
-    public static function appRequest(ContactsRequest $request): ContactsDTO
+    public static function appRequest(SettingsRequest $request): SettingsDTO
     {
-        return new ContactsDTO(
+        $files = [
+            $request['file0'],
+            $request['file1'],
+        ];
+        return new SettingsDTO(
             $request['email'],
             $request['phone'],
             $request['work_time'],
             $request['location'],
-            $request['instagram']
+            $request['instagram'],
+            $files,
+            $request['description'],
         );
 
     }

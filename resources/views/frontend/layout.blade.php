@@ -10,6 +10,9 @@
     @vite('resources/js/app.js')
     <title>Document</title>
 </head>
+@php
+    $settings = \App\Models\Settings::first();
+@endphp
 <body>
 <header class="header">
     <nav class="header__nav">
@@ -39,9 +42,9 @@
         <div class="header__contacts">
             <div class="header__contacts-telephone">
                 <img src="{{Vite::asset("resources/icons/phone-logo.svg")}}" alt="phone-svg"/>
-                <a href="tel: +375">+375 (29) 608-40-00</a>
+                <a href="tel: +375">{{$settings->phone}}</a>
             </div>
-            <p class="header__contacts-time">Работаем ПН — ПТ, 10:00 — 19:00</p>
+            <p class="header__contacts-time">{{$settings->work_time}}</p>
         </div>
         <button class="button-filled">
             @lang('nav-links.orderButton')
@@ -97,14 +100,16 @@
     <div class="footer__contacts">
         <div class="footer__contacts__inner-div">
                 <span><img src="{{Vite::asset('resources/icons/phone.svg')}}" alt="phone"><a
-                        href="tel: +375"> +375 (29) 444-32-32</a></span>
+                        href="tel: +375">{{$settings->phone}}</a></span>
             <span><img src="{{Vite::asset('resources/icons/point.svg')}}"
-                       alt="address"> г. Минск, ул. Восточная 41</span>
+                       alt="address">{{$settings->location}}</span>
             <span><img src="{{Vite::asset('resources/icons/mail.svg')}}" alt="mail"><a
-                    href="mailto: me@email.com"></a>support@mot.ru</span>
+                    href="mailto: me@email.com"></a>{{$settings->email}}</span>
         </div>
     </div>
 </footer>
+
+
 @vite('resources/js/burger.js')
 @yield('scripts')
 </body>
