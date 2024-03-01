@@ -17,5 +17,9 @@
         "jquery": "^3.7.1",
         "jquery-viewer": "^1.0.1",
         "viewerjs": "^1.11.6"
-    }
+    },
+    "browserslist": [
+        "defaults and fully supports es6-module",
+        "maintained node versions"
+    ]
 }
