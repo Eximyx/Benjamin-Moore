@@ -2,13 +2,16 @@ const confirmButton = document.getElementById('confirm-button');
 const declineButton = document.getElementById('decline-button');
 const areaElement = document.querySelector('#area-block');
 const squareElement = document.querySelector('#_area-block');
-
-let isSelect = 0;
+const widthInput = document.querySelector('#width');
+const heightInput = document.querySelector('#height');
+const windowsInput = document.querySelector('#windows');
+const doorsInput = document.querySelector('#doors');
+const areaInput = document.querySelector('#area');
 
 document.querySelectorAll('.survey-input').forEach(input => {
     let length = 5;
     input.addEventListener('input', function() {
-        this.value = this.value.replace(/[^0-9]/g, '');
+        this.value = this.value.replace(/[^0-9.]/g, '');
         if (this.id === "area") {
             length = 10;
         }
@@ -18,14 +21,16 @@ document.querySelectorAll('.survey-input').forEach(input => {
     });
 });
 
+let isSelect = 0;
+
 document.querySelector('#confirm-button').addEventListener('click', function() {
-    isSelect = 1;
+    isSelect = 0;
     areaElement.classList.remove('display-none');
     squareElement.classList.add('display-none');
 });
 
 document.querySelector('#decline-button').addEventListener('click', function() {
-    isSelect = 0;
+    isSelect = 1;
     squareElement.classList.remove('display-none');
     areaElement.classList.add('display-none');
 });
@@ -41,16 +46,19 @@ declineButton.addEventListener('click', function() {
 });
 
 document.querySelector('#survey-submit').addEventListener('click', function() {
-    let length  = parseFloat(document.querySelector('#width').value) || 0;
-    let height = parseFloat(document.querySelector('#height').value) || 0;
-    let windows = parseFloat(document.querySelector('#windows').value) || 0;
-    let doors = parseFloat(document.querySelector('#doors').value) || 0;
+    let length  = parseFloat(widthInput.value) || 0;
+    let height = parseFloat(heightInput.value) || 0;
+    let windows = parseFloat(windowsInput.value) || 0;
+    let doors = parseFloat(doorsInput.value) || 0;
     let totalArea;
 
-    if (!isSelect) {
-        totalArea = length * height - doors * 0.9 * 2 - windows * 1.3 * 1.5 * 2;
+    console.log('length' + length + ' height'+ height + " windows" + windows + " doors" + doors)
+
+    if (isSelect === 1) {
+        totalArea = length * height - (doors * 0.9 * 2) - (windows * 1.3 * 1.5 * 2);
     } else {
-        totalArea = parseFloat(document.querySelector('#area').value) || 0;
+        totalArea = parseFloat(areaInput.value) || 0;
+        totalArea = totalArea - (doors * 0.9 * 2) - (windows * 1.3 * 1.5 * 2);
     }
 
     let recommendedGallons = Math.floor(totalArea / 20);

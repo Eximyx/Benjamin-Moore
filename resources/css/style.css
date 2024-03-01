@@ -999,7 +999,7 @@ input[type="checkbox"]:checked::after {
     max-width: 255px;
     margin-bottom: 20px;
     min-width: 200px;
-    padding: 0 initial;
+    padding: 0;
 }
 
 /*product page*/
@@ -1681,6 +1681,7 @@ input[type="checkbox"]:checked::after {
 
     .calculator-section__survey-block__rightside {
        flex-direction: column;
+        -webkit-flex-direction: column;
        justify-content: center;
         align-items: center;
     }
@@ -1739,7 +1740,7 @@ input[type="checkbox"]:checked::after {
     }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .product-card__price-block {
         flex-direction: column;
         align-items: stretch;
@@ -1973,18 +1974,15 @@ input[type="checkbox"]:checked::after {
 
     .catalog-wrapper {
         margin-top: 30px;
-    };
+    }
 
     .calculator-section {
         flex-direction: column;
+        align-items: center;
     }
 
     .calculator-section__survey-block__rightside {
         flex-direction: row;
-    }
-
-    .calculator-section {
-        align-items: center;
     }
 
     .about-us__block {
