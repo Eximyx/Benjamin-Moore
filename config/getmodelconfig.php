@@ -8,6 +8,7 @@ use App\Models\KindOfWork;
 use App\Models\Leads;
 use App\Models\MetaData;
 use App\Models\NewsPost;
+use App\Models\Partners;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Review;
@@ -19,10 +20,22 @@ use App\Models\UserRoles;
 
 return [
     // TODO: Переделать базовый сервис/репозиторий, они не должны знать о различиях между сущностями. Некоторые сущности содержат отношения.  BaseModelService->getVariablesForDataTable()
+    Partners::class => [
+        'ModelName' => 'admin.titles.partners',
+        'datatable_data' => [
+            'id',
+            'title',
+            'location',
+        ],
+        'form_data' => [
+            'title',
+            'location',
+        ],
+    ],
     NewsPost::class => [
         'ModelName' => 'admin.titles.news',
         'datatable_data' => [
-            "id",
+            'id',
             'title',
             'is_toggled',
             'category_id',
@@ -40,7 +53,7 @@ return [
     Banner::class => [
         'ModelName' => 'admin.titles.banners',
         'datatable_data' => [
-            "id",
+            'id',
             'title',
             'content',
             'banner_position_id',
@@ -58,7 +71,7 @@ return [
     Section::class => [
         'ModelName' => 'admin.titles.sections',
         'datatable_data' => [
-            "id",
+            'id',
             'title',
             'content',
             'section_position_id',
@@ -75,7 +88,7 @@ return [
     Product::class => [
         'ModelName' => 'admin.titles.product',
         'datatable_data' => [
-            "id",
+            'id',
             'title',
             'code',
             'product_category_id',
@@ -124,7 +137,7 @@ return [
     ProductCategory::class => [
         'ModelName' => 'admin.titles.productCategory',
         'datatable_data' => [
-            "id",
+            'id',
             'title',
             'kind_of_work_id',
         ],
@@ -139,7 +152,7 @@ return [
     User::class => [
         'ModelName' => 'admin.titles.user',
         'datatable_data' => [
-            "id",
+            'id',
             'name',
             'email',
             'user_role_id',
@@ -157,7 +170,7 @@ return [
     Category::class => [
         'ModelName' => 'admin.titles.category',
         'datatable_data' => [
-            "id",
+            'id',
             'title',
         ],
         'form_data' => [
@@ -167,7 +180,7 @@ return [
     Leads::class => [
         'ModelName' => 'admin.titles.leads',
         'datatable_data' => [
-            "id",
+            'id',
             'name',
             'contactInfo',
             'message',
@@ -181,7 +194,7 @@ return [
     StaticPage::class => [
         'ModelName' => 'admin.titles.staticPage',
         'datatable_data' => [
-            "id",
+            'id',
             'title',
             'is_toggled',
         ],
@@ -193,7 +206,7 @@ return [
     Review::class => [
         'ModelName' => 'admin.titles.review',
         'datatable_data' => [
-            "id",
+            'id',
             'name',
             'description',
             'is_toggled',
@@ -207,7 +220,7 @@ return [
     Color::class => [
         'ModelName' => 'admin.titles.color',
         'datatable_data' => [
-            "id",
+            'id',
             'title',
             'hex_code',
         ],
@@ -217,4 +230,3 @@ return [
         ],
     ],
 ];
-
