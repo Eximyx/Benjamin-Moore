@@ -1,4 +1,4 @@
-{{--TODO FRONT: 1. Увеличить размер фона пагинации --}}
+{{--TODO FRONT: 1. Увеличить размер фона пагинации - DONE, Back-end: change amount of pagination buttons on mobile--}}
 <div class="pagination">
     <ul class="pagination-ul">
         {{-- Previous Page Link --}}

@@ -102,7 +102,7 @@
                 <h3>@lang('main.titles.news')</h3>
                 <h2>@lang('main.titles.lastNews')</h2>
             </div>
-            <button class="button-outlined"><a href="{{route('user.news')}}">@lang('main.buttons.allNews')</a></button>
+            <a href="{{route('user.news')}}"><button class="button-outlined">@lang('main.buttons.allNews')</button></a>
         </div>
         <div class="news-wrapper">
             {{-- TODO: ADD an USER_NAME for post --}}
@@ -111,11 +111,16 @@
                     <img
                         src="{{url('storage/image').'/'.$value->main_image ?? Vite::asset('resources/image/news-mock-image.png')}}"
                         alt="news preview">
-                    <div class="news-card__details">
-                        <p class="news-card__details-author">USER_NAME •</p>
-                        <img class="news-card__details-clock-image" src="{{Vite::asset('resources/icons/clock.svg')}}"
-                             alt="clock image">
-                        <p class="news-card__details-date">{{$value->created_at}}</p>
+                    <div class="news-card__details-block">
+                        <div class="news-card__details">
+                            <p class="news-card__details-author">USER_NAME •</p>
+                            <img class="news-card__details-clock-image" src="{{Vite::asset('resources/icons/clock.svg')}}"
+                                 alt="clock image">
+                            <p class="news-card__details-date">{{$value->created_at->format('d.m.y')}}</p>
+                        </div>
+                        <a class="news-card__link" href="{{route('user.news')}}">
+                            @lang('main.buttons.more')
+                        </a>
                     </div>
                     <h4 class="news-card__header">
                         Какие IT - професси будут востребованы в 2022 году
@@ -123,14 +128,12 @@
                     <p class="news-card__description">
                         Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
                     </p>
-                    <a href="{{route('user.news')}}">
-                        <button class="button-outlined">@lang('main.buttons.more')</button>
-                    </a>
                 </div>
             @endforeach
         </div>
         <button class="button-filled mobile-news-button"><a
-                href="{{route('user.news')}}">@lang('main.buttons.allNews')</a></button>
+                href="{{route('user.news')}}">@lang('main.buttons.allNews')</a>
+        </button>
     </section>
     <section class="reviews">
         <div class="section-header">

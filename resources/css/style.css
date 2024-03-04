@@ -121,7 +121,7 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    top: 50px;
+    top: 60px;
     height: 100%;
     width: 100%;
     padding-right: 20px;
@@ -158,6 +158,7 @@ button {
 
 /*main code*/
 .header {
+    position: relative;
     display: flex;
     margin: 0 auto;
     max-width: 1410px;
@@ -166,6 +167,7 @@ button {
     color: var(--text-black);
     min-height: 85px;
     justify-content: space-between;
+    z-index: 100;
 }
 
 .header__nav {
@@ -334,6 +336,7 @@ button {
     min-width: 210px;
     height: fit-content;
     flex-grow: 1;
+    cursor: pointer;
 }
 
 .product-card img {
@@ -458,6 +461,21 @@ button {
     flex-basis: unset;
 }
 
+.news-card__details-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.news-card__link {
+    margin-top: 0;
+    color: var(--minor-information);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
 .news-card__details {
     display: flex;
     align-items: center;
@@ -492,10 +510,6 @@ button {
     font-weight: 400;
 }
 
-.news-card a {
-    margin-top: 20px;
-}
-
 .reviews {
     margin: 100px 0;
 }
@@ -504,6 +518,7 @@ button {
     border-radius: 20px;
     max-width: 450px;
     box-shadow: rgba(100, 100, 111, 0.2) 3px 7px 15px 5px;
+
 }
 
 .review-card__header {
@@ -680,8 +695,9 @@ button {
 
 .pagination {
     border-radius: 10px;
-    width: 300px;
+    width: fit-content;
     height: 45px;
+    padding: 0 5px;
     background-color: var(--accent-red);
     margin: 0 auto 40px auto;
 }
@@ -696,6 +712,7 @@ button {
     margin: 0;
     color: #fff;
     font-weight: 500;
+    gap: 3px;
 }
 
 .pagination-ul  a{
@@ -1270,6 +1287,10 @@ input[type="checkbox"]:checked::after {
     transform: translateY(-50%) scale(0.85);
 }
 
+.wrapper i:last-child:active {
+    transform: translateY(-76px) scale(0.85);
+}
+
 .wrapper i:first-child {
     left: -80px;
 }
@@ -1317,10 +1338,10 @@ input[type="checkbox"]:checked::after {
     height: fit-content;
     list-style: none;
     background: transparent;
-    cursor: pointer;
     flex-direction: column;
     padding: 10px;
 }
+
 
 /*reviews carousel styles*/
 
@@ -1358,8 +1379,12 @@ input[type="checkbox"]:checked::after {
     transform: rotate(-180deg);
 }
 
-.reviewsWrapper i:active {
+.reviewsWrapper i:active{
     transform: translateY(-50%) scale(0.85);
+}
+
+.reviewsWrapper i:last-child:active {
+    transform: translateY(-76px) scale(0.85);
 }
 
 .reviewsWrapper i:first-child {
@@ -1368,6 +1393,7 @@ input[type="checkbox"]:checked::after {
 
 .reviewsWrapper i:last-child {
     right: -80px;
+    transition: transform 0.1s linear;
 }
 
 .reviewsWrapper .reviewsCarousel {
@@ -1386,7 +1412,7 @@ input[type="checkbox"]:checked::after {
     gap: 10px;
     list-style: none;
     background: transparent;
-    cursor: pointer;
+    cursor: default;
     flex-direction: column;
 }
 
@@ -1396,16 +1422,6 @@ input[type="checkbox"]:checked::after {
 
 .reviewsCarousel.no-transition {
     scroll-behavior: auto;
-}
-
-.reviewsCarousel.reviewsDragging {
-    scroll-snap-type: none;
-    scroll-behavior: auto;
-}
-
-.reviewsCarousel.reviewsDragging .reviewsCard {
-    cursor: grab;
-    user-select: none;
 }
 
 .mobile-header {
@@ -1567,8 +1583,8 @@ input[type="checkbox"]:checked::after {
         position: relative;
         order: 3;
         margin: 10px auto 0 auto;
-        transform: translateY(-74px);
-        transition: none;
+        transform: translateY(-76px);
+        transition: 0.1s linear;
     }
 
     .wrapper, .reviewsWrapper {
@@ -1586,8 +1602,8 @@ input[type="checkbox"]:checked::after {
         position: relative;
         order: 3;
         margin: 10px auto 0 auto;
-        transform: translateY(-74px);
-        transition: none;
+        transform: translateY(-76px);
+        transition: 0.1s linear;
     }
 
     .product {
@@ -1703,16 +1719,23 @@ input[type="checkbox"]:checked::after {
     }
 
     .calculator-section__painting-area, .calculator-section__recommended-volume {
-        max-width: 250px;
-        padding: 20px 30px;
+        /*max-width: unset;*/
+        /*padding: 20px 30px;*/
     }
 
     .calculator-section__survey-block {
-        max-width: 450px;
+        max-width: 720px;
+        margin: 0 auto;
     }
 
     .calculator-section {
-        gap: 20px
+        gap: 20px;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .calculator-section__survey-block__rightside {
+        flex-direction: row;
     }
 
     .calculator-section h2 {
@@ -1731,10 +1754,6 @@ input[type="checkbox"]:checked::after {
 }
 
 @media (max-width: 865px) {
-    .calculator-section__painting-area, .calculator-section__recommended-volume {
-        width: unset;
-    }
-
     .news-wrapper {
         gap: 10px
     }
@@ -1871,6 +1890,7 @@ input[type="checkbox"]:checked::after {
 
     .review-card {
         max-width: max-content;
+        cursor: default
     }
 
     .about-us__block {
@@ -1981,12 +2001,22 @@ input[type="checkbox"]:checked::after {
         align-items: center;
     }
 
-    .calculator-section__survey-block__rightside {
-        flex-direction: row;
-    }
-
     .about-us__block {
         margin-right: unset;
+    }
+
+    .calculator-section__survey-block__rightside {
+        width: 100%;
+    }
+
+    .calculator-section__painting-area, .calculator-section__recommended-volume {
+        max-width: unset;
+        padding-left: unset;
+        padding-right: unset;
+    }
+
+    .calculator-section__recommended-volume h3 {
+        padding: 0 5px;
     }
 }
 
