@@ -2,14 +2,13 @@
 
 namespace App\Services;
 
-use App\DataTransferObjects\AboutUsDTO;
 use App\DataTransferObjects\ModelDTO\SettingsDTO;
 use App\Models\Settings;
-use App\Repositories\SettingRepositories\ContactsRepository;
+use App\Repositories\SettingRepositories\SettingsRepository;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-class ContactsService
+class SettingsService
 {
     /**
      * @var array<string,mixed>
@@ -17,27 +16,21 @@ class ContactsService
     protected array $repositories;
 
     public function __construct(
-        protected ContactsRepository $contactsRepository,
-    )
-    {
+        protected SettingsRepository $settingsRepository,
+    ) {
     }
 
     public function settingsSet(SettingsDTO $dto): Settings
     {
-        $dto = (array)$dto;
+        $dto = (array) $dto;
 
         $this->uploadFilesForAboutUs($dto['files']);
 
-        return $this->contactsRepository->updateOrCreate($dto);
-    }
-
-    public function settingsFetch(): ?Settings
-    {
-        return $this->contactsRepository->first();
+        return $this->settingsRepository->update($dto);
     }
 
     /**
-     * @param array<int, UploadedFile|string> $data
+     * @param  array<int, UploadedFile|string>  $data
      */
     public function uploadFilesForAboutUs(array $data): void
     {
@@ -48,5 +41,10 @@ class ContactsService
                     $value->getClientOriginalName());
             }
         }
+    }
+
+    public function settingsFetch(): ?Settings
+    {
+        return $this->contactsRepository->first();
     }
 }

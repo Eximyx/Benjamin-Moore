@@ -10,9 +10,6 @@
     @vite('resources/js/app.js')
     <title>Document</title>
 </head>
-@php
-    $settings = \App\Models\Settings::first();
-@endphp
 <body>
 <header class="header">
     <nav class="header__nav">
@@ -42,9 +39,9 @@
         <div class="header__contacts">
             <div class="header__contacts-telephone">
                 <img src="{{Vite::asset("resources/icons/phone-logo.svg")}}" alt="phone-svg"/>
-                <a href="tel: +375">{{$settings->phone}}</a>
+                <a href="tel: {{$data['settings']->phone}}">{{$data['settings']->phone}}</a>
             </div>
-            <p class="header__contacts-time">{{$settings->work_time}}</p>
+            <p class="header__contacts-time">{{$data['settings']->phone}}</p>
         </div>
         <button class="button-filled">
             @lang('nav-links.orderButton')
@@ -100,11 +97,11 @@
     <div class="footer__contacts">
         <div class="footer__contacts__inner-div">
                 <span><img src="{{Vite::asset('resources/icons/phone.svg')}}" alt="phone"><a
-                        href="tel: +375">{{$settings->phone}}</a></span>
+                        href="tel: {{$data['settings']->phone}}">{{$data['settings']->phone}}</a></span>
             <span><img src="{{Vite::asset('resources/icons/point.svg')}}"
-                       alt="address">{{$settings->location}}</span>
+                       alt="address">{{$data['settings']->location}}</span>
             <span><img src="{{Vite::asset('resources/icons/mail.svg')}}" alt="mail"><a
-                    href="mailto: me@email.com"></a>{{$settings->email}}</span>
+                    href="mailto: {{$data['settings']->email}}"></a>{{$data['settings']->email}}</span>
         </div>
     </div>
 </footer>

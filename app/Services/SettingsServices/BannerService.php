@@ -18,9 +18,9 @@ class BannerService extends BaseModelService
 
     public function create(ModelDTO $dto): ?Model
     {
-        $dto = (array)$dto;
+        $dto = (array) $dto;
 
-        if (!empty($dto['banner_position_id'])) {
+        if (! empty($dto['banner_position_id'])) {
             $this->repository->nullPosition($dto['banner_position_id']);
         }
 
@@ -29,9 +29,9 @@ class BannerService extends BaseModelService
 
     public function update(Model $entity, ModelDTO $dto): Model
     {
-        $dto = (array)$dto;
+        $dto = (array) $dto;
 
-        if (!empty($dto['banner_position_id'])) {
+        if (! empty($dto['banner_position_id'])) {
             $this->repository->nullPosition($dto['banner_position_id']);
         }
 
@@ -49,7 +49,7 @@ class BannerService extends BaseModelService
         $entity = $this->findById($request['id']);
 
         if ($entity !== null) {
-            if (!isset($entity->banner_position_id)) {
+            if (! isset($entity->banner_position_id)) {
                 $this->repository->destroy($entity);
             } else {
                 throw new Exception('Вы не можете удалить баннер, который уже используется!', 422);

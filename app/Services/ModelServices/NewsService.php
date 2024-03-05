@@ -3,7 +3,9 @@
 namespace App\Services\ModelServices;
 
 use App\Contracts\ModelDTO;
+use App\Models\Settings;
 use App\Repositories\ModelRepositories\NewsRepository;
+use App\Repositories\SettingRepositories\SettingsRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -11,9 +13,21 @@ use Illuminate\Support\Facades\Storage;
 
 class NewsService extends BaseModelService
 {
-    public function __construct(NewsRepository $repository)
+
+    public function __construct(
+        NewsRepository               $repository,
+        protected SettingsRepository $settingsRepository,
+    )
     {
         parent::__construct($repository);
+    }
+
+    /**
+     * @return Settings
+     */
+    public function getSettings(): Settings
+    {
+        return $this->settingsRepository->first();
     }
 
     public function findBySlug(string $slug): ?Model
@@ -21,13 +35,25 @@ class NewsService extends BaseModelService
         return $this->repository->findBySlug($slug);
     }
 
-    public function create(ModelDTO $dto): ?Model
+    public function create(ModelDTO $dto): Model
     {
         $data = (array)$dto;
 
         $data['main_image'] = $this->uploadImage($data['main_image']);
 
         return $this->repository->create($data);
+    }
+
+    protected function uploadImage(mixed $image): string
+    {
+        if ($image !== null) {
+            Storage::put('public\image', $image);
+            $image = $image->hashName();
+        } else {
+            $image = 'default_post.jpg';
+        }
+
+        return $image;
     }
 
     public function update(Model $entity, ModelDTO $dto): Model
@@ -49,15 +75,22 @@ class NewsService extends BaseModelService
         );
     }
 
-    public function destroy(Request $request): ?Model
+    protected function deleteImage(string $image): bool
+    {
+        if (!($image === 'default_post.jpg')) {
+            Storage::delete('public/image/' . $image);
+        }
+
+        return true;
+    }
+
+    public function destroy(Request $request): Model
     {
         $entity = $this->findById($request['id']);
 
         $this->deleteImage($entity->main_image);
 
-        if ($entity !== null) {
-            $this->repository->destroy($entity);
-        }
+        $this->repository->destroy($entity);
 
         return $entity;
     }
@@ -66,7 +99,7 @@ class NewsService extends BaseModelService
     {
         $entity = $this->findById($request['id']);
 
-        $entity['is_toggled'] = !$entity['is_toggled'];
+        $entity->is_toggled = !$entity->is_toggled;
 
         $entity = $this->repository->save($entity);
 
@@ -78,28 +111,7 @@ class NewsService extends BaseModelService
      */
     public function getLatest(): Collection
     {
-        return $this->repository->getLatest()->get();
-    }
-
-    protected function deleteImage(string $image): bool
-    {
-        if (!($image === 'default_post.jpg')) {
-            Storage::delete('public/image/' . $image);
-        }
-
-        return true;
-    }
-
-    protected function uploadImage(mixed $image): string
-    {
-        if ($image !== null) {
-            Storage::put('public\image', $image);
-            $image = $image->hashName();
-        } else {
-            $image = 'default_post.jpg';
-        }
-
-        return $image;
+        return $this->repository->getLatest(3)->get();
     }
 
     /**
@@ -114,7 +126,6 @@ class NewsService extends BaseModelService
 
         return $variables;
     }
-
 
     // TODO: Resource for pagination News & Products
 

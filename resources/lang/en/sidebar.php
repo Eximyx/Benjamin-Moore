@@ -3,6 +3,8 @@
 return [
     'lang' => 'en',
     'news.index' => 'News',
+    'partners.index' => 'Partners',
+    'colors.index' => 'Colors',
     'news_categories.index' => 'Categories of news',
     'products.index' => 'Products',
     'product_categories.index' => 'Product categories',

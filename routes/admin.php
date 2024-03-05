@@ -8,6 +8,7 @@ use App\Http\Controllers\ModelControllers\ColorController;
 use App\Http\Controllers\ModelControllers\LeadsController;
 use App\Http\Controllers\ModelControllers\MetaDataController;
 use App\Http\Controllers\ModelControllers\NewsController;
+use App\Http\Controllers\ModelControllers\PartnersController;
 use App\Http\Controllers\ModelControllers\ProductCategoryController;
 use App\Http\Controllers\ModelControllers\ProductsController;
 use App\Http\Controllers\ModelControllers\ReviewController;
@@ -21,7 +22,6 @@ Route::controller(AuthController::class)->middleware('user')->group(function () 
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
-
 Route::middleware('admin')->group(function () {
     Route::prefix('admin')
         ->group(function () {
@@ -34,13 +34,16 @@ Route::middleware('admin')->group(function () {
             Route::post('/profile', [AuthController::class, 'profile'])->name('profile');
             Route::post('update/{entity}', [NewsController::class, 'update']);
 
-
             Route::post('products/toggle', [ProductsController::class, 'toggle']);
             Route::post('news/toggle', [NewsController::class, 'toggle']);
             Route::post('static_pages/toggle', [StaticPageController::class, 'toggle']);
             Route::post('reviews/toggle', [ReviewController::class, 'toggle']);
 
+
+            //TODO how to bring in "update" into resource, issue via request
+
             Route::post('products/update/{entity}', [ProductsController::class, 'update']);
+            Route::post('partners/update/{entity}', [PartnersController::class, 'update']);
             Route::post('metadata/update/{entity}', [MetaDataController::class, 'update']);
             Route::post('news/update/{entity}', [NewsController::class, 'update']);
             Route::post('static_pages/update/{entity}', [StaticPageController::class, 'update']);
@@ -51,10 +54,11 @@ Route::middleware('admin')->group(function () {
             Route::post('users/update/{entity}', [AdminController::class, 'update']);
             Route::post('reviews/update/{entity}', [ReviewController::class, 'update']);
             Route::post('banners/update/{entity}', [BannersController::class, 'update']);
-            Route::post('colors/update/{entity}',[ColorController::class,'update']);
+            Route::post('colors/update/{entity}', [ColorController::class, 'update']);
 
             Route::resources([
                 'products' => ProductsController::class,
+                'partners' => PartnersController::class,
                 'news' => NewsController::class,
                 'static_pages' => StaticPageController::class,
                 'metadata' => MetaDataController::class,

@@ -3,12 +3,18 @@
 namespace App\Services;
 
 use App\Actions\WrapItems;
+use App\Http\Resources\NewsPostResource;
+use App\Http\Resources\ProductResource;
+use App\Http\Resources\ReviewResource;
+use App\Models\Settings;
 use App\Repositories\ModelRepositories\LeadsRepository;
 use App\Repositories\ModelRepositories\NewsRepository;
+use App\Repositories\ModelRepositories\PartnersRepository;
 use App\Repositories\ModelRepositories\ProductRepository;
 use App\Repositories\ModelRepositories\ReviewRepository;
 use App\Repositories\SettingRepositories\BannersRepository;
 use App\Repositories\SettingRepositories\SectionRepository;
+use App\Repositories\SettingRepositories\SettingsRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Psr\Container\ContainerExceptionInterface;
@@ -17,13 +23,15 @@ use Psr\Container\NotFoundExceptionInterface;
 class MainService
 {
     public function __construct(
-        protected NewsRepository    $newsRepository,
-        protected ProductRepository $productRepository,
-        protected ReviewRepository  $reviewRepository,
-        protected LeadsRepository   $leadsRepository,
-        protected BannersRepository $bannersRepository,
-        protected SectionRepository $sectionRepository,
-        protected WrapItems         $wrapItems
+        protected NewsRepository     $newsRepository,
+        protected ProductRepository  $productRepository,
+        protected ReviewRepository   $reviewRepository,
+        protected LeadsRepository    $leadsRepository,
+        protected BannersRepository  $bannersRepository,
+        protected SectionRepository  $sectionRepository,
+        protected PartnersRepository $partnersRepository,
+        protected SettingsRepository $settingsRepository,
+        protected WrapItems          $wrapItems
     )
     {
 
@@ -40,37 +48,74 @@ class MainService
         return $this->bannersRepository->getBannersWithPositions();
     }
 
+    /**
+     * @return Collection<int, Model>
+     */
+    public function getPartners(): Collection
+    {
+        return $this->partnersRepository->getLatest()->get();
+    }
+
+    public function getSettings(): Settings
+    {
+        return $this->settingsRepository->first();
+    }
+
+    /**
+     * @return Collection<int, Model>
+     *
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function getSectionsForMain(): Collection
     {
         return $this->sectionRepository->getSectionsWithPositions();
     }
 
     /**
-     * @param int|null $amountOfNews
-     * @return Collection
+     * @return Collection<mixed>
      */
-    public function showNews(?int $amountOfNews = null): Collection
+    public function newsWrapper(?int $maxSlides = 0): Collection
     {
-        return $this->newsRepository->getLatest(3)->get();
+        $wrappedItems = $this->wrapper($this->newsRepository->getLatest()->get(), $maxSlides);
+        $wrappedItems->each(function ($item, $index) use ($wrappedItems) {
+            $wrappedItems[$index] = NewsPostResource::collection($item);
+        });
+
+        return $wrappedItems;
+    }
+
+    public function wrapper(Collection $items, int $maxSlides = 0): Collection
+    {
+        return $this->wrapItems->__invoke($items, maxSlides: $maxSlides);
     }
 
     /**
-     * @return array<array<Model>>
+     * @return Collection<mixed>
      */
-    public function productsWrapper(int $amountOfProducts = 4): array
+    public function productsWrapper(?int $maxSlides = 0): Collection
     {
-        $items = $this->productRepository->getLatest()->get();
-
-        return $this->wrapItems->__invoke($items, $amountOfProducts);
+        $wrappedItems = $this->wrapper($this->productRepository->getLatest()->get(), $maxSlides);
+        $wrappedItems->each(function ($item, $index) use ($wrappedItems) {
+            $wrappedItems[$index] = ProductResource::collection($item);
+        });
+        return $wrappedItems;
     }
 
     /**
-     * @return array<array<Model>>
+     * @return Collection<mixed>
      */
-    public function reviewsWrapper(int $amountOfReviews = 3): array
+    public function reviewsWrapper(?int $maxSlides = 0): Collection
     {
-        $items = $this->reviewRepository->getLatest()->get();
+        $wrappedItems = $this->wrapper($this->reviewRepository->getLatest()->get());
+        $wrappedItems->each(function ($item, $index) use ($wrappedItems) {
+            $wrappedItems[$index] = ReviewResource::collection($item);
+        });
+        return $wrappedItems;
+    }
 
-        return $this->wrapItems->__invoke($items, $amountOfReviews);
+    public function getBannerByPositionId(int $id): Model
+    {
+        return $this->bannersRepository->getBannerByPositionId($id);
     }
 }

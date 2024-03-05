@@ -5,6 +5,7 @@ return [
 
     'titles' => [
         'news' => 'News',
+        'partners' => 'Partners',
         'category' => 'News categories',
         'product' => 'Products',
         'productCategory' => 'Product categories',
@@ -24,7 +25,7 @@ return [
     'keys' => [
         'id' => 'ID',
         'url' => 'URL',
-        'title' => 'Page title',
+        'title' => 'Title',
         'meta_description' => 'Meta description',
         'meta_keywords' => 'Keywords',
         'h' => 'Header',

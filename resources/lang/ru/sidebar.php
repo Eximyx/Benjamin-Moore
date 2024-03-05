@@ -3,6 +3,8 @@
 return [
     'lang' => 'ru',
     'news.index' => 'Новости',
+    'partners.index' => 'Партнеры',
+    'colors.index' => 'Цвета',
     'news_categories.index' => 'Категории новостей',
     'products.index' => 'Товары',
     'product_categories.index' => 'Категории продуктов',

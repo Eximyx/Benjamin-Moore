@@ -8,20 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class WrapItems
 {
     /**
-     * @param  Collection<int,Model>  $items
-     * @return array<int,array<Model>>
+     * @param Collection<int, Model> $items
+     * @return Collection<int, mixed>
      */
-    public function __invoke(Collection $items, int $slideAmount): array
+    public function __invoke(Collection $items, int $maxSlides = 0, int $slideAmount = 5): Collection
     {
         $j = 0;
-        $List = [];
-        foreach ($items as $i => $iValue) {
-            if (($i % $slideAmount === 0) & ($i !== 0)) {
+        $list = [new Collection()];
+        foreach ($items as $index => $item) {
+            if (($index % $slideAmount === 0) & ($index !== 0)) {
                 $j++;
+                if ($j > $maxSlides - 1 & $maxSlides !== 0) {
+                    break;
+                }
+                $list[] = new Collection();
             }
-            $List[$j][] = $iValue;
+            $list[$j]->push($item);
         }
-
-        return $List;
+        return new Collection($list);
     }
 }
