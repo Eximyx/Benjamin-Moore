@@ -3,20 +3,23 @@
 namespace App\Services\ModelServices;
 
 use App\Contracts\ModelDTO;
-use App\Http\Filters\ProductCategoryFilter;
-use App\Http\Filters\ProductFilter;
 use App\Http\Requests\ProductFilterRequest;
-use App\Models\Product;
-use App\Models\ProductCategory;
+use App\Repositories\ModelRepositories\ColorProductRepository;
+use App\Repositories\ModelRepositories\ColorRepository;
 use App\Repositories\ModelRepositories\ProductRepository;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
 class ProductService extends BaseModelService
 {
-    public function __construct(ProductRepository $repository)
+    public function __construct(
+        ProductRepository                $repository,
+        protected ColorProductRepository $colorProductRepository,
+        protected ColorRepository        $colorRepository,
+    )
     {
         parent::__construct($repository);
     }
@@ -27,6 +30,21 @@ class ProductService extends BaseModelService
     public function getLatest(): Collection
     {
         return $this->repository->getLatest()->get();
+    }
+
+    public function findById(string $id): ?Model
+    {
+        $entity = $this->repository->findById($id);
+
+        if ($entity == null) {
+            throw new ModelNotFoundException('ds', 500);
+        }
+
+        $entity['colors'] = $this->colorRepository->getColors(
+            $this->colorProductRepository->getColorIds($id)
+        );
+
+        return $entity;
     }
 
     /**
@@ -122,18 +140,19 @@ class ProductService extends BaseModelService
     public function getVariablesForDataTable(): array
     {
         $variables = parent::getVariablesForDataTable();
-        if (isset($variables['data']['selectableModel'])) {
-            $variables['selectable'] = $variables['data']['selectableModel']->all();
-        }
+
+        $variables['selectable'] = $variables['data']['selectableModel']->all();
+
+        $variables['tags'] = $variables['data']['tagsModel']->all();
 
         return $variables;
     }
 
-    public function fetchProducts(ProductFilterRequest $request)
+    public function fetchProducts(ProductFilterRequest $request): array
     {
         $data = $request->validated();
 
-        if(isset($data['kind_of_work_id'])){
+        if (isset($data['kind_of_work_id'])) {
             $list['categories'] = $this->repository->fetchCategories($request);
         }
 

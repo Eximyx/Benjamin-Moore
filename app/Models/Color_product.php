@@ -12,5 +12,4 @@ class Color_product extends Model
     protected $table = 'color_products';
 
     protected $guarded = false;
-
 }

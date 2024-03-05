@@ -43,13 +43,14 @@
                                     <textarea type="text" name="content" class="form-control" id="summernote-content"
                                               placeholder="@lang('admin.keys.content')" required></textarea>
                                 @elseif($value == 'hex_code')
-                                    <input type="color" name="{{$value}}" class="form-control" id="{{$value}}" required>
+                                    <input type="color" name="{{$value}}" class="form-control" id="{{$value}}"
+                                           style="width: 150px" required>
                                 @elseif($value == 'colors')
-                                    <select class="form-select" multiple name="{{$value}}[]" id="{{$value}}" size="3">
-                                        <option selected>Не выбрано</option>
-                                        <@foreach (App\Models\Color::all() as $item)
+                                    <select class="form-select" multiple name="{{$value}}[]" id="{{$value}}">
+                                        <option value="" selected>Не выбрано</option>
+                                        <@foreach ($data['tags'] as $item)
                                             <option value="{{ $item['id'] }}">
-                                                {{ $item['title'] }}
+                                                <b> {{ $item['title'] }}</b>
                                             </option>
                                         @endforeach
                                     </select>
@@ -83,6 +84,9 @@
                         <div class="col-lg mt-2">
                             <button type="button" class="btn btn-secondary"
                                     data-bs-dismiss="modal">@lang('admin.buttons.close')</button>
+                            <button type="button" class="btn btn-primary"
+                                    onclick="sort()">sort
+                            </button>
                             <button type="submit" class="btn btn-primary">@lang('admin.buttons.submit')</button>
                         </div>
                     </form>
@@ -101,6 +105,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
             console.log(urls);
             console.log();
             $('#table').DataTable({
@@ -246,6 +251,7 @@
                 },
                 dataType: 'json',
                 success: function (res) {
+                    console.log(this.url);
                     res = res['data'];
                     console.log(res);
                     $('#Form')[0].reset();
@@ -363,6 +369,35 @@
                     });
                 },
             });
-        })
+        });
+
+        function sort() {
+            // var wrapper = document.getElementById("colors");
+            // var colors = Array.from(wrapper.querySelectorAll("option"));
+            // var sorted = colors.map(option => ({ text: option.innerHTML, element: option }));
+            //
+            // sorted.sort((a, b) => a.text.localeCompare(b.text));
+            //
+            // colors.forEach(option => wrapper.removeChild(option));
+            // sorted.forEach(item => wrapper.appendChild(item.element));
+            var select = document.getElementById("colors");
+            var options = Array.from(select.querySelectorAll("option"));
+            var selectedOptions = options.filter(option => option.selected);
+
+            options = options.filter(option => !option.selected);
+
+            options.sort((a, b) => a.innerHTML.localeCompare(b.innerHTML));
+
+            options.unshift(...selectedOptions);
+
+// Удаляем все опции из элемента select
+            while (select.firstChild) {
+                select.removeChild(select.firstChild);
+            }
+
+// Добавляем отсортированные опции обратно в элемент select
+            options.forEach(option => select.appendChild(option));
+        }
+
     </script>
 @endsection

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ErikController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ModelControllers\LeadsController;
 use App\Http\Controllers\ModelControllers\NewsController;
@@ -27,6 +28,12 @@ Route::prefix('frontend')->group(function () {
     Route::get('/calc', [MainController::class, 'calc'])->name('user.calc');
     Route::post('/', [LeadsController::class, 'create'])->name('user.leads');
 });
+
+Route::get('/filter',[ProductsController::class,'filter']);
+
+Route::get('/erik', [ErikController::class,'erik']);
+
+Route::get('/erikw', [ErikController::class,'index']);
 
 /*Route::get('/', [MainController::class, 'index'])->name('user.main.index');
 Route::get('/catalog', [MainController::class, 'catalog'])->name('user.catalog');

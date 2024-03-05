@@ -113,6 +113,7 @@ return [
         ],
         'selectable_key' => 'product_category_id',
         'selectableModel' => app(ProductCategory::class),
+        'tagsModel' => app(Color::class),
     ], // DONE
 
     MetaData::class => [

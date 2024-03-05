@@ -21,7 +21,7 @@ class ProductsController extends BaseAdminController
         parent::__construct($service, ProductDTO::class, ProductResource::class, CreateProductRequest::class);
     }
 
-    public function store(Request $request)
+    public function store(Request $request):JsonResource
     {
         $request = app($this->request, $request->all());
 
@@ -55,7 +55,7 @@ class ProductsController extends BaseAdminController
         return view('frontend.products-details', $resource);
     }
 
-    public function filter(ProductFilterRequest $request)
+    public function filter(ProductFilterRequest $request):View
     {
         $entities = $this->service->fetchProducts($request);
 

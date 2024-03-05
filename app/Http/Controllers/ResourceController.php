@@ -18,7 +18,7 @@ abstract class ResourceController
 
     }
 
-    public function store(Request $request)
+    public function store(Request $request): JsonResource
     {
         $request = app($this->request, $request->all());
 
@@ -48,7 +48,6 @@ abstract class ResourceController
             $entity,
             $this->dto::appRequest($request)
         );
-
         return $this->resource::make($entity);
     }
 

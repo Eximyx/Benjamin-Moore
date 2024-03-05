@@ -26,7 +26,7 @@ class ProductRepository extends BaseModelRepository
 
     public function create(array $dto): ?Model
     {
-        $colors  = $dto['colors'];
+        $colors = $dto['colors'];
         unset($dto['colors']);
 
         $product = $this->model->create($dto);
@@ -38,7 +38,7 @@ class ProductRepository extends BaseModelRepository
 
     public function update(Model $entity, array $dto): Model
     {
-        $colors  = $dto['colors'];
+        $colors = $dto['colors'];
         unset($dto['colors']);
 
         $product = tap($entity)->update($dto);
@@ -93,22 +93,22 @@ class ProductRepository extends BaseModelRepository
         return $products->orderBy('product_category_id', 'desc')->paginate(12);
     }
 
-    public function fetchCategories(ProductFilterRequest $request)
+    public function fetchCategories(ProductFilterRequest $request): Collection
     {
         $data = $request->validated();
 
-        $filter = app()->make(ProductCategoryFilter::class,['queryParams' => ['kind_of_work_id' => $data['kind_of_work_id']]]);
+        $filter = app()->make(ProductCategoryFilter::class, ['queryParams' => ['kind_of_work_id' => $data['kind_of_work_id']]]);
 
         return ProductCategory::filter($filter)->get();
     }
 
-    public function fetchProducts(ProductFilterRequest $request)
+    public function fetchProducts(ProductFilterRequest $request): Collection
     {
         $data = $request->validated();
 
-        $filter = app()->make(ProductFilter::class,['queryParams' => array_filter($data)]);
+        $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
 
-        return Product::filter($filter)->get();
+        return Product::filter($filter)->get()->paginate(12);
     }
 
     public function getAllForDatatable(): Collection
@@ -142,5 +142,4 @@ class ProductRepository extends BaseModelRepository
 
         return $query;
     }
-
 }
