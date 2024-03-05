@@ -47,14 +47,20 @@ class MainController extends Controller
     {
         return view('frontend.calculator',
             [
-                'data' => ['settings' => $this->settings]
+                'data' => ['settings' => $this->settings],
             ]
         );
     }
 
     public function catalog(): View
     {
-        return view('frontend.catalog');
+        return view('frontend.catalog',
+            [
+                'data' => [
+                    'settings' => $this->settings,
+                ],
+            ]
+        );
     }
 
     public function contacts(): View
