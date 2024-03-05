@@ -47,7 +47,7 @@
                                            style="width: 150px" required>
                                 @elseif($value == 'colors')
                                     <select class="form-select" multiple name="{{$value}}[]" id="{{$value}}">
-                                        <option value="" selected>Не выбрано</option>
+                                        <option data="default" value="">Не выбрано</option>
                                         <@foreach ($data['tags'] as $item)
                                             <option value="{{ $item['id'] }}">
                                                 <b> {{ $item['title'] }}</b>
@@ -61,7 +61,7 @@
                                 @elseif(str_contains($value, '_id'))
                                     <div>
                                         <select class="form-select" name="{{ $value }}" id="select">
-                                            <option value="">
+                                            <option data="default" value="">
                                                 Не выбрано
                                             </option>
                                             @foreach ($data['selectable'] as $item)
@@ -243,6 +243,7 @@
         }
 
         function editFunc(id) {
+            del();
             $.ajax({
                 type: "GET",
                 url: urls + '/edit',
@@ -260,13 +261,14 @@
                     $.each(res, function (key, value) {
                         if (!key.includes('image')) {
                             if (key.includes('_id')) {
-                                $("#select").find(`option[value='${value}']`).attr("selected", true);
+                                $("#select").find(`option[value='${value}']`).attr('selected', true);
                             } else {
                                 $('#' + key).val(value);
                             }
                         } else {
                             result.attr("src", `{{ url('storage/image/') }}/${res[key]}`);
                         }
+                        $("#select option:selected").insertAfter("#select option[data='default']");
                     });
                     $('#summernote-content').summernote('code', res.content);
                 },
@@ -337,6 +339,12 @@
             })
         }
 
+        function del() {
+            $('#select option:selected').each((key, value) => {
+                $(value).removeAttr('selected')
+            });
+        }
+
         $('#Form').submit(function (e) {
             e.preventDefault();
             let formData = new FormData(this);
@@ -346,6 +354,8 @@
             if (id !== '') {
                 url += `/update/${id}`
             }
+
+            del();
             $.ajax({
                 type: type,
                 url: urls + url,
@@ -370,34 +380,6 @@
                 },
             });
         });
-
-        function sort() {
-            // var wrapper = document.getElementById("colors");
-            // var colors = Array.from(wrapper.querySelectorAll("option"));
-            // var sorted = colors.map(option => ({ text: option.innerHTML, element: option }));
-            //
-            // sorted.sort((a, b) => a.text.localeCompare(b.text));
-            //
-            // colors.forEach(option => wrapper.removeChild(option));
-            // sorted.forEach(item => wrapper.appendChild(item.element));
-            var select = document.getElementById("colors");
-            var options = Array.from(select.querySelectorAll("option"));
-            var selectedOptions = options.filter(option => option.selected);
-
-            options = options.filter(option => !option.selected);
-
-            options.sort((a, b) => a.innerHTML.localeCompare(b.innerHTML));
-
-            options.unshift(...selectedOptions);
-
-// Удаляем все опции из элемента select
-            while (select.firstChild) {
-                select.removeChild(select.firstChild);
-            }
-
-// Добавляем отсортированные опции обратно в элемент select
-            options.forEach(option => select.appendChild(option));
-        }
 
     </script>
 @endsection
