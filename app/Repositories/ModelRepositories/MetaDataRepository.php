@@ -11,7 +11,11 @@ class MetaDataRepository extends BaseModelRepository
         parent::__construct(Model::class);
     }
 
-    public function findByURL(string $url): ?Model
+    /**
+     * @param string $url
+     * @return Model
+     */
+    public function findByURL(string $url): Model
     {
         return $this->model::where('url', '=', $url)->firstOrFail();
     }

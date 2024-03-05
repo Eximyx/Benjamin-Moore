@@ -23,17 +23,16 @@ use Psr\Container\NotFoundExceptionInterface;
 class MainService
 {
     public function __construct(
-        protected NewsRepository     $newsRepository,
-        protected ProductRepository  $productRepository,
-        protected ReviewRepository   $reviewRepository,
-        protected LeadsRepository    $leadsRepository,
-        protected BannersRepository  $bannersRepository,
-        protected SectionRepository  $sectionRepository,
+        protected NewsRepository $newsRepository,
+        protected ProductRepository $productRepository,
+        protected ReviewRepository $reviewRepository,
+        protected LeadsRepository $leadsRepository,
+        protected BannersRepository $bannersRepository,
+        protected SectionRepository $sectionRepository,
         protected PartnersRepository $partnersRepository,
         protected SettingsRepository $settingsRepository,
-        protected WrapItems          $wrapItems
-    )
-    {
+        protected WrapItems $wrapItems
+    ) {
 
     }
 
@@ -75,9 +74,10 @@ class MainService
     /**
      * @return Collection<mixed>
      */
-    public function newsWrapper(?int $maxSlides = 0): Collection
+    public function newsWrapper(?int $maxSlides, ?int $amount = 3): Collection
     {
-        $wrappedItems = $this->wrapper($this->newsRepository->getLatest()->get(), $maxSlides);
+        $wrappedItems = $this->wrapper($this->newsRepository->getLatest()->get(), $maxSlides, $amount);
+
         $wrappedItems->each(function ($item, $index) use ($wrappedItems) {
             $wrappedItems[$index] = NewsPostResource::collection($item);
         });
@@ -85,32 +85,36 @@ class MainService
         return $wrappedItems;
     }
 
-    public function wrapper(Collection $items, int $maxSlides = 0): Collection
+    public function wrapper(Collection $items, int $maxSlides = 0, ?int $amount = 5): Collection
     {
-        return $this->wrapItems->__invoke($items, maxSlides: $maxSlides);
+        return $this->wrapItems->__invoke($items, maxSlides: $maxSlides, slideAmount: $amount);
     }
 
     /**
      * @return Collection<mixed>
      */
-    public function productsWrapper(?int $maxSlides = 0): Collection
+    public function productsWrapper(?int $maxSlides, ?int $amount = 3): Collection
     {
-        $wrappedItems = $this->wrapper($this->productRepository->getLatest()->get(), $maxSlides);
+        $wrappedItems = $this->wrapper($this->productRepository->getLatest()->get(), $maxSlides, $amount);
+
         $wrappedItems->each(function ($item, $index) use ($wrappedItems) {
             $wrappedItems[$index] = ProductResource::collection($item);
         });
+
         return $wrappedItems;
     }
 
     /**
      * @return Collection<mixed>
      */
-    public function reviewsWrapper(?int $maxSlides = 0): Collection
+    public function reviewsWrapper(?int $maxSlides, ?int $amount = 3): Collection
     {
-        $wrappedItems = $this->wrapper($this->reviewRepository->getLatest()->get());
+        $wrappedItems = $this->wrapper($this->reviewRepository->getLatest()->get(), $amount);
+
         $wrappedItems->each(function ($item, $index) use ($wrappedItems) {
             $wrappedItems[$index] = ReviewResource::collection($item);
         });
+
         return $wrappedItems;
     }
 

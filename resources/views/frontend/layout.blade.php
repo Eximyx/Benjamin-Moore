@@ -5,10 +5,14 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="{{$data['meta']->meta_description}}">
+    <meta name="keywords" content="{{$data['meta']->meta_keywords}}">
+
+    <title>{{$data['meta']->title}}</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500&display=swap" rel="stylesheet">
     @vite('resources/css/style.css')
     @vite('resources/js/app.js')
-    <title>Document</title>
 </head>
 <body>
 <header class="header">
@@ -84,7 +88,8 @@
     <div class="footer__logo">
         <img src="{{Vite::asset('resources/icons/benjaminmoore-icon.svg')}}" alt="icon"/>
         <a class="logo-text" href="{{route('user.main.index')}}">Benjamin Moore</a>
-        <p>Есть над чем задуматься: явные признаки победы ограничены исключительно образом мышления.</p>
+        <p>Есть над чем задуматься: явные признаки победы ограничены исключительно образом
+            мышления. {{$data['meta']->additional_text}}</p>
     </div>
     <div class="footer__buttons">
         <ul class="header__nav-buttons buttons-margin">

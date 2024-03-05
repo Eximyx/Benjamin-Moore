@@ -72,6 +72,8 @@ class BannersRepository extends BaseModelRepository
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
+
+
     public function getBannersWithPositions(): Collection
     {
         return $this->model->where('banner_position_id', '<>', 'null')->get();

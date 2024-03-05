@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class WrapItems
 {
     /**
-     * @param Collection<int, Model> $items
+     * @param  Collection<int, Model>  $items
      * @return Collection<int, mixed>
      */
-    public function __invoke(Collection $items, int $maxSlides = 0, int $slideAmount = 5): Collection
+    public function __invoke(Collection $items, int $maxSlides = 0, ?int $slideAmount = 5): Collection
     {
         $j = 0;
         $list = [new Collection()];
@@ -25,6 +25,7 @@ class WrapItems
             }
             $list[$j]->push($item);
         }
+
         return new Collection($list);
     }
 }

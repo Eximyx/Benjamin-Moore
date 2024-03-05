@@ -29,11 +29,11 @@ Route::prefix('frontend')->group(function () {
     Route::post('/', [LeadsController::class, 'create'])->name('user.leads');
 });
 
-Route::get('/filter',[ProductsController::class,'filter']);
+Route::get('/filter', [ProductsController::class, 'filter']);
 
-Route::get('/erik', [ErikController::class,'erik']);
+Route::get('/erik', [ErikController::class, 'erik']);
 
-Route::get('/erikw', [ErikController::class,'index']);
+Route::get('/erikw', [ErikController::class, 'index']);
 
 /*Route::get('/', [MainController::class, 'index'])->name('user.main.index');
 Route::get('/catalog', [MainController::class, 'catalog'])->name('user.catalog');

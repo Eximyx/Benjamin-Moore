@@ -19,6 +19,7 @@ return [
             'from' => 'From',
             'to' => 'To',
         ],
+        'jobs' => 'Jobs',
         'internalWork' => 'Internal work',
         'externalWork' => 'External work',
     ],

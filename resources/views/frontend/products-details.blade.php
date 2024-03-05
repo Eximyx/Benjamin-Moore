@@ -1,6 +1,6 @@
 @extends('frontend.layout')
 
-@section('breadcrumbs', $resource['entity']->title ?? 'ENTITY_TITLE')
+@section('breadcrumbs', $data['entity']->title ?? 'ENTITY_TITLE')
 
 @section('content')
     @include('frontend.breadcrumbs')
@@ -16,11 +16,11 @@
             </div>
         </div>
         <div class="product-details">
-            <h2 class="section-header">{{$resource['entity']->title}}</h2>
-            <p class="product-status">@lang('catalog.product-details.isAvailable.' . $resource['entity']->is_toggled ?? 0)</p>
+            <h2 class="section-header">{{$data['entity']->title}}</h2>
+            <p class="product-status">@lang('catalog.product-details.isAvailable.' . $data['entity']->is_toggled ?? 0)</p>
             <p class="product-description">
                 {{--                TODO: Добавить subContent в продукты--}}
-                {{$resource['entity']->subContent ?? "PRODUCT_SUBCONTENT"}}
+                {{$data['entity']->subContent ?? "PRODUCT_SUBCONTENT"}}
             </p>
             <p class="product-description">@lang('catalog.product-details.amount')</p>
             <div class="product-counter">
@@ -30,7 +30,7 @@
             </div>
             <div class="product-price-block">
                 <div class="product-price-block__inner-text"><p class="product-price">$</p>
-                    <p id="product-price">{{$resource['entity']->price}}</p></div>
+                    <p id="product-price">{{$data['entity']->price}}</p></div>
                 <button class="button-filled">@lang('catalog.product-details.call')</button>
             </div>
         </div>
@@ -42,31 +42,31 @@
             <input id="tab-btn-2" name="tab-btn" type="radio" value="">
             <label for="tab-btn-2">@lang('catalog.product-details.options')</label>
             <div class="tab-content" id="content-1">
-                {{$resource['entity']->content}}
+                {{$data['entity']->content}}
             </div>
             <div class="tab-content" id="content-2">
                 <div class="tab-content-block">
                     <div class="tab-content-block__inner-text">
                         <h4>@lang('admin.keys.code')</h4>
-                        <p>{{$resource['entity']->code}}</p>
+                        <p>{{$data['entity']->code}}</p>
                         <h4>@lang('admin.keys.description')</h4>
-                        <p>{{$resource['entity']->description}}</p>
+                        <p>{{$data['entity']->description}}</p>
                         <h4>@lang('admin.keys.type')</h4>
-                        <p>{{$resource['entity']->type}}</p>
+                        <p>{{$data['entity']->type}}</p>
                         <h4>@lang('admin.keys.colors')</h4>
-                        <p>{{$resource['entity']->colors ?? "PRODUCT_COLORS"}}</p>
+                        <p>{{$data['entity']->colors ?? "PRODUCT_COLORS"}}</p>
                         <h4>@lang('admin.keys.base')</h4>
                         <p>1-4</p>
                     </div>
                     <div class="tab-content-block__inner-text">
                         <h4>@lang('admin.keys.v_of_dry_remain')</h4>
-                        <p>{{$resource['entity']->v_of_dry_remain}}</p>
+                        <p>{{$data['entity']->v_of_dry_remain}}</p>
                         <h4>@lang('admin.keys.time_to_repeat')</h4>
-                        <p>{{$resource['entity']->time_to_repeat}}</p>
+                        <p>{{$data['entity']->time_to_repeat}}</p>
                         <h4>@lang('admin.keys.consumption')</h4>
-                        <p>{{$resource['entity']->consumption}}</p>
+                        <p>{{$data['entity']->consumption}}</p>
                         <h4>@lang('admin.keys.thickness')</h4>
-                        <p>{{$resource['entity']->thickness}}</p>
+                        <p>{{$data['entity']->thickness}}</p>
                     </div>
                 </div>
                 <button class="button-filled" id="pdf_button">@lang('catalog.product-details.download')</button>

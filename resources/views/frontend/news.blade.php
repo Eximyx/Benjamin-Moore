@@ -4,30 +4,31 @@
     <section class="news-section">
         <h2 class="section-title">@lang('news.title')</h2>
         <div class="news-section__wrapper">
-            @foreach($newsPosts as $key => $value)
+            @foreach($data['newsPosts'] as $key => $value)
                 <div class="news-card-link news-card">
                     <img src="{{url('storage/image').'/'.$value->main_image}}" alt="news preview">
                     <div class="news-card__details-block">
                         <div class="news-card__details">
-                            <p class="news-card__details-author">Udemy •</p>
-                            <img class="news-card__details-clock-image" src="{{Vite::asset('resources/icons/clock.svg')}}"
+                            <p class="news-card__details-author">USER_NAME •</p>
+                            <img class="news-card__details-clock-image"
+                                 src="{{Vite::asset('resources/icons/clock.svg')}}"
                                  alt="clock image">
-                            <p class="news-card__details-date">27 января 2021</p>
+                            <p class="news-card__details-date">{{$value->created_at->format('d.m.y')}}</p>
                         </div>
-                        <a class="news-card__link" href="{{route('user.news-show', $value->slug ?? 1)}}">
+                        <a class="news-card__link" href="{{route('user.news-show', $value->slug)}}">
                             @lang('news.more')
                         </a>
                     </div>
                     <h4 class="news-card__header">
-                        Какие IT - професси будут востребованы в 2022 году
+                        {{$value->title}}
                     </h4>
                     <p class="news-card__description">
-                        Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
+                        {{$value->description}}
                     </p>
                 </div>
             @endforeach
         </div>
         {{-- PAGINATION --}}
-        {{$newsPosts->links('frontend.pagination')}}
+        {{$data['newsPosts']->links('frontend.pagination')}}
     </section>
 @endsection

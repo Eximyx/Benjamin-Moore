@@ -34,7 +34,7 @@ class UpdateMetaData extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Adding meta-data for all routes';
 
     /**
      * Execute the console command.
@@ -44,17 +44,18 @@ class UpdateMetaData extends Command
         DB::table('meta_data')->truncate();
 
         $host = Request::getSchemeAndHttpHost();
-        $routeColection = Route::getRoutes()->get();
-        foreach ($routeColection as $value) {
+        $routeCollection = Route::getRoutes()->get();
+        foreach ($routeCollection as $value) {
             $name = $value->getName();
             $uri = $value->uri();
-            if ((str_contains($name, 'user')) & (!str_contains($uri, 'admin')) & ($value->methods()[0] == 'GET')) {
+
+            if ((str_contains($name, 'user')) & (! str_contains($uri, 'admin')) & ($value->methods()[0] == 'GET')) {
                 if (str_contains($uri, 'slug')) {
-                    $key = explode('/', $uri)[0];
+                    $key = explode('/', $uri)[1];
                     if (isset($this->entities[$key])) {
                         foreach ($this->entities[$key]::all() as $item) {
                             MetaData::factory()->create([
-                                'url' => str_replace('{slug}', $item->slug, $host . '/' . $uri),
+                                'url' => str_replace('{slug}', $item->slug, $host.'/'.$uri),
                                 'title' => $item->title,
                             ]);
                         }
@@ -62,7 +63,12 @@ class UpdateMetaData extends Command
 
                     continue;
                 }
-                MetaData::factory()->create(['url' => ($uri === '/' ? $host : $host . '/') . $uri, 'title' => trans($value->getName())]);
+                MetaData::factory()->create(
+                    [
+                        'url' => ($uri === '/' ? $host : $host.'/').$uri,
+                        'title' => trans($value->getName()),
+                    ]
+                );
             }
         }
     }

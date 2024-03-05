@@ -1,80 +1,54 @@
 @extends('frontend.layout')
 @section('content')
     @include('frontend.breadcrumbs')
+    {{-- TODO BOTH: 23. Обсудить, как будем данные фильтров передавать --}}
     <div class="catalog-block">
         <button class="mobile-filter__button button-outlined">
             <img src="{{Vite::asset('resources/icons/filter-icon.svg')}}"
                  alt="filter-icon">@lang('catalog.filter.title')
         </button>
         <form class="catalog-form">
-            <label class="form-label" for="series">@lang('catalog.filter.series')</label>
-            <div class="dropdown_with-chk">
-                <button type="button" class="dropdown_with-chk__button">@lang('catalog.filter.defaultValue')</button>
-                <ul class="dropdown_with-chk__list" id="series">
-                    <li class="dropdown_with-chk__list-item">
-                        <input type="checkbox" name="i-1" id="i-1" class="dropdown_with-chk__list-item_label">
-                        <label for="i-1" class="dropdown_with-chk__list-item_label">Aura</label>
-                    </li>
-                    <li class="dropdown_with-chk__list-item">
-                        <input type="checkbox" name="i-2" id="i-2" class="dropdown_with-chk__list-item_label">
-                        <label for="i-2" class="dropdown_with-chk__list-item_label">Shm aura</label>
-                    </li>
-                    <li class="dropdown_with-chk__list-item">
-                        <input type="checkbox" name="i-3" id="i-3" class="dropdown_with-chk__list-item_label">
-                        <label for="i-3" class="dropdown_with-chk__list-item_label">Maura</label>
-                    </li>
-                    <li class="dropdown_with-chk__list-item">
-                        <input type="checkbox" name="i-4" id="i-4" class="dropdown_with-chk__list-item_label">
-                        <label for="i-4" class="dropdown_with-chk__list-item_label">neAura</label>
-                    </li>
-                </ul>
-            </div>
-            <label class="form-label" for="jobs">Работы</label>
+            <label class="form-label" for="jobs">@lang('catalog.filter.jobs')</label>
             <div class="dropdown_with-chk">
                 <button type="button" class="dropdown_with-chk__button">@lang('catalog.filter.defaultValue')</button>
                 <ul class="dropdown_with-chk__list" id="jobs">
                     <li class="dropdown_with-chk__list-item">
-                        <input type="checkbox" name="i-1-1" id="i-1-1" class="dropdown_with-chk__list-item_label">
-                        <label for="i-1-1" class="dropdown_with-chk__list-item_label">Aura</label>
+                        <input type="checkbox" name="kind_of_work_id[]" class="dropdown_with-chk__list-item_label">
+                        <label class="dropdown_with-chk__list-item_label">@lang('catalog.filter.internalWork')</label>
                     </li>
                     <li class="dropdown_with-chk__list-item">
-                        <input type="checkbox" name="i-2-1" id="i-2-1" class="dropdown_with-chk__list-item_label">
-                        <label for="i-2-1" class="dropdown_with-chk__list-item_label">Shmaura</label>
-                    </li>
-                    <li class="dropdown_with-chk__list-item">
-                        <input type="checkbox" name="i-3-1" id="i-3-1" class="dropdown_with-chk__list-item_label">
-                        <label for="i-3-1" class="dropdown_with-chk__list-item_label">Maura</label>
-                    </li>
-                    <li class="dropdown_with-chk__list-item">
-                        <input type="checkbox" name="i-4-1" id="i-4-1" class="dropdown_with-chk__list-item_label">
-                        <label for="i-4-1" class="dropdown_with-chk__list-item_label">neAura</label>
+                        <input type="checkbox" name="kind_of_work_id[]" class="dropdown_with-chk__list-item_label">
+                        <label class="dropdown_with-chk__list-item_label">@lang('catalog.filter.externalWork')</label>
                     </li>
                 </ul>
             </div>
+            <label class="form-label" for="series">@lang('catalog.filter.series')</label>
+            <div class="dropdown_with-chk">
+                <button type="button" class="dropdown_with-chk__button">@lang('catalog.filter.defaultValue')</button>
+                <ul class="dropdown_with-chk__list" id="series">
+                    @foreach($data['productCategories'] as $key => $value)
+                        <li class="dropdown_with-chk__list-item">
+                            <input type="checkbox" name="products_categories[]" id="{{$value->id}}"
+                                   class="dropdown_with-chk__list-item_label">
+                            <label for="{{$value->id}}"
+                                   class="dropdown_with-chk__list-item_label">{{$value->title}}</label>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+
             <label class="form-label" for="colors">@lang('catalog.filter.colors')</label>
             <div class="dropdown_with-chk">
                 <button type="button" class="dropdown_with-chk__button">@lang('catalog.filter.defaultValue')</button>
                 <ul class="dropdown_with-chk__list" id="colors">
-                    <li class="dropdown_with-chk__list-item">
-                        <input type="checkbox" name="i-1-2" id="i-1-2" class="dropdown_with-chk__list-item_label">
-                        <label for="i-1-2" class="dropdown_with-chk__list-item_label">Aura</label>
-                    </li>
-                    <li class="dropdown_with-chk__list-item">
-                        <input type="checkbox" name="i-2-2" id="i-2-2" class="dropdown_with-chk__list-item_label">
-                        <label for="i-2-2" class="dropdown_with-chk__list-item_label">Shmaura</label>
-                    </li>
-                    <li class="dropdown_with-chk__list-item">
-                        <input type="checkbox" name="i-3-2" id="i-3-2" class="dropdown_with-chk__list-item_label">
-                        <label for="i-3-2" class="dropdown_with-chk__list-item_label">Maura</label>
-                    </li>
-                    <li class="dropdown_with-chk__list-item">
-                        <input type="checkbox" name="i-4-2" id="i-4-2" class="dropdown_with-chk__list-item_label">
-                        <label for="i-4-2" class="dropdown_with-chk__list-item_label">neAura</label>
-                    </li>
-                    <li class="dropdown_with-chk__list-item">
-                        <input type="checkbox" name="i-1-2" id="i-1-2" class="dropdown_with-chk__list-item_label">
-                        <label for="i-1-2" class="dropdown_with-chk__list-item_label">Aura</label>
-                    </li>
+                    @foreach($data['colors'] as $key => $value)
+                        <li class="dropdown_with-chk__list-item">
+                            <input type="checkbox" name="colorss[]" id="{{$value->id}}"
+                                   class="dropdown_with-chk__list-item_label">
+                            <label for="{{$value->id}}"
+                                   class="dropdown_with-chk__list-item_label">{{$value->title}}</label>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
             <label class="form-label" for="budget">@lang('catalog.filter.prices.budget')</label>
@@ -102,45 +76,22 @@
                 которую включены полноспектральные цвета,которые обладают усиленной реакцией на изменение освещения.
             </p>
             <div class="catalog-wrapper__products-block">
-                <div class="product-card">
-                    <img src="{{Vite::asset('resources/images/paint-can.png')}}" alt="paint can">
-                    <h4 class="product-card__header">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</h4>
-                    <p class="product-card__details">Степень блеска «полуглянцевая»</p>
-                    <div class="product-card__price-block">
-                        <p class="product-card__price-block__price">$ 5199.00</p>
-                        <a href="product-details.html">
-                            <button class="button-filled">@lang('catalog.buttons.order')</button>
-                        </a>
+                @foreach($data['products'] as $index => $value)
+                    <div class="product-card">
+                        <img src="{{Vite::asset('resources/images/paint-can.png')}}" alt="paint can">
+                        <h4 class="product-card__header">{{$value->title}}</h4>
+                        <p class="product-card__details">{{$value->gloss_level}}</p>
+                        <div class="product-card__price-block">
+                            <p class="product-card__price-block__price">$ {{$value->price}}</p>
+                            <a href="{{route('user.catalog-show', $value->slug)}}">
+                                <button class="button-filled">@lang('catalog.buttons.order')</button>
+                            </a>
+                        </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-            <div class="pagination">
-                <ul class="pagination-ul">
-                    <li class="pagination-item disabled">
-                        <a href="#">
-                            <svg width="6" height="12" viewBox="0 0 6 12" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 1L1 6L5 11" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="pagination-item disabled"><a href="#">1</a></li>
-                    <li class="pagination-item-active"><a href="#">2</a></li>
-                    <li class="pagination-item"><a href="#">4</a></li>
-                    <li class="pagination-item"><a href="#">5</a></li>
-                    <li class="pagination-item"><a href="#">6</a></li>
-                    <li>...</li>
-                    <li class="pagination-item"><a href="#" id="pagination-last-page">14</a></li>
-                    <li class="pagination-item">
-                        <a href="#">
-                            <svg width="6" height="12" viewBox="0 0 6 12" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 11L5 6L1 1" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            {{$data['products']->links('frontend.pagination')}}
+
         </div>
     </div>
 @endsection

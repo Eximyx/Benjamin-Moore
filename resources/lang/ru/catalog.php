@@ -11,6 +11,7 @@ return [
         'title' => 'Фильтры',
         'defaultValue' => 'Выберите из списка',
         'kindOfWork' => 'Работы',
+        'all' => 'Все',
         'series' => 'Серия',
         'colors' => 'Цвета',
         'prices' => [
@@ -18,7 +19,7 @@ return [
             'from' => 'От',
             'to' => 'До',
         ],
-        'all' => 'Все',
+        'jobs' => 'Работы',
         'internalWork' => 'Внутренние работы',
         'externalWork' => 'Внешние работы',
     ],
