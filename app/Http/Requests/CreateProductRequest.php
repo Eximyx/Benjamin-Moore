@@ -21,7 +21,7 @@ class CreateProductRequest extends FormRequest
             'title' => 'string|required|min:5|max:100',
             'main_image' => 'image|mimes:jpeg,png,jpg|nullable',
             'content' => 'string|required',
-            'code' => 'numeric|required|max:50',
+            'code' => 'numeric|required',
             'price' => 'numeric|required|min:1',
             'gloss_level' => 'string|required|min:5|max:50',
             'description' => 'string|required|max:50',
