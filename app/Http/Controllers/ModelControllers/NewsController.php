@@ -42,7 +42,7 @@ class NewsController extends BaseAdminController
                     [
                         'newsPosts' => $newsPosts,
                         'settings' => $this->settings,
-                        'meta' => $this->getMetaDataByRequest()
+                        'meta' => $this->getMetaDataByRequest(),
                     ]
                 ),
             ]);
@@ -53,11 +53,11 @@ class NewsController extends BaseAdminController
         $entity = $this->service->findBySlug($slug);
         //        dd(NewsPostResource::make($entity));
         $resource = NewsShowResource::make([
-                'entity' => $entity,
-                'latest' => $this->service->getLatest(),
-                'settings' => $this->settings,
-                'meta' => $this->getMetaDataByRequest()
-            ]
+            'entity' => $entity,
+            'latest' => $this->service->getLatest(),
+            'settings' => $this->settings,
+            'meta' => $this->getMetaDataByRequest(),
+        ]
         );
         dd($resource);
 
