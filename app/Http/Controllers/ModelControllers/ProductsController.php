@@ -5,6 +5,8 @@ namespace App\Http\Controllers\ModelControllers;
 use App\DataTransferObjects\ModelDTO\ProductDTO;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\ProductFilterRequest;
+use App\Http\Resources\ColorResource;
+use App\Http\Resources\ProductCategoryResource;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductShowResource;
 use App\Http\Resources\SettingsResource;
@@ -71,11 +73,26 @@ class ProductsController extends BaseAdminController
         return view('frontend.products-details', ['data' => $data]);
     }
 
-    public function filter(ProductFilterRequest $request): View
+    public function catalog(ProductFilterRequest $request): View
+    {
+        return view('frontend.catalog',
+            [
+                'data' => JsonResource::make([
+                    'products' => ProductResource::collection($this->filter($request)['products']),
+                    'colors' => ColorResource::collection($this->service->getColors()),
+                    'productCategories' => ProductCategoryResource::collection($this->filter($request)['categories']),
+                    'settings' => $this->settings,
+                    'meta' => $this->getMetaDataByRequest(),
+                ]),
+            ]
+        );
+    }
+
+    public function filter(ProductFilterRequest $request): array
     {
         $entities = $this->service->fetchProducts($request);
 
-        return view('user.catalog', ['Products' => $entities['products'], 'category' => $entities['categories']]);
+        return ['products' => $entities['products'], 'categories' => $entities['categories']];
 
     }
 }

@@ -97,18 +97,20 @@ class ProductRepository extends BaseModelRepository
     {
         $data = $request->validated();
 
-        $filter = app()->make(ProductCategoryFilter::class, ['queryParams' => ['kind_of_work_id' => $data['kind_of_work_id']]]);
+        $kind_of_work_id = $data['kind_of_work_id'] ?? [1, 2];
+
+        $filter = app()->make(ProductCategoryFilter::class, ['queryParams' => ['kind_of_work_id' => $kind_of_work_id]]);
 
         return ProductCategory::filter($filter)->get();
     }
 
-    public function fetchProducts(ProductFilterRequest $request): Collection
+    public function fetchProducts(ProductFilterRequest $request)
     {
         $data = $request->validated();
 
         $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
 
-        return Product::filter($filter)->get()->paginate(12);
+        return Product::filter($filter);
     }
 
     public function getAllForDatatable(): Collection

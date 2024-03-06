@@ -44,7 +44,7 @@ class ProductFilter extends AbstractFilter
 
     }
 
-    public function price(Builder $builder, string $value): void
+    public function price(Builder $builder, $value): void
     {
         $value['from'] = $value['from'] ?? '0';
 

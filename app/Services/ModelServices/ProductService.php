@@ -7,10 +7,10 @@ use App\Http\Requests\ProductFilterRequest;
 use App\Repositories\ModelRepositories\ColorProductRepository;
 use App\Repositories\ModelRepositories\ColorRepository;
 use App\Repositories\ModelRepositories\ProductRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
 class ProductService extends BaseModelService
@@ -154,15 +154,17 @@ class ProductService extends BaseModelService
 
     public function fetchProducts(ProductFilterRequest $request): array
     {
-        $data = $request->validated();
+        $list['categories'] = $this->repository->fetchCategories($request);
 
-        if (isset($data['kind_of_work_id'])) {
-            $list['categories'] = $this->repository->fetchCategories($request);
-        }
 
-        $list['products'] = $this->repository->fetchProducts($request);
+        $list['products'] = $this->repository->fetchProducts($request)->paginate(12);
 
         return $list;
 
+    }
+
+    public function getColors(): Collection
+    {
+        return $this->colorRepository->getColorsForCatalog();
     }
 }

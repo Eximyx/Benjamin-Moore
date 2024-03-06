@@ -4,6 +4,7 @@ namespace App\Repositories\ModelRepositories;
 
 use App\Models\Color;
 use App\Models\Color as Model;
+use Illuminate\Database\Eloquent\Collection;
 
 class ColorRepository extends BaseModelRepository
 {
@@ -15,6 +16,11 @@ class ColorRepository extends BaseModelRepository
     public function getColors(array $colorIds): array
     {
         return Color::whereIn('id', $colorIds)->pluck('id')->all();
+    }
+
+    public function getColorsForCatalog(): ?Collection
+    {
+        return Color::all();
     }
 
 }
