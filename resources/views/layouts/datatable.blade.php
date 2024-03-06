@@ -47,7 +47,9 @@
                                            style="width: 150px" required>
                                 @elseif($value == 'colors')
                                     <select class="form-select" multiple name="{{$value}}[]" id="{{$value}}">
-                                        <option data="default" value="">Не выбрано</option>
+                                        <option data="default" value="">
+                                            Не выбрано
+                                        </option>
                                         <@foreach ($data['tags'] as $item)
                                             <option value="{{ $item['id'] }}">
                                                 <b> {{ $item['title'] }}</b>
@@ -259,22 +261,34 @@
                     $('#window_title').text('@lang('admin.modal.edit')');
                     $('#Form-modal').modal('show');
                     $.each(res, function (key, value) {
-                        if (!key.includes('image')) {
-                            if (key.includes('_id')) {
-                                $("#select").find(`option[value='${value}']`).attr('selected', true);
+                            if (!key.includes('image')) {
+
+                                if (key.includes('_id')) {
+                                    $("#select").find(`option[value='${value}']`).attr('selected', true);
+                                }
+                                    // else if (key.includes('colors')) {
+                                    //     console.log(value);
+                                    //     // console.log($("#colors").find(`option[value='${value}']`).key);
+                                    //     $("#colors").find(`option[value='${value}']`).attr('selected', true);
+                                // }
+                                else {
+                                    $('#' + key).val(value);
+                                }
                             } else {
-                                $('#' + key).val(value);
+                                result.attr("src", `{{ url('storage/image/') }}/${res[key]}`);
                             }
-                        } else {
-                            result.attr("src", `{{ url('storage/image/') }}/${res[key]}`);
+                            // $("#select option:selected").insertAfter("#select option[data='default']");
+                            // $("#colors option:selected").insertAfter("#select option[data='default']");
                         }
-                        $("#select option:selected").insertAfter("#select option[data='default']");
-                    });
+                    )
+
                     $('#summernote-content').summernote('code', res.content);
                 },
-                error: function (data) {
-                    console.log(data);
-                }
+                error:
+
+                    function (data) {
+                        console.log(data);
+                    }
             });
         }
 

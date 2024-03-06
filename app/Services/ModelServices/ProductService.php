@@ -39,12 +39,14 @@ class ProductService extends BaseModelService
         if ($entity == null) {
             throw new ModelNotFoundException('ds', 500);
         }
+        return $entity;
+    }
 
-        $entity['colors'] = $this->colorRepository->getColors(
+    public function getSelectableColors(string $id): array
+    {
+        return $this->colorRepository->getColors(
             $this->colorProductRepository->getColorIds($id)
         );
-
-        return $entity;
     }
 
     /**
@@ -142,6 +144,8 @@ class ProductService extends BaseModelService
         $variables = parent::getVariablesForDataTable();
 
         $variables['selectable'] = $variables['data']['selectableModel']->all();
+
+//        $variables['tags'] = $variables['data']['tagsModel'];
 
         $variables['tags'] = $variables['data']['tagsModel']->all();
 
