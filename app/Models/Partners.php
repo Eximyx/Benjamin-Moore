@@ -10,6 +10,7 @@ class Partners extends Model
     use HasFactory;
 
     protected $table = 'partners';
+    protected $guarded = false;
 
     protected $fillable = [
         'title',

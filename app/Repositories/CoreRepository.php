@@ -44,7 +44,7 @@ abstract class CoreRepository
     /**
      * @return Builder<Model>
      */
-    public function getLatest(int $amount = null): Builder
+    public function getLatest(?int $amount = null): Builder
     {
         $entities = $this->model::latest();
 
@@ -66,19 +66,19 @@ abstract class CoreRepository
     }
 
     /**
-     * @param array<string,mixed> $dto
+     * @param array<string,mixed> $data
      */
-    public function create(array $dto): ?Model
+    public function create(array $data): ?Model
     {
-        return $this->model->create($dto);
+        return $this->model->create($data);
     }
 
     /**
-     * @param array<string, mixed> $dto
+     * @param array<string, mixed> $data
      */
-    public function update(Model $entity, array $dto): Model
+    public function update(Model $entity, array $data): Model
     {
-        return tap($entity)->update($dto);
+        return tap($entity)->update($data);
     }
 
     public function destroy(Model $entity): Model

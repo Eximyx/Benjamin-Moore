@@ -5,7 +5,6 @@
 
 @section('content')
     @include('frontend.breadcrumbs')
-
     <div class="news-details">
         <div class="news-details__news-block">
             <h2 class="section-title">

@@ -13,6 +13,7 @@ class MetaDataResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this['id'],
             'url' => $this['url'],
             'title' => $this['title'],
             'meta_description' => $this['meta_description'],

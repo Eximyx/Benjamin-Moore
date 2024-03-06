@@ -25,6 +25,19 @@ class NewsController extends BaseAdminController
         $this->settings = $this->getSettings();
     }
 
+    public function store(Request $request): JsonResource
+    {
+        $request = app($this->request, $request->all());
+
+        $dto = $this->dto::AppRequest(
+            $request
+        );
+
+        $entity = $this->service->create($dto);
+
+        return $this->resource::make($entity);
+    }
+
     public function toggle(Request $request): JsonResource
     {
         $entity = $this->service->toggle($request);
@@ -32,10 +45,26 @@ class NewsController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
+    public function update(Request $request): JsonResource
+    {
+        $entity = $this->service->findById($request['id']);
+        $slug = $entity->slug;
+
+        $request = app($this->request, $request->all());
+
+        $entity = $this->service->update(
+            $entity,
+            $this->dto::appRequest($request)
+        );
+
+        $this->updateMetaDataUrl($slug, $entity->only(['slug', 'title']));
+
+        return $this->resource::make($entity);
+    }
+
     public function news(): View
     {
         $newsPosts = $this->service->paginate();
-
         return view('frontend.news',
             [
                 'data' => SettingsResource::make(
@@ -48,19 +77,18 @@ class NewsController extends BaseAdminController
             ]);
     }
 
-    public function showBySlug(string $slug): View
+    public function showBySlug(string $slug): View|JsonResource
     {
         $entity = $this->service->findBySlug($slug);
-        //        dd(NewsPostResource::make($entity));
-        $resource = NewsShowResource::make([
-            'entity' => $entity,
-            'latest' => $this->service->getLatest(),
-            'settings' => $this->settings,
-            'meta' => $this->getMetaDataByRequest(),
-        ]
-        );
-        dd($resource);
 
-        return view('frontend.news-details', compact('resource'));
+        $data = NewsShowResource::make([
+                'entity' => $entity,
+                'latest' => $this->service->getLatest(),
+                'settings' => $this->settings,
+                'meta' => $this->getMetaDataByRequest(),
+            ]
+        );
+
+        return view('frontend.news-details', ['data' => $data]);
     }
 }

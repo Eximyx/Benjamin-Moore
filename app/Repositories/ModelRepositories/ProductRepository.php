@@ -36,12 +36,12 @@ class ProductRepository extends BaseModelRepository
         return $product;
     }
 
-    public function update(Model $entity, array $dto): Model
+    public function update(Model $entity, array $data): Model
     {
-        $colors = $dto['colors'];
-        unset($dto['colors']);
+        $colors = $data['colors'];
+        unset($data['colors']);
 
-        $product = tap($entity)->update($dto);
+        $product = tap($entity)->update($data);
 
         $product->colors()->sync($colors);
 

@@ -1,4 +1,5 @@
 {{--{{dd($resource->resource['news'][3]/*)*/}}--}}
+{{--
 
 //News
 <table>
@@ -97,3 +98,7 @@
 <br>
 {{$data->resource['settings']->resource->description}}
 <br>
+--}}
+
+
+{{dd($data)}}

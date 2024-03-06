@@ -4,7 +4,6 @@ namespace App\Services\ModelServices;
 
 use App\Repositories\ModelRepositories\MetaDataRepository;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class MetaDataService extends BaseModelService
 {
@@ -15,15 +14,21 @@ class MetaDataService extends BaseModelService
         parent::__construct($repository);
     }
 
-    public function findByURL(string $url): ?Model
+    public function findBySlug(string $slug): ?Model
     {
-        $entity = $this->repository->findByURL($url);
-
-        if ($entity == null) {
-            throw new ModelNotFoundException('ds', 500);
-        }
-
-        return $entity;
+        return $this->repository->findBySlug($slug);
     }
 
+    public function updateURL(Model $entity, string $url): Model
+    {
+        return $this->repository->update(
+            $entity,
+            ['url' => $url]
+        );
+    }
+
+    public function findByURL(string $url): ?Model
+    {
+        return $this->repository->findByURL($url);
+    }
 }

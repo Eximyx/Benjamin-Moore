@@ -15,6 +15,23 @@ class NewsPost extends Model
     protected $table = 'news_posts';
 
     protected $guarded = false;
+    protected $fillable = [
+        'title',
+        'content',
+        'is_toggled',
+        'main_image',
+        'description',
+        'category_id',
+    ];
+    protected $casts = [
+        'create_at' => 'datetime',
+        'update_at' => 'datetime',
+    ];
+    protected array $entities = [
+        StaticPage::class => '/',
+        Product::class => '/catalog/',
+        NewsPost::class => '/news/'
+    ];
 
     /**
      * @return BelongsTo<Category, NewsPost>
@@ -36,17 +53,12 @@ class NewsPost extends Model
         ];
     }
 
-    protected $fillable = [
-        'title',
-        'content',
-        'is_toggled',
-        'main_image',
-        'description',
-        'category_id',
-    ];
+    public function createMetaData(): void
+    {
+        MetaData::create([
+            'url' => route('user.main.index') . $this->entities[$this::class] . $this->slug,
+            'title' => $this->title,
+        ]);
+    }
 
-    protected $casts = [
-        'create_at' => 'datetime',
-        'update_at' => 'datetime',
-    ];
 }

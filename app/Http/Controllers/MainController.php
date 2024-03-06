@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\BannerResource;
-use App\Http\Resources\ContactsResource;
-use App\Http\Resources\MainResource;
 use App\Http\Resources\PartnersResource;
 use App\Http\Resources\SectionResource;
 use App\Http\Resources\SettingsResource;
@@ -14,6 +12,7 @@ use App\Models\ProductCategory;
 use App\Services\MainService;
 use App\Traits\MetadataTrait;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Routing\Controller;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -26,7 +25,8 @@ class MainController extends Controller
 
     public function __construct(
         protected MainService $service,
-    ) {
+    )
+    {
         $this->settings = $this->getSettings();
     }
 
@@ -34,10 +34,9 @@ class MainController extends Controller
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public function index(): View
+    public function index(): View|JsonResource
     {
-
-        $data = MainResource::make([
+        $data = JsonResource::make([
             'news' => $this->service->newsWrapper(1),
             'products' => $this->service->productsWrapper(5),
             'reviews' => $this->service->reviewsWrapper(5),
@@ -50,20 +49,20 @@ class MainController extends Controller
         return view('frontend.main',
             [
                 'data' => $data,
-                'meta' => $this->getMetaDataByRequest(),
-
             ]
         );
     }
 
-    public function calc(): View
+    public function calc(): View|JsonResource
     {
         return view('frontend.calculator',
             [
-                'data' => [
-                    'settings' => $this->settings,
-                    'meta' => $this->getMetaDataByRequest(),
-                ],
+                'data' => JsonResource::make(
+                    [
+                        'settings' => $this->settings,
+                        'meta' => $this->getMetaDataByRequest(),
+                    ]
+                ),
             ]
         );
     }
@@ -72,23 +71,23 @@ class MainController extends Controller
     {
         return view('frontend.catalog',
             [
-                'data' => [
+                'data' => JsonResource::make([
                     'products' => Product::paginate(10),
                     'colors' => Color::all(),
                     'productCategories' => ProductCategory::all(),
                     'settings' => $this->settings,
                     'meta' => $this->getMetaDataByRequest(),
-                ],
+                ]),
             ]
         );
     }
 
     public function contacts(): View
     {
-        $data = ContactsResource::make([
+        $data = JsonResource::make([
             'data' => PartnersResource::collection($this->service->getPartners()),
-            'settings' => $this->settings,
             'banner' => BannerResource::make($this->service->getBannerByPositionId(2)),
+            'settings' => $this->settings,
             'meta' => $this->getMetaDataByRequest(),
         ]);
 

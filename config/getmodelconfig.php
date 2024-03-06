@@ -32,6 +32,7 @@ return [
             'title',
             'location',
         ],
+        'actions' => ['adding' => true],
     ],
     NewsPost::class => [
         'ModelName' => 'admin.titles.news',
@@ -50,6 +51,8 @@ return [
         ],
         'selectable_key' => 'category_id',
         'selectableModel' => app(Category::class),
+        'actions' => ['adding' => true],
+
     ],
     Banner::class => [
         'ModelName' => 'admin.titles.banners',
@@ -67,6 +70,8 @@ return [
         ],
         'selectable_key' => 'banner_position_id',
         'selectableModel' => app(BannerPosition::class),
+        'actions' => ['adding' => true],
+
     ],
 
     Section::class => [
@@ -84,6 +89,8 @@ return [
         ],
         'selectable_key' => 'section_position_id',
         'selectableModel' => app(SectionPosition::class),
+        'actions' => ['adding' => true],
+
     ],
 
     Product::class => [
@@ -116,11 +123,14 @@ return [
         'selectableModel' => app(ProductCategory::class),
         'tagsModel' => app(Color::class),
         'intermediateModel' => app(Color_product::class),
+        'actions' => ['adding' => true],
+
     ], // DONE
 
     MetaData::class => [
         'ModelName' => 'admin.titles.metadata',
         'datatable_data' => [
+            'id',
             'url',
             'title',
             'meta_description',
@@ -129,13 +139,13 @@ return [
             'additional_text',
         ],
         'form_data' => [
-            'url',
             'title',
             'meta_description',
             'meta_keywords',
             'h',
             'additional_text',
         ],
+        'adding' => false,
     ],
     ProductCategory::class => [
         'ModelName' => 'admin.titles.productCategory',
@@ -151,6 +161,7 @@ return [
         ],
         'selectable_key' => 'kind_of_work_id',
         'selectableModel' => app(KindOfWork::class),
+        'actions' => ['adding' => true],
     ],
     User::class => [
         'ModelName' => 'admin.titles.user',
@@ -168,6 +179,7 @@ return [
         ],
         'selectable_key' => 'user_role_id',
         'selectableModel' => app(UserRoles::class),
+        'actions' => ['adding' => true],
     ],
 
     Category::class => [
@@ -179,6 +191,7 @@ return [
         'form_data' => [
             'title',
         ],
+        'actions' => ['adding' => true],
     ],
     Leads::class => [
         'ModelName' => 'admin.titles.leads',
@@ -193,6 +206,8 @@ return [
             'contactInfo',
             'message',
         ],
+        'actions' => ['adding' => false],
+
     ],
     StaticPage::class => [
         'ModelName' => 'admin.titles.staticPage',
@@ -205,6 +220,7 @@ return [
             'title',
             'content',
         ],
+        'actions' => ['adding' => false],
     ],
     Review::class => [
         'ModelName' => 'admin.titles.review',
@@ -219,6 +235,7 @@ return [
             'description',
             'main_image',
         ],
+        'actions' => ['adding' => true],
     ],
     Color::class => [
         'ModelName' => 'admin.titles.color',
@@ -231,5 +248,6 @@ return [
             'title',
             'hex_code',
         ],
+        'actions' => ['adding' => true],
     ],
 ];

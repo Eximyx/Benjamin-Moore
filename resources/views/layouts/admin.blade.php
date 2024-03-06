@@ -48,7 +48,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-     @include('layouts.scripts')
+    @include('layouts.scripts')
     <title>Benjamin moore Admin</title>
     <!-- Custom fonts for this template-->
     {{--    <link href="{{asset("css/all.min.css")}}" rel="stylesheet" type="text/css"> --}}
@@ -93,8 +93,9 @@
                 <!-- Page Heading -->
                 <div class="d-flex align-items-center justify-content-between mb-2">
                     <h1 class="h3 m-1 text-gray-800">@yield('title')</h1>
-                    @if(!str_contains(Route::currentRouteName(), 'profile') && !str_contains(Route::currentRouteName(),'settings'))
-                        <a class="btn btn-success text-center float-left mt-2" onClick="add()" href="javascript:void(0)">@lang('admin.buttons.add')</a>
+                    @if ($data['data']["actions"]['adding'] ?? false)
+                        <a class="btn btn-success text-center float-left mt-2" onClick="add()"
+                           href="javascript:void(0)">@lang('admin.buttons.add')</a>
                     @endif
 
                 </div>

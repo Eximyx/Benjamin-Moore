@@ -41,7 +41,7 @@ abstract class BaseAdminController extends ResourceController
 
         return view(
             'layouts.datatable',
-            compact('data')
+            ['data' => $data]
         );
     }
 }

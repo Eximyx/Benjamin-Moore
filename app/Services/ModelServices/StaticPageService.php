@@ -13,11 +13,16 @@ class StaticPageService extends BaseModelService
         parent::__construct($repository);
     }
 
+    public function findBySlug(string $slug): ?Model
+    {
+        return $this->repository->findBySlug($slug);
+    }
+
     public function toggle(Request $request): ?Model
     {
         $entity = $this->findById($request['id']);
 
-        $entity['is_toggled'] = !$entity['is_toggled'];
+        $entity['is_toggled'] = ! $entity['is_toggled'];
 
         return $this->repository->save($entity);
     }

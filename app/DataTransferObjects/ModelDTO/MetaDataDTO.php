@@ -3,6 +3,7 @@
 namespace App\DataTransferObjects\ModelDTO;
 
 use App\Contracts\ModelDTO;
+use App\Http\Requests\CreateMetaDataRequest;
 
 class MetaDataDTO implements ModelDTO
 {
@@ -18,7 +19,7 @@ class MetaDataDTO implements ModelDTO
 
     }
 
-    public static function appRequest($request): MetaDataDTO
+    public static function appRequest(CreateMetaDataRequest $request): MetaDataDTO
     {
         return new MetaDataDTO(
             $request['url'],

@@ -5,6 +5,8 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\ModelControllers\LeadsController;
 use App\Http\Controllers\ModelControllers\NewsController;
 use App\Http\Controllers\ModelControllers\ProductsController;
+use App\Http\Controllers\ModelControllers\StaticPageController;
+use App\Models\NewsPost;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,12 +26,19 @@ Route::prefix('frontend')->group(function () {
     Route::get('/news', [NewsController::class, 'news'])->name('user.news');
     Route::get('/news/{slug}', [NewsController::class, 'showBySlug'])->name('user.news-show');
     Route::get('/catalog/{slug}', [ProductsController::class, 'showBySlug'])->name('user.catalog-show');
+    Route::get('/{slug}', [StaticPageController::class, 'showBySlug'])->name('user.static-page-show');
     Route::get('/contacts', [MainController::class, 'contacts'])->name('user.contacts');
     Route::get('/calc', [MainController::class, 'calc'])->name('user.calc');
     Route::post('/', [LeadsController::class, 'create'])->name('user.leads');
 });
 
 Route::get('/filter', [ProductsController::class, 'filter']);
+Route::get('/test', [ErikController::class, 'test']);
+Route::get('/testing', function () {
+    $entity = NewsPost::create(['title' => 'последний', 'content' => 'asdas', 'description' => 'asdad']);
+    $entity->createMetaData();
+    dd($entity);
+});
 
 Route::get('/erik', [ErikController::class, 'erik']);
 
