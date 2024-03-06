@@ -21,7 +21,7 @@ class ProductResource extends JsonResource
             'gloss_level' => $this['gloss_level'],
             'description' => $this['description'],
             'type' => $this['type'],
-            'colors' => ColorResource::collection($this->colors()->get()),
+            'colors' => JsonResource::collection($this->colors()->get()),
             'v_of_dry_remain' => $this['v_of_dry_remain'],
             'time_to_repeat' => $this['time_to_repeat'],
             'consumption' => $this['consumption'],

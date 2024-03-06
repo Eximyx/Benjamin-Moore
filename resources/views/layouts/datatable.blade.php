@@ -36,6 +36,16 @@
                             <div class="col-lg mt-2">
                                 @if(str_contains($value, '_id'))
                                     <label for="{{ $value }}">@lang('admin.keys.category')</label>
+                                @elseif(str_contains($value, 'color'))
+                                    <div class="row">
+                                        <div class="col">
+                                            <label class="m-0 p-0 align-items-center"
+                                                   for="{{ $value }}">@lang('admin.keys.'.$value)</label>
+                                        </div>
+                                        <div class="col-11 row" id="color_boxes_row">
+
+                                        </div>
+                                    </div>
                                 @else
                                     <label for="{{ $value }}">@lang('admin.keys.'.$value)</label>
                                 @endif
@@ -50,9 +60,10 @@
                                         <option data="default" value="">
                                             Не выбрано
                                         </option>
-                                        <@foreach ($data['tags'] as $item)
-                                            <option value="{{ $item['id'] }}">
-                                                <b> {{ $item['title'] }}</b>
+                                        @foreach ($data['tags'] as $item)
+                                            <option onclick="addColor({{$item}})"
+                                                    value="{{ $item['id'] }}">
+                                                {{ $item['title'] }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -86,9 +97,6 @@
                         <div class="col-lg mt-2">
                             <button type="button" class="btn btn-secondary"
                                     data-bs-dismiss="modal">@lang('admin.buttons.close')</button>
-                            <button type="button" class="btn btn-primary"
-                                    onclick="sort()">sort
-                            </button>
                             <button type="submit" class="btn btn-primary">@lang('admin.buttons.submit')</button>
                         </div>
                     </form>
@@ -265,20 +273,24 @@
 
                                 if (key.includes('_id')) {
                                     $("#select").find(`option[value='${value}']`).attr('selected', true);
-                                }
-                                    // else if (key.includes('colors')) {
-                                    //     console.log(value);
-                                    //     // console.log($("#colors").find(`option[value='${value}']`).key);
-                                    //     $("#colors").find(`option[value='${value}']`).attr('selected', true);
-                                // }
-                                else {
+                                } else if (key.includes('colors')) {
+                                    $(value).each((key, value) => {
+                                        console.log(value);
+                                        $("#colors").find(`option[value='${value['id']}']`).attr('selected', true);
+                                    })
+                                    $("#color_boxes_row").html('');
+                                    $(value).each((key, value) => {
+                                        let htmlCode = " <div class='border border-dark m-1 p-0' onclick = 'delColor(this.id)' id='color_" + value['id'] + "' style='width:32px; height:32px'> <p class=' border border-3 border-white m-0' style='width:30px; height:30px; background:" + value['hex_code'] + "'></p></div>"
+                                        $(htmlCode).appendTo("#color_boxes_row");
+                                    })
+                                } else {
                                     $('#' + key).val(value);
                                 }
                             } else {
                                 result.attr("src", `{{ url('storage/image/') }}/${res[key]}`);
                             }
-                            // $("#select option:selected").insertAfter("#select option[data='default']");
-                            // $("#colors option:selected").insertAfter("#select option[data='default']");
+                            $("#select option:selected").insertAfter("#select option[data='default']");
+                            $("#colors option:selected").insertAfter("#color option[data='default']");
                         }
                     )
 
@@ -357,6 +369,25 @@
             $('#select option:selected').each((key, value) => {
                 $(value).removeAttr('selected')
             });
+            $('#colors option:selected').each((key, value) => {
+                $(value).removeAttr('selected')
+            });
+        }
+
+        function delColor(id) {
+            console.log(id);
+            document.getElementById(id).remove();
+            let color = id.substring(6);
+            $("#colors").find(`option[value='${color}']`).removeAttr('selected');
+        }
+
+        function addColor(color) {
+            let element = document.getElementById("color_" + color['id']);
+            if (!(element)) {
+                $("#colors").find(`option[value='${color['id']}']`).attr('selected', true);
+                let htmlCode = " <div class='border border-dark m-1 p-0' onclick = 'delColor(this.id)' id='color_" + color['id'] + "' style='width:32px; height:32px'> <p class=' border border-3 border-white m-0' style='width:30px; height:30px; background:" + color['hex_code'] + "'></p></div>"
+                $(htmlCode).appendTo("#color_boxes_row");
+            }
         }
 
         $('#Form').submit(function (e) {

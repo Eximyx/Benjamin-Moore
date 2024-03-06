@@ -43,7 +43,7 @@ class ProductsController extends BaseAdminController
     {
         $entity = $this->service->findById($request['id']);
 
-        $entity['colors'] = $this->service->getSelectableColors($request['id']);
+//        $entity['colors'] = $this->service->getSelectableColors($request['id']);
 
         return $this->resource::make($entity);
     }
