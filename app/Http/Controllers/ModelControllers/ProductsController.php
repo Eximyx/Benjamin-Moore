@@ -39,6 +39,15 @@ class ProductsController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
+    public function show(Request $request): JsonResource
+    {
+        $entity = $this->service->findById($request['id']);
+
+        $entity['colors'] = $this->service->getSelectableColors($request['id']);
+
+        return $this->resource::make($entity);
+    }
+
     public function toggle(Request $request): JsonResource
     {
         $entity = $this->service->toggle($request);

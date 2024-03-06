@@ -130,6 +130,10 @@ class ProductRepository extends BaseModelRepository
 
         $selectableModelName = $data['selectableModel']->getTable();
 
+        $tagsModelName = $data['tagsModel']->getTable();
+
+        $intermediateModelname = $data['intermediateModel']->getTable();
+
         $query['join'] = [
             $selectableModelName,
             $this->model->getTable() . '.' . $data['selectable_key'],
@@ -137,6 +141,15 @@ class ProductRepository extends BaseModelRepository
             $selectableModelName . '.id',
             'left',
         ];
+
+//        $query['tagsJoin'] = [
+//            $tagsModelName,
+//            $intermediateModelname . '.' . 'product_id',
+//            '=',
+//            $tagsModelName . 'id',
+//            'left',
+//        ];
+
 
         $query['select'][] = $selectableModelName . '.title as ' . $data['selectable_key'];
 
