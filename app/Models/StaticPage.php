@@ -2,19 +2,18 @@
 
 namespace App\Models;
 
-use App\Traits\ModelMetaDataTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class StaticPage extends Model
 {
-    use HasFactory, Sluggable, ModelMetaDataTrait;
+    use HasFactory, Sluggable;
 
     protected $table = 'static_pages';
 
     protected $guarded = false;
-    
+
     protected $fillable = [
         'title',
         'content',
