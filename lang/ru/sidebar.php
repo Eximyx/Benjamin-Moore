@@ -14,5 +14,6 @@ return [
     'reviews.index' => 'Отзывы',
     'banners.index' => 'Баннеры',
     'sections.index' => 'Секции',
+    'static-page.index' => 'Информация',
     'metadata.index' => 'Метаданные',
 ];

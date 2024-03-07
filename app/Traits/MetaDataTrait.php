@@ -3,11 +3,11 @@
 namespace App\Traits;
 
 use App\DataTransferObjects\ModelDTO\UpdateMetaDataDTO;
-use App\Http\Resources\MetaDataResource;
+use App\Http\Resources\ModelResources\MetaDataResource;
 use App\Models\NewsPost;
 use App\Models\Product;
 use App\Models\StaticPage;
-use App\Services\ModelServices\MetaDataService;
+use App\Services\Admin\ModelServices\MetaDataService;
 use Illuminate\Database\Eloquent\Model;
 
 trait MetaDataTrait
@@ -46,7 +46,7 @@ trait MetaDataTrait
 
         $metaData = $this->metaDataService->findBySlug($slug) ?? null;
 
-        if (! empty($metaData)) {
+        if (!empty($metaData)) {
             $url = explode('/', $metaData['url']);
 
             $url[count($url) - 1] = $entity['slug'];
@@ -66,7 +66,7 @@ trait MetaDataTrait
     {
         $this->metaDataService = $this->injectMetaDataService();
 
-        $url = route('user.main.index').$this->entities[$entity::class].$entity['slug'];
+        $url = route('user.main.index') . $this->entities[$entity::class] . $entity['slug'];
 
         $dto = UpdateMetaDataDTO::appRequest([
             'url' => $url,

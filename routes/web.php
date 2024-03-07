@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\ModelControllers\LeadsController;
-use App\Http\Controllers\ModelControllers\NewsController;
-use App\Http\Controllers\ModelControllers\ProductsController;
-use App\Http\Controllers\ModelControllers\StaticPageController;
+use App\Http\Controllers\Admin\ModelControllers\LeadsController;
+use App\Http\Controllers\Admin\ModelControllers\NewsController;
+use App\Http\Controllers\Admin\ModelControllers\ProductsController;
+use App\Http\Controllers\Admin\ModelControllers\StaticPageController;
+use App\Http\Controllers\Site\MainController;
 use App\Http\Controllers\TestController;
 use App\Models\NewsPost;
 use Illuminate\Support\Facades\Route;
@@ -26,10 +26,12 @@ Route::prefix('frontend')->group(function () {
     Route::get('/news', [NewsController::class, 'news'])->name('user.news');
     Route::get('/news/{slug}', [NewsController::class, 'showBySlug'])->name('user.news-show');
     Route::get('/catalog/{slug}', [ProductsController::class, 'showBySlug'])->name('user.catalog-show');
-    Route::get('/{slug}', [StaticPageController::class, 'showBySlug'])->name('user.static-page-show');
     Route::get('/contacts', [MainController::class, 'contacts'])->name('user.contacts');
+
     Route::get('/calc', [MainController::class, 'calc'])->name('user.calc');
     Route::post('/', [LeadsController::class, 'create'])->name('user.leads');
+    Route::get('/{slug}', [StaticPageController::class, 'showBySlug'])->name('user.static-page-show');
+
 });
 
 Route::get('/filter', [ProductsController::class, 'filter']);
@@ -57,4 +59,3 @@ Route::post('/leads', [MainController::class, 'leads'])->name('user.leads');
 Route::get('/eee', function () {
     return view('user.test');
 });
-require __DIR__.'/admin.php';

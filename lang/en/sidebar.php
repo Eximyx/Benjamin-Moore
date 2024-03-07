@@ -14,5 +14,6 @@ return [
     'reviews.index' => 'Reviews',
     'banners.index' => 'Banners',
     'sections.index' => 'Sections',
+    'static-page.index' => 'Information',
     'metadata.index' => 'Metadata',
 ];

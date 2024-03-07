@@ -44,13 +44,11 @@ class UpdateMetaData extends Command
     public function handle(): void
     {
         DB::table('meta_data')->truncate();
-
         $host = Request::getSchemeAndHttpHost();
         $routeCollection = Route::getRoutes()->get();
         foreach ($routeCollection as $value) {
             $name = $value->getName();
             $uri = $value->uri();
-
             if ((str_contains($name, 'user')) & (!str_contains($uri, 'admin')) & ($value->methods()[0] == 'GET')) {
                 if (str_contains($uri, 'slug')) {
                     $key = explode('/', $uri);
@@ -59,7 +57,6 @@ class UpdateMetaData extends Command
                             if ($key[1] == 'catalog') {
                                 $this->info($item->slug);
                             }
-
                             MetaData::factory()->create([
                                 'url' => str_replace('{slug}', $item->slug, $host . '/' . $uri),
                                 'title' => $item->title,
@@ -72,7 +69,7 @@ class UpdateMetaData extends Command
                 MetaData::factory()->create(
                     [
                         'url' => ($uri === '/' ? $host : $host . '/') . $uri,
-                        'title' => trans($value->getName()),
+                        'title' => __($value->getName()),
                     ]
                 );
             }
