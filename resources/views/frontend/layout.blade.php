@@ -47,9 +47,11 @@
             </div>
             <p class="header__contacts-time">{{$data['settings']->phone}}</p>
         </div>
-        <button class="button-filled">
-            @lang('nav-links.orderButton')
-        </button>
+        @if(request()->url() != route('user.contacts'))
+            <a href="{{route('user.contacts')}}" class="button-filled">
+                @lang('nav-links.orderButton')
+            </a>
+        @endif
     </div>
 </header>
 <div class="burger-menu">
