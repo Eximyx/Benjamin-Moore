@@ -77,9 +77,9 @@
             />
         </svg>
     </button>
-    <button class="button-filled">
+    <a href="{{route('user.contacts')}}" class="button-filled">
         @lang('nav-links.orderButton')
-    </button>
+    </a>
 </div>
 <main class="main">
     @yield('content')

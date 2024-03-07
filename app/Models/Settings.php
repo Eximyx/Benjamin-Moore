@@ -12,7 +12,8 @@ class Settings extends Model
     protected $table = 'settings';
 
     protected $fillable = [
-        'email', 'phone',
+        'email',
+        'phone',
         'work_time',
         'place',
         'location',

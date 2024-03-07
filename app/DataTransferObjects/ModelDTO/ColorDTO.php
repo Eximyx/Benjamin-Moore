@@ -4,7 +4,7 @@ namespace App\DataTransferObjects\ModelDTO;
 
 use App\Contracts\BaseDTO;
 use App\Contracts\ModelDTO;
-use App\Http\Requests\CreateColorRequest;
+use App\Http\Requests\ColorRequest;
 
 class ColorDTO implements ModelDTO
 {
@@ -15,7 +15,7 @@ class ColorDTO implements ModelDTO
     {
     }
 
-    public static function appRequest(CreateColorRequest $request): ColorDTO
+    public static function appRequest(ColorRequest $request): ColorDTO
     {
         return new ColorDTO(
             $request['title'],

@@ -3,7 +3,7 @@
 namespace App\DataTransferObjects\ModelDTO;
 
 use App\Contracts\ModelDTO;
-use App\Http\Requests\CreateSectionRequest;
+use App\Http\Requests\SectionRequest;
 
 class SectionDTO implements ModelDTO
 {
@@ -16,7 +16,7 @@ class SectionDTO implements ModelDTO
 
     }
 
-    public static function appRequest(CreateSectionRequest $request): SectionDTO
+    public static function appRequest(SectionRequest $request): SectionDTO
     {
         return new SectionDTO(
             $request['title'],

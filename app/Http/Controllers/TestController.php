@@ -7,13 +7,13 @@ use App\Http\Requests\ProductCategoryFilterRequest;
 use App\Http\Requests\ProductFilterRequest;
 use App\Models\NewsPost;
 use App\Models\ProductCategory;
-use App\Traits\MetadataTrait;
+use App\Traits\ModelMetaDataTrait;
 use Illuminate\Routing\Controller;
 
-class ErikController extends Controller
+class TestController extends Controller
 {
 
-    use MetadataTrait;
+    use ModelMetaDataTrait;
 
     public function test()
     {

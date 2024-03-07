@@ -17,11 +17,10 @@ abstract class BaseAdminController extends ResourceController
 {
     public function __construct(
         BaseModelService $service,
-        string           $dto,
-        string           $resource,
-        string           $request,
-    )
-    {
+        string $dto,
+        string $resource,
+        string $request,
+    ) {
         parent::__construct(
             $service, $dto, $resource, $request
         );

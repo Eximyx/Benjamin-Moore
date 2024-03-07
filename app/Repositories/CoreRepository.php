@@ -12,8 +12,6 @@ abstract class CoreRepository
 {
     protected Model $model;
 
-    // TODO: getLatest from CoreRepository to Product & News repositories
-
     public function __construct(
         ?string $modelClass
     )
@@ -39,8 +37,6 @@ abstract class CoreRepository
         return $this->model->all();
     }
 
-    // TODO Перенести getLatest FindBySlug в products/news
-
     /**
      * @return Builder<Model>
      */
@@ -55,7 +51,7 @@ abstract class CoreRepository
         return $entities;
     }
 
-    public function findById(string $id): ?Model
+    public function findById(string $id): Model
     {
         return $this->model::findOrFail($id);
     }
@@ -68,9 +64,9 @@ abstract class CoreRepository
     /**
      * @param array<string,mixed> $data
      */
-    public function create(array $data): ?Model
+    public function create(array $data): Model
     {
-        return $this->model->create($data);
+        return $this->model::create($data);
     }
 
     /**

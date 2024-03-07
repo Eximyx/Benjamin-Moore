@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateSectionRequest extends FormRequest
+class PartnersRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -17,9 +17,9 @@ class CreateSectionRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => 'numeric|nullable',
             'title' => 'string',
-            'section_position_id' => 'string|nullable',
-            'content' => 'string',
+            'location' => 'string',
         ];
     }
 }

@@ -3,7 +3,7 @@
 namespace App\DataTransferObjects\ModelDTO;
 
 use App\Contracts\ModelDTO;
-use App\Http\Requests\CreateAdminRequest;
+use App\Http\Requests\AdminRequest;
 
 class AdminDTO implements ModelDTO
 {
@@ -16,7 +16,7 @@ class AdminDTO implements ModelDTO
     {
     }
 
-    public static function appRequest(CreateAdminRequest $request): AdminDTO
+    public static function appRequest(AdminRequest $request): AdminDTO
     {
         return new AdminDTO(
             $request['name'],

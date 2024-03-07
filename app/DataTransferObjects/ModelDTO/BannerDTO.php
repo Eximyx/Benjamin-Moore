@@ -3,7 +3,7 @@
 namespace App\DataTransferObjects\ModelDTO;
 
 use App\Contracts\ModelDTO;
-use App\Http\Requests\CreateBannerRequest;
+use App\Http\Requests\BannerRequest;
 use Illuminate\Http\UploadedFile;
 
 class BannerDTO implements ModelDTO
@@ -18,7 +18,7 @@ class BannerDTO implements ModelDTO
 
     }
 
-    public static function appRequest(CreateBannerRequest $request): BannerDTO
+    public static function appRequest(BannerRequest $request): BannerDTO
     {
         return new BannerDTO(
             $request['title'],

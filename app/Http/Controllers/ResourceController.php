@@ -10,11 +10,10 @@ abstract class ResourceController
 {
     public function __construct(
         protected CoreService $service,
-        protected string      $dto,
-        protected string      $resource,
-        protected string      $request,
-    )
-    {
+        protected string $dto,
+        protected string $resource,
+        protected string $request,
+    ) {
 
     }
 
@@ -42,12 +41,13 @@ abstract class ResourceController
     {
         $entity = $this->service->findById($request['id']);
 
-        $request = app($this->request, $request->all());
+        $request = app($this->request, $request->input());
 
         $entity = $this->service->update(
             $entity,
             $this->dto::appRequest($request)
         );
+
         return $this->resource::make($entity);
     }
 

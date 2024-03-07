@@ -2,17 +2,24 @@
 
 namespace App\Models;
 
+use App\Traits\ModelMetaDataTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class StaticPage extends Model
 {
-    use HasFactory, Sluggable;
+    use HasFactory, Sluggable, ModelMetaDataTrait;
 
     protected $table = 'static_pages';
 
     protected $guarded = false;
+    
+    protected $fillable = [
+        'title',
+        'content',
+        'is_toggled',
+    ];
 
     /**
      * @return array<string,mixed>
@@ -25,15 +32,4 @@ class StaticPage extends Model
             ],
         ];
     }
-
-    protected $fillable = [
-        'title',
-        'content',
-        'is_toggled',
-    ];
-
-    protected $casts = [
-        'create_at' => 'datetime',
-        'update_at' => 'datetime',
-    ];
 }

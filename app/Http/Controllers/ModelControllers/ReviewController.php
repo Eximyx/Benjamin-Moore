@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\ModelControllers;
 
 use App\DataTransferObjects\ModelDTO\ReviewDTO;
-use App\Http\Requests\CreateReviewRequest;
+use App\Http\Requests\ReviewRequest;
 use App\Http\Resources\ReviewResource;
 use App\Services\ModelServices\ReviewService;
 use Illuminate\Http\Request;
@@ -13,7 +13,7 @@ class ReviewController extends BaseAdminController
 {
     public function __construct(ReviewService $service)
     {
-        parent::__construct($service, ReviewDTO::class, ReviewResource::class, CreateReviewRequest::class);
+        parent::__construct($service, ReviewDTO::class, ReviewResource::class, ReviewRequest::class);
     }
 
     public function toggle(Request $request): JsonResource

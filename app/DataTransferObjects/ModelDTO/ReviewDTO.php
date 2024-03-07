@@ -4,7 +4,7 @@ namespace App\DataTransferObjects\ModelDTO;
 
 use App\Contracts\BaseDTO;
 use App\Contracts\ModelDTO;
-use App\Http\Requests\CreateReviewRequest;
+use App\Http\Requests\ReviewRequest;
 
 class ReviewDTO implements ModelDTO
 {
@@ -16,7 +16,7 @@ class ReviewDTO implements ModelDTO
     {
     }
 
-    public static function appRequest(CreateReviewRequest $request): ReviewDTO
+    public static function appRequest(ReviewRequest $request): ReviewDTO
     {
         return new ReviewDTO(
             $request['name'],

@@ -12,7 +12,7 @@ class StaticPageRepository extends BaseModelRepository
         parent::__construct(StaticPage::class);
     }
 
-    public function findBySlug(string $slug): ?Model
+    public function findBySlug(string $slug): Model
     {
         return $this->model->where('slug', '=', $slug)->firstOrFail();
     }

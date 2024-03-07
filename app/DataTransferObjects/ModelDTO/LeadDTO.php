@@ -3,7 +3,7 @@
 namespace App\DataTransferObjects\ModelDTO;
 
 use App\Contracts\ModelDTO;
-use App\Http\Requests\CreateLeadsRequest;
+use App\Http\Requests\LeadsRequest;
 
 class LeadDTO implements ModelDTO
 {
@@ -15,7 +15,7 @@ class LeadDTO implements ModelDTO
     {
     }
 
-    public static function appRequest(CreateLeadsRequest $request): LeadDTO
+    public static function appRequest(LeadsRequest $request): LeadDTO
     {
         return new LeadDTO(
             $request['name'],

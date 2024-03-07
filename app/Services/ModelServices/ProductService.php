@@ -7,9 +7,10 @@ use App\Http\Requests\ProductFilterRequest;
 use App\Repositories\ModelRepositories\ColorProductRepository;
 use App\Repositories\ModelRepositories\ColorRepository;
 use App\Repositories\ModelRepositories\ProductRepository;
+use DOMDocument;
+use File;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,25 +33,7 @@ class ProductService extends BaseModelService
         return $this->repository->getLatest()->get();
     }
 
-    public function findById(string $id): ?Model
-    {
-        $entity = $this->repository->findById($id);
-
-        if ($entity == null) {
-            throw new ModelNotFoundException('ds', 500);
-        }
-        return $entity;
-    }
-
-    public function getSelectableColors(string $id): array
-    {
-        return $this->colorRepository->getColors(
-            $this->colorProductRepository->getColorIds($id)
-        );
-    }
-
     /**
-     * @param int $categoryID
      * @return Collection<int, Model>
      */
     public function getSimilar(int $categoryID): Collection
@@ -58,61 +41,98 @@ class ProductService extends BaseModelService
         return $this->repository->getSimilar($categoryID);
     }
 
-    public function findBySlug(string $slug): ?Model
+    //  TODO: DELETE
+    //    public function getSelectableColors(string $id): array
+    //    {
+    //        return $this->colorRepository->getColors(
+    //            $this->colorProductRepository->getColorIds($id)
+    //        );
+    //    }
+
+    public function findBySlug(string $slug): Model
     {
         return $this->repository->findBySlug($slug);
     }
 
-    public function create(ModelDTO $dto): ?Model
+    public function create(ModelDTO $dto): Model
     {
-        $data = (array)$dto;
 
-        $data['main_image'] = $this->uploadImage($data['main_image']);
+        $dto->main_image = $this->uploadImage($dto->main_image);
 
-        return $this->repository->create($data);
+        $data = $dto->toArray();
+
+        unset($data['colors']);
+
+        $entity = $this->repository->create($data);
+
+        $dto->content = $this->htmlParser($dto, $entity->id);
+
+        $entity->colors()->attach($dto->colors);
+
+        return $this->update($entity, $dto);
+    }
+
+    protected function uploadImage(mixed $image): string
+    {
+        if ($image !== null & !is_string($image)) {
+            Storage::put('public\image', $image);
+            $image = $image->hashName();
+        } else {
+            $image = 'default_post.jpg';
+        }
+
+        return $image;
+    }
+
+    public function htmlParser(ModelDTO $dto, int $id): string|false
+    {
+
+        $dom = new DOMDocument();
+        $dom->loadHTML($dto->content, 9);
+
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $key => $img) {
+            if (str_starts_with($img->getAttribute('src'), 'data:image/')) {
+                $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
+                $path = public_path() . '/storage/' . 'image' . '/products/' . $id;
+                if (!File::isDirectory($path)) {
+                    File::makeDirectory($path, 0777, true, true);
+                }
+                $image_name = time() . $key . '.png';
+                file_put_contents($path . '/' . $image_name, $data);
+
+                $img->removeAttribute('src');
+                $img->setAttribute('src', url('storage/image/products/' . $id) . '/' . $image_name);
+            }
+        }
+
+        return $dom->saveHTML();
     }
 
     public function update(Model $entity, ModelDTO $dto): Model
     {
-        $dto = (array)$dto;
+        $data = $dto->toArray();
 
-        if ($dto['main_image'] ?? null) {
+        if ($data['main_image']) {
             $deleted = $this->deleteImage($entity['main_image']);
             if ($deleted) {
-                $dto['main_image'] = $this->uploadImage($dto['main_image']);
+                $data['main_image'] = $this->uploadImage($data['main_image']);
             }
         } else {
-            $dto['main_image'] = $entity['main_image'];
+            $data['main_image'] = $entity['main_image'];
         }
+
+        $data['content'] = $this->htmlParser($dto, $entity['id']);
+
+        $entity->colors()->sync($data['colors']);
+
+        unset($data['colors']);
 
         return $this->repository->update(
             $entity,
-            $dto
+            $data
         );
-    }
-
-    public function destroy(Request $request): ?Model
-    {
-        $entity = $this->findById($request['id']);
-
-        if ($entity ?? null) {
-            if (isset($entity['main_image'])) {
-                $this->deleteImage($entity['main_image']);
-            }
-
-            $this->repository->destroy($entity);
-        }
-
-        return $entity;
-    }
-
-    public function toggle(Request $request): ?Model
-    {
-        $entity = $this->findById($request['id']);
-
-        $entity['is_toggled'] = !$entity['is_toggled'];
-
-        return $this->repository->save($entity);
     }
 
     protected function deleteImage(string $image): bool
@@ -124,16 +144,29 @@ class ProductService extends BaseModelService
         return true;
     }
 
-    protected function uploadImage(mixed $image): string
+    public function destroy(Request $request): Model
     {
-        if ($image !== null) {
-            Storage::put('public\image', $image);
-            $image = $image->hashName();
-        } else {
-            $image = 'default_post.jpg';
+        $entity = parent::destroy($request);
+
+        if (isset($entity['main_image'])) {
+            $this->deleteImage($entity['main_image']);
         }
 
-        return $image;
+        return $entity;
+    }
+
+    public function toggle(Request $request): Model
+    {
+        $entity = $this->findById($request['id']);
+
+        $entity['is_toggled'] = !$entity['is_toggled'];
+
+        return $this->repository->save($entity);
+    }
+
+    public function findById(string $id): Model
+    {
+        return $this->repository->findById($id);
     }
 
     /**
@@ -145,7 +178,7 @@ class ProductService extends BaseModelService
 
         $variables['selectable'] = $variables['data']['selectableModel']->all();
 
-//        $variables['tags'] = $variables['data']['tagsModel'];
+        //        $variables['tags'] = $variables['data']['tagsModel'];
 
         $variables['tags'] = $variables['data']['tagsModel']->all();
 
@@ -156,15 +189,17 @@ class ProductService extends BaseModelService
     {
         $list['categories'] = $this->repository->fetchCategories($request);
 
-
         $list['products'] = $this->repository->fetchProducts($request)->paginate(12);
 
         return $list;
 
     }
 
+    /**
+     * @return Collection<int, Model>
+     */
     public function getColors(): Collection
     {
-        return $this->colorRepository->getColorsForCatalog();
+        return $this->colorRepository->getAll();
     }
 }

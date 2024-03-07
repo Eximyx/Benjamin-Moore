@@ -18,9 +18,4 @@ class Review extends Model
         'description',
         'main_image',
     ];
-
-    protected $casts = [
-        'create_at' => 'datetime',
-        'update_at' => 'datetime',
-    ];
 }

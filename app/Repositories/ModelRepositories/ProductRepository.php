@@ -11,9 +11,9 @@ use App\Http\Filters\ProductFilter;
 use App\Http\Requests\ProductFilterRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
@@ -24,73 +24,20 @@ class ProductRepository extends BaseModelRepository
         parent::__construct(Product::class);
     }
 
-    public function create(array $dto): ?Model
-    {
-        $colors = $dto['colors'];
-        unset($dto['colors']);
-
-        $product = $this->model->create($dto);
-
-        $product->colors()->attach($colors);
-
-        return $product;
-    }
-
-    public function update(Model $entity, array $data): Model
-    {
-        $colors = $data['colors'];
-        unset($data['colors']);
-
-        $product = tap($entity)->update($data);
-
-        $product->colors()->sync($colors);
-
-        return $product;
-    }
-
-    public function findBySlug(string $slug): ?Model
+    public function findBySlug(string $slug): Model
     {
         return $this->model->where('slug', '=', $slug)->firstOrFail();
     }
 
     /**
-     * @param int $categoryID
      * @return Collection<int, Model>
+     *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
     public function getSimilar(int $categoryID): Collection
     {
         return $this->model->where('product_category_id', '=', $categoryID)->get();
-    }
-
-    /**
-     * @return Collection<int,Model>
-     */
-    public function getAllSelectables(mixed $kindOfWorkId = null): Collection
-    {
-        $selectable = $this->modelData['selectableModel']->query();
-        if ($kindOfWorkId) {
-            $selectable = $selectable->where('kind_of_work_id', $kindOfWorkId);
-        }
-
-        return $selectable->get();
-    }
-
-    /**
-     * @return LengthAwarePaginator<Model>
-     */
-    public function getAllWithFilters(mixed $categories = null): LengthAwarePaginator
-    {
-        $products = $this->startConditions();
-
-        if (is_array($categories)) {
-            $products = $products->whereIn('product_category_id', $categories);
-        } else {
-            $products = $products->where('product_category_id', $categories);
-        }
-
-        return $products->orderBy('product_category_id', 'desc')->paginate(12);
     }
 
     public function fetchCategories(ProductFilterRequest $request): Collection
@@ -104,7 +51,10 @@ class ProductRepository extends BaseModelRepository
         return ProductCategory::filter($filter)->get();
     }
 
-    public function fetchProducts(ProductFilterRequest $request)
+    /**
+     * @throws BindingResolutionException
+     */
+    public function fetchProducts(ProductFilterRequest $request): mixed
     {
         $data = $request->validated();
 
@@ -132,28 +82,27 @@ class ProductRepository extends BaseModelRepository
 
         $selectableModelName = $data['selectableModel']->getTable();
 
-        $tagsModelName = $data['tagsModel']->getTable();
+        //        $tagsModelName = $data['tagsModel']->getTable();
 
-        $intermediateModelname = $data['intermediateModel']->getTable();
+        //        $intermediateModelName = $data['intermediateModel']->getTable();
 
         $query['join'] = [
             $selectableModelName,
-            $this->model->getTable() . '.' . $data['selectable_key'],
+            $this->model->getTable().'.'.$data['selectable_key'],
             '=',
-            $selectableModelName . '.id',
+            $selectableModelName.'.id',
             'left',
         ];
 
-//        $query['tagsJoin'] = [
-//            $tagsModelName,
-//            $intermediateModelname . '.' . 'product_id',
-//            '=',
-//            $tagsModelName . 'id',
-//            'left',
-//        ];
+        //        $query['tagsJoin'] = [
+        //            $tagsModelName,
+        //            $intermediateModelName . '.' . 'product_id',
+        //            '=',
+        //            $tagsModelName . 'id',
+        //            'left',
+        //        ];
 
-
-        $query['select'][] = $selectableModelName . '.title as ' . $data['selectable_key'];
+        $query['select'][] = $selectableModelName.'.title as '.$data['selectable_key'];
 
         return $query;
     }

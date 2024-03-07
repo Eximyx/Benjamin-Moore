@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Filterable;
+use App\Traits\ModelMetaDataTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,39 +12,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
-    use HasFactory, Sluggable,Filterable;
+    use Filterable, HasFactory, ModelMetaDataTrait, Sluggable;
 
     protected $table = 'products';
 
     protected $guarded = false;
-
-    /**
-     * @return BelongsTo<ProductCategory, Product>
-     */
-    public function productCategory(): BelongsTo
-    {
-        return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
-    }
-
-    /**
-     * @return BelongsToMany<Color, Product>
-     */
-    public function colors(): BelongsToMany
-    {
-        return $this->belongsToMany(Color::class,'color_products','product_id','color_id');
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    public function sluggable(): array
-    {
-        return [
-            'slug' => [
-                'source' => 'title',
-            ],
-        ];
-    }
 
     protected $fillable = [
         'title',
@@ -64,8 +37,31 @@ class Product extends Model
         'product_category_id',
     ];
 
-    protected $casts = [
-        'create_at' => 'datetime',
-        'update_at' => 'datetime',
-    ];
+    /**
+     * @return BelongsTo<ProductCategory, Product>
+     */
+    public function productCategory(): BelongsTo
+    {
+        return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
+    }
+
+    /**
+     * @return BelongsToMany<Color, Product>
+     */
+    public function colors(): BelongsToMany
+    {
+        return $this->belongsToMany(Color::class, 'color_products', 'product_id', 'color_id');
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+            ],
+        ];
+    }
 }

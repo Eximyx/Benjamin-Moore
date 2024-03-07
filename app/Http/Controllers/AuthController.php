@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use _PHPStan_11268e5ee\Nette\Neon\Exception;
 use App\DataTransferObjects\AuthDTO;
 use App\Http\Requests\AuthRequest;
 use App\Http\Resources\AuthResource;
@@ -17,8 +18,7 @@ class AuthController extends Controller
 {
     public function __construct(
         protected AuthService $service,
-    )
-    {
+    ) {
     }
 
     public function login(): View
@@ -45,11 +45,14 @@ class AuthController extends Controller
         return redirect('login');
     }
 
+    /**
+     * @throws Exception
+     */
     public function profile(): View|AuthResource
     {
         if (request()->ajax()) {
-            $entity = $this->service->getUserById((string)Auth::user()['id']);
-            $request = new AuthRequest(request()->all());
+            $entity = $this->service->getUserById((string) Auth::user()['id']);
+            $request = app(AuthRequest::class, request()->all());
             $request = $this->service->profileSet($request);
 
             $entity = $this->service->update(

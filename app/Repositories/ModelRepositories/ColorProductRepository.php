@@ -12,9 +12,13 @@ class ColorProductRepository extends BaseModelRepository
         parent::__construct(Model::class);
     }
 
+    /**
+     * @param string $id
+     * @return array<int, int>
+     */
     public function getColorIds(string $id): array
     {
-        return Color_product::Where('product_id', $id)->pluck('color_id')->all();
+        return Color_product::where('product_id', $id)->pluck('color_id')->all();
     }
 
 }

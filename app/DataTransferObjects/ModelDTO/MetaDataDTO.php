@@ -8,12 +8,10 @@ use App\Http\Requests\CreateMetaDataRequest;
 class MetaDataDTO implements ModelDTO
 {
     public function __construct(
-        public readonly string $url,
-        public readonly string $title,
-        public readonly string $meta_description,
-        public readonly string $meta_keywords,
-        public readonly string $h,
-        public readonly string $additional_text,
+        public readonly ?string $meta_description,
+        public readonly ?string $meta_keywords,
+        public readonly ?string $h,
+        public readonly ?string $additional_text,
     )
     {
 
@@ -22,8 +20,6 @@ class MetaDataDTO implements ModelDTO
     public static function appRequest(CreateMetaDataRequest $request): MetaDataDTO
     {
         return new MetaDataDTO(
-            $request['url'],
-            $request['title'],
             $request['meta_description'],
             $request['meta_keywords'],
             $request['h'],

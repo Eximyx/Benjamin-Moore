@@ -10,11 +10,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProductCategory extends Model
 {
-    use HasFactory,Filterable;
+    use HasFactory, Filterable;
 
     protected $table = 'product_categories';
 
     protected $guarded = false;
+
+    protected $fillable = [
+        'title',
+        'content',
+        'kind_of_work_id',
+    ];
 
     /**
      * @return HasMany<Product>
@@ -31,15 +37,4 @@ class ProductCategory extends Model
     {
         return $this->belongsTo(KindOfWork::class, 'kind_of_work_id', 'id');
     }
-
-    protected $fillable = [
-        'title',
-        'content',
-        'kind_of_work_id',
-    ];
-
-    protected $casts = [
-        'create_at' => 'datetime',
-        'update_at' => 'datetime',
-    ];
 }

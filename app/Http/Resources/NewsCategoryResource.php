@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ToggleResource extends JsonResource
+class NewsCategoryResource extends JsonResource
 {
     /**
      * @return array<string,mixed>
@@ -13,7 +13,8 @@ class ToggleResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'active_items' => $this['active_items'],
+            'id' => $this['id'],
+            'title' => $this['title'],
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateStaticPageRequest extends FormRequest
+class SectionRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -17,9 +17,9 @@ class CreateStaticPageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'numeric|nullable',
-            'title' => 'string|required|min:5|max:100',
-            'content' => 'string|required',
+            'title' => 'string',
+            'section_position_id' => 'string|nullable',
+            'content' => 'string',
         ];
     }
 }

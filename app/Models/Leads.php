@@ -18,9 +18,4 @@ class Leads extends Model
         'contactInfo',
         'message',
     ];
-
-    protected $casts = [
-        'create_at' => 'datetime',
-        'update_at' => 'datetime',
-    ];
 }

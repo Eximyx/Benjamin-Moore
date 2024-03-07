@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateProductCategoryRequest extends FormRequest
+class LeadsRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -18,9 +18,9 @@ class CreateProductCategoryRequest extends FormRequest
     {
         return [
             'id' => 'numeric|nullable',
-            'title' => 'string|required|min:5|max:100',
-            'content' => 'string|required',
-            'kind_of_work_id' => 'string|nullable',
+            'name' => 'string|required|min:2|max:25',
+            'contactInfo' => 'string|required|min:5|max:50',
+            'message' => 'string|required|max:200',
         ];
     }
 }

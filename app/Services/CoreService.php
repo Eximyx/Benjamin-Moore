@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Contracts\ModelDTO;
 use App\Repositories\CoreRepository;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 abstract class CoreService
@@ -15,18 +14,7 @@ abstract class CoreService
     ) {
     }
 
-    public function findById(string $id): ?Model
-    {
-        $entity = $this->repository->findById($id);
-
-        if ($entity == null) {
-            throw new ModelNotFoundException('ds', 500);
-        }
-
-        return $entity;
-    }
-
-    public function create(ModelDTO $dto): ?Model
+    public function create(ModelDTO $dto): Model
     {
         $dto = (array) $dto;
 
@@ -43,14 +31,17 @@ abstract class CoreService
         );
     }
 
-    public function destroy(Request $request): ?Model
+    public function destroy(Request $request): Model
     {
         $entity = $this->findById($request['id']);
 
-        if ($entity !== null) {
-            $this->repository->destroy($entity);
-        }
+        $this->repository->destroy($entity);
 
         return $entity;
+    }
+
+    public function findById(string $id): Model
+    {
+        return $this->repository->findById($id);
     }
 }

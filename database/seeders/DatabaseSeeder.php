@@ -16,6 +16,7 @@ use App\Models\Review;
 use App\Models\Section;
 use App\Models\SectionPosition;
 use App\Models\Settings;
+use App\Models\StaticPage;
 use App\Models\User;
 use App\Models\UserRoles;
 use Illuminate\Database\Seeder;
@@ -63,6 +64,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin',
             'password' => Hash::make('admin'),
             'user_role_id' => UserRoles::where('id', '3')->first()['id'],
+        ]);
+        StaticPage::factory()->createMany([
+            ['title' => "Статическая страница №1", 'en_title' => "Static Page 1", "content" => "first"],
+            ['title' => "Статическая страница №2", 'en_title' => "Static Page 2", "content" => "first"],
+            ['title' => "Статическая страница №3", 'en_title' => "Static Page 3", "content" => "first"],
         ]);
     }
 }

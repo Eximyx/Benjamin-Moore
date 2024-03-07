@@ -3,7 +3,7 @@
 namespace App\DataTransferObjects\ModelDTO;
 
 use App\Contracts\ModelDTO;
-use App\Http\Requests\CreatePartnersRequest;
+use App\Http\Requests\PartnersRequest;
 
 class PartnersDTO implements ModelDTO
 {
@@ -15,7 +15,7 @@ class PartnersDTO implements ModelDTO
 
     }
 
-    public static function appRequest(CreatePartnersRequest $request): PartnersDTO
+    public static function appRequest(PartnersRequest $request): PartnersDTO
     {
         return new PartnersDTO(
             $request['title'],

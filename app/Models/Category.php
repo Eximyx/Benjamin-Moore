@@ -13,6 +13,9 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $guarded = false;
+    protected $fillable = [
+        'title',
+    ];
 
     /**
      * @return HasMany<NewsPost>
@@ -21,13 +24,4 @@ class Category extends Model
     {
         return $this->hasMany(NewsPost::class, 'category_id', 'id');
     }
-
-    protected $fillable = [
-        'title',
-    ];
-
-    protected $casts = [
-        'create_at' => 'datetime',
-        'update_at' => 'datetime',
-    ];
 }

@@ -13,22 +13,16 @@ class Color extends Model
     protected $table = 'colors';
 
     protected $guarded = false;
+    protected $fillable = [
+        'title',
+        'hex_code',
+    ];
 
     /**
      * @return BelongsToMany<Product, Color>
      */
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class,'color_products','color_id','product_id');
+        return $this->belongsToMany(Product::class, 'color_products', 'color_id', 'product_id');
     }
-
-    protected $fillable = [
-        'title',
-        'hex_code',
-    ];
-
-    protected $casts = [
-        'create_at' => 'datetime',
-        'update_at' => 'datetime',
-    ];
 }

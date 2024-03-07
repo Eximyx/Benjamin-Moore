@@ -2,7 +2,10 @@
 
 namespace App\Services\ModelServices;
 
+use App\Contracts\ModelDTO;
 use App\Repositories\ModelRepositories\StaticPageRepository;
+use DOMDocument;
+use File;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -11,6 +14,41 @@ class StaticPageService extends BaseModelService
     public function __construct(StaticPageRepository $repository)
     {
         parent::__construct($repository);
+    }
+
+    public function update(Model $entity, ModelDTO $dto): Model
+    {
+        $dto = $this->htmlParser($dto, $entity->id);
+
+        return parent::update($entity, $dto);
+    }
+
+    public function htmlParser(ModelDTO $dto, int $id): ModelDTO
+    {
+
+        $dom = new DOMDocument();
+        $dom->loadHTML($dto->content, 9);
+
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $key => $img) {
+            if (str_starts_with($img->getAttribute('src'), 'data:image/')) {
+                $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
+                $path = public_path().'/storage/'.'image'.'/static_pages/'.$id;
+                if (! File::isDirectory($path)) {
+                    File::makeDirectory($path, 0777, true, true);
+                }
+                $image_name = time().$key.'.png';
+                file_put_contents($path.'/'.$image_name, $data);
+
+                $img->removeAttribute('src');
+                $img->setAttribute('src', url('storage/image/static_pages/'.$id).'/'.$image_name);
+            }
+        }
+
+        $dto->content = $dom->saveHTML();
+
+        return $dto;
     }
 
     public function findBySlug(string $slug): ?Model

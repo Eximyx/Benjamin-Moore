@@ -13,12 +13,19 @@ class ColorRepository extends BaseModelRepository
         parent::__construct(Model::class);
     }
 
+    /**
+     * @param array<int, int> $colorIds
+     * @return array<int, int>
+     */
     public function getColors(array $colorIds): array
     {
         return Color::whereIn('id', $colorIds)->pluck('id')->all();
     }
 
-    public function getColorsForCatalog(): ?Collection
+    /**
+     * @return Collection<int, Color>
+     */
+    public function getColorsForCatalog(): Collection
     {
         return Color::all();
     }

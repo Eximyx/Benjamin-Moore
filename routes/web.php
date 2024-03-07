@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\ErikController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ModelControllers\LeadsController;
 use App\Http\Controllers\ModelControllers\NewsController;
 use App\Http\Controllers\ModelControllers\ProductsController;
 use App\Http\Controllers\ModelControllers\StaticPageController;
+use App\Http\Controllers\TestController;
 use App\Models\NewsPost;
 use Illuminate\Support\Facades\Route;
 
@@ -33,16 +33,16 @@ Route::prefix('frontend')->group(function () {
 });
 
 Route::get('/filter', [ProductsController::class, 'filter']);
-Route::get('/test', [ErikController::class, 'test']);
+Route::get('/test', [TestController::class, 'test']);
 Route::get('/testing', function () {
     $entity = NewsPost::create(['title' => 'последний', 'content' => 'asdas', 'description' => 'asdad']);
-    $entity->createMetaData();
+    $entity->update(['title' => 'asdkaskdas']);
     dd($entity);
 });
 
-Route::get('/erik', [ErikController::class, 'erik']);
+Route::get('/erik', [TestController::class, 'erik']);
 
-Route::get('/erikw', [ErikController::class, 'index']);
+Route::get('/erikw', [TestController::class, 'index']);
 
 /*Route::get('/', [MainController::class, 'index'])->name('user.main.index');
 Route::get('/catalog', [MainController::class, 'catalog'])->name('user.catalog');

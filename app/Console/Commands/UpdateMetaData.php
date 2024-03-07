@@ -7,6 +7,7 @@ namespace App\Console\Commands;
 use App\Models\MetaData;
 use App\Models\NewsPost;
 use App\Models\Product;
+use App\Models\StaticPage;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
@@ -27,6 +28,7 @@ class UpdateMetaData extends Command
     protected array $entities = [
         'news' => NewsPost::class,
         'catalog' => Product::class,
+        '{slug}' => StaticPage::class,
     ];
 
     /**
@@ -49,13 +51,17 @@ class UpdateMetaData extends Command
             $name = $value->getName();
             $uri = $value->uri();
 
-            if ((str_contains($name, 'user')) & (! str_contains($uri, 'admin')) & ($value->methods()[0] == 'GET')) {
+            if ((str_contains($name, 'user')) & (!str_contains($uri, 'admin')) & ($value->methods()[0] == 'GET')) {
                 if (str_contains($uri, 'slug')) {
-                    $key = explode('/', $uri)[1];
-                    if (isset($this->entities[$key])) {
-                        foreach ($this->entities[$key]::all() as $item) {
+                    $key = explode('/', $uri);
+                    if (isset($this->entities[$key[1]])) {
+                        foreach ($this->entities[$key[1]]::all() as $item) {
+                            if ($key[1] == 'catalog') {
+                                $this->info($item->slug);
+                            }
+
                             MetaData::factory()->create([
-                                'url' => str_replace('{slug}', $item->slug, $host.'/'.$uri),
+                                'url' => str_replace('{slug}', $item->slug, $host . '/' . $uri),
                                 'title' => $item->title,
                             ]);
                         }
@@ -65,7 +71,7 @@ class UpdateMetaData extends Command
                 }
                 MetaData::factory()->create(
                     [
-                        'url' => ($uri === '/' ? $host : $host.'/').$uri,
+                        'url' => ($uri === '/' ? $host : $host . '/') . $uri,
                         'title' => trans($value->getName()),
                     ]
                 );

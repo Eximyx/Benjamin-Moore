@@ -16,11 +16,11 @@ class BannerService extends BaseModelService
         parent::__construct($repository);
     }
 
-    public function create(ModelDTO $dto): ?Model
+    public function create(ModelDTO $dto): Model
     {
-        $dto = (array) $dto;
+        $dto = (array)$dto;
 
-        if (! empty($dto['banner_position_id'])) {
+        if (!empty($dto['banner_position_id'])) {
             $this->repository->nullPosition($dto['banner_position_id']);
         }
 
@@ -29,9 +29,9 @@ class BannerService extends BaseModelService
 
     public function update(Model $entity, ModelDTO $dto): Model
     {
-        $dto = (array) $dto;
+        $dto = (array)$dto;
 
-        if (! empty($dto['banner_position_id'])) {
+        if (!empty($dto['banner_position_id'])) {
             $this->repository->nullPosition($dto['banner_position_id']);
         }
 
@@ -44,17 +44,14 @@ class BannerService extends BaseModelService
     /**
      * @throws Exception
      */
-    public function destroy(Request $request): ?Model
+    public function destroy(Request $request): Model
     {
         $entity = $this->findById($request['id']);
 
-        if ($entity !== null) {
-            if (! isset($entity->banner_position_id)) {
-                $this->repository->destroy($entity);
-            } else {
-                throw new Exception('Вы не можете удалить баннер, который уже используется!', 422);
-            }
-
+        if (!isset($entity->banner_position_id)) {
+            $this->repository->destroy($entity);
+        } else {
+            throw new Exception(__('errors.banner.position'), 422);
         }
 
         return $entity;
@@ -66,9 +63,7 @@ class BannerService extends BaseModelService
     public function getVariablesForDataTable(): array
     {
         $variables = parent::getVariablesForDataTable();
-        if (isset($variables['data']['selectableModel'])) {
-            $variables['selectable'] = $variables['data']['selectableModel']->all();
-        }
+        $variables['selectable'] = $variables['data']['selectableModel']->all();
 
         return $variables;
     }

@@ -3,57 +3,75 @@
 namespace App\Http\Controllers\ModelControllers;
 
 use App\DataTransferObjects\ModelDTO\StaticPageDTO;
-use App\Http\Requests\CreateStaticPageRequest;
+use App\Http\Requests\StaticPageRequest;
 use App\Http\Resources\SettingsResource;
 use App\Http\Resources\StaticPageResource;
+use App\Models\Settings;
 use App\Services\ModelServices\StaticPageService;
-use App\Traits\MetadataTrait;
+use App\Traits\MetaDataTrait;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\View\View;
 
 class StaticPageController extends BaseAdminController
 {
-    use MetadataTrait;
-
     protected SettingsResource $settings;
 
-    public function __construct(StaticPageService $service)
+    use MetaDataTrait;
+
+    public function __construct(
+        StaticPageService $service,
+    )
     {
-        parent::__construct($service, StaticPageDTO::class, StaticPageResource::class, CreateStaticPageRequest::class
+        parent::__construct($service, StaticPageDTO::class, StaticPageResource::class, StaticPageRequest::class
         );
-        $this->settings = $this->getSettings();
+        $this->settings = SettingsResource::make(app(Settings::class));
     }
 
     public function showBySlug(string $slug): View
     {
         $entity = $this->service->findBySlug($slug);
 
-        $data = StaticPageResource::make([
-            'entity' => $entity,
+        $data = JsonResource::make([
+            'entity' => StaticPageResource::make($entity),
             'settings' => $this->settings,
-            'meta' => $this->getMetaDataByRequest(),
+            'meta' => $this->getMetaDataByURL(),
         ]);
+
         return view('frontend.static-page', ['data' => $data]);
     }
 
     public function update(Request $request): JsonResource
     {
         $entity = $this->service->findById($request['id']);
+
         $slug = $entity->slug;
 
-        $request = app($this->request, $request->all());
+        $request = app($this->request, $request->input());
 
         $entity = $this->service->update(
             $entity,
             $this->dto::appRequest($request)
         );
 
-        $this->updateMetaDataUrl($slug, $entity->only(['slug', 'title']));
+        $this->updateMetaData($slug, $entity);
 
         return $this->resource::make($entity);
     }
 
+    public function store(Request $request): JsonResource
+    {
+        $request = app($this->request, $request->all());
+
+        $dto = $this->dto::AppRequest(
+            $request
+        );
+
+        $entity = $this->service->create($dto);
+        $this->createMetaData($entity);
+
+        return $this->resource::make($entity);
+    }
 
     public function toggle(Request $request): JsonResource
     {

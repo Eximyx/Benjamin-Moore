@@ -13,14 +13,11 @@ class MetaDataRepository extends BaseModelRepository
 
     public function findByURL(string $url): Model
     {
-        return $this->model::where('url', '=', $url)->firstOrfail();
+        return $this->model::where('url', '=', $url)->first();
     }
 
-    /**
-     * @param string $url
-     */
-    public function findBySlug(string $slug): Model
+    public function findBySlug(string $slug): ?Model
     {
-        return $this->model::where('url', 'LIKE', '%' . $slug)->first();
+        return $this->model::where('url', 'like', '%'.$slug)->first();
     }
 }

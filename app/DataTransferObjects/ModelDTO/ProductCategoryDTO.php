@@ -3,7 +3,7 @@
 namespace App\DataTransferObjects\ModelDTO;
 
 use App\Contracts\ModelDTO;
-use App\Http\Requests\CreateProductCategoryRequest;
+use App\Http\Requests\ProductCategoryRequest;
 
 class ProductCategoryDTO implements ModelDTO
 {
@@ -15,7 +15,7 @@ class ProductCategoryDTO implements ModelDTO
     {
     }
 
-    public static function appRequest(CreateProductCategoryRequest $request): ProductCategoryDTO
+    public static function appRequest(ProductCategoryRequest $request): ProductCategoryDTO
     {
         return new ProductCategoryDTO(
             $request['title'],

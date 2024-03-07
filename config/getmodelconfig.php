@@ -139,7 +139,6 @@ return [
             'additional_text',
         ],
         'form_data' => [
-            'title',
             'meta_description',
             'meta_keywords',
             'h',

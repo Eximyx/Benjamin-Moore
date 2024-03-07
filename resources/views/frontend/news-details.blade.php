@@ -1,24 +1,24 @@
 @extends('frontend.layout')
 
 
-@section('breadcrumbs', $entity->title ?? 'ENTITY_TITLE')
+@section('breadcrumbs', $data['entity']->title)
 
 @section('content')
     @include('frontend.breadcrumbs')
     <div class="news-details">
         <div class="news-details__news-block">
             <h2 class="section-title">
-                {{ $entity->title ?? 'ENTITY_TITLE'}}
+                {{ $data['entity']->title}}
             </h2>
             <div class="news-card__details">
                 <p class="news-card__details-author">Udemy •</p>
                 <img class="news-card__details-clock-image" src="{{Vite::asset('resources/icons/clock.svg')}}"
                      alt="clock image">
-                <p class="news-card__details-date">27 января 2021</p>
+                <p class="news-card__details-date">{{date_format($data['entity']->created_at, 'd m y')}}</p>
             </div>
             <img class="news-image" src="{{Vite::asset('resources/images/news-png.png')}}" alt="news image">
             <p class="content">
-                {{ $entity->content ?? 'ENTITY_CONTENT'}}
+                {!! $data['entity']->content !!}
             </p>
         </div>
         <article class="last-news-block">

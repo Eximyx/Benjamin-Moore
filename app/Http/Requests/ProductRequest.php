@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateProductRequest extends FormRequest
+class ProductRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -18,7 +18,7 @@ class CreateProductRequest extends FormRequest
     {
         return [
             'id' => 'numeric|nullable',
-            'title' => 'string|required|min:5|max:100',
+            'title' => 'string|required|min:5|max:100|nullable',
             'main_image' => 'image|mimes:jpeg,png,jpg|nullable',
             'content' => 'string|required',
             'code' => 'numeric|required',
@@ -26,13 +26,13 @@ class CreateProductRequest extends FormRequest
             'gloss_level' => 'string|required|min:5|max:50',
             'description' => 'string|required|max:50',
             'type' => 'string|required|max:50',
-            'colors' => '',
+            'colors' => 'nullable|array',
             'base' => 'string|required|max:50',
             'v_of_dry_remain' => 'string|required|max:20',
             'time_to_repeat' => 'string|required|max:20',
             'consumption' => 'string|required|max:20',
             'thickness' => 'string|required|max:20',
-            'product_category_id' => 'numeric|nullable',
+            'product_category_id' => 'numeric|required',
         ];
     }
 }

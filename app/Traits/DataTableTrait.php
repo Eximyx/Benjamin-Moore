@@ -4,7 +4,6 @@ namespace App\Traits;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\View\View;
 use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\Exceptions\Exception;
@@ -39,7 +38,7 @@ trait DataTableTrait
     public function getDatatableColumns(array $data): array
     {
         $columns = [];
-        foreach ($data['datatable_data'] as $key => $item) {
+        foreach ($data['datatable_data'] as $item) {
             $columns[] = ['data' => $item, 'name' => $item];
         }
 

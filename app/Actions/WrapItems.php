@@ -11,7 +11,7 @@ class WrapItems
      * @param  Collection<int, Model>  $items
      * @return Collection<int, mixed>
      */
-    public function __invoke(Collection $items, int $maxSlides = 0, ?int $slideAmount = 5): Collection
+    public function __invoke(Collection $items, ?int $maxSlides = 0, ?int $slideAmount = 5): Collection
     {
         $j = 0;
         $list = [new Collection()];

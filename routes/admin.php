@@ -45,8 +45,12 @@ Route::middleware('admin')->group(function () {
             Route::post('products/update/{entity}', [ProductsController::class, 'update']);
             Route::post('partners/update/{entity}', [PartnersController::class, 'update']);
             Route::post('metadata/update/{entity}', [MetaDataController::class, 'update']);
+            Route::resource('metadata', StaticPageController::class)->except('create', 'store');
             Route::post('news/update/{entity}', [NewsController::class, 'update']);
+
             Route::post('static_pages/update/{entity}', [StaticPageController::class, 'update']);
+            Route::resource("static_pages", StaticPageController::class)->except(['create', 'store']);
+
             Route::post('sections/update/{entity}', [SectionsController::class, 'update']);
             Route::post('news_categories/update/{entity}', [CategoryController::class, 'update']);
             Route::post('leads/update/{entity}', [LeadsController::class, 'update']);
@@ -60,7 +64,6 @@ Route::middleware('admin')->group(function () {
                 'products' => ProductsController::class,
                 'partners' => PartnersController::class,
                 'news' => NewsController::class,
-                'static_pages' => StaticPageController::class,
                 'metadata' => MetaDataController::class,
                 'news_categories' => CategoryController::class,
                 'leads' => LeadsController::class,

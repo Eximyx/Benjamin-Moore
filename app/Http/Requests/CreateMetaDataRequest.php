@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateMetaDataRequest extends FormRequest
@@ -17,17 +18,15 @@ class CreateMetaDataRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'url' => 'string',
-            'title' => 'string',
-            'meta_description' => 'string',
-            'meta_keywords' => 'string',
-            'h' => 'string',
-            'additional_text' => 'string',
+            'meta_description' => 'string|nullable',
+            'meta_keywords' => 'string|nullable',
+            'h' => 'string|nullable',
+            'additional_text' => 'string|nullable',
         ];
     }
 }

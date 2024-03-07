@@ -16,11 +16,11 @@ class SectionService extends BaseModelService
         parent::__construct($repository);
     }
 
-    public function create(ModelDTO $dto): ?Model
+    public function create(ModelDTO $dto): Model
     {
-        $dto = (array)$dto;
+        $dto = (array) $dto;
 
-        if (!empty($dto['section_position_id'])) {
+        if (! empty($dto['section_position_id'])) {
             $this->repository->nullPosition($dto['section_position_id']);
         }
 
@@ -30,16 +30,14 @@ class SectionService extends BaseModelService
     /**
      * @throws Exception
      */
-    public function destroy(Request $request): ?Model
+    public function destroy(Request $request): Model
     {
         $entity = $this->findById($request['id']);
 
-        if ($entity !== null) {
-            if (!isset($entity->section_position_id)) {
-                $this->repository->destroy($entity);
-            } else {
-                throw new Exception('Вы не можете удалить секцию, которая уже используется!', 422);
-            }
+        if (! isset($entity->section_position_id)) {
+            $this->repository->destroy($entity);
+        } else {
+            throw new Exception(__('errors.sections.position'), 422);
         }
 
         return $entity;
@@ -54,6 +52,4 @@ class SectionService extends BaseModelService
 
         return $variables;
     }
-
-
 }
