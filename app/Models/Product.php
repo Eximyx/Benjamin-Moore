@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Traits\Filterable;
-use App\Traits\ModelMetaDataTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
-    use Filterable, HasFactory, ModelMetaDataTrait, Sluggable;
+    use Filterable, HasFactory, Sluggable;
 
     protected $table = 'products';
 
