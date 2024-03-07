@@ -44,8 +44,8 @@
                     </div>
                     <div class="col-12 justify-content-between align-items-center">
                         <label class="form-label p-0">Email</label>
-                        <input type="email" class="form-control rounded-5 border-danger border-2" id="contactInfo"
-                               name="contactInfo" placeholder="Email">
+                        <input type="email" class="form-control rounded-5 border-danger border-2" id="contact_info"
+                               name="contact_info" placeholder="Email">
                     </div>
                     <div class="col-12 justify-content-between align-items-center">
                         <label for="exampleFormControlTextarea1" class="form-label p-0">Сообщение</label>

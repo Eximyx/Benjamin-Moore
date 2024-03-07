@@ -9,10 +9,8 @@ class StaticPageDTO implements ModelDTO
 {
     public function __construct(
         public readonly string $title,
-        public string          $content,
-    )
-    {
-
+        public string $content,
+    ) {
     }
 
     public static function appRequest(StaticPageRequest $request): StaticPageDTO
@@ -21,6 +19,13 @@ class StaticPageDTO implements ModelDTO
             $request['title'],
             $request['content'],
         );
+    }
 
+    public function toArray(): array
+    {
+        return [
+            'title' => $this->title,
+            'content' => $this->content,
+        ];
     }
 }

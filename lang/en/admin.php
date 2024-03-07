@@ -49,7 +49,7 @@ return [
         'password' => 'Password',
         'created_at' => 'Created at',
         'updated_at' => 'Updated at',
-        'contactInfo' => 'Contact info',
+        'contact_info' => 'Contact info',
         'message' => 'Message',
         'phoneNumber' => 'Phone number',
         'workTime' => 'Work time',

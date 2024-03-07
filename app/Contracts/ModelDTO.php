@@ -5,7 +5,7 @@ namespace App\Contracts;
 interface ModelDTO
 {
     /**
-     * @return array<int, mixed>
+     * @return array<string, mixed>
      */
     public function toArray(): array;
 }

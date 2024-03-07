@@ -8,5 +8,5 @@ return [
     'info' => 'Information',
     'contacts' => 'Contacts',
 
-    'orderButton' => "Leave a request"
+    'orderButton' => 'Leave a request',
 ];

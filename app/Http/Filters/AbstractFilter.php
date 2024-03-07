@@ -29,11 +29,6 @@ abstract class AbstractFilter implements FilterInterface
 
     abstract protected function getCallbacks(): array;
 
-    /**
-     * @param string $key
-     * @param mixed|null $default
-     * @return array|null
-     */
     protected function getQueryParam(string $key, mixed $default = null): ?array
     {
         return $this->queryParams[$key] ?? $default;

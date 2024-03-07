@@ -13,6 +13,4 @@ class ProductCategoryController extends BaseAdminController
     {
         parent::__construct($service, ProductCategoryDTO::class, ProductCategoryResource::class, ProductCategoryRequest::class);
     }
-
-
 }

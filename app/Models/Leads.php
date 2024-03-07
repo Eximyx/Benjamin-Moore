@@ -15,7 +15,7 @@ class Leads extends Model
 
     protected $fillable = [
         'name',
-        'contactInfo',
+        'contact_info',
         'message',
     ];
 }

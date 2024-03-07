@@ -35,12 +35,12 @@ class DatabaseSeeder extends Seeder
         BannerPosition::factory()->createMany([
             ['id' => 1, 'title' => 'Главная'],
             ['id' => 2, 'title' => 'Скидка'],
-            ['id' => 3, 'title' => 'Где купить']
+            ['id' => 3, 'title' => 'Где купить'],
         ]);
         SectionPosition::factory()->createMany([
             ['id' => 1, 'title' => 'Секция 1'],
             ['id' => 2, 'title' => 'Секция 2'],
-            ['id' => 3, 'title' => 'Секция 3']
+            ['id' => 3, 'title' => 'Секция 3'],
         ]);
         Section::factory()->createMany([
             ['section_position_id' => 1],
@@ -66,9 +66,9 @@ class DatabaseSeeder extends Seeder
             'user_role_id' => UserRoles::where('id', '3')->first()['id'],
         ]);
         StaticPage::factory()->createMany([
-            ['title' => "Статическая страница №1", 'en_title' => "Static Page 1", "content" => "first"],
-            ['title' => "Статическая страница №2", 'en_title' => "Static Page 2", "content" => "first"],
-            ['title' => "Статическая страница №3", 'en_title' => "Static Page 3", "content" => "first"],
+            ['title' => 'Статическая страница №1', 'en_title' => 'Static Page 1', 'content' => 'first'],
+            ['title' => 'Статическая страница №2', 'en_title' => 'Static Page 2', 'content' => 'first'],
+            ['title' => 'Статическая страница №3', 'en_title' => 'Static Page 3', 'content' => 'first'],
         ]);
     }
 }

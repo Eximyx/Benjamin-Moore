@@ -47,8 +47,8 @@
                     </div>
                     <div class="col-12 justify-content-between align-items-center">
                         <label class="form-label p-0">@lang('findStore.form.email')</label>
-                        <input type="email" class="form-control rounded-5 border-danger border-2" id="contactInfo"
-                               name="contactInfo" placeholder=@lang('findStore.form.email')>
+                        <input type="email" class="form-control rounded-5 border-danger border-2" id="contact_info"
+                               name="contact_info" placeholder=@lang('findStore.form.email')>
                     </div>
                     <div class="col-12 justify-content-between align-items-center">
                         <label for="exampleFormControlTextarea1"

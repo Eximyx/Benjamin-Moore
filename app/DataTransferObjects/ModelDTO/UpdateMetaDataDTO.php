@@ -10,7 +10,6 @@ class UpdateMetaDataDTO implements ModelDTO
         public readonly string $url,
         public readonly string $title,
     ) {
-
     }
 
     /**
@@ -25,9 +24,6 @@ class UpdateMetaDataDTO implements ModelDTO
 
     }
 
-    /**
-     * @return array<string|int, mixed>
-     */
     public function toArray(): array
     {
         return [

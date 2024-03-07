@@ -10,6 +10,4 @@ class ColorService extends BaseModelService
     {
         parent::__construct($repository);
     }
-
 }
-

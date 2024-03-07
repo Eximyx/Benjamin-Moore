@@ -9,18 +9,26 @@ class LeadDTO implements ModelDTO
 {
     public function __construct(
         public readonly string $name,
-        public readonly string $contactInfo,
-        public readonly string $message,
-    )
-    {
+        public readonly string $contact_info,
+        public readonly ?string $message,
+    ) {
     }
 
     public static function appRequest(LeadsRequest $request): LeadDTO
     {
         return new LeadDTO(
             $request['name'],
-            $request['contactInfo'],
+            $request['contact_info'],
             $request['message']
         );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'contact_info' => $this->contact_info,
+            'message' => $this->message,
+        ];
     }
 }

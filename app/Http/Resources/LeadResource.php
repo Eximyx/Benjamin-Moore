@@ -18,7 +18,7 @@ class LeadResource extends JsonResource
          */
         return [
             'name' => $this['name'],
-            'contactInfo' => $this['contactInfo'],
+            'contact_info' => $this['contact_info'],
             'message' => $this['message'],
             'id' => $this['id'],
         ];

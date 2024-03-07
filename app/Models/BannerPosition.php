@@ -14,7 +14,6 @@ class BannerPosition extends Model
 
     protected $guarded = false;
 
-
     /**
      * @return HasOne<Banner>
      */
@@ -22,5 +21,4 @@ class BannerPosition extends Model
     {
         return $this->hasOne(Banner::class, 'banner_id', 'id');
     }
-
 }

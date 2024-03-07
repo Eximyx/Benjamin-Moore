@@ -10,9 +10,7 @@ class PartnersDTO implements ModelDTO
     public function __construct(
         public readonly string $title,
         public readonly string $location,
-    )
-    {
-
+    ) {
     }
 
     public static function appRequest(PartnersRequest $request): PartnersDTO
@@ -21,6 +19,13 @@ class PartnersDTO implements ModelDTO
             $request['title'],
             $request['location'],
         );
+    }
 
+    public function toArray(): array
+    {
+        return [
+            'title' => $this->title,
+            'location' => $this->location,
+        ];
     }
 }

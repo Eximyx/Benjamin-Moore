@@ -12,9 +12,7 @@ class MetaDataDTO implements ModelDTO
         public readonly ?string $meta_keywords,
         public readonly ?string $h,
         public readonly ?string $additional_text,
-    )
-    {
-
+    ) {
     }
 
     public static function appRequest(CreateMetaDataRequest $request): MetaDataDTO
@@ -25,6 +23,15 @@ class MetaDataDTO implements ModelDTO
             $request['h'],
             $request['additional_text'],
         );
+    }
 
+    public function toArray(): array
+    {
+        return [
+            'meta_description' => $this->meta_description,
+            'meta_keywords' => $this->meta_keywords,
+            'h' => $this->h,
+            'additional_text' => $this->additional_text,
+        ];
     }
 }

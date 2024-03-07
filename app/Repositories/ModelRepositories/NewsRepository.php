@@ -31,7 +31,7 @@ class NewsRepository extends BaseModelRepository
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param  array<string,mixed>  $data
      * @return array<string,array<int,mixed>>
      */
     public function queryForDatatable(array $data): array
@@ -42,13 +42,13 @@ class NewsRepository extends BaseModelRepository
 
         $query['join'] = [
             $selectableModelName,
-            $this->model->getTable() . '.' . $data['selectable_key'],
+            $this->model->getTable().'.'.$data['selectable_key'],
             '=',
-            $selectableModelName . '.id',
+            $selectableModelName.'.id',
             'left',
         ];
 
-        $query['select'][] = $selectableModelName . '.title as ' . $data['selectable_key'];
+        $query['select'][] = $selectableModelName.'.title as '.$data['selectable_key'];
 
         return $query;
     }

@@ -12,7 +12,6 @@ class Banner extends Model
 
     protected $table = 'banners';
 
-
     protected $fillable = [
         'title',
         'content',
@@ -20,7 +19,6 @@ class Banner extends Model
         'banner_position_id',
         'image',
     ];
-
 
     /**
      * @return BelongsTo<BannerPosition>

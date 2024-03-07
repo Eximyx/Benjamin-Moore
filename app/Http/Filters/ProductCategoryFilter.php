@@ -17,8 +17,6 @@ class ProductCategoryFilter extends AbstractFilter
 
     public function kindOfWorkId(Builder $builder, $value)
     {
-        $builder->whereIn('kind_of_work_id',$value);
+        $builder->whereIn('kind_of_work_id', $value);
     }
-
-
 }

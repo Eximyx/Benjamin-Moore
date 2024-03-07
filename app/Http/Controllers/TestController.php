@@ -11,11 +11,11 @@ use Illuminate\Routing\Controller;
 
 class TestController extends Controller
 {
-
     public function test()
     {
         $entity = $this->createMetaData(NewsPost::first());
         dd($entity);
+
         return view('test');
     }
 
@@ -27,13 +27,13 @@ class TestController extends Controller
     public function erik(ProductFilterRequest $request)
     {
         $data = $request->validated();
-//        dd($data);
+        //        dd($data);
         /*dd(array_filter($data['kind_of_work_id']));*/
 
         $filter = app()->make(ProductCategoryFilter::class, ['queryParams' => ['kind_of_work_id' => $data['kind_of_work_id']]]);
 
         $products = ProductCategory::filter($filter)->get();
-//dd(['queryParams' => ['kind_of_work_id' => $data['kind_of_work_id']]]);
+        //dd(['queryParams' => ['kind_of_work_id' => $data['kind_of_work_id']]]);
         dd($products, $request->query());
 
     }
@@ -41,7 +41,7 @@ class TestController extends Controller
     public function erikEr(ProductCategoryFilterRequest $request)
     {
         $data = $request->validated();
-//        dd($data);
+        //        dd($data);
         $filter = app()->make(ProductCategoryFilter::class, ['queryParams' => array_filter($data)]);
 
         $products = ProductCategory::filter($filter)->get();

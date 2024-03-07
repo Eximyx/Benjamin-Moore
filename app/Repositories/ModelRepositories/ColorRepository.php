@@ -14,7 +14,7 @@ class ColorRepository extends BaseModelRepository
     }
 
     /**
-     * @param array<int, int> $colorIds
+     * @param  array<int, int>  $colorIds
      * @return array<int, int>
      */
     public function getColors(array $colorIds): array
@@ -29,5 +29,4 @@ class ColorRepository extends BaseModelRepository
     {
         return Color::all();
     }
-
 }

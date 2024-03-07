@@ -9,8 +9,7 @@ class CategoryDTO implements ModelDTO
 {
     public function __construct(
         public readonly string $title,
-    )
-    {
+    ) {
     }
 
     public static function appRequest(NewsCategoryRequest $request): CategoryDTO
@@ -18,5 +17,12 @@ class CategoryDTO implements ModelDTO
         return new CategoryDTO(
             $request['title'],
         );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'title' => $this->title,
+        ];
     }
 }

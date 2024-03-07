@@ -14,7 +14,6 @@ class SectionPosition extends Model
 
     protected $guarded = false;
 
-
     /**
      * @return HasOne<Banner>
      */
@@ -22,5 +21,4 @@ class SectionPosition extends Model
     {
         return $this->hasOne(Section::class, 'section_id', 'id');
     }
-
 }

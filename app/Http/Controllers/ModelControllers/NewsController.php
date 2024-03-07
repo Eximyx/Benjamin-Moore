@@ -21,8 +21,7 @@ class NewsController extends BaseAdminController
 
     public function __construct(
         NewsService $service,
-    )
-    {
+    ) {
         parent::__construct($service, NewsPostDTO::class, NewsPostResource::class, NewsPostRequest::class);
         $this->settings = SettingsResource::make(app(Settings::class));
     }
@@ -85,13 +84,13 @@ class NewsController extends BaseAdminController
         $entity = $this->service->findBySlug($slug);
 
         $data = JsonResource::make([
-                'entity' => NewsPostResource::make($entity),
-                'latest' => NewsPostResource::collection(
-                    $this->service->getLatest(3)->get()
-                ),
-                'settings' => $this->settings,
-                'meta' => $this->getMetaDataByURL(),
-            ]
+            'entity' => NewsPostResource::make($entity),
+            'latest' => NewsPostResource::collection(
+                $this->service->getLatest(3)->get()
+            ),
+            'settings' => $this->settings,
+            'meta' => $this->getMetaDataByURL(),
+        ]
         );
 
         return view('frontend.news-details', ['data' => $data]);

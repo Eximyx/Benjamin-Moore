@@ -18,18 +18,16 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductsController extends BaseAdminController
 {
-
     protected SettingsResource $settings;
+
     use MetaDataTrait;
 
     public function __construct(
         ProductService $service,
-    )
-    {
+    ) {
         parent::__construct($service, ProductDTO::class, ProductResource::class, ProductRequest::class);
         $this->settings = SettingsResource::make(app(Settings::class));
     }
-
 
     public function show(Request $request): JsonResource
     {
@@ -50,12 +48,12 @@ class ProductsController extends BaseAdminController
         $entity = $this->service->findBySlug($slug);
 
         $data = JsonResource::make([
-                'entity' => ProductResource::make($entity),
-                'latest' => $this->service->getLatest(),
-                'similar' => $this->service->getSimilar($entity->product_category_id),
-                'meta' => $this->getMetaDataByURL(),
-                'settings' => $this->settings,
-            ]
+            'entity' => ProductResource::make($entity),
+            'latest' => $this->service->getLatest(),
+            'similar' => $this->service->getSimilar($entity->product_category_id),
+            'meta' => $this->getMetaDataByURL(),
+            'settings' => $this->settings,
+        ]
         );
 
         return view('frontend.products-details', ['data' => $data]);
@@ -114,7 +112,7 @@ class ProductsController extends BaseAdminController
 
         return [
             'products' => $entities['products'],
-            'categories' => $entities['categories']
+            'categories' => $entities['categories'],
         ];
 
     }

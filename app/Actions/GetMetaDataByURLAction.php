@@ -9,8 +9,7 @@ class GetMetaDataByURLAction
 {
     public function __construct(
         protected MetaDataService $metaDataService,
-    )
-    {
+    ) {
     }
 
     public function __invoke(): MetaDataResource

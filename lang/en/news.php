@@ -9,4 +9,3 @@ return [
     'lastNews' => 'Last news',
     'allNews' => 'All news',
 ];
-

@@ -8,5 +8,5 @@ return [
     'info' => 'Информация',
     'contacts' => 'Контакты',
 
-    'orderButton' => "Оставить заявку"
+    'orderButton' => 'Оставить заявку',
 ];

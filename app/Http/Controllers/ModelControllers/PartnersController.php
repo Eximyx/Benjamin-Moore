@@ -14,4 +14,3 @@ class PartnersController extends BaseAdminController
         parent::__construct($service, PartnersDTO::class, PartnersResource::class, PartnersRequest::class);
     }
 }
-

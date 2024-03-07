@@ -197,12 +197,13 @@ return [
         'datatable_data' => [
             'id',
             'name',
-            'contactInfo',
+            'contact_info',
             'message',
+
         ],
         'form_data' => [
             'name',
-            'contactInfo',
+            'contact_info',
             'message',
         ],
         'actions' => ['adding' => false],

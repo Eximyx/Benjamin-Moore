@@ -57,4 +57,4 @@ Route::post('/leads', [MainController::class, 'leads'])->name('user.leads');
 Route::get('/eee', function () {
     return view('user.test');
 });
-require __DIR__ . '/admin.php';
+require __DIR__.'/admin.php';

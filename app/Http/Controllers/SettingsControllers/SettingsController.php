@@ -19,7 +19,7 @@ class SettingsController extends Controller
 
     public function index(): View
     {
-        $resource = (array)SettingsResource::make($this->service->settingsFetch());
+        $resource = (array) SettingsResource::make($this->service->settingsFetch());
 
         return view('admin.settings', $resource);
     }

@@ -16,4 +16,3 @@ return [
     'sections.index' => 'Sections',
     'metadata.index' => 'Metadata',
 ];
-

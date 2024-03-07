@@ -21,8 +21,7 @@ class StaticPageController extends BaseAdminController
 
     public function __construct(
         StaticPageService $service,
-    )
-    {
+    ) {
         parent::__construct($service, StaticPageDTO::class, StaticPageResource::class, StaticPageRequest::class
         );
         $this->settings = SettingsResource::make(app(Settings::class));

@@ -41,7 +41,7 @@ return [
         'call' => 'Request a call',
         'specs' => 'Specifications',
         'options' => 'Options',
-        'download' => 'Download technical specifications'
+        'download' => 'Download technical specifications',
     ],
 
 ];

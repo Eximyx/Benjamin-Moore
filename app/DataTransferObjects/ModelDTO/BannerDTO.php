@@ -9,13 +9,11 @@ use Illuminate\Http\UploadedFile;
 class BannerDTO implements ModelDTO
 {
     public function __construct(
-        public readonly string       $title,
-        public readonly string       $content,
-        public readonly ?string      $banner_position_id,
+        public readonly string $title,
+        public readonly string $content,
+        public readonly ?string $banner_position_id,
         public readonly UploadedFile $image,
-    )
-    {
-
+    ) {
     }
 
     public static function appRequest(BannerRequest $request): BannerDTO
@@ -24,8 +22,18 @@ class BannerDTO implements ModelDTO
             $request['title'],
             $request['content'],
             $request['banner_position_id'],
-            $request['image'] ? $request['image'] : new UploadedFile('storage/image/default_post.jpg', 'banner_1.jpg'),
+            $request['image'],
+            // TODO CHECK ? $request['image'] : new UploadedFile('storage/image/default_post.jpg', 'banner_1.jpg'),
         );
+    }
 
+    public function toArray(): array
+    {
+        return [
+            'title' => $this->title,
+            'content' => $this->content,
+            'banner_position_id' => $this->banner_position_id,
+            'image' => $this->image,
+        ];
     }
 }

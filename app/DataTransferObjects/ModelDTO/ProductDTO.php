@@ -8,27 +8,25 @@ use App\Http\Requests\ProductRequest;
 class ProductDTO implements ModelDTO
 {
     /**
-     * @param array<int, int> $colors
+     * @param  array<int, int>  $colors
      */
     public function __construct(
         public readonly string $title,
-        public string          $content,
-        public readonly int    $code,
-        public readonly int    $price,
+        public string $content,
+        public readonly int $code,
+        public readonly int $price,
         public readonly string $gloss_level,
         public readonly string $description,
         public readonly string $type,
-        public ?array          $colors,
+        public ?array $colors,
         public readonly string $v_of_dry_remain,
         public readonly string $time_to_repeat,
         public readonly string $consumption,
         public readonly string $thickness,
         public readonly string $base,
-        public readonly ?int   $product_category_id,
-        public mixed           $main_image,
-    )
-    {
-
+        public readonly int $product_category_id,
+        public mixed $main_image,
+    ) {
     }
 
     public static function appRequest(ProductRequest $request): ProductDTO
@@ -52,9 +50,6 @@ class ProductDTO implements ModelDTO
         );
     }
 
-    /**
-     * @return array<int, mixed>
-     */
     public function toArray(): array
     {
         return [

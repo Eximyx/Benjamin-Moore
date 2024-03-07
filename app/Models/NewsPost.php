@@ -44,5 +44,4 @@ class NewsPost extends Model
             ],
         ];
     }
-
 }

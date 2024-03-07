@@ -11,7 +11,7 @@ return [
 
     'buttons' => [
         'delete' => 'Delete',
-        'cancel' => 'Cancel'
-    ]
+        'cancel' => 'Cancel',
+    ],
 
 ];

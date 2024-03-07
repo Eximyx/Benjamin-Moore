@@ -8,14 +8,12 @@ use App\Http\Requests\NewsPostRequest;
 class NewsPostDTO implements ModelDTO
 {
     public function __construct(
-        public readonly string  $title,
-        public readonly string  $description,
+        public readonly string $title,
+        public readonly string $description,
         public readonly ?string $category_id,
-        public ?string          $content,
-        public mixed            $main_image,
-    )
-    {
-
+        public ?string $content,
+        public mixed $main_image,
+    ) {
     }
 
     public static function appRequest(NewsPostRequest $request): NewsPostDTO
@@ -30,9 +28,6 @@ class NewsPostDTO implements ModelDTO
 
     }
 
-    /**
-     * @return array<int, mixed>
-     */
     public function toArray(): array
     {
         return [

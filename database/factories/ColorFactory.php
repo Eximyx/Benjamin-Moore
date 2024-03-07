@@ -18,7 +18,7 @@ class ColorFactory extends Factory
     {
         return [
             'title' => fake()->name(),
-            'hex_code' =>'#'.fake()->numberBetween(100000, 999999),
+            'hex_code' => '#'.fake()->numberBetween(100000, 999999),
         ];
     }
 }

@@ -13,6 +13,7 @@ class Color extends Model
     protected $table = 'colors';
 
     protected $guarded = false;
+
     protected $fillable = [
         'title',
         'hex_code',

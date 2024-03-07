@@ -13,12 +13,10 @@ class ColorProductRepository extends BaseModelRepository
     }
 
     /**
-     * @param string $id
      * @return array<int, int>
      */
     public function getColorIds(string $id): array
     {
         return Color_product::where('product_id', $id)->pluck('color_id')->all();
     }
-
 }

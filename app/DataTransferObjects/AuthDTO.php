@@ -11,9 +11,7 @@ class AuthDTO implements ModelDTO
         public readonly string $name,
         public readonly string $email,
         public readonly string $password,
-    )
-    {
-
+    ) {
     }
 
     public static function appRequest(AuthRequest $request): AuthDTO
@@ -26,9 +24,6 @@ class AuthDTO implements ModelDTO
 
     }
 
-    /**
-     * @return array<string, mixed>
-     */
     public function toArray(): array
     {
         return [

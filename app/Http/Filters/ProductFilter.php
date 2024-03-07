@@ -9,10 +9,12 @@ use Illuminate\Database\Eloquent\Builder;
 class ProductFilter extends AbstractFilter
 {
     public const KIND_OF_WORK_ID = 'kind_of_work_id';
-    public const PRICE = 'price';
-    public const PRODUCT_CATEGORY_ID = 'product_category_id';
-    public const COLORS = 'colors';
 
+    public const PRICE = 'price';
+
+    public const PRODUCT_CATEGORY_ID = 'product_category_id';
+
+    public const COLORS = 'colors';
 
     protected function getCallbacks(): array
     {
@@ -55,5 +57,4 @@ class ProductFilter extends AbstractFilter
         }
 
     }
-
 }

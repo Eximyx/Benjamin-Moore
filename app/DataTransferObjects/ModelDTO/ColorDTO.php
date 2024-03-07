@@ -2,7 +2,6 @@
 
 namespace App\DataTransferObjects\ModelDTO;
 
-use App\Contracts\BaseDTO;
 use App\Contracts\ModelDTO;
 use App\Http\Requests\ColorRequest;
 
@@ -11,8 +10,7 @@ class ColorDTO implements ModelDTO
     public function __construct(
         public readonly string $title,
         public readonly string $hex_code,
-    )
-    {
+    ) {
     }
 
     public static function appRequest(ColorRequest $request): ColorDTO
@@ -21,5 +19,13 @@ class ColorDTO implements ModelDTO
             $request['title'],
             $request['hex_code'],
         );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'title' => $this->title,
+            'hex_code' => $this->hex_code,
+        ];
     }
 }
