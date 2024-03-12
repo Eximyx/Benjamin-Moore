@@ -18,13 +18,12 @@ class AuthController extends Controller
 {
     public function __construct(
         protected AuthService $service,
-    )
-    {
+    ) {
     }
 
     public function login(): View
     {
-        return view('auth/login');
+        return view('admin.pages.login');
     }
 
     /**
@@ -52,7 +51,7 @@ class AuthController extends Controller
     public function profile(): View|AuthResource
     {
         if (request()->ajax()) {
-            $entity = $this->service->getUserById((string)Auth::user()['id']);
+            $entity = $this->service->getUserById((string) Auth::user()['id']);
             $request = app(AuthRequest::class, request()->all());
             $request = $this->service->profileSet($request);
 
@@ -64,6 +63,6 @@ class AuthController extends Controller
             return AuthResource::make($entity);
         }
 
-        return view('admin/profile');
+        return view('admin.pages.profile');
     }
 }

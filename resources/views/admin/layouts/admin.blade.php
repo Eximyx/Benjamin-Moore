@@ -48,7 +48,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    @include('layouts.scripts')
+    @include('admin.components.scripts')
     <title>Benjamin moore Admin</title>
     <!-- Custom fonts for this template-->
     {{--    <link href="{{asset("css/all.min.css")}}" rel="stylesheet" type="text/css"> --}}
@@ -74,7 +74,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    @include('layouts.sidebar')
+    @include('admin.components.sidebar')
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -84,7 +84,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            @include('layouts.navbar')
+            @include('admin.components.navbar')
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -111,7 +111,7 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        @include('layouts.footer')
+        @include('admin.components.footer')
         <!-- End of Footer -->
 
     </div>

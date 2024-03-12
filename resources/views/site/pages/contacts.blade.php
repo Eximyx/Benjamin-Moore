@@ -1,6 +1,6 @@
-@extends('frontend.layout')
+@extends('site.layouts.site')
 @section('content')
-    @include('frontend.breadcrumbs')
+    @include('site.components.breadcrumbs')
     <section class="contact-section">
         <div class=" contacts-block">
             <h3 class="section-header">@lang('contacts.contacts')</h3>
@@ -42,5 +42,5 @@
                 referrerpolicy="no-referrer-when-downgrade">
         </iframe>
     </section>
-    @include('frontend.lead_form')
+    @include('site.components.lead_form')
 @endsection

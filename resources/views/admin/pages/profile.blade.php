@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.layouts.admin')
 @section('contents')
     <h1 class="m-0">@lang('admin.titles.profile')</h1>
     <hr/>
@@ -14,7 +14,8 @@
 
                         <div class="col-md-6">
                             <label class="labels">@lang('admin.keys.name')</label>
-                            <input type="text" name="name" id="name" class="form-control" placeholder="@lang('admin.keys.email')"
+                            <input type="text" name="name" id="name" class="form-control"
+                                   placeholder="@lang('admin.keys.email')"
                                    value="{{ auth()->user()->name }}">
                         </div>
                         <div class="col-md-6">

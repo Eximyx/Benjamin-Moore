@@ -1,6 +1,6 @@
-@extends('frontend.layout')
+@extends('site.layouts.site')
 @section('content')
-    @include('frontend.breadcrumbs')
+    @include('site.components.breadcrumbs')
     {{-- TODO BOTH: 23. Обсудить, как будем данные фильтров передавать --}}
     <div class="catalog-block">
         <button class="mobile-filter__button button-outlined">

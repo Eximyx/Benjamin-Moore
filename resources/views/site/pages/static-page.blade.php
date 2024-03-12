@@ -1,6 +1,6 @@
-@extends('frontend.layout')
+@extends('site.layouts.site')
 @section('content')
-    @include('frontend.breadcrumbs')
+    @include('site.components.breadcrumbs')
     {!! html_entity_decode($data['entity']->content) !!}
 @endsection
 @section('scripts')

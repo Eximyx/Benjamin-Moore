@@ -1,9 +1,9 @@
-@extends('frontend.layout')
+@extends('site.layouts.site')
 
 @section('breadcrumbs', $data['entity']->title)
 
 @section('content')
-    @include('frontend.breadcrumbs')
+    @include('site.components.breadcrumbs')
     <div class="news-details">
         <div class="news-details__news-block">
             <h2 class="section-title">

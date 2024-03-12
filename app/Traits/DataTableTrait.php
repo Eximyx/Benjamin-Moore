@@ -25,12 +25,12 @@ trait DataTableTrait
                 return Carbon::parse($value['updated_at'])->format('Y-m-d H:i:s');
             })
             ->editColumn('hex_code', function ($value) {
-                return view('layouts/color', compact('value'));
+                return view('admin.components.color', compact('value'));
             })
             ->addColumn('action', function ($value) {
                 $request = request()->getPathInfo();
 
-                return view('layouts/action', compact('request', 'value'));
+                return view('admin.components.action', compact('request', 'value'));
             })
             ->addIndexColumn();
     }

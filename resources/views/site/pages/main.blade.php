@@ -1,4 +1,4 @@
-@extends('frontend.layout')
+@extends('site.layouts.site')
 @section('content')
     {{--TODO FRONT: 20. Какие-то проблемы с кнопками враппера (ПРИЛОЖЕНИЕ 1) + высота карточек должна быть одинаковой (ПРИЛОЖЕНИЕ 2)--}}
     <section class="main__banner">
@@ -110,7 +110,7 @@
             @foreach($data['news'] as $value)
                 <div class="news-card">
                     <img
-                        src="{{url('storage/image').'/'.$value->main_image}}"
+                        src="{{url('storage/image').'main.blade.php/'.$value->main_image}}"
                         alt="news preview">
                     <div class="news-card__details-block">
                         <div class="news-card__details">
@@ -170,7 +170,7 @@
             <button class="button-outlined">@lang('main.titles.catalog')</button>
         </a>
     </section>
-    @include('frontend.lead_form')
+    @include('site.components.lead_form')
 @endsection
 @section('scripts')
     @vite('resources/js/slider.js')

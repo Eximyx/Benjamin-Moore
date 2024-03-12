@@ -1,6 +1,6 @@
-@extends('frontend.layout')
+@extends('site.layouts.site')
 @section('content')
-    @include('frontend.breadcrumbs')
+    @include('site.components.breadcrumbs')
     <h2 class="section-title" id="calculator-page__title">@lang('calc.title')</h2>
     <h3 class="section-subtitle">
         @lang('calc.subTitle')

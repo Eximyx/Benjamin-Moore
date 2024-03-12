@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.layouts.admin')
 @section('title', trans($data['data']['ModelName']))
 @section('contents')
     <div class="container-fluid p-0">

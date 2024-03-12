@@ -1,9 +1,9 @@
-@extends('frontend.layout')
+@extends('site.layouts.site')
 
 @section('breadcrumbs', $data['entity']->title ?? 'ENTITY_TITLE')
 
 @section('content')
-    @include('frontend.breadcrumbs')
+    @include('site.components.breadcrumbs')
     <section class="product-details-section">
         <div class="product-images-block">
             <img src="" alt="main-image" class="main-product-image">
