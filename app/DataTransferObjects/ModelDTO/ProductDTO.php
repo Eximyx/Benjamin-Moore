@@ -26,6 +26,7 @@ class ProductDTO implements ModelDTO
         public readonly ?string $base,
         public readonly ?int    $product_category_id,
         public mixed            $main_image,
+        public mixed            $sub_images,
     )
     {
     }
@@ -48,6 +49,7 @@ class ProductDTO implements ModelDTO
             $request['base'],
             $request['product_category_id'],
             $request['main_image'],
+            $request['sub_images'],
         );
     }
 
@@ -69,6 +71,7 @@ class ProductDTO implements ModelDTO
             'base' => $this->base,
             'product_category_id' => $this->product_category_id,
             'main_image' => $this->main_image,
+            'sub_images' => $this->sub_images,
         ];
     }
 }
