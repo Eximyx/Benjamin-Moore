@@ -29,6 +29,6 @@
             @endforeach
         </div>
         {{-- TODO FRONT: нажатие на пагинации отрабатывает только при нажатии на текст! --}}
-        {{$data['newsPosts']->links('frontend.pagination')}}
+        {{$data['newsPosts']->links('site.components.pagination')}}
     </section>
 @endsection

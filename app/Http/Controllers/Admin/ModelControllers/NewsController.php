@@ -70,7 +70,7 @@ class NewsController extends BaseAdminController
 
     public function news(): View
     {
-        return view('frontend.news',
+        return view('site.pages.news',
             [
                 'data' => SettingsResource::make(
                     [
@@ -96,6 +96,6 @@ class NewsController extends BaseAdminController
             ]
         );
 
-        return view('frontend.news-details', ['data' => $data]);
+        return view('site.pages.news-details', ['data' => $data]);
     }
 }

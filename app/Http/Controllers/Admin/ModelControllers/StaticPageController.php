@@ -38,7 +38,7 @@ class StaticPageController extends BaseAdminController
             'meta' => $this->getMetaDataByURL(),
         ]);
 
-        return view('frontend.static-page', ['data' => $data]);
+        return view('site.pages.static-page', ['data' => $data]);
     }
 
     public function update(Request $request): JsonResource

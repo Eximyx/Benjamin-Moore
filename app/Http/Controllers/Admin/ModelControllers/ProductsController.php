@@ -57,7 +57,7 @@ class ProductsController extends BaseAdminController
             ]
         );
 
-        return view('frontend.products-details', ['data' => $data]);
+        return view('site.pages.products-details', ['data' => $data]);
     }
 
     public function update(Request $request): JsonResource
@@ -94,7 +94,7 @@ class ProductsController extends BaseAdminController
 
     public function catalog(ProductFilterRequest $request): View
     {
-        return view('frontend.catalog',
+        return view('site.pages.catalog',
             [
                 'data' => JsonResource::make([
                     'products' => ProductResource::collection($this->filter($request)['products']),

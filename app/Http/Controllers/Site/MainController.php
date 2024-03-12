@@ -43,14 +43,14 @@ class MainController extends Controller
             'settings' => $this->settings,
             'meta' => $this->service->metaDataFindByURL(),
         ]);
-        return view('frontend.main', [
+        return view('site.pages.main', [
             'data' => $data,
         ]);
     }
 
     public function calc(): View|JsonResource
     {
-        return view('frontend.calculator', [
+        return view('site.pages.calculator', [
             'data' => JsonResource::make([
                 'settings' => $this->settings,
                 'meta' => $this->service->metaDataFindByURL(),
@@ -66,7 +66,7 @@ class MainController extends Controller
             'settings' => $this->settings,
             'meta' => $this->service->metaDataFindByURL(),
         ]);
-        return view('frontend.contacts', [
+        return view('site.pages.contacts', [
             'data' => $data,
         ]);
     }

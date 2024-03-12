@@ -79,7 +79,7 @@
                     </div>
                 @endforeach
             </div>
-            {{$data['products']->links('frontend.pagination')}}
+            {{$data['products']->links('site.components.pagination')}}
 
         </div>
     </div>
