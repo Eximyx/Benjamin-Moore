@@ -1,6 +1,5 @@
 @extends('site.layouts.site')
 @section('content')
-    {{--TODO FRONT: 20. Какие-то проблемы с кнопками враппера (ПРИЛОЖЕНИЕ 1) + высота карточек должна быть одинаковой (ПРИЛОЖЕНИЕ 2)--}}
     <section class="main__banner">
         <div class="main__banner-block">
             <h2 class="main__banner-text"><b>Benjamin Moore</b><br>@lang('main.titles.paints')</h2>

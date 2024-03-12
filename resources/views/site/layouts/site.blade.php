@@ -48,8 +48,8 @@
             <p class="header__contacts-time">{{$data['settings']->phone}}</p>
         </div>
         @if(request()->url() != route('user.contacts'))
-            <a href="{{route('user.contacts')}}" class="button-filled">
-                @lang('nav-links.orderButton')
+            <a href="{{route('user.contacts')}}">
+                <button class="button-filled">@lang('nav-links.orderButton')</button>
             </a>
         @endif
     </div>
@@ -79,8 +79,8 @@
             />
         </svg>
     </button>
-    <a href="{{route('user.contacts')}}" class="button-filled">
-        @lang('nav-links.orderButton')
+    <a href="{{route('user.contacts')}}">
+        <button class="button-filled">@lang('nav-links.orderButton')</button>
     </a>
 </div>
 <main class="main">
