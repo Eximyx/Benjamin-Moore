@@ -186,7 +186,7 @@ button {
 .header__nav-buttons {
     display: flex;
     gap: 30px;
-    margin-right: auto;
+    padding: 0;
 }
 
 .header__rightside {
@@ -256,7 +256,6 @@ button {
     display: flex;
     flex-direction: column;
     min-height: 512px;
-    background-color: #cacaca;
     border-radius: 20px;
     justify-content: center;
 }
@@ -329,12 +328,12 @@ button {
 .product-card {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     border: 1px solid #1A1A1A33;
     border-radius: 20px;
     max-width: 700px;
     min-width: 210px;
-    height: fit-content;
+    height: auto;
     flex-grow: 1;
     cursor: pointer;
 }
@@ -612,8 +611,10 @@ button {
     margin: 60px auto;
     max-width: 1410px;
     padding-top: 60px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     justify-content: space-between;
+    gap: 10px;
     align-items: center;
     border-top: 2px solid var(--border-black);
 }
@@ -720,24 +721,24 @@ button {
     font-size: 15px;
     font-weight: 500;
     text-align: center;
+    padding: 5px 7px;
 }
 
-.pagination-item-active {
+.pagination-item-active a{
     background-color: rgba(255, 255, 255, 0.3);
     border-width: 1px;
     border-radius: 5px;
-    padding: 5px 7px;
     border-style: solid;
     border-color: rgba(255, 255, 255, 0.1);
 }
 
 .pagination-item {
-    padding: 5px 7px;
     transition: .35s;
     border-radius: 5px;
 }
 
 .pagination-item:hover:not(.disabled) {
+    padding: 5px 0;
     background-color: rgba(255, 255, 255, 0.3);
 }
 
@@ -817,6 +818,7 @@ button {
     flex-direction: column;
     max-width: 1050px;
     align-items: center;
+    width: 100%;
 }
 
 .catalog-wrapper .section-title {
@@ -1287,10 +1289,6 @@ input[type="checkbox"]:checked::after {
     transform: translateY(-50%) scale(0.85);
 }
 
-.wrapper i:last-child:active {
-    transform: translateY(-76px) scale(0.85);
-}
-
 .wrapper i:first-child {
     left: -80px;
 }
@@ -1335,11 +1333,12 @@ input[type="checkbox"]:checked::after {
 
 .carousel .card {
     scroll-snap-align: start;
-    height: fit-content;
+    height: auto;
     list-style: none;
     background: transparent;
     flex-direction: column;
     padding: 10px;
+    justify-content: space-between;
 }
 
 
@@ -1381,10 +1380,6 @@ input[type="checkbox"]:checked::after {
 
 .reviewsWrapper i:active{
     transform: translateY(-50%) scale(0.85);
-}
-
-.reviewsWrapper i:last-child:active {
-    transform: translateY(-76px) scale(0.85);
 }
 
 .reviewsWrapper i:first-child {
@@ -1573,6 +1568,14 @@ input[type="checkbox"]:checked::after {
         transform: translateY(-50%) scale(0.85);
     }
 
+    .reviewsWrapper i:last-child:active {
+        transform: translateY(-76px) scale(0.85);
+    }
+
+    .wrapper i:last-child:active {
+        transform: translateY(-76px) scale(0.85);
+    }
+
     .reviewsWrapper i:first-child {
         position: relative;
         order: 2;
@@ -1716,11 +1719,6 @@ input[type="checkbox"]:checked::after {
 
     .contact-section__map {
         min-width: 65%;
-    }
-
-    .calculator-section__painting-area, .calculator-section__recommended-volume {
-        /*max-width: unset;*/
-        /*padding: 20px 30px;*/
     }
 
     .calculator-section__survey-block {
