@@ -54,6 +54,10 @@ Route::middleware('admin')->group(function () {
             Route::post('banners/update/{entity}', [BannersController::class, 'update']);
             Route::post('colors/update/{entity}', [ColorController::class, 'update']);
 
+            Route::middleware('root')->group(function () {
+                Route::resource('users', AdminController::class);
+            });
+
             Route::resources([
                 'products' => ProductsController::class,
                 'partners' => PartnersController::class,
@@ -62,7 +66,6 @@ Route::middleware('admin')->group(function () {
                 'news_categories' => CategoryController::class,
                 'leads' => LeadsController::class,
                 'product_categories' => ProductCategoryController::class,
-                'users' => AdminController::class,
                 'reviews' => ReviewController::class,
                 'banners' => BannersController::class,
                 'sections' => SectionsController::class,

@@ -28,7 +28,7 @@
                 </div>
             @endforeach
         </div>
-        {{-- PAGINATION --}}
+        {{-- TODO FRONT: нажатие на пагинации отрабатывает только при нажатии на текст! --}}
         {{$data['newsPosts']->links('frontend.pagination')}}
     </section>
 @endsection

@@ -6,21 +6,15 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ProductCategoryRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     /**
      * @return string[]
      */
     public function rules(): array
     {
         return [
-            'id' => 'numeric|nullable',
-            'title' => 'string|required|min:5|max:100',
-            'content' => 'string|required',
-            'kind_of_work_id' => 'string|nullable',
+            'id' => 'nullable|numeric',
+            'title' => 'required|string|between:5,30',
+            'kind_of_work_id' => 'nullable|string|exists:kind_of_work,id',
         ];
     }
 }

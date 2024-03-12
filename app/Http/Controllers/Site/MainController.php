@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Actions\GetMetaDataByURLAction;
 use App\Http\Resources\ModelResources\BannerResource;
+use App\Http\Resources\ModelResources\NewsPostResource;
 use App\Http\Resources\ModelResources\PartnersResource;
+use App\Http\Resources\ModelResources\ProductResource;
+use App\Http\Resources\ModelResources\ReviewResource;
 use App\Http\Resources\ModelResources\SectionResource;
 use App\Http\Resources\SettingsResources\SettingsResource;
 use App\Models\Settings;
@@ -20,8 +22,7 @@ class MainController extends Controller
     protected SettingsResource $settings;
 
     public function __construct(
-        protected MainService            $service,
-        protected GetMetaDataByURLAction $getMetaDataByURLAction,
+        protected MainService $service,
     )
     {
         $this->settings = SettingsResource::make(app(Settings::class));
@@ -34,48 +35,39 @@ class MainController extends Controller
     public function index(): View|JsonResource
     {
         $data = JsonResource::make([
-            'news' => $this->service->newsWrapper(1),
-            'products' => $this->service->productsWrapper(5),
-            'reviews' => $this->service->reviewsWrapper(5),
+            'news' => NewsPostResource::collection($this->service->getLatestNews()),
+            'products' => ProductResource::collection($this->service->getLatestProducts()),
+            'reviews' => ReviewResource::collection($this->service->getLatestReviews()),
             'banners' => BannerResource::collection($this->service->getBannersForMain()),
             'sections' => SectionResource::collection($this->service->getSectionsForMain()),
             'settings' => $this->settings,
-            'meta' => $this->getMetaDataByURLAction->__invoke(),
+            'meta' => $this->service->metaDataFindByURL(),
         ]);
-
-        return view('frontend.main',
-            [
-                'data' => $data,
-            ]
-        );
+        return view('frontend.main', [
+            'data' => $data,
+        ]);
     }
 
     public function calc(): View|JsonResource
     {
-        return view('frontend.calculator',
-            [
-                'data' => JsonResource::make(
-                    [
-                        'settings' => $this->settings,
-                        'meta' => $this->getMetaDataByURLAction->__invoke(),
-                    ]
-                ),
-            ]
-        );
+        return view('frontend.calculator', [
+            'data' => JsonResource::make([
+                'settings' => $this->settings,
+                'meta' => $this->service->metaDataFindByURL(),
+            ]),
+        ]);
     }
 
     public function contacts(): View
     {
         $data = JsonResource::make([
-            'data' => PartnersResource::collection($this->service->getPartners()),
+            'partners' => PartnersResource::collection($this->service->getPartners()),
             'banner' => BannerResource::make($this->service->getBannerByPositionId(2)),
             'settings' => $this->settings,
-            'meta' => $this->getMetaDataByURLAction->__invoke(),
+            'meta' => $this->service->metaDataFindByURL(),
         ]);
-        return view('frontend.contacts',
-            [
-                'data' => $data,
-            ]
-        );
+        return view('frontend.contacts', [
+            'data' => $data,
+        ]);
     }
 }

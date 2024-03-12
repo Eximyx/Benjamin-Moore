@@ -2,6 +2,7 @@
 
 return [
     'titles' => [
+        'paints' => 'Американские краски',
         'products' => 'Предлагаем',
         'lastProducts' => 'НАШУ ПРОДУКЦИЮ',
         'news' => 'Новости',

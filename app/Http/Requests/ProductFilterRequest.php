@@ -6,11 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ProductFilterRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     /**
      * @return string[]
      */
@@ -18,9 +13,14 @@ class ProductFilterRequest extends FormRequest
     {
         return [
             'product_category_id' => 'nullable|array',
+            'product_category_id.*' => 'sometimes|required|numeric|exists:product_categories,id',
             'kind_of_work_id' => 'nullable|array',
+            'kind_of_work_id.*' => 'sometimes|required|numeric|exists:kind_of_work,id',
             'price' => 'nullable|array',
+            'price.to' => 'sometimes|required|numeric',
+            'price.from' => 'sometimes|required|numeric',
             'colors' => 'nullable|array',
+            'colors.*' => 'sometimes|required|numeric|exists:colors,id',
         ];
     }
 }

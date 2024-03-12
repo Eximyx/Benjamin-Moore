@@ -12,9 +12,9 @@ class ColorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'numeric|nullable',
-            'title' => 'string|required|min:5|max:30',
-            'hex_code' => 'string|required|max:7',
+            'id' => 'nullable|numeric',
+            'title' => 'required|string|between:5,30',
+            'hex_code' => 'required|hex_color',
         ];
     }
 }

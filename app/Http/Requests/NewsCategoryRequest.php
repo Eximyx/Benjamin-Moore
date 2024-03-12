@@ -6,19 +6,14 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class NewsCategoryRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     /**
      * @return string[]
      */
     public function rules(): array
     {
         return [
-            'id' => 'numeric|nullable',
-            'title' => 'string|required|min:2|max:30',
+            'id' => 'nullable|numeric',
+            'title' => 'required|string|between:5,30',
         ];
     }
 }

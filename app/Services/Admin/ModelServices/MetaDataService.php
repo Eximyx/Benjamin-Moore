@@ -2,7 +2,6 @@
 
 namespace App\Services\Admin\ModelServices;
 
-use App\Models\MetaData;
 use App\Repositories\ModelRepositories\MetaDataRepository;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,8 +9,7 @@ class MetaDataService extends BaseModelService
 {
     public function __construct(
         MetaDataRepository $repository
-    )
-    {
+    ) {
         parent::__construct($repository);
     }
 
@@ -20,7 +18,7 @@ class MetaDataService extends BaseModelService
         return $this->repository->findByURL($url);
     }
 
-    public function findBySlug(string $slug): ?MetaData
+    public function findBySlug(string $slug): ?Model
     {
         return $this->repository->findBySlug($slug);
     }

@@ -14,7 +14,6 @@ return new class extends Migration
             $table->unsignedBigInteger('kind_of_work_id')->nullable();
             $table->index('kind_of_work_id', 'product_category_kind_of_work_idx');
             $table->foreign('kind_of_work_id', 'product_category_kind_of_work_fk')->references('id')->on('kind_of_work');
-            $table->text('content');
             $table->timestamps();
         });
     }

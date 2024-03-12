@@ -12,10 +12,10 @@ class ReviewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'numeric|nullable',
-            'name' => 'string|required|min:5|max:30',
-            'description' => 'string|required|min:10|max:200',
-            'main_image' => 'image|mimes:jpeg,png,jpg|nullable',
+            'id' => 'nullable|numeric',
+            'name' => 'required|string|between:2,25',
+            'description' => 'nullable|string|between:5,160',
+            'main_image' => 'nullable|image|mimes:jpeg,png,jpg|dimensions:ratio=16/9',
         ];
     }
 }

@@ -4,6 +4,7 @@ return [
     'lang' => 'en',
 
     'titles' => [
+        'paints' => 'American paints',
         'products' => 'We offer',
         'lastProducts' => 'OUR PRODUCTS',
         'news' => 'News',

@@ -12,12 +12,12 @@ class NewsPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'numeric|nullable',
-            'title' => 'string|required|min:5|max:100',
-            'description' => 'string|required',
-            'category_id' => 'string|nullable',
-            'content' => 'string|required',
-            'main_image' => 'image|mimes:jpeg,png,jpg|nullable',
+            'id' => 'nullable|numeric',
+            'title' => 'required|string|between:5,30',
+            'description' => 'required|string',
+            'category_id' => 'nullable|exists:categories,id',
+            'content' => 'nullable|string',
+            'main_image' => 'nullable|image|mimes:jpeg,png,jpg|dimensions:ratio=16/9',
         ];
     }
 }

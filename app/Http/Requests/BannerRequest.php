@@ -6,21 +6,16 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class BannerRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     /**
      * @return string[]
      */
     public function rules(): array
     {
         return [
-            'title' => 'string',
-            'content' => 'string',
-            'banner_position_id' => 'string|nullable',
-            'image' => 'image|nullable',
+            'title' => 'required|string|between:5,30',
+            'content' => 'required|string|nullable',
+            'banner_position_id' => 'nullable|exists:banner_positions,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|dimensions:ratio=16/9',
         ];
     }
 }

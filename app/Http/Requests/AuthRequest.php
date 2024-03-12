@@ -3,24 +3,20 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class AuthRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     /**
-     * @return string[]
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
         return [
-            'id' => 'numeric|nullable',
-            'name' => 'string|required|min:2|max:25',
-            'email' => 'email|required|min:5|max:50',
-            'password' => 'string|required|min:8|max:30|nullable',
+            'id' => 'nullable|numeric',
+            'name' => 'required|string|between:5,25',
+            'email' => 'required|email|between:5,50',
+            'password' => ['required', Password::defaults()],
         ];
     }
 }

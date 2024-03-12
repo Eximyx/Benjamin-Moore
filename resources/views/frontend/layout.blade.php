@@ -90,8 +90,7 @@
     <div class="footer__logo">
         <img src="{{Vite::asset('resources/icons/benjaminmoore-icon.svg')}}" alt="icon"/>
         <a class="logo-text" href="{{route('user.main.index')}}">Benjamin Moore</a>
-        <p>Есть над чем задуматься: явные признаки победы ограничены исключительно образом
-            мышления. {{$data['meta']->additional_text}}</p>
+        <p>{{$data['meta']->additional_text}}</p>
     </div>
     <div class="footer__buttons">
         <ul class="header__nav-buttons buttons-margin">
@@ -112,7 +111,6 @@
         </div>
     </div>
 </footer>
-
 
 @vite('resources/js/burger.js')
 @yield('scripts')

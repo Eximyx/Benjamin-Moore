@@ -31,7 +31,6 @@ Route::prefix('frontend')->group(function () {
     Route::get('/calc', [MainController::class, 'calc'])->name('user.calc');
     Route::post('/', [LeadsController::class, 'create'])->name('user.leads');
     Route::get('/{slug}', [StaticPageController::class, 'showBySlug'])->name('user.static-page-show');
-
 });
 
 Route::get('/filter', [ProductsController::class, 'filter']);

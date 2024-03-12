@@ -13,6 +13,5 @@
         <a href="{{request()->getUri()}}"><b>@yield('breadcrumbs')</b></a>
     @else
         <a href="{{request()->getUri()}}"><b>{{trans('breadcrumbs.'.Route::getCurrentRoute()->getName())}}</b></a>
-
     @endif
 </div>

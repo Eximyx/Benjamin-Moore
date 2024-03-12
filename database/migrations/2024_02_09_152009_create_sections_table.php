@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -17,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('section_position_id')->unique()->nullable();
             $table->index('section_position_id', 'section_section_positions_idx');
             $table->foreign('section_position_id', 'section_section_positions_fk')->references('id')->on('section_positions');
-            $table->string('content');
+            $table->string('content')->nullable();
             $table->timestamps();
         });
     }

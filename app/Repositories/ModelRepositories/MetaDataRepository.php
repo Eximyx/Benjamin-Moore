@@ -2,16 +2,17 @@
 
 namespace App\Repositories\ModelRepositories;
 
-use App\Models\MetaData as Model;
+use App\Models\MetaData;
+use Illuminate\Database\Eloquent\Model;
 
 class MetaDataRepository extends BaseModelRepository
 {
     public function __construct()
     {
-        parent::__construct(Model::class);
+        parent::__construct(MetaData::class);
     }
 
-    public function findByURL(string $url): Model
+    public function findByURL(string $url): ?Model
     {
         return $this->model::where('url', '=', $url)->first();
     }

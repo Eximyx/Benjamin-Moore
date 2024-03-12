@@ -3,21 +3,21 @@
     {{--TODO FRONT: 20. Какие-то проблемы с кнопками враппера (ПРИЛОЖЕНИЕ 1) + высота карточек должна быть одинаковой (ПРИЛОЖЕНИЕ 2)--}}
     <section class="main__banner">
         <div class="main__banner-block">
-            <h2 class="main__banner-text"><b>Benjamin Moore</b><br>Американские краски</h2>
-            <p id="main__banner-p-desktop">Открой для себя мир удивительных красок</p>
-            <p id="main_banner-p-mobile">Есть над чем задуматься: явные признаки победы ограничены исключительно образом
-                мышления.</p>
+            <h2 class="main__banner-text"><b>Benjamin Moore</b><br>@lang('main.titles.paints')</h2>
+            <p id="main__banner-p-desktop">{{$data['banners'][0]->content}}</p>
+            <p id="main_banner-p-mobile">{{$data['banners'][0]->content}}</p>
             <div class="main__banner-buttons">
                 <a href="{{route('user.catalog')}}">
                     <button class="button-filled">@lang('main.buttons.buy')</button>
                 </a>
+                {{-- TODO BOTH: Нужно реализовать страницу со всеми красками --}}
                 <a href="">
                     <button class="button-outlined">@lang('main.buttons.allColors')</button>
                 </a>
             </div>
             {{--TODO FRONT: 2. Необходимо заполнять баннер этой картинкой --}}
-            <img src="{{$data['banners'][0]->image ?? url('storage/image/default_post.jpg')}}"
-                 alt="{{$data['banners'][0]->title ?? "Картинка"}}">
+            <img src="{{$data['banners'][0]->image}}"
+                 alt="{{$data['banners'][0]->title}}">
         </div>
     </section>
     <section class="product">
@@ -33,21 +33,18 @@
         <div class="wrapper">
             <i class="left"><img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="arrow left"></i>
             <ul class="carousel">
-                {{--                TODO BOTH: Обсудить, как это слайдер рабатает, что ему отдавать--}}
-                @foreach($data['products'] as $index => $slide)
-                    @foreach($slide as $key => $value)
-                        <li class="card product-card">
-                            <img src="{{Vite::asset("resources/images/paint-can.png")}}" alt="paint can">
-                            <h4 class="product-card__header">{{$value->title}}</h4>
-                            <p class="product-card__details">{{$value->gloss_level}}</p>
-                            <div class="product-card__price-block">
-                                <p class="product-card__price-block__price">$ {{$value->price}}</p>
-                                <a href="{{route('user.catalog-show', $value->slug)}}">
-                                    <button class="button-filled">@lang('main.buttons.order')</button>
-                                </a>
-                            </div>
-                        </li>
-                    @endforeach
+                @foreach($data['products'] as $value)
+                    <li class="card product-card">
+                        <img src="{{Vite::asset("resources/images/paint-can.png")}}" alt="paint can">
+                        <h4 class="product-card__header">{{$value->title}}</h4>
+                        <p class="product-card__details">{{$value->gloss_level}}</p>
+                        <div class="product-card__price-block">
+                            <p class="product-card__price-block__price">$ {{$value->price}}</p>
+                            <a href="{{route('user.catalog-show', $value->slug)}}">
+                                <button class="button-filled">@lang('main.buttons.order')</button>
+                            </a>
+                        </div>
+                    </li>
                 @endforeach
             </ul>
             <i class="right"><img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="arrow right"></i>
@@ -62,12 +59,15 @@
                 </div>
                 <div class="flex-block">
                     <div class="about-us__image-placeholder-mobile">
-                        <img src="" alt="">
+                        <img src="{{url('storage/image/sections/section_image_1.jpg')}}" alt="">
                     </div>
-                    <div class="about-us__image-placeholder-mobile"></div>
+                    <div class="about-us__image-placeholder-mobile">
+                        <img style="height:500px; width: 500px"
+                             src="{{url('storage/image/sections/section_image_2.jpg')}}" alt="">
+                    </div>
                 </div>
                 <div class="about-us__inner-div">
-                    {!! str_replace('\n', '<br>', $data['settings']->description) !!}
+                    {!! nl2br(e($data['settings']->description)) !!}
                 </div>
                 {{-- TODO BOTH: 21. Необходимо обсудить, как у нас будут отображаться статические страницы--}}
                 <a href="">
@@ -107,32 +107,30 @@
         </div>
         <div class="news-wrapper">
             {{-- TODO: ADD an USER_NAME for post --}}
-            @foreach($data['news'] as $index => $slide)
-                @foreach($slide as $key => $value)
-                    <div class="news-card">
-                        <img
-                            src="{{url('storage/image').'/'.$value->main_image ?? Vite::asset('resources/image/news-mock-image.png')}}"
-                            alt="news preview">
-                        <div class="news-card__details-block">
-                            <div class="news-card__details">
-                                <p class="news-card__details-author">USER_NAME •</p>
-                                <img class="news-card__details-clock-image"
-                                     src="{{Vite::asset('resources/icons/clock.svg')}}"
-                                     alt="clock image">
-                                <p class="news-card__details-date">{{$value->created_at->format('d.m.y')}}</p>
-                            </div>
-                            <a class="news-card__link" href="{{route('user.news')}}">
-                                @lang('main.buttons.more')
-                            </a>
+            @foreach($data['news'] as $value)
+                <div class="news-card">
+                    <img
+                        src="{{url('storage/image').'/'.$value->main_image}}"
+                        alt="news preview">
+                    <div class="news-card__details-block">
+                        <div class="news-card__details">
+                            <p class="news-card__details-author">USER_NAME •</p>
+                            <img class="news-card__details-clock-image"
+                                 src="{{Vite::asset('resources/icons/clock.svg')}}"
+                                 alt="clock image">
+                            <p class="news-card__details-date">{{$value->created_at->format('d.m.y')}}</p>
                         </div>
-                        <h4 class="news-card__header">
-                            Какие IT - професси будут востребованы в 2022 году
-                        </h4>
-                        <p class="news-card__description">
-                            Предварительные выводы неутешительны: существующая теория требует анализа новых предложений.
-                        </p>
+                        <a class="news-card__link" href="{{route('user.news')}}">
+                            @lang('main.buttons.more')
+                        </a>
                     </div>
-                @endforeach
+                    <h4 class="news-card__header">
+                        {{$value->title}}
+                    </h4>
+                    <p class="news-card__description">
+                        {{$value->content}}
+                    </p>
+                </div>
             @endforeach
         </div>
         <button class="button-filled mobile-news-button"><a
@@ -147,20 +145,18 @@
         <div class="reviewsWrapper">
             <i class="left"><img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="arrow left"></i>
             <ul class="carousel reviewsCarousel">
-                @foreach($data['reviews'] as $index => $slide)
-                    @foreach($slide as $key => $value)
-                        <li class="card">
-                            <div class="review-card">
-                                <div class="review-card__header">
-                                    <img src="{{Vite::asset('resources/images/user-avatar.png')}}" alt="user avatar">
-                                    <h4>{{$value->name}}</h4>
-                                </div>
-                                <p class="review-card__text">
-                                    {{$value->description}}
-                                </p>
+                @foreach($data['reviews'] as $value)
+                    <li class="card">
+                        <div class="review-card">
+                            <div class="review-card__header">
+                                <img src="{{Vite::asset('resources/images/user-avatar.png')}}" alt="user avatar">
+                                <h4>{{$value->name}}</h4>
                             </div>
-                        </li>
-                    @endforeach
+                            <p class="review-card__text">
+                                {{$value->description}}
+                            </p>
+                        </div>
+                    </li>
                 @endforeach
             </ul>
             <i class="right"><img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="arrow right"></i>
@@ -168,8 +164,8 @@
     </section>
     <section class="banner">
         {{--TODO FRONT: 2. Необходимо заполнять баннер этой картинкой --}}
-        <img src="{{$data['banners'][1]->image ?? url('storage/image/default_main_banner_2.jpg')}}"
-             alt="{{$data['banners'][1]->title ?? "Картинка"}}">
+        <img src="{{$data['banners'][1]->image}}"
+             alt="{{$data['banners'][1]->title}}">
         <a href="{{route('user.catalog')}}">
             <button class="button-outlined">@lang('main.titles.catalog')</button>
         </a>

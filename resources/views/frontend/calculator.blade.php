@@ -8,7 +8,7 @@
     <section class="calculator-section">
         <div class="calculator-section__survey-block">
             <div class="calculator-section__survey-block__buttons">
-                <h4>@lang('Do you know the area to be painted?')</h4>
+                <h4>@lang('calc.form.paintingSquare')</h4>
                 <div class="spacing">
                     <button class="survey-button-outlined button-outlined active-survey-button"
                             id="confirm-button">@lang("calc.buttons.know")

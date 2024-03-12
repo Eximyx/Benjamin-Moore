@@ -12,7 +12,7 @@ class BannerDTO implements ModelDTO
         public readonly string $title,
         public readonly string $content,
         public readonly ?string $banner_position_id,
-        public readonly UploadedFile $image,
+        public readonly UploadedFile|string|null $image,
     ) {
     }
 
@@ -22,7 +22,7 @@ class BannerDTO implements ModelDTO
             $request['title'],
             $request['content'],
             $request['banner_position_id'],
-            $request['image'],
+            $request['image'] ?? new UploadedFile('storage/image/default_post.jpg', 'banner_'.$request['id'].'.jpg'),
             // TODO CHECK ? $request['image'] : new UploadedFile('storage/image/default_post.jpg', 'banner_1.jpg'),
         );
     }

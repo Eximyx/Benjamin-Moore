@@ -3,25 +3,21 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class AdminRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     /**
-     * @return string[]
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
         return [
-            'id' => 'numeric|nullable',
-            'name' => 'string|required|min:2|max:25',
-            'email' => 'email|required|min:5|max:50',
-            'password' => 'required|min:8',
-            'user_role_id' => 'string|nullable',
+            'id' => 'nullable|numeric',
+            'name' => 'required|string|between:2,25',
+            'email' => 'required|email|between:5,50',
+            'password' => ['required', Password::defaults()],
+            'user_role_id' => 'exists:user_roles,id',
         ];
     }
 }

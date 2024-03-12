@@ -6,11 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ProductCategoryFilterRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     /**
      * @return string[]
      */
@@ -18,6 +13,7 @@ class ProductCategoryFilterRequest extends FormRequest
     {
         return [
             'kind_of_work_id' => 'nullable|array',
+            'kind_of_work_id.*' => 'sometimes|required|string',
         ];
     }
 }

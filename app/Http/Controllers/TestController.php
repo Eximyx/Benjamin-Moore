@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\WrapItems;
 use App\Http\Filters\ProductCategoryFilter;
 use App\Http\Requests\ProductCategoryFilterRequest;
 use App\Http\Requests\ProductFilterRequest;
-use App\Models\NewsPost;
 use App\Models\ProductCategory;
 use Illuminate\Routing\Controller;
 
@@ -13,10 +13,7 @@ class TestController extends Controller
 {
     public function test()
     {
-        $entity = $this->createMetaData(NewsPost::first());
-        dd($entity);
-
-        return view('test');
+        return view('test', compact(''));
     }
 
     public function index()
