@@ -112,16 +112,18 @@
                         src="{{url('storage/image').'main.blade.php/'.$value->main_image}}"
                         alt="news preview">
                     <div class="news-card__details-block">
+                        <p class="news-card__details-author">Алексей Иванович Шишкин</p>
                         <div class="news-card__details">
-                            <p class="news-card__details-author">USER_NAME •</p>
-                            <img class="news-card__details-clock-image"
-                                 src="{{Vite::asset('resources/icons/clock.svg')}}"
-                                 alt="clock image">
-                            <p class="news-card__details-date">{{$value->created_at->format('d.m.y')}}</p>
+                            <div class="news-card__details-date-block">
+                                <img class="news-card__details-clock-image"
+                                     src="{{Vite::asset('resources/icons/clock.svg')}}"
+                                     alt="clock image">
+                                <p class="news-card__details-date">{{$value->created_at->format('d.m.y')}}</p>
+                            </div>
+                            <a class="news-card__link" href="{{route('user.news')}}">
+                                @lang('main.buttons.more')
+                            </a>
                         </div>
-                        <a class="news-card__link" href="{{route('user.news')}}">
-                            @lang('main.buttons.more')
-                        </a>
                     </div>
                     <h4 class="news-card__header">
                         {{$value->title}}

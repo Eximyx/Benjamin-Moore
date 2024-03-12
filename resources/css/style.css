@@ -180,7 +180,7 @@ button {
     font-size: 25px;
     font-weight: 500;
     color: var(--headers-black);
-    margin-left: 5px;
+    margin: 0 20px 0 5px;
 }
 
 .header__nav-buttons {
@@ -462,8 +462,11 @@ button {
 
 .news-card__details-block {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    margin-top: 10px;
+    gap: 10px;
 }
 
 .news-card__link {
@@ -473,14 +476,22 @@ button {
     text-underline-offset: 3px;
     font-size: 14px;
     font-weight: 500;
+    margin-bottom: 11px;
+}
+
+.news-card__details-date-block {
+    display: flex;
 }
 
 .news-card__details {
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
     font-size: 14px;
     font-weight: 500;
-    margin: 16px 0 10px 0;
+    gap: 10px;
+    width: 100%;
 }
 
 .news-card__details-author {
