@@ -36,9 +36,9 @@ class NewsController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
-    public function update(Request $request): JsonResource
+    public function update(string $id, Request $request): JsonResource
     {
-        $entity = $this->service->findById($request['id']);
+        $entity = $this->service->findById($id);
 
         $slug = $entity->slug;
 
@@ -68,7 +68,7 @@ class NewsController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
-    public function news(): View
+    public function __invoke(): View
     {
         return view('site.pages.news',
             [
@@ -82,7 +82,7 @@ class NewsController extends BaseAdminController
             ]);
     }
 
-    public function showBySlug(string $slug): View
+    public function show(string $slug): View
     {
         $entity = $this->service->findBySlug($slug);
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Resources\ModelResources\BannerResource;
 use App\Http\Resources\ModelResources\NewsPostResource;
-use App\Http\Resources\ModelResources\PartnersResource;
 use App\Http\Resources\ModelResources\ProductResource;
 use App\Http\Resources\ModelResources\ReviewResource;
 use App\Http\Resources\ModelResources\SectionResource;
@@ -32,9 +31,9 @@ class MainController extends Controller
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public function index(): View|JsonResource
+    public function __invoke(): View|JsonResource
     {
-        $data = JsonResource::make([
+        $data = [
             'news' => NewsPostResource::collection($this->service->getLatestNews()),
             'products' => ProductResource::collection($this->service->getLatestProducts()),
             'reviews' => ReviewResource::collection($this->service->getLatestReviews()),
@@ -42,32 +41,8 @@ class MainController extends Controller
             'sections' => SectionResource::collection($this->service->getSectionsForMain()),
             'settings' => $this->settings,
             'meta' => $this->service->metaDataFindByURL(),
-        ]);
-        return view('site.pages.main', [
-            'data' => $data,
-        ]);
-    }
+        ];
 
-    public function calc(): View|JsonResource
-    {
-        return view('site.pages.calculator', [
-            'data' => JsonResource::make([
-                'settings' => $this->settings,
-                'meta' => $this->service->metaDataFindByURL(),
-            ]),
-        ]);
-    }
-
-    public function contacts(): View
-    {
-        $data = JsonResource::make([
-            'partners' => PartnersResource::collection($this->service->getPartners()),
-            'banner' => BannerResource::make($this->service->getBannerByPositionId(2)),
-            'settings' => $this->settings,
-            'meta' => $this->service->metaDataFindByURL(),
-        ]);
-        return view('site.pages.contacts', [
-            'data' => $data,
-        ]);
+        return view('site.pages.main', compact('data'));
     }
 }

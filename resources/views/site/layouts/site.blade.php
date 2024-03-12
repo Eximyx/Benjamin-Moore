@@ -33,10 +33,10 @@
         <img src="{{Vite::asset('resources/icons/benjaminmoore-icon.svg')}}" alt="icon"/>
         <a class="logo-text" href="{{route('user.main.index')}}">Benjamin Moore</a>
         <ul class="header__nav-buttons">
-            <li><a href="{{route('user.catalog')}}">@lang('nav-links.catalog')</a></li>
-            <li><a href="{{route('user.news')}}">@lang('nav-links.news')</a></li>
-            <li><a href="{{route('user.calc')}}">@lang('nav-links.calc')</a></li>
-            <li><a href="{{route('user.contacts')}}">@lang('nav-links.contacts')</a></li>
+            <li><a href="{{route('user.catalog.index')}}">@lang('nav-links.catalog')</a></li>
+            <li><a href="{{route('user.news.index')}}">@lang('nav-links.news')</a></li>
+            <li><a href="{{route('user.calc.index')}}">@lang('nav-links.calc')</a></li>
+            <li><a href="{{route('user.contacts.index')}}">@lang('nav-links.contacts')</a></li>
         </ul>
     </nav>
     <div class="header__rightside">
@@ -47,8 +47,8 @@
             </div>
             <p class="header__contacts-time">{{$data['settings']->phone}}</p>
         </div>
-        @if(request()->url() != route('user.contacts'))
-            <a href="{{route('user.contacts')}}">
+        @if(request()->url() != route('user.contacts.index'))
+            <a href="{{route('user.contacts.index')}}">
                 <button class="button-filled">@lang('nav-links.orderButton')</button>
             </a>
         @endif
@@ -58,10 +58,10 @@
     <div class="burger-menu-div">
         <ul class="burger-links">
             <li><a href="{{route('user.main.index')}}">@lang('nav-links.main')</a></li>
-            <li><a href="{{route('user.catalog')}}">@lang('nav-links.catalog')</a></li>
-            <li><a href="{{route('user.news')}}">@lang('nav-links.news')</a></li>
-            <li><a href="{{route('user.calc')}}">@lang('nav-links.calc')</a></li>
-            <li><a href="{{route('user.contacts')}}">@lang('nav-links.contacts')</a></li>
+            <li><a href="{{route('user.catalog.index')}}">@lang('nav-links.catalog')</a></li>
+            <li><a href="{{route('user.news.index')}}">@lang('nav-links.news')</a></li>
+            <li><a href="{{route('user.calc.index')}}">@lang('nav-links.calc')</a></li>
+            <li><a href="{{route('user.contacts.index')}}">@lang('nav-links.contacts')</a></li>
         </ul>
     </div>
 </div>
@@ -79,7 +79,7 @@
             />
         </svg>
     </button>
-    <a href="{{route('user.contacts')}}">
+    <a href="{{route('user.contacts.index')}}">
         <button class="button-filled">@lang('nav-links.orderButton')</button>
     </a>
 </div>
@@ -94,10 +94,10 @@
     </div>
     <div class="footer__buttons">
         <ul class="header__nav-buttons buttons-margin">
-            <li><a href="{{route('user.catalog')}}">@lang('nav-links.catalog')</a></li>
-            <li><a href="{{route('user.news')}}">@lang('nav-links.news')</a></li>
-            <li><a href="{{route('user.calc')}}">@lang('nav-links.calc')</a></li>
-            <li><a href="{{route('user.contacts')}}">@lang('nav-links.contacts')</a></li>
+            <li><a href="{{route('user.catalog.index')}}">@lang('nav-links.catalog')</a></li>
+            <li><a href="{{route('user.news.index')}}">@lang('nav-links.news')</a></li>
+            <li><a href="{{route('user.calc.index')}}">@lang('nav-links.calc')</a></li>
+            <li><a href="{{route('user.contacts.index')}}">@lang('nav-links.contacts')</a></li>
         </ul>
     </div>
     <div class="footer__contacts">

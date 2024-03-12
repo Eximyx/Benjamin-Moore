@@ -32,27 +32,14 @@ Route::middleware('admin')->group(function () {
 
             Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
             Route::post('/profile', [AuthController::class, 'profile'])->name('profile');
-            Route::post('update/{slug}', [NewsController::class, 'update']);
             Route::post('products/toggle', [ProductsController::class, 'toggle']);
             Route::post('news/toggle', [NewsController::class, 'toggle']);
             Route::post('static_pages/toggle', [StaticPageController::class, 'toggle']);
             Route::post('reviews/toggle', [ReviewController::class, 'toggle']);
             //TODO how to bring in "update" into resource, issue via request
-            Route::post('products/update/{slug}', [ProductsController::class, 'update']);
-            Route::post('partners/update/{slug}', [PartnersController::class, 'update']);
-            Route::post('metadata/update/{slug}', [MetaDataController::class, 'update']);
-            Route::resource('metadata', StaticPageController::class)->except('create', 'store');
-            Route::post('news/update/{entity}', [NewsController::class, 'update']);
-            Route::post('static-page/update/{entity}', [StaticPageController::class, 'update']);
+
+            Route::resource('metadata', MetaDataController::class)->except(['create', 'store']);
             Route::resource('static-page', StaticPageController::class)->except(['create', 'store']);
-            Route::post('sections/update/{entity}', [SectionsController::class, 'update']);
-            Route::post('news_categories/update/{entity}', [CategoryController::class, 'update']);
-            Route::post('leads/update/{entity}', [LeadsController::class, 'update']);
-            Route::post('product_categories/update/{entity}', [ProductCategoryController::class, 'update']);
-            Route::post('users/update/{entity}', [AdminController::class, 'update']);
-            Route::post('reviews/update/{entity}', [ReviewController::class, 'update']);
-            Route::post('banners/update/{entity}', [BannersController::class, 'update']);
-            Route::post('colors/update/{entity}', [ColorController::class, 'update']);
 
             Route::middleware('root')->group(function () {
                 Route::resource('users', AdminController::class);

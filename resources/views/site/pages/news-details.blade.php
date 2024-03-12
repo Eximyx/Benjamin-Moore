@@ -37,12 +37,12 @@
                     <p class="news-card__description">
                         {{$value->content}}
                     </p>
-                    <a href="{{route('user.news-show', $value->slug)}}">
+                    <a href="{{route('user.news.show', $value->slug)}}">
                         <button class="button-outlined">@lang('news.more')</button>
                     </a>
                 </div>
             @endforeach
-            <a href="{{route('user.news')}}">
+            <a href="{{route('user.news.index')}}">
                 <button class="button-filled">@lang('news.allNews')</button>
             </a>
         </article>

@@ -72,7 +72,7 @@
                         <p class="product-card__details">{{$value->gloss_level}}</p>
                         <div class="product-card__price-block">
                             <p class="product-card__price-block__price">$ {{$value->price}}</p>
-                            <a href="{{route('user.catalog-show', $value->slug)}}">
+                            <a href="{{route('user.catalog.show', $value->slug)}}">
                                 <button class="button-filled">@lang('catalog.buttons.order')</button>
                             </a>
                         </div>
@@ -85,5 +85,5 @@
     </div>
 @endsection
 @section('scripts')
-    @vite(['resources/js/filter.js', 'resources/js/custom-select.js']);
+    @vite(['resources/js/filter.js', 'resources/js/custom-select.js'])
 @endsection

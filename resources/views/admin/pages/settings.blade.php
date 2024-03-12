@@ -14,30 +14,30 @@
                 <div class="row justify-content-between m-0 p-0">
                     <div class="col-md-6">
                         <label for="email">@lang('admin.keys.email')</label>
-                        <input type="email" name="email" value="{{$resource->email}}" id="email"
+                        <input type="email" name="email" value="{{$data->email}}" id="email"
                                class="form-control"
                                placeholder="email">
                     </div>
                     <div class="col-md-6">
                         <label for="phone">@lang('admin.keys.phoneNumber')</label>
-                        <input type="text" name="phone" value="{{$resource->phone}}" id="phone" class="form-control"
+                        <input type="text" name="phone" value="{{$data->phone}}" id="phone" class="form-control"
                                placeholder="phone-number">
                     </div>
                     <div class="col-md-6">
                         <label for="work_time">@lang('admin.keys.workTime')</label>
-                        <input type="text" name="work_time" id="work_time" value="{{$resource->work_time}}"
+                        <input type="text" name="work_time" id="work_time" value="{{$data->work_time}}"
                                class="form-control"
                                placeholder="@lang('admin.keys.workTime')">
                     </div>
                     <div class="col-md-6">
                         <label for="location">@lang('admin.keys.location')</label>
-                        <input type="text" name="location" id="location" value="{{$resource->location}}"
+                        <input type="text" name="location" id="location" value="{{$data->location}}"
                                class="form-control"
                                placeholder="@lang('admin.keys.location')">
                     </div>
                     <div class="col-md-6">
                         <label for="instagram">@lang('admin.keys.instagram')</label>
-                        <input type="text" name="instagram" id="instagram" value="{{$resource->instagram}}"
+                        <input type="text" name="instagram" id="instagram" value="{{$data->instagram}}"
                                class="form-control"
                                placeholder="instagram">
                     </div>
@@ -48,7 +48,7 @@
                 <div class="col-lg-8">
                     <div class="row m-0 p-0">
                         <label class="p-0">@lang('admin.keys.description')</label>
-                        <textarea name="description" id="" cols="30" rows="10">{{$resource->description}}</textarea>
+                        <textarea name="description" id="" cols="30" rows="10">{{$data->description}}</textarea>
                         <label class="p-0">@lang('admin.keys.file') 1</label>
                         <div class="row m-0 p-0">
                             <input type="file" name="file1" class="fileImage form-control col"

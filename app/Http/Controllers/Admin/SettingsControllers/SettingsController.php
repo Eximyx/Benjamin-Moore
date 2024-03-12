@@ -19,9 +19,9 @@ class SettingsController extends Controller
 
     public function index(): View
     {
-        $resource = (array)SettingsResource::make($this->service->settingsFetch());
+        $resource = SettingsResource::make($this->service->settingsFetch());
 
-        return view('admin.pages.settings', $resource);
+        return view('admin.pages.settings', ['data' => $resource]);
     }
 
     public function settings(SettingsRequest $request): JsonResource
