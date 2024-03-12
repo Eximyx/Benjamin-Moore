@@ -84,6 +84,11 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                @elseif($value == 'sub_images')
+                                    <input type="file" name="{{$value}}" class="form-control" id="sub_images"
+                                           multiple>
+                                    <img class="my-2 img-thumbnail m-0" id="result"
+                                         style="max-width: 20rem;max-height:20rem">
                                 @elseif(str_contains($value, 'image'))
                                     <input type="file" name="{{ $value }}" class="form-control" id="image">
                                     <img class="my-2 img-thumbnail m-0" id="result"

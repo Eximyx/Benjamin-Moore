@@ -14,7 +14,8 @@ abstract class CoreRepository
 
     public function __construct(
         ?string $modelClass
-    ) {
+    )
+    {
         $this->model = app($modelClass);
     }
 
@@ -61,15 +62,16 @@ abstract class CoreRepository
     }
 
     /**
-     * @param  array<string,mixed>  $data
+     * @param array<string,mixed> $data
      */
     public function create(array $data): Model
     {
+ 
         return $this->model::create($data);
     }
 
     /**
-     * @param  array<string, mixed>  $data
+     * @param array<string, mixed> $data
      */
     public function update(Model $entity, array $data): Model
     {

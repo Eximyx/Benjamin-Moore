@@ -105,6 +105,7 @@ return [
         'form_data' => [
             'title',
             'main_image',
+            'sub_images',
             'content',
             'code',
             'price',
@@ -125,7 +126,7 @@ return [
         'intermediateModel' => app(Color_product::class),
         'actions' => ['adding' => true],
 
-    ], // DONE
+    ],
 
     MetaData::class => [
         'ModelName' => 'admin.titles.metadata',

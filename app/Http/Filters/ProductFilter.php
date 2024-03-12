@@ -2,8 +2,6 @@
 
 namespace App\Http\Filters;
 
-use App\Models\Color_product;
-use App\Models\ProductCategory;
 use Illuminate\Database\Eloquent\Builder;
 
 class ProductFilter extends AbstractFilter
@@ -33,28 +31,22 @@ class ProductFilter extends AbstractFilter
 
     public function kindOfWorkId(Builder $builder, $value): void
     {
-        $productCategories = ProductCategory::whereIn('kind_of_work_id', $value)->get();
-
-        $builder->whereBelongsTo($productCategories)->get();
+        $builder->whereHas('productCategory', fn($query) => $query->whereIn('kind_of_work_id', $value))->get();
     }
 
     public function colors(Builder $builder, $value): void
     {
-        $productIds = Color_product::whereIn('color_id', $value)->pluck('product_id')->all();
-
-        $builder->WhereIn('id', $productIds)->get();
-
+        $builder->whereHas('colors', fn($query) => $query->whereIn('color_id', $value))->get();
     }
 
     public function price(Builder $builder, $value): void
     {
         $value['from'] = $value['from'] ?? '0';
 
-        if (isset($value['to'])) {
-            $builder->whereBetween('price', [$value['from'], $value['to']])->get();
-        } else {
-            $builder->where('price', '>=', $value['from'])->get();
-        }
-
+        $builder->when(
+            isset($value['to']),
+            fn(Builder $subQuery) => $subQuery->whereBetween('price', [$value['from'], $value['to']]),
+            fn(Builder $subQuery) => $subQuery->where('price', '>=', $value['from']),
+        )->get();
     }
 }

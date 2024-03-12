@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Builder;
 abstract class AbstractFilter implements FilterInterface
 {
     /**
-     * @var array<mixed>
+     * @var array<string>
      */
     private array $queryParams;
 
+    /**
+     * @param array<string> $queryParams
+     */
     public function __construct(array $queryParams)
     {
         $this->queryParams = $queryParams;
@@ -27,7 +30,7 @@ abstract class AbstractFilter implements FilterInterface
         }
     }
 
-    protected function before(Builder $builder)
+    protected function before(Builder $builder): void
     {
 
     }

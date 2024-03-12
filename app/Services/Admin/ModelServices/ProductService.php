@@ -59,6 +59,8 @@ class ProductService extends BaseModelService
 
         $dto->main_image = $this->uploadImage($dto->main_image);
 
+        $dto->sub_images = $this->uploadImage($dto->sub_images);
+
         $data = $dto->toArray();
 
         unset($data['colors']);

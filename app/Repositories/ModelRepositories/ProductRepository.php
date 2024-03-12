@@ -88,9 +88,9 @@ class ProductRepository extends BaseModelRepository
 
         $query['join'] = [
             $selectableModelName,
-            $this->model->getTable().'.'.$data['selectable_key'],
+            $this->model->getTable() . '.' . $data['selectable_key'],
             '=',
-            $selectableModelName.'.id',
+            $selectableModelName . '.id',
             'left',
         ];
 
@@ -102,7 +102,7 @@ class ProductRepository extends BaseModelRepository
         //            'left',
         //        ];
 
-        $query['select'][] = $selectableModelName.'.title as '.$data['selectable_key'];
+        $query['select'][] = $selectableModelName . '.title as ' . $data['selectable_key'];
 
         return $query;
     }
