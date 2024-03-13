@@ -5,16 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Services\CoreService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Routing\Controller;
 
-abstract class ResourceController
+abstract class ResourceController extends Controller
 {
     public function __construct(
         protected CoreService $service,
-        protected string      $dto,
-        protected string      $resource,
-        protected string      $request,
-    )
-    {
+        protected string $dto,
+        protected string $resource,
+        protected string $request,
+    ) {
 
     }
 
@@ -31,16 +31,16 @@ abstract class ResourceController
         return $this->resource::make($entity);
     }
 
-    public function show(Request $request): JsonResource
+    public function edit(string $id): JsonResource
     {
-        $entity = $this->service->findById($request['id']);
+        $entity = $this->service->findById($id);
 
         return $this->resource::make($entity);
     }
 
-    public function update(Request $request): JsonResource
+    public function update(string $id, Request $request): JsonResource
     {
-        $entity = $this->service->findById($request['id']);
+        $entity = $this->service->findById($id);
 
         $request = app($this->request, $request->input());
 

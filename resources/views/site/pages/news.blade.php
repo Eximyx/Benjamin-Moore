@@ -15,7 +15,7 @@
                                  alt="clock image">
                             <p class="news-card__details-date">{{$value->created_at->format('d.m.y')}}</p>
                         </div>
-                        <a class="news-card__link" href="{{route('user.news-show', $value->slug)}}">
+                        <a class="news-card__link" href="{{route('user.news.show', $value->slug)}}">
                             @lang('news.more')
                         </a>
                     </div>

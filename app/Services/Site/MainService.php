@@ -44,14 +44,6 @@ class MainService
 
     /**
      * @return Collection<int, Model>
-     */
-    public function getPartners(): Collection
-    {
-        return $this->partnersRepository->getLatest()->get();
-    }
-
-    /**
-     * @return Collection<int, Model>
      *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
@@ -59,11 +51,6 @@ class MainService
     public function getSectionsForMain(): Collection
     {
         return $this->sectionRepository->getSectionsWithPositions();
-    }
-
-    public function getBannerByPositionId(int $id): Model
-    {
-        return $this->bannersRepository->getBannerByPositionId($id);
     }
 
     /**

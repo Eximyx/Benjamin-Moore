@@ -258,13 +258,10 @@
         }
 
         function editFunc(id) {
-            del();
+            delSelected();
             $.ajax({
                 type: "GET",
-                url: urls + '/edit',
-                data: {
-                    id: id
-                },
+                url: urls + `/${id}` + '/edit',
                 dataType: 'json',
                 success: function (res) {
                     console.log(this.url);
@@ -370,7 +367,7 @@
             })
         }
 
-        function del() {
+        function delSelected() {
             $('#select option:selected').each((key, value) => {
                 $(value).removeAttr('selected')
             });
@@ -395,6 +392,10 @@
             }
         }
 
+        async function deleteErrors() {
+            return await $(document).find("li.alert").remove();
+        }
+
         $('#Form').submit(function (e) {
             e.preventDefault();
             let formData = new FormData(this);
@@ -402,10 +403,9 @@
             let type = 'POST';
             let id = $('#id').val();
             if (id !== '') {
-                url += `/update/${id}`
+                url += `/${id}?_method=PATCH`;
             }
-
-            del();
+            delSelected();
             $.ajax({
                 type: type,
                 url: urls + url,
@@ -423,7 +423,7 @@
                 },
                 error: function (data) {
                     console.log(data);
-                    $(document).find("li.alert").remove();
+
                     $.each(data.responseJSON["errors"], (key, item) => {
                         $("#errors").append("<li class='alert alert-danger'>" + item[0] + "</li>")
                     });

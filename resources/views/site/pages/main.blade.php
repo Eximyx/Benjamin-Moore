@@ -6,7 +6,7 @@
             <p id="main__banner-p-desktop">{{$data['banners'][0]->content}}</p>
             <p id="main_banner-p-mobile">{{$data['banners'][0]->content}}</p>
             <div class="main__banner-buttons">
-                <a href="{{route('user.catalog')}}">
+                <a href="{{route('user.catalog.index')}}">
                     <button class="button-filled">@lang('main.buttons.buy')</button>
                 </a>
                 {{-- TODO BOTH: Нужно реализовать страницу со всеми красками --}}
@@ -25,7 +25,7 @@
                 <h3>@lang('main.titles.products')</h3>
                 <h2>@lang('main.titles.lastProducts')</h2>
             </div>
-            <a href="{{route('user.catalog')}}">
+            <a href="{{route('user.catalog.index')}}">
                 <button class="button-outlined">@lang("main.buttons.allProducts")</button>
             </a>
         </div>
@@ -39,7 +39,7 @@
                         <p class="product-card__details">{{$value->gloss_level}}</p>
                         <div class="product-card__price-block">
                             <p class="product-card__price-block__price">$ {{$value->price}}</p>
-                            <a href="{{route('user.catalog-show', $value->slug)}}">
+                            <a href="{{route('user.catalog.show', $value->slug)}}">
                                 <button class="button-filled">@lang('main.buttons.order')</button>
                             </a>
                         </div>
@@ -100,7 +100,7 @@
                 <h3>@lang('main.titles.news')</h3>
                 <h2>@lang('main.titles.lastNews')</h2>
             </div>
-            <a href="{{route('user.news')}}">
+            <a href="{{route('user.news.index')}}">
                 <button class="button-outlined">@lang('main.buttons.allNews')</button>
             </a>
         </div>
@@ -120,9 +120,9 @@
                                      alt="clock image">
                                 <p class="news-card__details-date">{{$value->created_at->format('d.m.y')}}</p>
                             </div>
-                            <a class="news-card__link" href="{{route('user.news')}}">
-                                @lang('main.buttons.more')
-                            </a>
+                        <a class="news-card__link" href="{{route('user.news.index')}}">
+                            @lang('main.buttons.more')
+                        </a>
                         </div>
                     </div>
                     <h4 class="news-card__header">
@@ -135,7 +135,7 @@
             @endforeach
         </div>
         <button class="button-filled mobile-news-button"><a
-                href="{{route('user.news')}}">@lang('main.buttons.allNews')</a>
+                href="{{route('user.news.index')}}">@lang('main.buttons.allNews')</a>
         </button>
     </section>
     <section class="reviews">
@@ -167,7 +167,7 @@
         {{--TODO FRONT: 2. Необходимо заполнять баннер этой картинкой --}}
         <img src="{{$data['banners'][1]->image}}"
              alt="{{$data['banners'][1]->title}}">
-        <a href="{{route('user.catalog')}}">
+        <a href="{{route('user.catalog.index')}}">
             <button class="button-outlined">@lang('main.titles.catalog')</button>
         </a>
     </section>

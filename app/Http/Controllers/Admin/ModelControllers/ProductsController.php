@@ -30,13 +30,6 @@ class ProductsController extends BaseAdminController
         $this->settings = SettingsResource::make(app(Settings::class));
     }
 
-    public function show(Request $request): JsonResource
-    {
-        $entity = $this->service->findById($request['id']);
-
-        return $this->resource::make($entity);
-    }
-
     public function toggle(Request $request): JsonResource
     {
         $entity = $this->service->toggle($request);
@@ -44,7 +37,7 @@ class ProductsController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
-    public function showBySlug(string $slug): View
+    public function show(string $slug): View
     {
         $entity = $this->service->findBySlug($slug);
 
@@ -60,9 +53,9 @@ class ProductsController extends BaseAdminController
         return view('site.pages.products-details', ['data' => $data]);
     }
 
-    public function update(Request $request): JsonResource
+    public function update(string $id, Request $request): JsonResource
     {
-        $entity = $this->service->findById($request['id']);
+        $entity = $this->service->findById($id);
 
         $slug = $entity->slug;
 
@@ -92,29 +85,28 @@ class ProductsController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
-    public function catalog(ProductFilterRequest $request): View
+    public function __invoke(ProductFilterRequest $request): View
     {
+        if (request()->ajax()) {
+            $data = $this->service->fetchProducts($request);
+            return JsonResource::make([
+                "data" => [
+                    "products" => ProductResource::collection($data["products"]),
+                    "categories" => ProductCategoryResource::collection($data["categories"]),
+                ]
+            ]);
+        }
+
         return view('site.pages.catalog',
             [
                 'data' => JsonResource::make([
-                    'products' => ProductResource::collection($this->filter($request)['products']),
+                    'products' => ProductResource::collection($this->service->getLatestPaginated()),
                     'colors' => ColorResource::collection($this->service->getColors()),
-                    'productCategories' => ProductCategoryResource::collection($this->filter($request)['categories']),
+                    'productCategories' => ProductCategoryResource::collection($this->service->getProductCategories()),
                     'settings' => $this->settings,
                     'meta' => $this->getMetaDataByURL(),
                 ]),
             ]
         );
-    }
-
-    public function filter(ProductFilterRequest $request): array
-    {
-        $entities = $this->service->fetchProducts($request);
-
-        return [
-            'products' => $entities['products'],
-            'categories' => $entities['categories'],
-        ];
-
     }
 }

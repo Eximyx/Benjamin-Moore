@@ -28,7 +28,7 @@ class StaticPageController extends BaseAdminController
         $this->settings = SettingsResource::make(app(Settings::class));
     }
 
-    public function showBySlug(string $slug): View
+    public function show(string $slug): View
     {
         $entity = $this->service->findBySlug($slug);
 
@@ -41,9 +41,9 @@ class StaticPageController extends BaseAdminController
         return view('site.pages.static-page', ['data' => $data]);
     }
 
-    public function update(Request $request): JsonResource
+    public function update(string $id, Request $request): JsonResource
     {
-        $entity = $this->service->findById($request['id']);
+        $entity = $this->service->findById($id);
 
         $slug = $entity->slug;
 
