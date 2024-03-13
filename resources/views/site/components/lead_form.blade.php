@@ -4,7 +4,8 @@
             style="border:0;" allowfullscreen="" loading="lazy"
             referrerpolicy="no-referrer-when-downgrade">
     </iframe>
-    <form action="javascript:void(0)" class="form-section__form" method="POST" enctype="multipart/form-data">
+    <form action="javascript:void(0)" id="leadsForm" class="form-section__form" method="POST"
+          enctype="multipart/form-data">
         @csrf
         <h4>@lang('main.form.title')</h4>
         <p>@lang('main.form.subTitle')</p>
@@ -17,25 +18,35 @@
         <textarea name="message" id="message" placeholder="@lang('main.form.message')"></textarea>
         <button class="button-filled" type="submit">@lang('main.form.send')</button>
     </form>
-    {{--      <form action="javascript:void(0)" id="Form" name="Form" method="POST" class="form-horizontal"
-                enctype="multipart/form-data">
-              <h3 class="fw-normal fs-3">@lang('main.form.title')</h3>
-              <h2 class="text-wrap fw-normal fs-5 mb-2">@lang('main.form.subTitle')</h2>
-              <input type="hidden" name="id" id="id">
-
-                  <label class="form-label p-0">@lang('main.form.name')</label>
-                  <input type="text" class="form-control rounded-5 border-danger border-2" id="name"
-                         name="name" placeholder=@lang('main.form.name')>
-                  <label class="form-label p-0">@lang('main.form.email')</label>
-                  <input type="email" class="form-control rounded-5 border-danger border-2" id="contact_info"
-                         name="contact_info" placeholder=@lang('main.form.email')>
-                  <label for="exampleFormControlTextarea1" class="form-label p-0">@lang('main.form.message')</label>
-                  <textarea class="form-control rounded-4 border-danger border-2" id="message" name="message" rows="6"
-                            placeholder=@lang('main.form.message')></textarea>
-                  <button type="submit"
-                          class="w-auto px-5 btn btn-danger text-center rounded-4 fs-4">@lang('main.form.order')
-                  </button>
-          </form>--}}
 </section>
+<script>
+    const form = document.getElementById("leadsForm");
+    console.log(form);
 
-{{-- TODO FRONT: 5. Сделать AJAX запрос в эту же форму и тут лушче использовать formdata, чтобы в юрл не уходили параметры --}}
+    // TODO FRONT: Display messages via user input
+    
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        var csrf = document.getElementsByName("csrf-token")[0].content;
+
+        var data = new FormData(e.target);
+
+        let response = await fetch("", {
+            method: "POST",
+            headers: {
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-TOKEN": csrf
+            },
+            body: data,
+        });
+        var result = await response.json()
+
+        if (response.ok) {
+            console.log("ACCESS:", result)
+        } else {
+            console.log("ERROR:", result.message);
+        }
+
+    });
+</script>
+

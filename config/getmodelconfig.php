@@ -207,7 +207,7 @@ return [
             'contact_info',
             'message',
         ],
-        'actions' => ['adding' => false],
+        'actions' => ['adding' => true],
 
     ],
     StaticPage::class => [

@@ -7,8 +7,6 @@ use App\Http\Controllers\Admin\ModelControllers\StaticPageController;
 use App\Http\Controllers\Site\CalculatorController;
 use App\Http\Controllers\Site\ContactsController;
 use App\Http\Controllers\Site\MainController;
-use App\Http\Controllers\TestController;
-use App\Models\NewsPost;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,8 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('frontend')->group(function () {
     Route::get('/', MainController::class)->name('user.main.index');
-
-    Route::post('/', [LeadsController::class, 'create'])->name('user.leads');
+    Route::post('/', [LeadsController::class, 'store'])->name('user.leads.store');
 
     Route::get('/catalog', ProductsController::class)->name('user.catalog.index');
 
@@ -40,15 +37,6 @@ Route::prefix('frontend')->group(function () {
     Route::get('/calculator', CalculatorController::class)->name('user.calc.index');
 
     Route::get('/{slug}', [StaticPageController::class, 'show'])->name('user.static.page.show');
+
 });
 
-Route::get('/filter', [ProductsController::class, 'filter']);
-Route::get('/test', [TestController::class, 'test']);
-Route::get('/testing', function () {
-    $entity = NewsPost::create(['title' => 'последний', 'content' => 'asdas', 'description' => 'asdad']);
-    $entity->update(['title' => 'asdkaskdas']);
-    dd($entity);
-});
-
-
-Route::post('/leads', [MainController::class, 'leads'])->name('user.leads');

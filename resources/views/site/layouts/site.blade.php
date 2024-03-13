@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="{{$data['meta']->meta_description}}">
     <meta name="keywords" content="{{$data['meta']->meta_keywords}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{$data['meta']->title}}</title>
 

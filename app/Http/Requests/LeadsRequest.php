@@ -14,7 +14,7 @@ class LeadsRequest extends FormRequest
         return [
             'id' => 'nullable|numeric',
             'name' => 'required|string|between:2,25',
-            'contact_info' => 'required|phone|email|between:5,50',
+            'contact_info' => 'required|email|between:5,50',
             'message' => 'required|string|max:255',
         ];
     }

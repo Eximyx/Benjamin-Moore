@@ -24,8 +24,7 @@ class ProductsController extends BaseAdminController
 
     public function __construct(
         ProductService $service,
-    )
-    {
+    ) {
         parent::__construct($service, ProductDTO::class, ProductResource::class, ProductRequest::class);
         $this->settings = SettingsResource::make(app(Settings::class));
     }
@@ -42,12 +41,12 @@ class ProductsController extends BaseAdminController
         $entity = $this->service->findBySlug($slug);
 
         $data = JsonResource::make([
-                'entity' => ProductResource::make($entity),
-                'latest' => $this->service->getLatest(),
-                'similar' => $this->service->getSimilar($entity->product_category_id),
-                'meta' => $this->getMetaDataByURL(),
-                'settings' => $this->settings,
-            ]
+            'entity' => ProductResource::make($entity),
+            'latest' => $this->service->getLatest(),
+            'similar' => $this->service->getSimilar($entity->product_category_id),
+            'meta' => $this->getMetaDataByURL(),
+            'settings' => $this->settings,
+        ]
         );
 
         return view('site.pages.products-details', ['data' => $data]);
@@ -85,15 +84,16 @@ class ProductsController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
-    public function __invoke(ProductFilterRequest $request): View
+    public function __invoke(ProductFilterRequest $request): View|JsonResource
     {
         if (request()->ajax()) {
             $data = $this->service->fetchProducts($request);
+
             return JsonResource::make([
-                "data" => [
-                    "products" => ProductResource::collection($data["products"]),
-                    "categories" => ProductCategoryResource::collection($data["categories"]),
-                ]
+                'data' => [
+                    'products' => ProductResource::collection($data['products']),
+                    'categories' => ProductCategoryResource::collection($data['categories']),
+                ],
             ]);
         }
 

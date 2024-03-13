@@ -51,10 +51,10 @@
                                 @endif
                                 @if ($value === 'content')
                                     <textarea type="text" name="content" class="form-control" id="summernote-content"
-                                              placeholder="@lang('admin.keys.content')" required></textarea>
+                                              placeholder="@lang('admin.keys.content')"></textarea>
                                 @elseif($value == 'hex_code')
                                     <input type="color" name="{{$value}}" class="form-control" id="{{$value}}"
-                                           style="width: 150px" required>
+                                           style="width: 150px">
                                 @elseif($value == 'colors')
                                     <select class="form-select" multiple name="{{$value}}[]" id="{{$value}}">
                                         <option data="default" value="">
@@ -70,7 +70,7 @@
                                 @elseif($value == 'description')
                                     <textarea type="text" name="description" class="form-control" id="description"
                                               rows="3" placeholder="@lang('admin.keys.'.$value)"
-                                              required></textarea>
+                                    ></textarea>
                                 @elseif(str_contains($value, '_id'))
                                     <div>
                                         <select class="form-select" name="{{ $value }}" id="select">
@@ -95,7 +95,7 @@
                                          style="max-width: 20rem;max-height:20rem">
                                 @else
                                     <input type="text" name="{{ $value }}" id="{{ $value }}"
-                                           class="form-control" placeholder="@lang('admin.keys.'.$value)" required>
+                                           class="form-control" placeholder="@lang('admin.keys.'.$value)">
                                 @endif
                             </div>
                         @endforeach
@@ -398,6 +398,7 @@
 
         $('#Form').submit(function (e) {
             e.preventDefault();
+            deleteErrors();
             let formData = new FormData(this);
             let url = '';
             let type = 'POST';
@@ -422,11 +423,7 @@
                     $("#btn-save").attr("disabled", false);
                 },
                 error: function (data) {
-                    console.log(data);
-
-                    $.each(data.responseJSON["errors"], (key, item) => {
-                        $("#errors").append("<li class='alert alert-danger'>" + item[0] + "</li>")
-                    });
+                    $("#errors").append("<li class='alert alert-danger'>" + data.responseJSON.message + "</li>")
                 },
             });
         });
