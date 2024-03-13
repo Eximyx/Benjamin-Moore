@@ -13,7 +13,7 @@ class SettingsRequest extends FormRequest
     {
         return [
             'email' => 'email|required',
-            'phone' => 'required|phone',
+            'phone' => 'required',
             'work_time' => 'required|string',
             'location' => 'required|string',
             'instagram' => 'required|string',

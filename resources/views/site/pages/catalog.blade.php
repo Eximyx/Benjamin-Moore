@@ -35,8 +35,8 @@
                         </li>
                     @endforeach
                 </ul>
-            </div>
 
+            </div>
             <label class="form-label" for="colors">@lang('catalog.filter.colors')</label>
             <div class="dropdown_with-chk">
                 <button type="button" class="dropdown_with-chk__button">@lang('catalog.filter.defaultValue')</button>
