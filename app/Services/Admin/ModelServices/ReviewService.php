@@ -17,7 +17,7 @@ class ReviewService extends BaseModelService
 
     public function create(ModelDTO $dto): Model
     {
-        $data = (array)$dto;
+        $data = (array) $dto;
 
         $data['main_image'] = $this->uploadImage($data['main_image']);
 
@@ -38,27 +38,27 @@ class ReviewService extends BaseModelService
 
     public function update(Model $entity, ModelDTO $dto): Model
     {
-        $dto = (array)$dto;
+        $data = (array) $dto;
 
-        if ($dto['main_image'] !== null) {
+        if ($data['main_image'] !== null) {
             $deleted = $this->deleteImage($entity['main_image']);
             if ($deleted) {
-                $dto['main_image'] = $this->uploadImage($dto['main_image']);
+                $data['main_image'] = $this->uploadImage($data['main_image']);
             }
         } else {
-            $dto['main_image'] = $entity['main_image'];
+            $data['main_image'] = $entity['main_image'];
         }
 
         return $this->repository->update(
             $entity,
-            $dto
+            $data
         );
     }
 
     protected function deleteImage(string $image): bool
     {
-        if (!($image === 'default_post.jpg')) {
-            Storage::delete('public/image/' . $image);
+        if (! ($image === 'default_post.jpg')) {
+            Storage::delete('public/image/'.$image);
         }
 
         return true;
@@ -68,8 +68,7 @@ class ReviewService extends BaseModelService
     {
         $entity = $this->findById($request['id']);
 
-        $this->deleteImage($entity->main_image);
-
+        $this->deleteImage($entity['main_image']);
         $this->repository->destroy($entity);
 
         return $entity;
@@ -79,9 +78,8 @@ class ReviewService extends BaseModelService
     {
         $entity = $this->findById($request['id']);
 
-        $entity['is_toggled'] = !$entity['is_toggled'];
-        $entity = $this->repository->save($entity);
+        $entity['is_toggled'] = ! $entity['is_toggled'];
 
-        return $entity;
+        return $this->repository->save($entity);
     }
 }

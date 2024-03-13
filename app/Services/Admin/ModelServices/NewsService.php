@@ -34,7 +34,7 @@ class NewsService extends BaseModelService
 
         $entity = $this->repository->create($data);
 
-        $dto->content = $this->htmlParser($dto, $entity->id);
+        $dto->content = $this->htmlParser($dto, $entity['id']);
 
         return $this->update($entity, $dto);
     }
@@ -109,7 +109,7 @@ class NewsService extends BaseModelService
     {
         $entity = $this->findById($request['id']);
 
-        $this->deleteImage($entity->main_image);
+        $this->deleteImage($entity['main_image']);
 
         $this->repository->destroy($entity);
 
@@ -122,9 +122,7 @@ class NewsService extends BaseModelService
 
         $entity['is_toggled'] = !$entity['is_toggled'];
 
-        $entity = $this->repository->save($entity);
-
-        return $entity;
+        return $this->repository->save($entity);
     }
 
     /**

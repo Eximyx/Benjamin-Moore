@@ -37,7 +37,7 @@ class BannersRepository extends BaseModelRepository
 
         $entities = $this->startConditions();
 
-        $entities = $entities->join(...$query['join']);
+        $entities = $entities->query()->join(...$query['join']);
 
         return $entities->select(...$query['select'])->get();
     }
@@ -76,7 +76,7 @@ class BannersRepository extends BaseModelRepository
         return $this->model->where('banner_position_id', '<>', 'null')->get();
     }
 
-    public function getBannerByPositionId(int $id): Banner
+    public function getBannerByPositionId(int $id): Model
     {
         return $this->model->where('banner_position_id', '=', $id)->firstOrFail();
     }

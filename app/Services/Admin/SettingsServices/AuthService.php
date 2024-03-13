@@ -2,9 +2,7 @@
 
 namespace App\Services\Admin\SettingsServices;
 
-use _PHPStan_11268e5ee\Nette\Neon\Exception;
 use App\DataTransferObjects\AuthDTO;
-use App\Http\Requests\AuthRequest;
 use App\Models\User;
 use App\Repositories\SettingRepositories\AuthRepository;
 use Illuminate\Http\Request;
@@ -15,8 +13,7 @@ class AuthService
 {
     public function __construct(
         protected AuthRepository $repository
-    )
-    {
+    ) {
     }
 
     public function update(User $entity, AuthDTO $dto): User
@@ -29,33 +26,12 @@ class AuthService
         );
     }
 
-    public function getUserById(string $id): User
-    {
-        return $this->repository->getUserById($id);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function profileSet(AuthRequest $request): AuthRequest
-    {
-        $data = $request->all();
-        $data['id'] = Auth::user()->id ?? throw new Exception(__('errors.auth.failed'), 422);
-
-        if (!($data['password'] !== null)) {
-            $data['password'] = Auth::user()->password;
-        }
-        $request->replace($data);
-
-        return $request;
-    }
-
     /**
      * @throws ValidationException
      */
     public function authAttempt(Request $request): void
     {
-        if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+        if (! Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
             ]);

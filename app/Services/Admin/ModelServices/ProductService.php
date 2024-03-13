@@ -35,17 +35,20 @@ class ProductService extends BaseModelService
         return $this->productCategoryRepository->getLatest()->get();
     }
 
-    public function getLatestPaginated(): LengthAwarePaginator
-    {
-        return $this->repository->getLatest()->paginate(12);
-    }
-
     /**
      * @return Collection<int, Model>
      */
     public function getLatest(): Collection
     {
         return $this->repository->getLatest()->get();
+    }
+
+    /**
+     * @return LengthAwarePaginator<Model>
+     */
+    public function getLatestPaginated(): LengthAwarePaginator
+    {
+        return $this->repository->getLatest()->paginate(12);
     }
 
     /**

@@ -40,6 +40,11 @@ class ProductRepository extends BaseModelRepository
         return $this->model->where('product_category_id', '=', $categoryID)->get();
     }
 
+    /**
+     * @return Collection<int, ProductCategory>
+     *
+     * @throws BindingResolutionException
+     */
     public function fetchCategories(ProductFilterRequest $request): Collection
     {
         $data = $request->validated();
@@ -71,7 +76,7 @@ class ProductRepository extends BaseModelRepository
 
         $entities = $this->startConditions();
 
-        $entities = $entities->join(...$query['join']);
+        $entities = $entities->query()->join(...$query['join']);
 
         return $entities->select(...$query['select'])->get();
     }

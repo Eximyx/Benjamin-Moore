@@ -16,7 +16,7 @@ abstract class BaseModelRepository extends CoreRepository
     public function __construct(?string $modelClass)
     {
         parent::__construct($modelClass);
-        $this->modelData = ((array) config('getmodelconfig'))[$modelClass];
+        $this->modelData = ((array)config('getmodelconfig'))[$modelClass];
     }
 
     /**
@@ -38,11 +38,11 @@ abstract class BaseModelRepository extends CoreRepository
 
         $entities = $this->startConditions();
 
-        return $entities->select(...$query['select'])->get();
+        return $entities->query()->select(...$query['select'])->get();
     }
 
     /**
-     * @param  array<string,mixed>  $data
+     * @param array<string,mixed> $data
      * @return array<string,array<int,mixed>>
      */
     public function queryForDatatable(array $data): array
@@ -51,10 +51,10 @@ abstract class BaseModelRepository extends CoreRepository
         $modelName = $this->model->getTable();
 
         foreach ($data['datatable_data'] as $item) {
-            $query['select'][] = $modelName.'.'.$item;
+            $query['select'][] = $modelName . '.' . $item;
         }
-        $query['select'][] = $modelName.'.created_at';
-        $query['select'][] = $modelName.'.updated_at';
+        $query['select'][] = $modelName . '.created_at';
+        $query['select'][] = $modelName . '.updated_at';
 
         return $query;
     }

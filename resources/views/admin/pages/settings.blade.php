@@ -100,7 +100,7 @@
             });
 
             let imageModal = $('#imageModal');
-            let urls = '{{route('settings.set')}}';
+            let urls = '{{route('settings.update')}}';
 
             const output = $('#output');
 

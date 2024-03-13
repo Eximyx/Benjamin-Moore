@@ -63,7 +63,6 @@ class UpdateMetaData extends Command
                             ]);
                         }
                     }
-
                     continue;
                 }
                 MetaData::factory()->create(

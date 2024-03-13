@@ -17,19 +17,18 @@ class SettingsController extends Controller
 
     }
 
-    public function index(): View
+    public function __invoke(): View|JsonResource
     {
+        if (request()->ajax()) {
+            $request = app(SettingsRequest::class, request()->all());
+
+            $dto = SettingsDTO::appRequest($request);
+            $entity = $this->service->settingsSet($dto);
+
+            return SettingsResource::make($entity);
+        }
         $resource = SettingsResource::make($this->service->settingsFetch());
 
         return view('admin.pages.settings', ['data' => $resource]);
-    }
-
-    public function settings(SettingsRequest $request): JsonResource
-    {
-        $dto = SettingsDTO::appRequest($request);
-
-        $entity = $this->service->settingsSet($dto);
-
-        return SettingsResource::make($entity);
     }
 }

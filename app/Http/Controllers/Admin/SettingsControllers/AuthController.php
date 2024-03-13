@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers\Admin\SettingsControllers;
 
-use _PHPStan_11268e5ee\Nette\Neon\Exception;
-use App\DataTransferObjects\AuthDTO;
-use App\Http\Requests\AuthRequest;
-use App\Http\Resources\SettingsResources\AuthResource;
 use App\Services\Admin\SettingsServices\AuthService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -18,7 +14,8 @@ class AuthController extends Controller
 {
     public function __construct(
         protected AuthService $service,
-    ) {
+    )
+    {
     }
 
     public function login(): View
@@ -33,7 +30,7 @@ class AuthController extends Controller
     {
         $this->service->authAttempt($request);
 
-        return redirect(route('settings'));
+        return redirect(route('settings.index'));
     }
 
     public function logout(Request $request): RedirectResponse
@@ -43,26 +40,5 @@ class AuthController extends Controller
         $request->session()->invalidate();
 
         return redirect('login');
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function profile(): View|AuthResource
-    {
-        if (request()->ajax()) {
-            $entity = $this->service->getUserById((string) Auth::user()['id']);
-            $request = app(AuthRequest::class, request()->all());
-            $request = $this->service->profileSet($request);
-
-            $entity = $this->service->update(
-                $entity,
-                AuthDTO::appRequest($request)
-            );
-
-            return AuthResource::make($entity);
-        }
-
-        return view('admin.pages.profile');
     }
 }

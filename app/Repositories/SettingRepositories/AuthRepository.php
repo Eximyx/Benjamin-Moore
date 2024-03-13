@@ -7,7 +7,7 @@ use App\Models\User;
 class AuthRepository
 {
     /**
-     * @param array<string,mixed> $dto
+     * @param  array<string,mixed>  $dto
      */
     public function update(User $entity, array $dto): User
     {

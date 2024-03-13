@@ -22,7 +22,7 @@
 
     @foreach(Route::getRoutes() as $key => $value)
         @if(str_contains($value->uri, 'admin') && str_contains($value->getName(), 'index'))
-            @if (str_contains($value->getName(),'user') && Auth()->user()->user_role_id < 3)
+            @if (str_contains($value->getName(),'user') && Auth()->user()->user_role_id < 3 || (str_contains($value->getName(), 'settings') || str_contains($value->getName(), 'profile')) )
                 @continue
             @endif
             <li class="nav-item">
@@ -32,7 +32,7 @@
             </li>
         @endif
     @endforeach
-    
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

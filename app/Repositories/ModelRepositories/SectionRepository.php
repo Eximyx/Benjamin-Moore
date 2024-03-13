@@ -26,7 +26,7 @@ class SectionRepository extends BaseModelRepository
 
         $entities = $this->startConditions();
 
-        $entities = $entities->join(...$query['join']);
+        $entities = $entities->query()->join(...$query['join']);
 
         return $entities->select(...$query['select'])->get();
     }

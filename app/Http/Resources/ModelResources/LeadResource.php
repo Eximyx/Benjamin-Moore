@@ -13,7 +13,7 @@ class LeadResource extends JsonResource
     public function toArray(Request $request): array
     {
         /**
-         * @param Request $request
+         * @param  Request  $request
          * @return array<string,mixed>
          */
         return [

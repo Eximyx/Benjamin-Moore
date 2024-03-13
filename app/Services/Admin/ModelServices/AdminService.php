@@ -17,7 +17,6 @@ class AdminService extends BaseModelService
         if (isset($variables['data']['selectableModel'])) {
             $variables['selectable'] = $variables['data']['selectableModel']->all();
         }
-
         return $variables;
     }
 }

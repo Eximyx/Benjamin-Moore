@@ -8,8 +8,7 @@ class ProductCategoryService extends BaseModelService
 {
     public function __construct(
         ProductCategoryRepository $repository
-    )
-    {
+    ) {
         parent::__construct($repository);
     }
 

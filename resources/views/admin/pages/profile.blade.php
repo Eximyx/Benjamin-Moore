@@ -53,7 +53,7 @@
                 const formData = new FormData(this);
                 $.ajax({
                     type: 'POST',
-                    url: "{{route('profile')}}",
+                    url: "{{route('profile.update')}}",
                     data: formData,
                     cache: false,
                     contentType: false,

@@ -17,13 +17,13 @@ class SectionService extends BaseModelService
 
     public function create(ModelDTO $dto): Model
     {
-        $dto = (array)$dto;
+        $data = $dto->toArray();
 
-        if (!empty($dto['section_position_id'])) {
-            $this->repository->nullPosition($dto['section_position_id']);
+        if (! empty($dto['section_position_id'])) {
+            $this->repository->nullPosition($data['section_position_id']);
         }
 
-        return $this->repository->create($dto);
+        return $this->repository->create($data);
     }
 
     /**
@@ -33,7 +33,7 @@ class SectionService extends BaseModelService
     {
         $entity = $this->findById($request['id']);
 
-        if (!isset($entity->section_position_id)) {
+        if (! isset($entity->section_position_id)) {
             $this->repository->destroy($entity);
         } else {
             throw new Exception(__('errors.sections.position'), 422);

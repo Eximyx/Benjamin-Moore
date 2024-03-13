@@ -25,13 +25,13 @@ class NewsRepository extends BaseModelRepository
 
         $entities = $this->startConditions();
 
-        $entities = $entities->join(...$query['join']);
+        $entities = $entities->query()->join(...$query['join']);
 
         return $entities->select(...$query['select'])->get();
     }
 
     /**
-     * @param  array<string,mixed>  $data
+     * @param array<string,mixed> $data
      * @return array<string,array<int,mixed>>
      */
     public function queryForDatatable(array $data): array
@@ -42,13 +42,13 @@ class NewsRepository extends BaseModelRepository
 
         $query['join'] = [
             $selectableModelName,
-            $this->model->getTable().'.'.$data['selectable_key'],
+            $this->model->getTable() . '.' . $data['selectable_key'],
             '=',
-            $selectableModelName.'.id',
+            $selectableModelName . '.id',
             'left',
         ];
 
-        $query['select'][] = $selectableModelName.'.title as '.$data['selectable_key'];
+        $query['select'][] = $selectableModelName . '.title as ' . $data['selectable_key'];
 
         return $query;
     }
