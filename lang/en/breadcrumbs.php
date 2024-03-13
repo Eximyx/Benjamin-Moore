@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'user.news' => 'News',
-    'user.contacts' => 'Contacts',
-    'user.catalog' => 'Catalog',
-    'user.calc' => 'Calculator',
+    'user.news.index' => 'News',
+    'user.contacts.index' => 'Contacts',
+    'user.catalog.index' => 'Catalog',
+    'user.calc.index' => 'Calculator',
 ];
