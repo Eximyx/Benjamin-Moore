@@ -609,7 +609,7 @@ button {
 .form-section__form input, .form-section__form textarea {
     background-color: transparent;
     border: 2px solid var(--accent-red);
-    border-radius: 10px;
+    border-radius: 1git0px;
     padding: 14px 0 14px 15px;
     resize: none;
 }
