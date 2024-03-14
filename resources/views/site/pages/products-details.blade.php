@@ -1,7 +1,5 @@
 @extends('site.layouts.site')
-
 @section('breadcrumbs', $data['entity']->title ?? 'ENTITY_TITLE')
-
 @section('content')
     @include('site.components.breadcrumbs')
     <section class="product-details-section">
@@ -24,9 +22,9 @@
             </p>
             <p class="product-description">@lang('catalog.product-details.amount')</p>
             <div class="product-counter">
-                <button class="counter-button" onclick="counterDecrement()">–</button>
+                <button class="counter-button sub">–</button>
                 <p id="counter">1</p>
-                <button class="counter-button" onclick="counterIncrement()">+</button>
+                <button class="counter-button add">+</button>
             </div>
             <div class="product-price-block">
                 <div class="product-price-block__inner-text"><p class="product-price">$</p>
@@ -251,27 +249,6 @@
         </div>
     </section>
 @endsection
-
 @section('scripts')
-    <script>
-        let counter = 1;
-        let price = parseInt(document.getElementById("product-price").innerHTML);
-        let counterElement = document.getElementById("counter");
-        let productPriceElement = document.getElementById("product-price");
-
-        function counterIncrement() {
-            counter++;
-            counterElement.innerHTML = counter;
-            productPriceElement.innerHTML = (counter * price).toFixed(2);
-        }
-
-        function counterDecrement() {
-            if (counter > 1) {
-                counter--;
-                counterElement.innerHTML = counter;
-                productPriceElement.innerHTML = (counter * price).toFixed(2);
-            }
-        }
-    </script>
-    @vite(['resources/js/slider.js'])
+    @vite(['resources/js/slider.js', 'resources/js/product-counter.js'])
 @endsection

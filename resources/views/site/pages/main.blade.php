@@ -120,9 +120,9 @@
                                      alt="clock image">
                                 <p class="news-card__details-date">{{$value->created_at->format('d.m.y')}}</p>
                             </div>
-                        <a class="news-card__link" href="{{route('user.news.index')}}">
-                            @lang('main.buttons.more')
-                        </a>
+                            <a class="news-card__link" href="{{route('user.news.index')}}">
+                                @lang('main.buttons.more')
+                            </a>
                         </div>
                     </div>
                     <h4 class="news-card__header">
@@ -171,7 +171,7 @@
             <button class="button-outlined">@lang('main.titles.catalog')</button>
         </a>
     </section>
-    @include('site.components.lead_form')
+    @include('site.components.lead-form')
 @endsection
 @section('scripts')
     @vite('resources/js/slider.js')
