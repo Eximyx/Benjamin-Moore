@@ -85,5 +85,8 @@
     </div>
 @endsection
 @section('scripts')
+    <script>
+        
+    </script>
     @vite(['resources/js/filter.js', 'resources/js/custom-select.js'])
 @endsection

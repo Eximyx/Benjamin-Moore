@@ -19,34 +19,7 @@
         <button class="button-filled" type="submit">@lang('main.form.send')</button>
     </form>
 </section>
-<script>
-    const form = document.getElementById("leadsForm");
-    console.log(form);
-
-    // TODO FRONT: Display messages via user input
-    
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        var csrf = document.getElementsByName("csrf-token")[0].content;
-
-        var data = new FormData(e.target);
-
-        let response = await fetch("", {
-            method: "POST",
-            headers: {
-                "X-Requested-With": "XMLHttpRequest",
-                "X-CSRF-TOKEN": csrf
-            },
-            body: data,
-        });
-        var result = await response.json()
-
-        if (response.ok) {
-            console.log("ACCESS:", result)
-        } else {
-            console.log("ERROR:", result.message);
-        }
-
-    });
-</script>
+@section('scripts')
+    @vite('resources/js/lead-form.js')
+@endsection
 

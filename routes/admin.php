@@ -43,8 +43,8 @@ Route::middleware('admin')->group(function () {
             Route::post('static_pages/toggle', [StaticPageController::class, 'toggle']);
             Route::post('reviews/toggle', [ReviewController::class, 'toggle']);
 
-            Route::resource('metadata', MetaDataController::class)->except(['create', 'store']);
-            Route::resource('static-page', StaticPageController::class)->except(['create', 'store']);
+            Route::resource('metadata', MetaDataController::class)->except(['create', 'store', 'destroy']);
+            Route::resource('static-page', StaticPageController::class)->except(['create', 'store', 'destroy']);
 
             Route::middleware('root')->group(function () {
                 Route::resource('users', AdminController::class);
@@ -54,7 +54,6 @@ Route::middleware('admin')->group(function () {
                 'products' => ProductsController::class,
                 'partners' => PartnersController::class,
                 'news' => NewsController::class,
-                'metadata' => MetaDataController::class,
                 'news_categories' => CategoryController::class,
                 'leads' => LeadsController::class,
                 'product_categories' => ProductCategoryController::class,
