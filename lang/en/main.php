@@ -1,8 +1,6 @@
 <?php
 
 return [
-    'lang' => 'en',
-
     'titles' => [
         'paints' => 'American paints',
         'products' => 'We offer',
@@ -15,7 +13,6 @@ return [
         'reviews' => 'Reviews about us',
         'subReviews' => 'WHAT THEY SAY ABOUT US',
     ],
-
     'buttons' => [
         'buy' => 'Buy',
         'allColors' => 'All colors',
@@ -25,7 +22,6 @@ return [
         'more' => 'Read more',
         'allNews' => 'All news',
     ],
-
     'form' => [
         'title' => 'Leave a request',
         'subTitle' => 'We will contact you within 5 minutes',
@@ -34,5 +30,4 @@ return [
         'message' => 'Message',
         'send' => 'Send',
     ],
-
 ];

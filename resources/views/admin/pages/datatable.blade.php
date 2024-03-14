@@ -289,7 +289,10 @@
                                     $('#' + key).val(value);
                                 }
                             } else {
-                                result.attr("src", `{{ url('storage/image/') }}/${res[key]}`);
+                                console.log(typeof (value));
+                                if (typeof value == "string") {
+                                    result.attr("src", `{{url("storage/image/")}}/${value}`);
+                                }
                             }
                             $("#select option:selected").insertAfter("#select option[data='default']");
                             $("#colors option:selected").insertAfter("#color option[data='default']");

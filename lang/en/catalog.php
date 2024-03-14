@@ -1,12 +1,9 @@
 <?php
 
 return [
-    'lang' => 'en',
-
     'title' => 'We offer',
     'subTitle' => 'OUR PRODUCTS',
     'productsTitle' => 'All',
-
     'filter' => [
         'title' => 'Filters',
         'defaultValue' => 'Select from list',
@@ -23,13 +20,11 @@ return [
         'internalWork' => 'Internal work',
         'externalWork' => 'External work',
     ],
-
     'buttons' => [
         'submit' => 'Submit filters',
         'reset' => 'Reset all',
         'order' => 'Order',
     ],
-
     'product-details' => [
         'similar' => 'Similar products',
         'recommend' => 'Recommended products',
@@ -43,5 +38,4 @@ return [
         'options' => 'Options',
         'download' => 'Download technical specifications',
     ],
-
 ];

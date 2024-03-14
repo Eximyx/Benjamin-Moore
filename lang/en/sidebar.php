@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'lang' => 'en',
     'news.index' => 'News',
     'partners.index' => 'Partners',
     'colors.index' => 'Colors',

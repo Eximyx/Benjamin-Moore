@@ -48,7 +48,7 @@ class ProductDTO implements ModelDTO
             $request['thickness'],
             $request['base'],
             $request['product_category_id'],
-            $request['main_image'],
+            $request['main_image'] ?? "default_post.jpg",
             $request['sub_images'],
         );
     }

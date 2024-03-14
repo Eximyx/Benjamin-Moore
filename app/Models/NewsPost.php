@@ -20,6 +20,7 @@ class NewsPost extends Model
         'title',
         'content',
         'is_toggled',
+        'user_name',
         'main_image',
         'description',
         'category_id',

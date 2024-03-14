@@ -5,11 +5,12 @@ namespace App\Services\Admin\ModelServices;
 use App\Contracts\ModelDTO;
 use App\Repositories\ModelRepositories\NewsRepository;
 use DOMDocument;
-use File;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class NewsService extends BaseModelService
@@ -31,12 +32,12 @@ class NewsService extends BaseModelService
         $dto->main_image = $this->uploadImage($dto->main_image);
 
         $data = $dto->toArray();
+        $user = Auth::user();
 
-        $entity = $this->repository->create($data);
-
-        $dto->content = $this->htmlParser($dto, $entity['id']);
-
-        return $this->update($entity, $dto);
+        if ($user) {
+            $data['user_name'] = $user['name'];
+        }
+        return $this->repository->create($data);
     }
 
     protected function uploadImage(mixed $image): string

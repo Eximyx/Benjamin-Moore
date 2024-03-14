@@ -19,11 +19,12 @@ use Illuminate\Support\Facades\Storage;
 class ProductService extends BaseModelService
 {
     public function __construct(
-        ProductRepository $repository,
-        protected ColorProductRepository $colorProductRepository,
+        ProductRepository                   $repository,
+        protected ColorProductRepository    $colorProductRepository,
         protected ProductCategoryRepository $productCategoryRepository,
-        protected ColorRepository $colorRepository,
-    ) {
+        protected ColorRepository           $colorRepository,
+    )
+    {
         parent::__construct($repository);
     }
 
@@ -59,14 +60,6 @@ class ProductService extends BaseModelService
         return $this->repository->getSimilar($categoryID);
     }
 
-    //  TODO: DELETE
-    //    public function getSelectableColors(string $id): array
-    //    {
-    //        return $this->colorRepository->getColors(
-    //            $this->colorProductRepository->getColorIds($id)
-    //        );
-    //    }
-
     public function findBySlug(string $slug): Model
     {
         return $this->repository->findBySlug($slug);
@@ -80,21 +73,17 @@ class ProductService extends BaseModelService
         $dto->sub_images = $this->uploadImage($dto->sub_images);
 
         $data = $dto->toArray();
-
         unset($data['colors']);
 
         $entity = $this->repository->create($data);
 
-        $dto->content = $this->htmlParser($dto, $entity->id);
-
         $entity->colors()->attach($dto->colors);
-
-        return $this->update($entity, $dto);
+        return $entity;
     }
 
     protected function uploadImage(mixed $image): string
     {
-        if ($image !== null & ! is_string($image)) {
+        if ($image !== null & !is_string($image)) {
             Storage::put('public\image', $image);
             $image = $image->hashName();
         } else {
@@ -102,32 +91,6 @@ class ProductService extends BaseModelService
         }
 
         return $image;
-    }
-
-    public function htmlParser(ModelDTO $dto, int $id): string|false
-    {
-
-        $dom = new DOMDocument();
-        $dom->loadHTML($dto->content, 9);
-
-        $images = $dom->getElementsByTagName('img');
-
-        foreach ($images as $key => $img) {
-            if (str_starts_with($img->getAttribute('src'), 'data:image/')) {
-                $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
-                $path = public_path().'/storage/'.'image'.'/products/'.$id;
-                if (! File::isDirectory($path)) {
-                    File::makeDirectory($path, 0777, true, true);
-                }
-                $image_name = time().$key.'.png';
-                file_put_contents($path.'/'.$image_name, $data);
-
-                $img->removeAttribute('src');
-                $img->setAttribute('src', url('storage/image/products/'.$id).'/'.$image_name);
-            }
-        }
-
-        return $dom->saveHTML();
     }
 
     public function update(Model $entity, ModelDTO $dto): Model
@@ -157,11 +120,37 @@ class ProductService extends BaseModelService
 
     protected function deleteImage(string $image): bool
     {
-        if (! ($image === 'default_post.jpg')) {
-            Storage::delete('public/image/'.$image);
+        if (!($image === 'default_post.jpg')) {
+            Storage::delete('public/image/' . $image);
         }
 
         return true;
+    }
+
+    public function htmlParser(ModelDTO $dto, int $id): string|false
+    {
+
+        $dom = new DOMDocument();
+        $dom->loadHTML($dto->content, 9);
+
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $key => $img) {
+            if (str_starts_with($img->getAttribute('src'), 'data:image/')) {
+                $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
+                $path = public_path() . '/storage/' . 'image' . '/products/' . $id;
+                if (!File::isDirectory($path)) {
+                    File::makeDirectory($path, 0777, true, true);
+                }
+                $image_name = time() . $key . '.png';
+                file_put_contents($path . '/' . $image_name, $data);
+
+                $img->removeAttribute('src');
+                $img->setAttribute('src', url('storage/image/products/' . $id) . '/' . $image_name);
+            }
+        }
+
+        return $dom->saveHTML();
     }
 
     public function destroy(Request $request): Model
@@ -179,7 +168,7 @@ class ProductService extends BaseModelService
     {
         $entity = $this->findById($request['id']);
 
-        $entity['is_toggled'] = ! $entity['is_toggled'];
+        $entity['is_toggled'] = !$entity['is_toggled'];
 
         return $this->repository->save($entity);
     }

@@ -1,8 +1,6 @@
 <?php
 
 return [
-    'lang' => 'ru',
-
     'titles' => [
         'news' => 'Новости',
         'category' => 'Категории новостей',
@@ -20,7 +18,6 @@ return [
         'banners' => 'Баннеры',
         'metadata' => 'Метаданные',
     ],
-
     'keys' => [
         'id' => 'ID',
         'url' => 'url',
@@ -57,7 +54,6 @@ return [
         'active' => 'Активные',
         'file' => 'Файл',
     ],
-
     'buttons' => [
         'profileSave' => 'Сохранить профиль',
         'logout' => 'Выйти',
@@ -68,7 +64,6 @@ return [
         'settings' => 'Настройки',
         'cancel' => 'Отменить',
     ],
-
     'modal' => [
         'edit' => 'Редактирование',
         'create' => 'Создание',

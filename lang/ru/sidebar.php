@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'lang' => 'ru',
     'news.index' => 'Новости',
     'partners.index' => 'Партнеры',
     'colors.index' => 'Цвета',

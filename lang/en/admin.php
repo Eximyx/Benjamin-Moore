@@ -1,8 +1,6 @@
 <?php
 
 return [
-    'lang' => 'en',
-
     'titles' => [
         'news' => 'News',
         'partners' => 'Partners',
@@ -21,7 +19,6 @@ return [
         'sections' => 'Sections',
         'metadata' => 'Metadata',
     ],
-
     'keys' => [
         'id' => 'ID',
         'url' => 'URL',
@@ -59,7 +56,6 @@ return [
         'active' => 'Active',
         'file' => 'File',
     ],
-
     'buttons' => [
         'profileSave' => 'Save profile',
         'logout' => 'Logout',
@@ -70,7 +66,6 @@ return [
         'settings' => 'Settings',
         'cancel' => 'Cancel',
     ],
-
     'modal' => [
         'edit' => 'Edit',
         'create' => 'Create',

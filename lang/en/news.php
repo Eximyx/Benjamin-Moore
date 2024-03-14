@@ -2,7 +2,7 @@
 
 return [
     'lang' => 'en',
-
+    'moder' => 'Moderator',
     'title' => 'News',
     'subTitle' => 'LAST NEWS',
     'more' => 'More',

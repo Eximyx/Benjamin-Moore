@@ -1,11 +1,8 @@
 <?php
 
 return [
-    'lang' => 'en',
-
     'title' => 'Paint consumption calculator',
     'subTitle' => 'Don’t overpay for paint, calculate it accurately',
-
     'form' => [
         'paintingSquare' => 'Do you know the area to be painted?',
         'squareParams' => 'Enter area parameters',
@@ -22,7 +19,6 @@ return [
         'square' => 'Square (m)*',
         'indicateTheArea' => 'Indicate the area',
     ],
-
     'results' => [
         'firstTitle' => 'Painting area',
         'secTitle' => 'Recommended amount of paint',
@@ -30,7 +26,6 @@ return [
         'quart' => 'Quart',
         'gallons' => 'Gallons',
     ],
-
     'buttons' => [
         'calculate' => 'Calculate',
         'know' => 'I know',
