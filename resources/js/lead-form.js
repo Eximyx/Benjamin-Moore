@@ -12,7 +12,9 @@ document.getElementById("leadsForm").addEventListener("submit", async (e) => {
         },
         body: data,
     });
+    console.log(response);
     var result = await response.json()
+    console.log(result);
 
     if (response.ok) {
         console.log("ACCESS:", result)

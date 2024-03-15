@@ -75,4 +75,11 @@ trait MetaDataTrait
 
         $this->metaDataService->create($dto);
     }
+
+    public function deleteMetaData(Model $entity): Model
+    {
+        $this->metaDataService = $this->injectMetaDataService();
+
+        return $this->metaDataService->destroyWithEntity($entity['slug']);
+    }
 }
