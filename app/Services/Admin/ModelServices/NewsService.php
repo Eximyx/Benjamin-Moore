@@ -29,21 +29,24 @@ class NewsService extends BaseModelService
 
     public function create(ModelDTO $dto): Model
     {
-        $dto->main_image = $this->uploadImage($dto->main_image);
 
         $data = $dto->toArray();
-        $user = Auth::user();
 
-        if ($user) {
-            $data['user_name'] = $user['name'];
-        }
-        return $this->repository->create($data);
+        $data['user_name'] = Auth::user()['name'];
+
+        $entity = $this->repository->create($data);
+
+        $dto->main_image = $this->uploadImage($dto->main_image, $entity->id);
+
+        $dto->content = $this->htmlParser($dto, $entity['id']);
+
+        return $this->repository->update($entity, $dto->toArray());
     }
 
-    protected function uploadImage(mixed $image): string
+    protected function uploadImage(mixed $image, string $id): string
     {
         if ($image !== null & !is_string($image)) {
-            Storage::put('public\image', $image);
+            Storage::put('public\\image\\news\\' . $id, $image);
             $image = $image->hashName();
         } else {
             $image = 'default_post.jpg';
@@ -71,7 +74,7 @@ class NewsService extends BaseModelService
                 file_put_contents($path . '/' . $image_name, $data);
 
                 $img->removeAttribute('src');
-                $img->setAttribute('src', url('storage/image/products/' . $id) . '/' . $image_name);
+                $img->setAttribute('src', url('storage/image/news/' . $id) . '/' . $image_name);
             }
         }
 
@@ -85,7 +88,7 @@ class NewsService extends BaseModelService
         if ($data['main_image']) {
             $deleted = $this->deleteImage($entity['main_image']);
             if ($deleted) {
-                $data['main_image'] = $this->uploadImage($data['main_image']);
+                $data['main_image'] = $this->uploadImage($data['main_image'], $entity->id);
             }
         } else {
             $data['main_image'] = $entity['main_image'];
@@ -104,17 +107,6 @@ class NewsService extends BaseModelService
         }
 
         return true;
-    }
-
-    public function destroy(Request $request): Model
-    {
-        $entity = $this->findById($request['id']);
-
-        $this->deleteImage($entity['main_image']);
-
-        $this->repository->destroy($entity);
-
-        return $entity;
     }
 
     public function toggle(Request $request): Model

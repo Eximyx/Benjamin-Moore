@@ -25,7 +25,6 @@ class StaticPageService extends BaseModelService
 
     public function htmlParser(ModelDTO $dto, int $id): ModelDTO
     {
-
         $dom = new DOMDocument();
         $dom->loadHTML($dto->content, 9);
 
@@ -34,15 +33,15 @@ class StaticPageService extends BaseModelService
         foreach ($images as $key => $img) {
             if (str_starts_with($img->getAttribute('src'), 'data:image/')) {
                 $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
-                $path = public_path().'/storage/'.'image'.'/static_pages/'.$id;
-                if (! File::isDirectory($path)) {
+                $path = public_path() . '/storage/' . 'image' . '/static_pages/' . $id;
+                if (!File::isDirectory($path)) {
                     File::makeDirectory($path, 0777, true, true);
                 }
-                $image_name = time().$key.'.png';
-                file_put_contents($path.'/'.$image_name, $data);
+                $image_name = time() . $key . '.png';
+                file_put_contents($path . '/' . $image_name, $data);
 
                 $img->removeAttribute('src');
-                $img->setAttribute('src', url('storage/image/static_pages/'.$id).'/'.$image_name);
+                $img->setAttribute('src', url('storage/image/static_pages/' . $id) . '/' . $image_name);
             }
         }
 
@@ -60,7 +59,7 @@ class StaticPageService extends BaseModelService
     {
         $entity = $this->findById($request['id']);
 
-        $entity['is_toggled'] = ! $entity['is_toggled'];
+        $entity['is_toggled'] = !$entity['is_toggled'];
 
         return $this->repository->save($entity);
     }
