@@ -19,7 +19,7 @@
         <button class="button-filled" type="submit">@lang('main.form.send')</button>
     </form>
 </section>
-@section('scripts')
+@push('scripts')
     @vite('resources/js/lead-form.js')
-@endsection
+@endpush
 

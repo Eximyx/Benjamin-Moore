@@ -479,10 +479,7 @@ button {
     flex-basis: 450px;
     min-width: 235px;
     flex-grow: 1;
-}
-
-.news-wrapper .news-card {
-    flex-basis: unset;
+    height: max-content;
 }
 
 .news-card__details-block {
@@ -517,6 +514,7 @@ button {
     font-weight: 500;
     gap: 10px;
     width: 100%;
+    height: fit-content;
 }
 
 .news-card__details-author {
@@ -648,7 +646,7 @@ button {
     max-width: 1410px;
     padding-top: 60px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 245px 1fr 1fr;
     justify-content: space-between;
     gap: 10px;
     align-items: center;
@@ -664,7 +662,8 @@ button {
 }
 
 .footer__logo {
-    flex: 1;
+    display: flex;
+    align-items: center;
 }
 
 .footer__buttons {
@@ -815,15 +814,12 @@ button {
     min-width: 220px;
     flex-basis: unset;
     flex-grow: unset;
+    height: fit-content;
 }
 
 .last-news-block h2 {
     margin: 0;
     width: 100%;
-}
-
-.last-news-block a {
-    margin-top: 30px;
 }
 
 .news-image {
@@ -1840,9 +1836,9 @@ input[type="checkbox"]:checked::after {
     }
 
     .footer {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        gap: 30px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-row-gap: 20px;
     }
 
     .footer__contacts {
@@ -2144,6 +2140,55 @@ input[type="checkbox"]:checked::after {
 
     .catalog-form__budget-block {
         max-width: unset;
+    }
+
+    .footer-accordion {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: transparent;
+        color: var(--text-black);
+        cursor: pointer;
+        padding: 18px 0;
+        width: 100%;
+        text-align: left;
+        border: none;
+        outline: none;
+        font-size: 18px;
+    }
+
+    .footer-accordion__arrow {
+        width: 10px;
+        height: 30px;
+        transform: rotate(0deg);
+        transition: transform 0.3s;
+    }
+
+    .rotate-arrow {
+        transform: rotate(90deg);
+        transition: transform 0.3s;
+    }
+
+    .footer-accordion__panel {
+        padding: 0;
+        background-color: transparent;
+        display: none;
+        max-height: 0;
+        overflow: hidden;
+        height: fit-content;
+        transition:  max-height 0.4s ease-in-out;
+    }
+
+    .active-accordion {
+        display: block;
+        max-height: max-content;
+        transition: max-height 0.4s ease-in-out;
+    }
+
+    .footer {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-row-gap: 20px;
     }
 }
 

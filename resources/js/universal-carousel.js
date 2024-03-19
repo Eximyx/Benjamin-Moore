@@ -1,4 +1,4 @@
-export default function slider(wrapperClass, columnAmount) {
+export default function slider(wrapperClass) {
     const wrapper = document.querySelector(wrapperClass);
     const carousel = wrapper.querySelector('.carousel');
     const firstCardWidth = carousel.querySelector(".card").offsetWidth;
@@ -23,7 +23,6 @@ export default function slider(wrapperClass, columnAmount) {
     arrowBtns.forEach(btn => {
         btn.addEventListener("click", () => {
             carousel.scrollLeft += btn.classList.contains("left") ? -firstCardWidth : firstCardWidth;
-            // carousel.scrollLeft += btn.id == "left-btn" ? -firstCardWidth : firstCardWidth;
         });
     });
 }

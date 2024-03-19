@@ -249,6 +249,6 @@
         </div>
     </section>
 @endsection
-@section('scripts')
-    @vite(['resources/js/slider.js', 'resources/js/product-counter.js'])
-@endsection
+@push('scripts')
+    @vite('resources/js/slider.js')
+@endpush
