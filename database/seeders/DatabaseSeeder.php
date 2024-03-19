@@ -7,6 +7,7 @@ use App\Models\BannerPosition;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Color_product;
+use App\Models\ColorProduct;
 use App\Models\KindOfWork;
 use App\Models\NewsPost;
 use App\Models\Partners;
@@ -57,7 +58,7 @@ class DatabaseSeeder extends Seeder
         Color::factory(30)->create();
         Partners::factory(3)->create();
         Product::factory(500)->create();
-        Color_product::factory(300)->create();
+        ColorProduct::factory(300)->create();
         UserRoles::factory()->createMany([['title' => 'User'], ['title' => 'Admin'], ['title' => 'root']]);
         User::factory()->create([
             'name' => 'admin',

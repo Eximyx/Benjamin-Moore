@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\KindOfWork;
 use App\Models\ProductCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -32,7 +33,7 @@ class ProductFactory extends Factory
             'time_to_repeat' => fake()->word(),
             'consumption' => fake()->word(),
             'thickness' => fake()->word(),
-            'product_category_id' => ProductCategory::factory()->has(P),
+            'product_category_id' => ProductCategory::factory()->has(KindOfWork::factory()),
         ];
     }
 }

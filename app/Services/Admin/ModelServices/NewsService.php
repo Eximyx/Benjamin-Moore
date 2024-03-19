@@ -29,7 +29,6 @@ class NewsService extends BaseModelService
 
     public function create(ModelDTO $dto): Model
     {
-
         $data = $dto->toArray();
 
         $data['user_name'] = Auth::user()['name'];
@@ -40,7 +39,7 @@ class NewsService extends BaseModelService
 
         $dto->content = $this->htmlParser($dto, $entity['id']);
 
-        return $this->repository->update($entity, $dto->toArray());
+        return $entity;
     }
 
     protected function uploadImage(mixed $image, string $id): string

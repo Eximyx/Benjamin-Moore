@@ -33,7 +33,7 @@ class ProductCategory extends Model
     /**
      * @return belongsTo<KindOfWork,ProductCategory>
      */
-    public function kind_of_work(): BelongsTo
+    public function kindOfWork(): BelongsTo
     {
         return $this->belongsTo(KindOfWork::class, 'kind_of_work_id', 'id');
     }

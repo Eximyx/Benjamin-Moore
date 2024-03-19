@@ -14,7 +14,8 @@ class DatabaseSeederService
 
     /**
      *
-     * 
+     *
+     *
      * @return void
      */
     public function run()
