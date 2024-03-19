@@ -67,21 +67,15 @@ class ProductService extends BaseModelService
 
     public function create(ModelDTO $dto): Model
     {
-        dump($dto);
         $data = $dto->toArray();
 
         unset($data['colors']);
-        
+
         $entity = $this->repository->create($data);
 
         $dto->main_image = $this->uploadImage($dto->main_image, $entity->id);
 
         $dto->sub_images = $this->MassUploadImage($dto->sub_images, $entity->id);
-
-//        for ($i = 0; $i < count($dto->sub_images); $i++) {
-//            $this->imageRepository->create($entity['id'], 'public/images/' . $dto->sub_images[$i]);
-//        }
-        $entity = $this->repository->update($entity, $dto->toArray());
 
         $entity->colors()->attach($dto->colors);
 
@@ -118,7 +112,7 @@ class ProductService extends BaseModelService
         if ($data['main_image']) {
             $deleted = $this->deleteImage($entity['main_image']);
             if ($deleted) {
-                $data['main_image'] = $this->uploadImage($data['main_image']);
+                $data['main_image'] = $this->uploadImage($data['main_image'], $entity->id);
             }
         } else {
             $data['main_image'] = $entity['main_image'];

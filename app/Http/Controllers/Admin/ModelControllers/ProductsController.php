@@ -86,7 +86,7 @@ class ProductsController extends BaseAdminController
 
         return $this->resource::make($entity);
     }
-    
+
     public function destroy(Request $request): JsonResource
     {
         $entity = $this->service->destroy($request);
