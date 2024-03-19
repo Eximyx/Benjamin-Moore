@@ -4,7 +4,7 @@ use App\Models\Banner;
 use App\Models\BannerPosition;
 use App\Models\Category;
 use App\Models\Color;
-use App\Models\Color_product;
+use App\Models\ColorProduct;
 use App\Models\KindOfWork;
 use App\Models\Leads;
 use App\Models\MetaData;
@@ -123,7 +123,7 @@ return [
         'selectable_key' => 'product_category_id',
         'selectableModel' => app(ProductCategory::class),
         'tagsModel' => app(Color::class),
-        'intermediateModel' => app(Color_product::class),
+        'intermediateModel' => app(ColorProduct::class),
         'actions' => ['adding' => true],
 
     ],

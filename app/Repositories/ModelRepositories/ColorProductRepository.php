@@ -3,7 +3,7 @@
 namespace App\Repositories\ModelRepositories;
 
 use App\Models\Color as Model;
-use App\Models\Color_product;
+use App\Models\ColorProduct;
 
 class ColorProductRepository extends BaseModelRepository
 {
@@ -17,6 +17,6 @@ class ColorProductRepository extends BaseModelRepository
      */
     public function getColorIds(string $id): array
     {
-        return Color_product::where('product_id', $id)->pluck('color_id')->all();
+        return ColorProduct::where('product_id', $id)->pluck('color_id')->all();
     }
 }
