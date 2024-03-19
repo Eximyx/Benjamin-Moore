@@ -94,12 +94,18 @@
         <p>{{$data['meta']->additional_text}}</p>
     </div>
     <div class="footer__buttons">
-        <ul class="header__nav-buttons buttons-margin">
-            <li><a href="{{route('user.catalog.index')}}">@lang('nav-links.catalog')</a></li>
-            <li><a href="{{route('user.news.index')}}">@lang('nav-links.news')</a></li>
-            <li><a href="{{route('user.calc.index')}}">@lang('nav-links.calc')</a></li>
-            <li><a href="{{route('user.contacts.index')}}">@lang('nav-links.contacts')</a></li>
-        </ul>
+        <button class="footer-accordion">
+            Навигация
+            <img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="right-arrow" class="footer-accordion__arrow">
+        </button>
+        <div class="footer-accordion__panel">
+            <ul class="footer__nav-buttons">
+                <li><a href="{{route('user.catalog.index')}}">@lang('nav-links.catalog')</a></li>
+                <li><a href="{{route('user.news.index')}}">@lang('nav-links.news')</a></li>
+                <li><a href="{{route('user.calc.index')}}">@lang('nav-links.calc')</a></li>
+                <li><a href="{{route('user.contacts.index')}}">@lang('nav-links.contacts')</a></li>
+            </ul>
+        </div>
     </div>
     <div class="footer__contacts">
         <div class="footer__contacts__inner-div">
@@ -112,8 +118,7 @@
         </div>
     </div>
 </footer>
-
 @vite('resources/js/burger.js')
-@yield('scripts')
+@stack('scripts')
 </body>
 </html>

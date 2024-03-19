@@ -81,6 +81,6 @@
         </div>
     </section>
 @endsection
-@section('scripts')
+@push('scripts')
     @vite('resources/js/calculator.js')
-@endsection
+@endpush

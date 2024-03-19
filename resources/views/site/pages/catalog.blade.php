@@ -68,7 +68,7 @@
         </div>
     </div>
 @endsection
-@section('scripts')
+@push('scripts')
     <script>
         document.getElementById("catalog-form").addEventListener("submit", function () {
             e.preventDefault()
@@ -78,4 +78,4 @@
         });
     </script>
     @vite(['resources/js/filter.js', 'resources/js/custom-select.js'])
-@endsection
+@endpush

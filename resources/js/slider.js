@@ -1,6 +1,6 @@
-import slider from "../js/universal-carousel.js";
-
+import slider from "./universal-carousel.js";
 window.addEventListener("DOMContentLoaded", () => {
-    slider(".wrapper", 4)
-    slider(".reviewsWrapper", 3)
+    slider(".wrapper")
+    slider(".recommendedWrapper")
 });
+

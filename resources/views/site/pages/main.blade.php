@@ -33,17 +33,7 @@
             <i class="left"><img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="arrow left"></i>
             <ul class="carousel">
                 @foreach($data['products'] as $value)
-                    <li class="card product-card">
-                        <img src="{{Vite::asset("resources/images/paint-can.png")}}" alt="paint can">
-                        <h4 class="product-card__header">{{$value->title}}</h4>
-                        <p class="product-card__details">{{$value->gloss_level}}</p>
-                        <div class="product-card__price-block">
-                            <p class="product-card__price-block__price">$ {{$value->price}}</p>
-                            <a href="{{route('user.catalog.show', $value->slug)}}">
-                                <button class="button-filled">@lang('main.buttons.order')</button>
-                            </a>
-                        </div>
-                    </li>
+                    @include('site.components.product-card')
                 @endforeach
             </ul>
             <i class="right"><img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="arrow right"></i>
@@ -61,7 +51,7 @@
                         <img src="{{url('storage/image/sections/section_image_1.jpg')}}" alt="">
                     </div>
                     <div class="about-us__image-placeholder-mobile">
-                        <img style="height:500px; width: 500px"
+                        <img
                              src="{{url('storage/image/sections/section_image_2.jpg')}}" alt="">
                     </div>
                 </div>
@@ -107,31 +97,7 @@
         <div class="news-wrapper">
             {{-- TODO: ADD an USER_NAME for post --}}
             @foreach($data['news'] as $value)
-                <div class="news-card">
-                    <img
-                        src="{{url('storage/image').'main.blade.php/'.$value->main_image}}"
-                        alt="news preview">
-                    <div class="news-card__details-block">
-                        <p class="news-card__details-author">Алексей Иванович Шишкин</p>
-                        <div class="news-card__details">
-                            <div class="news-card__details-date-block">
-                                <img class="news-card__details-clock-image"
-                                     src="{{Vite::asset('resources/icons/clock.svg')}}"
-                                     alt="clock image">
-                                <p class="news-card__details-date">{{$value->created_at->format('d.m.y')}}</p>
-                            </div>
-                            <a class="news-card__link" href="{{route('user.news.index')}}">
-                                @lang('main.buttons.more')
-                            </a>
-                        </div>
-                    </div>
-                    <h4 class="news-card__header">
-                        {{$value->title}}
-                    </h4>
-                    <p class="news-card__description">
-                        {{$value->content}}
-                    </p>
-                </div>
+                @include('site.components.news-card')
             @endforeach
         </div>
         <button class="button-filled mobile-news-button"><a
@@ -173,6 +139,6 @@
     </section>
     @include('site.components.lead-form')
 @endsection
-@section('scripts')
-    @vite('resources/js/slider.js')
-@endsection
+@push('scripts')
+    @vite(['resources/js/slider.js'])
+@endpush
