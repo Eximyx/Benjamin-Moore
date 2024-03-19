@@ -13,6 +13,7 @@ use App\Models\Settings;
 use App\Services\Admin\ModelServices\ProductService;
 use App\Traits\MetaDataTrait;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,7 +25,8 @@ class ProductsController extends BaseAdminController
 
     public function __construct(
         ProductService $service,
-    ) {
+    )
+    {
         parent::__construct($service, ProductDTO::class, ProductResource::class, ProductRequest::class);
         $this->settings = SettingsResource::make(app(Settings::class));
     }
@@ -41,12 +43,12 @@ class ProductsController extends BaseAdminController
         $entity = $this->service->findBySlug($slug);
 
         $data = JsonResource::make([
-            'entity' => ProductResource::make($entity),
-            'latest' => $this->service->getLatest(),
-            'similar' => $this->service->getSimilar($entity->product_category_id),
-            'meta' => $this->getMetaDataByURL(),
-            'settings' => $this->settings,
-        ]
+                'entity' => ProductResource::make($entity),
+                'latest' => $this->service->getLatest(),
+                'similar' => $this->service->getSimilar($entity->product_category_id),
+                'meta' => $this->getMetaDataByURL(),
+                'settings' => $this->settings,
+            ]
         );
 
         return view('site.pages.products-details', ['data' => $data]);
@@ -70,7 +72,7 @@ class ProductsController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
-    public function store(Request $request): JsonResource
+    public function store(Request $request): JsonResponse|JsonResource
     {
         $request = app($this->request, $request->all());
 
@@ -79,7 +81,17 @@ class ProductsController extends BaseAdminController
         );
 
         $entity = $this->service->create($dto);
+
         $this->createMetaData($entity);
+
+        return $this->resource::make($entity);
+    }
+    
+    public function destroy(Request $request): JsonResource
+    {
+        $entity = $this->service->destroy($request);
+
+        $this->deleteMetaData($entity);
 
         return $this->resource::make($entity);
     }

@@ -11,19 +11,20 @@ abstract class CoreService
 {
     public function __construct(
         protected CoreRepository $repository,
-    ) {
+    )
+    {
     }
 
     public function create(ModelDTO $dto): Model
     {
-        $dto = (array) $dto;
+        $dto = $dto->toArray();
 
         return $this->repository->create($dto);
     }
 
     public function update(Model $entity, ModelDTO $dto): Model
     {
-        $dto = (array) $dto;
+        $dto = $dto->toArray();
 
         return $this->repository->update(
             $entity,

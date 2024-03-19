@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,8 +17,8 @@ return new class extends Migration
 
             $table->index('product_id', 'color_product_product_idx');
             $table->index('color_id', 'color_product_color_idx');
-            $table->foreign('product_id', 'color_product_product_fk')->on('products')->references('id');
-            $table->foreign('color_id', 'color_product_color_fk')->on('colors')->references('id');
+            $table->foreign('product_id', 'color_product_product_fk')->on('products')->references('id')->onDelete('cascade');
+            $table->foreign('color_id', 'color_product_color_fk')->on('colors')->references('id')->onDelete('cascade');
 
             $table->timestamps();
         });

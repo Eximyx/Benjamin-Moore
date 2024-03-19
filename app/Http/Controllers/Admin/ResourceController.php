@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Services\CoreService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Routing\Controller;
@@ -11,14 +12,15 @@ abstract class ResourceController extends Controller
 {
     public function __construct(
         protected CoreService $service,
-        protected string $dto,
-        protected string $resource,
-        protected string $request,
-    ) {
+        protected string      $dto,
+        protected string      $resource,
+        protected string      $request,
+    )
+    {
 
     }
 
-    public function store(Request $request): JsonResource
+    public function store(Request $request): JsonResponse|JsonResource
     {
         $request = app($this->request, $request->all());
 

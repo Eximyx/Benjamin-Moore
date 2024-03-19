@@ -67,24 +67,42 @@ class ProductService extends BaseModelService
 
     public function create(ModelDTO $dto): Model
     {
-
-        $dto->main_image = $this->uploadImage($dto->main_image);
-
-        $dto->sub_images = $this->uploadImage($dto->sub_images);
-
+        dump($dto);
         $data = $dto->toArray();
-        unset($data['colors']);
 
+        unset($data['colors']);
+        
         $entity = $this->repository->create($data);
 
+        $dto->main_image = $this->uploadImage($dto->main_image, $entity->id);
+
+        $dto->sub_images = $this->MassUploadImage($dto->sub_images, $entity->id);
+
+//        for ($i = 0; $i < count($dto->sub_images); $i++) {
+//            $this->imageRepository->create($entity['id'], 'public/images/' . $dto->sub_images[$i]);
+//        }
+        $entity = $this->repository->update($entity, $dto->toArray());
+
         $entity->colors()->attach($dto->colors);
+
         return $entity;
     }
 
-    protected function uploadImage(mixed $image): string
+    protected function MassUploadImage(mixed $images, string $id): array
+    {
+        for ($i = 0; $i < count($images); $i++) {
+            if ($images[$i] !== null & !is_string($images[$i])) {
+                Storage::put('public\\image\\products\\' . $id . '\\sub_images\\' . $i . '.jpg', file_get_contents($images[$i]));
+                $images[$i] = $images[$i]->hashName();
+            }
+        }
+        return $images;
+    }
+
+    protected function uploadImage(mixed $image, string $id): string
     {
         if ($image !== null & !is_string($image)) {
-            Storage::put('public\image', $image);
+            Storage::put('public\\image\\products\\' . $id, $image);
             $image = $image->hashName();
         } else {
             $image = 'default_post.jpg';
