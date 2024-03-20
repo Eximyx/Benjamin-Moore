@@ -19,8 +19,8 @@ class ProductFilterRequest extends FormRequest
             'price' => 'nullable|array',
             'price.to' => 'sometimes|required|numeric',
             'price.from' => 'sometimes|required|numeric',
-            'colors' => 'nullable|array',
-            'colors.*' => 'sometimes|required|numeric|exists:colors,id',
+            'color_id' => 'nullable|array',
+            'color_id.*' => 'sometimes|required|numeric|exists:colors,id',
         ];
     }
 }
