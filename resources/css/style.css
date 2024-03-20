@@ -360,7 +360,6 @@ button {
     min-width: 210px;
     height: auto;
     flex-grow: 1;
-    cursor: pointer;
 }
 
 .product-card img {
@@ -646,7 +645,7 @@ button {
     max-width: 1410px;
     padding-top: 60px;
     display: grid;
-    grid-template-columns: 245px 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     justify-content: space-between;
     gap: 10px;
     align-items: center;
@@ -664,12 +663,7 @@ button {
 .footer__logo {
     display: flex;
     align-items: center;
-}
-
-.footer__buttons {
-    display: flex;
-    flex: 2;
-    justify-content: center;
+    min-width: 250px;
 }
 
 .buttons-margin {
@@ -1611,6 +1605,10 @@ input[type="checkbox"]:checked::after {
     color: var(--accent-red);
 }
 
+.footer-accordion {
+    display: none;
+}
+
 @media (max-width: 1600px) {
     .reviewsWrapper i:active {
         transform: translateY(-50%) scale(0.85);
@@ -1718,10 +1716,6 @@ input[type="checkbox"]:checked::after {
     .buttons-margin {
         margin: 0;
         padding: 0;
-    }
-
-    .footer__logo {
-        min-width: 200px;
     }
 
     .form-section__map {
@@ -1858,6 +1852,7 @@ input[type="checkbox"]:checked::after {
 
     .news-wrapper {
         flex-direction: column;
+        gap: 30px;
     }
 
     .header-block .button-outlined {
@@ -2069,6 +2064,10 @@ input[type="checkbox"]:checked::after {
     .dropdown_with-chk__list {
         max-height: 250px;
     }
+
+    .news-wrapper .news-card {
+        flex-basis: unset;
+    }
 }
 
 @media (max-width: 600px) {
@@ -2180,15 +2179,31 @@ input[type="checkbox"]:checked::after {
     }
 
     .active-accordion {
-        display: block;
+        display: flex;
         max-height: max-content;
         transition: max-height 0.4s ease-in-out;
     }
 
     .footer {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(2, 0.4fr);
         grid-row-gap: 20px;
+    }
+
+    .footer-accordion__panel ul {
+        padding-inline-start: unset;
+        width: 100%;
+    }
+
+    .footer-accordion__panel ul li a {
+        display: flex;
+        width: 100%;
+        padding: 7px 2px;
+        transition: all 0.35s ease-in-out;
+    }
+
+    .footer-accordion__panel ul li a:hover {
+        background-color: rgba(204, 204, 204, 0.56);
     }
 }
 
