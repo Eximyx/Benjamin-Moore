@@ -18,7 +18,7 @@
             <p class="product-status">@lang('catalog.product-details.isAvailable.' . $data['entity']->is_toggled ?? 0)</p>
             <p class="product-description">
                 {{--                TODO: Добавить subContent в продукты--}}
-                {{$data['entity']->subContent ?? "PRODUCT_SUBCONTENT"}}
+                {{$data['entity']->sub_content ?? "PRODUCT_SUBCONTENT"}}
             </p>
             <p class="product-description">@lang('catalog.product-details.amount')</p>
             <div class="product-counter">
