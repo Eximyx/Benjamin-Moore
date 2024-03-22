@@ -290,7 +290,7 @@
                             } else {
                                 console.log(typeof (value));
                                 if (typeof value == "string") {
-                                    result.attr("src", `{{url("storage/image/")}}/${value}`);
+                                    result.attr("src", `/${value}`);
                                 }
                             }
                             $("#select option:selected").insertAfter("#select option[data='default']");
