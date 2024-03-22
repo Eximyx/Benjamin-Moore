@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->string('user_name')->default("news.moder");
-            $table->string('main_image')->default('news-post-image.png');
+            $table->string('main_image')->nullable();
             $table->boolean('is_toggled')->default(false);
             $table->longText('content');
             $table->longText('description');

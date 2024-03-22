@@ -66,7 +66,7 @@ return [
             'title',
             'content',
             'banner_position_id',
-            'main_image',
+            'image',
         ],
         'selectable_key' => 'banner_position_id',
         'selectableModel' => app(BannerPosition::class),

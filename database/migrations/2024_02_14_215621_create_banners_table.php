@@ -18,7 +18,7 @@ return new class extends Migration
             $table->index('banner_position_id', 'banner_banner_positions_idx');
             $table->foreign('banner_position_id', 'banner_banner_positions_fk')->references('id')->on('banner_positions');
             $table->string('content');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

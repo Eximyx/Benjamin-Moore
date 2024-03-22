@@ -2,6 +2,7 @@
 
 namespace App\Services\Admin\ModelServices;
 
+use _PHPStan_11268e5ee\Nette\Neon\Exception;
 use App\Contracts\ModelDTO;
 use App\Repositories\ModelRepositories\NewsRepository;
 use DOMDocument;
@@ -35,18 +36,22 @@ class NewsService extends BaseModelService
 
         $entity = $this->repository->create($data);
 
-        $dto->main_image = $this->uploadImage($dto->main_image, $entity->id);
+        $entity['main_image'] = $this->uploadImage($data['main_image'], $entity['id']);
 
-        $dto->content = $this->htmlParser($dto, $entity['id']);
+        $entity['content'] = $this->htmlParser($dto, $entity['id']);
+
+        $this->repository->save($entity);
 
         return $entity;
     }
 
     protected function uploadImage(mixed $image, string $id): string
     {
+        $path = 'image/news/' . $id. '/';
+
         if ($image !== null & !is_string($image)) {
-            Storage::put('public\\image\\news\\' . $id, $image);
-            $image = $image->hashName();
+            Storage::put('public/'. $path, $image);
+            $image = 'storage/'.$path . $image->hashName();
         } else {
             $image = 'default_post.jpg';
         }
@@ -87,7 +92,7 @@ class NewsService extends BaseModelService
         if ($data['main_image']) {
             $deleted = $this->deleteImage($entity['main_image']);
             if ($deleted) {
-                $data['main_image'] = $this->uploadImage($data['main_image'], $entity->id);
+                $data['main_image'] = $this->uploadImage($data['main_image'], $entity['id']);
             }
         } else {
             $data['main_image'] = $entity['main_image'];
@@ -99,10 +104,10 @@ class NewsService extends BaseModelService
         );
     }
 
-    protected function deleteImage(string $image): bool
+    public function deleteImage(string $image): bool
     {
         if (!($image === 'default_post.jpg')) {
-            Storage::delete('public/image/' . $image);
+            Storage::delete(str_replace("storage/","public/",  $image));
         }
 
         return true;
@@ -131,6 +136,7 @@ class NewsService extends BaseModelService
     public function getVariablesForDataTable(): array
     {
         $variables = parent::getVariablesForDataTable();
+
         if (isset($variables['data']['selectableModel'])) {
             $variables['selectable'] = $variables['data']['selectableModel']->all();
         }

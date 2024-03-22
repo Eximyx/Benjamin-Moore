@@ -1,13 +1,12 @@
 @extends('site.layouts.site')
 @section('content')
     @include('site.components.breadcrumbs')
-    {{-- TODO BOTH: 23. Обсудить, как будем данные фильтров передавать --}}
     <div class="catalog-block">
         <button class="mobile-filter__button button-outlined">
             <img src="{{Vite::asset('resources/icons/filter-icon.svg')}}"
                  alt="filter-icon">@lang('catalog.filter.title')
         </button>
-        {{--TODO FRONT: Странно работает форма --}}
+        {{--30. TODO FRONT Добавить иконки для сортировки по цене и названию--}}
         <form id="catalog" action="" class="catalog-form" enctype="multipart/form-data">
             <label class="form-label" for="jobs">@lang('catalog.filter.jobs')</label>
             <div class="dropdown_with-chk">

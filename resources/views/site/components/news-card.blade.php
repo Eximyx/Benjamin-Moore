@@ -1,5 +1,5 @@
 <div class="news-card">
-    <img src="{{url('storage/image').'/'.$value->main_image}}" alt="news preview">
+    <img src="{{url($value->main_image)}}" alt="news preview">
     <div class="news-card__details-block">
         <p class="news-card__details-author">Алексей Иванович Шишкин</p>
         <div class="news-card__details">

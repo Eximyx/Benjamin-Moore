@@ -334,7 +334,7 @@
                             oTable.fnDraw(false);
                         },
                         error: function (res) {
-                            console.log(res);
+                            // TODO IMPLEMENT DISPLAY WINDOW WTIH ERROR FOR DELETING BANNERS OR SMTHG WHAT WE CANT TO DO!
                         }
                     });
                 }
