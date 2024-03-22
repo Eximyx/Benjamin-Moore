@@ -13,6 +13,7 @@ class ProductDTO implements ModelDTO
     public function __construct(
         public readonly string  $title,
         public ?string          $content,
+        public readonly string  $sub_content,
         public readonly ?int    $code,
         public readonly int     $price,
         public readonly ?string $gloss_level,
@@ -36,6 +37,7 @@ class ProductDTO implements ModelDTO
         return new ProductDTO(
             $request['title'],
             $request['content'],
+            $request['sub_content'],
             $request['code'],
             $request['price'],
             $request['gloss_level'],
@@ -58,6 +60,7 @@ class ProductDTO implements ModelDTO
         return [
             'title' => $this->title,
             'content' => $this->content,
+            'sub_content' => $this->sub_content,
             'code' => $this->code,
             'price' => $this->price,
             'gloss_level' => $this->gloss_level,

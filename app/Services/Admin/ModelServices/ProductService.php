@@ -73,9 +73,13 @@ class ProductService extends BaseModelService
 
         $entity = $this->repository->create($data);
 
-        $dto->main_image = $this->uploadImage($dto->main_image, $entity->id);
-
         $dto->sub_images = $this->MassUploadImage($dto->sub_images, $entity->id);
+
+        $entity->main_image = $this->uploadImage($dto->main_image, $entity->id);
+
+        $entity->save();
+
+        $this->createSubImages($entity, $dto->sub_images);
 
         $entity->colors()->attach($dto->colors);
 
@@ -87,7 +91,7 @@ class ProductService extends BaseModelService
         for ($i = 0; $i < count($images); $i++) {
             if ($images[$i] !== null & !is_string($images[$i])) {
                 Storage::put('public\\image\\products\\' . $id . '\\sub_images\\' . $i . '.jpg', file_get_contents($images[$i]));
-                $images[$i] = $images[$i]->hashName();
+                $images[$i] = 'storage\\image\\products\\' . $id . '\\sub_images\\' . $i . '.jpg';
             }
         }
         return $images;
@@ -97,12 +101,25 @@ class ProductService extends BaseModelService
     {
         if ($image !== null & !is_string($image)) {
             Storage::put('public\\image\\products\\' . $id, $image);
-            $image = $image->hashName();
+            $image = 'storage\\image\\products\\' . $id . '\\' . $image->hashName();
         } else {
             $image = 'default_post.jpg';
         }
 
         return $image;
+    }
+
+    public function createSubImages(Model $entity, ?array $images): void
+    {
+        foreach ($images as $image) {
+            $entity->images()->create(
+                [
+                    'product_id' => $entity->id,
+                    'url' => $image,
+                ]
+            );
+        }
+
     }
 
     public function update(Model $entity, ModelDTO $dto): Model

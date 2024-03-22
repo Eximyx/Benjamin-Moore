@@ -223,7 +223,6 @@
             }
         });
 
-        // const upload = $('#image');
         const result = $('#result');
         const default_image = "{{ url('storage/image/default_post.jpg') }}";
 

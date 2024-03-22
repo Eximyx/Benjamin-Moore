@@ -3,11 +3,12 @@
 namespace Database\Factories;
 
 use App\Models\KindOfWork;
+use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
+ * @extends Factory<Product>
  */
 class ProductFactory extends Factory
 {
@@ -23,6 +24,7 @@ class ProductFactory extends Factory
             'title' => fake()->name(),
             'main_image' => 'краска.webp',
             'content' => fake()->text(),
+            'sub_content' => fake()->text(),
             'code' => fake()->numberBetween(0, 500),
             'price' => fake()->numberBetween(0, 5000),
             'gloss_level' => fake()->word(),

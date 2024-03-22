@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->string('title')->nullable();
             $table->string('main_image')->nullable();
             $table->longText('content')->nullable();
+            $table->longText('sub_content')->nullable();
             $table->integer('code')->nullable();
             $table->unsignedInteger('price');
             $table->string('gloss_level')->nullable();

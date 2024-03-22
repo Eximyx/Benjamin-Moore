@@ -16,6 +16,7 @@ class ProductRequest extends FormRequest
             'title' => 'required|string|between:5,30',
             'main_image' => 'nullable|image|mimes:jpeg,png,jpg|dimensions:ratio=16/9',
             'content' => 'nullable|string',
+            'sub_content' => 'nullable|string',
             'code' => 'nullable|numeric|min:1',
             'price' => 'required|numeric|min:1',
             'gloss_level' => 'nullable|string|between:5,50',

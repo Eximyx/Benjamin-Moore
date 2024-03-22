@@ -107,6 +107,7 @@ return [
             'main_image',
             'sub_images',
             'content',
+            'sub_content',
             'code',
             'price',
             'gloss_level',
