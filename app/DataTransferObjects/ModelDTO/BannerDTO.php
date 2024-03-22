@@ -22,8 +22,7 @@ class BannerDTO implements ModelDTO
             $request['title'],
             $request['content'],
             $request['banner_position_id'],
-            $request['image'] ?? new UploadedFile('storage/image/default_post.jpg', 'banner_'.$request['id'].'.jpg'),
-            // TODO CHECK ? $request['image'] : new UploadedFile('storage/image/default_post.jpg', 'banner_1.jpg'),
+            $request['image'],
         );
     }
 

@@ -16,9 +16,14 @@ document.getElementById("leadsForm").addEventListener("submit", async (e) => {
     var result = await response.json()
     console.log(result);
 
+    const modalError = document.querySelector('.modal-blurred');
+    const modalSuccess = document.querySelector('.success');
     if (response.ok) {
-        console.log("ACCESS:", result)
+        modalSuccess.classList.add('modal-show');
+        modalError.classList.remove('modal-show');
     } else {
         console.log("ERROR:", result.message);
+        modalError.classList.add('modal-show');
+        modalSuccess.classList.remove('modal-show');
     }
 });

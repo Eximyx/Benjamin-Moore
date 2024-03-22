@@ -1,6 +1,7 @@
 @extends('site.layouts.site')
 @section('content')
     <section class="main__banner">
+{{--        style="background-image: {{{url($data['banners'][0]->image)}}}" for section --}}
         <div class="main__banner-block">
             <h2 class="main__banner-text"><b>Benjamin Moore</b><br>@lang('main.titles.paints')</h2>
             <p id="main__banner-p-desktop">{{$data['banners'][0]->content}}</p>
@@ -15,8 +16,6 @@
                 </a>
             </div>
             {{--TODO FRONT: 2. Необходимо заполнять баннер этой картинкой --}}
-            <img src="{{$data['banners'][0]->image}}"
-                 alt="{{$data['banners'][0]->title}}">
         </div>
     </section>
     <section class="product">
@@ -65,12 +64,8 @@
             </div>
             <div class="flex-block">
                 {{--TODO FRONT: 4. Картинки расположить, юрл есть --}}
-                <div class="about-us__image-placeholder"><img
-                        src="{{url('storage/image/sections/section_image_1.jpg')}}"
-                        alt=""></div>
-                <div class="about-us__image-placeholder"><img
-                        src="{{url('storage/image/sections/section_image_2.jpg')}}"
-                        alt=""></div>
+                <div class="about-us__image-placeholder" style="background-image: url(' {{{url('storage/image/sections/section_image_1.jpg')}}} ')"></div>
+                <div class="about-us__image-placeholder" style="background-image: url(' {{{url('storage/image/sections/section_image_2.jpg')}}} ')"></div>
             </div>
         </div>
         <div class="about-us__quality-cards-wrapper">
@@ -130,9 +125,13 @@
         </div>
     </section>
     <section class="banner">
+{{--        style="background-image: url('{{{$data['banners'][1]->image}}}')"    --}}
         {{--TODO FRONT: 2. Необходимо заполнять баннер этой картинкой --}}
-        <img src="{{$data['banners'][1]->image}}"
-             alt="{{$data['banners'][1]->title}}">
+<<<<<<< Updated upstream
+{{--        <img src="{{$data['banners'][1]->image}}"--}}
+{{--             alt="{{$data['banners'][1]->title}}">--}}
+=======
+>>>>>>> Stashed changes
         <a href="{{route('user.catalog.index')}}">
             <button class="button-outlined">@lang('main.titles.catalog')</button>
         </a>
