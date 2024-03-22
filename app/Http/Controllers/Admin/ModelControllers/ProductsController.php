@@ -96,17 +96,14 @@ class ProductsController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
-    public function __invoke(ProductFilterRequest $request): View|JsonResource
+    public function __invoke(ProductFilterRequest $request): View|string
     {
         if (request()->ajax()) {
             $data = $this->service->fetchProducts($request);
-
-            return JsonResource::make([
-                'data' => [
-                    'products' => ProductResource::collection($data['products']),
-                    'categories' => ProductCategoryResource::collection($data['categories']),
-                ],
-            ]);
+            return view('site.components.search-result',['data' => [
+                'products' => ProductResource::collection($data['products']),
+                'categories' => ProductCategoryResource::collection($data['categories']),
+            ]])->render();
         }
 
         return view('site.pages.catalog',

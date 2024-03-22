@@ -26,6 +26,7 @@ Route::prefix('frontend')->group(function () {
     Route::post('/', [LeadsController::class, 'store'])->name('user.leads.store');
 
     Route::get('/catalog', ProductsController::class)->name('user.catalog.index');
+    Route::post('/catalog', ProductsController::class)->name('user.catalog.index');
     Route::get('/catalog/{slug}', [ProductsController::class, 'show'])->name('user.catalog.show');
 
     Route::get('/news', NewsController::class)->name('user.news.index');

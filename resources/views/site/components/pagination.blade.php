@@ -1,4 +1,6 @@
 {{--TODO FRONT: 1. Увеличить размер фона пагинации - DONE, Back-end: change amount of pagination buttons on mobile--}}
+
+@if($paginator->total() > $paginator->perPage())
 <div class="pagination">
     <ul class="pagination-ul">
         {{-- Previous Page Link --}}
@@ -61,3 +63,4 @@
         @endif
     </ul>
 </div>
+@endif
