@@ -17,8 +17,8 @@ class ProductFilterRequest extends FormRequest
             'kind_of_work_id' => 'nullable|array',
             'kind_of_work_id.*' => 'sometimes|required|numeric|exists:kind_of_work,id',
             'price' => 'nullable|array',
-            'price.to' => 'sometimes|required|numeric',
-            'price.from' => 'sometimes|required|numeric',
+            'price.to' => 'nullable|sometimes|numeric',
+            'price.from' => 'nullable|sometimes|numeric',
             'color_id' => 'nullable|array',
             'color_id.*' => 'sometimes|required|numeric|exists:colors,id',
         ];

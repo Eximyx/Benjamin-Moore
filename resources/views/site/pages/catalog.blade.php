@@ -14,12 +14,12 @@
                 <button type="button" class="dropdown_with-chk__button">@lang('catalog.filter.defaultValue')</button>
                 <ul class="dropdown_with-chk__list" id="jobs">
                     <li class="dropdown_with-chk__list-item">
-                        <input type="checkbox" name="kind_of_work_id[]" class="dropdown_with-chk__list-item_label">
-                        <label class="dropdown_with-chk__list-item_label">@lang('catalog.filter.internalWork')</label>
+                        <input type="checkbox" name="kind_of_work_id" id="K_1" class="dropdown_with-chk__list-item_label">
+                        <label for="K_1" class="dropdown_with-chk__list-item_label">@lang('catalog.filter.internalWork')</label>
                     </li>
                     <li class="dropdown_with-chk__list-item">
-                        <input type="checkbox" name="kind_of_work_id[]" class="dropdown_with-chk__list-item_label">
-                        <label class="dropdown_with-chk__list-item_label">@lang('catalog.filter.externalWork')</label>
+                        <input type="checkbox" name="kind_of_work_id" id="K_2" class="dropdown_with-chk__list-item_label">
+                        <label for="K_2" class="dropdown_with-chk__list-item_label">@lang('catalog.filter.externalWork')</label>
                     </li>
                 </ul>
             </div>
@@ -29,9 +29,9 @@
                 <ul class="dropdown_with-chk__list" id="series">
                     @foreach($data['productCategories'] as $key => $value)
                         <li class="dropdown_with-chk__list-item">
-                            <input type="checkbox" name="products_categories[]" id="{{$value->id}}"
+                            <input type="checkbox" name="product_category_id" id="PC_{{$value->id}}"
                                    class="dropdown_with-chk__list-item_label">
-                            <label for="{{$value->id}}"
+                            <label for="PC_{{$value->id}}"
                                    class="dropdown_with-chk__list-item_label">{{$value->title}}</label>
                         </li>
                     @endforeach
@@ -44,38 +44,31 @@
                 <ul class="dropdown_with-chk__list" id="colors">
                     @foreach($data['colors'] as $key => $value)
                         <li class="dropdown_with-chk__list-item">
-                            <input type="checkbox" name="colorss[]" id="{{$value->id}}"
+                            <input type="checkbox" name="color_id" id="C_{{$value->id}}"
                                    class="dropdown_with-chk__list-item_label">
-                            <label for="{{$value->id}}"
-                                   class="dropdown_with-chk__list-item_label">{{$value->title}}</label>
+                            <label for="C_{{$value->id}}"
+                                   class="dropdown_with-chk__list-item_label">{{$value->title}} <div style="height: 10px;width: 10px;background-color:{{{$value->hex_code}}}"></div></label>
                         </li>
                     @endforeach
                 </ul>
             </div>
-            <label class="form-label" for="budget">@lang('catalog.filter.prices.budget')</label>
+            <label class="form-label" for="budget">@lang('catalog.filter.prices.budget') </label>
             <div class="catalog-form__budget-block" id="budget">
-                <input type="text" class="form-input" placeholder="@lang('catalog.filter.prices.from')">
+                <input type="text" name="price[from]"  class="form-input" placeholder="@lang('catalog.filter.prices.from')">
                 <p>-</p>
-                <input type="text" class="form-input" placeholder="@lang('catalog.filter.prices.to')">
+                <input type="text" name="price[to]" class="form-input" placeholder="@lang('catalog.filter.prices.to')">
             </div>
             <div class="form-buttons">
                 <button class="button-outlined form-button">@lang("catalog.buttons.submit")</button>
                 <button class="button-filled form-button">@lang("catalog.buttons.reset")</button>
             </div>
         </form>
-        <div class="catalog-wrapper">
+        <div id="search-result" class="catalog-wrapper">
             @include('site.components.search-result')
         </div>
     </div>
+
 @endsection
 @push('scripts')
-    <script>
-        document.getElementById("catalog-form").addEventListener("submit", function () {
-            e.preventDefault()
-            for (var item of new FormData(this).entries()) {
-                console.log(item[1])
-            }
-        });
-    </script>
     @vite(['resources/js/filter.js', 'resources/js/custom-select.js'])
 @endpush
