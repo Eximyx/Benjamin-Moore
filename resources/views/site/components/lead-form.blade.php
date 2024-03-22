@@ -10,6 +10,8 @@
         <h4>@lang('main.form.title')</h4>
         <p>@lang('main.form.subTitle')</p>
         @csrf
+        @include('site.components.error-alert')
+        @include('site.components.success-alert')
         <label for="name">@lang('main.form.name')</label>
         <input type="text" name="name" id="name" placeholder="@lang('main.form.name')">
         <label for="contact_info">@lang('main.form.email')</label>
