@@ -9,6 +9,7 @@ use App\Models\NewsPost;
 use App\Models\Product;
 use App\Models\StaticPage;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
@@ -44,7 +45,8 @@ class UpdateMetaData extends Command
     public function handle(): void
     {
         DB::table('meta_data')->truncate();
-        $host = Request::getSchemeAndHttpHost();
+        $host =  Request::getScheme()."://". (Config::get("app.domain") ?? Request::getHost() . Request::getPort());
+
         $routeCollection = Route::getRoutes()->get();
         foreach ($routeCollection as $value) {
             $name = $value->getName();
