@@ -2,6 +2,7 @@
 
 namespace App\DataTransferObjects\ModelDTO;
 
+use _PHPStan_11268e5ee\Nette\Neon\Exception;
 use App\Contracts\ModelDTO;
 use App\Http\Requests\BannerRequest;
 use Illuminate\Http\UploadedFile;

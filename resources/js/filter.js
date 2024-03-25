@@ -5,6 +5,8 @@ accordion.addEventListener('click', () => {
     body.classList.toggle('active')
 });
 
+
+//29. TODO FRONT Адаптировать интерфейс при выборе значений фильтров у продукта
 var csrf = document.getElementsByName("csrf-token")[0].content;
 var search = document.getElementById("search-result");
 
@@ -71,7 +73,6 @@ document.querySelectorAll("input").forEach((item)=> {
         fetchFormData(e.target);
     })
 })
-
 
 
 async function paginatorAjax()

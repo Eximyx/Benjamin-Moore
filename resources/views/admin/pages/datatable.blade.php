@@ -223,7 +223,6 @@
             }
         });
 
-        // const upload = $('#image');
         const result = $('#result');
         const default_image = "{{ url('storage/image/default_post.jpg') }}";
 
@@ -291,7 +290,7 @@
                             } else {
                                 console.log(typeof (value));
                                 if (typeof value == "string") {
-                                    result.attr("src", `{{url("storage/image/")}}/${value}`);
+                                    result.attr("src", `/${value}`);
                                 }
                             }
                             $("#select option:selected").insertAfter("#select option[data='default']");
@@ -335,7 +334,7 @@
                             oTable.fnDraw(false);
                         },
                         error: function (res) {
-                            console.log(res);
+                            // TODO IMPLEMENT DISPLAY WINDOW WTIH ERROR FOR DELETING BANNERS OR SMTHG WHAT WE CANT TO DO!
                         }
                     });
                 }
