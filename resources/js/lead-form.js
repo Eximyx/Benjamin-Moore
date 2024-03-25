@@ -1,3 +1,6 @@
+const modalError = document.querySelector('.modal-blurred');
+const modalSuccess = document.querySelector('.success');
+const modalWindow = document.querySelector('.modal-lead-form__blurred-bg');
 document.getElementById("leadsForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     var csrf = document.getElementsByName("csrf-token")[0].content;
@@ -12,17 +15,16 @@ document.getElementById("leadsForm").addEventListener("submit", async (e) => {
         },
         body: data,
     });
-    console.log(response);
-    var result = await response.json()
-    console.log(result);
 
-    const modalError = document.querySelector('.modal-blurred');
-    const modalSuccess = document.querySelector('.success');
+    var result = await response.json();
+
     if (response.ok) {
-        modalSuccess.classList.add('modal-show');
+        modalSuccess.classList.add('modal-show')
+        setTimeout(function() {
+            modalWindow.classList.remove('modal-lead-form__active');
+        }, 5000);
         modalError.classList.remove('modal-show');
     } else {
-        console.log("ERROR:", result.message);
         modalError.classList.add('modal-show');
         modalSuccess.classList.remove('modal-show');
     }

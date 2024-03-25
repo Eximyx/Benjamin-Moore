@@ -86,6 +86,7 @@
 </div>
 <main class="main">
     @yield('content')
+    @include('site.components.modal')
 </main>
 <footer class="footer">
     <div class="footer__logo">
