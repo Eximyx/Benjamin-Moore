@@ -1,21 +1,16 @@
 @extends('site.layouts.site')
 @section('content')
-    <section class="main__banner">
-{{--        style="background-image: {{{url($data['banners'][0]->image)}}}" for section --}}
+    <section class="main__banner" style="background-image:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url({{{($data['banners'][0]->image)}}})">
         <div class="main__banner-block">
             <h2 class="main__banner-text"><b>Benjamin Moore</b><br>@lang('main.titles.paints')</h2>
             <p id="main__banner-p-desktop">{{$data['banners'][0]->content}}</p>
             <p id="main_banner-p-mobile">{{$data['banners'][0]->content}}</p>
             <div class="main__banner-buttons">
-                <a href="{{route('user.catalog.index')}}">
-                    <button class="button-filled">@lang('main.buttons.buy')</button>
-                </a>
                 {{-- TODO BOTH: Нужно реализовать страницу со всеми красками --}}
                 <a href="">
-                    <button class="button-outlined">@lang('main.buttons.allColors')</button>
+                    <button class="button-filled">@lang('main.buttons.allColors')</button>
                 </a>
             </div>
-            {{--TODO FRONT: 2. Необходимо заполнять баннер этой картинкой --}}
         </div>
     </section>
     <section class="product">
@@ -51,7 +46,7 @@
                     </div>
                     <div class="about-us__image-placeholder-mobile">
                         <img
-                             src="{{url('storage/image/sections/section_image_2.jpg')}}" alt="">
+                            src="{{url('storage/image/sections/section_image_2.jpg')}}" alt="">
                     </div>
                 </div>
                 <div class="about-us__inner-div">
@@ -64,8 +59,10 @@
             </div>
             <div class="flex-block">
                 {{--TODO FRONT: 4. Картинки расположить, юрл есть --}}
-                <div class="about-us__image-placeholder" style="background-image: url(' {{{url('storage/image/sections/section_image_1.jpg')}}} ')"></div>
-                <div class="about-us__image-placeholder" style="background-image: url(' {{{url('storage/image/sections/section_image_2.jpg')}}} ')"></div>
+                <div class="about-us__image-placeholder"
+                     style="background-image: url(' {{{url('storage/image/sections/section_image_1.jpg')}}} ')"></div>
+                <div class="about-us__image-placeholder"
+                     style="background-image: url(' {{{url('storage/image/sections/section_image_2.jpg')}}} ')"></div>
             </div>
         </div>
         <div class="about-us__quality-cards-wrapper">
@@ -125,18 +122,18 @@
         </div>
     </section>
     <section class="banner">
-{{--        style="background-image: url('{{{$data['banners'][1]->image}}}')"    --}}
+        {{--        style="background-image: url('{{{$data['banners'][1]->image}}}')"    --}}
         {{--TODO FRONT: 2. Необходимо заполнять баннер этой картинкой --}}
-<<<<<<< Updated upstream
-{{--        <img src="{{$data['banners'][1]->image}}"--}}
-{{--             alt="{{$data['banners'][1]->title}}">--}}
-=======
->>>>>>> Stashed changes
+        <<<<<<< Updated upstream
+        {{--        <img src="{{$data['banners'][1]->image}}"--}}
+        {{--             alt="{{$data['banners'][1]->title}}">--}}
+        =======
+        >>>>>>> Stashed changes
         <a href="{{route('user.catalog.index')}}">
             <button class="button-outlined">@lang('main.titles.catalog')</button>
         </a>
     </section>
-    @include('site.components.lead-form')
+    @include('site.components.lead-form-map')
 @endsection
 @push('scripts')
     @vite(['resources/js/slider.js'])

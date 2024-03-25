@@ -286,6 +286,7 @@ button {
     object-fit: cover;
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: bottom;
 }
 
 .main__banner-text {
@@ -1656,12 +1657,47 @@ input[type="checkbox"]:checked::after {
 }
 
 #close-modal {
-    max-width: fit-content;
-    padding: 0 7px;
-    margin: 0 0 0 auto;
-    font-size: 12px;
-    height: 25px;
-    border-radius: 5px;
+    display: flex;
+    position: relative;
+    margin-left: auto;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    color: var(--accent-red);
+    background-color: transparent;
+    /* rgba(255, 0, 0, 0.27) */
+    align-items: center;
+    padding: 2px 6px
+}
+
+.modal-lead-form__blurred-bg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.modal-lead-form__active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(26, 32, 44, 0.35);
+    z-index: 999;
+}
+
+.modal-lead-form__form {
+    background-color: var(--form-background);
+    padding: 40px;
+    width: 40%;
+    border-radius: 10px;
+}
+
+.modal-lead-form__form .form-section__form {
+    width: 100%;
+    margin: 0;
 }
 
 @media (max-width: 1600px) {
@@ -1775,6 +1811,10 @@ input[type="checkbox"]:checked::after {
 
     .form-section__map {
         min-width: 55%;
+    }
+
+    .modal-lead-form__blurred-bg .form-section  .form-section__map {
+        min-width: 50%;
     }
 
     .form-section__form {
@@ -2123,6 +2163,10 @@ input[type="checkbox"]:checked::after {
     .news-wrapper .news-card {
         flex-basis: unset;
     }
+
+    .modal-lead-form__form {
+        width: 70%;
+    }
 }
 
 @media (max-width: 600px) {
@@ -2259,6 +2303,19 @@ input[type="checkbox"]:checked::after {
 
     .footer-accordion__panel ul li a:hover {
         background-color: rgba(204, 204, 204, 0.56);
+    }
+
+    .modal-lead-form__form {
+        width: 70%;
+        padding: 30px;
+    }
+
+    .modal-lead-form__form .form-section__form h4 {
+        font-size: 24px;
+    }
+
+    .modal-lead-form__form .form-section__form p {
+        font-size: clamp(1rem, 2vw, 17px);
     }
 }
 
