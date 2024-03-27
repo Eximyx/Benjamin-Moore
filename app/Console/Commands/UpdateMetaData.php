@@ -45,7 +45,7 @@ class UpdateMetaData extends Command
     public function handle(): void
     {
         DB::table('meta_data')->truncate();
-        $host =  Request::getScheme()."://". (Config::get("app.domain") ?? Request::getHost() . Request::getPort());
+        $host =  Request::getScheme()."://". (Config::get("app.domain") ?? Request::getHost() . ":". Request::getPort());
 
         $routeCollection = Route::getRoutes()->get();
         foreach ($routeCollection as $value) {
