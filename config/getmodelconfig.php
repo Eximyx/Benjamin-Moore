@@ -235,7 +235,6 @@ return [
         'form_data' => [
             'name',
             'description',
-            'main_image',
         ],
         'actions' => ['adding' => true],
     ],

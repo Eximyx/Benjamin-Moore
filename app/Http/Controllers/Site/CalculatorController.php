@@ -15,8 +15,7 @@ class CalculatorController extends Controller
 
     public function __construct(
         protected CalculatorService $service,
-    )
-    {
+    ) {
         $this->settings = SettingsResource::make(app(Settings::class));
     }
 
