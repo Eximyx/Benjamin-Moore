@@ -5,5 +5,6 @@ import.meta.glob([
 ]);
 
 import './footer-accordion.js';
-
+import './modal-window.js';
+import './filter.js';
 

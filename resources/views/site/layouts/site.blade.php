@@ -36,8 +36,16 @@
         <ul class="header__nav-buttons">
             <li><a href="{{route('user.catalog.index')}}">@lang('nav-links.catalog')</a></li>
             <li><a href="{{route('user.news.index')}}">@lang('nav-links.news')</a></li>
-            <li><a href="{{route('user.calc.index')}}">@lang('nav-links.calc')</a></li>
             <li><a href="{{route('user.contacts.index')}}">@lang('nav-links.contacts')</a></li>
+            <li class="nav-button__static-page">
+                <p class="nav-button__static-page__p">Static pages</p>
+                <div class="nav-button__static-page__content">
+                    <a href="{{route('user.calc.index')}}">@lang('nav-links.calc')</a>
+                    <a href="#">Next page</a>
+                    <a href="#">Some link</a>
+                    <a href="#">Next page</a>
+                </div>
+            </li>
         </ul>
     </nav>
     <div class="header__rightside">
@@ -86,6 +94,7 @@
 </div>
 <main class="main">
     @yield('content')
+    @include('site.components.modal')
 </main>
 <footer class="footer">
     <div class="footer__logo">

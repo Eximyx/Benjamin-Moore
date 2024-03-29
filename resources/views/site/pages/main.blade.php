@@ -1,22 +1,16 @@
 @extends('site.layouts.site')
 @section('content')
-    <section class="main__banner">
+    <section class="main__banner" style="background-image:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url({{{($data['banners'][0]->image)}}})">
         <div class="main__banner-block">
             <h2 class="main__banner-text"><b>Benjamin Moore</b><br>@lang('main.titles.paints')</h2>
             <p id="main__banner-p-desktop">{{$data['banners'][0]->content}}</p>
             <p id="main_banner-p-mobile">{{$data['banners'][0]->content}}</p>
             <div class="main__banner-buttons">
-                <a href="{{route('user.catalog.index')}}">
-                    <button class="button-filled">@lang('main.buttons.buy')</button>
-                </a>
                 {{-- TODO BOTH: Нужно реализовать страницу со всеми красками --}}
                 <a href="">
-                    <button class="button-outlined">@lang('main.buttons.allColors')</button>
+                    <button class="button-filled">@lang('main.buttons.allColors')</button>
                 </a>
             </div>
-            {{--TODO FRONT: 2. Необходимо заполнять баннер этой картинкой --}}
-            <img src="{{$data['banners'][0]->image}}"
-                 alt="{{$data['banners'][0]->title}}">
         </div>
     </section>
     <section class="product">

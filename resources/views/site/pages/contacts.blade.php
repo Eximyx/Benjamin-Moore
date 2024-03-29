@@ -42,5 +42,5 @@
                 referrerpolicy="no-referrer-when-downgrade">
         </iframe>
     </section>
-    @include('site.components.lead-form')
+    @include('site.components.lead-form-map')
 @endsection

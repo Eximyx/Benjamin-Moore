@@ -1,5 +1,8 @@
 @if(count($data['products']))
-    <h2 class="section-title">Серия Aura®</h2>
+    <div class="search-result__section">
+        <h2 class="section-title">Серия Aura®</h2>
+        @include('.site.components.sort-buttons')
+    </div>
     <div class="catalog-wrapper__products-block">
         @foreach($data['products'] as $index => $value)
             @include('site.components.product-card')

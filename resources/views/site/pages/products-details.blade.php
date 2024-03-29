@@ -29,7 +29,7 @@
             <div class="product-price-block">
                 <div class="product-price-block__inner-text"><p class="product-price">$</p>
                     <p id="product-price">{{$data['entity']->price}}</p></div>
-                <button class="button-filled">@lang('catalog.product-details.call')</button>
+                <button class="button-filled call-modal">@lang('catalog.product-details.call')</button>
             </div>
         </div>
     </section>
@@ -251,4 +251,5 @@
 @endsection
 @push('scripts')
     @vite('resources/js/slider.js')
+    @vite('resources/js.modal-window.js')
 @endpush
