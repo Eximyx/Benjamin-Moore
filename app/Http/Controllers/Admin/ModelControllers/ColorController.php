@@ -9,7 +9,6 @@ use App\Http\Resources\SettingsResources\SettingsResource;
 use App\Models\Settings;
 use App\Services\Admin\ModelServices\ColorService;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\View\View;
 
 class ColorController extends BaseAdminController
@@ -29,12 +28,6 @@ class ColorController extends BaseAdminController
      */
     public function __invoke(Request $request): View
     {
-        return view('site.pages.colors', [
-            'data' => JsonResource::make([
-                'colors' => ColorResource::make($this->service->getAll()),
-                'settings' => $this->settings,
-                'meta' => $this->service->metaDataFindByURL(),
-            ]),
-        ]);
+        return view('site.pages.colors');
     }
 }
