@@ -10,7 +10,7 @@
         <form id="catalog" action="" class="catalog-form" enctype="multipart/form-data">
             <label class="form-label" for="jobs">@lang('catalog.filter.jobs')</label>
             <div class="dropdown_with-chk">
-                <button type="button" class="dropdown_with-chk__button">@lang('catalog.filter.defaultValue')</button>
+                <button type="button" id="jobs-button" class="dropdown_with-chk__button">@lang('catalog.filter.defaultValue')</button>
                 <ul class="dropdown_with-chk__list" id="jobs">
                     <li class="dropdown_with-chk__list-item">
                         <input type="checkbox" name="kind_of_work_id" id="K_1" class="dropdown_with-chk__list-item_label">
@@ -24,7 +24,7 @@
             </div>
             <label class="form-label" for="series">@lang('catalog.filter.series')</label>
             <div class="dropdown_with-chk">
-                <button type="button" class="dropdown_with-chk__button">@lang('catalog.filter.defaultValue')</button>
+                <button type="button" id="series-button" class="dropdown_with-chk__button">@lang('catalog.filter.defaultValue')</button>
                 <ul class="dropdown_with-chk__list" id="series">
                     @foreach($data['productCategories'] as $key => $value)
                         <li class="dropdown_with-chk__list-item">
@@ -39,14 +39,16 @@
             </div>
             <label class="form-label" for="colors">@lang('catalog.filter.colors')</label>
             <div class="dropdown_with-chk">
-                <button type="button" class="dropdown_with-chk__button">@lang('catalog.filter.defaultValue')</button>
+                <button type="button" id="colors-button" class="dropdown_with-chk__button">@lang('catalog.filter.defaultValue')</button>
                 <ul class="dropdown_with-chk__list" id="colors">
                     @foreach($data['colors'] as $key => $value)
                         <li class="dropdown_with-chk__list-item">
                             <input type="checkbox" name="color_id" id="C_{{$value->id}}"
                                    class="dropdown_with-chk__list-item_label">
-                            <label for="C_{{$value->id}}"
-                                   class="dropdown_with-chk__list-item_label">{{$value->title}} <div style="height: 10px;width: 10px;background-color:{{{$value->hex_code}}}"></div></label>
+                            <label for="C_{{$value->id}}" class="dropdown_with-chk__list-item_label">
+                                {{$value->title}}
+                                <div class="color-preview" style="background-color:{{{$value->hex_code}}}"></div>
+                            </label>
                         </li>
                     @endforeach
                 </ul>
