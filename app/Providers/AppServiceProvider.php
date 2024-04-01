@@ -4,7 +4,10 @@ namespace App\Providers;
 
 use App\Models\Settings;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +29,16 @@ class AppServiceProvider extends ServiceProvider
             //            return $this->app->isProduction()
             //                ? $rule->mixedCase()->uncompromised()
             //                : $rule;
+        });
+
+        DB::listen(function ($query) {
+            Log::info(
+                Str::replaceArray('?', $query->bindings, $query->sql),
+                [
+                    'bindings' => $query->bindings,
+                    'time' => $query->time
+                ]
+            );
         });
     }
 }
