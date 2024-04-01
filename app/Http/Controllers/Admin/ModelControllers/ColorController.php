@@ -7,7 +7,7 @@ use App\Http\Requests\ColorRequest;
 use App\Http\Resources\ModelResources\ColorResource;
 use App\Http\Resources\SettingsResources\SettingsResource;
 use App\Models\Settings;
-use App\Services\ColorService;
+use App\Services\Admin\ModelServices\ColorService;
 use App\Traits\MetaDataTrait;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\View\View;
