@@ -1,6 +1,6 @@
 @extends('site.layouts.site')
 @section('content')
-    {{$colors[0]->hex_code ?? null}}
+    {{$data["colors"]}}
 @endsection
 @push('scripts')
     @vite(['resources/js/slider.js'])
