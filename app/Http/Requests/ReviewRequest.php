@@ -15,7 +15,6 @@ class ReviewRequest extends FormRequest
             'id' => 'nullable|numeric',
             'name' => 'required|string|between:2,25',
             'description' => 'nullable|string|between:5,160',
-            'main_image' => 'nullable|image|mimes:jpeg,png,jpg|dimensions:ratio=16/9',
         ];
     }
 }
