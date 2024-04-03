@@ -41,7 +41,7 @@
                 <p class="nav-button__static-page__p">Static pages</p>
                 <div class="nav-button__static-page__content">
                     <a href="{{route('user.calc.index')}}">@lang('nav-links.calc')</a>
-                    <a href="#">Next page</a>
+                    <a href="{{route('user.colors.index')}}">@lang('nav-links.colors')</a>
                     <a href="#">Some link</a>
                     <a href="#">Next page</a>
                 </div>
@@ -68,6 +68,7 @@
         <ul class="burger-links">
             <li><a href="{{route('user.main.index')}}">@lang('nav-links.main')</a></li>
             <li><a href="{{route('user.catalog.index')}}">@lang('nav-links.catalog')</a></li>
+            <li><a href="{{route('user.colors.index')}}">@lang('nav-links.colors')</a></li>
             <li><a href="{{route('user.news.index')}}">@lang('nav-links.news')</a></li>
             <li><a href="{{route('user.calc.index')}}">@lang('nav-links.calc')</a></li>
             <li><a href="{{route('user.contacts.index')}}">@lang('nav-links.contacts')</a></li>
@@ -127,7 +128,7 @@
         </div>
     </div>
 </footer>
-@vite('resources/js/burger.js')
+@vite('resources/js/widgets/burger.js')
 @stack('scripts')
 </body>
 </html>

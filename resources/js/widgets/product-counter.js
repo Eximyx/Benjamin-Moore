@@ -7,7 +7,7 @@ document.querySelectorAll(".counter-button").forEach((item) => {
     item.addEventListener("click", (e) => {
 
         if (e.target.classList.contains("sub")) {
-            if (value == 0) return;
+            if (value === 0) return;
             value--;
         } else {
             value++

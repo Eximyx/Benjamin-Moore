@@ -6,9 +6,11 @@ const colorsButton = document.querySelector('#colors-button');
 const sortAlphabeticButton = document.querySelector('#sortAlphabeticButton');
 const sortNumericButton = document.querySelector('#sortNumericButton');
 
-accordion.addEventListener('click', () => {
-    body.classList.toggle('active');
-});
+if(accordion){
+    accordion.addEventListener('click', () => {
+        body.classList.toggle('active');
+    });
+}
 
 var csrf = document.getElementsByName("csrf-token")[0].content;
 var search = document.getElementById("search-result");
@@ -28,6 +30,13 @@ let data = {
 let selectedColors = {};
 let count = 0;
 let buttonInnerHtml = jobsButton.innerHTML;
+
+document.addEventListener("DOMContentLoaded", function() {
+    let checkboxes = body.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+});
 
 let fetchFormData = (element) => {
     if (element.name in data) {

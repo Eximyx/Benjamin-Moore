@@ -82,5 +82,5 @@
     </section>
 @endsection
 @push('scripts')
-    @vite('resources/js/calculator.js')
+    @vite('resources/js/components/calculator.js')
 @endpush

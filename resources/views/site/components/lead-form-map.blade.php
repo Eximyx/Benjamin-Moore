@@ -7,6 +7,6 @@
     @include('site.components.lead-form')
 </section>
 @push('scripts')
-    @vite('resources/js/lead-form.js')
+    @vite('resources/js/components/lead-form.js')
 @endpush
 
