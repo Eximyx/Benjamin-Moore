@@ -35,7 +35,7 @@ class ProductFactory extends Factory
             'time_to_repeat' => fake()->word(),
             'consumption' => fake()->word(),
             'thickness' => fake()->word(),
-            'product_category_id' => ProductCategory::factory()->has(KindOfWork::factory()),
+            'product_category_id' => ,
         ];
     }
 }
