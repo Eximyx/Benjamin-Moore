@@ -250,6 +250,6 @@
     </section>
 @endsection
 @push('scripts')
-    @vite('resources/js/slider.js')
-    @vite('resources/js.modal-window.js')
+    @vite('resources/js/components/slider.js')
+    @vite('resources/js/widgets/product-counter.js')
 @endpush

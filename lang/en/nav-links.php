@@ -7,6 +7,6 @@ return [
     'calc' => 'Calculator',
     'info' => 'Information',
     'contacts' => 'Contacts',
-
+    'colors' => 'All colors',
     'orderButton' => 'Leave a request',
 ];

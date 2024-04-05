@@ -71,5 +71,5 @@
 
 @endsection
 @push('scripts')
-    @vite(['resources/js/filter.js', 'resources/js/custom-select.js'])
+    @vite(['resources/js/filter.js', 'resources/js/widgets/custom-select.js'])
 @endpush

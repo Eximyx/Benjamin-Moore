@@ -18,6 +18,11 @@ body {
 
 }
 
+::placeholder {
+    color: var(--text-black);
+    opacity: 1;
+}
+
 ::-webkit-scrollbar {
     width: 1em;
 }
@@ -464,6 +469,7 @@ button {
 .quality-card {
     max-width: 450px;
     min-width: 220px;
+    width: 100%;
     border-top: 2px solid var(--accent-red);
     text-align: justify;
 }
@@ -552,14 +558,15 @@ button {
 }
 
 .reviews {
-    margin: 100px 0;
+    margin: 100px 0 50px 0;
 }
 
 .review-card {
     border-radius: 20px;
     max-width: 450px;
+    width: 100%;
     box-shadow: rgba(100, 100, 111, 0.2) 3px 7px 15px 5px;
-
+    height: 100%;
 }
 
 .review-card__header {
@@ -1267,7 +1274,7 @@ input[type="checkbox"]:checked::after {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    margin-bottom: 40px;
+    /*margin-bottom: 40px;*/
 }
 
 .contacts-block h4 {
@@ -1294,11 +1301,14 @@ input[type="checkbox"]:checked::after {
 .contact-section {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 90px;
+    gap: 40px;
 }
 
-.contact-section__map {
-    min-width: 70%;
+.contact-section__banner {
+    max-width: 70%;
+    width: 100%;
     height: 535px;
     border-radius: 20px;
 }
@@ -1306,6 +1316,7 @@ input[type="checkbox"]:checked::after {
 .contacts-block .section-header {
     font-size: 35px;
     margin: 0;
+    max-width: 423px;
 }
 
 /*carousel*/
@@ -1501,7 +1512,7 @@ input[type="checkbox"]:checked::after {
 
 .calculator-section {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     gap: 40px;
     margin: 40px 0;
     text-align: center;
@@ -1807,6 +1818,60 @@ input[type="checkbox"]:checked::after {
     background: url("../icons/arrow-right.svg") no-repeat center;
     pointer-events: none;
     transition: 200ms ease
+}
+
+.colors-wrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(15, 1fr);
+    gap: 2px;
+    height: fit-content;
+    overflow: hidden;
+}
+
+.color-block {
+    height: 120px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.color-block__info {
+    position: relative;
+    width: fit-content;
+    height: 25%;
+    padding: 0 10px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    z-index: 999;
+    transition: all 0.2s ease-in-out;
+
+}
+
+.svg-cart {
+    margin: 5px 5px 0 auto;
+    transition: all 0.2s ease-in-out;
+}
+
+.color-block__info p {
+    color: white;
+    font-size: 14px;
+}
+
+.color-block__info h6 {
+    color: white;
+    margin: unset;
+    font-size: 14px;
+}
+
+.hidden {
+    opacity: 0;
 }
 
 @media (max-width: 1600px) {
@@ -2135,7 +2200,7 @@ input[type="checkbox"]:checked::after {
     }
 
     .review-card {
-        max-width: max-content;
+        max-width: unset;
         cursor: default
     }
 
@@ -2145,7 +2210,7 @@ input[type="checkbox"]:checked::after {
 
     .about-us__image-placeholder-mobile {
         display: block;
-        width: 50%;
+        width: 100%;
         border-radius: 20px;
         height: 250px;
         background-color: #cacaca;
@@ -2185,8 +2250,13 @@ input[type="checkbox"]:checked::after {
         flex-direction: column;
     }
 
+    .contact-section__banner {
+        max-width: 100%;
+    }
+
     .contacts-block {
         width: 100%;
+        /*margin-bottom: 40px;*/
     }
 
     .contacts-block .section-header {
@@ -2429,6 +2499,11 @@ input[type="checkbox"]:checked::after {
 
     .sort-buttons__group p {
         display: none;
+    }
+
+    .flex-block {
+        flex-direction: column;
+        gap: unset;
     }
 }
 

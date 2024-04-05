@@ -38,4 +38,9 @@ return [
         'options' => 'Options',
         'download' => 'Download technical specifications',
     ],
+    'sort' => [
+        'title' => 'Sort:',
+        'name' => 'Name',
+        'price' => 'Price',
+    ]
 ];

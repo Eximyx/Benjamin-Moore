@@ -4,7 +4,5 @@ import.meta.glob([
     '../icons/**',
 ]);
 
-import './footer-accordion.js';
-import './modal-window.js';
-import './filter.js';
+import '../js/widgets/footer-accordion.js';
 

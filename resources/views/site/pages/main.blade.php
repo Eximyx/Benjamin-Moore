@@ -7,7 +7,7 @@
             <p id="main_banner-p-mobile">{{$data['banners'][0]->content}}</p>
             <div class="main__banner-buttons">
                 {{-- TODO BOTH: Нужно реализовать страницу со всеми красками --}}
-                <a href="">
+                <a href="{{route('user.colors.index')}}">
                     <button class="button-filled">@lang('main.buttons.allColors')</button>
                 </a>
             </div>
@@ -107,17 +107,7 @@
             <i class="left"><img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="arrow left"></i>
             <ul class="carousel reviewsCarousel">
                 @foreach($data['reviews'] as $value)
-                    <li class="card">
-                        <div class="review-card">
-                            <div class="review-card__header">
-                                <img src="{{Vite::asset('resources/images/user-avatar.png')}}" alt="user avatar">
-                                <h4>{{$value->name}}</h4>
-                            </div>
-                            <p class="review-card__text">
-                                {{$value->description}}
-                            </p>
-                        </div>
-                    </li>
+                    @include('site.components.review-card')
                 @endforeach
             </ul>
             <i class="right"><img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="arrow right"></i>
@@ -131,8 +121,8 @@
             <button class="button-outlined">@lang('main.titles.catalog')</button>
         </a>
     </section>
-    @include('site.components.lead-form')
+    @include('site.components.lead-form-map')
 @endsection
 @push('scripts')
-    @vite(['resources/js/slider.js'])
+    @vite(['resources/js/components/slider.js'])
 @endpush

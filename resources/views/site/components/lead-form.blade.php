@@ -15,5 +15,5 @@
     <button class="button-filled" type="submit">@lang('main.form.send')</button>
 </form>
 @push('scripts')
-    @vite('resources/js/lead-form.js')
+    @vite('resources/js/components/lead-form.js')
 @endpush
