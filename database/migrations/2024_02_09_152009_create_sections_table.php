@@ -13,9 +13,7 @@ return new class extends Migration {
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->unsignedBigInteger('section_position_id')->unique()->nullable();
-            $table->index('section_position_id', 'section_section_positions_idx');
-            $table->foreign('section_position_id', 'section_section_positions_fk')->references('id')->on('section_positions');
+            $table->foreignId('section_position_id')->unique()->nullable()->constrained('section_positions');
             $table->string('content')->nullable();
             $table->timestamps();
         });

@@ -24,9 +24,7 @@ return new class extends Migration {
             $table->string('consumption')->nullable();
             $table->string('thickness')->nullable();
             $table->string('slug')->unique();
-            $table->unsignedBigInteger('product_category_id')->nullable();
-            $table->index('product_category_id', 'product_product_category_idx');
-            $table->foreign('product_category_id', 'product_product_category_fk')->references('id')->on('product_categories');
+            $table->foreignId('product_category_id')->nullable()->constrained('product_categories');
             $table->boolean('is_toggled')->default(false);
             $table->softDeletes();
             $table->timestamps();

@@ -10,4 +10,12 @@ return [
     'auth' => [
         'failed' => 'Error, you are not authorized',
     ],
+    'news' => [
+        'categories' => 'Error, you cannot delete a category that has a posts',
+    ],
+    'products' => [
+        'colors' => 'Error, you cannot delete a color that has a products',
+        'categories' => 'Error, you cannot delete a category that has a products',
+    ]
+
 ];

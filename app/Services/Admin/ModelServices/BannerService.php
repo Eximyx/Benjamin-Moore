@@ -20,7 +20,7 @@ class BannerService extends BaseModelService
     {
         $data = $dto->toArray();
 
-        if (! empty($data['banner_position_id'])) {
+        if (!empty($data['banner_position_id'])) {
             $this->repository->nullPosition($data['banner_position_id']);
         }
 
@@ -42,22 +42,23 @@ class BannerService extends BaseModelService
 
     protected function uploadImage(mixed $image, string $id): string
     {
-        $path = 'image/banners/' . $id. '/';
+        $path = 'image/banners/' . $id . '/';
 
         if ($image !== null & !is_string($image)) {
-            Storage::put('public/'. $path, $image);
-            $image = 'storage/'.$path . $image->hashName();
+            Storage::put('public/' . $path, $image);
+            $image = 'storage/' . $path . $image->hashName();
         } else {
             $image = 'default_post.jpg';
         }
 
         return $image;
     }
+
     public function update(Model $entity, ModelDTO $dto): Model
     {
         $data = $dto->toArray();
 
-        if (! empty($data['banner_position_id'])) {
+        if (!empty($data['banner_position_id'])) {
             $this->repository->nullPosition($data['banner_position_id']);
         }
 
@@ -83,10 +84,10 @@ class BannerService extends BaseModelService
     {
         $entity = $this->findById($request['id']);
 
-        if (! isset($entity->banner_position_id)) {
+        if (!isset($entity->banner_position_id)) {
             $this->repository->destroy($entity);
         } else {
-            throw new Exception(__('errors.banner.position'), 422);
+            throw new Exception(__('errors.banners.position'), 422);
         }
 
         return $entity;

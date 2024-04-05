@@ -12,14 +12,8 @@ return new class extends Migration {
     {
         Schema::create('color_products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('color_id');
-
-            $table->index('product_id', 'color_product_product_idx');
-            $table->index('color_id', 'color_product_color_idx');
-            $table->foreign('product_id', 'color_product_product_fk')->on('products')->references('id')->onDelete('cascade');
-            $table->foreign('color_id', 'color_product_color_fk')->on('colors')->references('id')->onDelete('cascade');
-
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+            $table->foreignId('color_id')->constrained('colors')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -15,9 +15,7 @@ return new class extends Migration {
             $table->boolean('is_toggled')->default(false);
             $table->longText('content');
             $table->longText('description');
-            $table->unsignedBigInteger('category_id')->nullable();
-            $table->index('category_id', 'news_category_idx');
-            $table->foreign('category_id', 'news_category_fk')->references('id')->on('categories');
+            $table->foreignId('category_id')->nullable()->constrained('categories');
             $table->string('slug')->unique();
             $table->softDeletes();
             $table->timestamps();

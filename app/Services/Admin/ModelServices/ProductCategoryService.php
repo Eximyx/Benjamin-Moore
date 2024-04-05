@@ -3,12 +3,16 @@
 namespace App\Services\Admin\ModelServices;
 
 use App\Repositories\ModelRepositories\ProductCategoryRepository;
+use Exception;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class ProductCategoryService extends BaseModelService
 {
     public function __construct(
         ProductCategoryRepository $repository
-    ) {
+    )
+    {
         parent::__construct($repository);
     }
 
@@ -23,5 +27,18 @@ class ProductCategoryService extends BaseModelService
         }
 
         return $variables;
+    }
+
+    public function destroy(Request $request): Model
+    {
+        $entity = $this->findById($request['id']);
+
+        if ($entity->products()->count() === 0) {
+            $this->repository->destroy($entity);
+        } else {
+            throw new Exception(__('errors.products.categories'), 422);
+        }
+
+        return $entity;
     }
 }
