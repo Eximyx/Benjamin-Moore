@@ -40,7 +40,7 @@ Route::middleware('admin')->group(function () {
 
             Route::post('products/toggle', [ProductsController::class, 'toggle']);
             Route::post('news/toggle', [NewsController::class, 'toggle']);
-            Route::post('static_pages/toggle', [StaticPageController::class, 'toggle']);
+            Route::post('static-page/toggle', [StaticPageController::class, 'toggle']);
             Route::post('reviews/toggle', [ReviewController::class, 'toggle']);
 
             Route::resource('metadata', MetaDataController::class)->except(['create', 'store', 'destroy']);
