@@ -18,6 +18,7 @@ return [
         'banners' => 'Banners',
         'sections' => 'Sections',
         'metadata' => 'Metadata',
+        'color' => 'Colors',
     ],
     'keys' => [
         'id' => 'ID',
@@ -55,6 +56,7 @@ return [
         'available' => 'Available',
         'active' => 'Active',
         'file' => 'File',
+        'hex_code' => 'Color',
     ],
     'buttons' => [
         'profileSave' => 'Save profile',

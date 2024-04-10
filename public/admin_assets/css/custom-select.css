@@ -1,0 +1,98 @@
+.dropdown_with-chk__button {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #6e707e;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #d1d3e2;
+    border-radius: .35rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    text-align: start;
+}
+
+.dropdown_with-chk__list {
+    margin-top: 2px;
+    padding: 0 10px;
+    list-style-type: none;
+    position: absolute;
+    left: 0;
+    top: 50px;
+    color: #6e707e;
+    border: 1px solid #d1d3e2;
+    border-radius: .35rem;
+    background: var(--form-background);
+    overflow: hidden;
+    width: 100%;
+    max-height: 300px;
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: 200ms ease;
+    overflow-y: scroll;
+}
+
+.dropdown_with-chk__list_visible {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    top: unset;
+}
+
+.dropdown_with-chk__list-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 5px 0;
+}
+
+.dropdown_with-chk__list-item_label {
+    margin: 0;
+}
+
+#color_boxes_row {
+    display: flex;
+    margin-bottom: 10px;
+    min-height: 20px;
+    line-height: 1;
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+
+.color-input {
+    display: none !important;
+}
+
+.color-picker__button {
+    display: flex !important;
+    align-items: center;
+    width: 300px;
+    max-width: max-content;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    cursor: pointer;
+    gap: 10px;
+}
+
+.color-picker__preview-border {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    border: 1px solid #6e707e;
+    border-radius: 3px;
+}
+
+.color-picker__preview {
+    width: 15px;
+    height: 15px;
+}
