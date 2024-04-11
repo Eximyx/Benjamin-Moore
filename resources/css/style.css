@@ -263,8 +263,12 @@ button {
     font-size: 20px;
     font-weight: 400;
     letter-spacing: 0.01875rem;
+    transition: background-color .15s ease-in-out;
 }
 
+.button-filled:hover {
+    background-color: #bb0202;
+}
 
 .button-outlined {
     background-color: transparent;
@@ -275,6 +279,12 @@ button {
     height: 45px;
     font-size: 20px;
     max-width: 200px;
+    transition: all .15s ease-in-out;
+}
+
+.button-outlined:hover {
+    background-color: var(--accent-red);
+    color: #fff;
 }
 
 .button-outlined a {

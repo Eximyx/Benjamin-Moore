@@ -4,13 +4,15 @@ Array.from(colorsWrapper).forEach(wrapper => {
     const children = wrapper.children;
 
     Array.from(children).forEach(child => {
-        let svg = child.querySelector('.svg-cart')
+        let svg = child.querySelector('.svg-cart');
+        let pathElement = svg.querySelector('path');
         let blockHeader = child.querySelector('.color-block__title');
         let blockId = child.querySelector('.color-block__id');
         let style = window.getComputedStyle(child).getPropertyValue('background-color');
         if(getColorBrightness(style)) {
             blockHeader.style.color = '#0e0e0e';
             blockId.style.color = '#0e0e0e';
+            pathElement.style.fill = '#0e0e0e';
         }
 
         child.addEventListener('mouseover', () => {
