@@ -3,6 +3,7 @@
 namespace App\Database\Seeders\CustomSeeders;
 
 use App\Models\Section;
+use App\Models\SectionPosition;
 use Illuminate\Database\Seeder;
 
 return new class extends Seeder {
@@ -14,13 +15,20 @@ return new class extends Seeder {
     public function run(): void
     {
         $arr = [
-            "Качество",
-            
+            "Качество" => "Качество",
+            "Профессиональный подход" => "Профессиональный подход",
+            "Высокий уровень сервиса" => "Высокий уровень сервиса"
         ];
-        for ($i = 1; $i < 4; $i++) {
+
+        $categoryId = 1;
+
+        foreach ($arr as $key => $item) {
             Section::factory()->create([
-                'title' => 'Качество' . $i,
+                "title" => $key,
+                "content" => $item,
+                "section_position_id" => SectionPosition::query()->where("id", "=", $categoryId)->first()
             ]);
+            $categoryId++;
         }
     }
 };

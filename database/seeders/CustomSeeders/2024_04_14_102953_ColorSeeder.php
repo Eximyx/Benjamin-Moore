@@ -2,7 +2,7 @@
 
 namespace App\Database\Seeders\CustomSeeders;
 
-use App\Models\Product;
+use App\Models\Color;
 use Illuminate\Database\Seeder;
 
 return new class extends Seeder {
@@ -13,6 +13,6 @@ return new class extends Seeder {
      */
     public function run(): void
     {
-        Product::factory(50)->create();
+        Color::factory(50)->create();
     }
 };

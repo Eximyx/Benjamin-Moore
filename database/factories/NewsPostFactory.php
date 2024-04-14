@@ -3,10 +3,11 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\NewsPost;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\NewsPost>
+ * @extends Factory<NewsPost>
  */
 class NewsPostFactory extends Factory
 {
@@ -22,7 +23,7 @@ class NewsPostFactory extends Factory
             'main_image' => 'default_post.jpg',
             'content' => fake()->text(),
             'description' => fake()->text(),
-            'category_id' => Category::get()->random()->id,
+            'category_id' => Category::query()->inRandomOrder()->first() ?? Category::factory(),
         ];
     }
 }

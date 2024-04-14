@@ -11,7 +11,7 @@ return new class extends Seeder {
      */
     public function run(): void
     {
-        Settings::factory(1)->create([
+        Settings::factory()->create([
                 'email' => 'sales@benjaminmoore.by',
                 'phone' => '+375 (29) 608-40-00',
                 'work_time' => 'Работаем ПН — ПТ, 10:00 — 19:00',

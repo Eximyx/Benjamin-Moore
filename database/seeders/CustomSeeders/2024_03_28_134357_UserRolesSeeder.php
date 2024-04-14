@@ -5,8 +5,7 @@ namespace App\Database\Seeders\CustomSeeders;
 use App\Models\UserRoles;
 use Illuminate\Database\Seeder;
 
-return new class extends Seeder
-{
+return new class extends Seeder {
     /**
      * Run the database seeds.
      */
@@ -19,9 +18,9 @@ return new class extends Seeder
         ];
 
         foreach ($arr as $item) {
-            UserRoles::factory()->create(
-                ['title' => $item]
-            );
+            UserRoles::factory()->create([
+                'title' => $item
+            ]);
         }
     }
 };
