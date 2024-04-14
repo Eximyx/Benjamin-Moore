@@ -17,6 +17,7 @@ return [
         'sections' => 'Секции',
         'banners' => 'Баннеры',
         'metadata' => 'Метаданные',
+        'color' => 'Цвета',
     ],
     'keys' => [
         'id' => 'ID',
@@ -53,6 +54,7 @@ return [
         'available' => 'Доступные',
         'active' => 'Активные',
         'file' => 'Файл',
+        'hex_code' => 'Цвет',
     ],
     'buttons' => [
         'profileSave' => 'Сохранить профиль',

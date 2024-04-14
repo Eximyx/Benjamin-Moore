@@ -54,7 +54,7 @@
                 <img src="{{Vite::asset("resources/icons/phone-logo.svg")}}" alt="phone-svg"/>
                 <a href="tel: {{$data['settings']->phone}}">{{$data['settings']->phone}}</a>
             </div>
-            <p class="header__contacts-time">{{$data['settings']->phone}}</p>
+            <p class="header__contacts-time">{{$data['settings']->work_time}}</p>
         </div>
         @if(request()->url() != route('user.contacts.index'))
             <a href="{{route('user.contacts.index')}}">

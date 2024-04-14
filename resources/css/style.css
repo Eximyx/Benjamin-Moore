@@ -263,8 +263,12 @@ button {
     font-size: 20px;
     font-weight: 400;
     letter-spacing: 0.01875rem;
+    transition: background-color .15s ease-in-out;
 }
 
+.button-filled:hover {
+    background-color: #bb0202;
+}
 
 .button-outlined {
     background-color: transparent;
@@ -275,6 +279,12 @@ button {
     height: 45px;
     font-size: 20px;
     max-width: 200px;
+    transition: all .15s ease-in-out;
+}
+
+.button-outlined:hover {
+    background-color: var(--accent-red);
+    color: #fff;
 }
 
 .button-outlined a {
@@ -457,6 +467,9 @@ button {
     min-width: 192px;
     height: 100%;
     max-height: 350px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .about-us__quality-cards-wrapper {
@@ -596,6 +609,11 @@ button {
     background-color: #cacaca;
     min-height: 250px;
     border-radius: 20px;
+    background-position: center;
+}
+
+.banner a {
+    transform: translateX(100px);
 }
 
 .form-section {
@@ -952,7 +970,7 @@ button {
     opacity: 0;
     visibility: hidden;
     transition: 200ms ease;
-    overflow-y: scroll;;
+    overflow-y: scroll;
 }
 
 .dropdown_with-chk__list_visible {
@@ -2215,6 +2233,9 @@ input[type="checkbox"]:checked::after {
         height: 250px;
         background-color: #cacaca;
         margin-top: 20px;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
     }
 
     .about-us__image-placeholder {

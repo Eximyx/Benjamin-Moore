@@ -252,4 +252,5 @@
 @push('scripts')
     @vite('resources/js/components/slider.js')
     @vite('resources/js/widgets/product-counter.js')
+    @vite('resources/js/widgets/modal-window.js')
 @endpush

@@ -1,0 +1,101 @@
+:root {
+    --text-black: #4E5B5B;
+    --border-black: #868686;
+    --background-white: #FBF8F4;
+    --headers-black: #000;
+    --accent-red: #E03729;
+    --minor-information: #AAA;
+    --form-background: #F5E9DD;
+    --breadcrumbs-links: #464646;
+    --succes-green: #126935;
+}
+
+* {
+    font-family: 'Commissioner', sans-serif;
+}
+
+body {
+    margin: 0;
+    background-color: var(--background-white);
+}
+
+/*headers  */
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.17em;
+}
+
+h4 {
+    font-size: 1em;
+}
+
+h5 {
+    font-size: 0.83em;
+}
+
+h6 {
+    font-size: 0.67em;
+}
+
+/* inputs */
+
+input {outline: none;}
+input:-webkit-autofill {
+    -webkit-box-shadow: inset 0 0 0 50px var(--background-white) !important;
+    -webkit-text-fill-color: #000 !important; /* цвет текста */
+    color: #000 !important; /* цвет текста */
+}
+
+input {
+    background-color: transparent;
+    border: 2px solid red;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 1em;
+}
+
+/* buttons */
+
+.button-filled {
+    background-color: red;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    font-size: 1em;
+    font-weight: 500;
+    padding: 10px 50px;
+    width: fit-content;
+}
+
+/* login page */
+
+.login-body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-block {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid #cacaca;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

@@ -10,9 +10,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>SB Admin 2 - Dashboard</title>
 
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+{{--    <link--}}
+{{--        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"--}}
+{{--        rel="stylesheet">--}}
+    <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
           integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
@@ -27,6 +28,7 @@
 
     <link href="https://fonts.cdnfonts.com/css/commissioner-2" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="{{ asset('admin_assets/css/custom-select.css') }}">
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"
@@ -47,6 +49,7 @@
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.8/r-2.5.0/sl-1.7.0/datatables.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{{asset('admin_assets/js/custom-select-admin.js')}}"></script>
 
     @include('admin.components.scripts')
     <title>Benjamin moore Admin</title>

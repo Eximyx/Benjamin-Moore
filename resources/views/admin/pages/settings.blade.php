@@ -48,7 +48,7 @@
                 <div class="col-lg-8">
                     <div class="row m-0 p-0">
                         <label class="p-0">@lang('admin.keys.description')</label>
-                        <textarea name="description" id="" cols="30" rows="10">{{$data->description}}</textarea>
+                        <textarea class="form-control" name="description" id="" cols="30" rows="10">{{$data->description}}</textarea>
                         <label class="p-0">@lang('admin.keys.file') 1</label>
                         <div class="row m-0 p-0">
                             <input type="file" name="file1" class="fileImage form-control col"
