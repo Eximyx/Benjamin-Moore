@@ -4,10 +4,11 @@ namespace Database\Factories;
 
 use App\Models\Color;
 use App\Models\Product;
+use App\Models\Review;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Review>
+ * @extends Factory<Review>
  */
 class ColorProductFactory extends Factory
 {
@@ -19,8 +20,8 @@ class ColorProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'color_id' => Color::factory(),
-            'product_id' => Product::factory(),
+            'color_id' => Color::query()->inRandomOrder()->first() ?? Color::factory(),
+            'product_id' => Product::query()->inRandomOrder()->first() ?? Product::factory(),
         ];
     }
 }

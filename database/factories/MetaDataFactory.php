@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\MetaData;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\MetaData>
+ * @extends Factory<MetaData>
  */
 class MetaDataFactory extends Factory
 {

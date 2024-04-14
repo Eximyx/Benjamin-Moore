@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\SectionPosition;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SectionPosition>
+ * @extends Factory<SectionPosition>
  */
 class SectionPositionFactory extends Factory
 {

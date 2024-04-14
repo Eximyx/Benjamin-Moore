@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Banner;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Banner>
+ * @extends Factory<Banner>
  */
 class BannerFactory extends Factory
 {
@@ -20,6 +21,7 @@ class BannerFactory extends Factory
             'title' => fake()->word(),
             'image' => 'default_post.jpg',
             'content' => fake()->text(),
+//            'banner_position_id' => BannerPosition::query()->inRandomOrder()->first() ?? BannerPosition::factory()
         ];
     }
 }

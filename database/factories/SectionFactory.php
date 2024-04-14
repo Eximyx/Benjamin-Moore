@@ -20,6 +20,7 @@ class SectionFactory extends Factory
         return [
             'title' => fake()->word(),
             'content' => fake()->text(),
+//            'section_position_id' => SectionPosition::query()->inRandomOrder()->first()
         ];
     }
 }
