@@ -3,30 +3,30 @@
 namespace App\Repositories\ModelRepositories;
 
 use App\Models\Color;
-use App\Models\Color as Model;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class ColorRepository extends BaseModelRepository
 {
     public function __construct()
     {
-        parent::__construct(Model::class);
+        parent::__construct(Color::class);
     }
 
     /**
-     * @param  array<int, int>  $colorIds
+     * @param array<int, int> $colorIds
      * @return array<int, int>
      */
     public function getColors(array $colorIds): array
     {
-        return Color::whereIn('id', $colorIds)->pluck('id')->all();
+        return $this->model::whereIn('id', $colorIds)->pluck('id')->all();
     }
 
     /**
-     * @return Collection<int, Color>
+     * @return Collection<int, Model>
      */
     public function getColorsForCatalog(): Collection
     {
-        return Color::all();
+        return $this->model::all();
     }
 }

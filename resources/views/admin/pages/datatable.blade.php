@@ -58,16 +58,20 @@
                                     <div class="color-picker__button form-control">
                                         Chose color
                                     </div>
-{{--        Colors create form        --}}
+                                    {{--        Colors create form        --}}
                                 @elseif($value == 'colors')
                                     <div class="dropdown_with-chk-admin">
-                                        <button type="button" id="colors-button-admin" class="dropdown_with-chk__button">@lang('catalog.filter.defaultValue')</button>
+                                        <button type="button" id="colors-button-admin"
+                                                class="dropdown_with-chk__button">@lang('catalog.filter.defaultValue')</button>
                                         <ul class="dropdown_with-chk__list" id="colors">
                                             @foreach($data['tags'] as $item)
                                                 <li class="dropdown_with-chk__list-item">
-                                                    <input type="checkbox" name="color_id" id="{{$item->id}}" class="dropdown_with-chk__list-item_label">
-                                                    <label for="{{$item->id}}" class="dropdown_with-chk__list-item_label">{{$item->title}}</label>
-                                                    <div id="preview_{{$item->id}}" style="width: 10px; height: 10px; margin-left: auto; margin-right: 15px; background-color: {{$item->hex_code}}"></div>
+                                                    <input type="checkbox" name="color_id" id="{{$item->id}}"
+                                                           class="dropdown_with-chk__list-item_label">
+                                                    <label for="{{$item->id}}"
+                                                           class="dropdown_with-chk__list-item_label">{{$item->title}}</label>
+                                                    <div id="preview_{{$item->id}}"
+                                                         style="width: 10px; height: 10px; margin-left: auto; margin-right: 15px; background-color: {{$item->hex_code}}"></div>
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -286,7 +290,7 @@
                                     })
                                     $("#color_boxes_row").html('');
                                     $(value).each((key, value) => {
-                                            let htmlCode = " <div class='border border-dark m-1 p-0' onclick = 'delColor(this.id)' id='color_" + value['id'] + "' style='width:32px; height:32px'> <p class=' border border-3 border-white m-0' style='width:30px; height:30px; background:" + value['hex_code'] + "'></p></div>"
+                                        let htmlCode = " <div class='border border-dark m-1 p-0' onclick = 'delColor(this.id)' id='color_" + value['id'] + "' style='width:32px; height:32px'> <p class=' border border-3 border-white m-0' style='width:30px; height:30px; background:" + value['hex_code'] + "'></p></div>"
                                         $(htmlCode).appendTo("#color_boxes_row");
                                     })
                                 } else {
@@ -429,5 +433,5 @@
     </script>
 @endsection
 @push('scripts')
-    @vite('public/admin_assets/js/custom-select-admin.js')
+    {{asset("public/admin_assets/js/custom-select.js")}}
 @endpush

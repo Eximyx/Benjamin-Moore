@@ -14,15 +14,22 @@ abstract class CoreRepository
 
     public function __construct(
         ?string $modelClass
-    ) {
+    )
+    {
         $this->model = app($modelClass);
     }
 
+    /**
+     * @return string
+     */
     public function getModelClass(): string
     {
         return $this->model::class;
     }
 
+    /**
+     * @return Model
+     */
     public function startConditions(): Model
     {
         return clone $this->model;
@@ -37,6 +44,7 @@ abstract class CoreRepository
     }
 
     /**
+     * @param int|null $amount
      * @return Builder<Model>
      */
     public function getLatest(?int $amount = null): Builder
@@ -50,18 +58,26 @@ abstract class CoreRepository
         return $entities;
     }
 
+    /**
+     * @param string|int|null $id
+     * @return Model
+     */
     public function findById(string|int|null $id): Model
     {
         return $this->model::findOrFail($id);
     }
 
+    /**
+     * @param Model $entity
+     * @return Model
+     */
     public function save(Model $entity): Model
     {
         return tap($entity)->save();
     }
 
     /**
-     * @param  array<string,mixed>  $data
+     * @param array<string,mixed> $data
      */
     public function create(array $data): Model
     {
@@ -70,15 +86,38 @@ abstract class CoreRepository
     }
 
     /**
-     * @param  array<string, mixed>  $data
+     * @param array<string, mixed> $data
      */
     public function update(Model $entity, array $data): Model
     {
         return tap($entity)->update($data);
     }
 
+    /**
+     * @param Model $entity
+     * @return Model
+     */
     public function destroy(Model $entity): Model
     {
         return tap($entity)->delete();
     }
+
+    /**
+     * @param string $key
+     * @param string $type
+     * @return Builder<Model>
+     */
+    public function getOrderedBy(string $key, string $type = "asc"): Builder
+    {
+        return $this->getBuilder()->orderBy($key, $type);
+    }
+
+    /**
+     * @return Builder<Model>
+     */
+    public function getBuilder(): Builder
+    {
+        return $this->model::query();
+    }
+
 }

@@ -26,7 +26,7 @@ class ColorController extends BaseAdminController
 
     /**
      * @return View
-     * TODO: Вовзращать не все цвета, а отсортировать их по возрастанию HEX_CODE
+     *
      */
     public function __invoke(): View
     {
@@ -34,11 +34,10 @@ class ColorController extends BaseAdminController
             [
                 'data' => JsonResource::make(
                     [
-                        'colors' => $this->service->getAll(),
+                        'colors' => ColorResource::collection($this->service->getOrderedByHexColor()),
                         'settings' => $this->settings,
                         'meta' => $this->getMetaDataByURL(),
-                    ]
-                ),
+                    ])
             ]);
     }
 }

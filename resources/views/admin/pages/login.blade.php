@@ -16,7 +16,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-{{--    <link href="{{ asset('admin_assets/css/sb-admin-2.min.css') }}" rel="stylesheet">--}}
+    {{--    <link href="{{ asset('admin_assets/css/sb-admin-2.min.css') }}" rel="stylesheet">--}}
 </head>
 <body class="login-body">
 <div class="login-block">

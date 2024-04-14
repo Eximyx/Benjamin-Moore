@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Contracts\ModelDTO;
 use App\Repositories\CoreRepository;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -44,5 +45,15 @@ abstract class CoreService
     public function findById(string $id): Model
     {
         return $this->repository->findById($id);
+    }
+
+    /**
+     * @param string $key
+     * @param string $type
+     * @return Builder<Model>
+     */
+    public function getOrderedBy(string $key, string $type = "asc"): Builder
+    {
+        return $this->repository->getOrderedBy($key, $type);
     }
 }
