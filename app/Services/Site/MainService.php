@@ -18,15 +18,16 @@ use Psr\Container\NotFoundExceptionInterface;
 class MainService
 {
     public function __construct(
-        protected NewsRepository $newsRepository,
+        protected NewsRepository     $newsRepository,
         protected MetaDataRepository $metaDataRepository,
-        protected ProductRepository $productRepository,
-        protected ReviewRepository $reviewRepository,
-        protected LeadsRepository $leadsRepository,
-        protected BannersRepository $bannersRepository,
-        protected SectionRepository $sectionRepository,
+        protected ProductRepository  $productRepository,
+        protected ReviewRepository   $reviewRepository,
+        protected LeadsRepository    $leadsRepository,
+        protected BannersRepository  $bannersRepository,
+        protected SectionRepository  $sectionRepository,
         protected PartnersRepository $partnersRepository,
-    ) {
+    )
+    {
 
     }
 
@@ -53,6 +54,7 @@ class MainService
     }
 
     /**
+     * @param int $amount
      * @return Collection<int, Model>
      */
     public function getLatestNews(int $amount = 3): Collection
@@ -61,6 +63,7 @@ class MainService
     }
 
     /**
+     * @param int $amount
      * @return Collection<int, Model>
      */
     public function getLatestProducts(int $amount = 20): Collection
@@ -69,6 +72,7 @@ class MainService
     }
 
     /**
+     * @param int $amount
      * @return Collection<int, Model>
      */
     public function getLatestReviews(int $amount = 20): Collection

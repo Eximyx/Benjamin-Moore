@@ -20,7 +20,7 @@ class ProductCategoryFactory extends Factory
     {
         return [
             'title' => fake()->name(),
-            'kind_of_work_id' => KindOfWork::get()->random()->id,
+            'kind_of_work_id' => KindOfWork::query()->inRandomOrder()->first(),
         ];
     }
 }

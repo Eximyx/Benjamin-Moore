@@ -13,20 +13,14 @@ use App\Http\Controllers\Admin\ModelControllers\ProductsController;
 use App\Http\Controllers\Admin\ModelControllers\ReviewController;
 use App\Http\Controllers\Admin\ModelControllers\SectionsController;
 use App\Http\Controllers\Admin\ModelControllers\StaticPageController;
-use App\Http\Controllers\Admin\SettingsControllers\AuthController;
 use App\Http\Controllers\Admin\SettingsControllers\SettingsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::controller(AuthController::class)->middleware('user')->group(function () {
-    Route::get('login', 'login')->name('login');
-    Route::post('login', 'loginAction')->name('login.action');
-    Route::get('logout', 'logout')->middleware('auth')->name('logout');
-});
-
 Route::middleware('admin')->group(function () {
     Route::prefix('admin')
         ->group(function () {
+            Route::view("/", "admin.layouts.admin"); // TODO some dashboard
 
             Route::prefix('settings')->group(function () {
                 Route::get('/', SettingsController::class)->name('settings.index');

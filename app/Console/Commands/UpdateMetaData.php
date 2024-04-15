@@ -45,7 +45,7 @@ class UpdateMetaData extends Command
     public function handle(): void
     {
         DB::table('meta_data')->truncate();
-        $host =  Request::getScheme()."://". (Config::get("app.domain") ?? Request::getHost() . ":". Request::getPort());
+        $host = Request::getScheme() . "://" . (Config::get("app.domain") ?? Request::getHost() . ":" . Request::getPort());
 
         $routeCollection = Route::getRoutes()->get();
         foreach ($routeCollection as $value) {
@@ -54,9 +54,9 @@ class UpdateMetaData extends Command
             if ((str_contains($name, 'user')) & (!str_contains($uri, 'admin')) & ($value->methods()[0] == 'GET')) {
                 if (str_contains($uri, 'slug')) {
                     $key = explode('/', $uri);
-                    if (isset($this->entities[$key[1]])) {
-                        foreach ($this->entities[$key[1]]::all() as $item) {
-                            if ($key[1] == 'catalog') {
+                    if (isset($this->entities[$key[0]])) {
+                        foreach ($this->entities[$key[0]]::all() as $item) {
+                            if ($key[0] == 'catalog') {
                                 $this->info($item->slug);
                             }
                             MetaData::factory()->create([

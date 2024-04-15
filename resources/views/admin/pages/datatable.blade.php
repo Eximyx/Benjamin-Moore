@@ -390,6 +390,15 @@
             $("#colors").find(`option[value='${color}']`).removeAttr('selected');
         }
 
+        function addColor(color) {
+            let element = document.getElementById("color_" + color['id']);
+            if (!(element)) {
+                $("#colors").find(`option[value='${color['id']}']`).attr('selected', true);
+                let htmlCode = " <div class='border border-dark m-1 p-0' onclick = 'delColor(this.id)' id='color_" + color['id'] + "' style='width:32px; height:32px'> <p class=' border border-3 border-white m-0' style='width:30px; height:30px; background:" + color['hex_code'] + "'></p></div>"
+                $(htmlCode).appendTo("#color_boxes_row");
+            }
+        }
+
         async function deleteErrors() {
             return await $(document).find("li.alert").remove();
         }

@@ -65,6 +65,19 @@ class ProductService extends BaseModelService
         return $this->repository->findBySlug($slug);
     }
 
+    public function createSubImages(Model $entity, ?array $images): void
+    {
+        foreach ($images as $image) {
+            $entity->images()->create(
+                [
+                    'product_id' => $entity->id,
+                    'url' => $image,
+                ]
+            );
+        }
+
+    }
+
     public function create(ModelDTO $dto): Model
     {
         $data = $dto->toArray();
@@ -73,28 +86,17 @@ class ProductService extends BaseModelService
 
         $entity = $this->repository->create($data);
 
-        $dto->sub_images = $this->MassUploadImage($dto->sub_images, $entity->id);
+//        $dto->sub_images = $this->MassUploadImage($dto->sub_images, $entity->id);
 
         $entity->main_image = $this->uploadImage($dto->main_image, $entity->id);
 
         $entity->save();
 
-        $this->createSubImages($entity, $dto->sub_images);
+//        $this->createSubImages($entity, $dto->sub_images);
 
         $entity->colors()->attach($dto->colors);
 
         return $entity;
-    }
-
-    protected function MassUploadImage(mixed $images, string $id): array
-    {
-        for ($i = 0; $i < count($images); $i++) {
-            if ($images[$i] !== null & !is_string($images[$i])) {
-                Storage::put('public\\image\\products\\' . $id . '\\sub_images\\' . $i . '.jpg', file_get_contents($images[$i]));
-                $images[$i] = 'storage\\image\\products\\' . $id . '\\sub_images\\' . $i . '.jpg';
-            }
-        }
-        return $images;
     }
 
     protected function uploadImage(mixed $image, string $id): string
@@ -107,19 +109,6 @@ class ProductService extends BaseModelService
         }
 
         return $image;
-    }
-
-    public function createSubImages(Model $entity, ?array $images): void
-    {
-        foreach ($images as $image) {
-            $entity->images()->create(
-                [
-                    'product_id' => $entity->id,
-                    'url' => $image,
-                ]
-            );
-        }
-
     }
 
     public function update(Model $entity, ModelDTO $dto): Model
@@ -239,5 +228,16 @@ class ProductService extends BaseModelService
     public function getColors(): Collection
     {
         return $this->colorRepository->getAll();
+    }
+
+    protected function MassUploadImage(mixed $images, string $id): array
+    {
+        for ($i = 0; $i < count($images); $i++) {
+            if ($images[$i] !== null & !is_string($images[$i])) {
+                Storage::put('public\\image\\products\\' . $id . '\\sub_images\\' . $i . '.jpg', file_get_contents($images[$i]));
+                $images[$i] = 'storage\\image\\products\\' . $id . '\\sub_images\\' . $i . '.jpg';
+            }
+        }
+        return $images;
     }
 }
