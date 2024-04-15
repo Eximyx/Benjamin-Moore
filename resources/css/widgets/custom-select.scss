@@ -1,0 +1,162 @@
+@import "../variables";
+
+.dropdown_with-chk {
+    max-width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.dropdown_with-chk__button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    line-height: 18px;
+    color: $text-black;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: 2px solid $accent-red;
+    border-radius: 10px;
+    height: 50px;
+    padding: 10px 40px 10px 15px;
+}
+
+.dropdown_with-chk__button::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    background: url("../../icons/select-arrow.svg") no-repeat center;
+    pointer-events: none;
+    transition: 200ms ease;
+}
+
+.dropdown_with-chk__button_active::after {
+    transform: translateY(-50%) rotate(-180deg);
+}
+
+.dropdown_with-chk__list {
+    margin-top: 2px;
+    padding: 0;
+    list-style-type: none;
+    position: absolute;
+    left: 0;
+    top: 50px;
+    border: 2px solid $accent-red;
+    border-radius: 10px;
+    background: $form-background;
+    overflow: hidden;
+    width: 99%;
+    max-height: 300px;
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: 200ms ease;
+    overflow-y: scroll;
+}
+
+.dropdown_with-chk__list_visible {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    top: unset;
+}
+
+.dropdown_with-chk__list-item {
+    margin: 0;
+    padding: 15px;
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    align-items: center;
+    cursor: pointer;
+    font-size: 15px;
+    line-height: 18px;
+    color: $text-black;
+    transition: 200ms ease;
+    isolation: isolate;
+}
+
+.dropdown_with-chk__list-item input[type="checkbox"],
+.dropdown_with-chk__list-item input[type="radio"] {
+    pointer-events: none;
+}
+
+.dropdown_with-chk__list-item label {
+    position: absolute;
+    width: 77%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding-left: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: -1;
+    margin-left: 5px;
+    user-select: none;
+}
+
+.dropdown_with-chk__input_hidden {
+    display: none;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    position: relative;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 2px solid $accent-red;
+    transition: 600ms ease;
+}
+
+input[type="checkbox"]::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: url('../../icons/Check.svg');
+    background-size: contain;
+    opacity: 0;
+    visibility: hidden;
+    transition: 300ms ease;
+}
+
+input[type="checkbox"]:checked {
+    background: $accent-red;
+    border: 1px solid $accent-red;
+    transition: 300ms ease;
+}
+
+input[type="checkbox"]:checked::after {
+    opacity: 1;
+    visibility: visible;
+    transition: 600ms ease;
+}
+
+.color-preview {
+    height: 10px;
+    width: 10px;
+    margin-right: 4px;
+    border: 1px solid #cacaca;
+}
+
+@media screen and (max-width: 768px) {
+    .dropdown_with-chk__list {
+        max-height: 250px;
+    }
+}

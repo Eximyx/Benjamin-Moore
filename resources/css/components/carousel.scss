@@ -1,0 +1,140 @@
+@import "../variables";
+
+.wrapper {
+    max-width: 1460px;
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+}
+
+.wrapper i img {
+    height: 40%;
+    padding: 20% 0;
+}
+
+.wrapper i:where(.left) img {
+    height: 40%;
+    padding: 20% 0;
+    transform: rotate(-180deg);
+}
+
+.wrapper i {
+    top: 50%;
+    height: 40px;
+    width: 65px;
+    cursor: pointer;
+    position: absolute;
+    text-align: center;
+    background: transparent;
+    border-radius: 20px;
+    border: 2px solid $accent-red;
+    transform: translateY(-50%);
+    transition: transform 0.1s linear;
+}
+
+.wrapper i:active {
+    transform: translateY(-50%) scale(0.85);
+}
+
+.wrapper i:first-child {
+    left: -80px;
+}
+
+.wrapper i:last-child {
+    right: -80px;
+}
+
+.wrapper .carousel {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% / 4) + 2px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    gap: 10px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel.no-transition {
+    scroll-behavior: auto;
+}
+
+.carousel.dragging {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+}
+
+.carousel.dragging .card {
+    cursor: grab;
+    user-select: none;
+}
+
+.carousel :where(.card) {
+    display: flex;
+}
+
+.carousel .card {
+    scroll-snap-align: start;
+    height: auto;
+    list-style: none;
+    background: transparent;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+@media (max-width: 1600px) {
+    .wrapper i:last-child:active {
+        transform: translateY(-76px) scale(0.85);
+    }
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .wrapper i:first-child {
+        position: relative;
+        order: 2;
+        margin: 20px auto 0 auto;
+    }
+
+    .wrapper i:last-child {
+        position: relative;
+        order: 3;
+        margin: 10px auto 0 auto;
+        transform: translateY(-76px);
+        transition: 0.1s linear;
+    }
+}
+
+@media (max-width: 1240px) {
+
+    .wrapper .carousel {
+        grid-auto-columns: calc((100% / 3) - 10px);
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper .carousel {
+        grid-auto-columns: calc((100% / 2) - 10px);
+    }
+}
+
+@media (max-width: 600px) {
+    .wrapper .carousel {
+        grid-auto-columns: calc((100%) - 10px);
+    }
+}
+
+@media (max-width: 370px) {
+    .wrapper .carousel {
+        grid-auto-columns: 100%;
+    }
+}

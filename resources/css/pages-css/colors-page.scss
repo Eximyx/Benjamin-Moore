@@ -1,0 +1,52 @@
+.colors-wrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(15, 1fr);
+    gap: 2px;
+    height: fit-content;
+    overflow: hidden;
+}
+
+.color-block {
+    height: 120px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.color-block__info {
+    position: relative;
+    width: fit-content;
+    height: 25%;
+    padding: 0 10px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    transition: all 0.2s ease-in-out;
+
+}
+
+.svg-cart {
+    margin: 5px 5px 0 auto;
+    transition: all 0.2s ease-in-out;
+}
+
+.color-block__info p {
+    color: white;
+    font-size: 14px;
+}
+
+.color-block__info h6 {
+    color: white;
+    margin: unset;
+    font-size: 14px;
+}
+
+.hidden {
+    opacity: 0;
+}

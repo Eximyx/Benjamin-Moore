@@ -1,0 +1,93 @@
+@import "../variables";
+
+.button-filled {
+    background-color: $accent-red;
+    color: #fff;
+    border-radius: 10px;
+    border: transparent;
+    height: 45px;
+    padding: 0 1.88rem;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.01875rem;
+    transition: background-color .15s ease-in-out;
+}
+
+.button-filled:hover {
+    background-color: #bb0202;
+}
+
+.button-outlined {
+    background-color: transparent;
+    border-radius: 10px;
+    border: 2px solid $accent-red;
+    color: $accent-red;
+    padding: 0 1.88rem;
+    height: 45px;
+    font-size: 20px;
+    max-width: 200px;
+    transition: all .15s ease-in-out;
+}
+
+.button-outlined:hover {
+    background-color: $accent-red;
+    color: #fff;
+}
+
+.button-outlined a {
+    color: $accent-red;
+}
+
+.sort-buttons__group {
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.sort-buttons__group p {
+    color: $headers-black
+}
+
+.sort-button {
+    border: 1px solid #cacaca;
+    border-radius: 5px;
+    padding: 3px 7px 3px 4px;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    text-decoration: underline;
+    transition: transform .05s ease-in-out;
+}
+
+.sort-button:active {
+    transform: scale(0.95);
+}
+
+.sort-button__image {
+    display: none;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.active-button {
+    display: block;
+}
+
+@media (max-width: 1240px) {
+    .button-outlined {
+        font-size: 16px;
+    }
+
+    .button-filled {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 500px) {
+    .sort-buttons__group p {
+        display: none;
+    }
+}
