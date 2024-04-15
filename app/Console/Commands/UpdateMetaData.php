@@ -52,13 +52,11 @@ class UpdateMetaData extends Command
             $name = $value->getName();
             $uri = $value->uri();
             if ((str_contains($name, 'user')) & (!str_contains($uri, 'admin')) & ($value->methods()[0] == 'GET')) {
+                $this->info($value->uri());
                 if (str_contains($uri, 'slug')) {
                     $key = explode('/', $uri);
                     if (isset($this->entities[$key[0]])) {
                         foreach ($this->entities[$key[0]]::all() as $item) {
-                            if ($key[0] == 'catalog') {
-                                $this->info($item->slug);
-                            }
                             MetaData::factory()->create([
                                 'url' => str_replace('{slug}', $item->slug, $host . '/' . $uri),
                                 'title' => $item->title,
@@ -69,7 +67,7 @@ class UpdateMetaData extends Command
                 }
                 MetaData::factory()->create(
                     [
-                        'url' => ($uri === '/' ? $host : $host . '/') . $uri,
+                        'url' => ($uri === '/' ? $host : $host . '/' . $uri),
                         'title' => __($value->getName()),
                     ]
                 );
