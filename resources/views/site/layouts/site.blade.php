@@ -12,7 +12,7 @@
     <title>{{$data['meta']->title}}</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500&display=swap" rel="stylesheet">
-    @vite('resources/css/style.css')
+    @vite('resources/css/app.scss')
     @vite('resources/js/app.js')
 </head>
 <body>

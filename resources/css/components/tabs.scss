@@ -1,0 +1,86 @@
+
+.tab-container {
+    margin: 40px 0;
+}
+
+.tab {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.tab > input[type="radio"] {
+    display: none;
+}
+
+.tab-content {
+    display: none;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+#tab-btn-1:checked ~ #content-1,
+#tab-btn-2:checked ~ #content-2 {
+    display: block;
+}
+
+.tab > label {
+    font-size: 20px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    cursor: pointer;
+    transition: color .15s ease-in-out, border-color .15s ease-in-out;
+    color: $text-black;
+    background: 0 0;
+    border-bottom: 0.125rem solid transparent;
+}
+
+.tab > label:hover {
+    border-bottom-color: $accent-red;
+}
+
+.tab > input[type="radio"]:checked + label {
+    cursor: default;
+    font-weight: bold;
+    color: $headers-black;
+    border-bottom-color: $accent-red;
+}
+
+.tab-content-block {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.tab-content-block__inner-text {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(auto-fill, 20px);
+    gap: 50px;
+    margin-bottom: 30px;
+}
+
+.tab-content-block__inner-text__headers {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.tab-content-block__inner-text h4 {
+    margin: 0;
+}
+
+.tab-content-block__inner-text__paragraphs {
+    font-size: 20px;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    gap: 30px
+}
+
+.carousel-section {
+    display: flex;
+    flex-direction: column;
+}

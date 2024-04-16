@@ -1,0 +1,117 @@
+
+.reviewsWrapper {
+    max-width: 1460px;
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+}
+
+.reviewsWrapper i {
+    top: 50%;
+    height: 40px;
+    width: 65px;
+    cursor: pointer;
+    font-size: 1.25rem;
+    position: absolute;
+    text-align: center;
+    line-height: 50px;
+    background: transparent;
+    border-radius: 20px;
+    border: 2px solid $accent-red;
+    transform: translateY(-50%);
+    transition: transform 0.1s linear;
+}
+
+.reviewsWrapper i img {
+    height: 40%;
+    padding: 20% 0;
+}
+
+.reviewsWrapper i:where(.left) img {
+    height: 40%;
+    padding: 20% 0;
+    transform: rotate(-180deg);
+}
+
+.reviewsWrapper i:active {
+    transform: translateY(-50%) scale(0.85);
+}
+
+.reviewsWrapper i:first-child {
+    left: -80px;
+}
+
+.reviewsWrapper i:last-child {
+    right: -80px;
+    transition: transform 0.1s linear;
+}
+
+.reviewsWrapper .reviewsCarousel {
+    display: grid;
+    grid-auto-flow: column;
+    width: 100%;
+    grid-auto-columns: calc((100% / 3) - 7px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    scroll-snap-align: center;
+    height: fit-content;
+    padding: 17px 0;
+    gap: 10px;
+    list-style: none;
+    background: transparent;
+    cursor: default;
+    flex-direction: column;
+}
+
+.reviewsCarousel::-webkit-scrollbar {
+    display: none;
+}
+
+.reviewsCarousel.no-transition {
+    scroll-behavior: auto;
+}
+
+@media (max-width: 1600px) {
+    .reviewsWrapper i:active {
+        transform: translateY(-50%) scale(0.85);
+    }
+
+    .reviewsWrapper i:last-child:active {
+        transform: translateY(-76px) scale(0.85);
+    }
+
+    .reviewsWrapper i:first-child {
+        position: relative;
+        order: 2;
+        margin: 20px auto 0 auto;
+    }
+
+    .reviewsWrapper i:last-child {
+        position: relative;
+        order: 3;
+        margin: 10px auto 0 auto;
+        transform: translateY(-76px);
+        transition: 0.1s linear;
+    }
+
+    .reviewsWrapper {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .reviewsWrapper .reviewsCarousel {
+        grid-auto-flow: column;
+        grid-auto-columns: 100%;
+        padding: 10px;
+    }
+
+    .review-card {
+        max-width: unset;
+        cursor: default
+    }
+}

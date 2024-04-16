@@ -1,0 +1,24 @@
+@import "resets";
+@import "variables";
+
+@import "pages-css/main-page";
+@import "pages-css/news-details";
+@import "pages-css/news-page";
+@import "pages-css/catalog-page";
+@import "pages-css/product-details-page";
+@import "pages-css/calculator-page";
+@import "pages-css/contacts-page";
+@import "pages-css/colors-page";
+
+@import "widgets/breadcrumbs";
+@import "widgets/burger";
+@import "widgets/buttons";
+@import "widgets/custom-select";
+@import "widgets/pagination";
+
+@import "components/carousel";
+@import "components/footer";
+@import "components/header";
+@import "components/modal";
+@import "components/reviews-carousel";
+@import "components/tabs";

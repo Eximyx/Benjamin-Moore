@@ -1,0 +1,171 @@
+@import "../variables";
+
+.header {
+    position: relative;
+    display: flex;
+    margin: 0 auto;
+    max-width: 1410px;
+    align-items: center;
+    border-bottom: 2px solid $border-black;
+    color: $text-black;
+    min-height: 85px;
+    justify-content: space-between;
+    z-index: 100;
+}
+
+.header__nav {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.logo-text {
+    font-size: 25px;
+    font-weight: 500;
+    color: $headers-black;
+    margin: 0 30px 0 5px;
+}
+
+.header__nav-buttons {
+    display: flex;
+    gap: 30px;
+    padding: 0;
+}
+
+.header__nav-buttons li {
+    display: flex;
+    align-items: center;
+}
+
+.header__rightside {
+    display: flex
+}
+
+.header__contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-right: 38px;
+}
+
+.header__contacts-time {
+    font-size: 0.8125rem
+}
+
+.header__contacts-telephone a {
+    text-decoration: none;
+    color: $text-black;
+    font-size: 17px;
+    margin-left: 10px;
+}
+
+.header__contacts-telephone {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.nav-button__static-page__content {
+    display: none;
+    background-color: $background-white;
+    min-width: 100px;
+    border-radius: 5px;
+    border: 1px solid #cacaca;
+}
+
+.nav-button__static-page__content a {
+    transition: all .35s ease-in-out;
+    padding: 10px 50px 10px 10px;
+}
+
+.nav-button__static-page__content a:hover {
+    background-color: #dad9d9;
+}
+
+.nav-button__static-page:hover .nav-button__static-page__content {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 58px;
+}
+
+.nav-button__static-page:hover .nav-button__static-page__p::after {
+    transform: rotate(90deg);
+}
+
+.nav-button__static-page__p {
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav-button__static-page__p::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: -17px;
+    width: 15px;
+    height: 15px;
+    background: url("../../icons/arrow-right.svg") no-repeat center;
+    pointer-events: none;
+    transition: 200ms ease
+}
+
+.mobile-header {
+    display: none;
+}
+
+@media (max-width: 1240px) {
+    .menu {
+        display: flex;
+    }
+
+    .header__nav .header__nav-buttons {
+        display: none;
+    }
+
+    .header__contacts-telephone a {
+        font-size: 15px;
+    }
+
+    .header__contacts-telephone img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .header__contacts-time {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header__contacts {
+        display: none;
+    }
+
+    .header-block .button-outlined {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .header__nav .menu {
+        display: none;
+    }
+
+    .header__rightside {
+        display: none;
+    }
+
+    .mobile-header {
+        position: sticky;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $background-white;
+        z-index: 99;
+        padding: 10px 0;
+    }
+}
