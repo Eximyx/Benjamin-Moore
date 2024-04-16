@@ -5,6 +5,7 @@ const seriesButton = document.querySelector('#series-button');
 const colorsButton = document.querySelector('#colors-button');
 const sortAlphabeticButton = document.querySelector('#sortAlphabeticButton');
 const sortNumericButton = document.querySelector('#sortNumericButton');
+const resetFormButton = document.querySelector('#resetForm');
 
 if(accordion){
     accordion.addEventListener('click', () => {
@@ -170,6 +171,15 @@ form.addEventListener('change', function () {
         colorsButton.innerHTML = buttonInnerHtml;
     }
 });
+
+if(resetFormButton){
+    resetFormButton.addEventListener('click', function (){
+        form.reset();
+        jobsButton.innerHTML = buttonInnerHtml;
+        seriesButton.innerHTML = buttonInnerHtml;
+        colorsButton.innerHTML = buttonInnerHtml;
+    });
+}
 
 // TODO: Запросы на выборку
 sortNumericButton.addEventListener('click',  () => {

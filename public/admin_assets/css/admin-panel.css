@@ -99,3 +99,37 @@ input {
     flex-direction: column;
     gap: 15px;
 }
+
+@media (max-width: 1600px) {
+    .login-block {
+        width: 40%;
+    }
+}
+
+@media (max-width: 998px) {
+    .login-block {
+        width: 65%;
+    }
+}
+
+@media (max-width: 560px) {
+    .login-block {
+        width: 80%;
+    }
+}
+
+@media (max-width: 460px) {
+    .login-form .button-filled {
+        width: 100%;
+    }
+
+    .login-block h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .login-block h1 {
+        font-size: 1.5rem;
+    }
+}
