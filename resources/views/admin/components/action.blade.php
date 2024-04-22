@@ -16,7 +16,7 @@
                    style="transform: scale(1.5); "></i>
             </a>
         @endif
-        @if(!str_contains(request()->url(), "metadata"))
+        @if(!str_contains(request()->url(), "metadata") && !str_contains(request()->url(), "static-page"))
             <a href="javascript:void(0);" onClick="deleteFunc({{ $value->id }})" class="m-1 delete btn">
                 <i class="fa fa-trash" style="color: #e74a3b"></i>
             </a>
