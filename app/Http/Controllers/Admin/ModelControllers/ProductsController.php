@@ -111,7 +111,7 @@ class ProductsController extends BaseAdminController
                 'data' => JsonResource::make([
                     'products' => ProductResource::collection($this->service->getLatestPaginated()),
                     'colors' => ColorResource::collection($this->service->getColors()),
-                    'productCategories' => ProductCategoryResource::collection($this->service->getProductCategories()),
+                    'categories' => ProductCategoryResource::collection($this->service->getProductCategories()),
                     'settings' => $this->settings,
                     'meta' => $this->getMetaDataByURL(),
                 ]),

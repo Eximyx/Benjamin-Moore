@@ -30,7 +30,6 @@ class ProductResource extends JsonResource
             'base' => $this['base'],
             'product_category_id' => $this['product_category_id'],
             'main_image' => $this['main_image'],
-            'sub_images' => $this['sub_images'],
         ];
     }
 }
