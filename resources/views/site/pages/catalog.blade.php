@@ -6,7 +6,6 @@
             <img src="{{Vite::asset('resources/icons/filter-icon.svg')}}"
                  alt="filter-icon">@lang('catalog.filter.title')
         </button>
-        {{--30. TODO FRONT Добавить иконки для сортировки по цене и названию--}}
         <form id="catalog" action="" class="catalog-form" enctype="multipart/form-data">
             <label class="form-label" for="jobs">@lang('catalog.filter.jobs')</label>
             <div class="dropdown_with-chk">
@@ -60,7 +59,7 @@
             </div>
             <div class="form-buttons">
                 <button class="button-outlined form-button">@lang("catalog.buttons.submit")</button>
-                <button class="button-filled form-button">@lang("catalog.buttons.reset")</button>
+                <button class="button-filled form-button" >@lang("catalog.buttons.reset")</button>
             </div>
         </form>
         <div id="search-result" class="catalog-wrapper">
