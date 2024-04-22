@@ -178,8 +178,14 @@ if(resetFormButton){
         jobsButton.innerHTML = buttonInnerHtml;
         seriesButton.innerHTML = buttonInnerHtml;
         colorsButton.innerHTML = buttonInnerHtml;
+
+        data.product_category_id = [];
+        data.color_id = [];
+        data.kind_of_work_id = [];
+        selectedColors = {};
     });
 }
+
 
 // TODO: Запросы на выборку
 sortNumericButton.addEventListener('click',  () => {

@@ -59,7 +59,7 @@
             </div>
             <div class="form-buttons">
                 <button class="button-outlined form-button">@lang("catalog.buttons.submit")</button>
-                <button class="button-filled form-button" >@lang("catalog.buttons.reset")</button>
+                <button class="button-filled form-button" id="resetForm">@lang("catalog.buttons.reset")</button>
             </div>
         </form>
         <div id="search-result" class="catalog-wrapper">
