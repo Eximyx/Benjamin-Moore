@@ -44,21 +44,6 @@ abstract class CoreRepository
     }
 
     /**
-     * @param int|null $amount
-     * @return Builder<Model>
-     */
-    public function getLatest(?int $amount = null): Builder
-    {
-        $entities = $this->model::latest();
-
-        if ($amount) {
-            $entities = $entities->take($amount);
-        }
-
-        return $entities;
-    }
-
-    /**
      * @param string|int|null $id
      * @return Model
      */

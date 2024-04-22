@@ -12,6 +12,7 @@ use App\Http\Requests\ProductFilterRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Psr\Container\ContainerExceptionInterface;
@@ -87,10 +88,6 @@ class ProductRepository extends BaseModelRepository
 
         $selectableModelName = $data['selectableModel']->getTable();
 
-        //        $tagsModelName = $data['tagsModel']->getTable();
-
-        //        $intermediateModelName = $data['intermediateModel']->getTable();
-
         $query['join'] = [
             $selectableModelName,
             $this->model->getTable() . '.' . $data['selectable_key'],
@@ -99,16 +96,19 @@ class ProductRepository extends BaseModelRepository
             'left',
         ];
 
-        //        $query['tagsJoin'] = [
-        //            $tagsModelName,
-        //            $intermediateModelName . '.' . 'product_id',
-        //            '=',
-        //            $tagsModelName . 'id',
-        //            'left',
-        //        ];
-
         $query['select'][] = $selectableModelName . '.title as ' . $data['selectable_key'];
 
         return $query;
+    }
+
+    public function getLatest(?int $amount = null): Builder
+    {
+        $entities = $this->model::latest();
+
+        if ($amount) {
+            $entities = $entities->take($amount);
+        }
+
+        return $entities;
     }
 }

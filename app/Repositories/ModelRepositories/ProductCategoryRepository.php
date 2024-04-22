@@ -3,6 +3,7 @@
 namespace App\Repositories\ModelRepositories;
 
 use App\Models\ProductCategory as Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 class ProductCategoryRepository extends BaseModelRepository
@@ -48,5 +49,16 @@ class ProductCategoryRepository extends BaseModelRepository
         $query['select'][] = $selectableModelName . '.title as ' . $data['selectable_key'];
 
         return $query;
+    }
+
+    public function getLatest(?int $amount = null): Builder
+    {
+        $entities = $this->model::latest();
+
+        if ($amount) {
+            $entities = $entities->take($amount);
+        }
+
+        return $entities;
     }
 }

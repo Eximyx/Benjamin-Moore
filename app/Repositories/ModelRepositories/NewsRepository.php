@@ -4,6 +4,7 @@ namespace App\Repositories\ModelRepositories;
 
 use App\Models\NewsPost;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -61,5 +62,16 @@ class NewsRepository extends BaseModelRepository
     public function findBySlug(string $slug): Model
     {
         return $this->model->where('slug', '=', $slug)->firstOrFail();
+    }
+
+    public function getLatest(?int $amount = null): Builder
+    {
+        $entities = $this->model::latest();
+
+        if ($amount) {
+            $entities = $entities->take($amount);
+        }
+
+        return $entities;
     }
 }
