@@ -9,7 +9,7 @@ return [
         'defaultValue' => 'Выберите из списка',
         'kindOfWork' => 'Работы',
         'all' => 'Все',
-        'series' => 'Серия',
+        'series' => 'Серии',
         'colors' => 'Цвета',
         'prices' => [
             'title' => 'Бюджет',
