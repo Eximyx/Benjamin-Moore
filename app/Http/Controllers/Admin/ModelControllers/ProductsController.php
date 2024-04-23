@@ -100,6 +100,7 @@ class ProductsController extends BaseAdminController
     {
         if (request()->ajax()) {
             $data = $this->service->fetchProducts($request);
+            
             return view('site.components.search-result', ['data' => [
                 'products' => ProductResource::collection($data['products']),
                 'categories' => ProductCategoryResource::collection($data['categories']),

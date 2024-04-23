@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 class ProductCategoryFilter extends AbstractFilter
 {
     public const KIND_OF_WORK_ID = 'kind_of_work_id';
+
     public const PRODUCT_CATEGORY_ID = 'product_category_id';
 
     protected function getCallbacks(): array

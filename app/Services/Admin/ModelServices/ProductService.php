@@ -45,7 +45,7 @@ class ProductService extends BaseModelService
     }
 
     /**
-     * @return LengthAwarePaginator<Model>
+     * @return LengthAwarePaginator
      */
     public function getLatestPaginated(): LengthAwarePaginator
     {
@@ -53,18 +53,27 @@ class ProductService extends BaseModelService
     }
 
     /**
-     * @return Collection<int, Model>
+     * @param int $categoryID
+     * @return Collection
      */
     public function getSimilar(int $categoryID): Collection
     {
         return $this->repository->getSimilar($categoryID);
     }
 
+    /**
+     * @param string $slug
+     * @return Model
+     */
     public function findBySlug(string $slug): Model
     {
         return $this->repository->findBySlug($slug);
     }
 
+    /**
+     * @param ModelDTO $dto
+     * @return Model
+     */
     public function create(ModelDTO $dto): Model
     {
         $data = $dto->toArray();
@@ -82,6 +91,11 @@ class ProductService extends BaseModelService
         return $entity;
     }
 
+    /**
+     * @param mixed $image
+     * @param string $id
+     * @return string
+     */
     protected function uploadImage(mixed $image, string $id): string
     {
         if ($image !== null & !is_string($image)) {
@@ -94,6 +108,11 @@ class ProductService extends BaseModelService
         return $image;
     }
 
+    /**
+     * @param Model $entity
+     * @param ModelDTO $dto
+     * @return Model
+     */
     public function update(Model $entity, ModelDTO $dto): Model
     {
         $data = $dto->toArray();
@@ -119,6 +138,10 @@ class ProductService extends BaseModelService
         );
     }
 
+    /**
+     * @param string $image
+     * @return bool
+     */
     protected function deleteImage(string $image): bool
     {
         if (!($image === 'default_post.jpg')) {
@@ -128,10 +151,15 @@ class ProductService extends BaseModelService
         return true;
     }
 
+    /**
+     * @param ModelDTO $dto
+     * @param int $id
+     * @return string|false
+     */
     public function htmlParser(ModelDTO $dto, int $id): string|false
     {
-
         $dom = new DOMDocument();
+
         $dom->loadHTML($dto->content, 9);
 
         $images = $dom->getElementsByTagName('img');
@@ -154,6 +182,10 @@ class ProductService extends BaseModelService
         return $dom->saveHTML();
     }
 
+    /**
+     * @param Request $request
+     * @return Model
+     */
     public function destroy(Request $request): Model
     {
         $entity = parent::destroy($request);
@@ -165,6 +197,10 @@ class ProductService extends BaseModelService
         return $entity;
     }
 
+    /**
+     * @param Request $request
+     * @return Model
+     */
     public function toggle(Request $request): Model
     {
         $entity = $this->findById($request['id']);
@@ -174,6 +210,10 @@ class ProductService extends BaseModelService
         return $this->repository->save($entity);
     }
 
+    /**
+     * @param string $id
+     * @return Model
+     */
     public function findById(string $id): Model
     {
         return $this->repository->findById($id);
@@ -193,6 +233,10 @@ class ProductService extends BaseModelService
         return $variables;
     }
 
+    /**
+     * @param ProductFilterRequest $request
+     * @return array
+     */
     public function fetchProducts(ProductFilterRequest $request): array
     {
         $list['categories'] = $this->repository->fetchCategories($request);
@@ -200,7 +244,6 @@ class ProductService extends BaseModelService
         $list['products'] = $this->repository->fetchProducts($request)->paginate(12);
 
         return $list;
-
     }
 
     /**
@@ -210,5 +253,4 @@ class ProductService extends BaseModelService
     {
         return $this->colorRepository->getAll();
     }
-
 }

@@ -1,5 +1,4 @@
 @if(count($data['products']))
-    {{count($data['categories'])}}
     <div class="search-result__section">
         @if(count($data['categories']) == 1)
             <h2 class="section-title">{{$data['categories'][0]['title']}}</h2>
