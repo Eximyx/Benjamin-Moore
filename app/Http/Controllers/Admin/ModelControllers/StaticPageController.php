@@ -19,6 +19,9 @@ class StaticPageController extends BaseAdminController
 
     use MetaDataTrait;
 
+    /**
+     * @param StaticPageService $service
+     */
     public function __construct(
         StaticPageService $service,
     )
@@ -28,6 +31,10 @@ class StaticPageController extends BaseAdminController
         $this->settings = SettingsResource::make(app(Settings::class));
     }
 
+    /**
+     * @param string $slug
+     * @return View
+     */
     public function show(string $slug): View
     {
         $entity = $this->service->findBySlug($slug);
@@ -41,6 +48,11 @@ class StaticPageController extends BaseAdminController
         return view('site.pages.static-page', ['data' => $data]);
     }
 
+    /**
+     * @param string $id
+     * @param Request $request
+     * @return JsonResource
+     */
     public function update(string $id, Request $request): JsonResource
     {
         $entity = $this->service->findById($id);
@@ -59,6 +71,10 @@ class StaticPageController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResource
+     */
     public function store(Request $request): JsonResource
     {
         $request = app($this->request, $request->all());
@@ -73,6 +89,10 @@ class StaticPageController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResource
+     */
     public function toggle(Request $request): JsonResource
     {
         $entity = $this->service->toggle($request);

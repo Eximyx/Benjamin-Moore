@@ -9,6 +9,9 @@ use App\Services\Admin\ModelServices\PartnersService;
 
 class PartnersController extends BaseAdminController
 {
+    /**
+     * @param PartnersService $service
+     */
     public function __construct(PartnersService $service)
     {
         parent::__construct($service, PartnersDTO::class, PartnersResource::class, PartnersRequest::class);

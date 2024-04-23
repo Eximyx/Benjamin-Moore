@@ -9,6 +9,9 @@ use App\Services\Admin\ModelServices\SectionService;
 
 class SectionsController extends BaseAdminController
 {
+    /**
+     * @param SectionService $service
+     */
     public function __construct(SectionService $service)
     {
         parent::__construct($service, SectionDTO::class, SectionResource::class, SectionRequest::class);

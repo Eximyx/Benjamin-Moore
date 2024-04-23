@@ -23,6 +23,9 @@ class ProductsController extends BaseAdminController
 
     use MetaDataTrait;
 
+    /**
+     * @param ProductService $service
+     */
     public function __construct(
         ProductService $service,
     )
@@ -31,6 +34,10 @@ class ProductsController extends BaseAdminController
         $this->settings = SettingsResource::make(app(Settings::class));
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResource
+     */
     public function toggle(Request $request): JsonResource
     {
         $entity = $this->service->toggle($request);
@@ -38,6 +45,10 @@ class ProductsController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
+    /**
+     * @param string $slug
+     * @return View
+     */
     public function show(string $slug): View
     {
         $entity = $this->service->findBySlug($slug);
@@ -54,6 +65,11 @@ class ProductsController extends BaseAdminController
         return view('site.pages.products-details', ['data' => $data]);
     }
 
+    /**
+     * @param string $id
+     * @param Request $request
+     * @return JsonResource
+     */
     public function update(string $id, Request $request): JsonResource
     {
         $entity = $this->service->findById($id);
@@ -72,7 +88,11 @@ class ProductsController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
-    public function store(Request $request): JsonResponse|JsonResource
+    /**
+     * @param Request $request
+     * @return JsonResponse|JsonResource
+     */
+    public function store(Request $request): JsonResource
     {
         $request = app($this->request, $request->all());
 
@@ -87,6 +107,10 @@ class ProductsController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResource
+     */
     public function destroy(Request $request): JsonResource
     {
         $entity = $this->service->destroy($request);
@@ -96,11 +120,15 @@ class ProductsController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
+    /**
+     * @param ProductFilterRequest $request
+     * @return View|string
+     */
     public function __invoke(ProductFilterRequest $request): View|string
     {
         if (request()->ajax()) {
             $data = $this->service->fetchProducts($request);
-            
+
             return view('site.components.search-result', ['data' => [
                 'products' => ProductResource::collection($data['products']),
                 'categories' => ProductCategoryResource::collection($data['categories']),

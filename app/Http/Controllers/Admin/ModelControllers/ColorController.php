@@ -18,6 +18,9 @@ class ColorController extends BaseAdminController
 
     use MetaDataTrait;
 
+    /**
+     * @param ColorService $service
+     */
     public function __construct(ColorService $service)
     {
         parent::__construct($service, ColorDTO::class, ColorResource::class, ColorRequest::class);

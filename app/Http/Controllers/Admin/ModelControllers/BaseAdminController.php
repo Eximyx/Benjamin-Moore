@@ -9,12 +9,17 @@ namespace App\Http\Controllers\Admin\ModelControllers;
 use App\Http\Controllers\Admin\ResourceController;
 use App\Http\Resources\DataTableResource;
 use App\Services\Admin\ModelServices\BaseModelService;
-use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 
 abstract class BaseAdminController extends ResourceController
 {
+    /**
+     * @param BaseModelService $service
+     * @param string $dto
+     * @param string $resource
+     * @param string $request
+     */
     public function __construct(
         BaseModelService $service,
         string           $dto,
@@ -28,9 +33,9 @@ abstract class BaseAdminController extends ResourceController
     }
 
     /**
-     * @throws Exception
+     * @return JsonResponse|View
      */
-    public function index(): JsonResponse|View
+    public function index(): View
     {
         if (request()->ajax()) {
             return $this->service->ajaxDataTable();

@@ -9,6 +9,9 @@ use App\Services\Admin\ModelServices\MetaDataService;
 
 class MetaDataController extends BaseAdminController
 {
+    /**
+     * @param MetaDataService $service
+     */
     public function __construct(MetaDataService $service)
     {
         parent::__construct($service, MetaDataDTO::class, MetaDataResource::class, CreateMetaDataRequest::class);

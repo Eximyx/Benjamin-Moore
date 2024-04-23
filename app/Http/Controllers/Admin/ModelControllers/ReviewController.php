@@ -11,11 +11,18 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ReviewController extends BaseAdminController
 {
+    /**
+     * @param ReviewService $service
+     */
     public function __construct(ReviewService $service)
     {
         parent::__construct($service, ReviewDTO::class, ReviewResource::class, ReviewRequest::class);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResource
+     */
     public function toggle(Request $request): JsonResource
     {
         $entity = $this->service->toggle($request);

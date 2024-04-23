@@ -9,6 +9,9 @@ use App\Services\Admin\ModelServices\LeadsService;
 
 class LeadsController extends BaseAdminController
 {
+    /**
+     * @param LeadsService $service
+     */
     public function __construct(LeadsService $service)
     {
         parent::__construct($service, LeadDTO::class, LeadResource::class, LeadsRequest::class);

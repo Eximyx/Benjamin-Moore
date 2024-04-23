@@ -9,6 +9,9 @@ use App\Services\Admin\ModelServices\AdminService;
 
 class AdminController extends BaseAdminController
 {
+    /**
+     * @param AdminService $service
+     */
     public function __construct(AdminService $service)
     {
         parent::__construct($service, AdminDTO::class, AdminResource::class, AdminRequest::class);
