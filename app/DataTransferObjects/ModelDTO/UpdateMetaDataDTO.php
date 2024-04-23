@@ -6,14 +6,20 @@ use App\Contracts\ModelDTO;
 
 class UpdateMetaDataDTO implements ModelDTO
 {
+    /**
+     * @param string $url
+     * @param string $title
+     */
     public function __construct(
         public readonly string $url,
         public readonly string $title,
-    ) {
+    )
+    {
     }
 
     /**
-     * @param  array<string, string>  $data
+     * @param array $data
+     * @return UpdateMetaDataDTO
      */
     public static function appRequest(array $data): UpdateMetaDataDTO
     {
@@ -24,6 +30,9 @@ class UpdateMetaDataDTO implements ModelDTO
 
     }
 
+    /**
+     * @return array|mixed[]
+     */
     public function toArray(): array
     {
         return [

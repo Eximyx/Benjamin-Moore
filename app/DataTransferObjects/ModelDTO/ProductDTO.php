@@ -31,6 +31,10 @@ class ProductDTO implements ModelDTO
     {
     }
 
+    /**
+     * @param ProductRequest $request
+     * @return ProductDTO
+     */
     public static function appRequest(ProductRequest $request): ProductDTO
     {
         return new ProductDTO(
@@ -53,6 +57,9 @@ class ProductDTO implements ModelDTO
         );
     }
 
+    /**
+     * @return array|mixed[]
+     */
     public function toArray(): array
     {
         return [

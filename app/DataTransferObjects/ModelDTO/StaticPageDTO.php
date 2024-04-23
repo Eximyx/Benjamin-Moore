@@ -7,12 +7,21 @@ use App\Http\Requests\StaticPageRequest;
 
 class StaticPageDTO implements ModelDTO
 {
+    /**
+     * @param string $title
+     * @param string $content
+     */
     public function __construct(
         public readonly string $title,
-        public string $content,
-    ) {
+        public string          $content,
+    )
+    {
     }
 
+    /**
+     * @param StaticPageRequest $request
+     * @return StaticPageDTO
+     */
     public static function appRequest(StaticPageRequest $request): StaticPageDTO
     {
         return new StaticPageDTO(
@@ -21,6 +30,9 @@ class StaticPageDTO implements ModelDTO
         );
     }
 
+    /**
+     * @return array|mixed[]
+     */
     public function toArray(): array
     {
         return [

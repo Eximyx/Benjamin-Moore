@@ -7,14 +7,25 @@ use App\Http\Requests\CreateMetaDataRequest;
 
 class MetaDataDTO implements ModelDTO
 {
+    /**
+     * @param string|null $meta_description
+     * @param string|null $meta_keywords
+     * @param string|null $h
+     * @param string|null $additional_text
+     */
     public function __construct(
         public readonly ?string $meta_description,
         public readonly ?string $meta_keywords,
         public readonly ?string $h,
         public readonly ?string $additional_text,
-    ) {
+    )
+    {
     }
 
+    /**
+     * @param CreateMetaDataRequest $request
+     * @return MetaDataDTO
+     */
     public static function appRequest(CreateMetaDataRequest $request): MetaDataDTO
     {
         return new MetaDataDTO(
@@ -25,6 +36,9 @@ class MetaDataDTO implements ModelDTO
         );
     }
 
+    /**
+     * @return array|mixed[]
+     */
     public function toArray(): array
     {
         return [

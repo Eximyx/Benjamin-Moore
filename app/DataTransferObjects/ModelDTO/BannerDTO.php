@@ -9,12 +9,19 @@ use Illuminate\Http\UploadedFile;
 
 class BannerDTO implements ModelDTO
 {
+    /**
+     * @param string $title
+     * @param string $content
+     * @param string|null $banner_position_id
+     * @param UploadedFile|string|null $image
+     */
     public function __construct(
-        public readonly string $title,
-        public readonly string $content,
-        public readonly ?string $banner_position_id,
+        public readonly string                   $title,
+        public readonly string                   $content,
+        public readonly ?string                  $banner_position_id,
         public readonly UploadedFile|string|null $image,
-    ) {
+    )
+    {
     }
 
     public static function appRequest(BannerRequest $request): BannerDTO

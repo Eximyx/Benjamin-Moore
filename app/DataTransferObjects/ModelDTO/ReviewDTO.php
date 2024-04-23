@@ -7,6 +7,10 @@ use App\Http\Requests\ReviewRequest;
 
 class ReviewDTO implements ModelDTO
 {
+    /**
+     * @param string $name
+     * @param string|null $description
+     */
     public function __construct(
         public readonly string  $name,
         public readonly ?string $description,
@@ -14,6 +18,10 @@ class ReviewDTO implements ModelDTO
     {
     }
 
+    /**
+     * @param ReviewRequest $request
+     * @return ReviewDTO
+     */
     public static function appRequest(ReviewRequest $request): ReviewDTO
     {
         return new ReviewDTO(
@@ -22,6 +30,9 @@ class ReviewDTO implements ModelDTO
         );
     }
 
+    /**
+     * @return array|mixed[]
+     */
     public function toArray(): array
     {
         return [

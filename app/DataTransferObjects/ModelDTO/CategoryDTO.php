@@ -7,11 +7,19 @@ use App\Http\Requests\NewsCategoryRequest;
 
 class CategoryDTO implements ModelDTO
 {
+    /**
+     * @param string $title
+     */
     public function __construct(
         public readonly string $title,
-    ) {
+    )
+    {
     }
 
+    /**
+     * @param NewsCategoryRequest $request
+     * @return CategoryDTO
+     */
     public static function appRequest(NewsCategoryRequest $request): CategoryDTO
     {
         return new CategoryDTO(
@@ -19,6 +27,9 @@ class CategoryDTO implements ModelDTO
         );
     }
 
+    /**
+     * @return string[]
+     */
     public function toArray(): array
     {
         return [

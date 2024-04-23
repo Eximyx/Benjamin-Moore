@@ -7,13 +7,23 @@ use App\Http\Requests\AuthRequest;
 
 class AuthDTO implements ModelDTO
 {
+    /**
+     * @param string $name
+     * @param string $email
+     * @param string $password
+     */
     public function __construct(
         public readonly string $name,
         public readonly string $email,
         public readonly string $password,
-    ) {
+    )
+    {
     }
 
+    /**
+     * @param AuthRequest $request
+     * @return AuthDTO
+     */
     public static function appRequest(AuthRequest $request): AuthDTO
     {
         return new AuthDTO(
@@ -24,6 +34,9 @@ class AuthDTO implements ModelDTO
 
     }
 
+    /**
+     * @return array|mixed[]
+     */
     public function toArray(): array
     {
         return [

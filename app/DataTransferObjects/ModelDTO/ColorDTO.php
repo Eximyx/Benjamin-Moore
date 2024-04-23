@@ -7,12 +7,21 @@ use App\Http\Requests\ColorRequest;
 
 class ColorDTO implements ModelDTO
 {
+    /**
+     * @param string $title
+     * @param string $hex_code
+     */
     public function __construct(
         public readonly string $title,
         public readonly string $hex_code,
-    ) {
+    )
+    {
     }
 
+    /**
+     * @param ColorRequest $request
+     * @return ColorDTO
+     */
     public static function appRequest(ColorRequest $request): ColorDTO
     {
         return new ColorDTO(
@@ -21,6 +30,9 @@ class ColorDTO implements ModelDTO
         );
     }
 
+    /**
+     * @return array|mixed[]
+     */
     public function toArray(): array
     {
         return [

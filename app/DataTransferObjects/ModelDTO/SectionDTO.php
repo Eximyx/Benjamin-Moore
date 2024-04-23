@@ -7,6 +7,11 @@ use App\Http\Requests\SectionRequest;
 
 class SectionDTO implements ModelDTO
 {
+    /**
+     * @param string $title
+     * @param string|null $section_position_id
+     * @param string $content
+     */
     public function __construct(
         public readonly string  $title,
         public readonly ?string $section_position_id,
@@ -15,6 +20,10 @@ class SectionDTO implements ModelDTO
     {
     }
 
+    /**
+     * @param SectionRequest $request
+     * @return SectionDTO
+     */
     public static function appRequest(SectionRequest $request): SectionDTO
     {
         return new SectionDTO(
@@ -25,6 +34,9 @@ class SectionDTO implements ModelDTO
 
     }
 
+    /**
+     * @return array|mixed[]
+     */
     public function toArray(): array
     {
         return [

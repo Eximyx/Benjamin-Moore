@@ -7,6 +7,10 @@ use App\Http\Requests\ProductCategoryRequest;
 
 class ProductCategoryDTO implements ModelDTO
 {
+    /**
+     * @param string $title
+     * @param string|null $kind_of_work_id
+     */
     public function __construct(
         public readonly string  $title,
         public readonly ?string $kind_of_work_id,
@@ -14,6 +18,10 @@ class ProductCategoryDTO implements ModelDTO
     {
     }
 
+    /**
+     * @param ProductCategoryRequest $request
+     * @return ProductCategoryDTO
+     */
     public static function appRequest(ProductCategoryRequest $request): ProductCategoryDTO
     {
         return new ProductCategoryDTO(
@@ -22,6 +30,9 @@ class ProductCategoryDTO implements ModelDTO
         );
     }
 
+    /**
+     * @return array|mixed[]
+     */
     public function toArray(): array
     {
         return [
