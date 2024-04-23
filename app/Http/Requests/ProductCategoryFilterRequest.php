@@ -14,6 +14,8 @@ class ProductCategoryFilterRequest extends FormRequest
         return [
             'kind_of_work_id' => 'nullable|array',
             'kind_of_work_id.*' => 'sometimes|required|string',
+            'product_category_id' => 'nullable|array',
+            'product_category_id.*' => 'sometimes|required|string',
         ];
     }
 }

@@ -49,10 +49,8 @@ class ProductRepository extends BaseModelRepository
     public function fetchCategories(ProductFilterRequest $request): Collection
     {
         $data = $request->validated();
-
-        $kind_of_work_id = $data['kind_of_work_id'] ?? [1, 2];
-
-        $filter = app()->make(ProductCategoryFilter::class, ['queryParams' => ['kind_of_work_id' => $kind_of_work_id]]);
+        
+        $filter = app()->make(ProductCategoryFilter::class, ['queryParams' => array_filter($data)]);
 
         return ProductCategory::filter($filter)->get();
     }

@@ -7,7 +7,7 @@ const sortAlphabeticButton = document.querySelector('#sortAlphabeticButton');
 const sortNumericButton = document.querySelector('#sortNumericButton');
 const resetFormButton = document.querySelector('#resetForm');
 
-if(accordion){
+if (accordion) {
     accordion.addEventListener('click', () => {
         body.classList.toggle('active');
     });
@@ -32,7 +32,7 @@ let selectedColors = {};
 let count = 0;
 let buttonInnerHtml = jobsButton.innerHTML;
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     let checkboxes = body.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
         checkbox.checked = false;
@@ -141,7 +141,7 @@ form.addEventListener('change', function () {
             delete selectedColors[color];
         });
 
-        data.color_id.forEach((el)=> {
+        data.color_id.forEach((el) => {
             let labelElement = document.querySelector(`[for='C_${el}']`);
             let divElement = labelElement.querySelector('div');
             selectedColors[el] = window.getComputedStyle(divElement).getPropertyValue('background-color');
@@ -172,8 +172,8 @@ form.addEventListener('change', function () {
     }
 });
 
-if(resetFormButton){
-    resetFormButton.addEventListener('click', function (){
+if (resetFormButton) {
+    resetFormButton.addEventListener('click', function () {
         form.reset();
         jobsButton.innerHTML = buttonInnerHtml;
         seriesButton.innerHTML = buttonInnerHtml;
@@ -188,8 +188,8 @@ if(resetFormButton){
 
 
 // TODO: Запросы на выборку
-sortNumericButton.addEventListener('click',  () => {
-   const buttonImages = sortNumericButton.querySelectorAll('.sort-button__image');
+sortNumericButton.addEventListener('click', () => {
+    const buttonImages = sortNumericButton.querySelectorAll('.sort-button__image');
     buttonImages.forEach(image => {
         if (image.classList.contains('active-button')) {
             image.classList.remove('active-button');

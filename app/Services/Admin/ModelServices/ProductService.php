@@ -64,7 +64,7 @@ class ProductService extends BaseModelService
     {
         return $this->repository->findBySlug($slug);
     }
-    
+
     public function create(ModelDTO $dto): Model
     {
         $data = $dto->toArray();

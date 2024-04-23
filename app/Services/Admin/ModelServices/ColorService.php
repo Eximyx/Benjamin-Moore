@@ -34,8 +34,6 @@ class ColorService extends BaseModelService
      */
     public function getOrderedByHexColor(): Collection
     {
-
-
         $colors = $this->sortColors($this->getAll());
 
         return Collection::make($colors);
