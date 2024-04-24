@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
+    /**
+     * @return void
+     */
     public function run(): void
     {
         app(CustomSeederService::class)->run();

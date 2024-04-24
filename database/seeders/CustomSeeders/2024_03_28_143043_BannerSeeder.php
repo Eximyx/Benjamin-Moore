@@ -9,6 +9,8 @@ use Illuminate\Database\Seeder;
 return new class extends Seeder {
     /** TODO Banner_IMAGE
      * Run the database seeds.
+     *
+     * @return void
      */
     public function run(): void
     {
