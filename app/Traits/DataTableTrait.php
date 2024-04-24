@@ -35,6 +35,10 @@ trait DataTableTrait
             ->addIndexColumn();
     }
 
+    /**
+     * @param array $data
+     * @return array
+     */
     public function getDatatableColumns(array $data): array
     {
         $columns = [];

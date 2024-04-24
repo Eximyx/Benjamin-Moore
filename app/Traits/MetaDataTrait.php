@@ -12,6 +12,9 @@ use Illuminate\Database\Eloquent\Model;
 
 trait MetaDataTrait
 {
+    /**
+     * @var array|string[]
+     */
     protected array $entities = [
         StaticPage::class => '/',
         Product::class => '/catalog/',
@@ -20,6 +23,9 @@ trait MetaDataTrait
 
     protected MetaDataService $metaDataService;
 
+    /**
+     * @return MetaDataResource
+     */
     public function getMetaDataByURL(): MetaDataResource
     {
         $this->metaDataService = $this->injectMetaDataService();
@@ -31,6 +37,9 @@ trait MetaDataTrait
         );
     }
 
+    /**
+     * @return MetaDataService
+     */
     public function injectMetaDataService(): MetaDataService
     {
         if (empty($this->metaDataService)) {
@@ -40,13 +49,18 @@ trait MetaDataTrait
         return $this->metaDataService;
     }
 
+    /**
+     * @param string $slug
+     * @param Model $entity
+     * @return void
+     */
     public function updateMetaData(string $slug, Model $entity): void
     {
         $this->metaDataService = $this->injectMetaDataService();
 
         $metaData = $this->metaDataService->findBySlug($slug) ?? null;
 
-        if (! empty($metaData)) {
+        if (!empty($metaData)) {
             $url = explode('/', $metaData['url']);
 
             $url[count($url) - 1] = $entity['slug'];
@@ -62,11 +76,15 @@ trait MetaDataTrait
         }
     }
 
+    /**
+     * @param Model $entity
+     * @return void
+     */
     public function createMetaData(Model $entity): void
     {
         $this->metaDataService = $this->injectMetaDataService();
 
-        $url = route('user.main.index').$this->entities[$entity::class].$entity['slug'];
+        $url = route('user.main.index') . $this->entities[$entity::class] . $entity['slug'];
 
         $dto = UpdateMetaDataDTO::appRequest([
             'url' => $url,
@@ -76,6 +94,10 @@ trait MetaDataTrait
         $this->metaDataService->create($dto);
     }
 
+    /**
+     * @param Model $entity
+     * @return Model
+     */
     public function deleteMetaData(Model $entity): Model
     {
         $this->metaDataService = $this->injectMetaDataService();
