@@ -11,8 +11,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class UpdateSlug extends Command
 {
+    /**
+     * @var string
+     */
     protected $signature = 'app:update-slug';
 
+    /**
+     * @var string
+     */
     protected $description = 'Updating the slug of all existing entities that contain it';
 
     /**
@@ -30,6 +36,9 @@ class UpdateSlug extends Command
         ];
     }
 
+    /**
+     * @return void
+     */
     public function handle(): void
     {
         foreach ($this->arrayOfSluggableModels as $model) {

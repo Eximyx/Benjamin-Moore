@@ -10,6 +10,9 @@ class ProductCategoryFilter extends AbstractFilter
 
     public const PRODUCT_CATEGORY_ID = 'product_category_id';
 
+    /**
+     * @return array[]
+     */
     protected function getCallbacks(): array
     {
         return [
@@ -18,12 +21,22 @@ class ProductCategoryFilter extends AbstractFilter
         ];
     }
 
-    public function kindOfWorkId(Builder $builder, $value)
+    /**
+     * @param Builder $builder
+     * @param $value
+     * @return void
+     */
+    public function kindOfWorkId(Builder $builder, $value): void
     {
         $builder->whereIn('kind_of_work_id', $value);
     }
 
-    public function productCategoryId(Builder $builder, $value)
+    /**
+     * @param Builder $builder
+     * @param $value
+     * @return void
+     */
+    public function productCategoryId(Builder $builder, $value): void
     {
         $builder->whereIn('id', $value);
     }

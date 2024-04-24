@@ -14,6 +14,9 @@ class ProductFilter extends AbstractFilter
 
     public const COLOR_ID = 'color_id';
 
+    /**
+     * @return array[]
+     */
     protected function getCallbacks(): array
     {
         return [
@@ -24,21 +27,41 @@ class ProductFilter extends AbstractFilter
         ];
     }
 
+    /**
+     * @param Builder $builder
+     * @param $value
+     * @return void
+     */
     public function productCategoryId(Builder $builder, $value): void
     {
         $builder->whereIn('product_category_id', $value);
     }
 
+    /**
+     * @param Builder $builder
+     * @param $value
+     * @return void
+     */
     public function kindOfWorkId(Builder $builder, $value): void
     {
         $builder->whereHas('productCategory', fn($query) => $query->whereIn('kind_of_work_id', $value))->get();
     }
 
+    /**
+     * @param Builder $builder
+     * @param $value
+     * @return void
+     */
     public function colorId(Builder $builder, $value): void
     {
         $builder->whereHas('colors', fn($query) => $query->whereIn('color_id', $value))->get();
     }
 
+    /**
+     * @param Builder $builder
+     * @param $value
+     * @return void
+     */
     public function price(Builder $builder, $value): void
     {
         $value['from'] = $value['from'] ?? '0';
