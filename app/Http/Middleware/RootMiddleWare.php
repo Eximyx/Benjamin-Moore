@@ -9,6 +9,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RootMiddleWare
 {
+    /**
+     * @param Request $request
+     * @param Closure $next
+     * @return Response
+     */
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::user()['user_role_id'] !== 3) {

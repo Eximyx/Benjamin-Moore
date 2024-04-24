@@ -9,9 +9,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserSessionMidlleware
 {
+    /**
+     * @param Request $request
+     * @param Closure $next
+     * @return Response
+     */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! Auth::check()) {
+        if (!Auth::check()) {
             return $next($request);
         }
         if ($request->getPathInfo() === '/logout') {
