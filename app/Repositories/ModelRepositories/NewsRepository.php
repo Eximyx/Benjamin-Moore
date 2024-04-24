@@ -54,16 +54,27 @@ class NewsRepository extends BaseModelRepository
         return $query;
     }
 
+    /**
+     * @return LengthAwarePaginator
+     */
     public function paginate(): LengthAwarePaginator
     {
         return $this->model->paginate();
     }
 
+    /**
+     * @param string $slug
+     * @return Model
+     */
     public function findBySlug(string $slug): Model
     {
         return $this->model->where('slug', '=', $slug)->firstOrFail();
     }
 
+    /**
+     * @param int|null $amount
+     * @return Builder
+     */
     public function getLatest(?int $amount = null): Builder
     {
         $entities = $this->model::latest();

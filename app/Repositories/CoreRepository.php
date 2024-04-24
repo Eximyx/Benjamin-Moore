@@ -4,12 +4,16 @@
 
 namespace App\Repositories;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class CoreRepository
 {
+    /**
+     * @var Model|Application|\Illuminate\Foundation\Application|mixed
+     */
     protected Model $model;
 
     public function __construct(
@@ -63,6 +67,7 @@ abstract class CoreRepository
 
     /**
      * @param array<string,mixed> $data
+     * @return Model
      */
     public function create(array $data): Model
     {
@@ -72,6 +77,7 @@ abstract class CoreRepository
 
     /**
      * @param array<string, mixed> $data
+     * @return Model
      */
     public function update(Model $entity, array $data): Model
     {

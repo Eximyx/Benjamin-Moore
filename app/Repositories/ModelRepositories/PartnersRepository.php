@@ -12,6 +12,10 @@ class PartnersRepository extends BaseModelRepository
         parent::__construct(Model::class);
     }
 
+    /**
+     * @param int|null $amount
+     * @return Builder
+     */
     public function getLatest(?int $amount = null): Builder
     {
         $entities = $this->model::latest();

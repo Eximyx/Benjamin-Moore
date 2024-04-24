@@ -51,6 +51,10 @@ class ProductCategoryRepository extends BaseModelRepository
         return $query;
     }
 
+    /**
+     * @param int|null $amount
+     * @return Builder
+     */
     public function getLatest(?int $amount = null): Builder
     {
         $entities = $this->model::latest();

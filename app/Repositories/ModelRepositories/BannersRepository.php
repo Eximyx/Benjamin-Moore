@@ -15,6 +15,10 @@ class BannersRepository extends BaseModelRepository
         parent::__construct(Banner::class);
     }
 
+    /**
+     * @param string|null $bannerPositionId
+     * @return void
+     */
     public function nullPosition(?string $bannerPositionId = null): void
     {
         if ($bannerPositionId) {
@@ -67,7 +71,6 @@ class BannersRepository extends BaseModelRepository
 
     /**
      * @return Collection<int, Model>
-     *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
@@ -76,6 +79,10 @@ class BannersRepository extends BaseModelRepository
         return $this->model->where('banner_position_id', '<>', 'null')->get();
     }
 
+    /**
+     * @param int $id
+     * @return Model
+     */
     public function getBannerByPositionId(int $id): Model
     {
         return $this->model->where('banner_position_id', '=', $id)->firstOrFail();

@@ -56,7 +56,6 @@ class SectionRepository extends BaseModelRepository
 
     /**
      * @return Collection<int, Model>
-     *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */

@@ -13,7 +13,8 @@ class ColorProductRepository extends BaseModelRepository
     }
 
     /**
-     * @return array<int, int>
+     * @param string $id
+     * @return array
      */
     public function getColorIds(string $id): array
     {

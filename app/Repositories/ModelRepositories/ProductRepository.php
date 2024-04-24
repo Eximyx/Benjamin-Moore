@@ -25,6 +25,10 @@ class ProductRepository extends BaseModelRepository
         parent::__construct(Product::class);
     }
 
+    /**
+     * @param string $slug
+     * @return Model
+     */
     public function findBySlug(string $slug): Model
     {
         return $this->model->where('slug', '=', $slug)->firstOrFail();
@@ -32,7 +36,6 @@ class ProductRepository extends BaseModelRepository
 
     /**
      * @return Collection<int, Model>
-     *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
@@ -43,19 +46,20 @@ class ProductRepository extends BaseModelRepository
 
     /**
      * @return Collection<int, ProductCategory>
-     *
      * @throws BindingResolutionException
      */
     public function fetchCategories(ProductFilterRequest $request): Collection
     {
         $data = $request->validated();
-        
+
         $filter = app()->make(ProductCategoryFilter::class, ['queryParams' => array_filter($data)]);
 
         return ProductCategory::filter($filter)->get();
     }
 
     /**
+     * @param ProductFilterRequest $request
+     * @return mixed
      * @throws BindingResolutionException
      */
     public function fetchProducts(ProductFilterRequest $request): mixed
@@ -67,6 +71,9 @@ class ProductRepository extends BaseModelRepository
         return Product::filter($filter);
     }
 
+    /**
+     * @return Collection
+     */
     public function getAllForDatatable(): Collection
     {
         $data = $this->modelData;
@@ -80,6 +87,10 @@ class ProductRepository extends BaseModelRepository
         return $entities->select(...$query['select'])->get();
     }
 
+    /**
+     * @param array $data
+     * @return array|mixed[][]
+     */
     public function queryForDatatable(array $data): array
     {
         $query = parent::queryForDatatable($data);
@@ -99,6 +110,10 @@ class ProductRepository extends BaseModelRepository
         return $query;
     }
 
+    /**
+     * @param int|null $amount
+     * @return Builder
+     */
     public function getLatest(?int $amount = null): Builder
     {
         $entities = $this->model::latest();
