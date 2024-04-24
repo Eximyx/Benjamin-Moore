@@ -12,6 +12,9 @@ use Illuminate\Validation\Rules\Password;
 
 class AppServiceProvider extends ServiceProvider
 {
+    /**
+     * @return void
+     */
     public function register(): void
     {
         $this->app->singleton(Settings::class, function () {
@@ -19,6 +22,9 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 
+    /**
+     * @return void
+     */
     public function boot(): void
     {
         Paginator::defaultView('vendor.pagination.bootstrap-5');

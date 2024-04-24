@@ -12,6 +12,9 @@ class RouteServiceProvider extends ServiceProvider
 {
     public const HOME = '/';
 
+    /**
+     * @return void
+     */
     public function boot(): void
     {
         RateLimiter::for('api', function (Request $request) {
