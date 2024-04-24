@@ -12,9 +12,10 @@ class ContactsService
 {
     public function __construct(
         protected MetaDataRepository $metaDataRepository,
-        protected BannersRepository $bannersRepository,
+        protected BannersRepository  $bannersRepository,
         protected PartnersRepository $partnersRepository,
-    ) {
+    )
+    {
     }
 
     /**
@@ -25,11 +26,18 @@ class ContactsService
         return $this->partnersRepository->getLatest()->get();
     }
 
+    /**
+     * @param int $id
+     * @return Model
+     */
     public function getBannerByPositionId(int $id): Model
     {
         return $this->bannersRepository->getBannerByPositionId($id);
     }
 
+    /**
+     * @return Model|null
+     */
     public function metaDataFindByURL(): ?Model
     {
         return $this->metaDataRepository->findByUrl(

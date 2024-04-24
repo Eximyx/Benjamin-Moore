@@ -29,6 +29,11 @@ class ProductCategoryService extends BaseModelService
         return $variables;
     }
 
+    /**
+     * @param Request $request
+     * @return Model
+     * @throws Exception
+     */
     public function destroy(Request $request): Model
     {
         $entity = $this->findById($request['id']);

@@ -2,11 +2,11 @@
 
 namespace App\Services\Admin\ModelServices;
 
-use _PHPStan_11268e5ee\Nette\Neon\Exception;
 use App\Contracts\ModelDTO;
 use App\Repositories\ModelRepositories\SectionRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Exceptions\Exception;
 
 class SectionService extends BaseModelService
 {
@@ -15,11 +15,15 @@ class SectionService extends BaseModelService
         parent::__construct($repository);
     }
 
+    /**
+     * @param ModelDTO $dto
+     * @return Model
+     */
     public function create(ModelDTO $dto): Model
     {
         $data = $dto->toArray();
 
-        if (! empty($dto['section_position_id'])) {
+        if (!empty($dto['section_position_id'])) {
             $this->repository->nullPosition($data['section_position_id']);
         }
 
@@ -27,13 +31,15 @@ class SectionService extends BaseModelService
     }
 
     /**
+     * @param Request $request
+     * @return Model
      * @throws Exception
      */
     public function destroy(Request $request): Model
     {
         $entity = $this->findById($request['id']);
 
-        if (! isset($entity->section_position_id)) {
+        if (!isset($entity->section_position_id)) {
             $this->repository->destroy($entity);
         } else {
             throw new Exception(__('errors.sections.position'), 422);
@@ -42,6 +48,9 @@ class SectionService extends BaseModelService
         return $entity;
     }
 
+    /**
+     * @return array|mixed[]
+     */
     public function getVariablesForDataTable(): array
     {
         $variables = parent::getVariablesForDataTable();

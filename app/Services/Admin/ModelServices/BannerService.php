@@ -2,12 +2,12 @@
 
 namespace App\Services\Admin\ModelServices;
 
-use _PHPStan_11268e5ee\Nette\Neon\Exception;
 use App\Contracts\ModelDTO;
 use App\Repositories\ModelRepositories\BannersRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Exceptions\Exception;
 
 class BannerService extends BaseModelService
 {
@@ -16,6 +16,10 @@ class BannerService extends BaseModelService
         parent::__construct($repository);
     }
 
+    /**
+     * @param ModelDTO $dto
+     * @return Model
+     */
     public function create(ModelDTO $dto): Model
     {
         $data = $dto->toArray();
@@ -31,6 +35,10 @@ class BannerService extends BaseModelService
         return $this->repository->save($entity);
     }
 
+    /**
+     * @param string $image
+     * @return bool
+     */
     protected function deleteImage(string $image): bool
     {
         if (!($image === 'default_post.jpg')) {
@@ -40,6 +48,11 @@ class BannerService extends BaseModelService
         return true;
     }
 
+    /**
+     * @param mixed $image
+     * @param string $id
+     * @return string
+     */
     protected function uploadImage(mixed $image, string $id): string
     {
         $path = 'image/banners/' . $id . '/';
@@ -54,6 +67,11 @@ class BannerService extends BaseModelService
         return $image;
     }
 
+    /**
+     * @param Model $entity
+     * @param ModelDTO $dto
+     * @return Model
+     */
     public function update(Model $entity, ModelDTO $dto): Model
     {
         $data = $dto->toArray();
@@ -78,6 +96,8 @@ class BannerService extends BaseModelService
     }
 
     /**
+     * @param Request $request
+     * @return Model
      * @throws Exception
      */
     public function destroy(Request $request): Model

@@ -18,6 +18,7 @@ abstract class BaseModelService extends CoreService
     }
 
     /**
+     * @return JsonResponse
      * @throws Exception
      */
     public function ajaxDataTable(): JsonResponse

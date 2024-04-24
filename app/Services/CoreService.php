@@ -16,6 +16,10 @@ abstract class CoreService
     {
     }
 
+    /**
+     * @param ModelDTO $dto
+     * @return Model
+     */
     public function create(ModelDTO $dto): Model
     {
         $dto = $dto->toArray();
@@ -23,6 +27,11 @@ abstract class CoreService
         return $this->repository->create($dto);
     }
 
+    /**
+     * @param Model $entity
+     * @param ModelDTO $dto
+     * @return Model
+     */
     public function update(Model $entity, ModelDTO $dto): Model
     {
         $dto = $dto->toArray();
@@ -33,6 +42,10 @@ abstract class CoreService
         );
     }
 
+    /**
+     * @param Request $request
+     * @return Model
+     */
     public function destroy(Request $request): Model
     {
         $entity = $this->findById($request['id']);
@@ -42,6 +55,10 @@ abstract class CoreService
         return $entity;
     }
 
+    /**
+     * @param string $id
+     * @return Model
+     */
     public function findById(string $id): Model
     {
         return $this->repository->findById($id);

@@ -33,7 +33,6 @@ class MainService
 
     /**
      * @return Collection<int, Model>
-     *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
@@ -44,7 +43,6 @@ class MainService
 
     /**
      * @return Collection<int, Model>
-     *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
@@ -80,6 +78,9 @@ class MainService
         return $this->reviewRepository->getLatest($amount)->get();
     }
 
+    /**
+     * @return Model|null
+     */
     public function metaDataFindByURL(): ?Model
     {
         return $this->metaDataRepository->findByUrl(

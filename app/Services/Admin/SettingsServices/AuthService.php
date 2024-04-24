@@ -13,9 +13,15 @@ class AuthService
 {
     public function __construct(
         protected AuthRepository $repository
-    ) {
+    )
+    {
     }
 
+    /**
+     * @param User $entity
+     * @param AuthDTO $dto
+     * @return User
+     */
     public function update(User $entity, AuthDTO $dto): User
     {
         $dto = $dto->toArray();
@@ -27,11 +33,13 @@ class AuthService
     }
 
     /**
+     * @param Request $request
+     * @return Void
      * @throws ValidationException
      */
     public function authAttempt(Request $request): void
     {
-        if (! Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+        if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
             ]);

@@ -16,6 +16,11 @@ class StaticPageService extends BaseModelService
         parent::__construct($repository);
     }
 
+    /**
+     * @param Model $entity
+     * @param ModelDTO $dto
+     * @return Model
+     */
     public function update(Model $entity, ModelDTO $dto): Model
     {
         $dto = $this->htmlParser($dto, $entity['id']);
@@ -23,6 +28,11 @@ class StaticPageService extends BaseModelService
         return parent::update($entity, $dto);
     }
 
+    /**
+     * @param ModelDTO $dto
+     * @param int $id
+     * @return ModelDTO
+     */
     public function htmlParser(ModelDTO $dto, int $id): ModelDTO
     {
         $dom = new DOMDocument();
@@ -50,11 +60,19 @@ class StaticPageService extends BaseModelService
         return $dto;
     }
 
+    /**
+     * @param string $slug
+     * @return Model|null
+     */
     public function findBySlug(string $slug): ?Model
     {
         return $this->repository->findBySlug($slug);
     }
 
+    /**
+     * @param Request $request
+     * @return Model|null
+     */
     public function toggle(Request $request): ?Model
     {
         $entity = $this->findById($request['id']);

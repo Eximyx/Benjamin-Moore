@@ -13,6 +13,10 @@ class ReviewService extends BaseModelService
         parent::__construct($repository);
     }
 
+    /**
+     * @param Request $request
+     * @return Model|null
+     */
     public function toggle(Request $request): ?Model
     {
         $entity = $this->findById($request['id']);

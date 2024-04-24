@@ -9,9 +9,13 @@ class CalculatorService
 {
     public function __construct(
         protected MetaDataRepository $metaDataRepository,
-    ) {
+    )
+    {
     }
 
+    /**
+     * @return Model|null
+     */
     public function metaDataFindByURL(): ?Model
     {
         return $this->metaDataRepository->findByUrl(

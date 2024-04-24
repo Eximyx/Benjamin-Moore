@@ -11,6 +11,9 @@ class AdminService extends BaseModelService
         parent::__construct($adminRepository);
     }
 
+    /**
+     * @return array|mixed[]
+     */
     public function getVariablesForDataTable(): array
     {
         $variables = parent::getVariablesForDataTable();

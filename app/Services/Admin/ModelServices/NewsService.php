@@ -23,11 +23,19 @@ class NewsService extends BaseModelService
         parent::__construct($repository);
     }
 
+    /**
+     * @param string $slug
+     * @return Model
+     */
     public function findBySlug(string $slug): Model
     {
         return $this->repository->findBySlug($slug);
     }
 
+    /**
+     * @param ModelDTO $dto
+     * @return Model
+     */
     public function create(ModelDTO $dto): Model
     {
         $data = $dto->toArray();
@@ -45,13 +53,18 @@ class NewsService extends BaseModelService
         return $entity;
     }
 
+    /**
+     * @param mixed $image
+     * @param string $id
+     * @return string
+     */
     protected function uploadImage(mixed $image, string $id): string
     {
-        $path = 'image/news/' . $id. '/';
+        $path = 'image/news/' . $id . '/';
 
         if ($image !== null & !is_string($image)) {
-            Storage::put('public/'. $path, $image);
-            $image = 'storage/'.$path . $image->hashName();
+            Storage::put('public/' . $path, $image);
+            $image = 'storage/' . $path . $image->hashName();
         } else {
             $image = 'default_post.jpg';
         }
@@ -59,6 +72,11 @@ class NewsService extends BaseModelService
         return $image;
     }
 
+    /**
+     * @param ModelDTO $dto
+     * @param int $id
+     * @return string|false
+     */
     public function htmlParser(ModelDTO $dto, int $id): string|false
     {
 
@@ -85,6 +103,11 @@ class NewsService extends BaseModelService
         return $dom->saveHTML();
     }
 
+    /**
+     * @param Model $entity
+     * @param ModelDTO $dto
+     * @return Model
+     */
     public function update(Model $entity, ModelDTO $dto): Model
     {
         $data = $dto->toArray();
@@ -104,15 +127,23 @@ class NewsService extends BaseModelService
         );
     }
 
+    /**
+     * @param string $image
+     * @return bool
+     */
     public function deleteImage(string $image): bool
     {
         if (!($image === 'default_post.jpg')) {
-            Storage::delete(str_replace("storage/","public/",  $image));
+            Storage::delete(str_replace("storage/", "public/", $image));
         }
 
         return true;
     }
 
+    /**
+     * @param Request $request
+     * @return Model
+     */
     public function toggle(Request $request): Model
     {
         $entity = $this->findById($request['id']);
@@ -123,6 +154,7 @@ class NewsService extends BaseModelService
     }
 
     /**
+     * @param int|null $amount
      * @return Builder<Model>
      */
     public function getLatest(?int $amount = null): Builder

@@ -22,6 +22,9 @@ class ColorService extends BaseModelService
         parent::__construct($repository);
     }
 
+    /**
+     * @return Model|null
+     */
     public function metaDataFindByURL(): ?Model
     {
         return $this->metaDataRepository->findByUrl(

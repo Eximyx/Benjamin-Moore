@@ -17,12 +17,17 @@ class SettingsService
 
     public function __construct(
         protected SettingsRepository $settingsRepository,
-    ) {
+    )
+    {
     }
 
+    /**
+     * @param SettingsDTO $dto
+     * @return Settings
+     */
     public function settingsSet(SettingsDTO $dto): Settings
     {
-        $dto = (array) $dto;
+        $dto = (array)$dto;
 
         $this->uploadFilesForAboutUs($dto['files']);
 
@@ -30,12 +35,13 @@ class SettingsService
     }
 
     /**
-     * @param  array<int, UploadedFile|string>  $data
+     * @param array<int, UploadedFile|string> $data
+     * @return Void
      */
     public function uploadFilesForAboutUs(array $data): void
     {
         foreach ($data as $value) {
-            if (! is_string($value)) {
+            if (!is_string($value)) {
                 Storage::putFileAs(
                     'public/image/sections', $value,
                     $value->getClientOriginalName());
@@ -43,6 +49,9 @@ class SettingsService
         }
     }
 
+    /**
+     * @return Settings|null
+     */
     public function settingsFetch(): ?Settings
     {
         return $this->settingsRepository->first();

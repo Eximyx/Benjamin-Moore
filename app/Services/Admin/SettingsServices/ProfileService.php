@@ -15,6 +15,11 @@ class ProfileService
     {
     }
 
+    /**
+     * @param Model $user
+     * @param ModelDTO $dto
+     * @return Model
+     */
     public function update(Model $user, ModelDTO $dto): Model
     {
         return $this->repository->update(
@@ -23,6 +28,9 @@ class ProfileService
         );
     }
 
+    /**
+     * @return Model
+     */
     public function getCurrentUser(): Model
     {
         return $this->repository->findById(Auth::id());
