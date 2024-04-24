@@ -10,6 +10,9 @@ class UserRoles extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     protected $table = 'user_roles';
 
     /**

@@ -10,8 +10,14 @@ class SectionPosition extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     protected $table = 'section_positions';
 
+    /**
+     * @var bool
+     */
     protected $guarded = false;
 
     /**

@@ -10,13 +10,15 @@ class Category extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     protected $table = 'categories';
 
+    /**
+     * @var bool
+     */
     protected $guarded = false;
-
-    protected $fillable = [
-        'title',
-    ];
 
     /**
      * @return HasMany<NewsPost>
@@ -25,4 +27,11 @@ class Category extends Model
     {
         return $this->hasMany(NewsPost::class, 'category_id', 'id');
     }
+
+    /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'title',
+    ];
 }

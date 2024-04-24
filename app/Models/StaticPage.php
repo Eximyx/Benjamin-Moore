@@ -10,10 +10,19 @@ class StaticPage extends Model
 {
     use HasFactory, Sluggable;
 
+    /**
+     * @var string
+     */
     protected $table = 'static_pages';
 
+    /**
+     * @var bool
+     */
     protected $guarded = false;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'title',
         'content',

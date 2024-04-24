@@ -13,6 +13,11 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
+     * @var string
+     */
+    protected $table = 'users';
+
+    /**
      * @return BelongsTo<UserRoles, User>,
      */
     public function userRoles(): BelongsTo
@@ -20,6 +25,9 @@ class User extends Authenticatable
         return $this->belongsTo(UserRoles::class, 'user_role_id', 'id');
     }
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'name',
         'email',
@@ -27,15 +35,19 @@ class User extends Authenticatable
         'user_role_id',
     ];
 
+    /**
+     * @var string[]
+     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
+    /**
+     * @var string[]
+     */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    protected $table = 'users';
 }

@@ -10,14 +10,15 @@ class Color extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     protected $table = 'colors';
 
+    /**
+     * @var bool
+     */
     protected $guarded = false;
-
-    protected $fillable = [
-        'title',
-        'hex_code',
-    ];
 
     /**
      * @return BelongsToMany<Product, Color>
@@ -26,4 +27,12 @@ class Color extends Model
     {
         return $this->belongsToMany(Product::class, 'color_products', 'color_id', 'product_id');
     }
+    
+    /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'title',
+        'hex_code',
+    ];
 }

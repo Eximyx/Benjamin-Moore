@@ -9,8 +9,14 @@ class Settings extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     protected $table = 'settings';
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'email',
         'phone',

@@ -12,15 +12,15 @@ class ProductCategory extends Model
 {
     use Filterable, HasFactory;
 
+    /**
+     * @var string
+     */
     protected $table = 'product_categories';
 
+    /**
+     * @var bool
+     */
     protected $guarded = false;
-
-    protected $fillable = [
-        'title',
-        'content',
-        'kind_of_work_id',
-    ];
 
     /**
      * @return HasMany<Product>
@@ -37,4 +37,13 @@ class ProductCategory extends Model
     {
         return $this->belongsTo(KindOfWork::class, 'kind_of_work_id', 'id');
     }
+
+    /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'title',
+        'content',
+        'kind_of_work_id',
+    ];
 }

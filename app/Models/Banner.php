@@ -10,15 +10,10 @@ class Banner extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     protected $table = 'banners';
-
-    protected $fillable = [
-        'title',
-        'content',
-        'position',
-        'banner_position_id',
-        'image',
-    ];
 
     /**
      * @return BelongsTo<BannerPosition>
@@ -27,4 +22,15 @@ class Banner extends Model
     {
         return $this->belongsTo(BannerPosition::class, 'banner_position_id', 'banner_position_id');
     }
+
+    /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'title',
+        'content',
+        'position',
+        'banner_position_id',
+        'image',
+    ];
 }

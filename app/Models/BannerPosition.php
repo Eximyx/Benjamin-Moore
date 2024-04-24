@@ -10,8 +10,14 @@ class BannerPosition extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     protected $table = 'banner_positions';
 
+    /**
+     * @var bool
+     */
     protected $guarded = false;
 
     /**

@@ -12,19 +12,15 @@ class NewsPost extends Model
 {
     use HasFactory, Sluggable, SoftDeletes;
 
+    /**
+     * @var string
+     */
     protected $table = 'news_posts';
 
+    /**
+     * @var bool
+     */
     protected $guarded = false;
-
-    protected $fillable = [
-        'title',
-        'content',
-        'is_toggled',
-        'user_name',
-        'main_image',
-        'description',
-        'category_id',
-    ];
 
     /**
      * @return BelongsTo<Category, NewsPost>
@@ -45,4 +41,17 @@ class NewsPost extends Model
             ],
         ];
     }
+
+    /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'title',
+        'content',
+        'is_toggled',
+        'user_name',
+        'main_image',
+        'description',
+        'category_id',
+    ];
 }

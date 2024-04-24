@@ -9,10 +9,19 @@ class Partners extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     protected $table = 'partners';
 
+    /**
+     * @var bool
+     */
     protected $guarded = false;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'title',
         'location',

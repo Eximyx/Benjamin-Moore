@@ -13,28 +13,15 @@ class Product extends Model
 {
     use Filterable, HasFactory, Sluggable;
 
+    /**
+     * @var string
+     */
     protected $table = 'products';
 
+    /**
+     * @var bool
+     */
     protected $guarded = false;
-
-    protected $fillable = [
-        'title',
-        'content',
-        'is_toggled',
-        'main_image',
-        'code',
-        'price',
-        'gloss_level',
-        'description',
-        'type',
-        'colors',
-        'base',
-        'v_of_dry_remain',
-        'time_to_repeat',
-        'consumption',
-        'thickness',
-        'product_category_id',
-    ];
 
     /**
      * @return BelongsTo<ProductCategory, Product>
@@ -63,4 +50,26 @@ class Product extends Model
             ],
         ];
     }
+
+    /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'title',
+        'content',
+        'is_toggled',
+        'main_image',
+        'code',
+        'price',
+        'gloss_level',
+        'description',
+        'type',
+        'colors',
+        'base',
+        'v_of_dry_remain',
+        'time_to_repeat',
+        'consumption',
+        'thickness',
+        'product_category_id',
+    ];
 }

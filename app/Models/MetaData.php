@@ -10,8 +10,14 @@ class MetaData extends Model
 {
     use HasFactory, SoftDeletes;
 
+    /**
+     * @var string
+     */
     protected $table = 'meta_data';
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'url',
         'title',

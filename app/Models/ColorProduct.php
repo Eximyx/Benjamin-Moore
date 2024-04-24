@@ -9,7 +9,13 @@ class ColorProduct extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     protected $table = 'color_products';
 
+    /**
+     * @var bool
+     */
     protected $guarded = false;
 }

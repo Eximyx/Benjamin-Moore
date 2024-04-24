@@ -10,8 +10,14 @@ class KindOfWork extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     protected $table = 'kind_of_work';
 
+    /**
+     * @var bool
+     */
     protected $guarded = false;
 
     /**
