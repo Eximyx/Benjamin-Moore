@@ -20,6 +20,10 @@ class NewsController extends BaseAdminController
 
     use MetaDataTrait;
 
+    /**
+     * @param MetaDataService $metaDataService
+     * @param NewsService $service
+     */
     public function __construct(
         protected MetaDataService $metaDataService,
         NewsService               $service,
@@ -29,6 +33,10 @@ class NewsController extends BaseAdminController
         $this->settings = SettingsResource::make(app(Settings::class));
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResource
+     */
     public function toggle(Request $request): JsonResource
     {
         $entity = $this->service->toggle($request);
@@ -36,6 +44,11 @@ class NewsController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
+    /**
+     * @param string $id
+     * @param Request $request
+     * @return JsonResource
+     */
     public function update(string $id, Request $request): JsonResource
     {
         $entity = $this->service->findById($id);
@@ -54,6 +67,10 @@ class NewsController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResource
+     */
     public function store(Request $request): JsonResource
     {
         $request = app($this->request, $request->all());
@@ -68,11 +85,14 @@ class NewsController extends BaseAdminController
         return $this->resource::make($entity);
     }
 
+    /**
+     * @return View
+     */
     public function __invoke(): View
     {
         return view('site.pages.news',
             [
-                'data' => SettingsResource::make(
+                'data' => JsonResource::make(
                     [
                         'newsPosts' => $this->service->getLatest()->paginate(9),
                         'settings' => $this->settings,
@@ -82,6 +102,10 @@ class NewsController extends BaseAdminController
             ]);
     }
 
+    /**
+     * @param string $slug
+     * @return View
+     */
     public function show(string $slug): View
     {
         $entity = $this->service->findBySlug($slug);
@@ -99,6 +123,10 @@ class NewsController extends BaseAdminController
         return view('site.pages.news-details', ['data' => $data]);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResource
+     */
     public function destroy(Request $request): JsonResource
     {
         $entity = $this->service->destroy($request);
