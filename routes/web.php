@@ -43,6 +43,7 @@ Route::controller(AuthController::class)->middleware('user')->group(function () 
     Route::post('login', 'loginAction')->name('login.action');
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
-
+Route::get('/erik', [ProductsController::class, 'erik']);
 Route::get('/{slug}', [StaticPageController::class, 'show'])->name('user.static.page.show');
+
 

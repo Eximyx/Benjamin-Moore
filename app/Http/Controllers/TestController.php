@@ -3,47 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Actions\WrapItems;
-use App\Http\Filters\ProductCategoryFilter;
-use App\Http\Requests\ProductCategoryFilterRequest;
 use App\Http\Requests\ProductFilterRequest;
-use App\Models\ProductCategory;
+use App\Http\Resources\ModelResources\ColorResource;
+use App\Http\Resources\ModelResources\ProductCategoryResource;
+use App\Http\Resources\ModelResources\ProductResource;
+use App\Services\Admin\ModelServices\ProductService;
+use App\Traits\MetaDataTrait;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Routing\Controller;
 
 class TestController extends Controller
 {
-    public function test()
-    {
-        return view('test', compact(''));
-    }
+    use MetaDataTrait;
+    
+    protected ProductService $service;
 
-    public function index()
+    public function __construct(ProductService $service)
     {
-        return view('erik');
+        $this->service = $service;
     }
 
     public function erik(ProductFilterRequest $request)
     {
-        $data = $request->validated();
-        //        dd($data);
-        /*dd(array_filter($data['kind_of_work_id']));*/
+        $data = $this->service->fetchProducts($request);
 
-        $filter = app()->make(ProductCategoryFilter::class, ['queryParams' => ['kind_of_work_id' => $data['kind_of_work_id']]]);
-
-        $products = ProductCategory::filter($filter)->get();
-        //dd(['queryParams' => ['kind_of_work_id' => $data['kind_of_work_id']]]);
-        dd($products, $request->query());
-
-    }
-
-    public function erikEr(ProductCategoryFilterRequest $request)
-    {
-        $data = $request->validated();
-        //        dd($data);
-        $filter = app()->make(ProductCategoryFilter::class, ['queryParams' => array_filter($data)]);
-
-        $products = ProductCategory::filter($filter)->get();
-
-        dd($products, $request->query());
+        return view('site.pages.catalog',
+            [
+                'data' => JsonResource::make([
+                    'products' => ProductResource::collection($data['products']),
+                    'colors' => ColorResource::collection($this->service->getColors()),
+                    'categories' => ProductCategoryResource::collection($data['categories']),
+                    'meta' => $this->getMetaDataByURL(),
+                ]),
+            ]
+        );
 
     }
 }

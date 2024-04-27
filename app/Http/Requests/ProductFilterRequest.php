@@ -21,6 +21,7 @@ class ProductFilterRequest extends FormRequest
             'price.from' => 'nullable|sometimes|numeric',
             'color_id' => 'nullable|array',
             'color_id.*' => 'sometimes|required|numeric|exists:colors,id',
+            'order' => 'nullable|string',
         ];
     }
 }

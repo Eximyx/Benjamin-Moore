@@ -14,6 +14,8 @@ class ProductFilter extends AbstractFilter
 
     public const COLOR_ID = 'color_id';
 
+    public const ORDER = 'order';
+
     /**
      * @return array[]
      */
@@ -24,6 +26,7 @@ class ProductFilter extends AbstractFilter
             self::PRICE => [$this, 'price'],
             self::KIND_OF_WORK_ID => [$this, 'kindOfWorkId'],
             self::COLOR_ID => [$this, 'colorId'],
+            self::ORDER => [$this, 'order'],
         ];
     }
 
@@ -71,5 +74,10 @@ class ProductFilter extends AbstractFilter
             fn(Builder $subQuery) => $subQuery->whereBetween('price', [$value['from'], $value['to']]),
             fn(Builder $subQuery) => $subQuery->where('price', '>=', $value['from']),
         )->get();
+    }
+
+    public function order(Builder $builder, $value): void
+    {
+        $builder->orderBy(stristr($value, ':', true), substr($value, strpos($value, ':') + 1))->get();
     }
 }
