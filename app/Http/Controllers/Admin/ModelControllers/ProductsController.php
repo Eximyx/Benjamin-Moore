@@ -147,22 +147,4 @@ class ProductsController extends BaseAdminController
             ]
         );
     }
-
-    public function erik(ProductFilterRequest $request)
-    {
-        $data = $this->service->fetchProducts($request);
-
-        return view('site.pages.catalog',
-            [
-                'data' => JsonResource::make([
-                    'products' => ProductResource::collection($data['products']),
-                    'colors' => ColorResource::collection($this->service->getColors()),
-                    'categories' => ProductCategoryResource::collection($data['categories']),
-                    'settings' => $this->settings,
-                    'meta' => $this->getMetaDataByURL(),
-                ]),
-            ]
-        );
-
-    }
 }

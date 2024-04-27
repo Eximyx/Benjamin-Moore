@@ -209,9 +209,3 @@ sortAlphabeticButton.addEventListener('click', () => {
         }
     });
 });
-
-
-
-
-
-
