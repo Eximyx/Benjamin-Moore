@@ -26,7 +26,9 @@ let data = {
     "product_category_id": [],
     "price[from]": "",
     "price[to]": "",
+    "order": "",
 };
+let sortedData = {};
 
 let selectedColors = {};
 let count = 0;
@@ -51,6 +53,9 @@ let fetchFormData = (element) => {
             }
         } else {
             data[element.name] = element.value;
+            console.log(element.name);
+            console.log(element.value);
+            console.log(data);
         }
     }
 };
@@ -92,9 +97,14 @@ async function paginatorAjax() {
 
 paginatorAjax();
 
-async function ajax(page) {
+async function ajax(page, sorted = false) {
+    let formData = {};
 
-    let formData = objectToFormData(data);
+    if (sorted) {
+        formData = objectToFormData(data);
+    } else {
+        formData = objectToFormData(sortedData);
+    }
 
     let response = await fetch(`?page=${page}`, {
         method: "POST",
@@ -118,6 +128,7 @@ async function ajax(page) {
 form.addEventListener("submit", async function (e) {
     e.preventDefault();
     await ajax(page);
+    sortedData = data;
 });
 
 
@@ -188,24 +199,36 @@ if (resetFormButton) {
 
 
 // TODO: Запросы на выборку
-sortNumericButton.addEventListener('click', () => {
+sortNumericButton.addEventListener('click', function (e) {
     const buttonImages = sortNumericButton.querySelectorAll('.sort-button__image');
     buttonImages.forEach(image => {
         if (image.classList.contains('active-button')) {
+            e.target.value = "price:asc";
+            fetchFormData(e.target);
             image.classList.remove('active-button');
+            ajax(page, true);
         } else {
+            e.target.value = "price:desc";
+            fetchFormData(e.target);
             image.classList.add('active-button');
+            ajax(page, true);
         }
     });
 });
 
-sortAlphabeticButton.addEventListener('click', () => {
+sortAlphabeticButton.addEventListener('click', function (e) {
     const buttonImages = sortAlphabeticButton.querySelectorAll('.sort-button__image');
     buttonImages.forEach(image => {
         if (image.classList.contains('active-button')) {
+            e.target.value = "title:desc";
+            fetchFormData(e.target);
             image.classList.remove('active-button');
+            ajax(page, true);
         } else {
+            e.target.value = "title:asc";
+            fetchFormData(e.target);
             image.classList.add('active-button');
+            ajax(page, true);
         }
     });
 });
