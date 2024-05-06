@@ -5,21 +5,19 @@ namespace App\Traits;
 use App\DataTransferObjects\ModelDTO\UpdateMetaDataDTO;
 use App\Facades\MetaData;
 use App\Http\Resources\ModelResources\MetaDataResource;
-use App\Models\NewsPost;
-use App\Models\Product;
-use App\Models\StaticPage;
 use Illuminate\Database\Eloquent\Model;
 
 trait MetaDataTrait
 {
     /**
-     * @var array|string[]
+     * @var array<string>
      */
-    protected array $entities = [
-        StaticPage::class => '/',
-        Product::class => '/catalog/',
-        NewsPost::class => '/news/',
-    ];
+    protected array $entities;
+
+    public function initializeEntities(): void
+    {
+        $this->entities = config('meta_data');
+    }
 
     /**
      * @return MetaDataResource
@@ -64,6 +62,8 @@ trait MetaDataTrait
      */
     public function createMetaData(Model $entity): void
     {
+        $this->initializeEntities();
+        
         $url = route('user.main.index') . $this->entities[$entity::class] . $entity['slug'];
 
         $dto = UpdateMetaDataDTO::appRequest([
