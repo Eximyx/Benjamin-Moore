@@ -3,11 +3,11 @@
 namespace App\Traits;
 
 use App\DataTransferObjects\ModelDTO\UpdateMetaDataDTO;
+use App\Facades\MetaData;
 use App\Http\Resources\ModelResources\MetaDataResource;
 use App\Models\NewsPost;
 use App\Models\Product;
 use App\Models\StaticPage;
-use App\Services\Admin\ModelServices\MetaDataService;
 use Illuminate\Database\Eloquent\Model;
 
 trait MetaDataTrait
@@ -21,32 +21,16 @@ trait MetaDataTrait
         NewsPost::class => '/news/',
     ];
 
-    protected MetaDataService $metaDataService;
-
     /**
      * @return MetaDataResource
      */
     public function getMetaDataByURL(): MetaDataResource
     {
-        $this->metaDataService = $this->injectMetaDataService();
-
         return MetadataResource::make(
-            $this->metaDataService->findByURL(
+            MetaData::findByURL(
                 request()->url()
             )
         );
-    }
-
-    /**
-     * @return MetaDataService
-     */
-    public function injectMetaDataService(): MetaDataService
-    {
-        if (empty($this->metaDataService)) {
-            $this->metaDataService = app(MetaDataService::class);
-        }
-
-        return $this->metaDataService;
     }
 
     /**
@@ -56,9 +40,7 @@ trait MetaDataTrait
      */
     public function updateMetaData(string $slug, Model $entity): void
     {
-        $this->metaDataService = $this->injectMetaDataService();
-
-        $metaData = $this->metaDataService->findBySlug($slug) ?? null;
+        $metaData = MetaData::findBySlug($slug) ?? null;
 
         if (!empty($metaData)) {
             $url = explode('/', $metaData['url']);
@@ -70,7 +52,7 @@ trait MetaDataTrait
                 'title' => $entity['title'],
             ]);
 
-            $this->metaDataService->update($metaData, $dto);
+            MetaData::update($metaData, $dto);
         } else {
             $this->createMetaData($entity);
         }
@@ -82,8 +64,6 @@ trait MetaDataTrait
      */
     public function createMetaData(Model $entity): void
     {
-        $this->metaDataService = $this->injectMetaDataService();
-
         $url = route('user.main.index') . $this->entities[$entity::class] . $entity['slug'];
 
         $dto = UpdateMetaDataDTO::appRequest([
@@ -91,7 +71,7 @@ trait MetaDataTrait
             'title' => $entity->title,
         ]);
 
-        $this->metaDataService->create($dto);
+        MetaData::create($dto);
     }
 
     /**
@@ -100,8 +80,6 @@ trait MetaDataTrait
      */
     public function deleteMetaData(Model $entity): Model
     {
-        $this->metaDataService = $this->injectMetaDataService();
-
-        return $this->metaDataService->destroyWithEntity($entity['slug']);
+        return MetaData::destroyWithEntity($entity['slug']);
     }
 }
