@@ -35,7 +35,7 @@ abstract class BaseAdminController extends ResourceController
     /**
      * @return JsonResponse|View
      */
-    public function index(): View
+    public function index(): JsonResponse|View
     {
         if (request()->ajax()) {
             return $this->service->ajaxDataTable();
