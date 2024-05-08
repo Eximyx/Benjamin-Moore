@@ -78,84 +78,21 @@
             <div class="wrapper">
                 <i class="left"><img src="../assets/icons/arrow-right.svg" alt="arrow left"></i>
                 <ul class="carousel">
-                    <li class="card">
-                        <div class="product-card">
-                            <img src="../assets/images/paint-can.png" alt="paint can">
-                            <h4 class="product-card__header">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</h4>
-                            <p class="product-card__details">Степень блеска «полуглянцевая»</p>
-                            <div class="product-card__price-block">
-                                <p class="product-card__price-block__price">$ 5199.00</p>
-                                <a href="product-details.html">
-                                    <button class="button-filled">Заказать</button>
-                                </a>
+                    @foreach($data['similar'] as $similar)
+                        <li class="card">
+                            <div class="product-card">
+                                <img src="{{Vite::asset("resources/images/paint-can.png")}}" alt="paint can">
+                                <h4 class="product-card__header">{{$similar->title}}</h4>
+                                <p class="product-card__details">{{$similar->gloss_level}}</p>
+                                <div class="product-card__price-block">
+                                    <p class="product-card__price-block__price">${{$similar->price}}</p>
+                                    <a href="{{route('user.catalog.show', $similar->slug)}}">
+                                        <button class="button-filled">@lang('catalog.buttons.order')</button>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="product-card">
-                            <img src="../assets/images/paint-can.png" alt="paint can">
-                            <h4 class="product-card__header">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</h4>
-                            <p class="product-card__details">Степень блеска «полуглянцевая»</p>
-                            <div class="product-card__price-block">
-                                <p class="product-card__price-block__price">$ 5199.00</p>
-                                <a href="product-details.html">
-                                    <button class="button-filled">Заказать</button>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="product-card">
-                            <img src="../assets/images/paint-can.png" alt="paint can">
-                            <h4 class="product-card__header">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</h4>
-                            <p class="product-card__details">Степень блеска «полуглянцевая»</p>
-                            <div class="product-card__price-block">
-                                <p class="product-card__price-block__price">$ 5199.00</p>
-                                <a href="product-details.html">
-                                    <button class="button-filled">Заказать</button>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="product-card">
-                            <img src="../assets/images/paint-can.png" alt="paint can">
-                            <h4 class="product-card__header">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</h4>
-                            <p class="product-card__details">Степень блеска «полуглянцевая»</p>
-                            <div class="product-card__price-block">
-                                <p class="product-card__price-block__price">$ 5199.00</p>
-                                <a href="product-details.html">
-                                    <button class="button-filled">Заказать</button>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="product-card">
-                            <img src="../assets/images/paint-can.png" alt="paint can">
-                            <h4 class="product-card__header">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</h4>
-                            <p class="product-card__details">Степень блеска «полуглянцевая»</p>
-                            <div class="product-card__price-block">
-                                <p class="product-card__price-block__price">$ 5199.00</p>
-                                <a href="product-details.html">
-                                    <button class="button-filled">Заказать</button>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="product-card">
-                            <img src="../assets/images/paint-can.png" alt="paint can">
-                            <h4 class="product-card__header">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</h4>
-                            <p class="product-card__details">Степень блеска «полуглянцевая»</p>
-                            <div class="product-card__price-block">
-                                <p class="product-card__price-block__price">$ 5199.00</p>
-                                <a href="product-details.html">
-                                    <button class="button-filled">Заказать</button>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                    @endforeach
                 </ul>
                 <i class="right"><img src="../assets/icons/arrow-right.svg" alt="arrow right"></i>
             </div>
@@ -165,84 +102,21 @@
             <div class="recommendedWrapper wrapper">
                 <i class="left"><img src="../assets/icons/arrow-right.svg" alt="arrow left"></i>
                 <ul class="carousel">
-                    <li class="card">
-                        <div class="product-card">
-                            <img src="../assets/images/paint-can.png" alt="paint can">
-                            <h4 class="product-card__header">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</h4>
-                            <p class="product-card__details">Степень блеска «полуглянцевая»</p>
-                            <div class="product-card__price-block">
-                                <p class="product-card__price-block__price">$ 5199.00</p>
-                                <a href="product-details.html">
-                                    <button class="button-filled">Заказать</button>
-                                </a>
+                    @foreach($data['latest'] as $latest)
+                        <li class="card">
+                            <div class="product-card">
+                                <img src="{{Vite::asset("resources/images/paint-can.png")}}" alt="paint can">
+                                <h4 class="product-card__header">{{$latest->title}}</h4>
+                                <p class="product-card__details">С{{$latest->gloss_level}}</p>
+                                <div class="product-card__price-block">
+                                    <p class="product-card__price-block__price">${{$latest->price}}</p>
+                                    <a href="{{route('user.catalog.show', $latest->slug)}}">
+                                        <button class="button-filled">@lang('catalog.buttons.order')</button>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="product-card">
-                            <img src="../assets/images/paint-can.png" alt="paint can">
-                            <h4 class="product-card__header">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</h4>
-                            <p class="product-card__details">Степень блеска «полуглянцевая»</p>
-                            <div class="product-card__price-block">
-                                <p class="product-card__price-block__price">$ 5199.00</p>
-                                <a href="product-details.html">
-                                    <button class="button-filled">Заказать</button>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="product-card">
-                            <img src="../assets/images/paint-can.png" alt="paint can">
-                            <h4 class="product-card__header">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</h4>
-                            <p class="product-card__details">Степень блеска «полуглянцевая»</p>
-                            <div class="product-card__price-block">
-                                <p class="product-card__price-block__price">$ 5199.00</p>
-                                <a href="product-details.html">
-                                    <button class="button-filled">Заказать</button>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="product-card">
-                            <img src="../assets/images/paint-can.png" alt="paint can">
-                            <h4 class="product-card__header">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</h4>
-                            <p class="product-card__details">Степень блеска «полуглянцевая»</p>
-                            <div class="product-card__price-block">
-                                <p class="product-card__price-block__price">$ 5199.00</p>
-                                <a href="product-details.html">
-                                    <button class="button-filled">Заказать</button>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="product-card">
-                            <img src="../assets/images/paint-can.png" alt="paint can">
-                            <h4 class="product-card__header">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</h4>
-                            <p class="product-card__details">Степень блеска «полуглянцевая»</p>
-                            <div class="product-card__price-block">
-                                <p class="product-card__price-block__price">$ 5199.00</p>
-                                <a href="product-details.html">
-                                    <button class="button-filled">Заказать</button>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="product-card">
-                            <img src="../assets/images/paint-can.png" alt="paint can">
-                            <h4 class="product-card__header">Ben® Premium Interior Latex Semi-Gloss Finish (W627)</h4>
-                            <p class="product-card__details">Степень блеска «полуглянцевая»</p>
-                            <div class="product-card__price-block">
-                                <p class="product-card__price-block__price">$ 5199.00</p>
-                                <a href="product-details.html">
-                                    <button class="button-filled">Заказать</button>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                    @endforeach
                 </ul>
                 <i class="right"><img src="../assets/icons/arrow-right.svg" alt="arrow right"></i>
             </div>
