@@ -6,6 +6,9 @@ const colorsButton = document.querySelector('#colors-button');
 const sortAlphabeticButton = document.querySelector('#sortAlphabeticButton');
 const sortNumericButton = document.querySelector('#sortNumericButton');
 const resetFormButton = document.querySelector('#resetForm');
+const seriesBlock = document.querySelector('#series');
+const seriesCheckboxes = seriesBlock.querySelectorAll('input[type="checkbox"]')
+const searchResultTitle = document.querySelector(".search-result__section .section-title")
 
 if (accordion) {
     accordion.addEventListener('click', () => {
@@ -33,6 +36,7 @@ let sortedData = {};
 let selectedColors = {};
 let count = 0;
 let buttonInnerHtml = jobsButton.innerHTML;
+let searchSectionInnerHtml = searchResultTitle.innerHTML;
 
 document.addEventListener("DOMContentLoaded", function () {
     let checkboxes = body.querySelectorAll('input[type="checkbox"]');
@@ -131,7 +135,6 @@ form.addEventListener("submit", async function (e) {
     sortedData = data;
 });
 
-
 form.addEventListener('change', function () {
     if (data.kind_of_work_id.length > 0) {
         jobsButton.innerHTML = `Выбрано: ${data.kind_of_work_id.length}`;
@@ -181,6 +184,7 @@ form.addEventListener('change', function () {
         selectedColors = {};
         colorsButton.innerHTML = buttonInnerHtml;
     }
+
 });
 
 if (resetFormButton) {
@@ -196,7 +200,6 @@ if (resetFormButton) {
         selectedColors = {};
     });
 }
-
 
 // TODO: Запросы на выборку
 sortNumericButton.addEventListener('click', function (e) {
@@ -229,6 +232,18 @@ sortAlphabeticButton.addEventListener('click', function (e) {
             fetchFormData(e.target);
             image.classList.add('active-button');
             ajax(page, true);
+        }
+    });
+});
+
+seriesCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', function() {
+        const checkedCheckboxes = seriesBlock.querySelectorAll('input[type="checkbox"]:checked');
+        if (checkedCheckboxes.length === 1) {
+            searchResultTitle.innerHTML = this.nextElementSibling.textContent.trim();
+        }
+        else {
+            searchResultTitle.innerHTML = searchSectionInnerHtml;
         }
     });
 });
