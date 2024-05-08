@@ -31,7 +31,7 @@ let data = {
     "price[to]": "",
     "order": "",
 };
-let sortedData = data;
+let sortedData = {};
 
 let selectedColors = {};
 let count = 0;
@@ -57,6 +57,9 @@ let fetchFormData = (element) => {
             }
         } else {
             data[element.name] = element.value;
+            console.log(element.name);
+            console.log(element.value);
+            console.log(data);
         }
     }
 };
@@ -102,9 +105,9 @@ async function ajax(page, sorted = false) {
     let formData = {};
 
     if (sorted) {
-        formData = objectToFormData(sortedData);
-    } else {
         formData = objectToFormData(data);
+    } else {
+        formData = objectToFormData(sortedData);
     }
 
     let response = await fetch(`?page=${page}`, {
@@ -204,15 +207,16 @@ sortNumericButton.addEventListener('click', function (e) {
     buttonImages.forEach(image => {
         if (image.classList.contains('active-button')) {
             e.target.value = "price:asc";
+            fetchFormData(e.target);
             image.classList.remove('active-button');
+            ajax(page, true);
         } else {
             e.target.value = "price:desc";
+            fetchFormData(e.target);
             image.classList.add('active-button');
+            ajax(page, true);
         }
     });
-
-    fetchFormData(e.target);
-    ajax(page, true);
 });
 
 sortAlphabeticButton.addEventListener('click', function (e) {
@@ -220,23 +224,25 @@ sortAlphabeticButton.addEventListener('click', function (e) {
     buttonImages.forEach(image => {
         if (image.classList.contains('active-button')) {
             e.target.value = "title:desc";
+            fetchFormData(e.target);
             image.classList.remove('active-button');
+            ajax(page, true);
         } else {
             e.target.value = "title:asc";
+            fetchFormData(e.target);
             image.classList.add('active-button');
+            ajax(page, true);
         }
     });
-
-    fetchFormData(e.target);
-    ajax(page, true);
 });
 
 seriesCheckboxes.forEach((checkbox) => {
-    checkbox.addEventListener('change', function () {
+    checkbox.addEventListener('change', function() {
         const checkedCheckboxes = seriesBlock.querySelectorAll('input[type="checkbox"]:checked');
         if (checkedCheckboxes.length === 1) {
             searchResultTitle.innerHTML = this.nextElementSibling.textContent.trim();
-        } else {
+        }
+        else {
             searchResultTitle.innerHTML = searchSectionInnerHtml;
         }
     });
