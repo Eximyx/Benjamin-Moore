@@ -27,7 +27,7 @@ class ContactsController extends Controller
         return view('site.pages.contacts', [
             'data' => JsonResource::make([
                 'partners' => PartnersResource::collection($this->service->getPartners()),
-                'banner' => BannerResource::make($this->service->getBannerByPositionId(2)),
+                'banner' => BannerResource::make($this->service->getBannerByPositionId(3)),
                 'settings' => $this->settings,
                 'meta' => $this->service->metaDataFindByURL(),
             ]),
