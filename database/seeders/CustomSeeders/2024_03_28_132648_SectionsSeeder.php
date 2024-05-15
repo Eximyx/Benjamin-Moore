@@ -25,7 +25,6 @@ return new class extends Seeder {
         foreach ($arr as $key => $item) {
             Section::factory()->create([
                 "title" => $key,
-                "content" => $item,
                 "section_position_id" => SectionPosition::query()->where("id", "=", $categoryId)->first()
             ]);
             $categoryId++;

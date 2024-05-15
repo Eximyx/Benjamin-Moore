@@ -24,6 +24,7 @@ class NewsPostFactory extends Factory
             'content' => fake()->text(),
             'description' => fake()->text(),
             'category_id' => Category::query()->inRandomOrder()->first() ?? Category::factory(),
+            'user_name' => fake()->name(),
         ];
     }
 }
