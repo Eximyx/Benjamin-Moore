@@ -10,6 +10,7 @@ use App\Http\Resources\ModelResources\SectionResource;
 use App\Http\Resources\SettingsResources\SettingsResource;
 use App\Models\Settings;
 use App\Services\Site\MainService;
+use App\Traits\MetaDataTrait;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Routing\Controller;
@@ -19,6 +20,8 @@ use Psr\Container\NotFoundExceptionInterface;
 class MainController extends Controller
 {
     protected SettingsResource $settings;
+
+    use MetaDataTrait;
 
     public function __construct(
         protected MainService $service,
@@ -40,7 +43,7 @@ class MainController extends Controller
             'banners' => BannerResource::collection($this->service->getBannersForMain()),
             'sections' => SectionResource::collection($this->service->getSectionsForMain()),
             'settings' => $this->settings,
-            'meta' => $this->service->metaDataFindByURL(),
+            'meta' => $this->getMetaDataByURL(),
         ];
 
         return view('site.pages.main', compact('data'));

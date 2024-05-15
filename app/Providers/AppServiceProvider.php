@@ -32,9 +32,6 @@ class AppServiceProvider extends ServiceProvider
             $rule = Password::min(8);
 
             return $rule->mixedCase()->uncompromised();
-            //            return $this->app->isProduction()
-            //                ? $rule->mixedCase()->uncompromised()
-            //                : $rule;
         });
 
         DB::listen(function ($query) {

@@ -7,7 +7,6 @@ use App\Http\Requests\NewsPostRequest;
 use App\Http\Resources\ModelResources\NewsPostResource;
 use App\Http\Resources\SettingsResources\SettingsResource;
 use App\Models\Settings;
-use App\Services\Admin\ModelServices\MetaDataService;
 use App\Services\Admin\ModelServices\NewsService;
 use App\Traits\MetaDataTrait;
 use Illuminate\Http\Request;
@@ -21,12 +20,10 @@ class NewsController extends BaseAdminController
     use MetaDataTrait;
 
     /**
-     * @param MetaDataService $metaDataService
      * @param NewsService $service
      */
     public function __construct(
-        protected MetaDataService $metaDataService,
-        NewsService               $service,
+        NewsService $service,
     )
     {
         parent::__construct($service, NewsPostDTO::class, NewsPostResource::class, NewsPostRequest::class);

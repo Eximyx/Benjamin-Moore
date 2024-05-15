@@ -3,7 +3,6 @@
 namespace App\Services\Admin\ModelServices;
 
 use App\Repositories\ModelRepositories\ColorRepository;
-use App\Repositories\ModelRepositories\MetaDataRepository;
 use App\Traits\ColorTrait;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
@@ -15,21 +14,10 @@ class ColorService extends BaseModelService
     use ColorTrait;
 
     public function __construct(
-        protected MetaDataRepository $metaDataRepository,
-        ColorRepository              $repository,
+        ColorRepository $repository,
     )
     {
         parent::__construct($repository);
-    }
-
-    /**
-     * @return Model|null
-     */
-    public function metaDataFindByURL(): ?Model
-    {
-        return $this->metaDataRepository->findByUrl(
-            request()->url()
-        );
     }
 
     /**

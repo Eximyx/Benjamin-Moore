@@ -4,7 +4,6 @@ namespace App\Services\Site;
 
 use App\Repositories\ModelRepositories\BannersRepository;
 use App\Repositories\ModelRepositories\LeadsRepository;
-use App\Repositories\ModelRepositories\MetaDataRepository;
 use App\Repositories\ModelRepositories\NewsRepository;
 use App\Repositories\ModelRepositories\PartnersRepository;
 use App\Repositories\ModelRepositories\ProductRepository;
@@ -19,7 +18,6 @@ class MainService
 {
     public function __construct(
         protected NewsRepository     $newsRepository,
-        protected MetaDataRepository $metaDataRepository,
         protected ProductRepository  $productRepository,
         protected ReviewRepository   $reviewRepository,
         protected LeadsRepository    $leadsRepository,
@@ -76,15 +74,5 @@ class MainService
     public function getLatestReviews(int $amount = 20): Collection
     {
         return $this->reviewRepository->getLatest($amount)->get();
-    }
-
-    /**
-     * @return Model|null
-     */
-    public function metaDataFindByURL(): ?Model
-    {
-        return $this->metaDataRepository->findByUrl(
-            request()->url()
-        );
     }
 }
