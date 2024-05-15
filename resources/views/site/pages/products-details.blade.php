@@ -5,7 +5,6 @@
     <section class="product-details-section">
         <div class="product-images-block">
             <img src="" alt="main-image" class="main-product-image">
-            {{--            TODO: 5 images--}}
             <div class="product-images">
                 <img src="../assets/images/product-image.png" alt="">
                 <img src="../assets/images/product-image.png" alt="">
@@ -17,8 +16,7 @@
             <h2 class="section-header">{{$data['entity']->title}}</h2>
             <p class="product-status">@lang('catalog.product-details.isAvailable.' . $data['entity']->is_toggled ?? 0)</p>
             <p class="product-description">
-                {{--                TODO: Добавить subContent в продукты--}}
-                {{$data['entity']->sub_content ?? "PRODUCT_SUBCONTENT"}}
+                {{$data['entity']->sub_content}}
             </p>
             <p class="product-description">@lang('catalog.product-details.amount')</p>
             <div class="product-counter">
@@ -52,7 +50,15 @@
                         <h4>@lang('admin.keys.type')</h4>
                         <p>{{$data['entity']->type}}</p>
                         <h4>@lang('admin.keys.colors')</h4>
-                        <p>{{$data['entity']->colors ?? "PRODUCT_COLORS"}}</p>
+                        <p>
+                            @if(count($data['entity']->colors) > 0)
+                                @foreach($data['entity']->colors as $color)
+                                    {{$color->title}}
+                                @endforeach
+                            @else
+                                -
+                            @endif
+                        </p>
                         <h4>@lang('admin.keys.base')</h4>
                         <p>1-4</p>
                     </div>

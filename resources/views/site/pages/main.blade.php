@@ -1,12 +1,12 @@
 @extends('site.layouts.site')
 @section('content')
-    <section class="main__banner" style="background-image:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url({{{($data['banners'][1]->image)}}})">
+    <section class="main__banner"
+             style="background-image:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url({{{($data['banners'][0]->image)}}})">
         <div class="main__banner-block">
             <h2 class="main__banner-text"><b>Benjamin Moore</b><br>@lang('main.titles.paints')</h2>
             <p id="main__banner-p-desktop">{{$data['banners'][0]->content}}</p>
             <p id="main_banner-p-mobile">{{$data['banners'][0]->content}}</p>
             <div class="main__banner-buttons">
-                {{-- TODO BOTH: Нужно реализовать страницу со всеми красками --}}
                 <a href="{{route('user.colors.index')}}">
                     <button class="button-filled">@lang('main.buttons.allColors')</button>
                 </a>
@@ -41,11 +41,12 @@
                     <h2>@lang('main.titles.aboutCompany')</h2>
                 </div>
                 <div class="flex-block">
-                    <div class="about-us__image-placeholder-mobile" style="background-image: url({{{($data['banners'][0]->image)}}});">>
+                    <div class="about-us__image-placeholder-mobile"
+                         style="background-image: url({{{($data['banners'][0]->image)}}});">>
                     </div>
                     <div class="about-us__image-placeholder-mobile">
                         <img
-                             src="{{url('storage/image/sections/section_image_2.jpg')}}" alt="">
+                            src="{{url('storage/image/sections/section_image_2.jpg')}}" alt="">
                     </div>
                 </div>
                 <div class="about-us__inner-div">
@@ -58,10 +59,10 @@
             </div>
             <div class="flex-block">
                 {{--TODO FRONT: 4. Картинки расположить, юрл есть --}}
-                <div class="about-us__image-placeholder" style="background-image: url({{{($data['banners'][2]->image)}}});"></div>
-                <div class="about-us__image-placeholder"><img
-                        src="{{url('storage/image/sections/section_image_2.jpg')}}"
-                        alt=""></div>
+                <div class="about-us__image-placeholder"
+                     style="background-image: url({{{'storage/image/sections/section_image_1.jpg'}}});"></div>
+                <div class="about-us__image-placeholder"
+                     style="background-image: url({{{'storage/image/sections/section_image_2.jpg'}}});"></div>
             </div>
         </div>
         <div class="about-us__quality-cards-wrapper">
@@ -86,7 +87,6 @@
             </a>
         </div>
         <div class="news-wrapper">
-            {{-- TODO: ADD an USER_NAME for post --}}
             @foreach($data['news'] as $value)
                 @include('site.components.news-card')
             @endforeach

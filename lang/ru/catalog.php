@@ -12,7 +12,7 @@ return [
         'series' => 'Серии',
         'colors' => 'Цвета',
         'prices' => [
-            'title' => 'Бюджет',
+            'budget' => 'Бюджет',
             'from' => 'От',
             'to' => 'До',
         ],

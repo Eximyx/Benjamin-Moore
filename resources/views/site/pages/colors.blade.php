@@ -2,11 +2,11 @@
 @section('content')
     @include('site.components.breadcrumbs')
     {{--  TODO: лэнги для страницы красок  --}}
-    <h4 class="section-title">Выберите цвет</h4>
+    <h4 class="section-title">@lang('colors.title')</h4>
     <div class="colors-wrapper">
         @foreach($data["colors"] as $value)
             <div id="color_{{$value["id"]}}" class="color-block" style="background-color: {{{$value["hex_code"]}}};">
-                <a href="#" class="svg-cart hidden">
+                <a href="catalog?color_id[0]={{$value["title"]}}" class="svg-cart hidden">
                     <svg class="svg-cart" width="20" height="20" viewBox="0 0 20 20" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path style="fill: #fff;"

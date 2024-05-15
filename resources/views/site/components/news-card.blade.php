@@ -1,7 +1,7 @@
 <div class="news-card">
     <img src="{{url($value->main_image)}}" alt="news preview">
     <div class="news-card__details-block">
-        <p class="news-card__details-author">Алексей Иванович Шишкин</p>
+        <p class="news-card__details-author">{{$value->user_name}}</p>
         <div class="news-card__details">
             <div class="news-card__details-date-block">
                 <img class="news-card__details-clock-image"

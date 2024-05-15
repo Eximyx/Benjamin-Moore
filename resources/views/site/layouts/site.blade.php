@@ -38,7 +38,7 @@
             <li><a href="{{route('user.news.index')}}">@lang('nav-links.news')</a></li>
             <li><a href="{{route('user.contacts.index')}}">@lang('nav-links.contacts')</a></li>
             <li class="nav-button__static-page">
-                <p class="nav-button__static-page__p">Static pages</p>
+                <p class="nav-button__static-page__p">@lang('nav-links.info')</p>
                 <div class="nav-button__static-page__content">
                     <a href="{{route('user.calc.index')}}">@lang('nav-links.calc')</a>
                     <a href="{{route('user.colors.index')}}">@lang('nav-links.colors')</a>
@@ -106,7 +106,8 @@
     <div class="footer__buttons">
         <button class="footer-accordion">
             Навигация
-            <img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="right-arrow" class="footer-accordion__arrow">
+            <img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="right-arrow"
+                 class="footer-accordion__arrow">
         </button>
         <div class="footer-accordion__panel">
             <ul class="footer__nav-buttons">

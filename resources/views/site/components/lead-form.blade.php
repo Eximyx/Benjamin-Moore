@@ -9,7 +9,7 @@
     <label for="name">@lang('main.form.name')</label>
     <input type="text" name="name" id="name" placeholder="@lang('main.form.name')">
     <label for="contact_info">@lang('main.form.email')</label>
-    <input type="text" name="contact_info" id="contact_info" placeholder="Contact information" required>
+    <input type="text" name="contact_info" id="contact_info" placeholder="@lang('main.form.email')" required>
     <label for="message">@lang('main.form.message')</label>
     <textarea name="message" id="message" placeholder="@lang('main.form.message')"></textarea>
     <button class="button-filled" type="submit">@lang('main.form.send')</button>

@@ -10,7 +10,7 @@
                 {{ $data['entity']->title}}
             </h2>
             <div class="news-card__details">
-                <p class="news-card__details-author">Udemy •</p>
+                <p class="news-card__details-author">{{ $data['entity']->user_name}}</p>
                 <img class="news-card__details-clock-image" src="{{Vite::asset('resources/icons/clock.svg')}}"
                      alt="clock image">
                 <p class="news-card__details-date">{{date_format($data['entity']->created_at, 'd m y')}}</p>

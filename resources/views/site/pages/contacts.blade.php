@@ -36,8 +36,8 @@
             @endif
         </div>
         {{-- TODO FRONT: тут должен быть баннер! add an image placeholder for this {{$data['banner']->image ?? Vite::asset('resources/images/news-mock-image.png')}} --}}
-        <div class="contact-section__banner" style="background-color: #cacaca; background-image: url('{{{$data['banner']->image ?? Vite::asset('resources/images/news-mock-image.png')}}}');">
-
+        <div class="contact-section__banner"
+             style="background-image: url('{{{$data['banner']->image ?? Vite::asset('resources/images/news-mock-image.png')}}}');">
         </div>
     </section>
     @include('site.components.lead-form-map')

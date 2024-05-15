@@ -40,7 +40,6 @@ class Kernel extends HttpKernel
      * @var array<int, class-string|string>
      */
     protected $middleware = [
-        // \App\Http\Middleware\TrustHosts::class,
         TrustProxies::class,
         HandleCors::class,
         PreventRequestsDuringMaintenance::class,
@@ -65,7 +64,6 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             ThrottleRequests::class . ':api',
             SubstituteBindings::class,
         ],
@@ -93,7 +91,6 @@ class Kernel extends HttpKernel
         'signed' => ValidateSignature::class,
         'throttle' => ThrottleRequests::class,
         'verified' => EnsureEmailIsVerified::class,
-        //        'admin' => \App\Http\Middleware\AdminPanelMiddleware::class,
         'user' => UserSessionMidlleware::class,
         'root' => RootMiddleWare::class,
     ];
