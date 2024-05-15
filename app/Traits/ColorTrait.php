@@ -7,92 +7,68 @@ use Illuminate\Database\Eloquent\Collection;
 trait ColorTrait
 {
     /**
+     * Сортирует цвета на основе их оттенков.
+     *
      * @param Collection $colors
      * @return array
      */
     private function sortColors(Collection $colors): array
     {
+        // Преобразуем коллекцию цветов в массив
         $colors = $colors->toArray();
+
+        // Сортируем цвета на основе их оттенков
         usort($colors, function ($a, $b) {
-            $rgb1 = sscanf($a["hex_code"], "#%02x%02x%02x");
-            $rgb2 = sscanf($b["hex_code"], "#%02x%02x%02x");
+            // Извлекаем оттенки цветов
+            $hueA = $this->extractHue($a['hex_code']);
+            $hueB = $this->extractHue($b['hex_code']);
 
-            if ($rgb1 == null)
-                return 0;
-            if ($rgb2 == null)
-                return 0;
-
-            list($r1, $g1, $b1) = $rgb1;
-            list($r2, $g2, $b2) = $rgb2;
-
-            return $this->step($r1, $g1, $b1, 8) <=> $this->step($r2, $g2, $b2, 8);
+            // Возвращаем результат сравнения
+            return $hueA <=> $hueB;
         });
+
         return $colors;
     }
 
-
     /**
-     * @param int|null $r
-     * @param int|null $g
-     * @param int|null $b
-     * @param int $repetitions
-     * @return array<float|int>
+     * Извлекает оттенок цвета из его HEX кода.
+     *
+     * @param string $hexCode
+     * @return int|null
      */
-    private function step(?int $r, ?int $g, ?int $b, int $repetitions = 1): array
+    private function extractHue(string $hexCode): ?int
     {
-        $lum = sqrt(0.241 * $r + 0.691 * $g + 0.068 * $b);
-        list($h, $s, $v) = $this->rgbToHsv($r, $g, $b);
-        $h2 = (int)($h * $repetitions);
-
-        $v2 = (int)($v * $repetitions);
-
-        if ($h2 % 2 == 1) {
-            $v2 = $repetitions - $v2;
-            $lum = $repetitions - $lum;
+        // Извлекаем компоненты цвета из HEX кода
+        $rgb = sscanf($hexCode, "#%02x%02x%02x");
+        if ($rgb === false || count($rgb) !== 3) {
+            return null;
         }
 
-        return [$h2, $lum, $v2];
-    }
-
-    /**
-     * @param int|null $r
-     * @param int|null $g
-     * @param int|null $b
-     * @return float[]|int[]
-     */
-    private function rgbToHsv(?int $r, ?int $g, ?int $b): array
-    {
-        $r /= 255;
-        $g /= 255;
-        $b /= 255;
-
+        // Вычисляем оттенок цвета
+        list($r, $g, $b) = $rgb;
         $max = max($r, $g, $b);
         $min = min($r, $g, $b);
+
+        if ($max === $min) {
+            return 0;
+        }
+
         $delta = $max - $min;
+        $hue = 0;
 
-        $v = $max;
-
-        if ($max != 0) {
-            $s = $delta / $max;
+        if ($max === $r) {
+            $hue = 60 * (($g - $b) / $delta);
+        } elseif ($max === $g) {
+            $hue = 60 * (($b - $r) / $delta) + 120;
         } else {
-            $s = 0;
-            $h = -1;
-            return [$h, $s, $v];
+            $hue = 60 * (($r - $g) / $delta) + 240;
         }
 
-        if ($r == $max) {
-            $h = ($g - $b) / $delta;
-        } else if ($g == $max) {
-            $h = 2 + ($b - $r) / $delta;
-        } else {
-            $h = 4 + ($r - $g) / $delta;
+        // Приводим оттенок к диапазону [0, 360]
+        if ($hue < 0) {
+            $hue += 360;
         }
 
-        $h *= 60;
-        if ($h < 0) {
-            $h += 360;
-        }
-
-        return [$h, $s, $v];
+        return (int)$hue;
     }
 }
