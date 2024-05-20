@@ -76,7 +76,10 @@ class BannersRepository extends BaseModelRepository
      */
     public function getBannersWithPositions(): Collection
     {
-        return $this->model->where('banner_position_id', '<>', 'null')->get();
+        $banners[0] = $this->model->where('banner_position_id', '=', '1')->get();
+        $banners[1] = $this->model->where('banner_position_id', '=', '2')->get();
+        
+        return Collection::make($banners);
     }
 
     /**

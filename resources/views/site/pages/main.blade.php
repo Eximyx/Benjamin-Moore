@@ -1,11 +1,11 @@
 @extends('site.layouts.site')
 @section('content')
     <section class="main__banner"
-             style="background-image:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url({{{($data['banners'][0]->image)}}})">
+             style="background-image:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url({{{($data['banners'][0][0]->image)}}})">
         <div class="main__banner-block">
             <h2 class="main__banner-text"><b>Benjamin Moore</b><br>@lang('main.titles.paints')</h2>
-            <p id="main__banner-p-desktop">{{$data['banners'][0]->content}}</p>
-            <p id="main_banner-p-mobile">{{$data['banners'][0]->content}}</p>
+            <p id="main__banner-p-desktop">{{$data['banners'][0][0]->content}}</p>
+            <p id="main_banner-p-mobile">{{$data['banners'][0][0]->content}}</p>
             <div class="main__banner-buttons">
                 <a href="{{route('user.colors.index')}}">
                     <button class="button-filled">@lang('main.buttons.allColors')</button>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="flex-block">
                     <div class="about-us__image-placeholder-mobile"
-                         style="background-image: url({{{($data['banners'][0]->image)}}});">>
+                         style="background-image: url({{{($data['banners'][0][0]->image)}}});">>
                     </div>
                     <div class="about-us__image-placeholder-mobile">
                         <img
@@ -110,7 +110,7 @@
             <i class="right"><img src="{{Vite::asset('resources/icons/arrow-right.svg')}}" alt="arrow right"></i>
         </div>
     </section>
-    <section class="banner" style="background-image: url({{{$data['banners'][0]->image}}}); background-size: cover">
+    <section class="banner" style="background-image: url({{{$data['banners'][1][0]->image}}}); background-size: cover">
         {{--TODO FRONT: 2. Необходимо заполнять баннер этой картинкой --}}
         <a href="{{route('user.catalog.index')}}">
             <button class="button-outlined">@lang('main.titles.catalog')</button>
