@@ -63,4 +63,19 @@ class SectionRepository extends BaseModelRepository
     {
         return $this->model->where('section_position_id', '<>', 'null')->get();
     }
+
+    /**
+     * @param string|null $sectionPositionId
+     * @return void
+     */
+    public function nullPosition(?string $sectionPositionId = null): void
+    {
+        if ($sectionPositionId) {
+            $entity = $this->model::query()->firstWhere("section_position_id", $sectionPositionId);
+            if (!empty($entity)) {
+                $entity->update(['section_position_id' => null]);
+                $entity->save();
+            }
+        }
+    }
 }

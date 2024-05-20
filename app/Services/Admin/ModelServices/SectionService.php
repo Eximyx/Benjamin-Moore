@@ -23,7 +23,7 @@ class SectionService extends BaseModelService
     {
         $data = $dto->toArray();
 
-        if (!empty($dto['section_position_id'])) {
+        if (!empty($data['section_position_id'])) {
             $this->repository->nullPosition($data['section_position_id']);
         }
 
@@ -46,6 +46,20 @@ class SectionService extends BaseModelService
         }
 
         return $entity;
+    }
+
+    public function update(Model $entity, ModelDTO $dto): Model
+    {
+        $data = $dto->toArray();
+        throw new Exception($entity["section_position_id"], 422);
+        if (!empty($data['section_position_id']) && $entity->section_position_id != $dto->section_position_id) {
+            $this->repository->nullPosition($data['section_position_id']);
+        }
+
+        return $this->repository->update(
+            $entity,
+            $data
+        );
     }
 
     /**

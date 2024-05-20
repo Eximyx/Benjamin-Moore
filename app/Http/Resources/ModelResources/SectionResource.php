@@ -16,6 +16,7 @@ class SectionResource extends JsonResource
         return [
             'id' => $this['id'],
             'title' => $this['title'],
+            'section_position_id' => $this['section_position_id'],
             'content' => $this['content'],
         ];
     }

@@ -12,9 +12,9 @@ class SectionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'string',
-            'section_position_id' => 'nullable|string|exists:section_positions,id|unique:section_positions,id',
+            'title' => 'required|string|between:5,30',
             'content' => 'nullable|required|string|between:5,160',
+            'section_position_id' => 'nullable|string|exists:section_positions,id',
         ];
     }
 }

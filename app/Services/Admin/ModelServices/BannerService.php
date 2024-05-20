@@ -76,7 +76,7 @@ class BannerService extends BaseModelService
     {
         $data = $dto->toArray();
 
-        if (!empty($data['banner_position_id'])) {
+        if (!empty($data['banner_position_id']) && $entity->banner_position_id != $dto->banner_position_id) {
             $this->repository->nullPosition($data['banner_position_id']);
         }
 

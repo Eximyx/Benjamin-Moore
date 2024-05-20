@@ -22,8 +22,8 @@ class BannersRepository extends BaseModelRepository
     public function nullPosition(?string $bannerPositionId = null): void
     {
         if ($bannerPositionId) {
-            $entity = $this->model::where('banner_position_id', $bannerPositionId)->first();
-            if ($entity) {
+            $entity = $this->model::query()->firstWhere("banner_position_id", $bannerPositionId);
+            if (!empty($entity)) {
                 $entity->update(['banner_position_id' => null]);
                 $entity->save();
             }
@@ -78,7 +78,7 @@ class BannersRepository extends BaseModelRepository
     {
         $banners[0] = $this->model->where('banner_position_id', '=', '1')->get();
         $banners[1] = $this->model->where('banner_position_id', '=', '2')->get();
-        
+
         return Collection::make($banners);
     }
 
