@@ -19,10 +19,16 @@ use Psr\Container\NotFoundExceptionInterface;
 
 class MainController extends Controller
 {
+    /**
+     * @var SettingsResource
+     */
     protected SettingsResource $settings;
 
     use MetaDataTrait;
 
+    /**
+     * @param MainService $service
+     */
     public function __construct(
         protected MainService $service,
     )
@@ -31,6 +37,7 @@ class MainController extends Controller
     }
 
     /**
+     * @return View|JsonResource
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */

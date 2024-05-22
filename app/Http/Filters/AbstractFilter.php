@@ -34,9 +34,12 @@ abstract class AbstractFilter implements FilterInterface
         }
     }
 
+    /**
+     * @param Builder $builder
+     * @return void
+     */
     protected function before(Builder $builder): void
     {
-
     }
 
     /**
@@ -49,7 +52,7 @@ abstract class AbstractFilter implements FilterInterface
      * @param mixed|null $default
      * @return array|string|null
      */
-    protected function getQueryParam(string $key, mixed $default = null): ?array
+    protected function getQueryParam(string $key, mixed $default = null): array|string|null
     {
         return $this->queryParams[$key] ?? $default;
     }

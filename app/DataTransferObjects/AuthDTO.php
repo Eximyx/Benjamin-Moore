@@ -31,11 +31,10 @@ class AuthDTO implements ModelDTO
             $request['email'],
             $request['password'],
         );
-
     }
 
     /**
-     * @return array|mixed[]
+     * @return array
      */
     public function toArray(): array
     {

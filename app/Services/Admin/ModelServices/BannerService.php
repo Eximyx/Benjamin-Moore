@@ -11,6 +11,9 @@ use Yajra\DataTables\Exceptions\Exception;
 
 class BannerService extends BaseModelService
 {
+    /**
+     * @param BannersRepository $repository
+     */
     public function __construct(BannersRepository $repository)
     {
         parent::__construct($repository);
@@ -82,6 +85,7 @@ class BannerService extends BaseModelService
 
         if ($data['image']) {
             $deleted = $this->deleteImage($entity['image']);
+
             if ($deleted) {
                 $data['image'] = $this->uploadImage($data['image'], $entity['id']);
             }
@@ -119,6 +123,7 @@ class BannerService extends BaseModelService
     public function getVariablesForDataTable(): array
     {
         $variables = parent::getVariablesForDataTable();
+        
         $variables['selectable'] = $variables['data']['selectableModel']->all();
 
         return $variables;

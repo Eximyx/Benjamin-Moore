@@ -10,6 +10,12 @@ use Illuminate\Routing\Controller;
 
 abstract class ResourceController extends Controller
 {
+    /**
+     * @param CoreService $service
+     * @param string $dto
+     * @param string $resource
+     * @param string $request
+     */
     public function __construct(
         protected CoreService $service,
         protected string      $dto,
@@ -17,9 +23,12 @@ abstract class ResourceController extends Controller
         protected string      $request,
     )
     {
-
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse|JsonResource
+     */
     public function store(Request $request): JsonResponse|JsonResource
     {
         $request = app($this->request, $request->all());
@@ -33,6 +42,10 @@ abstract class ResourceController extends Controller
         return $this->resource::make($entity);
     }
 
+    /**
+     * @param string $id
+     * @return JsonResource
+     */
     public function edit(string $id): JsonResource
     {
         $entity = $this->service->findById($id);
@@ -40,6 +53,11 @@ abstract class ResourceController extends Controller
         return $this->resource::make($entity);
     }
 
+    /**
+     * @param string $id
+     * @param Request $request
+     * @return JsonResource
+     */
     public function update(string $id, Request $request): JsonResource
     {
         $entity = $this->service->findById($id);
@@ -54,6 +72,10 @@ abstract class ResourceController extends Controller
         return $this->resource::make($entity);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResource
+     */
     public function destroy(Request $request): JsonResource
     {
         $entity = $this->service->destroy($request);

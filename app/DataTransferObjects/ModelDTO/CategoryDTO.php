@@ -28,7 +28,7 @@ class CategoryDTO implements ModelDTO
     }
 
     /**
-     * @return string[]
+     * @return array
      */
     public function toArray(): array
     {

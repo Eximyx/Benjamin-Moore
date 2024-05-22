@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class CalculatorService
 {
+    /**
+     * @param MetaDataRepository $metaDataRepository
+     */
     public function __construct(
         protected MetaDataRepository $metaDataRepository,
     )

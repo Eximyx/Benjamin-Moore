@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class MetaDataService extends BaseModelService
 {
+    /**
+     * @param MetaDataRepository $repository
+     */
     public function __construct(
         MetaDataRepository $repository
     )
@@ -30,6 +33,7 @@ class MetaDataService extends BaseModelService
     public function destroyWithEntity(string $slug): Model
     {
         $entity = $this->findBySlug($slug);
+
         return $this->repository->destroy($entity);
     }
 

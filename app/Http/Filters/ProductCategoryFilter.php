@@ -11,7 +11,7 @@ class ProductCategoryFilter extends AbstractFilter
     public const PRODUCT_CATEGORY_ID = 'product_category_id';
 
     /**
-     * @return array[]
+     * @return array
      */
     protected function getCallbacks(): array
     {

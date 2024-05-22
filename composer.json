@@ -25,7 +25,8 @@
         "laravel/tinker": "^2.8",
         "yajra/laravel-datatables": "10.0",
         "ext-dom": "*",
-        "eximyx/laravel-custom-seeder" : "@dev"
+        "eximyx/laravel-custom-seeder" : "@dev",
+      "ext-pdo": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.10",

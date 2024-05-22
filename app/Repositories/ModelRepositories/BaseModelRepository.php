@@ -13,9 +13,13 @@ abstract class BaseModelRepository extends CoreRepository
      */
     protected array $modelData;
 
+    /**
+     * @param string|null $modelClass
+     */
     public function __construct(?string $modelClass)
     {
         parent::__construct($modelClass);
+
         $this->modelData = ((array)config('getmodelconfig'))[$modelClass];
     }
 
@@ -53,6 +57,7 @@ abstract class BaseModelRepository extends CoreRepository
         foreach ($data['datatable_data'] as $item) {
             $query['select'][] = $modelName . '.' . $item;
         }
+        
         $query['select'][] = $modelName . '.created_at';
         $query['select'][] = $modelName . '.updated_at';
 

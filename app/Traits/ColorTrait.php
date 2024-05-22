@@ -54,7 +54,6 @@ trait ColorTrait
         }
 
         $delta = $max - $min;
-        $hue = 0;
 
         if ($max === $r) {
             $hue = 60 * (($g - $b) / $delta);

@@ -12,6 +12,9 @@ abstract class BaseModelService extends CoreService
 {
     use DataTableTrait;
 
+    /**
+     * @param BaseModelRepository $repository
+     */
     public function __construct(BaseModelRepository $repository)
     {
         parent::__construct($repository);
@@ -39,6 +42,7 @@ abstract class BaseModelService extends CoreService
         $variables = [];
 
         $variables['datatable_columns'] = $this->getDatatableColumns($modelData);
+        
         $variables['data'] = $modelData;
 
         return $variables;

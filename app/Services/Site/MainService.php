@@ -16,6 +16,15 @@ use Psr\Container\NotFoundExceptionInterface;
 
 class MainService
 {
+    /**
+     * @param NewsRepository $newsRepository
+     * @param ProductRepository $productRepository
+     * @param ReviewRepository $reviewRepository
+     * @param LeadsRepository $leadsRepository
+     * @param BannersRepository $bannersRepository
+     * @param SectionRepository $sectionRepository
+     * @param PartnersRepository $partnersRepository
+     */
     public function __construct(
         protected NewsRepository     $newsRepository,
         protected ProductRepository  $productRepository,

@@ -23,6 +23,7 @@ class SettingsRepository
     public function first(): Settings
     {
         $entity = Settings::first();
+        
         if ($entity === null) {
             $entity = Settings::create(['id' => 1]);
         }

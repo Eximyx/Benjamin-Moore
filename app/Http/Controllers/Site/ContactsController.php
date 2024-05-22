@@ -13,8 +13,14 @@ use Illuminate\View\View;
 
 class ContactsController extends Controller
 {
+    /**
+     * @var SettingsResource
+     */
     protected SettingsResource $settings;
 
+    /**
+     * @param ContactsService $service
+     */
     public function __construct(
         protected ContactsService $service,
     )
@@ -22,6 +28,9 @@ class ContactsController extends Controller
         $this->settings = SettingsResource::make(app(Settings::class));
     }
 
+    /**
+     * @return View
+     */
     public function __invoke(): View
     {
         return view('site.pages.contacts', [

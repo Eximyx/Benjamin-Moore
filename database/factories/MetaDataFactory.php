@@ -2,12 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\MetaData;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends Factory<MetaData>
- */
 class MetaDataFactory extends Factory
 {
     /**
@@ -18,7 +14,6 @@ class MetaDataFactory extends Factory
     public function definition(): array
     {
         return [
-
         ];
     }
 }

@@ -10,6 +10,9 @@ use Yajra\DataTables\Exceptions\Exception;
 
 class SectionService extends BaseModelService
 {
+    /**
+     * @param SectionRepository $repository
+     */
     public function __construct(SectionRepository $repository)
     {
         parent::__construct($repository);
@@ -48,10 +51,15 @@ class SectionService extends BaseModelService
         return $entity;
     }
 
+    /**
+     * @param Model $entity
+     * @param ModelDTO $dto
+     * @return Model
+     */
     public function update(Model $entity, ModelDTO $dto): Model
     {
         $data = $dto->toArray();
-        throw new Exception($entity["section_position_id"], 422);
+
         if (!empty($data['section_position_id']) && $entity->section_position_id != $dto->section_position_id) {
             $this->repository->nullPosition($data['section_position_id']);
         }
@@ -68,6 +76,7 @@ class SectionService extends BaseModelService
     public function getVariablesForDataTable(): array
     {
         $variables = parent::getVariablesForDataTable();
+        
         if (isset($variables['data']['selectableModel'])) {
             $variables['selectable'] = $variables['data']['selectableModel']->all();
         }

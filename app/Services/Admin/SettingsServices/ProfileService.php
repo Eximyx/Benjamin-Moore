@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileService
 {
+    /**
+     * @param AdminRepository $repository
+     */
     public function __construct(
         protected AdminRepository $repository
     )

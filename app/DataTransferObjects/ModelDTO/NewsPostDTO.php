@@ -37,11 +37,10 @@ class NewsPostDTO implements ModelDTO
             $request['content'],
             $request['main_image']
         );
-
     }
 
     /**
-     * @return array|mixed[]
+     * @return array
      */
     public function toArray(): array
     {

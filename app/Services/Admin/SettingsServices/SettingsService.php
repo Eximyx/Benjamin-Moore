@@ -15,6 +15,9 @@ class SettingsService
      */
     protected array $repositories;
 
+    /**
+     * @param SettingsRepository $settingsRepository
+     */
     public function __construct(
         protected SettingsRepository $settingsRepository,
     )

@@ -31,11 +31,10 @@ class SectionDTO implements ModelDTO
             $request['section_position_id'],
             $request['content'],
         );
-
     }
 
     /**
-     * @return array|mixed[]
+     * @return array
      */
     public function toArray(): array
     {

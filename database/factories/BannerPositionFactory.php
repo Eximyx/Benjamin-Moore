@@ -2,12 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\BannerPosition;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends Factory<BannerPosition>
- */
 class BannerPositionFactory extends Factory
 {
     /**

@@ -2,12 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\SectionPosition;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends Factory<SectionPosition>
- */
 class SectionPositionFactory extends Factory
 {
     /**
@@ -18,7 +14,6 @@ class SectionPositionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
         ];
     }
 }

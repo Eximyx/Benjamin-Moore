@@ -15,6 +15,9 @@ use Illuminate\View\View;
 
 class StaticPageController extends BaseAdminController
 {
+    /**
+     * @var SettingsResource
+     */
     protected SettingsResource $settings;
 
     use MetaDataTrait;
@@ -26,8 +29,8 @@ class StaticPageController extends BaseAdminController
         StaticPageService $service,
     )
     {
-        parent::__construct($service, StaticPageDTO::class, StaticPageResource::class, StaticPageRequest::class
-        );
+        parent::__construct($service, StaticPageDTO::class, StaticPageResource::class, StaticPageRequest::class);
+        
         $this->settings = SettingsResource::make(app(Settings::class));
     }
 

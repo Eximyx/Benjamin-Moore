@@ -72,8 +72,10 @@ class SectionRepository extends BaseModelRepository
     {
         if ($sectionPositionId) {
             $entity = $this->model::query()->firstWhere("section_position_id", $sectionPositionId);
+
             if (!empty($entity)) {
                 $entity->update(['section_position_id' => null]);
+                
                 $entity->save();
             }
         }

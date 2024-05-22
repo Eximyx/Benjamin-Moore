@@ -12,18 +12,26 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    /**
+     * @param AuthService $service
+     */
     public function __construct(
         protected AuthService $service,
     )
     {
     }
 
+    /**
+     * @return View
+     */
     public function login(): View
     {
         return view('admin.pages.login');
     }
 
     /**
+     * @param Request $request
+     * @return RedirectResponse
      * @throws ValidationException
      */
     public function loginAction(Request $request): RedirectResponse
@@ -33,6 +41,10 @@ class AuthController extends Controller
         return redirect(route('settings.index'));
     }
 
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function logout(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();

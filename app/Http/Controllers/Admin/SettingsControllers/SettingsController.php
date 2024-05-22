@@ -12,11 +12,16 @@ use Illuminate\View\View;
 
 class SettingsController extends Controller
 {
+    /**
+     * @param SettingsService $service
+     */
     public function __construct(protected SettingsService $service)
     {
-
     }
 
+    /**
+     * @return View|JsonResource
+     */
     public function __invoke(): View|JsonResource
     {
         if (request()->ajax()) {
@@ -27,6 +32,7 @@ class SettingsController extends Controller
 
             return SettingsResource::make($entity);
         }
+        
         $resource = SettingsResource::make($this->service->settingsFetch());
 
         return view('admin.pages.settings', ['data' => $resource]);

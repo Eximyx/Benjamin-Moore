@@ -9,11 +9,19 @@ use Illuminate\Http\Request;
 
 class CategoryService extends BaseModelService
 {
+    /**
+     * @param CategoryRepository $repository
+     */
     public function __construct(CategoryRepository $repository)
     {
         parent::__construct($repository);
     }
 
+    /**
+     * @param Request $request
+     * @return Model
+     * @throws Exception
+     */
     public function destroy(Request $request): Model
     {
         $entity = $this->findById($request['id']);

@@ -19,6 +19,7 @@ class UserSessionMidlleware
         if (!Auth::check()) {
             return $next($request);
         }
+
         if ($request->getPathInfo() === '/logout') {
             return $next($request);
         }

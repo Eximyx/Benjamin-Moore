@@ -15,6 +15,9 @@ use Illuminate\View\View;
 
 class NewsController extends BaseAdminController
 {
+    /**
+     * @var SettingsResource
+     */
     protected SettingsResource $settings;
 
     use MetaDataTrait;
@@ -27,6 +30,7 @@ class NewsController extends BaseAdminController
     )
     {
         parent::__construct($service, NewsPostDTO::class, NewsPostResource::class, NewsPostRequest::class);
+
         $this->settings = SettingsResource::make(app(Settings::class));
     }
 

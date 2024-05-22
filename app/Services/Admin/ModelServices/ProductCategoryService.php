@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class ProductCategoryService extends BaseModelService
 {
+    /**
+     * @param ProductCategoryRepository $repository
+     */
     public function __construct(
         ProductCategoryRepository $repository
     )
@@ -22,6 +25,7 @@ class ProductCategoryService extends BaseModelService
     public function getVariablesForDataTable(): array
     {
         $variables = parent::getVariablesForDataTable();
+
         if (isset($variables['data']['selectableModel'])) {
             $variables['selectable'] = $variables['data']['selectableModel']->all();
         }

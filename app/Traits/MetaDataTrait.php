@@ -14,6 +14,9 @@ trait MetaDataTrait
      */
     protected array $entities;
 
+    /**
+     * @return void
+     */
     public function initializeEntities(): void
     {
         $this->entities = config('meta_data');
@@ -63,7 +66,7 @@ trait MetaDataTrait
     public function createMetaData(Model $entity): void
     {
         $this->initializeEntities();
-        
+
         $url = route('user.main.index') . $this->entities[$entity::class] . $entity['slug'];
 
         $dto = UpdateMetaDataDTO::appRequest([

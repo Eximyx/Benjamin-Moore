@@ -40,6 +40,7 @@ abstract class BaseAdminController extends ResourceController
         if (request()->ajax()) {
             return $this->service->ajaxDataTable();
         }
+        
         $data = DataTableResource::make(
             $this->service->getVariablesForDataTable()
         );

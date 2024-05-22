@@ -2,12 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\StaticPage;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends Factory<StaticPage>
- */
 class StaticPageFactory extends Factory
 {
     /**

@@ -4,12 +4,8 @@ namespace Database\Factories;
 
 use App\Models\Color;
 use App\Models\Product;
-use App\Models\Review;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends Factory<Review>
- */
 class ColorProductFactory extends Factory
 {
     /**

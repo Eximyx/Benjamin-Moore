@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class ReviewService extends BaseModelService
 {
+    /**
+     * @param ReviewRepository $repository
+     */
     public function __construct(ReviewRepository $repository)
     {
         parent::__construct($repository);

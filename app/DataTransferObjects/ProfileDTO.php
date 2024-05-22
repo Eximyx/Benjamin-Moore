@@ -31,11 +31,10 @@ class ProfileDTO implements ModelDTO
             $request['email'],
             $request['password'],
         );
-
     }
 
     /**
-     * @return array|mixed[]
+     * @return array<?string>
      */
     public function toArray(): array
     {

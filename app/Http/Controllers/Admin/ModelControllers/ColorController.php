@@ -14,6 +14,9 @@ use Illuminate\View\View;
 
 class ColorController extends BaseAdminController
 {
+    /**
+     * @var SettingsResource
+     */
     protected SettingsResource $settings;
 
     use MetaDataTrait;
@@ -24,6 +27,7 @@ class ColorController extends BaseAdminController
     public function __construct(ColorService $service)
     {
         parent::__construct($service, ColorDTO::class, ColorResource::class, ColorRequest::class);
+        
         $this->settings = SettingsResource::make(app(Settings::class));
     }
 

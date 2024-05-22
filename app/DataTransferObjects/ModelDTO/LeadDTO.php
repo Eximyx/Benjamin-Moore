@@ -34,7 +34,7 @@ class LeadDTO implements ModelDTO
     }
 
     /**
-     * @return array|mixed[]
+     * @return array
      */
     public function toArray(): array
     {

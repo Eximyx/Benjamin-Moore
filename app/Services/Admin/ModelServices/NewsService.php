@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Storage;
 
 class NewsService extends BaseModelService
 {
+    /**
+     * @param NewsRepository $repository
+     */
     public function __construct(
         NewsRepository $repository,
     )
@@ -89,9 +92,11 @@ class NewsService extends BaseModelService
             if (str_starts_with($img->getAttribute('src'), 'data:image/')) {
                 $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
                 $path = public_path() . '/storage/' . 'image' . '/news/' . $id;
+
                 if (!File::isDirectory($path)) {
                     File::makeDirectory($path, 0777, true, true);
                 }
+
                 $image_name = time() . $key . '.png';
                 file_put_contents($path . '/' . $image_name, $data);
 
@@ -114,6 +119,7 @@ class NewsService extends BaseModelService
 
         if ($data['main_image']) {
             $deleted = $this->deleteImage($entity['main_image']);
+            
             if ($deleted) {
                 $data['main_image'] = $this->uploadImage($data['main_image'], $entity['id']);
             }

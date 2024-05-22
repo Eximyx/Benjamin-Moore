@@ -47,6 +47,21 @@ class SettingsDTO
             $files,
             $request['description'],
         );
+    }
 
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'work_time' => $this->work_time,
+            'location' => $this->location,
+            'instagram' => $this->instagram,
+            'description' => $this->description,
+            'files' => $this->files,
+        ];
     }
 }

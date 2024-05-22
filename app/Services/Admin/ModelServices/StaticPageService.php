@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 
 class StaticPageService extends BaseModelService
 {
+    /**
+     * @param StaticPageRepository $repository
+     */
     public function __construct(StaticPageRepository $repository)
     {
         parent::__construct($repository);
@@ -44,9 +47,11 @@ class StaticPageService extends BaseModelService
             if (str_starts_with($img->getAttribute('src'), 'data:image/')) {
                 $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
                 $path = public_path() . '/storage/' . 'image' . '/static_pages/' . $id;
+
                 if (!File::isDirectory($path)) {
                     File::makeDirectory($path, 0777, true, true);
                 }
+
                 $image_name = time() . $key . '.png';
                 file_put_contents($path . '/' . $image_name, $data);
 

@@ -11,6 +11,9 @@ use Illuminate\Validation\ValidationException;
 
 class AuthService
 {
+    /**
+     * @param AuthRepository $repository
+     */
     public function __construct(
         protected AuthRepository $repository
     )
@@ -27,8 +30,8 @@ class AuthService
         $dto = $dto->toArray();
 
         return $this->repository->update(
-            entity: $entity,
-            dto: $dto
+            $entity,
+            $dto,
         );
     }
 
@@ -44,6 +47,7 @@ class AuthService
                 'email' => trans('auth.failed'),
             ]);
         }
+        
         request()->session()->regenerate();
     }
 }

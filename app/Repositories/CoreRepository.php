@@ -16,6 +16,9 @@ abstract class CoreRepository
      */
     protected Model $model;
 
+    /**
+     * @param string|null $modelClass
+     */
     public function __construct(
         ?string $modelClass
     )
@@ -76,6 +79,7 @@ abstract class CoreRepository
     }
 
     /**
+     * @param Model $entity
      * @param array<string, mixed> $data
      * @return Model
      */
@@ -91,16 +95,6 @@ abstract class CoreRepository
     public function destroy(Model $entity): Model
     {
         return tap($entity)->delete();
-    }
-
-    /**
-     * @param string $key
-     * @param string $type
-     * @return Builder<Model>
-     */
-    public function getOrderedBy(string $key, string $type = "asc"): Builder
-    {
-        return $this->getBuilder()->orderBy($key, $type);
     }
 
     /**

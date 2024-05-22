@@ -23,6 +23,7 @@ class BannersRepository extends BaseModelRepository
     {
         if ($bannerPositionId) {
             $entity = $this->model::query()->firstWhere("banner_position_id", $bannerPositionId);
+            
             if (!empty($entity)) {
                 $entity->update(['banner_position_id' => null]);
                 $entity->save();

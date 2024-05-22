@@ -12,12 +12,18 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    /**
+     * @param ProfileService $service
+     */
     public function __construct(
         protected ProfileService $service
     )
     {
     }
 
+    /**
+     * @return View|JsonResource
+     */
     public function __invoke(): View|JsonResource
     {
         if (request()->ajax()) {

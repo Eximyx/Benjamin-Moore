@@ -13,6 +13,9 @@ class ColorService extends BaseModelService
 {
     use ColorTrait;
 
+    /**
+     * @param ColorRepository $repository
+     */
     public function __construct(
         ColorRepository $repository,
     )

@@ -19,6 +19,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductsController extends BaseAdminController
 {
+    /**
+     * @var SettingsResource
+     */
     protected SettingsResource $settings;
 
     use MetaDataTrait;
@@ -31,6 +34,7 @@ class ProductsController extends BaseAdminController
     )
     {
         parent::__construct($service, ProductDTO::class, ProductResource::class, ProductRequest::class);
+
         $this->settings = SettingsResource::make(app(Settings::class));
     }
 

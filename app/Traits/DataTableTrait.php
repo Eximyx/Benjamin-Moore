@@ -11,8 +11,9 @@ use Yajra\DataTables\Exceptions\Exception;
 trait DataTableTrait
 {
     /**
+     * @param Collection|null $data
+     * @return DataTableAbstract|Exception|View
      * @throws Exception
-     * @throws \Exception
      */
     public function createDatatable(?Collection $data = null): DataTableAbstract|Exception|View
     {
@@ -42,6 +43,7 @@ trait DataTableTrait
     public function getDatatableColumns(array $data): array
     {
         $columns = [];
+        
         foreach ($data['datatable_data'] as $item) {
             $columns[] = ['data' => $item, 'name' => $item];
         }

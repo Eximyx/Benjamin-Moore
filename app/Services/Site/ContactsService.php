@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContactsService
 {
+    /**
+     * @param MetaDataRepository $metaDataRepository
+     * @param BannersRepository $bannersRepository
+     * @param PartnersRepository $partnersRepository
+     */
     public function __construct(
         protected MetaDataRepository $metaDataRepository,
         protected BannersRepository  $bannersRepository,

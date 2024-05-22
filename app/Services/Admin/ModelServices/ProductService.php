@@ -18,6 +18,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductService extends BaseModelService
 {
+    /**
+     * @param ProductRepository $repository
+     * @param ColorProductRepository $colorProductRepository
+     * @param ProductCategoryRepository $productCategoryRepository
+     * @param ColorRepository $colorRepository
+     */
     public function __construct(
         ProductRepository                   $repository,
         protected ColorProductRepository    $colorProductRepository,
@@ -119,6 +125,7 @@ class ProductService extends BaseModelService
 
         if ($data['main_image']) {
             $deleted = $this->deleteImage($entity['main_image']);
+
             if ($deleted) {
                 $data['main_image'] = $this->uploadImage($data['main_image'], $entity->id);
             }
@@ -168,9 +175,11 @@ class ProductService extends BaseModelService
             if (str_starts_with($img->getAttribute('src'), 'data:image/')) {
                 $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
                 $path = public_path() . '/storage/' . 'image' . '/products/' . $id;
+
                 if (!File::isDirectory($path)) {
                     File::makeDirectory($path, 0777, true, true);
                 }
+                
                 $image_name = time() . $key . '.png';
                 file_put_contents($path . '/' . $image_name, $data);
 

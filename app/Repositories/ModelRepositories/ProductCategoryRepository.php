@@ -36,6 +36,7 @@ class ProductCategoryRepository extends BaseModelRepository
     public function queryForDatatable(array $data): array
     {
         $query = parent::queryForDatatable($data);
+
         $selectableModelName = $data['selectableModel']->getTable();
 
         $query['join'] = [

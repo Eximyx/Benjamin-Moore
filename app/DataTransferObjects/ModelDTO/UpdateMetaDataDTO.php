@@ -27,11 +27,10 @@ class UpdateMetaDataDTO implements ModelDTO
             $data['url'],
             $data['title'],
         );
-
     }
 
     /**
-     * @return array|mixed[]
+     * @return array
      */
     public function toArray(): array
     {

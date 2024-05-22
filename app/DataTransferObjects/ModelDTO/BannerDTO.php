@@ -24,6 +24,10 @@ class BannerDTO implements ModelDTO
     {
     }
 
+    /**
+     * @param BannerRequest $request
+     * @return BannerDTO
+     */
     public static function appRequest(BannerRequest $request): BannerDTO
     {
         return new BannerDTO(
@@ -34,6 +38,9 @@ class BannerDTO implements ModelDTO
         );
     }
 
+    /**
+     * @return array
+     */
     public function toArray(): array
     {
         return [

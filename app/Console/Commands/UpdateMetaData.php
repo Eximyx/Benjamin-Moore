@@ -45,29 +45,30 @@ class UpdateMetaData extends Command
     public function handle(): void
     {
         DB::table('meta_data')->truncate();
-        $host = Request::getScheme() . "://" . (Config::get("app.domain") ?? Request::getHost() . ":" . Request::getPort());
+        $host = Request::getScheme().'://'.(Config::get('app.domain') ?? Request::getHost().':'.Request::getPort());
 
         $routeCollection = Route::getRoutes()->get();
         foreach ($routeCollection as $value) {
             $name = $value->getName();
             $uri = $value->uri();
-            if ((str_contains($name, 'user')) & (!str_contains($uri, 'admin')) & ($value->methods()[0] == 'GET')) {
+            if ((str_contains($name, 'user')) & (! str_contains($uri, 'admin')) & ($value->methods()[0] == 'GET')) {
                 $this->info($value->uri());
                 if (str_contains($uri, 'slug')) {
                     $key = explode('/', $uri);
                     if (isset($this->entities[$key[0]])) {
                         foreach ($this->entities[$key[0]]::all() as $item) {
                             MetaData::factory()->create([
-                                'url' => str_replace('{slug}', $item->slug, $host . '/' . $uri),
+                                'url' => str_replace('{slug}', $item->slug, $host.'/'.$uri),
                                 'title' => $item->title,
                             ]);
                         }
                     }
+
                     continue;
                 }
                 MetaData::factory()->create(
                     [
-                        'url' => ($uri === '/' ? $host : $host . '/' . $uri),
+                        'url' => ($uri === '/' ? $host : $host.'/'.$uri),
                         'title' => __($value->getName()),
                     ]
                 );
