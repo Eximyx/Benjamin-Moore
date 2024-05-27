@@ -14,13 +14,13 @@ return new class extends Seeder {
     public function run(): void
     {
         $titles = [
-            'Грунтовка',
-            'Образец цвета',
-            'Серия Ceiling Paint',
-            'Серия Ultra Spec® SCUFF-X™',
-            'Серия Super Hide®',
-            'Серия Ben®',
-            'Серия Aura®',
+            'Авто',
+            'Природа',
+            'Политика',
+            'Искусство',
+            'Обучение',
+            'Развлечения',
+            'Катастрофы',
         ];
 
         foreach ($titles as $item) {
