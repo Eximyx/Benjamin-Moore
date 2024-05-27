@@ -57,6 +57,9 @@ return [
         'active' => 'Active',
         'file' => 'File',
         'hex_code' => 'Color',
+        'price' => 'Price',
+        'sub_content' => 'Sub content',
+        'image' => 'Image',
     ],
     'buttons' => [
         'profileSave' => 'Save profile',

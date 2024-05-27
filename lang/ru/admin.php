@@ -55,6 +55,9 @@ return [
         'active' => 'Активные',
         'file' => 'Файл',
         'hex_code' => 'Цвет',
+        'price' => 'Цена',
+        'sub_content' => 'Дополнительный контент',
+        'image' => 'Картинка',
     ],
     'buttons' => [
         'profileSave' => 'Сохранить профиль',
