@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->foreignId('banner_position_id')->unique()->nullable()->constrained('banner_positions');
-            $table->string('content');
+            $table->string('description');
             $table->string('image')->nullable();
             $table->timestamps();
         });

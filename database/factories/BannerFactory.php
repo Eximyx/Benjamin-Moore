@@ -17,7 +17,7 @@ class BannerFactory extends Factory
         return [
             'title' => fake()->word(),
             'image' => 'default_post.jpg',
-            'content' => fake()->text(),
+            'description' => fake()->text(),
             'banner_position_id' => BannerPosition::query()->inRandomOrder()->first() ?? BannerPosition::factory()
         ];
     }

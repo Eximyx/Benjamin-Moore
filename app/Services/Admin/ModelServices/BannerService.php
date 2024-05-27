@@ -123,7 +123,7 @@ class BannerService extends BaseModelService
     public function getVariablesForDataTable(): array
     {
         $variables = parent::getVariablesForDataTable();
-        
+
         $variables['selectable'] = $variables['data']['selectableModel']->all();
 
         return $variables;

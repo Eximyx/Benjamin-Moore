@@ -59,12 +59,12 @@ return [
         'datatable_data' => [
             'id',
             'title',
-            'content',
+            'description',
             'banner_position_id',
         ],
         'form_data' => [
             'title',
-            'content',
+            'description',
             'banner_position_id',
             'image',
         ],
@@ -105,7 +105,6 @@ return [
         'form_data' => [
             'title',
             'main_image',
-            'sub_images',
             'content',
             'sub_content',
             'code',

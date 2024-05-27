@@ -11,13 +11,13 @@ class BannerDTO implements ModelDTO
 {
     /**
      * @param string $title
-     * @param string $content
+     * @param string $description
      * @param string|null $banner_position_id
      * @param UploadedFile|string|null $image
      */
     public function __construct(
         public readonly string                   $title,
-        public readonly string                   $content,
+        public readonly string                   $description,
         public readonly ?string                  $banner_position_id,
         public readonly UploadedFile|string|null $image,
     )
@@ -32,7 +32,7 @@ class BannerDTO implements ModelDTO
     {
         return new BannerDTO(
             $request['title'],
-            $request['content'],
+            $request['description'],
             $request['banner_position_id'],
             $request['image'],
         );
@@ -45,7 +45,7 @@ class BannerDTO implements ModelDTO
     {
         return [
             'title' => $this->title,
-            'content' => $this->content,
+            'description' => $this->description,
             'banner_position_id' => $this->banner_position_id,
             'image' => $this->image,
         ];

@@ -4,8 +4,8 @@
              style="background-image:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url({{{($data['banners'][0][0]->image)}}})">
         <div class="main__banner-block">
             <h2 class="main__banner-text"><b>Benjamin Moore</b><br>@lang('main.titles.paints')</h2>
-            <p id="main__banner-p-desktop">{{$data['banners'][0][0]->content}}</p>
-            <p id="main_banner-p-mobile">{{$data['banners'][0][0]->content}}</p>
+            <p id="main__banner-p-desktop">{{$data['banners'][0][0]->description}}</p>
+            <p id="main_banner-p-mobile">{{$data['banners'][0][0]->description}}</p>
             <div class="main__banner-buttons">
                 <a href="{{route('user.colors.index')}}">
                     <button class="button-filled">@lang('main.buttons.allColors')</button>
