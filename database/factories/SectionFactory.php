@@ -15,7 +15,7 @@ class SectionFactory extends Factory
     {
         return [
             'title' => fake()->word(),
-            'content' => fake()->text(),
+            'description' => fake()->text(),
         ];
     }
 }

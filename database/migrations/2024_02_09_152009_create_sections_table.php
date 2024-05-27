@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->foreignId('section_position_id')->unique()->nullable()->constrained('section_positions');
-            $table->string('content')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

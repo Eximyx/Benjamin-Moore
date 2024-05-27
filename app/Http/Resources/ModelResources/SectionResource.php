@@ -17,7 +17,7 @@ class SectionResource extends JsonResource
             'id' => $this['id'],
             'title' => $this['title'],
             'section_position_id' => $this['section_position_id'],
-            'content' => $this['content'],
+            'description' => $this['description'],
         ];
     }
 }

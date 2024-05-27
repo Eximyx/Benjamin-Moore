@@ -70,7 +70,7 @@
                 <div class="quality-card">
                     <h4 class="quality-card__card-header">{{$value->title}}</h4>
                     <p class="quality-card__card-details">
-                        {{$value->content}}
+                        {{$value->description}}
                     </p>
                 </div>
             @endforeach

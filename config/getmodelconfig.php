@@ -79,13 +79,13 @@ return [
         'datatable_data' => [
             'id',
             'title',
-            'content',
+            'description',
             'section_position_id',
         ],
         'form_data' => [
             'title',
             'section_position_id',
-            'content',
+            'description',
         ],
         'selectable_key' => 'section_position_id',
         'selectableModel' => app(SectionPosition::class),

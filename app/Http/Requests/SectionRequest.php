@@ -13,7 +13,7 @@ class SectionRequest extends FormRequest
     {
         return [
             'title' => 'required|string|between:5,30',
-            'content' => 'nullable|required|string|between:5,160',
+            'description' => 'nullable|required|string|between:5,160',
             'section_position_id' => 'nullable|string|exists:section_positions,id',
         ];
     }

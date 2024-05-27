@@ -10,12 +10,12 @@ class SectionDTO implements ModelDTO
     /**
      * @param string $title
      * @param string|null $section_position_id
-     * @param string $content
+     * @param string $description
      */
     public function __construct(
         public readonly string  $title,
         public readonly ?string $section_position_id,
-        public readonly string  $content,
+        public readonly string  $description,
     )
     {
     }
@@ -29,7 +29,7 @@ class SectionDTO implements ModelDTO
         return new SectionDTO(
             $request['title'],
             $request['section_position_id'],
-            $request['content'],
+            $request['description'],
         );
     }
 
@@ -41,7 +41,7 @@ class SectionDTO implements ModelDTO
         return [
             'title' => $this->title,
             'section_position_id' => $this->section_position_id,
-            'content' => $this->content,
+            'description' => $this->description,
         ];
     }
 }

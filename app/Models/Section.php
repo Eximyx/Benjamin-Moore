@@ -22,13 +22,13 @@ class Section extends Model
     {
         return $this->belongsTo(SectionPosition::class, 'section_position_id', 'section_position_id');
     }
-    
+
     /**
      * @var string[]
      */
     protected $fillable = [
         'title',
         'section_position_id',
-        'content',
+        'description',
     ];
 }
