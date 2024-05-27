@@ -16,6 +16,9 @@ return [
     'products' => [
         'colors' => 'Error, you cannot delete a color which is associated with the product',
         'categories' => 'Error, you cannot delete a category which is associated with the product',
-    ]
-
+    ],
+    'users' => [
+        'editMyself' => 'Error, you can edit your profile data only in the profile tab',
+        'deleteMyself' => 'Error, you cannot delete yourself',
+    ],
 ];

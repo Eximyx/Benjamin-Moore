@@ -382,11 +382,19 @@
 
         function delSelected() {
             $('#select option:selected').each((key, value) => {
-                $(value).removeAttr('selected')
+                $(value).removeAttr('selected');
             });
             $('#colors option:selected').each((key, value) => {
-                $(value).removeAttr('selected')
+                $(value).removeAttr('selected');
             });
+        }
+
+        function editMyself() {
+            alert("@lang("errors.users.editMyself")");
+        }
+
+        function deleteMyself() {
+            alert("@lang("errors.users.deleteMyself")");
         }
 
         function delColor(id) {
