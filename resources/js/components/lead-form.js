@@ -7,7 +7,7 @@ document.getElementById("leadsForm").addEventListener("submit", async (e) => {
 
     var data = new FormData(e.target);
 
-    let response = await fetch("", {
+    let response = await fetch("/", {
         method: "POST",
         headers: {
             "X-Requested-With": "XMLHttpRequest",
@@ -20,7 +20,7 @@ document.getElementById("leadsForm").addEventListener("submit", async (e) => {
 
     if (response.ok) {
         modalSuccess.classList.add('modal-show')
-        setTimeout(function() {
+        setTimeout(function () {
             modalWindow.classList.remove('modal-lead-form__active');
         }, 5000);
         modalError.classList.remove('modal-show');

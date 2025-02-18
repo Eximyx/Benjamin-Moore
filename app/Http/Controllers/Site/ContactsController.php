@@ -11,35 +11,35 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
 
-class ContactsController extends Controller
+class    ContactsController extends Controller
 {
-    /**
-     * @var SettingsResource
-     */
-    protected SettingsResource $settings;
+	/**
+	 * @var SettingsResource
+	 */
+	protected SettingsResource $settings;
 
-    /**
-     * @param ContactsService $service
-     */
-    public function __construct(
-        protected ContactsService $service,
-    )
-    {
-        $this->settings = SettingsResource::make(app(Settings::class));
-    }
+	/**
+	 * @param ContactsService $service
+	 */
+	public function __construct(
+		protected ContactsService $service,
+	)
+	{
+		$this->settings = SettingsResource::make(app(Settings::class));
+	}
 
-    /**
-     * @return View
-     */
-    public function __invoke(): View
-    {
-        return view('site.pages.contacts', [
-            'data' => JsonResource::make([
-                'partners' => PartnersResource::collection($this->service->getPartners()),
-                'banner' => BannerResource::make($this->service->getBannerByPositionId(3)),
-                'settings' => $this->settings,
-                'meta' => $this->service->metaDataFindByURL(),
-            ]),
-        ]);
-    }
+	/**
+	 * @return View
+	 */
+	public function __invoke(): View
+	{
+		return view('site.pages.contacts', [
+			'data' => JsonResource::make([
+				'partners' => PartnersResource::collection($this->service->getPartners()),
+				'banner' => BannerResource::make($this->service->getBannerByPositionId(3)),
+				'settings' => $this->settings,
+				'meta' => $this->service->metaDataFindByURL(),
+			]),
+		]);
+	}
 }
